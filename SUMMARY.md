@@ -1,5 +1,8 @@
 # Summary
 
+* [2b问题合集](README.md)
+  * [ssh密钥问题](2b问题合集/2b问题合集之ssh密钥问题.md)
+
 * [Linux命令](README.md)
     * [vim命令](README.md)
           * [vim命令](linux/linux命令/vim命令.md)
@@ -111,27 +114,29 @@
       * [centos7编译安装php](linux/linux服务/php/1.centos7编译安装php7.3.md)
 
 
-    * [Linux自动化运维平台](README.md)
-      * [瓦力](README.md)
-        * [瓦力安装](README.md)
-          * [walle1.2](linux/自动化运维平台/walle/CentOS7.5安装walle1.2.md)
-          * [walle2.0](linux/自动化运维平台/walle/CentOS7.5安装walle2.0.md)
-      * [gitea](README.md)
-        * [gitea安装](linux/自动化运维平台/gitea/gitea安装.md)
+* [Linux自动化运维平台](README.md)
+    * [瓦力](README.md)
+      * [瓦力安装](README.md)
+        * [walle1.2](linux/自动化运维平台/walle/CentOS7.5安装walle1.2.md)
+        * [walle2.0](linux/自动化运维平台/walle/CentOS7.5安装walle2.0.md)
+    * [gitea](README.md)
+      * [gitea安装](linux/自动化运维平台/gitea/gitea安装.md)
 
-      * [gitlab](README.md)
-        * [gitlab安装](README.md)
-          * [CentOS7.5安装gitlab-11.8.3](linux/自动化运维平台/gitlab/CentOS7.5安装gitlab-ce11.8.3.md)
-          * [gitlab最新版安装](linux/自动化运维平台/gitlab/gitlab安装最新版.md)
+    * [gitlab](README.md)
+      * [gitlab安装](README.md)
+        * [CentOS7.5安装gitlab-11.8.3](linux/自动化运维平台/gitlab/CentOS7.5安装gitlab-ce11.8.3.md)
+        * [gitlab最新版安装](linux/自动化运维平台/gitlab/gitlab安装最新版.md)
         * [gitlab一些问题汇总](linux/自动化运维平台/gitlab/gitlab一些问题汇总.md)
-        * [gitlab使用](README.md)
-      * [jenkins](README.md)
-        * [jenkins安装](README.md)
-          * [CentOS7.5安装jenkins-2.176](linux/自动化运维平台/jenkins/CentOS7.5安装jenkins-2.176.md)
-      * [自动化运维工具](README.md)
-        * [Ansible](README.md)
-          * [Ansible基础知识](linux/自动化运维平台/ansible/ansible基础知识.md)
-          * [Ansible常用模块](linux/自动化运维平台/ansible/ansible常用模块.md)          
+      * [gitlab使用](README.md)
+
+    * [jenkins](README.md)
+      * [jenkins安装](README.md)
+        * [CentOS7.5安装jenkins-2.176](linux/自动化运维平台/jenkins/CentOS7.5安装jenkins-2.176.md)
+        
+    * [自动化运维工具](README.md)
+      * [Ansible](README.md)
+        * [Ansible基础知识](linux/自动化运维平台/ansible/ansible基础知识.md)
+        * [Ansible常用模块](linux/自动化运维平台/ansible/ansible常用模块.md)          
 
 * [监控](README.md)
     * [zabbix](README.md)
