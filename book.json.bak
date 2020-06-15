@@ -1,0 +1,103 @@
+{
+    "gitbook": "3.2.3",
+    "title" : "打工是不可能打工的",
+    "author" : "泡泡吐肥皂o",
+    "description" : "个人技术博客记录",
+    "language" : "zh-hans",
+
+
+    "plugins": [
+        "accordion",
+        "code",
+        "copy-code-button",
+        "-lunr", 
+        "-search", 
+        "search-pro",
+        "advanced-emoji",
+        "github",
+        "splitter",
+        "pageview-count",
+        "auto-scroll-table",
+        "popup",
+        "-sharing", 
+        "sharing-plus",
+        "emphasize",
+        "klipse",
+        "tbfed-pagefooter",
+        "-highlight",
+        "prism",
+        "prism-themes",
+        "theme-comscore",
+        "ancre-navigation",
+        "simple-page-toc",
+        "todo",
+        "donate",
+        "alerts",
+        "flexible-alerts",
+        "expandable-chapters-small"
+      
+
+        
+        
+    ],
+    
+    "links": {
+        "sidebar" : {
+            "百度": "https://www.baidu.com",
+            "我鹏简书^-^": "https://www.jianshu.com/u/4666ca42b320",
+            "泡泡吐肥皂o": "https://www.pptfz.top"
+            }
+        },
+
+    
+    "pluginsConfig": {
+        "change_girls" : {
+            "time": 5,
+            "urls": [
+                "http://image.pptfz.top/gitbook/1.jpeg",
+                "http://image.pptfz.top/gitbook/2.jpeg"
+            ]
+    },
+        "donate": {
+            "wechat": "http://image.pptfz.top/gitbook/aaa.jpg",
+            "alipay": "http://image.pptfz.top/gitbook/bbb.jpg",
+            "title": "",
+            "button": "你过来啊",
+            "alipayText": "这辈子都不可能打工",
+            "wechatText": "打工是不可能打工的"
+        },
+
+        "prism": {
+            "css": [
+                "prism-themes/themes/prism-base16-ateliersulphurpool.light.css"
+            ]
+        },
+
+        "tbfed-pagefooter": {
+          "copyright":"泡泡吐肥皂o &copy gitbook.pptfz.top 2020",
+          "modify_label": "文件修订时间：",
+          "modify_format": "秃笔南波湾！！！"
+        },
+
+        "github": {
+            "url": "https://github.com/pptfz/gitbook"
+        },
+        
+        "sharing": {
+            "douban": false,
+            "facebook": false,
+            "google": true,
+            "pocket": false,
+            "qq": true,
+            "qzone": true,
+            "twitter": true,
+            "weibo": true,
+            "all": [
+                "douban", "facebook", "google", "instapaper", "linkedin","twitter", "weibo",
+                "messenger","qq", "qzone","viber","whatsapp"
+                ]
+        }
+    }
+}
+
+
