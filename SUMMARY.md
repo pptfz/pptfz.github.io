@@ -103,6 +103,17 @@
 * [Linux服务](README.md)
     * [nginx](README.md)
         * [nginx安装](linux/linux服务/nginx/1.centos7.7编译安装nginx.md)
+        * [http简要记录](linux/linux服务/nginx/2.http简要记录.md)
+        * [nginx基础应用](linux/linux服务/nginx/3.nginx基础应用.md)
+        * [nginx访问控制](linux/linux服务/nginx/4.nginx访问控制.md)
+        * [nginx日志](linux/linux服务/nginx/5.nginx日志.md)
+        * [nginx代理](linux/linux服务/nginx/6.nginx代理.md)
+        * [nginx location](linux/linux服务/nginx/7.nginx location.md)
+        * [nginx虚拟主机](linux/linux服务/nginx/8.nginx虚拟主机.md)
+        * [nginx负载均衡](README.md)
+          * [nginx七层负载均衡](linux/linux服务/nginx/9.1nginx七层负载均衡.md)
+          * [nginx四层负载均衡](linux/linux服务/nginx/9.2nginx四层负载均衡.md)
+          * [nginx负载均衡之基于不同客户端](linux/linux服务/nginx/9.3nginx负载均衡之基于不同客户端.md)
     * [ssh](README.md)
       * [禁止root远程登陆](linux/linux服务/ssh/1.ssh服务.md)
     * [nfs](linux/linux服务/nfs/centos7.7搭建NFS.md)
@@ -112,7 +123,6 @@
       * [lsyncd](linux/linux服务/同步服务/centos7.7搭建lsyncd.md)
     * [php](README.md)
       * [centos7编译安装php](linux/linux服务/php/1.centos7编译安装php7.3.md)
-
 
 * [Linux自动化运维平台](README.md)
     * [瓦力](README.md)
@@ -132,7 +142,7 @@
     * [jenkins](README.md)
       * [jenkins安装](README.md)
         * [CentOS7.5安装jenkins-2.176](linux/自动化运维平台/jenkins/CentOS7.5安装jenkins-2.176.md)
-        
+
     * [自动化运维工具](README.md)
       * [Ansible](README.md)
         * [Ansible基础知识](linux/自动化运维平台/ansible/ansible基础知识.md)
