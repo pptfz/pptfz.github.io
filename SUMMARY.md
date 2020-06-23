@@ -102,7 +102,7 @@
 
 * [Linux服务](README.md)
     * [nginx](README.md)
-        * [nginx安装](linux/linux服务/nginx/1.centos7.7编译安装nginx.md)
+        * [nginx安装](linux/linux服务/nginx/1.centos7安装nginx.md)
         * [http简要记录](linux/linux服务/nginx/2.http简要记录.md)
         * [nginx基础应用](linux/linux服务/nginx/3.nginx基础应用.md)
         * [nginx访问控制](linux/linux服务/nginx/4.nginx访问控制.md)
@@ -114,6 +114,14 @@
           * [nginx七层负载均衡](linux/linux服务/nginx/9.1nginx七层负载均衡.md)
           * [nginx四层负载均衡](linux/linux服务/nginx/9.2nginx四层负载均衡.md)
           * [nginx负载均衡之基于不同客户端](linux/linux服务/nginx/9.3nginx负载均衡之基于不同客户端.md)
+        * [lnmp平台](linux/linux服务/nginx/10.lnmp平台.md)
+        * [nginx https](linux/linux服务/nginx/11.nginx https.md)
+        * [nginx rewrite](linux/linux服务/nginx/12.nginx rewrite.md)
+        * [nginx动静分离](linux/linux服务/nginx/13.nginx动静分离.md)
+        * [nginx增加新模块](linux/linux服务/nginx/nginx增加新模块.md)
+        * [nginx解决非80端口https问题](linux/linux服务/nginx/nginx解决非80端口https问题.md)
+        * [nginx+keepalived实现负载均衡高可用](linux/linux服务/nginx/14.nginx+keepalived实现负载均衡高可用.md)
+
     * [ssh](README.md)
       * [禁止root远程登陆](linux/linux服务/ssh/1.ssh服务.md)
     * [nfs](linux/linux服务/nfs/centos7.7搭建NFS.md)
@@ -123,6 +131,9 @@
       * [lsyncd](linux/linux服务/同步服务/centos7.7搭建lsyncd.md)
     * [php](README.md)
       * [centos7编译安装php](linux/linux服务/php/1.centos7编译安装php7.3.md)
+      * [rpm包安装php](linux/linux服务/php/2.php安装(rpm包).md)
+    * [tomcat](README.md)
+      * [centos7二进制安装tomcat](linux/linux服务/tomcat/centos7二进制安装tomcat8.md)
 
 * [Linux自动化运维平台](README.md)
     * [瓦力](README.md)
