@@ -244,7 +244,22 @@
       * [hash 字典](db/redis/redis数据类型/3.redis数据类型-hash字典.md)
       * [set 集合](db/redis/redis数据类型/4.redis数据类型-set集合.md)
       * [zset 有序集合](db/redis/redis数据类型/5.redis数据类型-zset有序集合.md)
-     
+
+
+* [shell](README.md)
+  * [shell简介](linux/shell/1.shell简介.md)
+  * [shell变量](README.md)
+    * [shell变量综述](linux/shell/2.1shell变量综述.md)
+    * [shell变量子串](linux/shell/2.2shell变量子串.md)
+    * [shell变量自增](linux/shell/2.3shell变量自增.md)
+    * [shell特殊位置环境变量](linux/shell/2.4shell特殊位置环境变量.md)    
+  * [shell各种操作](README.md)
+    * [shell产生随机数方法](linux/shell/3.1shell产生随机数方法.md)
+    * [shell获取奇数行和偶数行](linux/shell/3.2shell获取奇数行和偶数行.md)
+    * [shell脚本小操作](linux/shell/3.3shell脚本小操作.md)
+    * [shell脚本执行方法](linux/shell/3.4shell脚本执行方法.md)
+    * [shell打印字符串长度](linux/shell/3.5shell打印字符长度.md)
+
 
 * [Python](README.md)
   * [Python基础](README.md)
