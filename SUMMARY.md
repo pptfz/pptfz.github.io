@@ -259,6 +259,18 @@
     * [shell脚本小操作](linux/shell/3.3shell脚本小操作.md)
     * [shell脚本执行方法](linux/shell/3.4shell脚本执行方法.md)
     * [shell打印字符串长度](linux/shell/3.5shell打印字符长度.md)
+  * [shell脚本条件测试](linux/shell/4.shell脚本条件测试.md)
+  * [shell数值运算](linux/shell/5.shell数值运算.md)
+  * [shell流程控制语句](README.md)
+    * [if](linux/shell/6.1shell流程控制语句之if.md)
+    * [case](linux/shell/6.2shell流程控制语句之case.md)
+  * [shell循环控制语句](README.md)
+    * [for](linux/shell/7.1shell循环控制语句之for.md)
+    * [while、until](linux/shell/7.2shell循环控制语句之while、until.md)
+    * [循环控制及状态返回值](linux/shell/7.3循环控制及状态返回值.md)
+  * [shell数组](linux/shell/8.shell数组.md)
+  * [shell函数](linux/shell/9.shell函数.md)    
+
 
 
 * [Python](README.md)
