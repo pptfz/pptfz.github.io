@@ -67,7 +67,7 @@ export JAVA_HOME PATH CLASSPATH
 EOF
 
 #使配置生效
-source /etc/profile
+source /etc/profile.d/jdk8.sh
 
 #验证
 $ java -version

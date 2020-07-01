@@ -134,6 +134,16 @@
       * [rpm包安装php](linux/linux服务/php/2.php安装(rpm包).md)
     * [tomcat](README.md)
       * [centos7二进制安装tomcat](linux/linux服务/tomcat/centos7二进制安装tomcat8.md)
+    * [supervisor](README.md)
+      * [supervisor安装](linux/linux服务/supervisor/1.supervisor安装.md)
+      * [supervisor管理服务](README.md)
+        * [supervisor管理mysql](linux/linux服务/supervisor/2.supervisor管理mysql.md)
+        * [supervisor管理nginx](linux/linux服务/supervisor/3.supervisor管理nginx.md)
+        * [supervisor管理tomcat](linux/linux服务/supervisor/4.supervisor管理tomcat.md)
+        * [supervisor管理redis](linux/linux服务/supervisor/5.supervisor管理redis.md)
+        * [supervisor管理mongodb](linux/linux服务/supervisor/6.supervisor管理mongodb.md)
+      * [supervisor自定义服务文件参数](linux/linux服务/supervisor/7.supervisor自定义服务文件参数.md)  
+
 
 * [Linux自动化运维平台](README.md)
     * [瓦力](README.md)
@@ -245,6 +255,9 @@
       * [set 集合](db/redis/redis数据类型/4.redis数据类型-set集合.md)
       * [zset 有序集合](db/redis/redis数据类型/5.redis数据类型-zset有序集合.md)
 
+* [mongodb](README.md)
+  * [centos7安装mongodb](db/mongodb/centos7安装mongodb.md)
+
 
 * [shell](README.md)
   * [shell简介](linux/shell/1.shell简介.md)
@@ -270,7 +283,7 @@
     * [循环控制及状态返回值](linux/shell/7.3循环控制及状态返回值.md)
   * [shell数组](linux/shell/8.shell数组.md)
   * [shell函数](linux/shell/9.shell函数.md)    
-
+  * [expect自动化交互程序](linux/shell/10.expect自动化交互式程序.md)
 
 
 * [Python](README.md)
