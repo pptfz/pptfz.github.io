@@ -32,11 +32,10 @@
 
 - 命令方式
 
+  `--generator=run-pod/v1就是指定创建的类型为pod  `
+
 ```python
 kubectl run nginx --image=nginx:1.16 --replicas=3 --generator=run-pod/v1
-  
-  
---generator=run-pod/v1就是指定创建的类型为pod  
 ```
 
 - yaml文件方式
@@ -110,8 +109,6 @@ kubectl describe pod pod-name
 #删除pod
 kubectl delete pod pod-name
 ```
-
-
 
 
 
@@ -221,7 +218,7 @@ volumeStatsAggPeriod: 0s
 如果你的 kubelet 启动参数中没有配置上面的`--pod-manifest-path`参数的话，那么添加上这个参数然后重启 kubelet 即可。
 
 ```yaml
-$ cat >/etc/kubernetes/manifest/static-web.yaml<<EOF
+cat >/etc/kubernetes/manifest/static-web.yaml<<EOF
 apiVersion: v1
 kind: Pod
 metadata:
