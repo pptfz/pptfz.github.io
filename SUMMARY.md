@@ -4,6 +4,9 @@
 * [2b问题合集](README.md)
   * [ssh密钥问题](2b问题合集/2b问题合集之ssh密钥问题.md)
 
+* [Linux排错宝典](README.md)
+  * [ECS运维指南之Linux系统诊断](linux/排错宝典/ECS运维指南之Linux系统诊断.md)
+
 * [Linux命令](README.md)
     * [vim命令](README.md)
           * [vim命令](linux/linux命令/vim命令.md)
@@ -181,6 +184,7 @@
 
 * [监控](README.md)
     * [zabbix](README.md)
+      * [zabbix故障记录](linux/monitor/zabbix/zabbix故障/zabbix故障.md)
       * [zabbix3.4](README.md)
         * [1.zabbix安装](README.md)
           * [zabbix3.4安装](linux/monitor/zabbix/zabbix3.4/1.CentOS7.5安装zabbix-3.4.md)
