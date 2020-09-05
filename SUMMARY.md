@@ -7,6 +7,10 @@
 * [Linux排错宝典](README.md)
   * [ECS运维指南之Linux系统诊断](linux/排错宝典/ECS运维指南之Linux系统诊断.md)
 
+* [生产环境开源项目](README.md)
+  * [任务调度系统](README.md)
+    * [DolphinScheduler](生产环境开源项目/任务调度系统/DolphinScheduler部署(单机).md)
+
 * [Linux命令](README.md)
     * [vim命令](README.md)
           * [vim命令](linux/linux命令/vim命令.md)
