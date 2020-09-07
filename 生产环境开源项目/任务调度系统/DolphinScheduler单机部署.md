@@ -1,4 +1,4 @@
-# DolphinScheduler部署(单机)
+# DolphinScheduler 单机部署
 
 # 一、DolphinScheduler简介
 
@@ -49,7 +49,7 @@
 
 **与同类调度系统的对比**
 
-![iShot2020-09-05 16.00.22](DolphinScheduler部署(单机).assets/iShot2020-09-05 16.00.22.png)
+![iShot2020-09-05 16.00.22](DolphinScheduler单机部署.assets/iShot2020-09-05 16.00.22.png)
 
 
 
@@ -169,13 +169,13 @@ ln -s /usr/local/jdk1.8.0_251/bin/java /usr/bin
 
 **下载二进制安装包**
 
-![iShot2020-09-05 16.32.17](DolphinScheduler部署(单机).assets/iShot2020-09-05 16.32.17.png)
+![iShot2020-09-05 16.32.17](DolphinScheduler单机部署.assets/iShot2020-09-05 16.32.17.png)
 
 
 
 **选择官方推荐的下载地址**
 
-![iShot2020-09-05 16.41.01](DolphinScheduler部署(单机).assets/iShot2020-09-05 16.41.01.png)
+![iShot2020-09-05 16.41.01](DolphinScheduler单机部署.assets/iShot2020-09-05 16.41.01.png)
 
 
 
@@ -257,13 +257,13 @@ clientPort=2181
 
 **选择相应版本的二进制包**
 
-![iShot2020-09-05 17.03.39](DolphinScheduler部署(单机).assets/iShot2020-09-05 17.03.39.png)
+![iShot2020-09-05 17.03.39](DolphinScheduler单机部署.assets/iShot2020-09-05 17.03.39.png)
 
 
 
 **选择官方推荐的下载地址**
 
-![iShot2020-09-05 17.04.21](DolphinScheduler部署(单机).assets/iShot2020-09-05 17.04.21.png)
+![iShot2020-09-05 17.04.21](DolphinScheduler单机部署.assets/iShot2020-09-05 17.04.21.png)
 
 
 
@@ -351,7 +351,7 @@ mysql -uroot -e "flush privileges"
 
 [mysql驱动官方下载地址](https://downloads.mysql.com/archives/c-j/)
 
-![iShot2020-09-05 17.29.56](DolphinScheduler部署(单机).assets/iShot2020-09-05 17.29.56.png)
+![iShot2020-09-05 17.29.56](DolphinScheduler单机部署.assets/iShot2020-09-05 17.29.56.png)
 
 
 
@@ -589,13 +589,13 @@ logs/
 
 密码：`dolphinscheduler123`
 
-![iShot2020-09-05 18.30.57](DolphinScheduler部署(单机).assets/iShot2020-09-05 18.30.57.png)
+![iShot2020-09-05 18.30.57](DolphinScheduler单机部署.assets/iShot2020-09-05 18.30.57.png)
 
 
 
 **登陆后首界面**
 
-![iShot2020-09-05 18.33.01](DolphinScheduler部署(单机).assets/iShot2020-09-05 18.33.01.png)
+![iShot2020-09-05 18.33.01](DolphinScheduler单机部署.assets/iShot2020-09-05 18.33.01.png)
 
 
 
