@@ -8,6 +8,8 @@
 
 # 1.安装docker-compose
 
+[docker-compose github地址](https://github.com/docker/compose)
+
 ```python
 1.下载安装包
 curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -16,7 +18,7 @@ curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compo
 chmod +x /usr/local/bin/docker-compose
 
 3.完成安装，查看版本
-docker-compose -v
+$ docker-compose -v
 docker-compose version 1.24.1, build 4667896b
 ```
 
@@ -52,7 +54,7 @@ web:
     - '/srv/gitlab/config:/etc/gitlab'
     - '/srv/gitlab/logs:/var/log/gitlab'
     - '/srv/gitlab/data:/var/opt/gitlab'
-EOf
+EOF
 ```
 
 

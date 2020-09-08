@@ -9,7 +9,7 @@
 
 * [生产环境开源项目](README.md)
   * [任务调度系统](README.md)
-    * [DolphinScheduler](生产环境开源项目/任务调度系统/DolphinScheduler部署(单机).md)
+    * [DolphinScheduler](生产环境开源项目/任务调度系统/DolphinScheduler单机部署.md)
 
 * [Linux命令](README.md)
     * [vim命令](README.md)
@@ -172,14 +172,18 @@
 
     * [gitlab](README.md)
       * [gitlab安装](README.md)
-        * [CentOS7.5安装gitlab-11.8.3](linux/自动化运维平台/gitlab/CentOS7.5安装gitlab-ce11.8.3.md)
-        * [gitlab最新版安装](linux/自动化运维平台/gitlab/gitlab安装最新版.md)
-        * [gitlab一些问题汇总](linux/自动化运维平台/gitlab/gitlab一些问题汇总.md)
+        * [CentOS7.5安装gitlab-11.8.3](linux/自动化运维平台/gitlab/gitlab安装/CentOS7.5安装gitlab-ce11.8.3.md)
+        * [gitlab最新版安装](linux/自动化运维平台/gitlab/gitlab安装/gitlab安装最新版.md)
+      * [gitlab问题](README.md)  
+        * [gitlab一些问题汇总](linux/自动化运维平台/gitlab/gitlab问题/gitlab一些问题汇总.md)
+        * [linux/自动化运维平台/gitlab/gitlab问题/gitlab非22端口问题.md]
       * [gitlab使用](README.md)
 
     * [jenkins](README.md)
       * [jenkins安装](README.md)
-        * [CentOS7.5安装jenkins-2.176](linux/自动化运维平台/jenkins/CentOS7.5安装jenkins-2.176.md)
+        * [CentOS7.5安装jenkins-2.176](linux/自动化运维平台/jenkins/jenkins安装/CentOS7.5安装jenkins-2.176.md)
+        * [docker安装jenkins](linux/自动化运维平台/jenkins/jenkins安装/docker安装jenkins.md)
+      * [jenkins使用](README.md)
 
     * [自动化运维工具](README.md)
       * [Ansible](README.md)
