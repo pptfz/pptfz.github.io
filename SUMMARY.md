@@ -176,7 +176,7 @@
         * [gitlab最新版安装](linux/自动化运维平台/gitlab/gitlab安装/gitlab安装最新版.md)
       * [gitlab问题](README.md)  
         * [gitlab一些问题汇总](linux/自动化运维平台/gitlab/gitlab问题/gitlab一些问题汇总.md)
-        * [linux/自动化运维平台/gitlab/gitlab问题/gitlab非22端口问题.md]
+        * [gitlab非22端口问题](linux/自动化运维平台/gitlab/gitlab问题/gitlab非22端口问题.md)
       * [gitlab使用](README.md)
 
     * [jenkins](README.md)
@@ -187,8 +187,11 @@
 
     * [自动化运维工具](README.md)
       * [Ansible](README.md)
+        * [Ansible好文](README.md)
+          * [这样理解Ansible更容易](linux/自动化运维平台/ansible/ansible好文/这样理解Ansible更容易.md)
         * [Ansible基础知识](linux/自动化运维平台/ansible/ansible基础知识.md)
-        * [Ansible常用模块](linux/自动化运维平台/ansible/ansible常用模块.md)          
+        * [Ansible常用模块](linux/自动化运维平台/ansible/ansible常用模块.md)     
+
 
 * [监控](README.md)
     * [zabbix](README.md)
