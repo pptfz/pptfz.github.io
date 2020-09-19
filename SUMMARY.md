@@ -11,6 +11,10 @@
   * [任务调度系统](README.md)
     * [DolphinScheduler](生产环境开源项目/任务调度系统/DolphinScheduler单机部署.md)
 
+* [big-data](README.md)
+  * [Ambari](README.md)
+    * [Ambari搭建](linux/big-data/Ambari/CentOS7中用Ambari快速搭建大数据平台.md)
+
 * [Linux命令](README.md)
     * [vim命令](README.md)
           * [vim命令](linux/linux命令/vim命令.md)
