@@ -46,7 +46,7 @@ git remote add origin
 #原先下载方式
 git clone https://github.com/xxx
 
-#修改下载链接地址
+#修改为如下地址
 git clone https://github.com.cnpmjs.org/xxx
 ```
 

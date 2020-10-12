@@ -17,8 +17,8 @@
 
 * [Linux命令](README.md)
     * [vim命令](README.md)
-          * [vim命令](linux/linux命令/vim命令.md)
-          * [vim进阶用法](linux/linux命令/vim进阶.md)
+      * [vim命令](linux/linux命令/vim命令.md)
+      * [vim进阶用法](linux/linux命令/vim进阶.md)
     * [date命令](linux/linux命令/date命令.md)
     * [xargs命令](linux/linux命令/xargs命令.md)
     * [rpm命令](linux/linux命令/rpm命令.md)
@@ -393,7 +393,7 @@
   * [mac添加多个github账号](mac使用记录/MAC本添加多个github账号.md)
   * [mac使用gitbook记录](mac使用记录/mac使用gitbook记录.md)
   * [brew替换国内源](mac使用记录/brew替换国内源.md)
-
+  * [mac ssh密钥转换](mac使用记录/mac ssh密钥转换问题.md)
 
 * [git总结](README.md)
     * [git初次使用](README.md)
