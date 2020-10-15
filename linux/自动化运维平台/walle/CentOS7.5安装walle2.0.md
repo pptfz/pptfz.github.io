@@ -10,7 +10,7 @@
 
 **瓦力上线流程**
 
-![QQ20191202-170743@2x](CentOS7.5安装walle2.0.assets/QQ20191202-170743@2x.png)
+![iShot2020-07-2010.13.06](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2010.13.06.png)
 
 
 
@@ -289,7 +289,7 @@ sh admin.sh migration # Migration，数据迁移
 
 **登陆界面**
 
-![c111](CentOS7.5安装walle2.0.assets/c111.png)
+![iShot2020-10-14 15.49.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.49.22.png)
 
 
 
@@ -297,7 +297,7 @@ sh admin.sh migration # Migration，数据迁移
 
 **登陆后首界面**
 
-![c222](CentOS7.5安装walle2.0.assets/c222.png)
+![iShot2020-10-14 15.49.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.49.51.png)
 
 
 

@@ -18,19 +18,19 @@
 
 ### 定义对比
 
-![iShot2020-05-0418.54.38](redis持久化.assets/iShot2020-05-0418.54.38.png)
+![iShot2020-05-0418.54.38](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0418.54.38.png)
 
 
 
 ### 优缺点对比
 
-![iShot2020-05-0418.55.47](redis持久化.assets/iShot2020-05-0418.55.47.png)
+![iShot2020-05-0418.55.47](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0418.55.47.png)
 
 
 
 ### 工作方式对比
 
-![iShot2020-05-0418.56.04](redis持久化.assets/iShot2020-05-0418.56.04.png)
+![iShot2020-05-0418.56.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0420.44.42.png)
 
 
 
@@ -140,7 +140,7 @@ total 16
 
 **AOF持久化原理**
 
-![iShot2020-05-0420.46.32](redis持久化.assets/iShot2020-05-0420.46.32.png)
+![iShot2020-05-0420.46.32](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0420.46.32.png)
 
 
 
@@ -258,7 +258,7 @@ test
 
 **RDB和AOF持久化对比**
 
-![iShot2020-05-0420.44.42](redis持久化.assets/iShot2020-05-0420.44.42.png)
+![iShot2020-05-0420.44.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0418.56.04.png)
 
 
 
@@ -297,7 +297,7 @@ save 60 1000
 
 该命令会阻塞当前Redis服务器，执行save命令期间，Redis不能处理其他命令，直到RDB过程完成为止。具体流程如下：
 
-![iShot2020-05-0420.28.48](redis持久化.assets/iShot2020-05-0420.28.48.png)
+![iShot2020-05-0420.28.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0420.28.48.png)
 
 
 
@@ -307,7 +307,7 @@ save 60 1000
 
 执行该命令时，Redis会在后台异步进行快照操作，快照同时还可以响应客户端请求。具体流程如下：
 
-![iShot2020-05-0420.31.43](redis持久化.assets/iShot2020-05-0420.31.43.png)
+![iShot2020-05-0420.31.43](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0420.31.43.png)
 
 
 
@@ -344,7 +344,7 @@ save 60 1000
 
 **save于bgsave对比**
 
-![iShot2020-05-0420.39.26](redis持久化.assets/iShot2020-05-0420.39.26.png)
+![iShot2020-05-0420.39.26](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0420.39.26.png)
 
 
 
@@ -361,7 +361,7 @@ save 60 1000
 
 **AOF重写原理**
 
-![iShot2020-05-0420.45.50](redis持久化.assets/iShot2020-05-0420.45.50.png)
+![iShot2020-05-0420.45.50](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0420.45.50.png)
 
 
 
@@ -379,7 +379,7 @@ save 60 1000
 
 总之fsync 的策略在实际使用中非常慢，即使在 Redis2.0 对相关的程序进行了改进之后仍是如此。频繁调用 fsync 注定了这种策略不可能快得起来。
 
-![iShot2020-05-0420.44.06](redis持久化.assets/iShot2020-05-0420.44.06.png)
+![iShot2020-05-0420.44.06](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0420.44.06.png)
 
 
 

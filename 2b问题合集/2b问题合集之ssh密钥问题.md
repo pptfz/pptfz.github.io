@@ -24,7 +24,7 @@
 
 > **mac本机，在根目录下创建了一个目录，准备把这个目录下的内容推送到码云新建的仓库中，已经手动把<span style=color:red>user</span>用户的公钥粘贴到了码云的个人账户中(码云中只有把公钥放到个人账户中才能对仓库有写权限)，但是推送的时候始终提示权限拒绝，而使用命令`ssh -T git@gitee.com`确是提示认证成功的**
 
-![iShot2020-06-1512.18.41](2b问题合集之ssh密钥问题.assets/iShot2020-06-1512.18.41.png)
+![iShot2020-06-1512.18.41](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-06-1512.18.41.png)
 
 
 

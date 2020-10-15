@@ -4,13 +4,13 @@
 
 **总纲**
 
-![iShot2020-04-0721.05.23](HTTP 协议.assets/iShot2020-04-0721.05.23.png)
+![iShot2020-04-0721.05.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0721.07.34.png)
 
 # 一、概述
 
 ## 1.1 计算机网络体系结构分层
 
-![iShot2020-04-0721.07.34](HTTP 协议.assets/iShot2020-04-0721.07.34.png)
+![iShot2020-10-14 15.22.52](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.22.52.png)
 
 ## 1.2 TCP/IP 通信传输流
 
@@ -18,7 +18,7 @@
 
 **TCP/IP 通信传输流**
 
-![iShot2020-04-0721.10.34](HTTP 协议.assets/iShot2020-04-0721.10.34.png)
+![iShot2020-04-0721.10.34](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0721.10.34.png)
 
 
 
@@ -29,7 +29,7 @@
 
 **HTTP请求如下图所示：**
 
-![iShot2020-04-0721.11.26](HTTP 协议.assets/iShot2020-04-0721.11.26.png)
+![iShot2020-04-0721.11.26](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0721.15.37.png)
 
 在网络体系结构中，包含了众多的网络协议，这篇文章主要围绕 HTTP 协议（HTTP/1.1版本）展开。
 
@@ -43,7 +43,7 @@
 
 **HTTP请求响应模型**
 
-![iShot2020-04-0721.12.40](HTTP 协议.assets/iShot2020-04-0721.12.40.png)
+![iShot2020-04-0721.12.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.07.56.png)
 
 HTTP通信机制是在一次完整的 HTTP 通信过程中，客户端与服务器之间将完成下列7个步骤：
 
@@ -95,7 +95,7 @@ Cookie 技术通过在请求和响应报文中写入 Cookie 信息来控制客�
 
 **Cookie 的流程**
 
-![iShot2020-04-0721.15.37](HTTP 协议.assets/iShot2020-04-0721.15.37.png)
+![iShot2020-04-0721.15.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0721.11.26.png)
 
 
 
@@ -105,7 +105,7 @@ HTTP 协议使用 URI 定位互联网上的资源。正是因为 URI 的特定�
 
 ## 3.5 告知服务器意图的 HTTP 方法（HTTP/1.1）
 
-![iShot2020-04-0722.07.56](HTTP 协议.assets/iShot2020-04-0722.07.56.png)
+![iShot2020-04-0722.07.56](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.10.52.png)
 
 | 方法    | 描述                                                         | 请求                                                         | 响应                                                         |
 | ------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -142,7 +142,7 @@ HTTP 报文大致可分为报文首部和报文主体两部分。两者由最初
 
 **HTTP 报文结构**
 
-![iShot2020-04-0722.10.52](HTTP 协议.assets/iShot2020-04-0722.10.52.png)
+![iShot2020-04-0722.10.52](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.11.45.png)
 
 
 
@@ -152,7 +152,7 @@ HTTP 报文大致可分为报文首部和报文主体两部分。两者由最初
 
 **请求报文结构**
 
-![iShot2020-04-0722.11.45](HTTP 协议.assets/iShot2020-04-0722.11.45.png)
+![iShot2020-04-0722.11.45](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.12.19.png)
 
 
 
@@ -163,11 +163,11 @@ HTTP 报文大致可分为报文首部和报文主体两部分。两者由最初
 
 请求报文的示例，如下：
 
-![iShot2020-04-0722.12.19](HTTP 协议.assets/iShot2020-04-0722.12.19.png)
+![iShot2020-04-0722.12.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.12.49.png)
 
 ### 4.2.2 响应报文结构
 
-![iShot2020-04-0722.12.49](HTTP 协议.assets/iShot2020-04-0722.12.49.png)
+![iShot2020-04-0722.12.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.13.22.png)
 
 响应报文的首部内容由以下数据组成：
 
@@ -176,7 +176,7 @@ HTTP 报文大致可分为报文首部和报文主体两部分。两者由最初
 
 响应报文的示例，如下：
 
-![iShot2020-04-0722.13.22](HTTP 协议.assets/iShot2020-04-0722.13.22.png)
+![iShot2020-04-0722.13.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.27.26.png)
 
 
 
@@ -971,7 +971,7 @@ HTTP 状态码种类繁多，数量达几十种。其中最常用的有以下 14
 
 **HTTP 报文结构**
 
-![iShot2020-04-0722.27.26](HTTP 协议.assets/iShot2020-04-0722.27.26.png)
+![iShot2020-04-0722.27.26](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.28.35.png)
 
 大家请仔细看看上面示例中，各个组成部分对应的内容。
  接着，我们来看看报文和实体的概念。如果把 HTTP 报文想象成因特网货运系统中的箱子，那么 HTTP 实体就是报文中实际的货物。
@@ -1003,7 +1003,7 @@ HTTP 状态码种类繁多，数量达几十种。其中最常用的有以下 14
 
 **内容编码和传输编码的对比**
 
-![iShot2020-04-0722.28.35](HTTP 协议.assets/iShot2020-04-0722.28.35.png)
+![iShot2020-04-0722.28.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.29.18.png)
 
 
 
@@ -1019,7 +1019,7 @@ HTTP 状态码种类繁多，数量达几十种。其中最常用的有以下 14
 
 **分块编码的报文**
 
-![iShot2020-04-0722.29.18](HTTP 协议.assets/iShot2020-04-0722.29.18.png)
+![iShot2020-04-0722.29.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.32.04.png)
 
 ## 8.5 多部分媒体类型
 
@@ -1044,7 +1044,7 @@ Range: bytes=20224-
 
 **实体范围请求示例**
 
-![iShot2020-04-0722.30.39](HTTP 协议.assets/iShot2020-04-0722.30.39.png)
+![iShot2020-04-0722.30.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.30.39.png)
 
 上面示例中，客户端请求的是文档开头20224字节之后的部分。
 
@@ -1054,7 +1054,7 @@ HTTP 通信时，除客户端和服务器外，还有一些用于协助通信的
 
 ## 9.1 代理
 
-![iShot2020-04-0722.31.28](HTTP 协议.assets/iShot2020-04-0722.31.28.png)
+![iShot2020-04-0722.31.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.33.25.png)
 
 HTTP 代理服务器是 Web 安全、应用集成以及性能优化的重要组成模块。代理位于客户端和服务器端之间，接收客户端所有的 HTTP 请求，并将这些请求转发给服务器（可能会对请求进行修改之后再进行转发）。对用户来说，这些应用程序就是一个代理，代表用户访问服务器。
  出于安全考虑，通常会将代理作为转发所有 Web 流量的可信任中间节点使用。代理还可以对请求和响应进行过滤，安全上网或绿色上网。
@@ -1063,11 +1063,11 @@ HTTP 代理服务器是 Web 安全、应用集成以及性能优化的重要组�
 
 **浏览器第一次请求：**
 
-![iShot2020-04-0722.32.04](HTTP 协议.assets/iShot2020-04-0722.32.04.png)
+![iShot2020-04-0722.32.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.32.37.png)
 
 **浏览器再次请求：**
 
-![iShot2020-04-0722.32.37](HTTP 协议.assets/iShot2020-04-0722.32.37.png)
+![iShot2020-04-0722.32.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.34.39.png)
 
 
 
@@ -1077,7 +1077,7 @@ Web 缓存或代理缓存是一种特殊的 HTTP 代理服务器，可以将经�
 
 **HTTP / FTP 网关**
 
-![iShot2020-04-0722.33.25](HTTP 协议.assets/iShot2020-04-0722.33.25.png)
+![iShot2020-04-0722.33.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.31.28.png)
 
 网关是一种特殊的服务器，作为其他服务器的中间实体使用。通常用于将 HTTP 流量转换成其他的协议。网关接收请求时就好像自己是资源的源服务器一样。客户端可能并不知道自己正在跟一个网关进行通信。
 
@@ -1085,7 +1085,7 @@ Web 缓存或代理缓存是一种特殊的 HTTP 代理服务器，可以将经�
 
 **HTTP/SSL 隧道**
 
-**![iShot2020-04-0722.34.39](HTTP 协议.assets/iShot2020-04-0722.34.39.png)**
+**![iShot2020-04-0722.34.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0722.35.44.png)**
 
 
 
@@ -1097,6 +1097,6 @@ HTTP 隧道的一种常见用途就是通过 HTTP 连接承载加密的安全套
 
 **自动搜索引擎“网络蜘蛛”**
 
-![iShot2020-04-0722.35.44](HTTP 协议.assets/iShot2020-04-0722.35.44.png)
+![iShot2020-04-0722.35.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0721.05.23.png)
 
 Agent 代理是代表用户发起 HTTP 请求的客户端应用程序。所有发布 Web 请求的应用程序都是 HTTP Agent 代理。

@@ -55,11 +55,11 @@ echo "test"
 
 **//测试，vim编辑脚本，末行模式按F1**
 
-![clipboard](vim进阶.assets/clipboard.png)
+![iShot2020-10-15 21.12.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 21.12.39.png)
 
 **//再次按回车，会回到脚本当中,这样就可以不退出脚本，直接执行脚本进行测试了！！！**
 
-![clipbo1ard](vim进阶.assets/clipbo1ard.png)
+![iShot2020-10-15 21.12.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 21.12.55.png)
 
 
 
@@ -181,6 +181,6 @@ let g:pydiction_menu_height = 10
 
  **编辑python脚本，然后输入库名，然后tab补齐即可**
 
-![cpboard](vim进阶.assets/cpboard.png)
+![iShot2020-10-15 21.13.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 21.13.23.png)
 
  

@@ -48,7 +48,7 @@
 
 **最重要的一点是 ansible是模块化的 它所有的操作都依赖于模块**
 
-![65930348150](ansible基础知识.assets/65930348150.jpg)
+![iShot2020-10-14 15.54.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.54.35.png)
 
 
 
@@ -141,7 +141,7 @@ command	     command模块，完成基础命令
 - **//检查服务器存活状态**
   - **ansible all -m ping** 
 
-![clipboard1](ansible基础知识.assets/clipboard1.png)
+![iShot2020-10-14 15.55.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.55.02.png)
 
 
 
@@ -236,11 +236,9 @@ command	     command模块，完成基础命令
 
   - **ansible-vault encrypt a.yaml		encrypt 加密**
 
-  ![clipboard2](ansible基础知识.assets/clipboard2.png)
+  ![iShot2020-10-14 15.55.32](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.55.32.png)
 
-  - **//加密后查看a.yaml文件就会显示乱码**
-
-​               ![clipboard3](ansible基础知识.assets/clipboard3.png)
+  - **//加密后查看a.yaml文件就会显示乱码**               ![iShot2020-10-14 15.56.08](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.56.08.png)
 
 
 
@@ -248,7 +246,7 @@ command	     command模块，完成基础命令
 
   - **ansible-vault decrypt a.yaml		decrypt 解密**
 
-    ![clipboard4](ansible基础知识.assets/clipboard4.png)
+    ![iShot2020-10-14 15.56.36](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.56.36.png)
 
 
 
@@ -262,11 +260,11 @@ command	     command模块，完成基础命令
 
 **ansible all -m ping**
 
-![clipboard5](ansible基础知识.assets/clipboard5.png)
+![iShot2020-10-14 15.56.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.56.57.png)
 
 **ansible "*" -m ping** 
 
-![clipboard6](ansible基础知识.assets/clipboard6.png)
+![iShot2020-10-14 15.57.21](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.57.21.png)
 
 
 
@@ -282,7 +280,7 @@ command	     command模块，完成基础命令
 
 **ansible "web:nfs" -m ping**
 
-![clipboard7](ansible基础知识.assets/clipboard7.png)
+![iShot2020-10-14 15.57.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.57.40.png)
 
 
 
@@ -312,7 +310,7 @@ command	     command模块，完成基础命令
 
 **//所有以www开头.com结尾的主机**
 
-![clipboard8](ansible基础知识.assets/clipboard8.png)
+![iShot2020-10-14 15.58.03](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.58.03.png)
 
 
 
@@ -326,9 +324,9 @@ command	     command模块，完成基础命令
 
 **⚠️注意**
 
-**~要在最前边，一定要加双引号**
+**~要在最前边，一定要加双引号![iShot2020-10-14 15.58.26](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.58.26.png)**
 
-![clipboard9](ansible基础知识.assets/clipboard9.png)
+
 
 
 
@@ -462,4 +460,4 @@ ansible websers --list-hosts
 
 ## 6.2ansible playbook安装Apache示例
 
-![clipboard10](ansible基础知识.assets/clipboard10.png)
+![iShot2020-10-14 15.59.00](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.59.00.png)

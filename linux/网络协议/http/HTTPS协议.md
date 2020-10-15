@@ -14,7 +14,7 @@ HTTPS 是使用 RSA 进行身份验证和交换密钥，然后再使用交换的
 
 如下图所示：
 
-![iShot2020-04-0821.05.28](HTTPS协议.assets/iShot2020-04-0821.05.28.png)
+![iShot2020-04-0821.05.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.05.28.png)
 
 他想发送的数据是"Meet at 5:00 PM"（5 点见面，如果是中文的话可以使用 UTF-8 编码），加密方式是直接在 ASCII 表进行左移或右移。
 
@@ -24,13 +24,13 @@ HTTPS 是使用 RSA 进行身份验证和交换密钥，然后再使用交换的
 
 如下图所示：
 
-![iShot2020-04-0821.06.21](HTTPS协议.assets/iShot2020-04-0821.06.21.png)
+![iShot2020-04-0821.06.21](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.06.21.png)
 
 所以小王打算用非对称加密，非对称加密的特点是双方都有自己的公钥和私钥对，其中公钥发给对方，密钥不交换自己保管不泄漏。
 
 如下图所示：
 
-![iShot2020-04-0821.06.54](HTTPS协议.assets/iShot2020-04-0821.06.54.png)
+![iShot2020-04-0821.06.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.09.05.png)
 
 
 
@@ -80,13 +80,13 @@ t = T ^ e % N = 3123 ^ 2753 % 3233 = 77
 
 正如 openssl 的注释所说，这是防止中间人攻击的唯一方法：
 
-![iShot2020-04-0821.09.05](HTTPS协议.assets/iShot2020-04-0821.09.05.png)
+![iShot2020-04-0821.09.05](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.06.54.png)
 
 我们以 MDN（https://developer.mozilla.org）的网站为例，然后用 wireshark 抓包，观察 HTTPS 连接建立的过程。
 
 如下图所示：
 
-![iShot2020-04-0821.09.35](HTTPS协议.assets/iShot2020-04-0821.09.35.png)
+![iShot2020-04-0821.09.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.10.57.png)
 
 首先是 TCP 三次握手，然后客户端（浏览器）发起一个 HTTPS 连接建立请求，客户端先发一个 Client Hello 的包，然后[服务端](http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&mid=2651233590&idx=1&sn=73d7fe9a02252b0c73494f5618f5ad62&chksm=bd4944b28a3ecda49ffcc366c6309862a7fe3be35f6e9921c237a5be60641e66ea6a7df1eb5d&scene=21#wechat_redirect)响应一个 Server Hello。
 
@@ -94,7 +94,7 @@ t = T ^ e % N = 3123 ^ 2753 % 3233 = 77
 
 在 Client Hello 里面客户端会告知服务端自己当前的一些信息，如下图所示：
 
-![iShot2020-04-0821.10.11](HTTPS协议.assets/iShot2020-04-0821.10.11.png)
+![iShot2020-04-0821.10.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.09.35.png)
 
 包括客户端要使用的 TLS 版本，支持的加密套装，要访问的域名，给服务端生成的一个随机数（Nonce）等。
 
@@ -104,7 +104,7 @@ t = T ^ e % N = 3123 ^ 2753 % 3233 = 77
 
 **服务端在 Server Hello 里面会做一些响应：**
 
-![iShot2020-04-0821.10.57](HTTPS协议.assets/iShot2020-04-0821.10.57.png)
+![iShot2020-04-0821.10.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.10.11.png)
 
 服务端选中的加密套装叫 TLSECDHERSAWITHAES128GCM_SHA256，这一串的意思是：
 
@@ -117,7 +117,7 @@ t = T ^ e % N = 3123 ^ 2753 % 3233 = 77
 
 **接着服务给客户端发来了 4 个证书：**
 
-![iShot2020-04-0821.11.35](HTTPS协议.assets/iShot2020-04-0821.11.35.png)
+![iShot2020-04-0821.11.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.12.10.png)
 
 
 
@@ -131,7 +131,7 @@ t = T ^ e % N = 3123 ^ 2753 % 3233 = 77
 
 **一个证书里面会有什么东西呢，我们可以展开第一个证书看一下，如下图所示：**
 
-![iShot2020-04-0821.12.10](HTTPS协议.assets/iShot2020-04-0821.12.10.png)
+![iShot2020-04-0821.12.10](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.13.11.png)
 
 **证书包含三部分内容：**
 
@@ -147,25 +147,25 @@ t = T ^ e % N = 3123 ^ 2753 % 3233 = 77
 
 我们先来看一下 tbsCertificate 里面有什么内容，如下图所示：
 
-![iShot2020-04-0821.13.11](HTTPS协议.assets/iShot2020-04-0821.13.11.png)
+![iShot2020-04-0821.13.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.11.35.png)
 
 它里面包括了证书的公钥、证书的适用公用名、证书的有效期还有它的签发者等信息。
 
 Amazon 的证书也具备上述结构，我们可以把 Amazon 证书的公钥拷出来，如下图所示：
 
-![iShot2020-04-0821.14.08](HTTPS协议.assets/iShot2020-04-0821.14.08.png)
+![iShot2020-04-0821.14.08](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.14.38.png)
 
 中间有一些填充的数字，用灰色字表示。可以看到N通常是一个很大的整数（二进制 2048 位），而 e 通常为 65537。
 
 然后我们用这个 CA 的公钥对 mozilla.org 的证书签名进行解密，方法和上面的类似：
 
-![iShot2020-04-0821.14.38](HTTPS协议.assets/iShot2020-04-0821.14.38.png)
+![iShot2020-04-0821.14.38](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.16.24.png)
 
 取解密后的数字 decrypted 的十六进制的末 64 位，即为二进制 256 位的 SHA 哈希签名。
 
 接下来我们手动计算一下 tbsCertificate 的 SHA256 哈希值，方法是在 wireshark 里面把 tbsCertificate 导出一个原始二进制文件：
 
-![iShot2020-04-0821.15.05](HTTPS协议.assets/iShot2020-04-0821.15.05.png)
+![iShot2020-04-0821.15.05](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.14.08.png)
 
 然后再使用 openssl 计算它的哈希值，如下所示：
 
@@ -179,7 +179,7 @@ liyinchengs-MBP:https liyincheng$ openssl dgst -sha256 ~/tbsCertificate.binSHA25
 
 并且第四个证书是根证书，它是内置于操作系统的（通过 Mac 的 keychain 工具可以查看）：
 
-![iShot2020-04-0821.15.49](HTTPS协议.assets/iShot2020-04-0821.15.49.png)
+![iShot2020-04-0821.15.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.15.49.png)
 
 假如 Hacker 通过 DNS 欺骗之类的方式把你访问的域名指向了他的机器，然后他再伪造一个证书。
 
@@ -191,7 +191,7 @@ liyinchengs-MBP:https liyincheng$ openssl dgst -sha256 ~/tbsCertificate.binSHA25
 
 例如通过打电话或者发邮件等方式告知服务器的签名，与自己算的证书的签名是否一致，如果一致说明证书没有被篡改过（如证书的公钥没有被改为 Hacker 的公钥）：
 
-![iShot2020-04-0821.16.24](HTTPS协议.assets/iShot2020-04-0821.16.24.png)
+![iShot2020-04-0821.16.24](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.15.05.png)
 
 上面展示的便是自己手动计算的值，拿这个值和之前的值进行比较是否相等便可知发过来的证书是否被修改过。
 
@@ -207,7 +207,7 @@ liyinchengs-MBP:https liyincheng$ openssl dgst -sha256 ~/tbsCertificate.binSHA25
 
 而使用 ECDHE 是一种更安全的密钥交换算法。如下图所示，双方通过 ECDHE 进行密钥交换：
 
-![iShot2020-04-0821.17.16](HTTPS协议.assets/iShot2020-04-0821.17.16.png)
+![iShot2020-04-0821.17.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.17.16.png)
 
 ECDHE 的全称是 Elliptic Curve Diffie–Hellman key Exchange 椭圆曲线迪非-赫尔曼密钥交换，它是对迪非-赫尔曼密钥交换算法的改进。
 
@@ -215,7 +215,7 @@ ECDHE 的全称是 Elliptic Curve Diffie–Hellman key Exchange 椭圆曲线迪�
 
 **这个算法的思想如下图所示：**
 
-![iShot2020-04-0821.17.51](HTTPS协议.assets/iShot2020-04-0821.17.51.png)
+![iShot2020-04-0821.17.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.17.51.png)
 
 为了得到共享秘钥 K，甲用它的私钥计算一个数 g^a，发送给乙，乙的私钥为 b，乙便得到 K= g^a^b，同时发送 g^b 给甲，甲也得到了 K=g^b^a。
 
@@ -225,7 +225,7 @@ ECDHE 的全称是 Elliptic Curve Diffie–Hellman key Exchange 椭圆曲线迪�
 
 现在的证书的签名算法有两种：RSA 和新起的 EC。如下图所示，google.com 便是使用的 ECC 证书：
 
-![iShot2020-04-0821.18.37](HTTPS协议.assets/iShot2020-04-0821.18.37.png)
+![iShot2020-04-0821.18.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.18.37.png)
 
 我们上面讨论的便是 RSA，破解 RSA 的难点在于无法对公钥的 N 进行质数分解。
 
@@ -237,13 +237,13 @@ ECDHE 的全称是 Elliptic Curve Diffie–Hellman key Exchange 椭圆曲线迪�
 y ^ 3 = x ^ 2 + ax + b:
 ```
 
-![iShot2020-04-0821.19.37](HTTPS协议.assets/iShot2020-04-0821.19.37.png)
+![iShot2020-04-0821.19.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.20.17.png)
 
 给定一个起点 G（x，y），现在要计算点 P=2G 的坐标，其过程是在 G 点上做一条线与曲线相切于 -2G，做 -2G 相对于 x 轴的反射便得到 2G 点。
 
 **为了计算 3G 的坐标，如下图所示：**
 
-![iShot2020-04-0821.20.17](HTTPS协议.assets/iShot2020-04-0821.20.17.png)
+![iShot2020-04-0821.20.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.22.23.png)
 
 连接 2G 与 G 与曲线相郊于 -3G，再做反射得到 3G，同理计算 4G 便是连接 G 与 3G 再做反射。如果最后一个点和起点的连线垂直于 x 轴，说明所有的点已用完。
 
@@ -271,7 +271,7 @@ M = C2 - rK = C2 - rkG = C2 - rkG = C2 - kC1
 
 **原理很简单，如下图所示：**
 
-![iShot2020-04-0821.21.37](HTTPS协议.assets/iShot2020-04-0821.21.37.png)
+![iShot2020-04-0821.21.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.24.02.png)
 
 之前交换的是两个幂次方的数，现在变成交换两个曲线上的点。
 
@@ -283,7 +283,7 @@ y^2 = x^3 + 486662x^2 + x
 
 在密钥交换里面会指定所使用的曲线方程，如下图所示：
 
-![iShot2020-04-0821.22.23](HTTPS协议.assets/iShot2020-04-0821.22.23.png)
+![iShot2020-04-0821.22.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.19.37.png)
 
 mozilla.org 所使用的曲线方程为 secp256r1，这个也是比较流行的一个，它的参数比 Curve X25519 大很多。
 
@@ -301,7 +301,7 @@ mozilla.org 所使用的曲线方程为 secp256r1，这个也是比较流行的�
 
 **EV 证书会在浏览器的地址栏显示证书的企业名称：**
 
-![iShot2020-04-0821.24.02](HTTPS协议.assets/iShot2020-04-0821.24.02.png)
+![iShot2020-04-0821.24.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.21.37.png)
 
 但是新版的 Chrome 似乎把这个去掉了，所以我们打开 medium 的控制台可以看到一个提示：
 
@@ -315,7 +315,7 @@ openssl req -x509 -nodes -sha256 -days 365 -newkey rsa:2048 -keyout test.com.key
 
 便会得到两个文件，test.com.crt 是证书，test.com.key 是证书的私钥，如下图所示：
 
-![iShot2020-04-0821.25.26](HTTPS协议.assets/iShot2020-04-0821.25.26.png)
+![iShot2020-04-0821.25.26](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.25.26.png)
 
 然后把这两个文件给 Nginx 使用便能使用 HTTPS 访问，如下代码所示：
 
@@ -337,15 +337,15 @@ server {
 
 签名验证算法和上文讨论的 TLS 证书一致。为什么可执行文件需要签名呢，因为如果不签名的话，系统会拦截安装或者运行，如 Mac 双击一个未签名的 dmg 包的提示：
 
-![iShot2020-04-0821.27.02](HTTPS协议.assets/iShot2020-04-0821.27.02.png)
+![iShot2020-04-0821.27.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.27.36.png)
 
 直接不让你运行了，而 Windows 也有类似的提示，Windows 是会给一个警告：
 
-![iShot2020-04-0821.27.36](HTTPS协议.assets/iShot2020-04-0821.27.36.png)
+![iShot2020-04-0821.27.36](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.27.02.png)
 
 而当我们运行一个已签名的 exe 文件将会是正常的提示，如 Chrome 的提示：
 
-![iShot2020-04-0821.28.15](HTTPS协议.assets/iShot2020-04-0821.28.15.png)
+![iShot2020-04-0821.28.15](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0821.28.15.png)
 
 综上本文主要讨论了对称加密和非对称加密的原理，并介绍了如何利用 RSA 对证书签名的检验以验证连接服务器的身份，怎么利用 ECC 进行数据加密和密钥交换，介绍了下怎么生成和使用 HTTPS 证书，并介绍了下客户端证书。
 

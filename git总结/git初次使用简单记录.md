@@ -121,23 +121,21 @@ git push -u origin master			#输入远程仓库的用户名和密码即可
 
 #### 3.2.1 远程代码仓库中有以下内容，此时远程仓库和本地仓库中的内容相同
 
-![image-20191008123655225](git初次使用简单记录.assets/image-20191008123655225.png)
+![iShot2020-10-14 14.16.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.16.23.png)
 
-![image-20191008123635381](git初次使用简单记录.assets/image-20191008123635381.png)
+![iShot2020-10-14 14.15.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.15.28.png)
 
 
 
 #### 3.2.2 手动删除远程仓库中的test文件，删除后内容为下
 
-![image-20191008123858024](git初次使用简单记录.assets/image-20191008123858024.png)
+![iShot2020-10-14 14.16.50](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.16.50.png)
 
 #### 3.2.3 手动删除远程仓库文件后，远程仓库和本地仓库中的内容就不同了，此时再次新建文件提交就会有冲突
 
 本地仓库中新建文件test111，尝试提交，报错
 
-![image-20191008124018538](git初次使用简单记录.assets/image-20191008124018538.png)
-
-
+![iShot2020-10-14 14.09.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.09.48.png)
 
 ### 解决方法
 
@@ -149,7 +147,7 @@ git pull origin master
 
 输入拉取代码的命令后会提示如下，意思为**请输入一条提交消息来解释为什么需要合并**，这里可以选择不输入
 
-![image-20191008124144223](git初次使用简单记录.assets/image-20191008124144223.png)
+![iShot2020-10-14 14.10.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.10.19.png)
 
 #### 3.2.5 加选项 --allow-unrelated-histories (允许合并不相关的历史记录)再次拉取
 
@@ -157,7 +155,7 @@ git pull origin master
 git pull origin master --allow-unrelated-histories
 ```
 
-![image-20191008124228621](git初次使用简单记录.assets/image-20191008124228621.png)
+![iShot2020-10-14 14.14.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.14.55.png)
 
 
 

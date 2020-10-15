@@ -193,7 +193,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 
 
-![iShot2020-05-0917.15.28](mysql事务隔离级别.assets/iShot2020-05-0917.15.28.png)
+![iShot2020-05-0917.15.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0917.15.28.png)
 
 如图所示，一个事务检索的数据被另一个未提交的事务给修改了。
 
@@ -246,7 +246,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 
 
-![iShot2020-05-0917.24.45](mysql事务隔离级别.assets/iShot2020-05-0917.24.45.png)
+![iShot2020-05-0917.24.45](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0813.12.21.png)
 
 如图所示，一个事务检索的数据只能被另一个已提交的事务修改。
 
@@ -305,9 +305,7 @@ mysql> SELECT @@global.tx_isolation, @@tx_isolation;
 
 
 
-
-
-![iShot2020-05-0922.06.50](mysql事务隔离级别.assets/iShot2020-05-0922.06.50.png)
+![iShot2020-05-0922.06.50](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0917.24.45.png)
 
 显然，该现象是符合幻读的定义的。即同一事务的两次相同查询出现不同行。
 
@@ -396,7 +394,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 
 
-![iShot2020-05-0923.08.09](mysql事务隔离级别.assets/iShot2020-05-0923.08.09-9036914.png)
+![iShot2020-05-0923.08.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0923.08.09-9036914.png)
 
 
 
@@ -411,7 +409,7 @@ OK,注意看上表红色部分！就是因为使用了`next-key locks`,innodb将
 
 根据事务的隔离级别不同，会有三种情况发生，即脏读、不可重复度、幻读，这三种情况有如下包含关系
 
-![iShot2020-05-0813.12.21](mysql事务隔离级别.assets/iShot2020-05-0813.12.21.png)
+![iShot2020-05-0813.12.21](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-0922.06.50.png)
 
 对上图解释
 
@@ -488,7 +486,7 @@ mysql> select @@autocommit;
 
 
 
-![iShot2020-05-1022.39.15](mysql事务隔离级别.assets/iShot2020-05-1022.39.15.png)
+![iShot2020-05-1022.39.15](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-1022.39.15.png)
 
 脏读定义
 
@@ -564,7 +562,7 @@ mysql> select @@autocommit;
 
 
 
-![iShot2020-05-1023.04.19](mysql事务隔离级别.assets/iShot2020-05-1023.04.19.png)
+![iShot2020-05-1023.04.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-1023.17.31.png)
 
 
 
@@ -614,7 +612,7 @@ mysql> select @@autocommit;
 
 
 
-![iShot2020-05-1023.17.31](mysql事务隔离级别.assets/iShot2020-05-1023.17.31.png)
+![iShot2020-05-1023.17.31](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-1023.04.19.png)
 
 
 
@@ -707,7 +705,7 @@ mysql> select @@autocommit;
 
 
 
-![iShot2020-05-1023.48.16](mysql事务隔离级别.assets/iShot2020-05-1023.48.16.png)
+![iShot2020-05-1023.48.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-1023.48.16.png)
 
 
 

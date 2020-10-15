@@ -52,7 +52,7 @@
 
 # Helm工作原理
 
-![9cojlzvbvv](helm安装.assets/9cojlzvbvv.jpeg)
+![iShot2020-10-15 14.44.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 14.44.49.png)
 
 
 

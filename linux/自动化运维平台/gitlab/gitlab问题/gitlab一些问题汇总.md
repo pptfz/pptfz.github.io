@@ -19,7 +19,7 @@ root
 
 **注册gitlab时提示如下**
 
-![cli123](gitlab一些问题汇总.assets/cli123.png)
+![iShot2020-10-14 15.36.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.36.33.png)
 
 
 

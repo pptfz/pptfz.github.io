@@ -2,17 +2,15 @@
 
 ## 1.1git工作流程
 
-![123rfv](git命令总结.assets/123rfv.png)
 
 
+![iShot2020-10-14 14.11.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.11.28.png)
 
 
 
 ## 1.2git四种状态
 
-![1fg](git命令总结.assets/1fg.png)
-
-
+![iShot2020-10-14 14.12.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.12.17.png)
 
 
 
@@ -20,9 +18,7 @@
 
 ## 2.1git工作区域及文件颜色
 
-![Xnip2020-02-23_15-53-54](git命令总结.assets/Xnip2020-02-23_15-53-54.jpg)
-
-
+![iShot2020-10-14 14.13.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.13.04.png)
 
 <h4>git status 文件三种颜色的变化</h4>
 - **<span style=color:red>红色</span>**

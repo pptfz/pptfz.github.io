@@ -2,9 +2,9 @@
 
 
 
+![iShot2020-10-15 16.24.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.24.55.png)
 
 
-![k8s知识图谱](k8s知识图谱.assets/k8s知识图谱.png)
 
 
 

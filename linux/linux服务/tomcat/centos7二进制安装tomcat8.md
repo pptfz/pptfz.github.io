@@ -150,5 +150,5 @@ systemctl start tomcat && systemctl enable tomcat
 
 浏览器访问8080端口
 
-![iShot2020-06-2309.17.30](centos7二进制安装tomcat8.assets/iShot2020-06-2309.17.30.png)
+![iShot2020-06-2309.17.30](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-06-2309.17.30.png)
 

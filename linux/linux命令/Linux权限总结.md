@@ -79,17 +79,17 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 
 **1.普通用户www无法使用less命令查看/系统日志/var/log/messages**
 
-![lip_image001](linux权限总结.assets/lip_image001.png)
+![iShot2020-10-15 19.51.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.51.28.png)
 
 **2.给/usr/bin/less设置suid**
 
 **设置suid后文件权限所有者处就变为rws，多了一个s权限，并且文件底色变成了红色**
 
-![lip_image002](linux权限总结.assets/lip_image002.png)
+![iShot2020-10-15 19.51.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.51.51.png)
 
 **stat查看文件属性，此时文件权限位4755**
 
-![lip_image003](linux权限总结.assets/lip_image003.png)
+![iShot2020-10-15 19.52.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.52.16.png)
 
 **3.为/usr/bin/less设置suid后www用户就可以查看系统日志了**
 
@@ -111,11 +111,11 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 
 **1.普通用户www对/tmp目录有777权限，在没有设置/tmp的sgid时，www用户在此创建的文件和目录属组是本身,即www**        
 
-![lip_image004](linux权限总结.assets/lip_image004.png)
+![iShot2020-10-15 19.52.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.52.44.png)
 
 **2.为/tmp目录设置sgid后，www用户在/tmp下创建的文件和目录属组就是root**
 
-![lip_image005](linux权限总结.assets/lip_image005.png)
+![iShot2020-10-15 19.53.07](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.53.07.png)
 
 ### 2.3sbit	sticky粘滞位
 
@@ -127,7 +127,7 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 
 **1.在没有设置sbit时，普通用户www可以删除/tmp下属主属组不是自己的文件和目录**
 
-![lip_image006](linux权限总结.assets/lip_image006.png)
+![iShot2020-10-15 19.53.45](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.53.45.png)
 
 
 
@@ -135,17 +135,17 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 
 **设置sbit后，文件权限其他人处变为了rwt**
 
-![lip_image007](linux权限总结.assets/lip_image007.png)
+![iShot2020-10-15 19.54.06](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.54.06.png)
 
 
 
 **stat查看/tmp权限，此时为1777**
 
-![lip_image008](linux权限总结.assets/lip_image008.png)
+![iShot2020-10-15 19.54.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.54.39.png)
 
 **此时，www用户无法删除文件所有者不是自己的文件**
 
-![lip_image009](linux权限总结.assets/lip_image009.png)
+![iShot2020-10-15 19.55.00](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.55.00.png)
 
 
 
@@ -161,17 +161,17 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 
 **为文件添加隐藏权限a后,可以看到，文件只能被追加和查看，其他操作无法执行**
 
-![lip_image010](linux权限总结.assets/lip_image010.png)
+![iShot2020-10-15 19.55.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.55.18.png)
 
 
 
 **为文件添加隐藏权限i后，可以看到，文件只能被查看，其他操作无法执行**
 
-![lip_image011](linux权限总结.assets/lip_image011.png)
+![iShot2020-10-15 19.55.46](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.55.46.png)
 
 ## 3.3查看隐藏权限	lsattr
 
-![lip_image012](linux权限总结.assets/lip_image012.png)
+![iShot2020-10-15 19.56.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.56.09.png)
 
 
 
@@ -200,17 +200,17 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 
 **1.没有设置FACL之前，www用户无法进入/test目录，无法查看/test目录内容**
 
-![lip_image013](linux权限总结.assets/lip_image013.png)
+![iShot2020-10-15 19.56.27](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.56.27.png)
 
 **2.setfacl -m u:www:r-x /test    为www用户设置/test的FACL**
 
-![lip_image014](linux权限总结.assets/lip_image014.png)
+![iShot2020-10-15 19.56.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.56.51.png)
 
 
 
 **3.验证，设置FACL之后，只有www这一个用户对/test目录拥有rx权限，其他普通用户没有权限**
 
-![lip_image015](linux权限总结.assets/lip_image015.png)
+![iShot2020-10-15 19.57.08](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.57.08.png)
 
 
 
@@ -220,7 +220,7 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 
 **取消FACL，-x选项，与设置FACL不同，取消的时候格式中不用再加权限**
 
-![lip_image016](linux权限总结.assets/lip_image016.png)
+![iShot2020-10-15 19.57.34](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.57.34.png)
 
 
 
@@ -228,13 +228,13 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 
 **没有设置FACL前**
 
-![lip_image017](linux权限总结.assets/lip_image017.png)
+![iShot2020-10-15 19.58.00](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.58.00.png)
 
 
 
 **设置FACL后**
 
-![lip_image018](linux权限总结.assets/lip_image018.png)
+![iShot2020-10-15 19.58.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.58.22.png)
 
 
 

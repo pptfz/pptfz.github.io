@@ -8,9 +8,9 @@
 
 **瓦力上线流程**
 
+![iShot2020-07-2010.13.06](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2010.13.06.png)
 
 
-![QQ20191202-170743@2x](CentOS7.5安装walle1.2.assets/QQ20191202-170743@2x.png)
 
 
 
@@ -241,9 +241,7 @@ C:\Windows\System32\drivers\etc
 
 **初始化开发者账号密码为：demo/demo**
 
-
-
-![clipboard111](CentOS7.5安装walle1.2.assets/clipboard111.png)
+![iShot2020-10-14 15.45.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.45.48.png)
 
 
 
@@ -251,7 +249,7 @@ C:\Windows\System32\drivers\etc
 
 **登陆后首界面**
 
-![clipboard222](CentOS7.5安装walle1.2.assets/clipboard222.png)
+![iShot2020-10-14 15.46.59](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.46.59.png)
 
 
 

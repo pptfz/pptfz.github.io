@@ -57,7 +57,7 @@ sed s#1#9# 123 ?...
 
 ## 2.5 -i	使管道前命令结果成为后续操作命令的参数
 
-![lip_image001](xargs命令.assets/lip_image001.png)
+![iShot2020-10-15 21.11.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 21.11.37.png)
 
 ## 2.6 -0(数字0)	识别find结束标记
 
@@ -73,7 +73,7 @@ total 0
 
 ### 2.find命令查找当前路径下这三个文件，会报错，因为find会认为含有空格的文件为两个文件
 
-![lip_image002](xargs命令.assets/lip_image002.png)
+![iShot2020-10-15 21.11.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 21.11.54.png)
 
 ### 3.解决方法
 
@@ -85,7 +85,7 @@ find . -type f -name "*.jpg" -print0|xargs -0 ls -l
 xargs0 识别结束标记
 ```
 
-![lip_image003](xargs命令.assets/lip_image003.png)
+![iShot2020-10-15 21.12.12](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 21.12.12.png)
 
 #### 方式二	find . -type f -name "*.jpg" |xargs -i ls -l {}
 

@@ -650,7 +650,7 @@ kubernetes-dashboard   NodePort   10.96.142.172   <none>        443:30001/TCP   
 
 **⚠️k8s1.16.9这个版本中，使用的dashboard版本是2.0.0-beta8，只有火狐浏览器可以访问，其余浏览器都不能访问，会报错如下**
 
-![iShot2020-04-2815.27.24](./在k8s集群安装kubesphere2.1.assets/iShot2020-04-2815.27.24.png)
+![iShot2020-04-2815.27.24](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-2815.27.24.png)
 
 > **使用火狐浏览器访问，由于 dashboard 默认是自建的 https 证书，该证书是不受浏览器信任的，所以我们需要强制跳转就可以了**
 
@@ -1140,10 +1140,10 @@ kubesphere-system              redis-6fd6c6d6f9-dqh2s                      1/1  
 
 **访问kubesphere:30880**
 
-![iShot2020-04-2815.28.13](./在k8s集群安装kubesphere2.1.assets/iShot2020-04-2815.28.13.png)
+![iShot2020-04-2815.28.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-2815.29.11.png)
 
 
 
 **登陆后首界面**
 
-![iShot2020-04-2815.29.11](./在k8s集群安装kubesphere2.1.assets/iShot2020-04-2815.29.11.png)
+![iShot2020-04-2815.29.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-2815.28.13.png)

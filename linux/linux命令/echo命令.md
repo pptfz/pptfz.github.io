@@ -85,13 +85,13 @@ hehe
 
 **\e写法**
 
-![image-20191108081615613](echo命令.assets/image-20191108081615613.png)
+![iShot2020-10-15 17.35.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 17.35.18.png)
 
 
 
 **\033写法**
 
-![image-20191108081657010](echo命令.assets/image-20191108081657010.png)
+![iShot2020-10-15 17.35.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 17.35.35.png)
 
 
 
@@ -129,13 +129,13 @@ hehe
 
 **windows终端下的效果**
 
-![image-20191108152651485](echo命令.assets/image-20191108152651485.png)
+![iShot2020-10-15 17.35.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 17.35.57.png)
 
 
 
 **mac终端下的效果**
 
-![image-20191108152546998](echo命令.assets/image-20191108152546998.png)
+![iShot2020-10-15 17.36.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 17.36.13.png)
 
 
 

@@ -179,13 +179,15 @@ The text leading up to this was:
 
 **设置密码，最少8位数**
 
-![cl111](CentOS7.5安装gitlab-ce11.8.3.assets/cl111.png)
+![iShot2020-10-14 15.34.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.34.55.png)
+
+
 
 
 
 **登陆gitlab，用户名为root，密码为自己设置的密码**
 
-![cl222](CentOS7.5安装gitlab-ce11.8.3.assets/cl222.png)
+![iShot2020-10-14 15.35.20](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.35.20.png)
 
 
 
@@ -193,7 +195,7 @@ The text leading up to this was:
 
 **登陆后首界面，有一部分没有汉化，汉化包的原因**
 
-![cl333](CentOS7.5安装gitlab-ce11.8.3.assets/cl333.png)
+![iShot2020-10-14 15.35.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.35.49.png)
 
 
 
