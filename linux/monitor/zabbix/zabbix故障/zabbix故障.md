@@ -19,7 +19,7 @@
 
 - zabbix报错如下
 
-![iShot2020-07-2516.33.42](zabbix故障.assets/iShot2020-07-2516.33.42.png)
+![iShot2020-07-2516.33.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2516.33.42.png)
 
 
 

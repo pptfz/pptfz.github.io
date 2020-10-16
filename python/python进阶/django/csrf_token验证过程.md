@@ -20,7 +20,7 @@ csrf_token
 
 **csrf_token验证过程**
 
-![QQ20191202-220110@2x](csrf_token验证过程.assets/QQ20191202-220110@2x.png)
+![iShot2020-10-16 15.20.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 15.20.23.png)
 
 
 

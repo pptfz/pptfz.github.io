@@ -79,7 +79,7 @@
 
 ## 五、图片
 
-![image-20190923104631352](markdown常用语法简记.assets/image-20190923104631352.png)
+![iShot2020-10-16 11.52.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 11.52.42.png)
 
 
 
@@ -149,4 +149,4 @@
   - ``<span style="color:颜色单词">内容</span>``
 
 
-![Xnip2019-10-20_14-55-00](markdown常用语法简记.assets/Xnip2019-10-20_14-55-00.jpg)
+![iShot2020-10-16 11.48.30](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 11.48.30.png)

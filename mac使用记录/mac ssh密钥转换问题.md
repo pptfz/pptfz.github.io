@@ -24,13 +24,13 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 使用 ZenTermLite 登陆服务器报错如下
 
-![iShot2020-10-12 09.48.30](https://tva1.sinaimg.cn/large/007S8ZIlly1gjmb75g89gj30ns07kmym.jpg)
+![iShot2020-10-12 09.48.30](https://gitee.com/pptfz/picgo-images/raw/master/img/007S8ZIlly1gjmb75g89gj30ns07kmym.jpg)
 
 
 
 并且使用 FinallShell 登陆服务器提示如下
 
-![iShot2020-10-12 09.53.46](mac ssh密钥转换问题.assets/iShot2020-10-12 09.53.46.png)
+![iShot2020-10-12 09.53.46](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-12 09.53.46.png)
 
 
 

@@ -291,12 +291,6 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-
-
-
-
-
-
 ## 2.6 配置时间同步
 
 **时间同步可选 ntp 和 chrony，这里选择 chrony**
@@ -890,13 +884,13 @@ Ambari Server 'start' completed successfully.
 
 **浏览器访问 `http://IP:8080`**
 
-![iShot2020-09-15 10.12.43](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 10.12.43.png)
+![iShot2020-09-15 10.12.43](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 10.12.43.png)
 
 
 
 **登陆后首界面**
 
-![iShot2020-09-15 10.13.09](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 10.13.09.png)
+![iShot2020-09-15 10.13.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 10.13.09.png)
 
 
 
@@ -912,13 +906,13 @@ Ambari Server 'start' completed successfully.
 
 **选择 `Launch Install Wizard`**
 
-![iShot2020-09-15 10.17.22](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 10.17.22.png)
+![iShot2020-09-15 10.17.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 10.17.22.png)
 
 
 
 **输入集群名称**
 
-![iShot2020-09-15 10.20.01](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 10.20.01.png)
+![iShot2020-09-15 10.20.01](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 10.20.01.png)
 
 
 
@@ -926,13 +920,13 @@ Ambari Server 'start' completed successfully.
 
 这里选择 HDP-2.6.5.0 版本
 
-![iShot2020-09-15 10.22.13](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 10.22.13.png)
+![iShot2020-09-15 10.22.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 10.22.13.png)
 
 
 
 **保留 redhat7 一处，删除其他**
 
-![iShot2020-09-15 10.24.07](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 10.24.07.png)
+![iShot2020-09-15 10.24.07](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 10.24.07.png)
 
 
 
@@ -962,7 +956,7 @@ http://10.0.0.136/ambari/HDP-UTILS/centos7/1.1.0.22
 
 **修改完成后点击下一步**
 
-![iShot2020-09-15 10.28.55](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 10.28.55.png)
+![iShot2020-09-15 10.28.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 10.28.55.png)
 
 
 
@@ -993,7 +987,7 @@ sed -i.bak '/^verify/cverify=disable' /etc/python/cert-verification.cfg
 
 **⚠️<span style=color:red>这一步必须在 `Confirm Hosts` 进行安装后才会有相应的文件，也就是说进入到 `Confirm Hosts` 这一步中注册主机稍等一会才可以进行修改文件操作(目前了解是这样，不知道有没有更好的方法)</span>**
 
-![iShot2020-09-17 18.38.49](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-17 18.38.49.png)
+![iShot2020-09-17 18.38.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-17 18.38.49.png)
 
 
 
@@ -1046,7 +1040,7 @@ ambari-agent02.test.com
 
 
 
-![iShot2020-09-15 10.45.51](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 10.45.51.png)
+![iShot2020-09-15 10.45.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 10.45.51.png)
 
 
 
@@ -1060,7 +1054,7 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 **注册成功后显示如下**
 
-![iShot2020-09-15 14.07.53](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 14.07.53.png)
+![iShot2020-09-15 14.07.53](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 14.07.53.png)
 
 
 
@@ -1070,13 +1064,13 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 #### 5.3.3.1 报错1	找不到 ambari server
 
-![iShot2020-09-14 17.00.15](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-14 17.00.15.png)
+![iShot2020-09-14 17.00.15](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-14 17.00.15.png)
 
 
 
 **重要日志**
 
-![iShot2020-09-14 17.01.54](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-14 17.01.54.png)
+![iShot2020-09-14 17.01.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-14 17.01.54.png)
 
 
 
@@ -1096,7 +1090,7 @@ ambari-agent02.test.com
 
 #### 5.3.3.2 报错2 SSLError
 
-![iShot2020-09-15 11.08.04](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 11.08.04.png)
+![iShot2020-09-15 11.08.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 11.08.04.png)
 
 
 
@@ -1149,7 +1143,7 @@ ambari-agent restart
 
 **根据实际情况选择要安装的组件**
 
-![iShot2020-09-15 14.18.23](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 14.18.23.png)
+![iShot2020-09-15 14.18.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 14.18.23.png)
 
 
 
@@ -1157,7 +1151,7 @@ ambari-agent restart
 
 **根据实际情况选择各组件安装的节点**
 
-![iShot2020-09-15 14.35.15](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 14.35.15.png)
+![iShot2020-09-15 14.35.15](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 14.35.15.png)
 
 
 
@@ -1169,7 +1163,7 @@ ambari-agent restart
 
 
 
-![iShot2020-09-15 16.00.36](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 16.00.36.png)
+![iShot2020-09-15 16.00.36](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 16.00.36.png)
 
 
 
@@ -1177,25 +1171,25 @@ ambari-agent restart
 
 只保留一个路径
 
-![iShot2020-09-15 16.01.23](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 16.01.23.png)
+![iShot2020-09-15 16.01.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 16.01.23.png)
 
 
 
 ### 5.6.2 YARN
 
-![iShot2020-09-15 16.05.09](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 16.05.09.png)
+![iShot2020-09-15 16.05.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 16.05.09.png)
 
 
 
 只保留一个路径
 
-![iShot2020-09-15 16.14.29](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 16.14.29.png)
+![iShot2020-09-15 16.14.29](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 16.14.29.png)
 
 
 
 ### 5.6.3 HIVE
 
-![iShot2020-09-15 16.27.42](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 16.27.42.png)
+![iShot2020-09-15 16.27.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 16.27.42.png)
 
 
 
@@ -1237,7 +1231,7 @@ mysql -uroot -e "flush privileges"
 
 **选择 `Existing MySQL / MariaDB Database` ，输入hive数据库密码，修改 `Database URL` 连接地址，测试连接成功即可**
 
-![iShot2020-09-15 16.37.23](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 16.37.23.png)
+![iShot2020-09-15 16.37.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 16.37.23.png)
 
 
 
@@ -1245,11 +1239,11 @@ mysql -uroot -e "flush privileges"
 
 **需要设置grafana管理员用户的密码**
 
-![iShot2020-09-15 16.41.09](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 16.41.09.png)
+![iShot2020-09-15 16.41.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 16.41.09.png)
 
 
 
-![iShot2020-09-15 16.43.35](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 16.43.35.png)
+![iShot2020-09-15 16.43.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 16.43.35.png)
 
 
 
@@ -1257,7 +1251,7 @@ mysql -uroot -e "flush privileges"
 
 **<span style=color:red>⚠️⚠️⚠️最好不要选择这个Atlas，网上查了半天也不知道标红的这两处该怎么写以及怎么查找</span>**
 
-![iShot2020-09-15 17.08.42](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 17.08.42.png)
+![iShot2020-09-15 17.08.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 17.08.42.png)
 
 
 
@@ -1267,31 +1261,31 @@ mysql -uroot -e "flush privileges"
 
 **需要输入密码，默认admin即可**
 
-![iShot2020-09-15 16.48.25](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 16.48.25.png)
+![iShot2020-09-15 16.48.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 16.48.25.png)
 
 
 
-![iShot2020-09-15 17.12.39](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 17.12.39.png)
+![iShot2020-09-15 17.12.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 17.12.39.png)
 
 
 
 ## 5.7 确认集群信息并部署
 
-![iShot2020-09-15 17.14.28](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 17.14.28.png)
+![iShot2020-09-15 17.14.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 17.14.28.png)
 
 
 
-![iShot2020-09-15 17.15.07](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 17.15.07-0161347.png)
+![iShot2020-09-15 17.15.07](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 17.15.07-0161347.png)
 
 
 
 
 
-![iShot2020-09-15 17.16.19](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 17.16.19.png)
+![iShot2020-09-15 17.16.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 17.16.19.png)
 
 
 
-![iShot2020-09-15 18.45.14](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 18.45.14.png)
+![iShot2020-09-15 18.45.14](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 18.45.14.png)
 
 
 
@@ -1299,12 +1293,12 @@ mysql -uroot -e "flush privileges"
 
 
 
-![iShot2020-09-15 18.45.58](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 18.45.58.png)
+![iShot2020-09-15 18.45.58](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 18.45.58.png)
 
 
 
 完成安装
 
-![iShot2020-09-15 18.46.54](CentOS7中用Ambari快速搭建大数据平台.assets/iShot2020-09-15 18.46.54.png)
+![iShot2020-09-15 18.46.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 18.46.54.png)
 
 
