@@ -20,7 +20,7 @@
 
 **sealos架构示意图**
 
-![iShot2020-07-1013.41.57](k8s安装神器-sealos.assets/iShot2020-07-1013.41.57.png)
+![iShot2020-07-1013.41.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-1013.55.59.png)
 
 
 
@@ -148,7 +148,7 @@ drwxr-xr-x 2 root root 4096 May 27 11:22 shell
 
 **`kube/bin`目录内容如下**
 
-![iShot2020-07-1013.55.59](k8s安装神器-sealos.assets/iShot2020-07-1013.55.59.png)
+![iShot2020-07-1013.55.59](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-1013.41.57.png)
 
 - `conntrack`是跟踪并且记录连接状态的一个工具
 - `crictl`是一个命令行接口，用于与CRI兼容的容器运行时
@@ -162,7 +162,7 @@ drwxr-xr-x 2 root root 4096 May 27 11:22 shell
 
 **`kube/conf`目录内容如下**
 
-![iShot2020-07-1014.16.56](k8s安装神器-sealos.assets/iShot2020-07-1014.16.56.png)
+![iShot2020-07-1014.16.56](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-1014.16.56.png)
 
 
 
@@ -170,7 +170,7 @@ drwxr-xr-x 2 root root 4096 May 27 11:22 shell
 
 **`kube/docker`目录内容如下**
 
-![iShot2020-07-1014.18.30](k8s安装神器-sealos.assets/iShot2020-07-1014.18.30.png)
+![iShot2020-07-1014.18.30](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-1014.18.30.png)
 
 - 就是docker二进制包，[docker官方二进制下载地址](https://download.docker.com/linux/static/stable/x86_64/)
 
@@ -180,7 +180,7 @@ drwxr-xr-x 2 root root 4096 May 27 11:22 shell
 
 **`kube/images`目录内容如下**
 
-![iShot2020-07-1014.21.17](k8s安装神器-sealos.assets/iShot2020-07-1014.21.17.png)
+![iShot2020-07-1014.21.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-1014.25.02.png)
 
 - 这里一共12个 `随机字符串.json文件`，其实就是kubeadm安装所需要的12个容器，分别是
 
@@ -230,13 +230,13 @@ drwxr-xr-x 2 root root 4096 May 27 11:22 shell
   calico/pod2daemon-flexvol                                                 v3.8.2
   ```
 
-- ![iShot2020-07-1014.25.02](k8s安装神器-sealos.assets/iShot2020-07-1014.25.02.png)
+- ![iShot2020-07-1014.25.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-1014.31.18.png)
 
 
 
 **`kube/shell`目录内容如下**
 
-![iShot2020-07-1014.31.18](k8s安装神器-sealos.assets/iShot2020-07-1014.31.18.png)
+![iShot2020-07-1014.31.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-1014.38.18.png)
 
 
 
@@ -254,7 +254,7 @@ wget -c https://sealyun.oss-cn-beijing.aliyuncs.com/d551b0b9e67e0416d0f9dce870a1
 
 然而当你想要安装别的版本时发现下载包还特么要花钱？还特么花50块钱？这不纯属扯淡呢吗？？？
 
-![iShot2020-07-1014.38.18](k8s安装神器-sealos.assets/iShot2020-07-1014.38.18.png)
+![iShot2020-07-1014.38.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-1015.31.05.png)
 
 
 
@@ -281,7 +281,7 @@ tar xf kubernetes-server-linux-amd64.tar.gz
 
 其中`kube-apiserver.tar`、`kube-controller-manager.tar`、`kube-proxy.tar`、`kube-scheduler.tar`就是kubeadm安装所需要的组件镜像
 
-![iShot2020-07-1015.31.05](k8s安装神器-sealos.assets/iShot2020-07-1015.31.05.png)
+![iShot2020-07-1015.31.05](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-1015.57.35.png)
 
 
 
@@ -315,7 +315,7 @@ kubernetesVersion: v1.18.5
 
 解压后就是这些内容，可以从`目录/json`文件中查看是哪个镜像，但是没有找到一种很好的区分方法，所以选择重新生成这个`images.tar`文件
 
-![iShot2020-07-1015.57.35](k8s安装神器-sealos.assets/iShot2020-07-1015.57.35.png)
+![iShot2020-07-1015.57.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-1014.21.17.png)
 
 
 

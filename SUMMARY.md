@@ -142,6 +142,7 @@
 
     * [ssh](README.md)
       * [禁止root远程登陆](linux/linux服务/ssh/1.ssh服务.md)
+      * [ssh密钥](linux/linux服务/ssh/ssh密钥.md)
     * [nfs](linux/linux服务/nfs/centos7.7搭建NFS.md)
     * [同步服务](README.md)
       * [rsync](linux/linux服务/同步服务/centos7.7搭建rsync.md) 
@@ -181,7 +182,10 @@
       * [gitlab问题](README.md)  
         * [gitlab一些问题汇总](linux/自动化运维平台/gitlab/gitlab问题/gitlab一些问题汇总.md)
         * [gitlab非22端口问题](linux/自动化运维平台/gitlab/gitlab问题/gitlab非22端口问题.md)
+      * [gitlab配置文件修改记录](linux/自动化运维平台/gitlab/gitlab配置文件修改/gitlab配置文件修改记录.md)
       * [gitlab使用](README.md)
+        * [关闭gitlab注册功能](linux/自动化运维平台/gitlab/gitlab使用/1.关闭gitlab自动注册功能.md)
+        * [设置gitlab分支保护](linux/自动化运维平台/gitlab/gitlab使用/2.设置gitlab分支保护.md)
 
     * [jenkins](README.md)
       * [jenkins安装](README.md)
