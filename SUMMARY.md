@@ -102,7 +102,7 @@
           * [pod创建流程代码版本kubelet篇](linux/k8s/k8s资源对象/pod/Pod创建流程代码版本kubelet篇.md)   
     * [helm](README.md)
       * [helm2](README.md)
-        * [helm2.16.安装记录](linux/k8s/helm2.16.3安装.md)
+        * [helm2.16.安装记录](linux/k8s/helm/helm2.16.3安装.md)
       * [helm3](README.md)
     * [kubesphere](linux/k8s/kubesphere/在k8s集群安装kubesphere2.1.md)            
 
