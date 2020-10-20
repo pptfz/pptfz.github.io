@@ -79,6 +79,7 @@
       * [kubeadm init流程](linux/k8s/k8s知识点/kubeadm 专题 一 init 究竟干了些什么.md)    
       * [k8s二进制包下载](linux/k8s/k8s下载/下载k8s二进制包.md)  
       * [k8s设置通过kubeconfig登陆dashboard](linux/k8s/k8s知识点/k8s设置通过kubeconfig登陆dashboard.md)
+      * [k8s给node节点添加角色标签](linux/k8s/k8s知识点/k8s给node节点添加角色标签.md)
     * [k8s安装](README.md)
       * [kubeadm安装](README.md)
         * [1.15](linux/k8s/k8s安装/1.使用 kubeadm 搭建 v1.15.3 版本 Kubernetes 集群.md)
