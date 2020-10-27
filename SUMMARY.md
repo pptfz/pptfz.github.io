@@ -10,6 +10,8 @@
 * [生产环境开源项目](README.md)
   * [任务调度系统](README.md)
     * [DolphinScheduler](生产环境开源项目/任务调度系统/DolphinScheduler单机部署.md)
+  * [计划任务系统](README.md)
+    * [gocron](生产环境开源项目/gocron/计划任务系统 gocron.md)
 
 * [big-data](README.md)
   * [Ambari](README.md)
@@ -189,6 +191,7 @@
       * [gitlab使用](README.md)
         * [关闭gitlab注册功能](linux/自动化运维平台/gitlab/gitlab使用/1.关闭gitlab自动注册功能.md)
         * [设置gitlab分支保护](linux/自动化运维平台/gitlab/gitlab使用/2.设置gitlab分支保护.md)
+        * [使用gitlab离线文档](linux/自动化运维平台/gitlab/gitlab使用/3.gitlab离线官方文档.md)
 
     * [jenkins](README.md)
       * [jenkins安装](README.md)

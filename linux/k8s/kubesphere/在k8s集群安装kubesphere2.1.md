@@ -1140,10 +1140,15 @@ kubesphere-system              redis-6fd6c6d6f9-dqh2s                      1/1  
 
 **访问kubesphere:30880**
 
-![iShot2020-04-2815.28.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-2815.29.11.png)
+用户名：`admin`
+
+密码：`P@88w0rd`
+
+![iShot2020-04-2815.29.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-2815.28.13.png)
 
 
 
 **登陆后首界面**
 
-![iShot2020-04-2815.29.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-2815.28.13.png)
+![iShot2020-04-2815.28.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-2815.29.11.png)
+

@@ -1,3 +1,3 @@
 # 😂 😂  😂
 
-![image](http://image.pptfz.top/gitbook/readme.gif)
+![readme](https://gitee.com/pptfz/picgo-images/raw/master/img/readme.gif)
