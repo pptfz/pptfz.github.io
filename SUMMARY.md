@@ -165,7 +165,8 @@
         * [supervisor管理tomcat](linux/linux服务/supervisor/4.supervisor管理tomcat.md)
         * [supervisor管理redis](linux/linux服务/supervisor/5.supervisor管理redis.md)
         * [supervisor管理mongodb](linux/linux服务/supervisor/6.supervisor管理mongodb.md)
-      * [supervisor自定义服务文件参数](linux/linux服务/supervisor/7.supervisor自定义服务文件参数.md)  
+        * [supervisor管理gitbook](linux/linux服务/supervisor/7.supervisor管理gitbook.md)
+      * [supervisor自定义服务文件参数](linux/linux服务/supervisor/supervisor自定义服务文件参数.md)  
 * [Linux内核](README.md)
   * [Linux升级内核](linux/linux内核/Linux升级内核.md)
 

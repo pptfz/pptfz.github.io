@@ -244,3 +244,60 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 ![iShot2020-10-27 11.25.43](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-27 11.25.43.png)
 
+
+
+# 四、使用supervisor管理gocron
+
+
+
+**supervisor配置文件`/etc/supervisor/supervisord.conf`中定义了include，因此如果想要管理服务，就需要编辑`/etc/supervisor/config.d/*.ini`文件**
+
+```shell
+[include] 
+files = /etc/supervisor/config.d/*.ini
+```
+
+
+
+**编辑gocron服务配置文件`/etc/supervisor/config.d/gocron.ini`**
+
+⚠️<span style=color:red>gocron不能独立运行，需指定程序运行时目录，这里gocron调度器二进制文件的目录是 `/usr/local/gocron/gocron-linux-amd64`  </span>
+
+```shell
+cat >/etc/supervisor/config.d/gocron.ini<<'EOF'
+[program:gocron]
+command=/usr/local/gocron/gocron-linux-amd64/gocron web
+directory=/usr/local/gocron/gocron-linux-amd64
+priority=1                    ; 数字越高，优先级越高
+autostart=true                ; 随着supervisord的启动而启动
+autorestart=true              ; 自动重启
+startretries=10               ; 启动失败时的最多重试次数
+exitcodes=0                   ; 正常退出代码
+stopsignal=KILL               ; 用来杀死进程的信号
+stopwaitsecs=10               ; 发送SIGKILL前的等待时间
+redirect_stderr=true          ; 重定向stderr到stdout
+
+stdout_logfile_maxbytes = 1024MB
+stdout_logfile_backups  = 10
+stdout_logfile          = /var/log/supervisor/gocron.log
+EOF
+```
+
+
+
+**将gocron加入supervisor**
+
+```shell
+$ supervisor> update gocron
+gocron: added process group
+```
+
+
+
+**查看gocron运行状态**
+
+```shell
+$ supervisor> status
+gocron                           RUNNING   pid 17468, uptime 0:00:03
+```
+
