@@ -16,6 +16,7 @@
 * [big-data](README.md)
   * [Ambari](README.md)
     * [Ambari平台搭建](linux/big-data/Ambari/CentOS7中用Ambari快速搭建大数据平台.md)
+    * [Ambari下载](linux/big-data/Ambari/ambari下载.md)
 
 * [Linux命令](README.md)
     * [vim命令](README.md)
@@ -199,6 +200,7 @@
         * [CentOS7.5安装jenkins-2.176](linux/自动化运维平台/jenkins/jenkins安装/CentOS7.5安装jenkins-2.176.md)
         * [docker安装jenkins](linux/自动化运维平台/jenkins/jenkins安装/docker安装jenkins.md)
       * [jenkins使用](README.md)
+        * [jenkins修改数据存放路径](linux/自动化运维平台/jenkins/jenkins使用/jenkins修改数据存放路径.md)
 
     * [自动化运维工具](README.md)
       * [Ansible](README.md)

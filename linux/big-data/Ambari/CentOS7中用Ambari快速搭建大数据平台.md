@@ -22,6 +22,32 @@ Ambari 自身也是一个分布式架构的软件，主要由两部分组成：A
 
 
 
+**Ambari**
+
+> 基于Web的工具，支持Apache Hadoop集群的创建、管理和监控。
+
+
+
+**HDP**
+
+> 包含了hadoop生态系统的所有软件项目，比如HBase、Zookeeper、Hive
+>
+> 、Pig等等。
+
+
+
+**HDP-UTILS**
+
+> 工具类库。
+
+
+
+**HDP-GPL**
+
+> LZO压缩库软件包存储在单独的HDP-GPL存储库中。
+
+
+
 **Ambari安装说明**
 
 > **Ambari类似于Ansible，并没有明确的 master/slave 之分**
