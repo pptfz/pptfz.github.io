@@ -194,6 +194,7 @@
         * [关闭gitlab注册功能](linux/自动化运维平台/gitlab/gitlab使用/1.关闭gitlab自动注册功能.md)
         * [设置gitlab分支保护](linux/自动化运维平台/gitlab/gitlab使用/2.设置gitlab分支保护.md)
         * [使用gitlab离线文档](linux/自动化运维平台/gitlab/gitlab使用/3.gitlab离线官方文档.md)
+        * [gitlab备份与恢复](linux/自动化运维平台/gitlab/gitlab使用/4.gitlab备份.md)
 
     * [jenkins](README.md)
       * [jenkins安装](README.md)
