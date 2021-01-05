@@ -330,7 +330,9 @@
   * [shell数组](linux/shell/8.shell数组.md)
   * [shell函数](linux/shell/9.shell函数.md)    
   * [expect自动化交互程序](linux/shell/10.expect自动化交互式程序.md)
-
+  * [各种脚本](README.md)
+    * [大神杰作](README.md)
+      * [shell脚本 俄罗斯方块](linux/shell/各种脚本/大神杰作/shell脚本 俄罗斯方块.md)
 
 * [Python](README.md)
   * [Python基础](README.md)

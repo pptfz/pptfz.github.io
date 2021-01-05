@@ -100,7 +100,7 @@
 
 - **pre_deploy**        在部署代码之前的准备工作，如git的一些前置检查、vendor的安装（更新），一行一条
 - **post_deploy**        git代码检出之后，可能做一些调整处理， 如vendor拷贝， 环境适配（mv config一test.phpconfig.php）一行一条
-- **pre_release**        同步完所有目标机器之后，更改版本软链之前触发任务。java可能要做一些暂停 服务的操作（双引号将会被转义为\\"）
+- **pre_release**        同步完所有目标机器之后，更改版本软链之前触发任务。java可能要做一些暂停服务的操作（双引号将会被转义为\\"）
 - **post_release**        所有目标机器都部署完毕之后，做一些清理工作， 如删除缓存、平滑重载/重启服务（nginx、php、task） ，一行一条（双引号将会被转义为\\"）
 - **post_release_delay**        按顺序在每台目标机执行高级任务，每台服务器执行完毕后暂停x秒。默认设置为0，应用服务使用平滑重载，仅当应用服务无法支持平滑重载必须重启时才配置此参数。设置为大于0的值会出现代码发布阶段各个服务器业务代码逻辑不一致的情况，请谨慎配置
 
@@ -197,7 +197,7 @@ mkdir -p /data/walle/WebServer && chown www.www /data/walle/WebServer
 
 **把本机`.ssh/id_rsa.pub`放到后续创建的gitlab项目中，注意以下问题**
 
-**<span style=color:red>⚠️ssh服务配置文件`/etc/ssh/sshd_config`中有一项配置是`AuthorizedKeysFile .ssh/authorized_keys`，如果想要使用私钥免密登陆，则公钥必须写入到文件`.ssh/authorized_keys`中，即注册私钥，否则免密会失败！！！</span>**
+**<span style=color:red>⚠️ssh服务配置文件`/etc/ssh/sshd_config`中有一项配置是`AuthorizedKeysFile .ssh/authorized_keys`，如果想要使用私钥免密登陆，则公钥必须写入到文件`.ssh/authorized_keys`中，即注册公钥，否则免密会失败！！！</span>**
 
 
 
@@ -223,7 +223,7 @@ EOF
 
 
 
-**在瓦力中我们配置了webroot是`/data/nginx/website`，但是瓦力会自动生成此软连接，因此只需要创建`/data/nginx`即可**
+**在瓦力中我们配置了webroot是`/data/nginx/website`，但是瓦力会自动生成此软连接，即瓦力会自动生成程序web根目录，因此只需要创建`/data/nginx`即可**
 
 ```shell
 mkdir -p /data/nginx && chown www.www /data/nginx
@@ -239,7 +239,13 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-这里的流程就是，开发写好了`index.html`文件内容并提交到gitlab，瓦力从gitlab拉取`index.html`文件到本机的`/data/walle/WebServer(自定义的代码检出仓库)`，然后瓦力利用rsync推送代码至`/data/release/项目名/时间目录`，然后瓦力中配置的程序根目录(webroot中指定)会软链接到`/data/release/项目名/时间目录`，这样就可以访问web服务了
+总结一下这里的流程就是
+
+1.开发写好了`index.html`文件内容并提交到gitlab
+
+2.瓦力从gitlab拉取`index.html`文件到本机的`/data/walle/WebServer(自定义的代码检出仓库)`
+
+3.最后瓦力利用rsync推送代码至`/data/release/项目名/时间目录`，然后瓦力中配置的程序根目录(webroot中指定)会软链接到`/data/release/项目名/时间目录`，这样就可以访问web服务了
 
 
 
@@ -301,19 +307,21 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-gitlab用户在组里面有5种不同权限：
+**gitlab用户在组里面有5种不同权限：**
 
-- Guest：可以创建issue、发表评论，不能读写版本库 
+- `Guest`：可以创建issue、发表评论，不能读写版本库 
 
-- Reporter：可以克隆代码，不能提交，QA、PM 可以赋予这个权限 
+- `Reporter`：可以克隆代码，不能提交，QA、PM 可以赋予这个权限 
 
-- Developer：可以克隆代码、开发、提交、push，普通开发可以赋予这个权限 
+- `Developer`：可以克隆代码、开发、提交、push，普通开发可以赋予这个权限 
 
-- Maintainer：可以创建项目、添加tag、保护分支、添加项目成员、编辑项目，核心开发可以赋予这个权限 
+- `Maintainer`：可以创建项目、添加tag、保护分支、添加项目成员、编辑项目，核心开发可以赋予这个权限 
 
-- Owner：可以设置项目访问权限 - Visibility Level、删除项目、迁移项目、管理组成员，开发组组长可以赋予这个权限 
+- `Owner`：可以设置项目访问权限 - Visibility Level、删除项目、迁移项目、管理组成员，开发组组长可以赋予这个权限 
 
+**⚠️新版的gitlab中的权限可能会不同**
 
+![iShot2020-11-27 14.27.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-11-27 14.27.17.png)
 
 
 
