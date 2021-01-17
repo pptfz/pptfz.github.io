@@ -13,6 +13,10 @@
   * [计划任务系统](README.md)
     * [gocron](生产环境开源项目/gocron/计划任务系统 gocron.md)
 
+
+* [日志](README.md)
+  * [日志切割 logrotate](linux/日志/Linux 日志切割神器 Logrotate 原理和配置详解.md)
+
 * [big-data](README.md)
   * [Ambari](README.md)
     * [Ambari平台搭建](linux/big-data/Ambari/CentOS7中用Ambari快速搭建大数据平台.md)
@@ -233,6 +237,7 @@
         * [1.zabbix5.0安装](linux/monitor/zabbix/zabbix5.0/1.centos7安装zabbix5.0.md)
     * [grafana](README.md)
       * [grafana7.0.3安装并结合zabbix数据源进行基础监控](linux/monitor/grafana/1.centos7安装grafana7.0.3并结合zabbix数据源进行基础监控.md)
+
 
 * [Linux其他](README.md)                
     * [Linux性能测试](README.md)
