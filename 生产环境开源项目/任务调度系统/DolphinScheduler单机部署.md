@@ -16,13 +16,9 @@
 
 
 
-
-
 [DolphinScheduler官网](https://dolphinscheduler.apache.org/zh-cn/)
 
 [DolphinScheduler github地址](https://github.com/apache/incubator-dolphinscheduler)
-
-
 
 
 
@@ -53,7 +49,7 @@
 
 
 
-# 二、DolphinScheduler安装
+# 二、DolphinScheduler标准安装
 
 ## 2.1 官方推荐系统配置
 
@@ -655,3 +651,306 @@ sh bin/dolphinscheduler-daemon.sh stop alert-server
 
 
 [dolphinscheduler使用文档](https://dolphinscheduler.apache.org/zh-cn/docs/1.3.2/user_doc/quick-start.html)
+
+
+
+
+
+## 三、DolphinScheduler docker安装
+
+[dolphinscheduler源码 清华下载地址](https://mirrors.tuna.tsinghua.edu.cn/apache/incubator/dolphinscheduler)
+
+
+
+## 3.1 下载源码 zip 包
+
+```sh
+# 创建源码存放目录
+mkdir -p /opt/soft/dolphinscheduler && cd /opt/soft/dolphinscheduler
+
+# 下载源码包
+wget https://mirrors.tuna.tsinghua.edu.cn/apache/incubator/dolphinscheduler/1.3.4/apache-dolphinscheduler-incubating-1.3.4-src.zip
+
+# 解压缩
+tar -zxvf apache-dolphinscheduler-incubating-1.3.4-src.zip
+
+mv apache-dolphinscheduler-incubating-1.3.4-src-release  dolphinscheduler-src
+```
+
+
+
+## 3.2 安装并启动服务
+
+[docker-compose 国内下载源](http://get.daocloud.io/)
+
+```sh
+cd dolphinscheduler-src
+docker-compose -f ./docker/docker-swarm/docker-compose.yml up -d
+```
+
+
+
+`docker-compose.yml`文件内容
+
+```yaml
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+version: "3.4"
+
+services:
+
+  dolphinscheduler-postgresql:
+    image: bitnami/postgresql:13.1.0
+    container_name: dolphinscheduler-postgresql
+    ports:
+    - 5432:5432
+    environment:
+      TZ: Asia/Shanghai
+      POSTGRESQL_USERNAME: root
+      POSTGRESQL_PASSWORD: root
+      POSTGRESQL_DATABASE: dolphinscheduler
+      POSTGRESQL_REPLICATION_PASSWORD: dolphinscheduler@123
+    volumes:
+    - dolphinscheduler-postgresql:/bitnami/postgresql
+    - dolphinscheduler-postgresql-initdb:/docker-entrypoint-initdb.d
+    networks:
+    - dolphinscheduler
+
+  dolphinscheduler-zookeeper:
+    image: bitnami/zookeeper:3.6.2
+    container_name: dolphinscheduler-zookeeper
+    ports:
+    - 2181:2181
+    environment:
+      TZ: Asia/Shanghai
+      ALLOW_ANONYMOUS_LOGIN: "yes"
+      ZOO_4LW_COMMANDS_WHITELIST: srvr,ruok,wchs,cons
+    volumes:
+    - dolphinscheduler-zookeeper:/bitnami/zookeeper
+    networks:
+    - dolphinscheduler
+
+  dolphinscheduler-api:
+    image: apache/dolphinscheduler:latest
+    container_name: dolphinscheduler-api
+    command: ["api-server"]
+    ports:
+    - 12345:12345
+    environment:
+      TZ: Asia/Shanghai
+      DATABASE_HOST: dolphinscheduler-postgresql
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DATABASE: dolphinscheduler
+      ZOOKEEPER_QUORUM: dolphinscheduler-zookeeper:2181
+      ZOOKEEPER_ROOT: /dolphinscheduler
+      DOLPHINSCHEDULER_RESOURCE_STORAGE_TYPE: "HDFS"
+      DOLPHINSCHEDULER_FS_DEFAULTFS: "file:///data/dolphinscheduler"
+    healthcheck:
+      test: ["CMD", "/root/checkpoint.sh", "ApiApplicationServer"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    depends_on:
+    - dolphinscheduler-postgresql
+    - dolphinscheduler-zookeeper
+    volumes:
+    - dolphinscheduler-logs:/opt/dolphinscheduler/logs
+    - dolphinscheduler-resource-storage-local:/dolphinscheduler
+    networks:
+    - dolphinscheduler
+
+  dolphinscheduler-frontend:
+    image: apache/dolphinscheduler:latest
+    container_name: dolphinscheduler-frontend
+    command: ["frontend"]
+    ports:
+    - 8889:8888
+    environment:
+      TZ: Asia/Shanghai
+      FRONTEND_API_SERVER_HOST: dolphinscheduler-api
+      FRONTEND_API_SERVER_PORT: 12345
+    healthcheck:
+      test: ["CMD", "nc", "-z", "localhost", "8888"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    depends_on:
+    - dolphinscheduler-api
+    volumes:
+    - dolphinscheduler-logs:/var/log/nginx
+    networks:
+    - dolphinscheduler
+
+  dolphinscheduler-alert:
+    image: apache/dolphinscheduler:latest
+    container_name: dolphinscheduler-alert
+    command: ["alert-server"]
+    environment:
+      TZ: Asia/Shanghai
+      XLS_FILE_PATH: "/tmp/xls"
+      MAIL_SERVER_HOST: ""
+      MAIL_SERVER_PORT: ""
+      MAIL_SENDER: ""
+      MAIL_USER: ""
+      MAIL_PASSWD: ""
+      MAIL_SMTP_STARTTLS_ENABLE: "false"
+      MAIL_SMTP_SSL_ENABLE: "false"
+      MAIL_SMTP_SSL_TRUST: ""
+      ENTERPRISE_WECHAT_ENABLE: "false"
+      ENTERPRISE_WECHAT_CORP_ID: ""
+      ENTERPRISE_WECHAT_SECRET: ""
+      ENTERPRISE_WECHAT_AGENT_ID: ""
+      ENTERPRISE_WECHAT_USERS: ""
+      DATABASE_HOST: dolphinscheduler-postgresql
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DATABASE: dolphinscheduler
+    healthcheck:
+      test: ["CMD", "/root/checkpoint.sh", "AlertServer"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    depends_on:
+    - dolphinscheduler-postgresql
+    volumes:
+    - dolphinscheduler-logs:/opt/dolphinscheduler/logs
+    networks:
+    - dolphinscheduler
+
+  dolphinscheduler-master:
+    image: apache/dolphinscheduler:latest
+    container_name: dolphinscheduler-master
+    command: ["master-server"]
+    ports:
+    - 5678:5678
+    environment:
+      TZ: Asia/Shanghai
+      MASTER_EXEC_THREADS: "100"
+      MASTER_EXEC_TASK_NUM: "20"
+      MASTER_HEARTBEAT_INTERVAL: "10"
+      MASTER_TASK_COMMIT_RETRYTIMES: "5"
+      MASTER_TASK_COMMIT_INTERVAL: "1000"
+      MASTER_MAX_CPULOAD_AVG: "100"
+      MASTER_RESERVED_MEMORY: "0.1"
+      DATABASE_HOST: dolphinscheduler-postgresql
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DATABASE: dolphinscheduler
+      ZOOKEEPER_QUORUM: dolphinscheduler-zookeeper:2181
+      ZOOKEEPER_ROOT: /dolphinscheduler
+    healthcheck:
+      test: ["CMD", "/root/checkpoint.sh", "MasterServer"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    depends_on:
+    - dolphinscheduler-postgresql
+    - dolphinscheduler-zookeeper
+    volumes:
+    - dolphinscheduler-logs:/opt/dolphinscheduler/logs
+    networks:
+    - dolphinscheduler
+
+  dolphinscheduler-worker:
+    image: apache/dolphinscheduler:latest
+    container_name: dolphinscheduler-worker
+    command: ["worker-server"]
+    ports:
+    - 1234:1234
+    - 50051:50051
+    environment:
+      TZ: Asia/Shanghai
+      WORKER_EXEC_THREADS: "100"
+      WORKER_HEARTBEAT_INTERVAL: "10"
+      WORKER_FETCH_TASK_NUM: "3"
+      WORKER_MAX_CPULOAD_AVG: "100"
+      WORKER_RESERVED_MEMORY: "0.1"
+      WORKER_GROUP: "default"
+      DOLPHINSCHEDULER_DATA_BASEDIR_PATH: "/tmp/dolphinscheduler"
+      DATABASE_HOST: dolphinscheduler-postgresql
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_DATABASE: dolphinscheduler
+      ZOOKEEPER_QUORUM: dolphinscheduler-zookeeper:2181
+      ZOOKEEPER_ROOT: /dolphinscheduler
+      DOLPHINSCHEDULER_RESOURCE_STORAGE_TYPE: "HDFS"
+      DOLPHINSCHEDULER_FS_DEFAULTFS: "file:///data/dolphinscheduler"
+    healthcheck:
+      test: ["CMD", "/root/checkpoint.sh", "WorkerServer"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    depends_on: 
+    - dolphinscheduler-postgresql
+    - dolphinscheduler-zookeeper
+    volumes:
+    - type: bind
+      source: ./dolphinscheduler_env.sh
+      target: /opt/dolphinscheduler/conf/env/dolphinscheduler_env.sh
+    - type: volume
+      source: dolphinscheduler-worker-data
+      target: /tmp/dolphinscheduler
+    - type: volume
+      source: dolphinscheduler-logs
+      target: /opt/dolphinscheduler/logs
+    - type: volume
+      source: dolphinscheduler-resource-storage-local
+      target: /dolphinscheduler
+    networks:
+    - dolphinscheduler
+
+networks:
+  dolphinscheduler:
+    driver: bridge
+
+volumes:
+  dolphinscheduler-postgresql:
+  dolphinscheduler-postgresql-initdb:
+  dolphinscheduler-zookeeper:
+  dolphinscheduler-worker-data:
+  dolphinscheduler-logs:
+  dolphinscheduler-resource-storage-local:
+
+configs:
+  dolphinscheduler-worker-task-env:
+    file: ./dolphinscheduler_env.sh
+```
+
+
+
+## 3.3 登陆系统
+
+浏览器访问 `IP:8888`
+
+用户名：`admin`
+
+密码：`dolphinscheduler123`
+
+![iShot2020-09-05 18.30.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-05 18.30.57.png)
+
+
+

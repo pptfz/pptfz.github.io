@@ -63,11 +63,11 @@ exit 0
 
 ```shell
 logrotate [OPTION...] <configfile>
--d, --debug ：debug模式，测试配置文件是否有错误。
--f, --force ：强制转储文件。
--m, --mail=command ：压缩日志后，发送日志到指定邮箱。
--s, --state=statefile ：使用指定的状态文件。
--v, --verbose ：显示转储过程。
+-d， --debug ：debug模式，测试配置文件是否有错误。
+-f， --force ：强制转储文件。
+-m， --mail=command ：压缩日志后，发送日志到指定邮箱。
+-s， --state=statefile ：使用指定的状态文件。
+-v， --verbose ：显示转储过程。
 ```
 
 
@@ -84,7 +84,7 @@ logrotate [OPTION...] <configfile>
 
 
 
-根据日志切割设置进行执行，并显示详细信息,但是不进行具体操作，debug模式
+根据日志切割设置进行执行，并显示详细信息，但是不进行具体操作，debug模式
 
 ```sh
 /usr/sbin/logrotate -d /etc/logrotate.conf
@@ -139,7 +139,7 @@ include /etc/logrotate.d
 
 # no packages own wtmp and btmp -- we'll rotate them here()
 /var/log/wtmp {			# 仅针对 /var/log/wtmp 所设定的参数
-    monthly			# 每月一次切割,取代默认的一周
+    monthly			# 每月一次切割，取代默认的一周
     create 0664 root utmp			# 文件大小超过 1M 后才会切割
 			minsize 1M			# 文件大小超过 1M 后才会切割
     rotate 1			# 只保留一个日志
@@ -337,7 +337,7 @@ total 25676
 
 ```sh
 $ cat /etc/logrotate.d/nginx
-/Data/logs/nginx/*/*log {
+/Data/logs/nginx/*log {
     daily
     rotate 365
     missingok
@@ -502,11 +502,11 @@ command			# 执行的命令
 
 ### 3.2 修改logrotate切割时间
 
-通过默认 `/etc/anacrontab` 文件配置，会发现logrotate自动切割日志文件的默认时间是凌晨3点多。现在需要将切割时间调整到每天的晚上12点，即每天切割的日志是前一天的0-24点之间的内容。
+通过默认 `/etc/anacrontab` 文件配置，会发现logrotate自动切割日志文件的默认时间是凌晨3点多。现在需要将切割时间调整到每天的晚上12点，即每天切割的日志是前一天的0-24点之间的内容。需要计划任务中指定执行切割的时间，并且加上 `-f` 选项强制切割。
 
 ```shell
 # 1.备份原有文件
-cp /etc/anacrontab{,.bak}
+cp /etc/anacrontab{，.bak}
 
 # 2.重新编辑文件
 $ cat /etc/logrotate.d/nstc_nohup.out
@@ -566,7 +566,7 @@ $ ll /data/nstc/nohup.out*
 $ cat log_rotate.py
 #!/usr/bin/env python
 
-import datetime,os,sys,shutil
+import datetime，os，sys，shutil
 
 log_path = '/opt/jumpserver/logs/'
 log_file = 'jumpserver.log'
@@ -577,12 +577,12 @@ try:
     os.makedirs(log_path + yesterday.strftime('%Y') + os.sep + \
                 yesterday.strftime('%m'))
 
-except OSError,e:
+except OSError，e:
     print
     print e
     sys.exit()
 
-shutil.move(log_path + log_file,log_path \
+shutil.move(log_path + log_file，log_path \
             + yesterday.strftime('%Y') + os.sep \
             + yesterday.strftime('%m') + os.sep \
             + log_file + '_' + yesterday.strftime('%Y%m%d') + '.log')
@@ -615,7 +615,7 @@ $ crontab -l
 $ cat log_rotate.py
 #!/usr/bin/env python
 
-import datetime,os,sys,shutil
+import datetime，os，sys，shutil
 
 log_path = '/app/nginx/logs/'
 log_file = 'www_access.log'
@@ -626,13 +626,13 @@ try:
     os.makedirs(log_path + yesterday.strftime('%Y') + os.sep + \
                 yesterday.strftime('%m'))
 
-except OSError,e:
+except OSError，e:
     print
     print e
     sys.exit()
 
 
-shutil.move(log_path + log_file,log_path \
+shutil.move(log_path + log_file，log_path \
             + yesterday.strftime('%Y') + os.sep \
             + yesterday.strftime('%m') + os.sep \
             + log_file + '_' + yesterday.strftime('%Y%m%d') + '.log')
@@ -640,8 +640,6 @@ shutil.move(log_path + log_file,log_path \
 
 os.popen("sudo kill -USR1 `cat /app/nginx/logs/nginx.pid`")
 ```
-
-
 
 
 
@@ -808,13 +806,9 @@ exit 0
 
 
 
-最后最后重启下cron服务：
+最后重启下cron服务：
 
 ```sh
-$ /etc/init.d/crond restart
-Stopping crond: [ OK ]
-Starting crond: [ OK ]
+systemctl restart crond.service 
 ```
-
-------
 

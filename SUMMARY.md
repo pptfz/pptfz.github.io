@@ -12,6 +12,8 @@
     * [DolphinScheduler](生产环境开源项目/任务调度系统/DolphinScheduler单机部署.md)
   * [计划任务系统](README.md)
     * [gocron](生产环境开源项目/gocron/计划任务系统 gocron.md)
+  * [bi工具](README.md)
+    * [zeppelin](生产环境开源项目/bi工具/zeppelin/zeppelin安装配置.md)
 
 
 * [日志](README.md)
@@ -199,6 +201,7 @@
         * [设置gitlab分支保护](linux/自动化运维平台/gitlab/gitlab使用/2.设置gitlab分支保护.md)
         * [使用gitlab离线文档](linux/自动化运维平台/gitlab/gitlab使用/3.gitlab离线官方文档.md)
         * [gitlab备份与恢复](linux/自动化运维平台/gitlab/gitlab使用/4.gitlab备份.md)
+        * [gitlab关闭双重认证](linux/自动化运维平台/gitlab/gitlab使用/5.关闭gitlab双重认证.md)
 
     * [jenkins](README.md)
       * [jenkins安装](README.md)
