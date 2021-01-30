@@ -162,6 +162,7 @@
     * [php](README.md)
       * [centos7编译安装php](linux/linux服务/php/1.centos7编译安装php7.3.md)
       * [rpm包安装php](linux/linux服务/php/2.php安装(rpm包).md)
+      * [编译安装php](linux/linux服务/php/编译安装php.md)
     * [tomcat](README.md)
       * [centos7二进制安装tomcat](linux/linux服务/tomcat/centos7二进制安装tomcat8.md)
     * [supervisor](README.md)
