@@ -8,6 +8,8 @@
 
 
 
+[lnmp一健安装](https://lnmp.org/)
+
 ## 一、编译安装php
 
 ### 1.1 下载源码包
@@ -248,9 +250,54 @@ extension=redis.so
 
 ### 1.8 启动php-fpm
 
+#### 1.8.1 方法一	指定配置文件直接启动
+
 ```sh
 /usr/local/php72/sbin/php-fpm -c /usr/local/php72/etc/php.ini -y /usr/local/php72/etc/php-fpm.conf -D
 ```
+
+
+
+#### 1.8.2 方法二	拷贝启动文件
+
+```sh
+cp php-7.2.32/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+chmod +x /etc/init.d/php-fpm
+/etc/init.d/php-fpm start
+```
+
+
+
+#### 1.8.3 方法三	使用systemd管理php-fpm
+
+```sh
+# 编辑systemd文件
+cat > /usr/lib/systemd/system/php-fpm.service << 'EOF'
+[Unit]
+Description=The PHP FastCGI Process Manager
+After=syslog.target network.target
+
+[Service]
+Type=forking
+PIDFile=/usr/local/php72/var/run/php-fpm.pid
+ExecStart=/usr/local/php72/sbin/php-fpm
+ExecReload=/bin/kill -USR2 $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# 重新加载
+systemctl daemon-reload 
+
+# 启动并设置开机自启
+systemctl enable php-fpm && systemctl start php-fpm
+```
+
+
+
+
 
 
 
@@ -282,6 +329,29 @@ php72: added process group
 
 **⚠️<span style=color:red>始终报错，无法解决</span>**
 
+```sh
+$ supervisorctl status
+php72                            BACKOFF   Exited too quickly (process log may have details)
+```
+
+
+
+**查看错误日志报错已经有另外一个FPM进程启动，此时查看php-fpm进程是启动的，但是supervisor中提示是启动失败的，原因未知，无法解决**
+
+```sh
+$ tail -100 /var/log/supervisord/php72.error.log 
+[01-Feb-2021 10:04:27] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[01-Feb-2021 10:04:27] NOTICE: [pool www] 'group' directive is ignored when FPM is not running as root
+[01-Feb-2021 10:04:28] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[01-Feb-2021 10:04:28] NOTICE: [pool www] 'group' directive is ignored when FPM is not running as root
+[01-Feb-2021 10:04:28] ERROR: An another FPM instance seems to already listen on /tmp/php72-cgi.sock
+[01-Feb-2021 10:04:28] ERROR: FPM initialization failed
+[01-Feb-2021 10:04:31] NOTICE: [pool www] 'user' directive is ignored when FPM is not running as root
+[01-Feb-2021 10:04:31] NOTICE: [pool www] 'group' directive is ignored when FPM is not running as root
+[01-Feb-2021 10:04:31] ERROR: An another FPM instance seems to already listen on /tmp/php72-cgi.sock
+[01-Feb-2021 10:04:31] ERROR: FPM initialization failed
+```
+
 
 
 ### 1.10 启动php报错
@@ -293,7 +363,9 @@ php72: added process group
 [04-Jan-2021 16:52:50] NOTICE: PHP message: PHP Warning:  PHP Startup: Unable to load dynamic library 'redis.so' (tried: /usr/local/php72/lib/php/extensions/no-debug-non-zts-20170718/redis.so (/usr/local/php72/lib/php/extensions/no-debug-non-zts-20170718/redis.so: undefined symbol: zend_string_init_interned), /usr/local/php72/lib/php/extensions/no-debug-non-zts-20170718/redis.so.so (/usr/local/php72/lib/php/extensions/no-debug-non-zts-20170718/redis.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
 ```
 
-解决方法
+
+
+**解决方法**
 
 注释 `php.ini` 中的 `extension=redis.so`
 
