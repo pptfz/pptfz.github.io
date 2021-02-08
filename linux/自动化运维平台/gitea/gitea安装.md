@@ -14,11 +14,25 @@
 
 [gitea中文文档](https://docs.gitea.io/zh-cn/)
 
+
+
+**gitea与Gogs**
+
+Gitea其实是Gogs的孪生兄弟，因为这是从Gogs源码的基础上开发的，算是分叉?官方介绍是"[Gitea](https://javajgs.com/go?url=http://www.senra.me/tag/gitea/) 是一个开源社区驱动的 [Gogs](https://javajgs.com/go?url=http://www.senra.me/tag/gogs/) 克隆"，关于原因可以参考官网上的一篇介绍——>[传送门](https://javajgs.com/go?url=https://blog.gitea.io/2016/12/welcome-to-gitea/)
+
+基本上就是有一部分开发者认为Gogs的开发者效率比较慢，而且不接受他人加入开发，所有修改和PR都需要经过他一个人的审核，这对Gogs的发展很不利。因而部分开发者决定基于Gogs重开一个项目，这就是Gitea。
+
+
+
+[Gogs docker安装官方文档](https://github.com/gogs/gogs/tree/main/docker)
+
+
+
 # 二、gitea安装
 
 gitea安装方式有很多种，详情看[官网](https://docs.gitea.io/zh-cn/)，这里选择docker安装，docker安装中的数据库有3种，``sqlite3``、``mysql``、``pg``
 
-## 2.1下载gitea镜像
+## 2.1 下载gitea镜像
 
 可以通过[dockerhub](https://hub.docker.com/r/gitea/gitea/tags)下载对应的gitea镜像
 
@@ -28,11 +42,11 @@ docker pull gitea/gitea:1.11.1
 
 
 
-## 2.2下载dcoker-compose
+## 2.2 下载dcoker-compose
 
-docker-compose[国内地址](http://get.daocloud.io/#install-compose)
+[docker-compose 国内地址](http://get.daocloud.io/#install-compose)
 
-docker-compose[官方地址](https://docs.docker.com/compose/install/)
+[docker-compose 官方地址](https://docs.docker.com/compose/install/)
 
 ```python
 curl -L https://get.daocloud.io/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
@@ -40,13 +54,19 @@ curl -L https://get.daocloud.io/docker/compose/releases/download/1.12.0/docker-c
 
 
 
-## 2.3编辑gitea docker-compose文件
+## 2.3 编辑gitea docker-compose文件
 
-```python
-1.创建目录
+### 2.3.1 创建目录
+
+```sh
 mkdir /usr/local/gitea && cd /usr/local/gitea
+```
 
-2.编辑gitea文件
+
+
+### 2.3.2  编辑gitea docker-compose文件
+
+```yaml
 cat >docker-compose.yaml <<EOF
 version: "2"
 
@@ -90,11 +110,21 @@ services:
     volumes:
       - ./postgres:/var/lib/postgresql/data
 EOF
+```
 
-3.启动
+
+
+### 2.3.3 启动
+
+```sh
 docker-compose up -d
+```
 
-4.查看启动的容器
+
+
+### 2.3.4 查看启动的容器
+
+```python
 $ docker ps -a
 CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS              PORTS                                         NAMES
 1278b606ea46        gitea/gitea:1.11.1   "/usr/bin/entrypoint…"   26 seconds ago      Up 25 seconds       0.0.0.0:3000->3000/tcp, 0.0.0.0:222->22/tcp   gitea_server_1
@@ -103,9 +133,9 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 
 
-## 2.4gitea数据库设置
+## 2.4 gitea数据库设置
 
-浏览器访问IP:3000
+浏览器访问	IP:3000
 
 初始界面如下，第一个注册的用户就是管理员，后续可以设置只有管理员能注册账号，可以修改配置文件，也可以在可选设置中设置
 
@@ -113,11 +143,11 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 
 
-数据库设置
+**数据库设置**
 
 ![iShot2020-03-0719.52.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-03-0719.52.28.png)
 
-一般设置
+**一般设置**
 
 可以自定义``仓库根目录``和``日志目录``
 
@@ -125,7 +155,7 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 
 
-可选设置
+**可选设置**
 
 ⚠️如果这里勾选了禁止用户自主注册就必须设置管理员信息，否则你不允许注册又没设置管理员信息那企不是**🐔🐔斯密达了**？
 
@@ -139,7 +169,7 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 
 
-## 2.5配置文件修改项
+## 2.5 配置文件修改项
 
 关于服务的一些修改，配置文件是``gitea/gitea/conf/app.ini``
 

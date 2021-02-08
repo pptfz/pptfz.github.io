@@ -14,7 +14,10 @@
     * [gocron](生产环境开源项目/gocron/计划任务系统 gocron.md)
   * [bi工具](README.md)
     * [zeppelin](生产环境开源项目/bi工具/zeppelin/zeppelin安装配置.md)
-
+  * [cmdb](README.md)
+    * [spug](README.md)
+      * [spug安装](生产环境开源项目/cmdb平台/spug/spug安装.md)
+      * [spug上线示例](生产环境开源项目/cmdb平台/spug/spug上线示例.md)
 
 * [日志](README.md)
   * [日志切割 logrotate](linux/日志/Linux 日志切割神器 Logrotate 原理和配置详解.md)

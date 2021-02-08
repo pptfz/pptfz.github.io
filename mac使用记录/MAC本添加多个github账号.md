@@ -112,11 +112,11 @@ git remote add origin git@one.github.com:one/仓库名.git
 ⚠️⚠️⚠️**<span style=color:red>这里有个坑，添加远程仓库时，从github仓库的``Clone or download``下的``Use SSH``复制的路径需要修改</span>**
 
 ```python
-⚠️⚠️⚠️这里需要注意的是，使用ssh方式添加远程仓库原先写法是这样的
+这里需要注意的是，使用ssh方式添加远程仓库原先写法是这样的
 git@github.com:one/仓库名.git
   
 现在需要修改为如下写法
-it remote add origin git@one.github.com:one/仓库名.git
+git remote add origin git@one.github.com:one/仓库名.git
 ```
 
 ---
