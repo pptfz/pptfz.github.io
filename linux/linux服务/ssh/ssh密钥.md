@@ -1,3 +1,5 @@
+## 生成密钥
+
 **使用 `ssh-keygen` 命令生成密钥**
 
 ```shell
@@ -42,5 +44,33 @@ ssh-keygen -t rsa -P '' -q -f ~/.ssh/id_rsa
 
 
 
+## 密钥格式转换
 
+一些工具，例如 `ZenTermLite(mac ssh工具)` ，`Another Redis Desktop Manager(redis远程连接工具)`不支持openssh格式的私钥，这个时候就需要将openssh格式的私钥转换为rsa格式
+
+
+
+openssh格式开头如下
+
+```shell
+-----BEGIN OPENSSH PRIVATE KEY-----
+```
+
+
+
+rsa格式开头如下
+
+```sh
+-----BEGIN RSA PRIVATE KEY-----
+```
+
+
+
+
+
+**转换命令**
+
+```sh
+ssh-keygen -p -N"" -m pem -f 旧私钥
+```
 

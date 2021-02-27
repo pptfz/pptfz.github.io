@@ -155,7 +155,7 @@
         * [nginx+keepalived实现负载均衡高可用](linux/linux服务/nginx/14.nginx+keepalived实现负载均衡高可用.md)
 
     * [ssh](README.md)
-      * [禁止root远程登陆](linux/linux服务/ssh/1.ssh服务.md)
+      * [ssh服务](linux/linux服务/ssh/1.ssh服务.md)
       * [ssh密钥](linux/linux服务/ssh/ssh密钥.md)
     * [nfs](linux/linux服务/nfs/centos7.7搭建NFS.md)
     * [同步服务](README.md)
