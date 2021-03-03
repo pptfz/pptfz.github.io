@@ -18,6 +18,8 @@
     * [spug](README.md)
       * [spug安装](生产环境开源项目/cmdb平台/spug/spug安装.md)
       * [spug上线示例](生产环境开源项目/cmdb平台/spug/spug上线示例.md)
+    * [codo](README.md)
+      * [codo安装](生产环境开源项目/cmdb平台/codo/codo安装.md)
 
 * [日志](README.md)
   * [日志切割 logrotate](linux/日志/Linux 日志切割神器 Logrotate 原理和配置详解.md)
@@ -177,6 +179,9 @@
         * [supervisor管理redis](linux/linux服务/supervisor/5.supervisor管理redis.md)
         * [supervisor管理mongodb](linux/linux服务/supervisor/6.supervisor管理mongodb.md)
         * [supervisor管理gitbook](linux/linux服务/supervisor/7.supervisor管理gitbook.md)
+        * [supervisor管理php](linux/linux服务/supervisor/8.supervisor管理php.md)
+        * [supervisor管理大数据任务](linux/linux服务/supervisor/9.supervisor管理大数据任务.md)
+
       * [supervisor自定义服务文件参数](linux/linux服务/supervisor/supervisor自定义服务文件参数.md)  
 * [Linux内核](README.md)
   * [Linux升级内核](linux/linux内核/Linux升级内核.md)
