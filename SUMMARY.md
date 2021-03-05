@@ -249,7 +249,9 @@
           * [zabbix3.4使用企业微信告警](linux/monitor/zabbix/zabbix3.4/10.zabbix3.4使用企业微信告警.md)
           * [zabbix3.4使用钉钉告警](linux/monitor/zabbix/zabbix3.4/11.zabbix3.4使用钉钉告警.md)    
       * [zabbix5.0](README.md)
-        * [1.zabbix5.0安装](linux/monitor/zabbix/zabbix5.0/1.centos7安装zabbix5.0.md)
+        * [安装](README.md）
+          * [标准安装](linux/monitor/zabbix/zabbix5.0/安装/标准安装.md)
+          * [docker-compose安装](linux/monitor/zabbix/zabbix5.0/安装/docker-compose安装.md)
     * [grafana](README.md)
       * [grafana7.0.3安装并结合zabbix数据源进行基础监控](linux/monitor/grafana/1.centos7安装grafana7.0.3并结合zabbix数据源进行基础监控.md)
 
