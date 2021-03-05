@@ -249,7 +249,7 @@
           * [zabbix3.4使用企业微信告警](linux/monitor/zabbix/zabbix3.4/10.zabbix3.4使用企业微信告警.md)
           * [zabbix3.4使用钉钉告警](linux/monitor/zabbix/zabbix3.4/11.zabbix3.4使用钉钉告警.md)    
       * [zabbix5.0](README.md)
-        * [安装](README.md）
+        * [安装](README.md)
           * [标准安装](linux/monitor/zabbix/zabbix5.0/安装/标准安装.md)
           * [docker-compose安装](linux/monitor/zabbix/zabbix5.0/安装/docker-compose安装.md)
     * [grafana](README.md)
