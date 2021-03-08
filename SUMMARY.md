@@ -7,6 +7,10 @@
 * [Linux排错宝典](README.md)
   * [ECS运维指南之Linux系统诊断](linux/排错宝典/ECS运维指南之Linux系统诊断.md)
 
+* [生产问题总结](README.md)
+  * [ssh](README.md)
+    * [记录一次诡异的ssh连接问题](生产问题总结/ssh/记录一次诡异的ssh连接问题.md)
+
 * [生产环境开源项目](README.md)
   * [任务调度系统](README.md)
     * [DolphinScheduler](生产环境开源项目/任务调度系统/DolphinScheduler单机部署.md)
@@ -353,6 +357,8 @@
   * [各种脚本](README.md)
     * [大神杰作](README.md)
       * [shell脚本 俄罗斯方块](linux/shell/各种脚本/大神杰作/shell脚本 俄罗斯方块.md)
+    * [实际应用脚本](README.md)
+      * [shell脚本判断系统类型](linux/shell/各种脚本/实际应用脚本/shell脚本判断系统类型.md)
 
 * [Python](README.md)
   * [Python基础](README.md)
