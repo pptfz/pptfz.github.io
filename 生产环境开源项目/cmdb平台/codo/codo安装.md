@@ -1971,9 +1971,15 @@ curl -I -X GET -m 10 -o /dev/null -s -w %{http_code} http://gw.opendevops.cn:888
 
 ## 3.0 访问codo
 
-这里访问的地址就是在2.2.1.3步骤中 compose 文件中对外暴露的端口
+这里访问的地址就是在2.2.1.3步骤中 compose 文件中对外暴露的端口，这里设置为81端口，然后利用nginx做反向代理
 
-![iShot2021-03-03 16.57.59](/Users/baixuebing/Desktop/iShot2021-03-03 16.57.59.png)
+用户名 `admin`
+
+密码 `admin@opendevops`
+
+
+
+![iShot2021-03-03 16.57.59a](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-03-03 16.57.59a.png)
 
 
 

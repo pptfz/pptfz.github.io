@@ -230,11 +230,14 @@
           * [这样理解Ansible更容易](linux/自动化运维平台/ansible/ansible好文/这样理解Ansible更容易.md)
         * [Ansible基础知识](linux/自动化运维平台/ansible/ansible基础知识.md)
         * [Ansible常用模块](linux/自动化运维平台/ansible/ansible常用模块.md)     
-
+        * [Ansible知识点](README.md)
+          * [Ansible只输出错误信息](linux/自动化运维平台/ansible/ansible知识点/ansible只输出错误信息.md)
 
 * [监控](README.md)
     * [zabbix](README.md)
-      * [zabbix故障记录](linux/monitor/zabbix/zabbix故障/zabbix故障.md)
+      * [zabbix问题记录](README.md)
+        * [zabbix数据库迁移问题](linux/monitor/zabbix/zabbix问题记录/zabbix数据库迁移的一个小问题.md)
+        * [ubuntu启动zabbix-agent报错](linux/monitor/zabbix/zabbix问题记录/ubuntu启动zabbix-agent报错.md)
       * [zabbix3.4](README.md)
         * [1.zabbix安装](README.md)
           * [zabbix3.4安装](linux/monitor/zabbix/zabbix3.4/1.CentOS7.5安装zabbix-3.4.md)
