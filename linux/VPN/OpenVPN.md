@@ -445,12 +445,12 @@ systemctl restart openvpn-server@server
 
 ```shell
 # 用户名密码文件
-$ cat /etc/openvpn/psw-file
+cat > /etc/openvpn/psw-file << EOF
 test test123
-testabc testabc789
+EOF
 
 # 文件所有者一定要是openvpn运行的用户，这里openvpn默认运行用户为nobody
-chown nobody.nobody psw-file && chmod 600 psw-file
+chown nobody.nobody /etc/openvpn/psw-file && chmod 600 /etc/openvpn/psw-file
 ```
 
 

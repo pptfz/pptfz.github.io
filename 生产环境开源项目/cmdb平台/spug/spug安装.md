@@ -188,7 +188,13 @@ Docker镜像内部使用的 `Mysql` 数据库。
 > 如果需要持久化存储代码和数据，可以添加：-v 映射容器内/data路径
 
 ```sh
-docker run -d --restart=always --name=spug -p 8000:80 -v /mydata/:/data registry.aliyuncs.com/openspug/spug
+docker run \
+	-d \
+	--restart=always \
+	--name=spug \
+	-p 8000:80 \
+	-v /mydata/:/data \
+	registry.aliyuncs.com/openspug/spug
 ```
 
 
@@ -335,7 +341,38 @@ location ^~ /api/ws/ {
 
 
 
+## 二、spug迁移
 
+官方容器安装命令
+
+```sh
+docker run \
+	-d \
+	--restart=always \
+	--name=spug \
+	-p 8000:80 \
+	-v /mydata/:/data \
+	registry.aliyuncs.com/openspug/spug
+```
+
+
+
+spug容器安装添加参数  `-v /mydata/:/data` ，执行 `docker exec spug init_spug admin spug.dev` 初始化命令后会在 `/mydata` 下持久化2个目录，分别是 `mysql`和`spug`，其中 `mysql` 是spug初始化后生成的数据目录，`spug`则是代码目录
+
+
+
+迁移的时候把这两个目录拷贝，并且在新机器上启动时需要指定这两个目录，例如我们把旧机器的 `/mydata` 目录拷贝到了新机器的 `/data` 并且重命名为 `spug`，则启动的时候命令如下
+
+```sh
+docker run \
+  -d \
+  --restart=always \
+  --name=spug \
+  -p 81:80 \
+  -v /data/spug/mysql/:/data/mysql \
+  -v /data/spug/spug:/data/spug \
+  registry.aliyuncs.com/openspug/spug
+```
 
 
 
