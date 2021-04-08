@@ -1,3 +1,7 @@
+[toc]
+
+
+
 本文严重抄袭至[互联网](https://blog.sealyun.com/views/container/2020/kube-cert.html)
 
 # 傻傻分不清楚的kubernetes证书

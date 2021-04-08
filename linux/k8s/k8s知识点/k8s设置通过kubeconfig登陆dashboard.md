@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # k8s设置通过kubeconfig登陆dashboard
 
 k8s 官方的dashboard每次登陆都需要输入token，而这个token一会特么就过期了，我就是本机实验，每次都得手动粘贴一大串命令获取token然后再登陆，非常麻烦

@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # centos7安装mongodb
 
 [mongodb官网](https://www.mongodb.com)

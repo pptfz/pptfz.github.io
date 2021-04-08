@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # ambari下载
 
 ## 一、令人懵逼的网站
@@ -136,4 +140,6 @@ wget http://public-repo-1.hortonworks.com/HDP-GPL/centos7/3.x/updates/3.1.4.0/HD
 ```shell
 wget http://public-repo-1.hortonworks.com/ambari/centos7/2.x/updates/2.7.4.0/ambari-2.7.4.0-centos7.tar.gz
 ```
+
+
 

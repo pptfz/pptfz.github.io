@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # centos7.7搭建lsyncd
 
 [lsyncd官网](https://axkibe.github.io/lsyncd/)

@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # 安装gitlab最新版
 
 # 一、docker安装gitlab最新版
@@ -6,7 +10,7 @@
 
 
 
-# 1.安装docker-compose
+## 1.安装docker-compose
 
 [docker-compose github地址](https://github.com/docker/compose)
 
@@ -24,7 +28,7 @@ docker-compose version 1.24.1, build 4667896b
 
 
 
-# 2.创建存放docker-compose文件目录
+## 2.创建存放docker-compose文件目录
 
 ```python
 mkdir /usr/local/gitlab
@@ -33,7 +37,7 @@ cd /usr/local/gitlab
 
 
 
-# 3.编辑docker-compose.yml文件
+## 3.编辑docker-compose.yml文件
 
 ```python
 #需要修改相对应的域名及映射的端口
@@ -59,7 +63,7 @@ EOF
 
 
 
-# 4.启动容器
+## 4.启动容器
 
 ```python
 docker-compose up -d
@@ -67,7 +71,7 @@ docker-compose up -d
 
 
 
-# 5.查看启动的容器
+## 5.查看启动的容器
 
 ```python
 [root@docker1 gitlab]# docker ps -a

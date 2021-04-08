@@ -1,3 +1,7 @@
+[toc]
+
+
+
 ## 一、jenkins报错 `Unable to create the home directory. This is most likely a permission problem`
 
 浏览器中访问 jenkins 报错如下

@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # Kubernetes组件
 
 [本文严重抄袭于kuboard.cn]([https://kuboard.cn/learning/k8s-bg/component.html#master%E7%BB%84%E4%BB%B6](https://kuboard.cn/learning/k8s-bg/component.html#master组件))

@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # centos7.7搭建sersync
 
 sersync已于2015年8月停止更新，作者推荐使用[lsyncd](https://axkibe.github.io/lsyncd/)

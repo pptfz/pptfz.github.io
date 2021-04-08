@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # CentOS7中用Ambari快速搭建大数据平台
 
 公司的产品是基于大数据平台的，近期要做公司产品私有化部署，因此学习一下 [Ambari](http://ambari.apache.org/)

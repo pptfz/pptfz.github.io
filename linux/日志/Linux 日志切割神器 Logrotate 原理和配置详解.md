@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # Linux 日志切割神器 Logrotate 原理和配置详解
 
 [本文严重抄袭至互联网并稍作修改](https://www.cnblogs.com/kevingrace/p/6307298.html)

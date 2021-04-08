@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # gitea安装
 
 # 一、gitea简介

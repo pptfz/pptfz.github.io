@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # 这样理解Ansible更容易
 
 [原文链接](http://showme.codes/2019-09-19/understand-ansible/)	这篇文章是 `Jenkins 2.x实践指南` 作者[翟志军博客](http://showme.codes/)中的一篇内容，看完之后觉得写的非常好，所以收藏一下

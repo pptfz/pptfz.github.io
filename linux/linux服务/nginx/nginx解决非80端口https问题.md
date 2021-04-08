@@ -2,7 +2,7 @@
 
 解决思路：
 监听80端口，80重定向到https443端口，443端口代理别的端口
-```
+```nginx
 server {
   listen 80;
   server_name pan.pptfz.top;

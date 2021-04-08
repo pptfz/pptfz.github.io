@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # centos7.6编译安装python3.6.9
 
 [python各版本下载地址](https://www.python.org/ftp/python/)

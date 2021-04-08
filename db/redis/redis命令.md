@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # redis命令
 
 [redis命令官方文档](https://redis.io/commands)

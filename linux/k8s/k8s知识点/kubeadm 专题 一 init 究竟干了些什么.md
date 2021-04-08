@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # kubeadm 专题 一 init 究竟干了些什么
 
 [本文严重抄袭至互联网](https://www.jianshu.com/p/1e65610dd223)

@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # deepin15.11使用记录
 
 [深度官方下载地址](https://www.deepin.org/download/)

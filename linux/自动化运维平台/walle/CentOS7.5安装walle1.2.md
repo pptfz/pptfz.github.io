@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # CentOS7.5安装walle1.2
 
 **walle1.0是基于php开发的，需要php5.4以上版本**

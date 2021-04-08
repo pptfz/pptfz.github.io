@@ -1,3 +1,5 @@
+[toc]
+
 ### k8s给node节点添加角色标签
 
 使用命令 `kubectl get nodes` 查看k8s集群中的node节点时， `ROLES` 处中的 node 节点显示为 `<none>`

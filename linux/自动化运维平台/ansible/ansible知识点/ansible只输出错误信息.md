@@ -1,3 +1,5 @@
+
+
 # ansible只输出错误信息
 
 [参考文章](https://blog.csdn.net/bruce_6/article/details/102604397)
