@@ -28,10 +28,14 @@
 
 ### 1.1 在 emr 控制台的 `hdfs-site.xml` 里增加如下 5 个参数，下发 NameNode 节点
 
+
+
 ```sh
 dfs.namenode.replication.max-streams 20
 dfs.namenode.replication.max-streams-hard-limit 40
-dfs.namenode.replication.work.multiplier.per.iteration	10 dfs.datanode.balance.max.concurrent.moves 30	dfs.datanode.balance.bandwidthPerSec 52428800
+dfs.namenode.replication.work.multiplier.per.iteration	10
+dfs.datanode.balance.max.concurrent.moves 30
+dfs.datanode.balance.bandwidthPerSec 52428800
 ```
 
 
@@ -198,23 +202,23 @@ Refresh nodes successful for /10.0.100.11:4007
 
 ⚠️<span style=color:red>一定要等2.3步骤中执行完成，即想要下线的节点状态变为 `Decommission` 才可以继续后续操作</span>
 
-在集群服务HDFS选项中，找到要下线的DataNode节点，选中，然后点击 `暂停`
+在集群服务HDFS选项中，找到要下线的 `DataNode` 节点，选中，然后点击 `暂停`
 
 ![iShot2021-04-10 14.22.53](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.22.53.png)
 
 
 
-分别选中两个要下线的DataNode节点，依次暂停
+分别选中两个要下线的 `DataNode` 节点，依次暂停
 
 ![iShot2021-04-10 14.26.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.26.42.png)
 
-暂停中的DataNode，模式为 `维护模式`
+暂停中的 `DataNode`，模式为 `维护模式`
 
 ![iShot2021-04-10 14.28.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.28.09.png)
 
 
 
-两个DataNode节点暂停后，在HDFS web UI 中就可以看到两个节点的状态变为了`Dead, Decommissioned`
+两个 `DataNode` 节点暂停后，在HDFS web UI 中就可以看到两个节点的状态变为了`Dead, Decommissioned`
 
 ![iShot2021-04-10 14.41.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.41.25.png)
 
@@ -262,7 +266,7 @@ Refresh nodes successful for /10.0.100.11:4007
 
 
 
-## 第三步、Nodemanager 下线操作
+## 第三步、NodeManager 下线操作
 
 **DataNode 下线完后操作**
 
@@ -369,7 +373,7 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 
 
 
-YARN 原生 web UI 将不再存在以上两节点，至此 Nodemanager 下线完毕
+YARN 原生 web UI 将不再存在以上两节点(腾讯云给的文档中说此步骤操作后，YARN 原生 web UI中不存在以上两个节点，但是实际上是存在的，经与腾讯云沟通后对方说存在也不影响)，至此 Nodemanager 下线完毕
 
 **⚠️<span style=color:red>对于 NodeManager 下线，emr-V1.3.1 版本需重启两个 ResourceManager 后，WEB 页面才剔除节点， 但实际影响不大。在执行完步骤 3.6 后，下线节点的 NodeManager 实际已从集群中移除，任务不会再分配到该下线的 NodeManmager 节点</span>**
 
@@ -494,9 +498,9 @@ HBASE 原生web UI 查看下线节点 region 为0即代表 `RegionServer` 下线
 
 ### 4.3 控制台下线 core节点操作
 
-在控制台 `集群服务` -> `资源管理` 选择 `Core`，找到要下线的节点，点击 `缩容` 即可
+在控制台 `集群资源` -> `资源管理` 选择 `Core`，找到要下线的节点，点击 `缩容` 即可
 
-![iShot2021-04-10 16.20.53](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 16.20.53.png)
+![iShot2021-04-12 10.51.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 10.51.35.png)
 
 
 
