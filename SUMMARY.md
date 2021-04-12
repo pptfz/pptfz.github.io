@@ -33,7 +33,8 @@
   * [Ambari](README.md)
     * [Ambari平台搭建](linux/big-data/Ambari/CentOS7中用Ambari快速搭建大数据平台.md)
     * [Ambari下载](linux/big-data/Ambari/ambari下载.md)
-
+  * [腾讯云MapReduce](README.md)
+    * [腾讯云 MapReduce 集群 core 节点下线过程](linux/big-data/MapReduce/腾讯云 MapReduce 集群 core 节点下线过程.md)
 * [Linux命令](README.md)
     * [vim命令](README.md)
       * [vim命令](linux/linux命令/vim命令.md)
@@ -217,6 +218,7 @@
         * [使用gitlab离线文档](linux/自动化运维平台/gitlab/gitlab使用/3.gitlab离线官方文档.md)
         * [gitlab备份与恢复](linux/自动化运维平台/gitlab/gitlab使用/4.gitlab备份.md)
         * [gitlab关闭双重认证](linux/自动化运维平台/gitlab/gitlab使用/5.关闭gitlab双重认证.md)
+        * [gitlab忘记root密码](linux/自动化运维平台/gitlab/gitlab使用/6.gitlab忘记root密码.md)
 
     * [jenkins](README.md)
       * [jenkins安装](README.md)
@@ -226,6 +228,7 @@
         * [jenkins修改数据存放路径](linux/自动化运维平台/jenkins/jenkins使用/jenkins修改数据存放路径.md)
       * [jenkins故障](README.md)
         * [jenkins报错](linux/自动化运维平台/jenkins/jenkins故障/jenkins报错.md)
+        * [jenkins无限构建问题](linux/自动化运维平台/jenkins/jenkins故障/jenkins无限构建问题.md)
     * [自动化运维工具](README.md)
       * [Ansible](README.md)
         * [Ansible好文](README.md)
