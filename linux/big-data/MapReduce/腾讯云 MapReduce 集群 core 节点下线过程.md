@@ -94,6 +94,78 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 
 
+### 常见问题
+
+#### 1.单副本问题
+
+**问题描述**
+
+> HDFS web UI 页面出现如下状况:下线进度停止 `blocks with no live replicas` 栏出现大量块
+
+![iShot2021-04-12 14.55.07](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 14.55.07.png)
+
+
+
+**原因**
+
+> 下线节点存在 单副本的情况，**hdfs** 拒绝继续执行下线以防数据丢失 
+
+**解决方案**
+
+> hadoop version 查看集群 hadoop 版本
+
+Hadoop 2.7 及以下版本 master 运行如下脚本设置单副本块为多副本
+
+```sh
+cd /data/emr/hdfs/logs
+
+hdfs dfsadmin -metasave metasave-report.txt
+
+cat /data/emr/hdfs/logs/metasave-report.txt | grep "l: 1" | cut -d':' -f1 >> ./single_replica
+
+for hdfsfile in cat /data/emr/hdfs/logs/single_replica; do hadoop fs -setrep 3 $hdfsfile; done
+```
+
+
+
+Hadoop 2.8 及以上版本 master 运行如下脚本设置多副本
+
+```sh
+hadoop fsck / -files -blocks -replicaDetails |grep -C 1 Live_repl=1 |grep OK |awk '{print $1}' >/tmp/single_replica
+
+for hdfsfile in `cat /tmp/single_replica`; do hadoop fs -setrep 3 $hdfsfile; done
+```
+
+
+
+运行完，如下即表示问题修复：
+
+![iShot2021-04-12 15.00.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 15.00.44.png)
+
+
+
+#### 2.DataNode 线程不足问题
+
+数据迁移过程中 `DataNode` 有如下信息
+
+`Threads quota is exceeded` 或者 `dataxceiver erro` r说明 `DataNode` 线程不足
+
+![iShot2021-04-12 15.02.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 15.02.22.png)
+
+
+
+将以下参数添加到 `hdfs-site.xml` 中并重启 `HDFS` 集群
+
+```sh
+dfs.datanode.max.xcievers =16384
+```
+
+
+
+![iShot2021-04-12 15.07.27](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 15.07.27.png)
+
+
+
 ## 第二步、DataNode下线
 
 core节点就是DataNode
