@@ -20,6 +20,20 @@
 
 
 
+**下线步骤**
+
+> 一、hadoop fsck / 运行健康检查，确认hdfs健康状态为healthy，如果有单副本情况存在，务必调整为多副本。
+>
+> 二、如果数据量较大，务必先调优，否则下线数据迁移异常缓慢。
+> 参考文档： 加快副本复制速度文档
+>
+> 三、开始下线节点
+> 参考文档： 大数据EMR-core节点下线操作
+>
+> 四、申请白名单，控制台缩容节点
+
+
+
 
 
 ## 第一步 加快副本复制速度
@@ -112,18 +126,20 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 **解决方案**
 
-> hadoop version 查看集群 hadoop 版本
+[老外解决方案原版链接](https://piyushroutray.com/2019/06/04/dealing-with-blocks-with-no-live-replicas-in-the-hdfs/)
+
+> 执行命令 `hadoop version` 查看集群 hadoop 版本
 
 Hadoop 2.7 及以下版本 master 运行如下脚本设置单副本块为多副本
 
 ```sh
 cd /data/emr/hdfs/logs
 
-hdfs dfsadmin -metasave metasave-report.txt
+su hadoop -c "hdfs dfsadmin -metasave metasave-report.txt"
 
 cat /data/emr/hdfs/logs/metasave-report.txt | grep "l: 1" | cut -d':' -f1 >> ./single_replica
 
-for hdfsfile in cat /data/emr/hdfs/logs/single_replica; do hadoop fs -setrep 3 $hdfsfile; done
+for hdfsfile in cat /data/emr/hdfs/logs/single_replica; do su hadoop -c "hadoop fs -setrep 3 $hdfsfile"; done
 ```
 
 
@@ -133,7 +149,7 @@ Hadoop 2.8 及以上版本 master 运行如下脚本设置多副本
 ```sh
 hadoop fsck / -files -blocks -replicaDetails |grep -C 1 Live_repl=1 |grep OK |awk '{print $1}' >/tmp/single_replica
 
-for hdfsfile in `cat /tmp/single_replica`; do hadoop fs -setrep 3 $hdfsfile; done
+for hdfsfile in `cat /tmp/single_replica`; do su hadoop -c "hadoop fs -setrep 3 $hdfsfile"; done
 ```
 
 
@@ -148,7 +164,7 @@ for hdfsfile in `cat /tmp/single_replica`; do hadoop fs -setrep 3 $hdfsfile; don
 
 数据迁移过程中 `DataNode` 有如下信息
 
-`Threads quota is exceeded` 或者 `dataxceiver erro` r说明 `DataNode` 线程不足
+`Threads quota is exceeded` 或者 `dataxceiver error` 说明 `DataNode` 线程不足
 
 ![iShot2021-04-12 15.02.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 15.02.22.png)
 
@@ -224,7 +240,7 @@ standby
 
 
 
-### 2.2 Active 节点执行 `hadoop dfsadmin -refreshNodes`
+### 2.2 Active NameNode 节点执行 `hadoop dfsadmin -refreshNodes`
 
 执行成功后最后会提示 `Refresh nodes successful for` ，其中的两个IP为两个master(NameNode节点)的IP
 
