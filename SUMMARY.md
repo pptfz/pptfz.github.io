@@ -201,8 +201,8 @@
       * [瓦力上线](README.md)
         * [walle1.2上线示例](linux/自动化运维平台/walle/walle1.2 上线示例.md)
     * [spug](README.md)
-      * [spug安装](linux/自动化运维平台/spug/spug安装.md)
-      * [spug上线示例](linux/自动化运维平台/spug/spug上线示例.md)
+    * [spug安装](linux/自动化运维平台/spug/spug安装.md)
+    * [spug上线示例](linux/自动化运维平台/spug/spug上线示例.md)
 
     * [gitea](README.md)
       * [gitea安装](linux/自动化运维平台/gitea/gitea安装.md)
