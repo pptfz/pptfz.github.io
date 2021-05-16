@@ -201,8 +201,8 @@
       * [瓦力上线](README.md)
         * [walle1.2上线示例](linux/自动化运维平台/walle/walle1.2 上线示例.md)
     * [spug](README.md)
-    * [spug安装](linux/自动化运维平台/spug/spug安装.md)
-    * [spug上线示例](linux/自动化运维平台/spug/spug上线示例.md)
+      * [spug安装](linux/自动化运维平台/walle/CentOS7.5安装walle1.2.md)
+      * [spug上线示例](linux/自动化运维平台/walle/CentOS7.5安装walle2.0.md)
 
     * [gitea](README.md)
       * [gitea安装](linux/自动化运维平台/gitea/gitea安装.md)
@@ -377,7 +377,7 @@
       * [shell脚本 俄罗斯方块](linux/shell/各种脚本/大神杰作/shell脚本 俄罗斯方块.md)
     * [实际应用脚本](README.md)
       * [shell脚本判断系统类型](linux/shell/各种脚本/实际应用脚本/shell脚本判断系统类型.md)
-
+      * [shell脚本批量免密](linux/shell/各种脚本/实际应用脚本/shell脚本判断系统类型.md)
 * [Python](README.md)
   * [Python基础](README.md)
     * [python基础一 变量、常量、注释](python/python基础/1.python基础一 变量、常量、注释.md)
