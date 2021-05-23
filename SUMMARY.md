@@ -1,8 +1,9 @@
 # Summary
 * [兔比喃波湾](README.md)
 
-* [2b问题合集](README.md)
-  * [ssh密钥问题](2b问题合集/2b问题合集之ssh密钥问题.md)
+* [翻车问题合集](README.md)
+  * [ssh密钥问题](翻车问题合集/翻车问题-ssh密钥问题.md)
+  * [证书格式问题](翻车问题合集/翻车问题-证书格式问题.md)
 
 * [Linux排错宝典](README.md)
   * [ECS运维指南之Linux系统诊断](linux/排错宝典/ECS运维指南之Linux系统诊断.md)
@@ -292,6 +293,7 @@
       * [HTTPS协议](linux/网络协议/http/HTTPS协议.md)
       * [TCP三次握手和四次挥手](linux/网络协议/tcp:ip/TCP三次握手和四次挥手.md)    
 
+    * [CentOS7安装字体](linux/linux其他/CentOS7安装字体.md)
 
 * [mysql](README.md)
     * [mysql基础](README.md)
