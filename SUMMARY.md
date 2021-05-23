@@ -380,6 +380,7 @@
     * [实际应用脚本](README.md)
       * [shell脚本判断系统类型](linux/shell/各种脚本/实际应用脚本/shell脚本判断系统类型.md)
       * [shell脚本批量免密](linux/shell/各种脚本/实际应用脚本/shell脚本判断系统类型.md)
+      * [shell脚本实现企业微信告警](linux/shell/各种脚本/实际应用脚本/shell脚本实现企业微信告警.md)
 * [Python](README.md)
   * [Python基础](README.md)
     * [python基础一 变量、常量、注释](python/python基础/1.python基础一 变量、常量、注释.md)

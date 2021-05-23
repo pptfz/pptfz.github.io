@@ -21,17 +21,19 @@
 ```sh
 #!/bin/bash
 #
+# nc命令检测端口，存在返回0，不存在返回1
 dn1=`nc -z dn1.com 8888 ; echo $?`
 dn2=`nc -z dn2.com 8888 ; echo $?` 
 dn3=`nc -z dn3.com 8888 ; echo $?` 
 dn4=`nc -z dn4.com 8888 ; echo $?` 
 dn5=`nc -z dn5.com 8888 ; echo $?`
 
-. /script/qiyewx.sh
+# 加载外部脚本，内容为调用企业微信机器人
+. ./qiyewx.sh
 
-if [[ $dn1 -eq $dn2 && $dn2 -eq $dn3 && $dn3 -eq $dn4 && $dn4 -eq $dn5 ]];then
+if [[ $dn1 -eq $dn2 && $dn2 -eq $dn3 && $dn3 -eq $dn4 && $dn4 -eq $dn5 && $dn5 -eq 1 ]];then
     # 调用户外部脚本，实现企业微信告警
-    wx "集群数据接口18891异常"
+    wx "集群数据接口8888异常"
 fi
 ```
 
@@ -64,7 +66,33 @@ sh $0.msg && rm -rf $0.msg
 
 ## 三、初级第二版 能发送告警也能发送恢复
 
-```
+```shell
+#!/bin/bash
+#
+# nc命令检测端口，存在返回0，不存在返回1
+dn1=`nc -z dn1.com 8888 ; echo $?`
+dn2=`nc -z dn2.com 8888 ; echo $?` 
+dn3=`nc -z dn3.com 8888 ; echo $?` 
+dn4=`nc -z dn4.com 8888 ; echo $?` 
+dn5=`nc -z dn5.com 8888 ; echo $?`
+ALARM_FILE=alarm_txt
 
+# 加载外部脚本，内容为调用企业微信机器人
+. ./qiyewx.sh
+
+# 如果5个返回值都相等并且都为1，则说明服务挂了
+if [[ $dn1 -eq $dn2 && $dn2 -eq $dn3 && $dn3 -eq $dn4 && $dn4 -eq $dn5 && $dn5 -eq 1 ]];then
+    wx "集群数据接口8888异常"
+    
+    # 当服务挂掉的时候向一个文件中写入一行内容
+    echo '集群数据接口18891异常' > $ALARM_FILE
+
+# 判断文件内容行数是否为1，如果为1，则说明是服务挂掉过，如果为空则说明告警恢复已出发过了
+elif [[ `wc -l $ALARM_FILE|awk '{print $1}'` -eq 1 ]];then
+    wx "集群数据接口8888异常已恢复"
+    
+    # 当服务恢复的时候告警并清空文件内容，这样就只发送一次告警恢复
+    > $ALARM_FILEi
+fi
 ```
 
