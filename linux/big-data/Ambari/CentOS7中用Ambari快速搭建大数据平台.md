@@ -66,7 +66,7 @@ Ambari 自身也是一个分布式架构的软件，主要由两部分组成：A
 #!/usr/bin/env bash
 #
 
-#修改系统yum源为aliyun并添加epel源
+# 修改系统yum源为aliyun并添加epel源
 mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
 [ ! -e /etc/yum.repos.d/CentOS-Base.repo ] && curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo && sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.repos.d/CentOS-Base.repo
 
@@ -74,15 +74,15 @@ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
 yum makecache
 yum -y install tar wget net-tools git vim tree lrzsz htop iftop iotop psmisc python36 python3-devel zlib zlib-devel gcc gcc-c++ conntrack-tools jq socat bash-completion telnet nload strace tcpdump lsof sysstat
 
-#关闭防火墙、selinux、NetworkManager
+# 关闭防火墙、selinux、NetworkManager
 systemctl disable firewalld NetworkManager
 sed -i '7s/enforcing/disabled/' /etc/selinux/config
 
-#同步时间计划任务 由于后续要用到ntpserver，因此ntpdate选择不执行
+# 同步时间计划任务 由于后续要用到ntpserver，因此ntpdate选择不执行
 #sed -i '/*\/10 \* \* \* \* \/usr\/sbin\/ntpdate ntp2\.aliyun\.com &>\/dev\/null/d' /var/spool/cron/root
 #echo "*/10 * * * * /usr/sbin/ntpdate ntp2.aliyun.com &>/dev/null" >>/var/spool/cron/root
 
-#历史命令显示时间
+# 历史命令显示时间
 sed -i '/HISTFILESIZE=2000/d' /etc/bashrc
 sed -i '/HISTSIZE=2000/d' /etc/bashrc
 sed -i '/HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "/d' /etc/bashrc
@@ -95,7 +95,7 @@ export HISTTIMEFORMAT
 EOF
 source /etc/bashrc
 
-#修改系统最大文件描述符
+# 修改系统最大文件描述符
 sed -i '/root soft nofile 65535/d' /etc/security/limits.conf
 sed -i '/root hard nofile 65535/d' /etc/security/limits.conf
 sed -i '/* soft nofile 65535/d' /etc/security/limits.conf
@@ -107,14 +107,14 @@ root hard nofile 65535
 * hard nofile 65535
 EOF
 
-#设置pip国内源
+# 设置pip国内源
 mkdir ~/.pip
 cat >~/.pip/pip.conf<<EOF
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple/
 EOF
 
-#个人习惯执行命令 netstat -ntpl，所以做一个别名
+# 个人习惯执行命令 netstat -ntpl，所以做一个别名
 sed -i.bak "8c alias n='netstat -ntpl'" ~/.bashrc && source ~/.bashrc
 
 reboot
@@ -191,7 +191,7 @@ EOF
 ### 2.2.4 编辑shell脚本循环执行expect脚本
 
 ```shell
-#编辑脚本
+# 编辑脚本
 source env.sh
 cat > ssh.sh <<'EOF'
 #!/bin/bash
@@ -201,10 +201,10 @@ do
 done
 EOF
 
-#安装expect
+# 安装expect
 yum -y install expect
 
-#执行脚本
+# 执行脚本
 source ssh.sh
 ```
 
@@ -221,8 +221,8 @@ for node_ip in ${NODE_IPS[@]}
 ${NODE_IPS[0]} ${NODE_NAMES[0]}
 ${NODE_IPS[1]} ${NODE_NAMES[1]}
 ${NODE_IPS[2]} ${NODE_NAMES[2]}
-	EOF"
-  done
+EOF"
+done
 ```
 
 
@@ -232,13 +232,13 @@ ${NODE_IPS[2]} ${NODE_NAMES[2]}
 **这一步已在2.0安装纯净系统后执行的脚本中执行过了**
 
 ```shell
-#禁用防火墙
+# 禁用防火墙
 systemctl stop firewalld && systemctl disable firewalld
 
-#禁用selinux	临时修改
+# 禁用selinux	临时修改
 setenforce 0
 
-#禁用selinux	永久修改，重启服务器后生效
+# 禁用selinux	永久修改，重启服务器后生效
 sed -i '7s/enforcing/disabled/' /etc/selinux/config
 ```
 
@@ -332,8 +332,6 @@ for node_ip in ${NODE_IPS[@]}
 
 
 **⚠️sed中有变量替换，需要使用双引号**
-
-
 
 
 
@@ -466,10 +464,10 @@ useradd -M -s /bin/nologin mysql
 **<span style=color:red>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会默认从 /tmp下找socket文件</span>**
 
 ```python
-#备份/etc/my.cnf
+# 备份/etc/my.cnf
 mv /etc/my.cnf /etc/my.cnf.old
 
-#以下配置为最精简版，可根据实际情况进行相应设置
+# 以下配置为最精简版，可根据实际情况进行相应设置
 cat >> /etc/my.cnf <<'EOF'
 [mysqld]
 basedir=/usr/local/mysql
@@ -531,10 +529,10 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 ### 2.8.9 添加mysql命令环境变量
 
 ```python
-#导出mysql命令环境变量
+# 导出mysql命令环境变量
 echo "export PATH=/usr/local/mysql/bin:$PATH" > /etc/profile.d/mysql.sh
 
-#使配置生效
+# 使配置生效
 source /etc/profile
 ```
 
@@ -567,13 +565,13 @@ EOF
 ### 2.8.11 启动mysql、检查启动
 
 ```python
-#重新加载systemd系统服务
+# 重新加载systemd系统服务
 systemctl daemon-reload
 
-#启动mysql并加入开机自启
+# 启动mysql并加入开机自启
 systemctl start mysqld && systemctl enable mysqld
 
-#查看mysql端口
+# 查看mysql端口
 $ netstat -ntpl  | grep 3306
 tcp6       0      0 :::3306                 :::*                    LISTEN      31349/mysqld  
 ```
@@ -729,16 +727,16 @@ REASON: Before starting Ambari Server, you must copy the MySQL JDBC driver JAR f
 
 
 ```shell
-#创建/usr/share/java目录
+# 创建/usr/share/java目录
 [ -d /usr/share/java ] || mkdir /usr/share/java && cd /usr/share/java
 
-#下载mysql驱动
+# 下载mysql驱动
 wget https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-java-5.1.46.tar.gz
 
-#解压缩包
+# 解压缩包
 tar xf mysql-connector-java-5.1.46.tar.gz 
 
-#移动mysql驱动到/usr/share/java，且名称必须为 mysql-connector-java.jar
+# 移动mysql驱动到/usr/share/java，且名称必须为 mysql-connector-java.jar
 mv mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar /usr/share/java/mysql-connector-java.jar
 ```
 
@@ -1330,5 +1328,4 @@ mysql -uroot -e "flush privileges"
 完成安装
 
 ![iShot2020-09-15 18.46.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-15 18.46.54.png)
-
 

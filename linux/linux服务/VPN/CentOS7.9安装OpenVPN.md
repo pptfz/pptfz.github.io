@@ -2,15 +2,27 @@
 
 
 
-# OpenVPN
+# CentOS7.9安装OpenVPN
 
-[openVPN github地址](https://github.com/Nyr/openvpn-install)
+[openvpn github地址](https://github.com/Nyr/openvpn-install)
 
-
+[openvpn官网](https://openvpn.net/)
 
 **需求及使用场景**
 
 > **公司的一些资源不想对外开放访问，例如gitlab、jenkins等等，现在想要的效果是部分资源只允许公司公网IP以及特定IP访问，这个时候就需要用到VPN了，但是公司花钱买VPN是不可能的，那么就需要一款免费好用的VPN，OpenVPN免费开源又好用，配置完OpenVPN后再加上云主机的安全组就完美解决问题了。**
+
+
+
+
+
+**说明**
+
+| 系统      | openvpn版本 | 内网IP     | openvpn分配客户端网段 |      |
+| --------- | ----------- | ---------- | --------------------- | ---- |
+| CentOS7.9 | 2.4.11      | 10.206.0.9 | 10.8.0.0              |      |
+
+
 
 
 
@@ -335,11 +347,13 @@ udp        0      0 10.9.95.147:1194        0.0.0.0:*                           
 
 
 
+
+
 ### 1.3.3 查看版本
 
 ```shell
 $ openvpn --version
-OpenVPN 2.4.9 x86_64-redhat-linux-gnu [Fedora EPEL patched] [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] built on Apr 24 2020
+OpenVPN 2.4.11 x86_64-redhat-linux-gnu [Fedora EPEL patched] [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] built on Apr 21 2021
 library versions: OpenSSL 1.0.2k-fips  26 Jan 2017, LZO 2.06
 Originally developed by James Yonan
 Copyright (C) 2002-2018 OpenVPN Inc <sales@openvpn.net>
@@ -424,12 +438,46 @@ EOF
 
 
 
-### 2.2.2 修改 server.conf
-
-**删除开头的 local locao_ip**
+`/etc/openvpn/server/server.conf ` 文件默认内容
 
 ```shell
-local 10.9.95.147
+local 10.206.0.9
+port 1194
+proto udp
+dev tun
+ca ca.crt
+cert server.crt
+key server.key
+dh dh.pem
+auth SHA512
+tls-crypt tc.key
+topology subnet
+server 10.8.0.0 255.255.255.0
+push "redirect-gateway def1 bypass-dhcp"
+ifconfig-pool-persist ipp.txt
+push "dhcp-option DNS 183.60.83.19"
+push "dhcp-option DNS 183.60.82.98"
+keepalive 10 120
+cipher AES-256-CBC
+user nobody
+group nobody
+persist-key
+persist-tun
+verb 3
+crl-verify crl.pem
+explicit-exit-notify
+```
+
+
+
+
+
+### 2.2.2 修改 server.conf
+
+**删除开头的 local 一行**
+
+```shell
+sed -i.bak '1d' /etc/openvpn/server/server.conf 
 ```
 
 
@@ -470,10 +518,10 @@ New clients can be added by running this script again.
 
 
 
-**客户端文件需要追加如下内容，开启用户名密码认证，然后下载到本地**
+**客户端文件需要追加一行 `auth-user-pass` 内容，开启用户名密码认证，然后下载到本地**
 
 ```shell
-auth-user-pass
+sed -i '14aauth-user-pass' /root/pptfz.ovpn 
 ```
 
 
@@ -528,6 +576,51 @@ auth-user-pass
 
 
 
+
+
+连接成功后，就会在本机生成一个 `utun1` 的虚拟网卡，并获取openvpn `server.conf` 中设置的  `server 10.8.0.0 255.255.255.0` 给客户端分配的网段，IP地址从 10.8.0.2 开始分配
+
+```
+utun1: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1500
+	inet 10.8.0.2 --> 10.8.0.2 netmask 0xffffff00 
+```
+
+
+
+此时mac本机是能与服务器内网相互ping通的
+
+> mac本机ping服务器内网
+
+```shell
+$ ping -c2 10.206.0.9
+PING 10.206.0.9 (10.206.0.9): 56 data bytes
+64 bytes from 10.206.0.9: icmp_seq=0 ttl=64 time=90.547 ms
+64 bytes from 10.206.0.9: icmp_seq=1 ttl=64 time=63.691 ms
+
+--- 10.206.0.9 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 63.691/77.119/90.547/13.428 ms
+```
+
+
+
+> 服务器ping mac本机
+
+```shell
+$ ping -c2 10.8.0.2
+PING 10.8.0.2 (10.8.0.2) 56(84) bytes of data.
+64 bytes from 10.8.0.2: icmp_seq=1 ttl=64 time=85.3 ms
+64 bytes from 10.8.0.2: icmp_seq=2 ttl=64 time=90.3 ms
+
+--- 10.8.0.2 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 85.362/87.876/90.390/2.514 ms
+```
+
+
+
+
+
 ## 3.2 windows连接示例
 
 [下载windows版安装包](https://openvpn.net/downloads/openvpn-connect-v3-windows.msi)
@@ -558,11 +651,33 @@ windows安装就是一路下一步
 
 **使用示例**
 
-**假设公司代码库gitlab部署在云主机中，现在只允许公司IP和openvpn IP访问**
+**假设公司代码库gitlab、上线工具jenkins等等部署在云主机中，现在只允许公司IP和openvpn IP访问**
 
 **则只需要在安全组中加入以下两条规则即可**
 
 > **1.允许公司IP访问**
 >
 > **2.允许OpenVPN所在机器公网IP访问**
+
+
+
+**在云主机中还可以根据具体情况设置相关安全策略，包括网络ACL访问控制，安全组等等**
+
+
+
+**openvpn+云主机安全组的应用场景**
+
+> 如果服务所在机器是经典网络(有公网IP)，则内网和公网都可以访问
+>
+> 如果服务所在机器是VPC网络(无公网IP)，则只允许内网访问
+
+
+
+
+
+
+
+
+
+
 

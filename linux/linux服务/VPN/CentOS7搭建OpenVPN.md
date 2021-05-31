@@ -1,0 +1,547 @@
+
+
+# CentOS7搭建OpenVPN
+
+[抄袭链接](http://www.zhangblog.com/2020/05/09/openvpn01/)
+
+
+
+
+
+OpenVPN软件版本
+
+
+
+
+
+# 一、前期环境准备
+
+## 1.1 实验环境
+
+| 系统      | IP          | 公网IP  | 配置 | 内核                        |
+| --------- | ----------- | ------- | ---- | --------------------------- |
+| CentOS7.9 | 10.206.0.16 | 8.8.8.8 | 1c1g | 3.10.0-1160.11.1.el7.x86_64 |
+| mac本机   | 10.0.6.190  | 9.9.9.9 | -    | -                           |
+
+
+
+## 1.2 OpenVPN机器配置必要修改
+
+### 1.2.1 开启路由转发
+
+```shell
+# 不存在则配置路由转发
+grep 'net.ipv4.ip_forward = 1' /etc/sysctl.conf || echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.conf
+
+# 使配置生效
+sysctl -p
+```
+
+
+
+### 1.2.2 iptables配置
+
+设置iptables规则
+
+```shell
+# 客户端连接vpn后，默认分配 10.8.0.0/24网段，需要进行nat设置
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+
+# 保存配置
+iptables-save > /etc/sysconfig/iptables
+```
+
+
+
+验证
+
+```shell
+# 验证
+$ iptables -L -n -t nat
+Chain PREROUTING (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain POSTROUTING (policy ACCEPT)
+target     prot opt source               destination         
+MASQUERADE  all  --  10.8.0.0/24          0.0.0.0/0        
+```
+
+
+
+删除上述iptables配置信息使用如下命令，可以对比正常和异常访问
+
+```shell
+iptables -t nat -D POSTROUTING 1
+```
+
+
+
+### 1.2.3 系统时间与硬件时间同步
+
+```shell
+# 配置时间同步
+$ crontab -l
+*/10 * * * * /usr/sbin/ntpdate ntp1.aliyun.com >/dev/null 2>&1
+
+# 系统使用上海时间
+$ ll /etc/localtime
+lrwxrwxrwx. 1 root root 35 Mar  7  2019 /etc/localtime -> ../usr/share/zoneinfo/Asia/Shanghai
+
+# 查看硬件时间
+$ hwclock --show 
+Thu 27 May 2021 02:49:25 PM CST  -0.109431 seconds
+
+# 系统时间同步到硬件时间
+hwclock --systohc
+```
+
+
+
+
+
+# 二、安装过程
+
+## 2.1 安装依赖包
+
+```shell
+yum -y install lz4-devel lzo-devel pam-devel openssl-devel systemd-devel sqlite-devel autoconf automake libtool libtool-ltdl
+```
+
+
+
+## 2.2 编译安装openvpn
+
+[openvpn github地址](https://github.com/OpenVPN/openvpn)
+
+[openvpn官网](https://openvpn.net/)
+
+[openvpn官网源码包下载地址](https://openvpn.net/community-downloads/)
+
+下载源码包
+
+```shell
+wget https://swupdate.openvpn.org/community/releases/openvpn-2.5.2.tar.xz
+```
+
+
+
+解压缩并进入源码目录
+
+```shell
+tar xf v2.5.2.tar.xz && cd openvpn-2.5.2/
+```
+
+
+
+开始编译安装
+
+> `nproc` 命令可以直接获取系统核心数
+
+```shell
+./configure --prefix=/usr/local/openvpn
+make -j${nproc} && make install
+```
+
+
+
+做一下openvpn命令的软连接
+
+```shell
+ln -s /usr/local/openvpn/sbin/openvpn /usr/local/sbin/openvpn
+```
+
+
+
+查看openvpn版本
+
+```shell
+$ openvpn --version
+OpenVPN 2.5.2 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [MH/PKTINFO] [AEAD] built on May 27 2021
+library versions: OpenSSL 1.0.2k-fips  26 Jan 2017, LZO 2.06
+Originally developed by James Yonan
+Copyright (C) 2002-2018 OpenVPN Inc <sales@openvpn.net>
+Compile time defines: enable_async_push=no enable_comp_stub=no enable_crypto_ofb_cfb=yes enable_debug=yes enable_def_auth=yes enable_dlopen=unknown enable_dlopen_self=unknown enable_dlopen_self_static=unknown enable_fast_install=yes enable_fragment=yes enable_iproute2=no enable_libtool_lock=yes enable_lz4=yes enable_lzo=yes enable_management=yes enable_multihome=yes enable_pam_dlopen=no enable_pedantic=no enable_pf=yes enable_pkcs11=no enable_plugin_auth_pam=yes enable_plugin_down_root=yes enable_plugins=yes enable_port_share=yes enable_selinux=no enable_shared=yes enable_shared_with_static_runtimes=no enable_small=no enable_static=yes enable_strict=no enable_strict_options=no enable_systemd=no enable_werror=no enable_win32_dll=yes enable_x509_alt_username=no with_aix_soname=aix with_crypto_library=openssl with_gnu_ld=yes with_mem_check=no with_sysroot=no
+```
+
+
+
+## 2.3 生成证书
+
+[easy-rsa github地址](https://github.com/OpenVPN/easy-rsa)
+
+
+
+### 2.3.1 下载 `easy-rsa` 工具
+
+下载包
+
+```shell
+wget https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.8/EasyRSA-3.0.8.tgz
+```
+
+
+
+解压缩
+
+```shell
+tar xf EasyRSA-3.0.8.tgz && cd EasyRSA-3.0.8/
+```
+
+
+
+### 2.3.2 生成全局配置文件 `vars`
+
+根据 `EasyRSA-3.0.8/vars.example` 文件生成全局配置文件 `vars`
+
+```shell
+# 新建一个专门存放easy-rsa相关文件的目录，以后所有生成证书等操作
+mkdir /usr/local/openvpn/easy-rsa
+
+# 拷贝EasyRSA-3.0.8下的部分文件到/usr/local/openvpn/easy-rsa/
+cp -r easyrsa openssl-easyrsa.cnf x509-types /usr/local/openvpn/easy-rsa/
+
+# 拷贝全局配置文件 vars
+cp vars.example /usr/local/openvpn/easy-rsa/vars
+```
+
+
+
+向 `vars` 文件追加以下内容
+
+```shell
+cat >> /usr/local/openvpn/easy-rsa/vars << EOF
+# 国家
+set_var EASYRSA_REQ_COUNTRY     "CN"
+
+# 省
+set_var EASYRSA_REQ_PROVINCE    "BJ"
+
+# 城市
+set_var EASYRSA_REQ_CITY        "BeiJing"
+
+# 组织
+set_var EASYRSA_REQ_ORG         "test"
+
+# 邮箱
+set_var EASYRSA_REQ_EMAIL       "test@test.com"
+
+# 拥有者
+set_var EASYRSA_REQ_OU          "ZJ"
+
+# 长度
+set_var EASYRSA_KEY_SIZE        2048
+
+# 算法
+set_var EASYRSA_ALGO            rsa
+
+# CA证书过期时间，单位天
+set_var EASYRSA_CA_EXPIRE      36500
+
+# 签发证书的有效期是多少天，单位天
+set_var EASYRSA_CERT_EXPIRE    36500
+EOF
+```
+
+
+
+
+
+### 2.3.3 生成服务端证书
+
+> ./easyrsa 命令生成各类证书的时候，如果不想设置密码，只需要在最后添加参数 `nopass` 即可
+
+
+
+#### 2.3.3.1 初始化与创建CA根证书
+
+执行命令 `./easyrsa init-pki` 会生成 `pki` 目录，用于存储一些中间变量及最终生成的证书
+
+```shell
+$ ./easyrsa init-pki
+
+Note: using Easy-RSA configuration from: /usr/local/openvpn/easy-rsa/vars
+
+init-pki complete; you may now create a CA or requests.
+Your newly created PKI dir is: /usr/local/openvpn/easy-rsa/pki
+```
+
+
+
+`pki` 目录内容如下
+
+```shell
+-rw------- 1 root root 4616 May 27 17:03 openssl-easyrsa.cnf
+drwx------ 2 root root 4096 May 27 17:03 private
+drwx------ 2 root root 4096 May 27 17:03 reqs
+-rw------- 1 root root 4648 May 27 17:03 safessl-easyrsa.cnf
+```
+
+
+
+
+
+#### 2.3.3.2 创建CA根证书
+
+如果不想给CA根证书设置密码，可以执行命令  `./easyrsa build-ca nopass`
+
+```shell
+$ ./easyrsa build-ca
+Note: using Easy-RSA configuration from: /usr/local/openvpn/easy-rsa/vars
+Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
+
+Enter New CA Key Passphrase: # 这里输入ca根证书的密码
+Re-Enter New CA Key Passphrase: # 确认密码
+Generating RSA private key, 2048 bit long modulus
+..............................+++
+.......................................................................................................................................+++
+e is 65537 (0x10001)
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+# 这里输入common name通用名，我这里就直接输入openvpn
+Common Name (eg: your user, host, or server name) [Easy-RSA CA]:openvpn
+
+CA creation complete and you may now import and sign cert requests.
+Your new CA certificate file for publishing is at:
+/usr/local/openvpn/easy-rsa/pki/ca.crt
+```
+
+
+
+#### 2.3.3.3 生成服务端证书
+
+为服务端生成证书对并在本地签名。nopass参数生成一个无密码的证书；在此过程中会让你确认ca密码
+
+```shell
+$ ./easyrsa build-server-full server nopass./easyrsa build-server-full server nopass
+
+Note: using Easy-RSA configuration from: /usr/local/openvpn/easy-rsa/vars
+Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
+Generating a 2048 bit RSA private key
+.........................................................................................................+++
+...+++
+writing new private key to '/usr/local/openvpn/easy-rsa/pki/easy-rsa-3923.d1Sc4r/tmp.MYDKYG'
+-----
+Using configuration from /usr/local/openvpn/easy-rsa/pki/easy-rsa-3923.d1Sc4r/tmp.ual9iX
+Enter pass phrase for /usr/local/openvpn/easy-rsa/pki/private/ca.key: # 这里输入上一步创建ca根证书时设置的密码
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+commonName            :ASN.1 12:'server'
+Certificate is to be certified until May  3 10:05:02 2121 GMT (36500 days)
+
+Write out database with 1 new entries
+Data Base Updated
+```
+
+
+
+#### 2.3.3.4 创建 `Diffie-Hellman`，确保key穿越不安全网络的命令
+
+```shell
+$ ./easyrsa gen-dh
+
+Note: using Easy-RSA configuration from: /usr/local/openvpn/easy-rsa/vars
+Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
+Generating DH parameters, 2048 bit long safe prime, generator 2
+This is going to take a long time
+......................................................................................................+...................................................................+....................................++*++*
+
+DH parameters of size 2048 created at /usr/local/openvpn/easy-rsa/pki/dh.pem
+```
+
+
+
+### 2.3.4 生成客户端证书
+
+#### 2.3.4.1 生成客户端证书
+
+> 这里客户端证书名称为test
+
+为客户端生成证书对并在本地签名。nopass参数生成一个无密码的证书；在此过程中都会让你确认ca密码
+
+```shell
+$ ./easyrsa build-client-full test
+
+Note: using Easy-RSA configuration from: /usr/local/openvpn/easy-rsa/vars
+Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
+Generating a 2048 bit RSA private key
+......................+++
+.........................................+++
+writing new private key to '/usr/local/openvpn/easy-rsa/pki/easy-rsa-13797.yzW0ws/tmp.oUlAEw'
+Enter PEM pass phrase: # 输入客户端证书密码
+Verifying - Enter PEM pass phrase: # 确认密码
+-----
+Using configuration from /usr/local/openvpn/easy-rsa/pki/easy-rsa-13797.yzW0ws/tmp.FM3jbH
+Enter pass phrase for /usr/local/openvpn/easy-rsa/pki/private/ca.key: # 这里输入ca根证书的密码
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+commonName            :ASN.1 12:'test'
+Certificate is to be certified until May  3 10:54:37 2121 GMT (36500 days)
+
+Write out database with 1 new entries
+Data Base Updated
+```
+
+
+
+#### 2.3.4.2 为了提高安全性，生成ta.key
+
+加强认证方式，防攻击。如果配置文件中启用此项(默认是启用的)，就需要执行以下命令，并把ta.key放到 /etc/openvpn/server目录。配置文件中服务端第二个参数为0，同时客户端也要有此文件，且client.conf中此指令的第二个参数需要为1。【服务端有该配置，那么客户端也必须要有】
+
+```shell
+openvpn --genkey secret ta.key
+```
+
+
+
+### 2.3.5 整理服务端证书
+
+```shell
+mkdir -p /usr/local/openvpn/conf/{server,client}
+cp pki/ca.crt  /usr/local/openvpn/conf/server
+cp pki/private/server.key /usr/local/openvpn/conf/server
+cp pki/issued/server.crt /usr/local/openvpn/conf/server
+cp pki/dh.pem /usr/local/openvpn/conf/server
+cp ta.key /usr/local/openvpn/conf/server
+```
+
+
+
+## 2.4 创建服务端配置文件
+
+`server.conf` 示例文件在 openvon源码目录下的 `openvpn-2.5.2/sample/sample-config-files/server.conf` 
+
+
+
+直接创建 `server.conf` 文件
+
+⚠️ 一定要添加openvpn服务器私有地址，注意掩码 `push "route 10.0.10.0 255.255.255.0"`
+
+```shell
+cat > /usr/local/openvpn/conf/server/server.conf <<EOF
+# 表示openvpn服务端的监听地址
+local 0.0.0.0
+
+# 监听的端口，默认是1194
+port 1194
+
+# 使用的协议，有udp和tcp。建议选择tcp
+proto tcp
+
+# 使用三层路由IP隧道(tun)还是二层以太网隧道(tap)。一般都使用tun
+dev tun
+
+# ca证书、服务端证书、服务端密钥和密钥交换文件。如果它们和server.conf在同一个目录下则可以不写绝对路径，否则需要写绝对路径调用
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+
+# vpn服务端为自己和客户端分配IP的地址池。
+# 服务端自己获取网段的第一个地址(此处为10.8.0.1)，后为客户端分配其他的可用地址。以后客户端就可以和10.8.0.1进行通信。
+# 注意：该网段地址池不要和已有网段冲突或重复。其实一般来说是不用改的。除非当前内网使用了10.8.0.0/24的网段。
+server 10.8.0.0 255.255.255.0
+
+
+# 使用一个文件记录已分配虚拟IP的客户端和虚拟IP的对应关系，以后openvpn重启时，将可以按照此文件继续为对应的客户端分配此前相同的IP。也就是自动续借IP的意思。
+ifconfig-pool-persist ipp.txt
+
+# 使用tap模式的时候考虑此选项。
+server-bridge XXXXXX
+
+# vpn服务端向客户端推送vpn服务端内网网段的路由配置，以便让客户端能够找到服务端内网。多条路由就写多个Push指令 
+push "route 10.0.10.0 255.255.255.0"
+push "route 192.168.10.0 255.255.255.0"
+push "route 10.206.0.0 255.255.240.0"
+
+# 让vpn客户端之间可以互相看见对方，即能互相通信。默认情况客户端只能看到服务端一个人；默认是注释的，不能客户端之间相互看见
+client-to-client
+
+# 允许多个客户端使用同一个VPN帐号连接服务端，默认是注释的，不支持多个客户登录一个账号
+duplicate-cn
+
+# 每10秒ping一次，120秒后没收到ping就说明对方挂了
+keepalive 10 120
+
+# 加强认证方式，防攻击。如果配置文件中启用此项(默认是启用的)需要执行openvpn --genkey --secret ta.key，并把ta.key放到/etc/openvpn/server录，服务端第二个参数为0；同时客户端也要有此文件，且client.conf中此指令的第二个参数需要为1
+tls-auth ta.key 0
+
+# 选择一个密码。如果在服务器上使用了cipher选项，那么您也必须在这里指定它。注意，v2.4客户端/服务器将在TLS模式下自动协商AES-256-GCM。
+cipher AES-256-CBC
+
+# openvpn 2.4版本的vpn才能设置此选项。表示服务端启用lz4的压缩功能，传输数据给客户端时会压缩数据包。Push后在客户端也配置启用lz4的压缩功能，向服务端发数据时也会压缩。如果是2.4版本以下的老版本，则使用用comp-lzo指令
+compress lz4-v2
+push "compress lz4-v2"
+
+# 启用lzo数据压缩格式。此指令用于低于2.4版本的老版本。且如果服务端配置了该指令，客户端也必须要配置
+comp-lzo
+
+# 并发客户端的连接数
+max-clients 100
+
+# 通过ping得知超时时，当重启vpn后将使用同一个密钥文件以及保持tun连接状态
+persist-key
+persist-tun
+
+# 在文件中输出当前的连接信息，每分钟截断并重写一次该文件
+status openvpn-status.log
+
+# 默认vpn的日志会记录到rsyslog中，使用这两个选项可以改变。log指令表示每次启动vpn时覆盖式记录到指定日志文件中，log-append则表示每次启动vpn时追加式的记录到指定日志中。但两者只能选其一，或者不选时记录到rsyslog中
+;log openvpn.log
+;log-append openvpn.log
+
+# 日志记录的详细级别。
+verb 3
+
+# 沉默的重复信息。最多20条相同消息类别的连续消息将输出到日志。
+;mute 20
+
+# 当服务器重新启动时，通知客户端，以便它可以自动重新连接。仅在UDP协议是可用
+explicit-exit-notify 1
+EOF
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+ # 启动脚本 vim ./sbin/openvpn-startup.sh
+cat > /usr/local/openvpn/sbin/openvpn-startup.sh <<'EOF'
+#!/bin/bash
+dir=/usr/local/openvpn
+${dir}/sbin/openvpn --cd ${dir} --daemon --config ${dir}/conf/server/server.conf
+EOF
+
+
+# 停止脚本 vim ./sbin/openvpn-shutdown.sh
+
+#!/bin/bash
+killall -TERM openvpn
+
+```
+
+
+
