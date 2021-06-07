@@ -602,6 +602,6 @@ tcp6       0      0 :::3306                 :::*                    LISTEN      
 
 
 ```shell
-wget https://yzbpdcnm@163.com:PAPAhuxiaoqian!1@archive.cloudera.com/cdh6/6.2.1-patch4069/redhat7/yum/ -P /etc/yum.repos.d/
+wget https://archive.cloudera.com/cdh6/6.2.1-patch4069/redhat7/yum/ -P /etc/yum.repos.d/
 ```
 

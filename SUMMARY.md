@@ -277,7 +277,8 @@
         * [zabbix数据库迁移的一个小问题](linux/monitor/zabbix/zabbix问题记录/zabbix数据库迁移的一个小问题.md)
         * [ubuntu启动zabbix-agent报错](linux/monitor/zabbix/zabbix问题记录/ubuntu启动zabbix-agent报错.md)
         * [zabbix-server无法启动](linux/monitor/zabbix/zabbix问题记录/zabbix-server无法启动.md)
-      
+      * [zabbix各种监控](README.md)
+        * [zabbix监控交换机](linux/monitor/zabbix/zabbix各种监控/zabbix监控交换机.md)
     * [grafana](README.md)
       * [grafana7.0.3安装并结合zabbix数据源进行基础监控](linux/monitor/grafana/1.centos7安装grafana7.0.3并结合zabbix数据源进行基础监控.md)
 

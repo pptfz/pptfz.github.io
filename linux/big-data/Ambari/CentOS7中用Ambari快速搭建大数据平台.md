@@ -22,7 +22,7 @@
 
 [Ambari](http://ambari.apache.org/) 是创建、管理、监视 [Hadoop](http://hadoop.apache.org/) 的集群的软件。这里的 Hadoop 是广义，指的是 Hadoop 整个生态圈（例如 [Hive](https://hive.apache.org/)，[Hbase](https://hbase.apache.org/)，[Sqoop](https://sqoop.apache.org/)，[Zookeeper](https://zookeeper.apache.org/) ，[Spark](https://spark.apache.org/) ，[Flink](https://flink.apache.org/) ，[Flume](https://flume.apache.org/) ，[Oozie](https://oozie.apache.org/) 等），而并不仅是特指 Hadoop。用一句话来说，Ambari 就是为了让 Hadoop 以及相关的大数据软件更容易使用的一个工具。 Ambari 现在所支持的平台组件也越来越多，例如流行的 Spark，Storm 等计算框架，以及资源调度平台 YARN 等，我们都能轻松地通过 Ambari 来进行部署，为想构建大数据平台的初学者提供了很大的便捷。 
 
-Ambari 自身也是一个分布式架构的软件，主要由两部分组成：Ambari Server 和 Ambari Agent。简单来说，用户通过 Ambari Server 通知 Ambari Agent 安装对应的软件；Agent 会定时地发送各个机器每个软件模块的状态给 Ambari Server，最终这些状态信息会呈现在 Ambari 的 GUI，方便用户了解到集群的各种状态，并进行相应的维护。
+Ambari 自身也是一个分布式架构的软件，主要由两部分组成：`Ambari Server` 和 `Ambari Agent`。简单来说，用户通过 `Ambari Server` 通知 `Ambari Agent` 安装对应的软件；Agent 会定时地发送各个机器每个软件模块的状态给 `Ambari Server`，最终这些状态信息会呈现在 Ambari 的 GUI，方便用户了解到集群的各种状态，并进行相应的维护。
 
 
 
@@ -270,7 +270,7 @@ cat >/opt/ambari/script/jdk8_install.sh <<'ABC'
 PWD=`pwd`
 JDK_PKG=jdk-8u251-linux-x64.tar.gz
 
-#安装jdk1.8.0_251
+# 安装jdk1.8.0_251
 tar xf $PWD/$JDK_PKG -C /usr/local
 cat >/etc/profile.d/jdk8.sh<<'EOF'
 export JAVA_HOME=/usr/local/jdk1.8.0_251
@@ -279,10 +279,10 @@ export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export JAVA_HOME PATH CLASSPATH
 EOF
 
-#使jdk命令环境变量生效
+# 使jdk命令环境变量生效
 source /etc/profile.d/jdk8.sh
 
-#做一个软连接
+# 做一个软连接
 ln -sf $JAVA_HOME/bin/java /usr/bin/java
 ABC
 ```
@@ -297,15 +297,14 @@ export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp ${NODE_NAMES}:/opt/ambari/script/jdk8_install.sh /opt/ambari/pkg/jdk-8u251-linux-x64.tar.gz ${node_ip}:/tmp
-  done
+    scp ${NODE_NAMES}:/opt/ambari/script/jdk8_install.sh ${node_ip}:/opt/ambari/script
+    scp ${NODE_NAMES}:/opt/ambari/pkg/jdk-8u251-linux-x64.tar.gz ${node_ip}:/opt/ambari/pkg 
+  done  
 ```
 
 
 
-### 2.5.4 执行jdk安装脚本
-
-⚠️这个有问题！！！
+### 2.5.4 所有节点执行jdk安装脚本
 
 ```shell
 source /opt/ambari/script/env.sh
@@ -313,7 +312,7 @@ export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"  
-    ssh root@${node_ip} 'source /tmp/jdk8_install.sh'
+    ssh root@${node_ip} 'source /opt/ambari/script/jdk8_install.sh'
   done
 ```
 
@@ -333,55 +332,68 @@ for node_ip in ${NODE_IPS[@]}
 
 **⚠️sed中有变量替换，需要使用双引号**
 
-
-
-这里有问未解决！！！
+### 2.6.1 各节点安装chrony
 
 ```shell
-#各节点安装chrony
 source /opt/ambari/script/env.sh
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
     ssh root@${node_ip} yum -y install chrony
   done
+```
 
 
-#修改服务器地址为阿里云
-source /opt/ambari/script/env.sh
+
+### 2.6.2 cdh master节点修改服务器地址为阿里云
+
+```shell
 sed -i.bak '3,6d' /etc/chrony.conf && sed -i -e '3cserver ntp1.aliyun.com iburst' -e "/^#allow/callow ${NODE_SUBNET}" /etc/chrony.conf
+```
 
 
-#node节点修改同步服务器为master节点
-#这里选择另外两个节点执行
-source /opt/ambari/script/env.sh
+
+### 2.6.3 alave节点修改同步服务器为master节点
+
+```shell
+# 这里选择另外两个节点执行
 export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
     ssh root@${node_ip} sed -i.bak '3,6d' /etc/chrony.conf && sed -i "3cserver ${NODE_NAMES[0]} iburst" /etc/chrony.conf
   done
+```
 
 
-#启动chronyd服务并设置开机自启
-source /opt/ambari/script/env.sh
+
+### 2.6.4 启动chronyd服务并设置开机自启
+
+```shell
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
     ssh root@${node_ip} 'systemctl enable chronyd && systemctl start chronyd'
   done
+```
 
 
-#检查端口，chronyd监听udp323端口
-source /opt/ambari/script/env.sh
+
+### 2.6.5 检查端口，chronyd监听udp323端口
+
+```shell
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
     ssh root@${node_ip} netstat -nupl|grep chronyd
   done
-  
-#检查同步
-source /opt/ambari/script/env.sh
+```
+
+
+
+### 2.6.6 检查同步
+
+```shell
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
@@ -586,8 +598,6 @@ mysql -uroot -e "grant all on ambari.* to ambari@'localhost' identified by 'amba
 mysql -uroot -e "grant all on ambari.* to ambari@'%' identified by 'ambari'"
 mysql -uroot -e "flush privileges"
 ```
-
-
 
 
 
