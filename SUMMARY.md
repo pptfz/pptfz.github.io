@@ -11,6 +11,12 @@
 * [生产问题总结](README.md)
   * [ssh](README.md)
     * [记录一次诡异的ssh连接问题](生产问题总结/ssh/记录一次诡异的ssh连接问题.md)
+* [linux实用开源小工具](README.md)
+  * [grc](linux实用开源小工具/grc.md)
+
+* [博客工具](README.md)
+  * [gitbook](README.md)
+    * [gitbook安装](博客工具/gitbook/CentOS7安装gitbook.md)
 
 * [生产环境开源项目](README.md)
   * [任务调度系统](README.md)
@@ -465,12 +471,14 @@
   * [mac ssh密钥转换](mac使用记录/mac ssh密钥转换问题.md)
 
 * [git总结](README.md)
-    * [git初次使用](README.md)
-       * [git初次使用记录](git总结/git初次使用简单记录.md)
-       * [git新建仓库后运行指令说明](git总结/git新建仓库后运行指令说明.md)
-    * [git命令](README.md)
-      * [git命令总结](git总结/git命令总结.md)
-
+  * [git安装](README.md)
+    * [git源码安装](git总结/CentOS7编译安装git.md)
+  * [git初次使用](README.md)
+    * [git初次使用记录](git总结/git初次使用简单记录.md)
+    * [git新建仓库后运行指令说明](git总结/git新建仓库后运行指令说明.md)
+  * [git命令](README.md)
+    * [git命令总结](git总结/git命令总结.md)
+    
 
 * [markdown使用记录](README.md)
     * [markdown常用语法简记](markdown语法总结/markdown常用语法简记.md)
