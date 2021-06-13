@@ -210,9 +210,13 @@
       * [瓦力安装](README.md)
         * [walle1.2](linux/自动化运维平台/walle/CentOS7.5安装walle1.2.md)
         * [walle2.0](linux/自动化运维平台/walle/CentOS7.5安装walle2.0.md)
+        * [1](linux/自动化运维平台/walle/spug安装.md)
+        * [2](linux/自动化运维平台/walle/spug上线示例.md)
       * [瓦力上线](README.md)
         * [walle1.2上线示例](linux/自动化运维平台/walle/walle1.2 上线示例.md)
     * [Spug](README.md)
+      * [1](linux/自动化运维平台/spug/安装.md)
+      * [2](linux/自动化运维平台/spug/上线示例.md)
       * [spug安装](linux/自动化运维平台/Spug/spug安装.md)
       * [spug上线示例](linux/自动化运维平台/Spug/spug上线示例.md)
 
