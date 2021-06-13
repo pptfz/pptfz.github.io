@@ -11,7 +11,7 @@
 * [生产问题总结](README.md)
   * [ssh](README.md)
     * [记录一次诡异的ssh连接问题](生产问题总结/ssh/记录一次诡异的ssh连接问题.md)
-* [linux实用开源小工具](README.md)
+* [Linux实用开源小工具](README.md)
   * [grc](linux实用开源小工具/grc.md)
 
 * [博客工具](README.md)
@@ -214,11 +214,16 @@
         * [2](linux/自动化运维平台/walle/spug上线示例.md)
       * [瓦力上线](README.md)
         * [walle1.2上线示例](linux/自动化运维平台/walle/walle1.2 上线示例.md)
+
     * [Spug](README.md)
       * [1](linux/自动化运维平台/spug/安装.md)
       * [2](linux/自动化运维平台/spug/上线示例.md)
       * [spug安装](linux/自动化运维平台/Spug/spug安装.md)
       * [spug上线示例](linux/自动化运维平台/Spug/spug上线示例.md)
+
+    * [spug](README.md)
+      * [spug安装](linux/自动化运维平台/spug/安装.md)
+      * [spug上线示例](linux/自动化运维平台/spug/spug上线示例.md)
 
     * [gitea](README.md)
       * [gitea安装](linux/自动化运维平台/gitea/gitea安装.md)
