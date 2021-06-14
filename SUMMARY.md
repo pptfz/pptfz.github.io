@@ -28,9 +28,6 @@
   * [cmdb](README.md)
     * [codo](README.md)
       * [codo安装](生产环境开源项目/cmdb平台/codo/codo安装.md)
-    * [spug](README.md)
-      * [spug安装](linux/自动化运维平台/spug/安装.md)
-      * [spug上线示例](linux/自动化运维平台/spug/spug上线示例.md)
   * [配置管理](README.md)
     * [nacos](README.md)
       * [nacos安装](生产环境开源项目/配置管理/nacos/nacos安装.md)
@@ -216,6 +213,10 @@
       * [瓦力上线](README.md)
         * [walle1.2上线示例](linux/自动化运维平台/walle/walle1.2 上线示例.md)
 
+    * [spug](README.md)
+      * [spug安装](linux/自动化运维平台/spug/安装.md)
+      * [spug上线示例](linux/自动化运维平台/spug/spug上线示例.md)
+      
     * [gitea](README.md)
       * [gitea安装](linux/自动化运维平台/gitea/gitea安装.md)
 
