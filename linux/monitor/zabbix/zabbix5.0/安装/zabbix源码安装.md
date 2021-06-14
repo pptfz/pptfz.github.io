@@ -58,23 +58,29 @@ useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monito
 
 ### 3.1 安装mysql
 
-#### 3.1.1 下载MySQL-5.7.22二进制包
+**⚠️<span style=color:red>源码安装的zabbix5.4中提示mysql版本需要5.7.28以上</span>**
+
+![iShot2021-06-14 17.19.59](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 17.19.59.png)
+
+
+
+#### 3.1.1 下载MySQL-5.7.32二进制包
 
 ```python
-wget https://cdn.mysql.com/archives/mysql-5.7/mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz
+wget https://cdn.mysql.com/archives/mysql-5.7/mysql-5.7.32-linux-glibc2.12-x86_64.tar.gz
 ```
 
 #### 3.1.2 解压缩mysql二进制包到/usr/local
 
 ```python
-tar xf mysql-5.7.22-linux-glibc2.12-x86_64.tar.gz -C /usr/local
+tar xf mysql-5.7.32-linux-glibc2.12-x86_64.tar.gz -C /usr/local
 ```
 
 #### 3.1.3 修改名称、做软连接
 
 ```python
-mv /usr/local/mysql-5.7.22-linux-glibc2.12-x86_64 /usr/local/mysql-5.7.22 && 
-ln -s /usr/local/mysql-5.7.22 /usr/local/mysql
+mv /usr/local/mysql-5.7.32-linux-glibc2.12-x86_64 /usr/local/mysql-5.7.32 && 
+ln -s /usr/local/mysql-5.7.32 /usr/local/mysql
 ```
 
 #### 3.1.4 创建mysql用户
@@ -83,7 +89,7 @@ ln -s /usr/local/mysql-5.7.22 /usr/local/mysql
 useradd -M -s /bin/nologin mysql
 ```
 
-#### 3.1.5 编辑主配置文件，myql-5.7.22二进制包默认没有mysql配置文件
+#### 3.1.5 编辑主配置文件，myql-5.7.32二进制包默认没有mysql配置文件
 
 **<span style=color:red>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
 
@@ -389,7 +395,7 @@ StatsAllowedIP=127.0.0.1
 
 ```shell
 # 修改zabbix_server地址
-sed -i '/Server=127.0.0.1/cServer=10.0.0.12' /usr/local/zabbix/etc/zabbix_agentd.conf
+sed -i '/Server=127.0.0.1/cServer=10.0.0.11' /usr/local/zabbix/etc/zabbix_agentd.conf
 
 # 修改日志文件位置，默认为 /tmp/zabbix_agentd.log，这里修改为 /var/log/zabbix/zabbix_agentd.log
 sed -i '/^LogFile/cLogFile=/var/log/zabbix/zabbix_agentd.log' /usr/local/zabbix/etc/zabbix_agentd.conf
@@ -402,7 +408,7 @@ sed -i '/^LogFile/cLogFile=/var/log/zabbix/zabbix_agentd.log' /usr/local/zabbix/
 ```shell
 $ egrep -v '^$|#' /usr/local/zabbix/etc/zabbix_agentd.conf
 LogFile=/var/log/zabbix/zabbix_agentd.log
-Server=10.0.0.12
+Server=10.0.0.11
 ServerActive=127.0.0.1
 Hostname=Zabbix server
 ```
@@ -410,6 +416,8 @@ Hostname=Zabbix server
 
 
 ## 6.启动zabbix
+
+### 6.1 标准启动
 
 **启动 zabbix_server**
 
@@ -427,7 +435,140 @@ Hostname=Zabbix server
 
 
 
-**验证zabbix启动**
+### 6.2 使用supervisor管理zabbix
+
+#### 6.2.1 安装supervisor
+
+**执行以下一键安装脚本**
+
+```shell
+#!/usr/bin/env bash
+TMP_FILE=/usr/lib/tmpfiles.d/tmp.conf
+
+# 安装supervisor最新版
+yum -y install python2-pip && pip install supervisor
+
+# 创建目录
+[ -d /etc/supervisor ] || mkdir /etc/supervisor
+
+# 创建supervisor配置文件
+cat >/etc/supervisor/supervisord.conf <<EOF
+[unix_http_server]
+file=/tmp/supervisor.sock   ; /tmp/supervisor.sock所有者为supervisor
+chmod = 0770
+chown = root:root
+
+
+[supervisord]
+logfile=/var/log/supervisor/supervisord.log ; main log file;
+logfile_maxbytes=50MB        ; max main logfile bytes b4 rotation; default 50MB
+logfile_backups=10           ; # of main logfile backups; 0 means none, default 10
+loglevel=info                ; log level; default info; others: debug,warn,trace
+pidfile=/tmp/supervisord.pid ; supervisord pidfile; default supervisord.pid
+
+;[inet_http_server]
+;port=10.0.0.10:9001
+;username=test
+;password=test
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisorctl]
+serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
+
+[include]
+files = /etc/supervisor/config.d/*.ini
+EOF
+
+
+# 设置supervisor日志滚动
+cat >/etc/logrotate.d/supervisor <<EOF
+/var/log/supervisor/*.log {
+       missingok
+       weekly
+       notifempty
+       nocompress
+}
+EOF
+
+
+# 设置Tmpfiles防止sock文件被清理
+grep -w 'x /tmp/supervisor.sock' $TMP_FILE && grep -w 'x /tmp/supervisord.pid' $TMP_FILE
+if [ $? -ne 0 ];then
+   sed -i.bak '/x \/tmp\/supervisord.pid/d' $TMP_FILE && sed -i '/x \/tmp\/supervisor.sock/d' $TMP_FILE
+   echo -e "x /tmp/supervisor.sock\nx /tmp/supervisord.pid" >> $TMP_FILE
+fi
+
+
+# 将supervisor加入systemd
+cat >/usr/lib/systemd/system/supervisord.service <<EOF
+# supervisord service for systemd (CentOS 7.0+)
+# by ET-CS (https://github.com/ET-CS)
+[Unit]
+Description=Supervisor daemon
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/supervisord
+ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
+ExecReload=/usr/bin/supervisorctl $OPTIONS reload
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+
+# 创建supervisor相关目录
+[ ! /var/log/supervisor ] || mkdir /var/log/supervisor
+[ ! /etc/supervisor/config.d ] || mkdir -p /etc/supervisor/config.d
+
+# 启动supervisor
+systemctl daemon-reload
+systemctl start supervisord && systemctl enable supervisord
+```
+
+
+
+
+
+
+
+#### 6.2.2 使用supervisor管理zabbix
+
+如下配置实际上是可以成功启动服务的，但是命令行却报错，原因未知
+
+编辑zabbix_server配置文件
+
+```shell
+cat > /etc/supervisor/config.d/zabbix_server.ini <<'EOF'
+[program:zabbix_server]
+command=/usr/local/zabbix/sbin/zabbix_server -c /usr/local/zabbix/etc/zabbix_server.conf -g 'daemon off;'
+directory=/usr/local/zabbix
+autostart=true
+stdout_logfile=/var/log/supervisor/zabbix_server.log
+EOF
+```
+
+
+
+编辑zabbix_agentd配置文件
+
+```shell
+cat > /etc/supervisor/config.d/zabbix_agentd.ini <<'EOF'
+[program:zabbix_agentd]
+command=/usr/local/zabbix/sbin/zabbix_agentd -c /usr/local/zabbix/etc/zabbix_agentd.conf
+autostart=true
+stdout_logfile=/var/log/supervisor/zabbix_agentd.log
+EOF
+```
+
+
+
+### 6.3 验证zabbix启动
 
 ```shell
 # 查看zabbix_server
@@ -445,5 +586,223 @@ tcp6       0      0 :::10050                :::*                    LISTEN      
 
 
 
+## 7.安装php
 
+### 7.1 添加第三方yum源
+
+**安装epel源并添加第三方yum源**
+
+```shell
+yum -y install epel-release && \
+yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm 
+```
+
+
+
+### 7.2 选择要安装的php版本
+
+```shell
+export phpversion=php73
+```
+
+
+
+```shell
+yum -y install $phpversion-php-fpm $phpversion-php-cli $phpversion-php-bcmath $phpversion-php-gd $phpversion-php-json $phpversion-php-mbstring $phpversion-php-mcrypt $phpversion-php-mysqlnd $phpversion-php-opcache $phpversion-php-pdo $phpversion-php-pecl-crypto $phpversion-php-pecl-mcrypt $phpversion-php-pecl-geoip $phpversion-php-recode $phpversion-php-snmp $phpversion-php-soap $phpversion-php-xml
+```
+
+
+
+**通过以下命令来获取更多安装信息**
+
+```shell
+yum search php73
+```
+
+
+
+**安装后的php配置文件路径**
+
+```shell
+/etc/opt/remi/php73
+```
+
+
+
+### 7.3 启动php并设置开机自启
+
+```shell
+systemctl enable php73-php-fpm && systemctl start php73-php-fpm
+```
+
+
+
+## 8.配置zabbix web
+
+### 8.1 安装nginx
+
+```shell
+yum -y install nginx
+systemctl enable nginx && systemctl start nginx
+```
+
+
+
+### 8.2 拷贝文件
+
+zabbix前端是php编写的，需要把zabbix源码目录下的ui目录下的所有文件拷贝到 `/var/www/html/zabbix` 
+
+```shell
+# 创建zabbix目录
+mkdir -p /var/www/html/zabbix
+
+# 拷贝所有文件到/var/www/html/zabbix
+cp -rp zabbix-5.4.1/ui/* /var/www/html/zabbix
+
+# 修改文件权限为zabbix所有
+chown -R zabbix.zabbix /var/www/html/zabbix/*
+```
+
+
+
+### 8.3 配置nginx
+
+> 这里需要做一下hosts解析  zabbix.test.com
+
+```nginx
+cat > /etc/nginx/conf.d/zabbix.conf <<EOF
+server {
+  listen 80;
+  server_name zabbix.test.com;
+  root   /var/www/html/zabbix;
+  index  index.php index.html;
+  
+  location ~ \.php$ {
+    fastcgi_pass   127.0.0.1:9000;
+    fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME  /scripts;
+    include        fastcgi.conf;
+  }
+}
+EOF
+```
+
+
+
+## 9.安装zabbix
+
+浏览器访问 `zabbix.test.com`
+
+
+
+### 9.1 默认语言选择中文
+
+![iShot2021-06-14 16.42.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 16.42.23.png)
+
+
+
+
+
+### 9.2 必要条件检测
+
+如检测失败则需要修改php的相关配置，本文安装的php的配置文件路径为 `/etc/opt/remi/php73`
+
+![iShot2021-06-14 16.44.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 16.44.22.png)
+
+
+
+以下选项只是为警告，不修改也可以
+
+![iShot2021-06-14 16.46.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 16.46.16.png)
+
+
+
+使用如下命令修改相关参数
+
+```shell
+sed -i.bak -e '/^post_max_size/cpost_max_size = 16M' \
+-e '/^max_execution_time/cmax_execution_time = 300' \
+-e '/^max_input_time/cmax_input_time = 300' \
+/etc/opt/remi/php73/php.ini
+```
+
+
+
+修改完成后重启php
+
+```shell
+ systemctl restart php73-php-fpm.service 
+```
+
+
+
+重新检测，都为ok即可
+
+![iShot2021-06-14 16.59.50](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 16.59.50.png)
+
+
+
+
+
+### 9.3 配置数据库连接
+
+![iShot2021-06-14 16.58.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 16.58.04.png)
+
+
+
+### 9.4 配置zabbix服务器详细信息
+
+![iShot2021-06-14 17.01.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 17.01.33.png)
+
+
+
+### 9.5 设置时区
+
+![iShot2021-06-14 17.03.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 17.03.54.png)
+
+
+
+### 9.6 确认安装信息
+
+![iShot2021-06-14 17.05.03](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 17.05.03.png)
+
+
+
+### 9.7 开始安装
+
+如遇如下界面，则需要按照提示下载配置文件 `zabbix.conf.php` 并上传至 `/var/www/html/zabbix/conf`
+
+![iShot2021-06-14 17.05.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 17.05.54.png)
+
+
+
+注意修改 `zabbix.conf.php` 文件所有者为zabbix
+
+```shell
+chown zabbix.zabbix zabbix.conf.php
+```
+
+
+
+再次检测
+
+![iShot2021-06-14 17.13.30](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 17.13.30.png)
+
+
+
+## 10.登陆zabbix
+
+> 用户名 `Admin`
+>
+> 密码 `zabbix`
+
+![iShot2021-06-14 17.13.12](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 17.13.12.png)
+
+
+
+**登陆后首页面**
+
+前端有问题！
+
+![iShot2021-06-14 17.15.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-14 17.15.33.png)
 

@@ -280,6 +280,7 @@
         * [安装](README.md)
           * [标准安装](linux/monitor/zabbix/zabbix5.0/安装/标准安装.md)
           * [docker-compose安装](linux/monitor/zabbix/zabbix5.0/安装/docker-compose安装.md)
+          * [源码安装](linux/monitor/zabbix/zabbix5.0/安装/zabbix源码安装.md)
       * [zabbix问题记录](README.md)
         * [zabbix数据库迁移的一个小问题](linux/monitor/zabbix/zabbix问题记录/zabbix数据库迁移的一个小问题.md)
         * [ubuntu启动zabbix-agent报错](linux/monitor/zabbix/zabbix问题记录/ubuntu启动zabbix-agent报错.md)
