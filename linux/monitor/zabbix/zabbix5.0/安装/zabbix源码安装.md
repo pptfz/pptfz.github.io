@@ -245,4 +245,205 @@ mysql -uzabbix -pzabbix zabbix < data.sql
 
 
 
-## 4.配置源
+## 4.编译安装
+
+### 4.1 安装依赖
+
+```shell
+yum -y install libxml2-devel net-snmp-devel libevent-devel curl-devel
+```
+
+
+
+### 4.2 编译安装
+
+> 使用命令 `./configure --help` 查看所有支持的选项
+
+**解决依赖关系**
+
+```shell
+./configure --enable-server --enable-agent --with-mysql --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2 --prefix=/usr/local/zabbix
+```
+
+**<span style=color:red>⚠️运行`make install`将默认在 `/usr/local/sbin` 中安装守护程序二进制文件（zabbix_server、zabbix_agentd、zabbix_proxy），在 `/usr/local/bin` 中安装客户端二进制文件（zabbix_get、zabbix_sender）。如果要指定与 `/usr/local` 不同的位置，需要添加参数 `--prefix` 来指定安装目录，例如 `--prefix=/usr/local/zabbix`。在这种情况下，守护程序二进制文件将安装在 <prefix>/sbin 下，而实用程序将安装在 <prefix>/bin 下。手册页将安装在 <prefix>/share 下。</span>**
+
+
+
+关于编译选项的说明：
+
+- 如果使用 --enable-agent 选项，则编译命令行实用程序 zabbix_get 和 zabbix_sender。
+- 虚拟机监控需要--with-libcurl 和--with-libxml2 配置选项；SMTP 身份验证和`web.page.*`Zabbix 代理[项](https://www.zabbix.com/documentation/current/manual/config/items/itemtypes/zabbix_agent)也需要 --with-libcurl 。请注意，使用 --with-libcurl 配置选项[需要](https://www.zabbix.com/documentation/current/manual/installation/requirements)cURL 7.20.0 或更高版本。
+- Zabbix 总是使用 PCRE 库进行编译（从 3.4.0 版本开始）；安装它不是可选的。--with-libpcre=[DIR] 只允许指向特定的基本安装目录，而不是搜索 libpcre 文件的许多常见位置。
+- 您可以使用 --enable-static 标志来静态链接库。如果您计划在不同的服务器之间分发已编译的二进制文件，则必须使用此标志使这些二进制文件无需所需的库即可工作。请注意， --enable-static 在[Solaris 中](http://blogs.sun.com/rie/entry/static_linking_where_did_it)不起作用。
+- 构建服务器时不建议使用 --enable-static 选项。为了静态构建服务器，您必须拥有所需的每个外部库的静态版本。在配置脚本中没有严格检查。
+- 在 MySQL 配置文件中添加可选路径 --with-mysql=/<path_to_the_file>/mysql_config 以在需要使用不在默认位置的 MySQL 客户端库时选择所需的 MySQL 客户端库。当在同一系统上安装了多个版本的 MySQL 或与 MySQL 一起安装了 MariaDB 时，它很有用。
+- 使用 --with-oracle 标志指定 OCI API 的位置。
+
+
+
+**开始编译安装**
+
+- ⚠️<span style=color:red>zabbix只需要运行 `make install`即可，不需要运行 `make`</span>
+
+```shell
+make install 
+```
+
+
+
+## 5.查看、编辑配置文件
+
+### 5.1 配置文件说明
+
+**使用 `tree` 命令查看目录结构**
+
+```sh
+$ pwd
+/usr/local/zabbix
+
+$ tree
+.
+├── bin
+│   ├── zabbix_get
+│   ├── zabbix_js
+│   └── zabbix_sender
+├── etc
+│   ├── zabbix_agentd.conf
+│   ├── zabbix_agentd.conf.d
+│   ├── zabbix_server.conf
+│   └── zabbix_server.conf.d
+├── lib
+│   └── modules
+├── sbin
+│   ├── zabbix_agentd
+│   └── zabbix_server
+└── share
+    ├── man
+    │   ├── man1
+    │   │   ├── zabbix_get.1
+    │   │   └── zabbix_sender.1
+    │   └── man8
+    │       ├── zabbix_agentd.8
+    │       └── zabbix_server.8
+    └── zabbix
+        ├── alertscripts
+        └── externalscripts
+```
+
+
+
+- zabbix_server配置文件路径为 `/usr/local/zabbix/etc/zabbix_server.conf`
+
+- zabbix_agent配置文件路径为 `/usr/local/zabbix/etc/zabbix_agentd.conf`
+
+- zabbix_server命令路径为 `/usr/local/zabbix/sbin/zabbix_server`
+- zabbix_agentd命令路径为 `/usr/local/zabbix/sbin/zabbix_agentd`
+
+
+
+
+
+### 5.2 编辑配置文件
+
+#### 5.2.1 编辑 zabbix_server 配置文件
+
+**编辑 zabbix_server 配置文件   `/usr/local/zabbix/etc/zabbix_server.conf` ，指定zabbix数据库用户名和密码，修改 `# DBPassword=` 一行，可以使用如下命令修改(DBName和DBUser默认均为zabbix)**
+
+```shell
+# 修改zabbix数据库密码
+sed -i '/# DBPassword=/c DBPassword=zabbix' /usr/local/zabbix/etc/zabbix_server.conf
+
+# 修改日志文件位置，默认为 /tmp/zabbix_server.log，这里修改为 /var/log/zabbix/zabbix_server.log
+sed -i '/^LogFile/cLogFile=/var/log/zabbix/zabbix_server.log' /usr/local/zabbix/etc/zabbix_server.conf
+
+# 创建日志目录并设置目录所有者为zabbix
+mkdir /var/log/zabbix && chown zabbix.zabbix /var/log/zabbix
+
+# 如果使用的是mysql，zabbix会默认去/tmp下找mysql.sock，本文的mysql.sock在/var/lib/mysql/mysql.sock，因此需要指定mysql.sock的路径
+sed -i '/# DBSocket=/c DBSocket=\/var\/lib\/mysql\/mysql.sock' /usr/local/zabbix/etc/zabbix_server.conf
+```
+
+- 如果想要优化zabbix相关性能，可以参考 [zabbix5.4官方性能调优文档](https://www.zabbix.com/documentation/current/manual/appendix/performance_tuning)
+
+
+
+**zabbix_server 配置文件内容如下**
+
+```shell
+egrep -v '^$|#' /usr/local/zabbix/etc/zabbix_server.conf
+LogFile=/var/log/zabbix/zabbix_server.log
+DBName=zabbix
+DBUser=zabbix
+DBPassword=zabbix
+DBSocket=/var/lib/mysql/mysql.sock
+Timeout=4
+LogSlowQueries=3000
+StatsAllowedIP=127.0.0.1
+```
+
+
+
+#### 5.2.2 编辑 zabbix_agent 配置文件
+
+**编辑 zabbix_agent 配置文件 `/usr/local/zabbix/etc/zabbix_agentd.conf` ，指定 zabbix_server 服务器地址，修改 `Server=127.0.0.1` 一行，默认为127.0.0.1，可以使用如下命令修改**
+
+```shell
+# 修改zabbix_server地址
+sed -i '/Server=127.0.0.1/cServer=10.0.0.12' /usr/local/zabbix/etc/zabbix_agentd.conf
+
+# 修改日志文件位置，默认为 /tmp/zabbix_agentd.log，这里修改为 /var/log/zabbix/zabbix_agentd.log
+sed -i '/^LogFile/cLogFile=/var/log/zabbix/zabbix_agentd.log' /usr/local/zabbix/etc/zabbix_agentd.conf
+```
+
+
+
+**zabbix_agentd 配置文件内容如下**
+
+```shell
+$ egrep -v '^$|#' /usr/local/zabbix/etc/zabbix_agentd.conf
+LogFile=/var/log/zabbix/zabbix_agentd.log
+Server=10.0.0.12
+ServerActive=127.0.0.1
+Hostname=Zabbix server
+```
+
+
+
+## 6.启动zabbix
+
+**启动 zabbix_server**
+
+```shell
+/usr/local/zabbix/sbin/zabbix_server -c /usr/local/zabbix/etc/zabbix_server.conf
+```
+
+
+
+**启动 zabbix_agentd**
+
+```shell
+/usr/local/zabbix/sbin/zabbix_agentd -c /usr/local/zabbix/etc/zabbix_agentd.conf
+```
+
+
+
+**验证zabbix启动**
+
+```shell
+# 查看zabbix_server
+$ netstat -ntpl|grep 10051 
+tcp        0      0 0.0.0.0:10051           0.0.0.0:*               LISTEN      9748/zabbix_server  
+tcp6       0      0 :::10051                :::*                    LISTEN      9748/zabbix_server  
+
+# 查看zabbix_agentd
+$netstat -ntpl|grep 10050
+tcp        0      0 0.0.0.0:10050           0.0.0.0:*               LISTEN      9902/zabbix_agentd  
+tcp6       0      0 :::10050                :::*                    LISTEN      9902/zabbix_agent
+```
+
+
+
+
+
+
+
