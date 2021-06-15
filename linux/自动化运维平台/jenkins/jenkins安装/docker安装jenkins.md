@@ -118,7 +118,6 @@ server {
       proxy_request_buffering    off; # Required for HTTP CLI commands
       proxy_set_header Connection ""; # Clear for keepalive
   }
-
 }
 ```
 

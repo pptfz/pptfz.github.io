@@ -242,6 +242,7 @@
         * [docker安装jenkins](linux/自动化运维平台/jenkins/jenkins安装/docker安装jenkins.md)
       * [jenkins使用](README.md)
         * [jenkins修改数据存放路径](linux/自动化运维平台/jenkins/jenkins使用/jenkins修改数据存放路径.md)
+        * [jenkins备份](linux/自动化运维平台/jenkins/jenkins使用/jenkins备份.md)
       * [jenkins故障](README.md)
         * [jenkins报错](linux/自动化运维平台/jenkins/jenkins故障/jenkins报错.md)
         * [jenkins无限构建问题](linux/自动化运维平台/jenkins/jenkins故障/jenkins无限构建问题.md)

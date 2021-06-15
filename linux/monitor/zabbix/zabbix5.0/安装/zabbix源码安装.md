@@ -242,7 +242,7 @@ mysql -uroot -e "grant all privileges on zabbix.* to 'zabbix'@'localhost';"
 zabbix数据库文件在zabbix源码包的 `cd zabbix-5.4.1/database/mysql/` 路径下
 
 ```shell
-# 注意导入顺序，一次为 schema.sql、images.sql、data.sql，否则会有外键报错
+# 注意导入顺序，依次为 schema.sql、images.sql、data.sql，否则会有外键报错
 cd zabbix-5.4.1/database/mysql/
 mysql -uzabbix -pzabbix zabbix < schema.sql
 mysql -uzabbix -pzabbix zabbix < images.sql
