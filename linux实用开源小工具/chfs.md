@@ -294,3 +294,14 @@ EOF
 nohup ./chfs --file=chfs.ini &
 ```
 
+
+
+
+
+## 6.chfs开发文档
+
+**运行chfs后，通过访问 `IP:port/asset/api.html` 查看chfs API文档**
+
+
+
+![iShot2021-06-16 21.05.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-16 21.05.48.png)
