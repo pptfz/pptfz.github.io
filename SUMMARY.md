@@ -112,7 +112,6 @@
         * [1.16](linux/k8s/k8s安装/2.使用 kubeadm 搭建 v1.16.3 版本 Kubernetes 集群.md)
         * [1.17](linux/k8s/k8s安装/3.使用 kubeadm 搭建 v1.17.4 版本 Kubernetes 集群.md)
         * [1.19](linux/k8s/k8s安装/5.使用 kubeadm 搭建 v1.19.3 版本 Kubernetes 集群.md)
-          
       * [二进制安装](README.md)    
         * [1.18](linux/k8s/k8s安装/8.centos8.2二进制安装单master k8s1.18.5.md)
 
