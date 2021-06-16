@@ -1,14 +1,6 @@
 
 
-# jenkins webhook
-
-
-
-
-
-
-
-# 一、gitee jenkins webhook
+# gitee jenkins webhook
 
 本文参考于[码云官方教程](https://gitee.com/help/articles/4193#article-header2)
 
@@ -47,10 +39,10 @@
 
 ### 1.3.1 在线安装
 
-- 前往 Manage Jenkins -> Manage Plugins -> Available
-- 右侧 Filter 输入： Gitee
-- 下方可选列表中勾选 Gitee（如列表中不存在 Gitee，则点击 Check now 更新插件列表）
-- 点击 Download now and install after restart
+- 前往 `Manage Jenkins` -> `Manage Plugins` -> `Available`
+- 右侧 Filter 输入： `Gitee`
+- 下方可选列表中勾选 `Gitee`（如列表中不存在 Gitee，则点击 `Check now` 更新插件列表）
+- 点击 `Download now and install after restart`
 
 ![iShot2021-06-15 14.35.59](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-15 14.35.59.png)
 
@@ -59,9 +51,9 @@
 ### 1.3.2 手动安装
 
 - 从 [release](https://gitee.com/oschina/Gitee-Jenkins-Plugin/releases) 列表中进入最新发行版，下载对应的 XXX.hpi 文件
-- 前往 Manage Jenkins -> Manage Plugins -> Advanced
-- Upload Plugin File 中选择刚才下载的 XXX.hpi 点击 Upload
-- 后续页面中勾选 Restart Jenkins when installation is complete and no jobs are running
+- 前往 `Manage Jenkins` -> `Manage Plugins` -> `Advanced`
+- `Upload Plugin File` 中选择刚才下载的 XXX.hpi 点击 `Upload`
+- 后续页面中勾选 `Restart Jenkins when installation is complete and no jobs are running`
 
 ![iShot2021-06-15 14.43.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-15 14.43.39.png)
 
@@ -135,6 +127,17 @@
 
 
 
+- `Kind` 选择 `SSH Username with private key`
+- `Scope` 选择 `global`
+- 输入 `ID` 、 `Description` 、`Username`
+- 填写 jenkins 服务器的私钥
+
+![iShot2021-06-15 17.40.14](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-15 17.40.14.png)
+
+
+
+
+
 #### 1.5.3.2 源码管理相关配置
 
 前往某个任务（如 `gitbook` ）的 `Configure` -> `Source Code Management` 选项卡
@@ -142,13 +145,13 @@
 - 输入你的仓库地址，例如 `git@your.gitee.server:gitee_group/gitee_project.git`
 
 - 点击 `Advanced` 按钮，`Name` 字段中输入 `origin`， `Refspec` 字段输入 `+refs/heads/*:refs/remotes/origin/* +refs/pull/*/MERGE:refs/pull/*/MERGE`
-  ，注意新版jenkins不再接受多条同时包含 `*` 通配符的refs描述，如只对push触发可写前半部分(`+refs/heads/*:refs/remotes/origin/*`)，如只对PR触发可只写后半段(`+refs/pull/*/MERGE:refs/pull/*/MERGE`)
-- 凭据 `Credentials` 中请输入 git 仓库 `https` 地址对应的 `用户名密码` 凭据，或者 `ssh` 对应的 `ssh key` 凭据，注意 `Gitee API Token` 凭据不可用于源码管理的凭据，只用于 gitee 插件的 API 调用凭据
+  ，**<span style=color:blue>注意新版jenkins不再接受多条同时包含 `*` 通配符的refs描述，如只对push触发可写前半部分(`+refs/heads/*:refs/remotes/origin/*`)，如只对PR触发可只写后半段(`+refs/pull/*/MERGE:refs/pull/*/MERGE`)</span>**，**<span style=color:red>这里场景只针对于push触发，因此填写 `+refs/heads/*:refs/remotes/origin/*`</span>**
+- 凭据 `Credentials` 中请输入 git 仓库 `https` 地址对应的 `用户名密码` 凭据，或者 `ssh` 对应的 `ssh key` 凭据，**<span style=color:red>注意 `Gitee API Token` 凭据不可用于源码管理的凭据，只用于 gitee 插件的 API 调用凭据</span>**，**这里选择输入上一步(1.5.3.1)中创建的jenkins key凭据**
 - `Branch Specifier` 选项
   - 对于单仓库工作流输入: `origin/${giteeSourceBranch}`
   - 对于 PR 工作流输入: `pull/${giteePullRequestIid}/MERGE`
 
-
+**这里输入 `origin/${giteeSourceBranch}`**
 
 ![iShot2021-06-15 18.39.29](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-15 18.39.29.png)
 
@@ -162,11 +165,17 @@
 
 [gitee webhook官方文档](https://gitee.com/help/categories/40)
 
-
-
-在gitee项目中的  `管理` 下选择  `WebHooks` ，新建webhook，URL在jenkins项目下的 `Build Tri` 中查看
+在gitee项目中的  `管理` 下选择  `WebHooks` ，新建webhook，URL在jenkins项目下的 `Build Triggers` 中查看
 
 ![iShot2021-06-15 19.20.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-15 19.20.04.png)
+
+
+
+<span style=color:red>⚠️gitee中的webhook密码是在jenkins中`Build Triggers` 下 `Gitee WebHook 密码` 处生成的</span>
+
+![iShot2021-06-16 10.22.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-16 10.22.39.png)
+
+
 
 
 
@@ -192,23 +201,40 @@ gitee webhook中的url填写jenkins中 `Build Triggers` 下显示的地址
 
 
 
-
-
-
-
 #### 1.5.4.2 配置触发器构建
 
 前往任务配置的触发器构建： `Configure` -> `Build Triggers` 选项卡
 
+勾选 `Gitee webhook 触发构建` 一行，触发构建策略选择 `推送代码`
+
+![iShot2021-06-16 10.25.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-16 10.25.25.png)
+
+
+
+### 1.5.5 验证
+
+在 `Build` 选相处，可以自定义webhook触发后执行的动作，这里以执行shell命令为例
+
+![iShot2021-06-16 11.35.56](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-16 11.35.56.png)
 
 
 
 
 
+本机手动提交代码，jenkins中就会自动触发构建了，构建就会执行上一步设置的webhook触发后执行的动作了
 
+![iShot2021-06-16 11.33.50](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-16 11.33.50.png)
+
+
+
+查看 `/tmp/test.test`
+
+```shell
+$ cat test.test 
+test
 ```
-https://jenkins.pptfz.cn/gitee-project/gitbook
-```
+
+
 
 
 
