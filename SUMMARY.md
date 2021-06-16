@@ -185,6 +185,7 @@
       * [知识点](README.md)
         * [nginx与php通信方式](linux/linux服务/php/知识点/nginx与php通信方式.md)
     * [tomcat](README.md)
+      * [jdk安装](linux/linux服务/tomcat/jdk安装.md)
       * [centos7二进制安装tomcat](linux/linux服务/tomcat/centos7二进制安装tomcat8.md)
     * [supervisor](README.md)
       * [supervisor安装](linux/linux服务/supervisor/1.supervisor安装.md)

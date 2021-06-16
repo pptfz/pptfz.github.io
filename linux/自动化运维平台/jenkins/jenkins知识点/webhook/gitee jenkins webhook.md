@@ -213,7 +213,7 @@ gitee webhook中的url填写jenkins中 `Build Triggers` 下显示的地址
 
 ### 1.5.5 验证
 
-在 `Build` 选相处，可以自定义webhook触发后执行的动作，这里以执行shell命令为例
+在 `Build` 选项处，可以自定义webhook触发后执行的动作，这里以执行shell命令为例
 
 ![iShot2021-06-16 11.35.56](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-16 11.35.56.png)
 
@@ -236,5 +236,11 @@ test
 
 
 
+可以看到 `/tmp/test.test` 文件中已经写入内容
 
+之前在 `Build` 中使用的是 `Execute shell Commond` ，自定了一个测试命令 `echo test >> /tmp/test.test`，那现在想让gitbook实现自动构建，则只需要修改命令即可
+
+```shell
+cd /gitbook && git pull git@gitee.com:xxx/gitbook.git && gitbook build
+```
 
