@@ -13,6 +13,7 @@
     * [记录一次诡异的ssh连接问题](生产问题总结/ssh/记录一次诡异的ssh连接问题.md)
 * [Linux实用开源小工具](README.md)
   * [grc](linux实用开源小工具/grc.md)
+  * [chfs](linux实用开源小工具/chfs.md)
 
 * [博客工具](README.md)
   * [gitbook](README.md)
