@@ -1,78 +1,22 @@
 [toc]
 
+# grafana接入zabbix数据源
 
-
-# centos7安装grafana7.0.3并结合zabbix数据源进行基础监控
-
-
-
-[frafana官网](https://grafana.com/)
-
-[grafana官方下载地址](https://grafana.com/grafana/download)
-
-[grafana官方管理配置文档](https://grafana.com/docs/grafana/latest/installation/configuration/)
-
-
-
-# 1.下载安装包并安装
-
-```python
-wget https://dl.grafana.com/oss/release/grafana-7.0.3-1.x86_64.rpm
-yum -y localinstall grafana-7.0.3-1.x86_64.rpm
-```
-
-
-
-# 2.启动服务并设置开机自启
-
-**grafana默认监听TCP/3000端口**
-
-**grafana配置文件`/etc/grafana/grafana.ini`**
-
-```python
-systemctl enable grafana-server && systemctl start grafana-server
-```
-
-
-
-# 3.登陆grafana
-
-**初始默认账户和密码都是`admin`**
-
-
-
-![iShot2020-06-1110.14.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-06-1110.14.33.png)
-
-
-
-**登陆成功后会提示修改密码，也可以选择跳过不修改**
-
-![iShot2020-06-1110.33.24](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-06-1110.15.21.png)
-
-
-
-**登陆后首界面**
-
-![iShot2020-06-1110.31.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-06-1110.16.16.png)
-
-
-
-
-
-# 4.安装zabbix插件
+# 1.安装zabbix插件
 
 [grafana 官方插件下载地址](https://grafana.com/grafana/plugins?utm_source=grafana_plugin_list&orderBy=weight&direction=asc)
 
 ```python
+# 安装zabbix插件
 grafana-cli plugins install alexanderzobnin-zabbix-app
 
-#插件安装完成后要重启grafana
+# 插件安装完成后要重启grafana
 systemctl restart grafana-server
 ```
 
 
 
-# 5.启用zabbix插件
+# 2.启用zabbix插件
 
 **第一步、点击左侧设置按钮，然后点击`Plugins`**
 
@@ -96,7 +40,7 @@ systemctl restart grafana-server
 
 
 
-# 6.配置zabbix数据源
+# 3.配置zabbix数据源
 
 **第一步、点击左侧设置按钮，然后选择`Data Sources`**
 
@@ -122,13 +66,13 @@ systemctl restart grafana-server
 
 grafana会自动使用默认的zabbix api地址
 
-配置完成后点击下方的`Save & Test`
+配置完成后点击下方的 `Save & Test`
 
 
 
 zabbix api地址如下，如果localhost无法解析，则需要把localhost改成zabbix的域名
 
-http://localhost/zabbix/api_jsonrpc.php
+`http://localhost/zabbix/api_jsonrpc.php`
 
 ![iShot2020-06-1110.45.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-06-1110.45.02.png)
 
@@ -142,9 +86,9 @@ http://localhost/zabbix/api_jsonrpc.php
 
 
 
-# 7.添加dashboard进行自定义监控
+# 4.添加dashboard进行自定义监控
 
-## 7.1 创建dashboard
+## 4.1 创建dashboard
 
 **点击左侧`+`号，选择`Dashboard`**
 
@@ -176,7 +120,7 @@ http://localhost/zabbix/api_jsonrpc.php
 
 
 
-## 7.2 创建监控图形
+## 4.2 创建监控图形
 
 **选择创建好的dashboard，然后点击右上角的`Add panel`，添加一个面板**
 
@@ -202,7 +146,7 @@ http://localhost/zabbix/api_jsonrpc.php
 
 
 
-## 7.3 保存dashboard
+## 4.3 保存dashboard
 
 **右上角点击`Save`**
 
@@ -234,7 +178,7 @@ http://localhost/zabbix/api_jsonrpc.php
 
 
 
-## 创建其他监控图形
+## 4.4 创建其他监控图形
 
 **如果想要创建其他监控项图形，先选择对应的dashboard，然后在创建面板，最后在面板中选择相应的监控信息即可**
 
@@ -261,6 +205,5 @@ http://localhost/zabbix/api_jsonrpc.php
 **最终效果，这样看起来左侧显示单位就比较明了了**
 
 ![iShot2020-06-1113.21.31](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-06-1113.30.36.png)
-
 
 

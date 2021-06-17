@@ -297,7 +297,9 @@
     * [zabbix各种监控](README.md)
       * [zabbix监控交换机](linux/monitor/zabbix/zabbix各种监控/zabbix监控交换机.md)
   * [grafana](README.md)
-    * [grafana7.0.3安装并结合zabbix数据源进行基础监控](linux/monitor/grafana/1.centos7安装grafana7.0.3并结合zabbix数据源进行基础监控.md)
+    * [安装](linux/monitor/grafana/安装/grafana安装.md)
+    * [知识点](README.md)
+      * [grafana接入zabbix数据源](linux/monitor/grafana/知识点/grafana接入zabbix数据源.md)
 
 
 * [Linux其他](README.md)                
