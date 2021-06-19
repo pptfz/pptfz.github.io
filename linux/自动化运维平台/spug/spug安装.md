@@ -311,13 +311,17 @@ server {
 
 [官方文档关于console连接问题的说明](https://spug.dev/docs/install-error/)
 
-问题一：主机console连接空白
+**问题一：主机console连接空白**
 
 ![iShot2021-02-02 15.45.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-02-02 15.45.57.png)
 
-原因：这种情况大部分都是 `Websocket` 连接建立失败了，一般出现在部署时自己加了一层 nginx 之类的代理工具，这些代理工具默认无法处理 `Weboscket` 请求， 这就需要你配置其支持转发 `Websocket` 请求
+**原因：**
 
-解决方法：在nginx中配置如下内容
+> 这种情况大部分都是 `Websocket` 连接建立失败了，一般出现在部署时自己加了一层 nginx 之类的代理工具，这些代理工具默认无法处理 `Weboscket` 请求， 这就需要你配置其支持转发 `Websocket` 请求
+
+**解决方法：**
+
+> 在nginx中配置如下内容
 
 ```nginx
 location ^~ /api/ws/ {
@@ -330,3 +334,20 @@ location ^~ /api/ws/ {
 ```
 
 ---
+
+**问题二：无法获取客户端真实IP以及spug console无法连接**
+
+> 在宿主机nginx中如果不配置 `proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;` 在登陆spug的时候就会提示无法获取客户端真实IP，但是配置了 `proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;` 后可以获取客户端真实IP，然而确无法连接主机console
+
+**原因：**
+
+> spug容器中已经有一层nginx做代理了
+
+**解决方法：**
+
+> 注释spug容器中nginx配置文件 `/etc/nginx/nginx.conf` 中 `location ^~ /api/ws/` 下的   `proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;`
+
+
+
+
+

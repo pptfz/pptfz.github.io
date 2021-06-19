@@ -93,7 +93,7 @@ yum -y install grafana-7.5.0
 ## 2.3 启动
 
 ```
-
+systemctl start grafana-server && systemctl enable grafana-server
 ```
 
 
@@ -145,7 +145,12 @@ wget https://dl.grafana.com/oss/release/grafana-8.0.2.linux-amd64.tar.gz
 ## 4.2 启动
 
 ```shell
+# 解压缩二进制包
+tar xf grafana-8.0.2.linux-amd64.tar.gz 
 
+# 后台启动
+cd grafana-8.0.2/
+./bin/grafana-server &
 ```
 
 
