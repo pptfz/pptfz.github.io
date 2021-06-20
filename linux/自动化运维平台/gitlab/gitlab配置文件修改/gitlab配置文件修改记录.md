@@ -30,4 +30,4 @@ server {
 ...
 ```
 
-⚠️ 修改完后执行 `gitlab-ctl restart`	重启即可，不能执行 `gitlab-ctl reconfigure` 重载配置文件，否则会覆盖修改
+⚠️ 修改完后执行 `gitlab-ctl restart`重启即可，不能执行 `gitlab-ctl reconfigure` 重载配置文件，否则会覆盖修改
