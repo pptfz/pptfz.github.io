@@ -12,9 +12,9 @@
   * [ssh](README.md)
     * [记录一次诡异的ssh连接问题](生产问题总结/ssh/记录一次诡异的ssh连接问题.md)
 * [Linux实用开源小工具](README.md)
-  * [grc-高亮显示](linux实用开源小工具/grc.md)
-  * [chfs-文件管理工具](linux实用开源小工具/chfs.md)
-  * [bat-cat语法高亮工具](linux实用开源小工具/bat.md)  
+  * [grc-linux命令高亮显示](linux实用开源小工具/grc.md)
+  * [chfs-文件管理](linux实用开源小工具/chfs.md)
+  * [bat-文件高亮显示](linux实用开源小工具/bat.md)  
 
 * [博客工具](README.md)
   * [gitbook](README.md)
