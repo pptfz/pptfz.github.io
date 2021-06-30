@@ -183,9 +183,8 @@
 
   * [php](README.md)
     * [安装](README.md)
-      * [centos7编译安装php](linux/linux服务/php/安装/1.centos7编译安装php7.3.md)
-      * [rpm包安装php](linux/linux服务/php/安装/2.php安装(rpm包).md)
-      * [编译安装php](linux/linux服务/php/安装/编译安装php.md)
+      * [源码安装](linux/linux服务/php/安装/源码安装.md)
+      * [yum安装](linux/linux服务/php/安装/yum安装.md)
     * [知识点](README.md)
       * [nginx与php通信方式](linux/linux服务/php/知识点/nginx与php通信方式.md)
 
