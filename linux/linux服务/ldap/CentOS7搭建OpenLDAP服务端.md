@@ -1,4 +1,12 @@
-# CentOS7搭建LDAP服务端
+[toc]
+
+
+
+# CentOS7搭建OpenLDAP服务端
+
+[openldap官网](https://www.openldap.org/)
+
+[openldap官方下载地址](https://www.openldap.org/software/download/)
 
 ## 一、安装openldap
 
@@ -28,7 +36,6 @@ $ slapd -VV
 
 ```sh
 $ slappasswd -s 123456
-slappasswd -s 123456
 {SSHA}KDATg8AaahEG0R3SIWz52JQQOviDsTLP
 ```
 
@@ -174,6 +181,7 @@ total 348
 
 ```shell
 $ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif
+
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
@@ -186,6 +194,7 @@ adding new entry "cn=cosine,cn=schema,cn=config"
 
 ```sh
 $ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
+
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
@@ -198,6 +207,7 @@ adding new entry "cn=nis,cn=schema,cn=config"
 
 ```shell
 $ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
+
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0

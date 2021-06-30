@@ -208,6 +208,9 @@
   * [VPN](README.md) 
     * [OpenVPN一键安装](linux/linux服务/VPN/CentOS7.9安装OpenVPN.md)
 
+  * [ldap](README.md)
+    * [安装](linux/linux服务/ldap/CentOS7搭建OpenLDAP服务端.md)
+
 * [Linux内核](README.md)
   * [Linux升级内核](linux/linux内核/Linux升级内核.md)
 
