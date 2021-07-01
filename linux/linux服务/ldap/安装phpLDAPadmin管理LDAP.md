@@ -136,7 +136,7 @@ EOF
 执行命令，会提示输入密码，这里输入搭建openldap时设置的管理员密码
 
 ```shell
-$ ldapadd -f /etc/openldap/base.ldif -x -D cn=ldap,dc=pptfz,dc=com -W
+$ ldapadd -f /etc/openldap/base.ldif -x -D cn=admin,dc=pptfz,dc=com -W
 Enter LDAP Password: 
 adding new entry "dc=pptfz,dc=com"
 ```
@@ -146,6 +146,46 @@ adding new entry "dc=pptfz,dc=com"
 执行成功后重新登陆 phpldapadmin，可以看到之前的报错已经没有了
 
 ![iShot2021-07-01 15.16.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-07-01 15.16.16.png)
+
+
+
+## 5.关闭匿名访问
+
+ldap默认是允许匿名访问的
+
+![iShot2021-07-01 18.09.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-07-01 18.09.42.png)
+
+
+
+编辑 `/etc/phpldapadmin/config.php`
+
+```shell
+# 关闭匿名访问
+修改
+	// $servers->setValue('login','anon_bind',true);
+修改为
+	$servers->setValue('login','anon_bind',false);
+	
+# 设置只有管理员能登陆
+在上边那行下新增一行
+	$servers->setValue('login','allowed_dns',array('cn=admin,dc=pptfz,dc=com'));
+```
+
+
+
+重启服务
+
+```shell
+systemctl restart slapd
+```
+
+
+
+配置完成后匿名登陆按钮就取消了
+
+![iShot2021-07-01 18.16.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-07-01 18.16.55.png)
+
+
 
 
 
@@ -213,14 +253,14 @@ $servers->setValue('server','host','127.0.0.1');
 $servers->setValue('server','port',389);
 $servers->setValue('server','base',array('dc=pptfz,dc=com'));   // 需要修改
 $servers->setValue('login','auth_type','cookie');
-$servers->setValue('login','bind_id','cn=ldap,dc=pptfz,dc=com');// 需要修改
-$servers->setValue('login','bind_pass','ldap123');# 需要修改
+$servers->setValue('login','bind_id','cn=admin,dc=pptfz,dc=com'); // 需要修改
+$servers->setValue('login','bind_pass','123456'); // 需要修改管理员密码
 $servers->setValue('server','tls',false);
 ```
 
 
 
-**重起服务**
+**重启服务**
 
 ```
 systemctl restart slapd httpd

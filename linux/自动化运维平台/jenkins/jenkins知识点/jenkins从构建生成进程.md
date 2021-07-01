@@ -42,6 +42,8 @@ daemonize -E BUILD_ID=dontKillMe /path/to/your/command
 
 **使用示例**
 
+> **daemonize需要执行命令 `yum -y install daemonize` 安装**
+
 ```shell
 # 原先执行方式，jenkins构建不会停止
 cd /gitbook && gitbook serve

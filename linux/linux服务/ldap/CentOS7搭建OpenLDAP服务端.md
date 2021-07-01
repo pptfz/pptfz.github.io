@@ -70,7 +70,7 @@ vim /etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif
 
 修改为
 	olcSuffix: dc=pptfz,dc=com
-	olcRootDN: cn=ldap,dc=pptfz,dc=com
+	olcRootDN: cn=admin,dc=pptfz,dc=com
 
 添加如下一行，冒号后边是2.1中生成的管理员密码随机字符串
 	olcRootPW: {SSHA}KDATg8AaahEG0R3SIWz52JQQOviDsTLP
@@ -89,7 +89,7 @@ vim /etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif
  
 修改为
 	olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=extern
- al,cn=auth" read by dn.base="cn=ldap,dc=pptfz,dc=com" read by * none
+ al,cn=auth" read by dn.base="cn=admin,dc=pptfz,dc=com" read by * none
 ```
 
 
