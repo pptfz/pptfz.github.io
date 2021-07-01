@@ -210,6 +210,9 @@
 
   * [ldap](README.md)
     * [安装](linux/linux服务/ldap/CentOS7搭建OpenLDAP服务端.md)
+    * [phpLDAPadmin](README.md)
+      * [安装](linux/linux服务/ldap/安装phpLDAPadmin管理LDAP.md)
+      * [使用](linux/linux服务/ldap/phpLDAPadmin使用.md)
 
 * [Linux内核](README.md)
   * [Linux升级内核](linux/linux内核/Linux升级内核.md)
