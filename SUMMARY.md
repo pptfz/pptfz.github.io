@@ -212,7 +212,8 @@
     * [安装](linux/linux服务/ldap/CentOS7搭建OpenLDAP服务端.md)
     * [phpLDAPadmin](README.md)
       * [安装](linux/linux服务/ldap/安装phpLDAPadmin管理LDAP.md)
-      * [使用](linux/linux服务/ldap/phpLDAPadmin使用.md)
+      * [使用](README.md)
+        * [phpLDAPadmin创建用户]()
 
 * [Linux内核](README.md)
   * [Linux升级内核](linux/linux内核/Linux升级内核.md)
@@ -254,6 +255,7 @@
     * [jenkins使用](README.md)
       * [jenkins修改数据存放路径](linux/自动化运维平台/jenkins/jenkins知识点/jenkins修改数据存放路径.md)
       * [jenkins备份](linux/自动化运维平台/jenkins/jenkins知识点/jenkins备份.md)
+      * [jenkins从构建生成进程](linux/自动化运维平台/jenkins/jenkins知识点/jenkins从构建生成进程.md)
       * [webhook](README.md)
         * [gitee jenkins webhook](linux/自动化运维平台/jenkins/jenkins知识点/webhook/gitee jenkins webhook.md)
     * [jenkins故障](README.md)

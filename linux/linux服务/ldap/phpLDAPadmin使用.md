@@ -1,2 +1,0 @@
-# phpLDAPadmin使用
-
