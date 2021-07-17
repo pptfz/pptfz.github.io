@@ -54,10 +54,10 @@ yum -y install rsync
 ### 2.编辑rsync配置文件
 
 ```python
-#备份原有文件
+# 备份原有文件
 cp /etc/rsyncd.conf{,.bak}
 
-#编辑rsync配置文件
+# 编辑rsync配置文件
 cat  >/etc/rsyncd.conf <<EOF
 uid = rsync
 gid = rsync
@@ -108,10 +108,10 @@ path = /backup				# 定义接收备份数据目录
 ### 3.建立rsync用户及共享目录
 
 ```python
-#创建rsync用户
+# 创建rsync用户
 useradd -M -s /sbin/nologin rsync
 
-#创建真正的共享目录并修改目录所有者为rsync
+# 创建真正的共享目录并修改目录所有者为rsync
 mkdir /backup && chown rsync.rsync /backup
 
 ```
@@ -123,10 +123,10 @@ mkdir /backup && chown rsync.rsync /backup
 ⚠️**<span style=color:red>用户密码文件权限必须为600！！！</span>**
 
 ```python
-#创建密码文件，密码文件要与/etc/rsyncd.conf中"secrets file = /etc/rsync.password"相同
+# 创建密码文件，密码文件要与/etc/rsyncd.conf中"secrets file = /etc/rsync.password"相同
 echo "rsync_backup:1" > /etc/rsync.password 
 
-#修改密码文件权限，必须为600！！！
+# 修改密码文件权限，必须为600！！！
 chmod 600 /etc/rsync.password
 
 ```
@@ -137,7 +137,6 @@ chmod 600 /etc/rsync.password
 
 ```python
 systemctl start rsyncd && systemctl enable rsyncd
-
 ```
 
 
@@ -149,13 +148,13 @@ systemctl start rsyncd && systemctl enable rsyncd
 ### 1.安装lsyncd、rsync
 
 ```python
-#安装lsyncd需要epel仓库
+# 安装lsyncd需要epel仓库
 yum install -y epel-release
 
-#安装lsyncd、rsync
+# 安装lsyncd、rsync
 yum -y install lsyncd rsync
 
-#查看版本
+# 查看版本
 $ rpm -qa lsyncd
 lsyncd-2.2.2-1.el7.x86_64
 
@@ -189,10 +188,10 @@ sync{default.rsyncssh, source="/var/www/html", host="localhost", targetdir="/tmp
 **⚠️<span style=color:red>``--delete = true``这个选项千万不要在生产环境中使用！！！</span>**
 
 ```python
-#备份文件
+# 备份文件
 cp /etc/lsyncd.conf{,.bak}
 
-#编辑文件
+# 编辑文件
 cat >/etc/lsyncd.conf <<EOF
 settings {
     logfile = "/var/log/lsyncd/lsyncd.log",
@@ -231,7 +230,7 @@ EOF
 
 
 
-#参数说明
+# 参数说明
 settings为全局配置，部分参数如下：
 	logfile：日志文件路径
 	statusFile：进程路径
@@ -259,7 +258,7 @@ sync为同步配置，部分参数如下：
 ![iShot2020-04-0516.36.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0516.36.55.png)
 
 ```python
-#在/etc/lsyncd.conf配置文件中多加几个sync标签即为同步到多台机器，需要注意的是，如果采用密码文件的方式，则每一个sync标签中都必须包含一个rsync标签，用来指定密码文件
+# 在/etc/lsyncd.conf配置文件中多加几个sync标签即为同步到多台机器，需要注意的是，如果采用密码文件的方式，则每一个sync标签中都必须包含一个rsync标签，用来指定密码文件
 
 
 sync {
@@ -321,7 +320,7 @@ sync {
 **主机之间先做ssh免密登陆**
 
 ```python
-#生成密钥，默认rsa加密类型，长度2048  -b指定长度  -t指定加密类型
+# 生成密钥，默认rsa加密类型，长度2048  -b指定长度  -t指定加密类型
 $ ssh-keygen 
 Generating public/private rsa key pair.
 Enter file in which to save the key (/root/.ssh/id_rsa): 
@@ -345,7 +344,7 @@ The key's randomart image is:
 +----[SHA256]-----+
 
 
-#拷贝公钥到其他需要同步到主机
+# 拷贝公钥到其他需要同步到主机
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@10.0.0.11
 ```
 
@@ -420,18 +419,17 @@ sync {
 ⚠️**<span style=color:red>密码文件权限必须为600！！！</span>**
 
 ```python
-#创建用户认证密码文件
+# 创建用户认证密码文件
 echo 1 > /etc/rsync.password
 
-#修改文件权限，必须为600！！！
+# 修改文件权限，必须为600！！！
 chmod 600 /etc/rsync.password
 
-#创建rsync用户，与rsync服务端共享目录权限相同
+# 创建rsync用户，与rsync服务端共享目录权限相同
 useradd -M -s /sbin/nologin rsync
 
-#创建共享目录
+# 创建共享目录
 mkdir /backup && chown rsync.rsync /backup
-
 ```
 
 
@@ -439,7 +437,7 @@ mkdir /backup && chown rsync.rsync /backup
 ### 4.启动lsyncd
 
 ```python
-#先使用如下命令启动看是否报错，如果不报错则ctrl+c停止然后用systemctl启动lsyncd
+# 先使用如下命令启动看是否报错，如果不报错则ctrl+c停止然后用systemctl启动lsyncd
 $ lsyncd -nodaemon /etc/lsyncd.conf
 16:31:18 Normal: --- Startup ---
 16:31:18 Normal: recursive startup rsync: /backup/ -> rsync_backup@10.0.0.10::backup/ excluding
@@ -452,9 +450,8 @@ cache/**
 16:31:18 Normal: Startup of /backup/ -> rsync_backup@10.0.0.10::backup/ finished.
 
 
-#systemctl启动
+# systemctl启动
 systemcl start lsyncd && systemctl enable lsyncd
-
 ```
 
 
