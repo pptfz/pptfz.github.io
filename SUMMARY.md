@@ -284,7 +284,7 @@
         * [Ansible只输出错误信息](linux/自动化运维平台/ansible/ansible知识点/ansible只输出错误信息.md)
         * [Ansible配置文件](linux/自动化运维平台/ansible/ansible配置文件.md)
 
-        
+
 * [监控](README.md)
   * [zabbix](README.md)
     * [zabbix问题记录](README.md)
@@ -492,6 +492,7 @@
   * [前端基础](README.md)
     * [html5](README.md)
       * [html5基础知识](web/html/1.html5基础知识.md)
+      * [html模版文件](web/html/html模版文件.md)
     * [css3](README.md)(README.md)
       * [css3基础知识](web/css/2.css基础知识.md)
 
