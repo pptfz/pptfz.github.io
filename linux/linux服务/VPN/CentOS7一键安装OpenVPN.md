@@ -617,8 +617,6 @@ rtt min/avg/max/mdev = 85.362/87.876/90.390/2.514 ms
 
 
 
-
-
 ## 3.2 windows连接示例
 
 [下载windows版安装包](https://openvpn.net/downloads/openvpn-connect-v3-windows.msi)

@@ -741,14 +741,14 @@ round-trip min/avg/max/stddev = 6.925/8.724/10.523/1.799 ms
 > 服务器ping mac本机
 
 ```shell
-$ ping -c2 10.0.18.249
-PING 10.0.18.249 (10.0.18.249) 56(84) bytes of data.
-64 bytes from 10.0.18.249: icmp_seq=1 ttl=61 time=10.1 ms
-64 bytes from 10.0.18.249: icmp_seq=2 ttl=61 time=10.2 ms
+$ ping -c2 10.8.0.6
+PING 10.8.0.6 (10.8.0.6) 56(84) bytes of data.
+64 bytes from 10.8.0.6: icmp_seq=1 ttl=64 time=59.1 ms
+64 bytes from 10.8.0.6: icmp_seq=2 ttl=64 time=47.0 ms
 
---- 10.0.18.249 ping statistics ---
+--- 10.8.0.6 ping statistics ---
 2 packets transmitted, 2 received, 0% packet loss, time 1001ms
-rtt min/avg/max/mdev = 10.105/10.165/10.226/0.117 ms
+rtt min/avg/max/mdev = 47.014/53.081/59.148/6.067 ms
 ```
 
 
