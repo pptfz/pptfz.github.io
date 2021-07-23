@@ -181,8 +181,6 @@ tar xf nacos-1.4.2.tar.gz -C /usr/local
 # 进入目录编译安装
 cd /usr/local/nacos-1.4.2
 mvn -Prelease-nacos clean install -U
-
-
 ```
 
 

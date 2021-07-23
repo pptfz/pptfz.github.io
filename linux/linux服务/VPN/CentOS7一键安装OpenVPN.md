@@ -2,7 +2,7 @@
 
 
 
-# CentOS7.9安装OpenVPN
+# CentOS7一键安装OpenVPN
 
 [openvpn github地址](https://github.com/Nyr/openvpn-install)
 
@@ -11,8 +11,6 @@
 **需求及使用场景**
 
 > **公司的一些资源不想对外开放访问，例如gitlab、jenkins等等，现在想要的效果是部分资源只允许公司公网IP以及特定IP访问，这个时候就需要用到VPN了，但是公司花钱买VPN是不可能的，那么就需要一款免费好用的VPN，OpenVPN免费开源又好用，配置完OpenVPN后再加上云主机的安全组就完美解决问题了。**
-
-
 
 
 

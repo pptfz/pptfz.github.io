@@ -21,7 +21,8 @@
 ### 1.1 下载二进制包
 
 ```shell
-wget https://nodejs.org/dist/latest-v12.x/node-v12.22.1-linux-x64.tar.xz
+export NODE_VERSION=12.22.3
+wget https://nodejs.org/dist/latest-v12.x/node-v${NODE_VERSION}-linux-x64.tar.xz
 ```
 
 
@@ -29,7 +30,7 @@ wget https://nodejs.org/dist/latest-v12.x/node-v12.22.1-linux-x64.tar.xz
 ### 1.2 解压缩包、修改名称
 
 ```shell
-tar xf node-v12.22.1-linux-x64.tar.xz -C /usr/local/ && mv /usr/local/node-v12.22.1-linux-x64/ /usr/local/node-v12.22.1
+tar xf node-v${NODE_VERSION}-linux-x64.tar.xz -C /usr/local/ && mv /usr/local/node-v${NODE_VERSION}-linux-x64/ /usr/local/node-v${NODE_VERSION}
 ```
 
 
@@ -37,7 +38,7 @@ tar xf node-v12.22.1-linux-x64.tar.xz -C /usr/local/ && mv /usr/local/node-v12.2
 ### 1.3 导出环境变量
 
 ```shell
-echo 'export PATH=$PATH:/usr/local/node-v12.22.1/bin' > /etc/profile.d/node.sh  && source /etc/profile
+echo "export PATH=$PATH:/usr/local/node-v${NODE_VERSION}/bin" > /etc/profile.d/node.sh  && source /etc/profile
 ```
 
 
@@ -46,10 +47,10 @@ echo 'export PATH=$PATH:/usr/local/node-v12.22.1/bin' > /etc/profile.d/node.sh  
 
 ```shell
 $ node -v
-v12.22.1
+v12.22.3
 
 $ npm -v
-6.14.12
+6.14.13
 ```
 
 

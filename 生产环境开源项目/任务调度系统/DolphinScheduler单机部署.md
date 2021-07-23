@@ -135,10 +135,10 @@ DolphinScheduler正常运行提供如下的网络端口配置：
 这里选择下载`jdk-8u251-linux-x64.tar.gz`
 
 ```shell
-#上传jdk安装包至/opt并解压缩至/usr/local
+# 上传jdk安装包至/opt并解压缩至/usr/local
 cd /opt && tar xf jdk-8u251-linux-x64.tar.gz -C /usr/local
 
-#导出jdk环境变量
+# 导出jdk环境变量
 cat >/etc/profile.d/jdk8.sh<<'EOF'
 export JAVA_HOME=/usr/local/jdk1.8.0_251
 export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre:$JAVA_HOME/lib:$PATH
@@ -146,10 +146,10 @@ export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export JAVA_HOME PATH CLASSPATH
 EOF
 
-#使配置生效
+# 使配置生效
 source /etc/profile.d/jdk8.sh
 
-#做java命令软连接
+# 做java命令软连接
 ln -s /usr/local/jdk1.8.0_251/bin/java /usr/bin
 ```
 
@@ -178,16 +178,16 @@ ln -s /usr/local/jdk1.8.0_251/bin/java /usr/bin
 **安装过程**
 
 ```shell
-#1.下载二进制包
+# 1.下载二进制包
 wget https://apache-mirror.rbc.ru/pub/apache/zookeeper/zookeeper-3.6.1/apache-zookeeper-3.6.1-bin.tar.gz
 
-#2.解压缩
+# 2.解压缩
 tar xf apache-zookeeper-3.6.1-bin.tar.gz -C /usr/local/
 
-#3.做软连接
+# 3.做软连接
 ln -s /usr/local/apache-zookeeper-3.6.1-bin/ /usr/local/zookeeper-3.6.1
 
-#4.编辑最简zookeeper配置文件
+# 4.编辑最简zookeeper配置文件
 cat > /usr/local/zookeeper-3.6.1/conf/zoo.cfg << EOF
 tickTime=2000
 initLimit=10   
@@ -196,20 +196,20 @@ dataDir=/data/zookeeper
 clientPort=2181
 EOF
 
-#5.启动zookeeper
+# 5.启动zookeeper
 $ /usr/local/zookeeper-3.6.1/bin/zkServer.sh start
 ZooKeeper JMX enabled by default
 Using config: /usr/local/zookeeper-3.6.1/bin/../conf/zoo.cfg
 Starting zookeeper ... STARTED
 
-#6.查看zookeeper启动情况
+# 6.查看zookeeper启动情况
 $ /usr/local/zookeeper-3.6.1/bin/zkServer.sh status
 ZooKeeper JMX enabled by default
 Using config: /usr/local/zookeeper-3.6.1/bin/../conf/zoo.cfg
 Client port found: 2181. Client address: localhost.
 Mode: standalone
 
-#7.连接zookeeper
+# 7.连接zookeeper
 /usr/local/zookeeper-3.6.1/bin/zkCli.sh -server 127.0.0.1:2181
 ```
 
@@ -218,20 +218,20 @@ Mode: standalone
 **zookeeper默认配置文件说明**
 
 ```shell
-#通信心跳时间，系统默认是2000毫秒，也就是间隔两秒心跳一次
-#客户端与服务器或者服务器与服务器之间维持心跳，也就是每个tickTime时间就会发送一次心跳。通过心跳不仅能够用来监听机器的工作状态，还可以通过心跳来控制Flower跟Leader的通信时间，默认情况下FL的会话时常是心跳间隔的两倍。
+# 通信心跳时间，系统默认是2000毫秒，也就是间隔两秒心跳一次
+# 客户端与服务器或者服务器与服务器之间维持心跳，也就是每个tickTime时间就会发送一次心跳。通过心跳不仅能够用来监听机器的工作状态，还可以通过心跳来控制Flower跟Leader的通信时间，默认情况下FL的会话时常是心跳间隔的两倍。
 tickTime=2000
 
-#集群中的follower服务器(F)与leader服务器(L)之间初始连接时能容忍的最多心跳数（tickTime的数量）。
+# 集群中的follower服务器(F)与leader服务器(L)之间初始连接时能容忍的最多心跳数（tickTime的数量）。
 initLimit=10
 
-#集群中flower服务器（F）跟leader（L）服务器之间的请求和答应最多能容忍的心跳数。   
+# 集群中flower服务器（F）跟leader（L）服务器之间的请求和答应最多能容忍的心跳数。   
 syncLimit=5
 
-#zookeeper数据目录，默认是/tmp/zookeeper
+# zookeeper数据目录，默认是/tmp/zookeeper
 dataDir=/data/zookeeper
 
-#客户端连接的接口，客户端连接zookeeper服务器的端口，zookeeper会监听这个端口，接收客户端的请求访问！
+# 客户端连接的接口，客户端连接zookeeper服务器的端口，zookeeper会监听这个端口，接收客户端的请求访问！
 clientPort=2181
 ```
 
@@ -262,13 +262,13 @@ clientPort=2181
 **下载二进制包并解压缩**
 
 ```shell
-#1.创建部署目录，部署目录请不要创建在/root、/home等高权限目录 
+# 1.创建部署目录，部署目录请不要创建在/root、/home等高权限目录 
 mkdir -p /opt/dolphinscheduler && cd /opt/dolphinscheduler
 
-#2.下载二进制包
+# 2.下载二进制包
 wget https://apache-mirror.rbc.ru/pub/apache/incubator/dolphinscheduler/1.3.2/apache-dolphinscheduler-incubating-1.3.2-dolphinscheduler-bin.tar.gz
 
-#3.解压缩并重命名
+# 3.解压缩并重命名
 tar xf apache-dolphinscheduler-incubating-1.3.2-dolphinscheduler-bin.tar.gz && mv apache-dolphinscheduler-incubating-1.3.2-dolphinscheduler-bin  dolphinscheduler-bin
 ```
 
@@ -279,16 +279,16 @@ tar xf apache-dolphinscheduler-incubating-1.3.2-dolphinscheduler-bin.tar.gz && m
 **创建部署用户，并且一定要配置sudo免密。以创建 `dolphinscheduler` 用户为例**
 
 ```shell
-#1.创建用户
+# 1.创建用户
 useradd dolphinscheduler
 
-#2.设置密码
+# 2.设置密码
 echo "dolphinscheduler" | passwd --stdin dolphinscheduler
 
-#3.配置sudo免密
+# 3.配置sudo免密
 sed -i '$adolphinscheduler  ALL=(ALL)  NOPASSWD: NOPASSWD: ALL' /etc/sudoers
 
-#4.修改目录权限，使得部署用户对dolphinscheduler-bin目录有操作权限
+# 4.修改目录权限，使得部署用户对dolphinscheduler-bin目录有操作权限
 chown -R dolphinscheduler:dolphinscheduler dolphinscheduler-bin
 ```
 
@@ -326,14 +326,14 @@ chmod 600 ~/.ssh/authorized_keys
 **以下操作为创建数据库 `dolphinscheduler`，授权用户 `dol ` 对数据库 `dolphinscheduler`有所有权限，密码是 `dol`**
 
 ```mysql
-#创建数据库
+# 创建数据库
 mysql -uroot -e "CREATE DATABASE dolphinscheduler DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci"
 
-#授权
+# 授权
 mysql -uroot -e "GRANT ALL PRIVILEGES ON dolphinscheduler.* TO 'dol'@'%' IDENTIFIED BY 'dol'"
 mysql -uroot -e "GRANT ALL PRIVILEGES ON dolphinscheduler.* TO 'dol'@'localhost' IDENTIFIED BY 'dol'"
 
-#刷新权限表
+# 刷新权限表
 mysql -uroot -e "flush privileges"
 ```
 
@@ -346,13 +346,13 @@ mysql -uroot -e "flush privileges"
 ![iShot2020-09-05 17.29.56](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-05 17.29.56.png)
 
 ```shell
-#1.下载mysql驱动包
+# 1.下载mysql驱动包
 wget https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-java-5.1.47.tar.gz
 
-#2.解压缩
+# 2.解压缩
 tar xf mysql-connector-java-5.1.47.tar.gz 
 
-#3.拷贝驱动包
+# 3.拷贝驱动包
 cp mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.jar dolphinscheduler-bin/lib/
 ```
 
@@ -375,7 +375,7 @@ spring.datasource.username=dol
 spring.datasource.password=dol
 
 
-#使用如下命令修改
+# 使用如下命令修改
 
 ```
 
@@ -384,12 +384,12 @@ spring.datasource.password=dol
 **创建表及导入基础数据**
 
 ```shell
-#编辑hosts文件，否则执行脚本会报错，这里最少保证能解析ds1
+# 编辑hosts文件，否则执行脚本会报错，这里最少保证能解析ds1
 cat >> /etc/hosts << EOF
 127.0.0.1 ds1 ds2 ds3 ds4 ds5
 EOF
 
-#执行脚本
+# 执行脚本
 sh script/create-dolphinscheduler.sh
 
 最后提示如下既为成功
@@ -440,13 +440,13 @@ username="xxx"
 # 数据库密码, 如果有特殊字符，请使用\转义，需要修改为上面设置的{password}具体值
 password="xxx"
 
-#Zookeeper地址，单机本机是localhost:2181，记得把2181端口带上
+# Zookeeper地址，单机本机是localhost:2181，记得把2181端口带上
 zkQuorum="localhost:2181"
 
-#将DS安装到哪个目录，如: /opt/soft/dolphinscheduler，不同于现在的目录
+# 将DS安装到哪个目录，如: /opt/soft/dolphinscheduler，不同于现在的目录
 installPath="/opt/soft/dolphinscheduler"
 
-#使用哪个用户部署，使用第3节创建的用户
+# 使用哪个用户部署，使用第3节创建的用户
 deployUser="dolphinscheduler"
 
 # 邮件配置，以qq邮箱为例
@@ -482,7 +482,7 @@ sslTrust="smtp.qq.com"
 resourceStorageType="HDFS"
 
 # 这里以保存到本地文件系统为例
-#注：但是如果你想上传到HDFS的话，NameNode启用了HA，则需要将hadoop的配置文件core-site.xml和hdfs-site.xml放到conf目录下，本例即是放到/opt/dolphinscheduler/conf下面，并配置namenode cluster名称；如果NameNode不是HA,则修改为具体的ip或者主机名即可
+# 注：但是如果你想上传到HDFS的话，NameNode启用了HA，则需要将hadoop的配置文件core-site.xml和hdfs-site.xml放到conf目录下，本例即是放到/opt/dolphinscheduler/conf下面，并配置namenode cluster名称；如果NameNode不是HA,则修改为具体的ip或者主机名即可
 defaultFS="file:///data/dolphinscheduler"    #hdfs://{具体的ip/主机名}:8020
 
 # 如果没有使用到Yarn,保持以下默认值即可；如果ResourceManager是HA，则配置为ResourceManager节点的主备ip或者hostname,比如"192.168.xx.xx,192.168.xx.xx";如果是单ResourceManager请配置yarnHaIps=""即可
@@ -497,22 +497,22 @@ resourceUploadPath="/data/dolphinscheduler"
 # 具备权限创建resourceUploadPath的用户
 hdfsRootUser="hdfs"
 
-#在哪些机器上部署DS服务，本机选localhost
+# 在哪些机器上部署DS服务，本机选localhost
 ips="localhost"
 
-#ssh端口,默认22
+# ssh端口,默认22
 sshPort="22"
 
-#master服务部署在哪台机器上
+# master服务部署在哪台机器上
 masters="localhost"
 
-#worker服务部署在哪台机器上,并指定此worker属于哪一个worker组,下面示例的default即为组名
+# worker服务部署在哪台机器上,并指定此worker属于哪一个worker组,下面示例的default即为组名
 workers="localhost:default"
 
-#报警服务部署在哪台机器上
+# 报警服务部署在哪台机器上
 alertServer="localhost"
 
-#后端api服务部署在在哪台机器上
+# 后端api服务部署在在哪台机器上
 apiServers="localhost"
 ```
 
@@ -554,7 +554,7 @@ $ jps
 **部署成功后，可以进行日志查看，日志统一存放于 `logs` 文件夹内**
 
 ```shell
-#logs目录是在dolphinscheduler安装目录下生成的，我这里设置的安装目录是/usr/local/dolphinscheduler
+# logs目录是在dolphinscheduler安装目录下生成的，我这里设置的安装目录是/usr/local/dolphinscheduler
 
 $ tree logs/
 logs/

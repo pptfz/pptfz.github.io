@@ -340,10 +340,10 @@ echo -e "\033[31m 注意：token_secret一定要做修改，防止网站被攻�
 echo -e "\033[32m 注意：token_secret一定要做修改，防止网站被攻击!!!!!!! \033[0m"
 echo -e "\033[33m 注意：token_secret一定要做修改，防止网站被攻击!!!!!!! \033[0m"
 
-#部署的IP地址
+# 部署的IP地址
 export LOCALHOST_IP="10.10.10.12"
 
-#设置你的MYSQL密码
+# 设置你的MYSQL密码
 export MYSQL_PASSWORD="m9uSFL7duAVXfeAwGUSG"
 
 ### 设置你的redis密码
@@ -354,26 +354,26 @@ export MQ_USER="ss"
 export MQ_PASSWORD="5Q2ajBHRT2lFJjnvaU0g"
 
 
-#codo-admin用到的cookie和token
+# codo-admin用到的cookie和token
 export cookie_secret="nJ2oZis0V/xlArY2rzpIE6ioC9/KlqR2fd59sD=UXZJ=3OeROB"
 # 这里codo-admin和gw网关都会用到，一定要修改。可生成随意字符
 export token_secret="pXFb4i%*834gfdh963df718iodGq4dsafsdadg7yI6ImF1999aaG7"
 
 
-##如果要进行读写分离，Master-slave主从请自行建立，一般情况下都是只用一个数据库就可以了
+## 如果要进行读写分离，Master-slave主从请自行建立，一般情况下都是只用一个数据库就可以了
 # 写数据库
 export DEFAULT_DB_DBHOST="10.10.10.12"
 export DEFAULT_DB_DBPORT='3307'
 export DEFAULT_DB_DBUSER='root'
 export DEFAULT_DB_DBPWD=${MYSQL_PASSWORD}
-#export DEFAULT_DB_DBNAME=${mysql_database}
+# export DEFAULT_DB_DBNAME=${mysql_database}
 
 # 读数据库
 export READONLY_DB_DBHOST='10.10.10.12'
 export READONLY_DB_DBPORT='3307'
 export READONLY_DB_DBUSER='root'
 export READONLY_DB_DBPWD=${MYSQL_PASSWORD}
-#export READONLY_DB_DBNAME=${mysql_database}
+# export READONLY_DB_DBNAME=${mysql_database}
 
 # 消息队列
 export DEFAULT_MQ_ADDR='10.10.10.12'
@@ -402,11 +402,11 @@ source /opt/codo/env.sh
 **关闭SELINUX**
 
 ```sh
-#临时关闭
+# 临时关闭
 $ setenforce 0
 
-#或修改配置文件关闭,需要重启
-$ vi /etc/selinux/config  
+# 或修改配置文件关闭,需要重启
+$ vim /etc/selinux/config  
 将SELINUX=enforcing改为SELINUX=disabled 
 设置后需要重启才能生效  
 ```
@@ -418,7 +418,7 @@ $ vi /etc/selinux/config
 > 注意，不要关闭防火墙，Docker需要用到NAT
 
 ```sh
-#只清空filter链即可
+# 只清空filter链即可
 $ iptables -F
 ```
 
@@ -986,7 +986,7 @@ source /opt/codo/env.sh
 #后端数据库名称,建议不要修改，初始化data.sql已经指定了数据库名字，若需改请一块修改
 CMDB_DB_DBNAME='codo_cmdb' 
 
-#任务系统的域名
+# 任务系统的域名
 sed -i.bak "s#cookie_secret = .*#cookie_secret = '${cookie_secret}'#g" settings.py
 
 # mysql配置
@@ -1037,7 +1037,7 @@ docker run -itd -p 8081:80 webterminal/webterminallte
 AWS_EVENT_TO_EMAIL = '1111@qq.com,2222@gmail.com'
 
 # Web Terminal 地址，请填写你部署的webterminal地址
-#注意这里是填写你上面docker run的机器外网IP
+# 注意这里是填写你上面docker run的机器外网IP
 WEB_TERMINAL = 'http://1.1.1.1:8081'
 ```
 
@@ -1051,10 +1051,10 @@ WEB_TERMINAL = 'http://1.1.1.1:8081'
 cat >Dockerfile <<EOF
 FROM registry.cn-shanghai.aliyuncs.com/ss1917/codo-cmdb
 
-#修改应用配置
+# 修改应用配置
 ADD settings.py /var/www/codo-cmdb/
 
-#修改nginx配置和守护配置
+# 修改nginx配置和守护配置
 #COPY doc/nginx_ops.conf /etc/nginx/conf.d/default.conf
 #COPY doc/supervisor_ops.conf  /etc/supervisord.conf
 
@@ -1179,7 +1179,7 @@ sed -i "s#READONLY_DB_DBNAME = .*#READONLY_DB_DBNAME = os.getenv('READONLY_DB_DB
 cat >Dockerfile <<EOF
 FROM registry.cn-shanghai.aliyuncs.com/ss1917/codo-cron
 
-#修改应用配置
+# 修改应用配置
 ADD settings.py /var/www/codo-cron/
 
 EXPOSE 80
@@ -1306,10 +1306,10 @@ sed -i "s#DEFAULT_MQ_PWD = .*#DEFAULT_MQ_PWD = os.getenv('DEFAULT_MQ_PWD', '${DE
 cat >Dockerfile <<EOF
 FROM registry.cn-shanghai.aliyuncs.com/ss1917/codo-task
 
-#修改应用配置
+# 修改应用配置
 ADD settings.py /var/www/codo-task/
 
-#修改nginx配置和守护配置
+# 修改nginx配置和守护配置
 #COPY doc/nginx_ops.conf /etc/nginx/conf.d/default.conf
 #COPY doc/supervisor_ops.conf  /etc/supervisord.conf
 
@@ -1420,10 +1420,10 @@ sed -i "s#DEFAULT_REDIS_PASSWORD = .*#DEFAULT_REDIS_PASSWORD = os.getenv('DEFAUL
 cat >Dockerfile <<EOF
 FROM registry.cn-shanghai.aliyuncs.com/ss1917/codo-tools
 
-#修改应用配置
+# 修改应用配置
 ADD settings.py /var/www/codo-tools/
 
-#修改nginx配置和守护配置
+# 修改nginx配置和守护配置
 #COPY doc/nginx_ops.conf /etc/nginx/conf.d/default.conf
 #COPY doc/supervisor_ops.conf  /etc/supervisord.conf
 
@@ -1533,10 +1533,10 @@ sed -i "s#READONLY_DB_DBNAME = .*#READONLY_DB_DBNAME = os.getenv('READONLY_DB_DB
 cat >Dockerfile <<EOF
 FROM registry.cn-shanghai.aliyuncs.com/ss1917/codo-kerrigan
 
-#修改应用配置
+# 修改应用配置
 ADD settings.py /var/www/kerrigan/
 
-#修改nginx配置和守护配置
+# 修改nginx配置和守护配置
 #COPY doc/nginx_ops.conf /etc/nginx/conf.d/default.conf
 #COPY doc/supervisor_ops.conf  /etc/supervisord.conf
 
@@ -1646,10 +1646,10 @@ sed -i "s#READONLY_DB_DBNAME = .*#READONLY_DB_DBNAME = os.getenv('READONLY_DB_DB
 cat >Dockerfile <<EOF
 FROM registry.cn-shanghai.aliyuncs.com/ss1917/codo-dns
 
-#修改应用配置
+# 修改应用配置
 ADD settings.py /var/www/codo-dns/
 
-#修改nginx配置和守护配置
+# 修改nginx配置和守护配置
 #COPY doc/nginx_ops.conf /etc/nginx/conf.d/default.conf
 #COPY doc/supervisor_ops.conf  /etc/supervisord.conf
 
@@ -1775,12 +1775,12 @@ events {
     worker_connections 51024;
 }
 http {
-    #设置默认lua搜索路径
+    # 设置默认lua搜索路径
     lua_package_path '$prefix/lua/?.lua;/blah/?.lua;;';
-    lua_code_cache on;      #线上环境设置为on, off时可以热加载lua文件
+    lua_code_cache on;      # 线上环境设置为on, off时可以热加载lua文件
     lua_shared_dict user_info 1m;
-    lua_shared_dict my_limit_conn_store 100m;   #100M可以放1.6M个键值对
-    include             mime.types;    #代理静态文件
+    lua_shared_dict my_limit_conn_store 100m;   # 100M可以放1.6M个键值对
+    include             mime.types;    # 代理静态文件
 
     client_header_buffer_size 64k;
     large_client_header_buffers 4 64k;
@@ -1938,7 +1938,7 @@ rewrite_conf = {
 cat >Dockerfile <<EOF
 FROM registry.cn-shanghai.aliyuncs.com/ss1917/api-gateway
 
-#修改配置
+# 修改配置
 ADD . /usr/local/openresty/nginx/
 
 EXPOSE 80
@@ -1990,3 +1990,4 @@ curl -I -X GET -m 10 -o /dev/null -s -w %{http_code} http://gw.opendevops.cn:888
 登陆后页面
 
 ![iShot2021-03-03 16.48.05](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-03-03 16.48.05.png)
+
