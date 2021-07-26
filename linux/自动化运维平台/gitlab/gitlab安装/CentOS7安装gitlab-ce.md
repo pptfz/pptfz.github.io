@@ -32,6 +32,8 @@ systemctl start postfix && systemctl enable postfix
 
 ## 1.2 下载安装包
 
+[gitlab官方rpm包下载地址](https://packages.gitlab.com/gitlab/gitlab-ce)
+
 也可以从 [清华源](https://mirrors4.tuna.tsinghua.edu.cn/gitlab-ce/) 下载
 
 ```shell

@@ -753,5 +753,34 @@ rtt min/avg/max/mdev = 47.014/53.081/59.148/6.067 ms
 
 
 
+## 2.9 开通、删除vpn步骤
 
+### 2.9.1 开通vpn
+
+> 这里以给小明开通vpn为例
+
+执行这个步骤会提示输入3次密码，前2次是用户个人密码，最后一次是ca根证书密码
+
+```shell
+./easyrsa build-client-full xiaoming
+```
+
+
+
+下载用户个人证书文件
+
+```shell
+# 只需要下载 crt 和 key 文件即可
+find / -name "xiaoming*"
+```
+
+
+
+### 2.9.2 删除vpn
+
+执行这个步骤需要输入ca根证书密码
+
+```shell
+./easyrsa revoke xiaoming
+```
 

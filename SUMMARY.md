@@ -257,6 +257,7 @@
       * [jenkins修改数据存放路径](linux/自动化运维平台/jenkins/jenkins知识点/jenkins修改数据存放路径.md)
       * [jenkins备份](linux/自动化运维平台/jenkins/jenkins知识点/jenkins备份.md)
       * [jenkins从构建生成进程](linux/自动化运维平台/jenkins/jenkins知识点/jenkins从构建生成进程.md)
+      * [jenkins用户权限管理](linux/自动化运维平台/jenkins/jenkins知识点/jenkins用户权限管理.md)
       * [webhook](README.md)
         * [gitee jenkins webhook](linux/自动化运维平台/jenkins/jenkins知识点/webhook/gitee jenkins webhook.md)
     * [jenkins故障](README.md)
