@@ -171,8 +171,9 @@
       * [nginx locaiton 匹配实际应用场景](linux/linux服务/nginx/nginx实际应用场景/nginx locaiton 匹配实际应用场景.md)
 
   * [ssh](README.md)
-    * [ssh服务](linux/linux服务/ssh/1.ssh服务.md)
+    * [ssh服务](linux/linux服务/ssh/ssh服务.md)
     * [ssh密钥](linux/linux服务/ssh/ssh密钥.md)
+    * [ssh config](linux/linux服务/ssh/ssh config.md)
 
   * [nfs](linux/linux服务/nfs/centos7.7搭建NFS.md)
 
@@ -518,4 +519,3 @@
     
 * [markdown使用记录](README.md)
   * [markdown常用语法简记](markdown语法总结/markdown常用语法简记.md)
-  

@@ -7,13 +7,13 @@
 ## 1.编辑文件``/etc/ssh/sshd_config``
 
 ```python
-#禁止root远程登陆
+# 禁止root远程登陆
 PermitRootLogin no
 
-#禁用密码验证
+# 禁用密码验证
 PasswordAuthentication no
 
-#启用密钥验证
+# 启用密钥验证
 RSAAuthentication yes //centos7没有这一项
 PubkeyAuthentication yes
 ```
@@ -25,10 +25,10 @@ PubkeyAuthentication yes
 **``visudo``或者编辑文件``/etc/sudoers``**
 
 ```python
-//创建一个用户
+# 创建一个用户
 useradd lcc
 
-//visudo编辑,101行写入以下内容
+# visudo编辑,101行写入以下内容
 lcc     ALL=NOPASSWD :ALL
 
 ```
@@ -38,10 +38,10 @@ lcc     ALL=NOPASSWD :ALL
 ## 3.配置ssh密钥
 
 ```python
-//切换到lcc用户
+# 切换到lcc用户
 su - lcc
 
-//生成密钥
+# 生成密钥
 $ ssh-keygen 
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/lcc/.ssh/id_rsa): 
@@ -66,10 +66,10 @@ The key's randomart image is:
 +----[SHA256]-----+
 
 
-//向authorized_keys文件写入公钥
+# 向authorized_keys文件写入公钥
 cd .ssh && cat id_rsa.pub >authorized_keys
 
-//修改authorized_keys文件权限至少为644，默认为664，无法使用密钥登陆
+# 修改authorized_keys文件权限至少为644，默认为664，无法使用密钥登陆
 chmod 644 authorized_keys
 ```
 
@@ -80,12 +80,11 @@ chmod 644 authorized_keys
 ## 4.配置完后验证
 
 ```python
-//root无法远程登陆
+# root无法远程登陆
 baixuebingdeMacBook-Pro:~ baixuebing$ ssh root@10.0.0.13
 root@10.0.0.13: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
   
- 
-//无法使用密码登陆，只能使用密钥登陆
+# 无法使用密码登陆，只能使用密钥登陆
 baixuebingdeMacBook-Pro:~ baixuebing$ ssh lcc@10.0.0.13
 lcc@10.0.0.13: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 ```
@@ -99,7 +98,7 @@ lcc@10.0.0.13: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 ## ssh-keygen免交互生成密钥
 
 ```python
-#免交互生成密钥
+# 免交互生成密钥
 ssh-keygen -t rsa -f /root/.ssh/id_dsa -P "" -q
 
 -f filename             	#指定密钥文件的文件名
@@ -132,11 +131,11 @@ sshpass -p1 ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@IP
 ```python
 #!/bin/bash
 
-#生成密钥
+# 生成密钥
 \rm -f /root/.ssh/id_*
 ssh-keygen -t rsa -f /root/.ssh/id_rsa -P "" -q
 
-#分发密钥
+# 分发密钥
 for ip in IP
 do
    echo "=== 分发主机 10.0.0.$ip ==="
@@ -155,10 +154,10 @@ done
 **编辑ssh服务配置文件`/etc/ssh/sshd_config`修改以下两项**
 
 ```shell
-#向客户端每30秒发一次保持连接的信号
+# 向客户端每30秒发一次保持连接的信号
 ClientAliveInterval 30
 
-#如果客户端30次未响应就断开连接
+# 如果客户端30次未响应就断开连接
 ClientAliveCountMax 30
 ```
 

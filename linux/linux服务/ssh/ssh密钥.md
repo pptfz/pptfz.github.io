@@ -80,31 +80,8 @@ ssh-keygen -p -N"" -m pem -f 旧私钥
 
 ## 关于自定义秘钥名称的问题
 
+在 `/etc/ssh/ssh_config` 中定义了默认的私钥文件名 `IdentityFile ~/.ssh/id_rsa` ，也就是说，当我们去使用密钥认证登陆的时候，会使用 `id_rsa` 这个私钥去进行认证，如果我们自定义了密钥文件名，在不指定私钥名称的情况下想进行认证，有2种方法解决
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- 1.修改 `/etc/ssh/ssh_config` 文件中 `IdentityFile ~/.ssh/id_rsa` 一项，指定私钥文件名称
+- 2.在 `.ssh` 目录下做私钥文件软连接，如私钥文件名称自定义为 `id_rsa_abc` ，执行命令 `ln -s id_rsa_abc id_rsa` 即可
 
