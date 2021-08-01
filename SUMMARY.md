@@ -19,6 +19,8 @@
 * [博客工具](README.md)
   * [gitbook](README.md)
     * [gitbook安装](博客工具/gitbook/CentOS7安装gitbook.md)
+   * [VuePress](README.md) 
+     * [VuePress1.x](博客工具/VuePress/VuePress1.x.md)
 
 * [生产环境开源项目](README.md)
   * [任务调度系统](README.md)

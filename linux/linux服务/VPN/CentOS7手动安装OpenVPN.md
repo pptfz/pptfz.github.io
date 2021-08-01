@@ -6,11 +6,11 @@
 
 [参考链接](http://www.zhangblog.com/2020/05/09/openvpn01/)
 
-OpenVPN软件版本 2.4.9
-
 # 一、前期环境准备
 
 ## 1.1 实验环境
+
+> OpenVPN软件版本 2.4.9
 
 | 系统      | IP          | 公网IP  | 配置 | 内核                        |
 | --------- | ----------- | ------- | ---- | --------------------------- |
@@ -782,5 +782,41 @@ find / -name "xiaoming*"
 
 ```shell
 ./easyrsa revoke xiaoming
+```
+
+
+
+### 2.10 扩展：openvpn配置用户获取固定IP地址
+
+编辑openvpn配置文件 `server.conf` ，增加 `ifconfig-pool-persist` 参数
+
+```shell
+ifconfig-pool-persist /etc/openvpn/server/fixed_ip
+```
+
+
+
+编辑 `/etc/openvpn/server/fixed_ip` 文件，用户名和IP以逗号分隔
+
+```shell
+test,10.8.0.250
+```
+
+
+
+编辑完成后重启openvpn
+
+```shell
+systemctl restart openvpn
+```
+
+
+
+验证
+
+```shell
+$ ifconfig
+utun2: flags=8051<UP,POINTOPOINT,RUNNING,MULTICAST> mtu 1500
+	inet 10.8.0.250 --> 10.8.0.249 netmask 0xffffffff 
 ```
 

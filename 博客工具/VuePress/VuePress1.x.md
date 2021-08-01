@@ -279,6 +279,8 @@ EOF
 
 ### 5.1 配置VuePress导航栏logo
 
+[VuePress1.x导航栏logo官方文档](https://v1.vuepress.vuejs.org/zh/theme/default-theme-config.html#%E5%AF%BC%E8%88%AA%E6%A0%8F-logo)
+
 你可以通过 `themeConfig.logo` 增加导航栏 Logo ，Logo 可以被放置在[公共文件目录 `.vuepress/public`](https://v1.vuepress.vuejs.org/zh/guide/assets.html#public-files)：
 
 ```shell
@@ -306,9 +308,235 @@ mkdir -p docs/.vuepress/public/assets/img
 
 
 
+### 5.2 配置VuePress导航栏链接
+
+[VuePress1.x 导航栏链接官方文档](https://v1.vuepress.vuejs.org/zh/theme/default-theme-config.html#%E5%AF%BC%E8%88%AA%E6%A0%8F%E9%93%BE%E6%8E%A5)
+
+#### 5.2.1 配置导航栏
+
+配置示例
+
+```js
+// .vuepress/config.js
+module.exports = {
+  themeConfig: {
+    nav: [
+      {
+        text: 'Languages',
+        ariaLabel: 'Language Menu',
+        items: [
+          { text: 'Chinese', link: '/language/chinese/' },
+          { text: 'Japanese', link: '/language/japanese/' }
+        ]
+      }
+    ]
+  }
+}
+```
+
+
+
+效果如下
+
+![iShot2021-08-01 22.18.56](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 22.18.56.png)
 
 
 
 
 
+此外，还可以使用items嵌套，语法如下
 
+```js
+// .vuepress/config.js
+module.exports = {
+  themeConfig: {
+    nav: [
+      {
+        text: 'Languages',
+        items: [
+          { text: 'Group1', items: [/*  */] },
+          { text: 'Group2', items: [/*  */] }
+        ]
+      }
+    ]
+  }
+}
+```
+
+
+
+使用示例
+
+```js
+// .vuepress/config.js
+module.exports = {
+    themeConfig: {
+      nav: [
+        {
+          text: 'Languages',
+          items: [
+            { 
+                text: 'Group1', 
+                items: [
+                    { text: 'Chinese', link: '/language/chinese/' },
+                    { text: 'Japanese', link: '/language/japanese/' }
+                ] 
+            },
+            { 
+                text: 'Group2', 
+                items: [
+                    { text: 'Chinese', link: '/language/chinese/' },
+                    { text: 'Japanese', link: '/language/japanese/' }
+                ] 
+            }
+          ]
+        }
+      ]
+    }
+  }
+```
+
+
+
+效果如下
+
+![iShot2021-08-01 22.49.36](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 22.49.36.png)
+
+
+
+如果想要增加多个导航链接，写法如下
+
+```js
+// .vuepress/config.js
+module.exports = {
+  themeConfig: {
+    nav: [
+      { text: 'Home', link: '/' },
+      { text: 'Guide', link: '/guide/' },
+      { text: 'External', link: 'https://google.com' },
+    ]
+  }
+}
+```
+
+
+
+效果如下
+
+![iShot2021-08-01 23.00.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 23.00.37.png)
+
+
+
+使用示例
+
+```js
+// .vuepress/config.js
+module.exports = {
+    themeConfig: {
+      nav: [
+        {
+          text: 'linux',
+          items: [
+            { 
+                text: 'linux基础命令', 
+                items: [
+                    { text: 'sed', link: '/language/chinese/' },
+                    { text: 'awk', link: '/language/japanese/' }
+                ] 
+            },
+            { 
+                text: 'linux服务', 
+                items: [
+                    { text: 'nginx', link: '/language/chinese/' },
+                    { text: 'ssh', link: '/language/japanese/' }
+                ] 
+            }
+          ]
+        },
+        {
+            text: 'python',
+            items: [
+              { 
+                  text: 'python基础', 
+                  items: [
+                      { text: 'python基础1', link: '/language/chinese/' },
+                      { text: 'python基础2', link: '/language/japanese/' }
+                  ] 
+              },
+              { 
+                  text: 'python框架', 
+                  items: [
+                      { text: 'django', link: '/language/chinese/' },
+                      { text: 'flash', link: '/language/japanese/' }
+                  ] 
+              }
+            ]
+          }
+      ]
+    }
+  }
+```
+
+
+
+效果如下
+
+![iShot2021-08-01 23.05.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 23.05.17.png)
+
+
+
+#### 5.2.2 禁用导航栏
+
+禁用导航栏，语法如下
+
+```js
+// .vuepress/config.js
+module.exports = {
+  themeConfig: {
+    navbar: false
+  }
+}
+```
+
+
+
+在某个md文件中禁用导航栏
+
+```markdown
+---
+navbar: false
+---
+```
+
+
+
+例如，在 `docs/about/about.md` 文件中有如下内容
+
+```markdown
+# 你好
+## 萨瓦迪卡
+```
+
+
+
+浏览器访问 `ip:port/about/about.html`
+
+![iShot2021-08-01 23.13.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 23.13.23.png)
+
+
+
+修改 `docs/about/about.md` 文件
+
+```markdown
+---
+navbar: false
+---
+# 你好
+## 萨瓦迪卡
+```
+
+
+
+浏览器再次访问 `ip:port/about/about.html`
+
+![iShot2021-08-01 23.15.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 23.15.39.png)
