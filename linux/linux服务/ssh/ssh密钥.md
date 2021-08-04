@@ -78,6 +78,38 @@ ssh-keygen -p -N"" -m pem -f 旧私钥
 
 
 
+---
+
+
+
+
+
+key格式开头如下
+
+```shell
+-----BEGIN PRIVATE KEY-----
+```
+
+
+
+转换为pem命令
+
+```shell
+openssl rsa -in xxx.key -out xxx.pem
+```
+
+
+
+pem格式开头如下
+
+```shell
+-----BEGIN RSA PRIVATE KEY-----
+```
+
+
+
+
+
 ## 关于自定义秘钥名称的问题
 
 在 `/etc/ssh/ssh_config` 中定义了默认的私钥文件名 `IdentityFile ~/.ssh/id_rsa` ，也就是说，当我们去使用密钥认证登陆的时候，会使用 `id_rsa` 这个私钥去进行认证，如果我们自定义了密钥文件名，在不指定私钥名称的情况下想进行认证，有2种方法解决

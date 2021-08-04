@@ -540,3 +540,154 @@ navbar: false
 浏览器再次访问 `ip:port/about/about.html`
 
 ![iShot2021-08-01 23.15.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 23.15.39.png)
+
+
+
+### 5.3 配置VuePress侧边栏
+
+#### 5.3.1 自动生成侧边栏
+
+在md文件中开头写入以下内容
+
+```markdown
+---
+sidebar: auto
+---
+```
+
+
+
+在全局 `config.js` 中配置
+
+```js
+// .vuepress/config.js
+module.exports = {
+  themeConfig: {
+    sidebar: 'auto'
+  }
+}
+```
+
+
+
+使用示例
+
+`docs/about/about.md` 文件内容如下
+
+```markdown
+---
+navbar: false
+---
+# 你好
+## 萨瓦迪卡
+
+# 哈哈
+## 呵呵
+
+# 123
+## jqk
+```
+
+
+
+浏览器访问 `ip:port/about/about.html`，效果如下
+
+![iShot2021-08-02 20.30.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-02 20.30.25.png)
+
+
+
+编辑 `config.js` ，配置自动生成侧边栏
+
+```js
+// .vuepress/config.js
+module.exports = {
+  themeConfig: {
+    sidebar: 'auto'
+  }
+}
+```
+
+
+
+效果如下
+
+![iShot2021-08-02 20.34.50](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-02 20.34.50.png)
+
+
+
+#### 5.3.2 侧边栏分组
+
+示例代码
+
+```js
+// .vuepress/config.js
+module.exports = {
+  themeConfig: {
+    sidebar: [
+      {
+        title: 'Group 1',   // 必要的
+        path: '/foo/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        collapsable: false, // 可选的, 默认值是 true,
+        sidebarDepth: 1,    // 可选的, 默认值是 1
+        children: [
+          '/'
+        ]
+      },
+      {
+        title: 'Group 2',
+        children: [ /* ... */ ],
+        initialOpenGroupIndex: -1 // 可选的, 默认值是 0
+      }
+    ]
+  }
+}
+```
+
+
+
+准备工作
+
+```shell
+# 在docs目录下新建多个目录，并在每个目录下编辑测试文件
+mkdir -p linux
+
+echo nginx > linux/nginx.md
+echo ssh > linux/ssh.md
+echo php > linux/php.md
+```
+
+
+
+代码
+
+```js
+// .vuepress/config.js
+module.exports = {
+  themeConfig: {
+    sidebar: [
+      {
+        title: 'Group 1',   // 必要的
+        path: '/linux/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+        collapsable: false, // 可选的, 默认值是 true,
+        sidebarDepth: 1,    // 可选的, 默认值是 1
+        children: [
+          '/linux/nginx.html',
+          '/linux/ssh.html',
+          '/linux/php.html',
+        ]
+      },
+      {
+        title: 'Group 2',
+        children: [ /* ... */ ],
+        initialOpenGroupIndex: -1 // 可选的, 默认值是 0
+      }
+    ]
+  }
+}
+```
+
+
+
+效果如下
+
+![iShot2021-08-02 21.45.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-02 21.45.28.png)

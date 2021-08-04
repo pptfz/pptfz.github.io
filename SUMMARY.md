@@ -19,8 +19,8 @@
 * [博客工具](README.md)
   * [gitbook](README.md)
     * [gitbook安装](博客工具/gitbook/CentOS7安装gitbook.md)
-   * [VuePress](README.md) 
-     * [VuePress1.x](博客工具/VuePress/VuePress1.x.md)
+  * [VuePress](README.md) 
+    * [VuePress1.x](博客工具/VuePress/VuePress1.x.md)
 
 * [生产环境开源项目](README.md)
   * [任务调度系统](README.md)
@@ -218,6 +218,9 @@
       * [安装](linux/linux服务/ldap/安装phpLDAPadmin管理LDAP.md)
       * [使用](README.md)
         * [phpLDAPadmin创建用户]()
+   
+  * [邮件服务](README.md)
+    * [linux使用命令发送邮件](linux/linux服务/邮件服务/linux使用命令发送邮件.md)    
 
 * [Linux内核](README.md)
   * [Linux升级内核](linux/linux内核/Linux升级内核.md)
