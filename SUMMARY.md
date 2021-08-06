@@ -293,6 +293,7 @@
         * [ansible只输出错误信息](linux/自动化运维平台/ansible/ansible知识点/ansible只输出错误信息.md)
         * [ansible配置文件](linux/自动化运维平台/ansible/ansible配置文件.md)
         * [ansible使用sudo](linux/自动化运维平台/ansible/ansible知识点/ansible使用sudo.md)
+      * [ansible playbook](linux/自动化运维平台/ansible/ansible playbook.md)
 
 * [监控](README.md)
   * [zabbix](README.md)

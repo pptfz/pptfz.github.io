@@ -10,12 +10,13 @@
 
 [git各版本官方下载地址](https://mirrors.edge.kernel.org/pub/software/scm/git/)
 
-
+[这个博客写的不错](https://learnku.com/server/t/34671)
 
 ## 1.下载源码包
 
 ```shell
-wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.32.0.tar.xz
+export GIT_VERSION=2.32.0
+wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar.xz
 ```
 
 
@@ -25,7 +26,7 @@ wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.32.0.tar.xz
 > 系统环境为最小化安装CentOS7.9
 
 ```shell
-yum -y install curl zlib zlib-devel openssl openssl-devel expat libiconv autoconf gcc gcc-c++ asciidoc xmlto util-linux
+yum -y install curl zlib zlib-devel openssl openssl-devel expat libiconv autoconf gcc gcc-c++ asciidoc xmlto util-linux docbook2X
 ```
 
 
@@ -33,8 +34,20 @@ yum -y install curl zlib zlib-devel openssl openssl-devel expat libiconv autocon
 官方文档中提到 `如果你使用 Fedora/RHEL/RHEL衍生版，那么你需要执行以下命令 ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi 以此来解决二进制文件名的不同`，`db2x_docbook2texi` 命令需要安装 `docbook2X` 包
 
 ```shell
-yum -y install docbook2X
 ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi
+ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi
+```
+
+
+
+<span style=color:red>⚠️官方文档中只说明了需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi` 这个命令，但是实际上还需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi`，否则后续make的时候会有如下报错 </span>
+
+```
+docbook2texi:/book: no description for directory entry
+    MAKEINFO git.info
+utf8 "\x89" does not map to Unicode at /usr/share/perl5/vendor_perl/XML/SAX/PurePerl/Reader/Stream.pm line 37.
+    MAKEINFO gitman.info
+make[1]: Leaving directory `/root/git-2.32.0/Documentation'
 ```
 
 
@@ -42,7 +55,7 @@ ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi
 ## 3.解压缩包
 
 ```shell
-tar xf git-2.32.0.tar.xz && cd git-2.32.0
+tar xf git-${GIT_VERSION}.tar.xz && cd git-${GIT_VERSION}
 ```
 
 
@@ -52,7 +65,7 @@ tar xf git-2.32.0.tar.xz && cd git-2.32.0
 ```shell
 make configure
 ./configure --prefix=/usr/local/git
-make all doc info
+make -j`nproc` all doc info
 make install install-doc install-html install-info
 ```
 
@@ -86,10 +99,10 @@ git clone git://git.kernel.org/pub/scm/git/git.git
 
 ## 7.遇到的问题
 
-**<span style=color:red>⚠️此问题无解，折腾了半天还是无法解决，果断放弃，还是乖乖的 yum 安装吧</span>**
+**<span style=color:red>⚠️此问题无解，折腾了半天还是无法解决</span>**
 
 ```shell
-$ git clone https://github.com/garabik/grc.git
+$ git clone https://github.com./garabik/grc.git
 Cloning into 'grc'...
 git: 'remote-https' is not a git command. See 'git --help'.
 ```
