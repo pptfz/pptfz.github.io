@@ -20,8 +20,6 @@
 
 ### 1.1 下载二进制包
 
-> VuePress2.x要求node版本为12+
-
 ```shell
 export NODE_VERSION=12.22.3
 wget https://nodejs.org/dist/latest-v12.x/node-v${NODE_VERSION}-linux-x64.tar.xz
@@ -96,7 +94,7 @@ npm -g install yarn
 
 ```shell
 # 一路会车默认即可，执行完成后会生成一个 package.json 文件
-yarn itit
+yarn init
 ```
 
 
@@ -149,7 +147,13 @@ mkdir docs && echo '# Hello VuePress' > docs/README.md
 VuePress 会在 http://localhost:8080 本地启动一个热重载的开发服务器。当你修改你的 Markdown 文件时，浏览器中的内容也会自动更新。
 
 ```shell
-yarn docs:dev &
+yarn docs:dev
+```
+
+直接执行 `yarn docs:dev &` 是不能在后台运行的，原因未知， 如果想要后台运行，执行以下命令，nohup.out文件必须存在
+
+```shell
+yarn docs:dev < /dev/null  >nohup.out&
 ```
 
 

@@ -4,6 +4,10 @@
 
 
 
+**<span style=color:red>ansible playbook使用 -C 选项进行模拟执行，和sed命令 -i 选项类似</span>**
+
+
+
 ansible playbook 官方示例，单task
 
 ```yaml
