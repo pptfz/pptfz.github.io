@@ -71,6 +71,9 @@ gitlab-ctl start
 
 # 重载gitlab配置文件
 gitlab-ctl reconfigure
+
+# 设置gitlab开机自启
+systemctl enable gitlab-runsvdir.service
 ```
 
 **重载配置文件成功提示如下**
