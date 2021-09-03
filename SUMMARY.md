@@ -5,8 +5,10 @@
   * [ssh密钥问题](翻车问题合集/翻车问题-ssh密钥问题.md)
   * [证书格式问题](翻车问题合集/翻车问题-证书格式问题.md)
 
-* [Linux排错宝典](README.md)
-  * [ECS运维指南之Linux系统诊断](linux/排错宝典/ECS运维指南之Linux系统诊断.md)
+* [阿里云开发者社区优秀文章](README.md)
+  * [Linux排错宝典](README.md)
+    * [ECS运维指南之Linux系统诊断](linux/阿里云开发者社区优秀文章/排错宝典/ECS运维指南之Linux系统诊断.md)
+  * [shell脚本](linux/阿里云开发者社区优秀文章/shell脚本/shell脚本速查手册.md)
 
 * [生产问题总结](README.md)
   * [ssh](README.md)
