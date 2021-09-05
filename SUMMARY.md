@@ -267,6 +267,7 @@
       * [jenkins从构建生成进程](linux/自动化运维平台/jenkins/jenkins知识点/jenkins从构建生成进程.md)
       * [jenkins用户权限管理](linux/自动化运维平台/jenkins/jenkins知识点/jenkins用户权限管理.md)
       * [jenkins配置构建邮件通知](linux/自动化运维平台/jenkins/jenkins知识点/jenkins配置构建邮件通知.md)
+      * [jenkins配置构建企业微信通知](linux/自动化运维平台/jenkins/jenkins知识点/jenkins配置构建企业微信通知.md)
 
       * [webhook](README.md)
         * [gitee jenkins webhook](linux/自动化运维平台/jenkins/jenkins知识点/webhook/gitee jenkins webhook.md)
