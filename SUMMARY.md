@@ -296,6 +296,7 @@
         * [ansible使用sudo](linux/自动化运维平台/ansible/ansible知识点/ansible使用sudo.md)
       * [ansible playbook](linux/自动化运维平台/ansible/ansible playbook.md)
 
+
 * [监控](README.md)
   * [zabbix](README.md)
     * [zabbix问题记录](README.md)
