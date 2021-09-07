@@ -4,11 +4,7 @@
 
 [kibana官方](https://www.elastic.co/cn/kibana)
 
-
-
 [kibana官方下载地址](https://www.elastic.co/cn/downloads/kibana)
-
-
 
 [kibana各版本官方下载地址](https://www.elastic.co/cn/downloads/past-releases#kibana)
 

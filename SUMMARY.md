@@ -36,6 +36,9 @@
   * [配置管理](README.md)
     * [nacos](README.md)
       * [nacos安装](生产环境开源项目/配置管理/nacos/nacos安装.md)
+  * [代码质量检测平台](README.md)
+    * [SonarQube](生产环境开源项目/代码质量检测平台/SonarQube/SonarQube.md)
+
 
 * [日志](README.md)
   * [日志查询](linux/日志/日志查询.md)
@@ -222,6 +225,12 @@
    
   * [邮件服务](README.md)
     * [linux使用命令发送邮件](linux/linux服务/邮件服务/linux使用命令发送邮件.md)    
+
+  * [elk](README.md)
+    * [elasticsearch](README.md)
+      * [elasticsearch安装](linux/linux服务/elk/elasticsearch/elasticsearch安装.md) 
+    * [kibana](README.md)
+      * [kibana安装](linux/linux服务/elk/kibana/kibana安装.md)
 
 * [Linux内核](README.md)
   * [Linux升级内核](linux/linux内核/Linux升级内核.md)

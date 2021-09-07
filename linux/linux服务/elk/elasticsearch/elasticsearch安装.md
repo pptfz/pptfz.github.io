@@ -36,8 +36,6 @@ tar xf elasticsearch-7.12.1-linux-x86_64.tar.gz -C /usr/local/
 
 
 
-
-
 ### 新建es用户
 
 ```sh
