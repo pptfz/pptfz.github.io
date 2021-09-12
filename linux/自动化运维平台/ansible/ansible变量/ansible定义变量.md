@@ -1,4 +1,6 @@
-# ansible变量
+[toc]
+
+# ansible定义变量
 
 [ansible2.9变量官方文档](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_variables.html)
 
@@ -418,28 +420,6 @@ devops01                   : ok=2    changed=0    unreachable=0    failed=0    s
 # 2.ansible变量优先级
 
 `-e` 传参 > `vars_files(playbook)` > `vars(playbook)`  > `host_vars(inventory)` > `group_vars(inventory)`> 特殊组all
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

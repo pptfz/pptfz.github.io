@@ -12,13 +12,13 @@
 
 **ldap相关术语**
 
-`Entry (or object) 条目(或对象)`：LDAP中的每个单元都认为是条目。
+`Entry (or object) 条目(或对象)`：LDAP中的每个单元都认为是条目
 
-`dn`：条目名称。
+`dn`：条目名称
 
-`ou`：组织名称。
+`ou`：组织名称
 
-`dc`：域组件。例如，baidu.com是这样写的:dc=baidu,dc=com。
+`dc`：域组件，例如，baidu.com是这样写的 `dc=baidu,dc=com`
 
 `cn`：通用名称，如原文链接：https://www.baidu.com 名或某个对象的名字
 
