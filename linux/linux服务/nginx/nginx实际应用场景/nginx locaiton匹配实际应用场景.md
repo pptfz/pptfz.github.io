@@ -1,6 +1,6 @@
 [toc]
 
-# nginx locaiton 匹配实际应用场景
+# nginx locaiton匹配实际应用场景
 
 
 

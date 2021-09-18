@@ -174,7 +174,7 @@
     * [nginx解决非80端口https问题](linux/linux服务/nginx/nginx解决非80端口https问题.md)
     * [nginx+keepalived实现负载均衡高可用](linux/linux服务/nginx/14.nginx+keepalived实现负载均衡高可用.md)
     * [nginx实际应用场景](README.md)
-      * [nginx locaiton 匹配实际应用场景](linux/linux服务/nginx/nginx实际应用场景/nginx locaiton 匹配实际应用场景.md)
+      * [nginx locaiton 匹配实际应用场景](linux/linux服务/nginx/nginx实际应用场景/nginx locaiton匹配实际应用场景.md)
 
   * [ssh](README.md)
     * [ssh服务](linux/linux服务/ssh/ssh服务.md)
