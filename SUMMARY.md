@@ -221,8 +221,9 @@
     * [phpLDAPadmin](README.md)
       * [安装](linux/linux服务/ldap/安装phpLDAPadmin管理LDAP.md)
       * [使用](README.md)
-        * [phpLDAPadmin创建用户]()
-   
+        * [phpLDAPadmin创建用户](linux/linux服务/ldap/phpLDAPadmin创建用户.md)
+    * [Self Service Pasword](linux/linux服务/ldap/Self Service Password.md)
+
   * [邮件服务](README.md)
     * [linux使用命令发送邮件](linux/linux服务/邮件服务/linux使用命令发送邮件.md)    
 
