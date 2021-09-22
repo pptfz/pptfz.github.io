@@ -2,9 +2,9 @@
 
 
 
-# 一、git简介
+# 1.git简介
 
-## 1.1git工作流程
+## 1.1 git工作流程
 
 
 
@@ -12,15 +12,15 @@
 
 
 
-## 1.2git四种状态
+## 1.2 git四种状态
 
 ![iShot2020-10-14 14.12.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.12.17.png)
 
 
 
-# 二、git命令总结
+# 2.git命令总结
 
-## 2.1git工作区域及文件颜色
+## 2.1 git工作区域及文件颜色
 
 ![iShot2020-10-14 14.13.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.13.04.png)
 
@@ -36,7 +36,7 @@
 
 
 
-## 2.2git提交数据
+## 2.2 git提交数据
 
 ```python
 1.创建文件
@@ -66,9 +66,9 @@ Changes to be committed:
 
 
 
-## 2.3git删除数据
+## 2.3 git删除数据
 
-### 2.3.1git删除暂存区中的文件``git rm --cached``
+### 2.3.1 git删除暂存区中的文件``git rm --cached``
 
 ```python
 //git删除暂存区中的文件
@@ -89,7 +89,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 
 
-### 2.3.2git删除工作区和暂存区中的文件``git rm -f 文件名``
+### 2.3.2 git删除工作区和暂存区中的文件``git rm -f 文件名``
 
 ```python
 //查看暂存区中的文件，此时是绿色的
@@ -112,9 +112,9 @@ nothing to commit, working tree clean
 
 
 
-## 2.4git移动数据
+## 2.4 git移动数据
 
-### 2.4.1git提交数据至版本库``git commit -m '描述信息'``
+### 2.4.1 git提交数据至版本库``git commit -m '描述信息'``
 
 ```python
 //创建文件
@@ -146,7 +146,7 @@ nothing to commit, working tree clean
 
 
 
-### 2.4.2git移动数据，有时会将已经添加至暂存区的文件重命名``git mv 原文件 新文件``
+### 2.4.2 git移动数据，有时会将已经添加至暂存区的文件重命名``git mv 原文件 新文件``
 
 ```python
 //此时文件是绿色的
@@ -176,9 +176,9 @@ Changes to be committed:
 
 
 
-## 2.5git历史数据
+## 2.5 git历史数据
 
-### 2.5.1git查看历史数据``git log``
+### 2.5.1 git查看历史数据``git log``
 
 ```python
 //查看全部日志
@@ -214,7 +214,7 @@ Date:   Sun Feb 23 21:10:03 2020 +0800
 
 
 
-### 2.5.2git以一行的形式查看日志``git log --oneline``
+### 2.5.2 git以一行的形式查看日志``git log --oneline``
 
 ```python
 //但是没有时间显示
@@ -251,7 +251,7 @@ c266f9ebd1d9bdac4fe8ce265484cf1c58ca6c68 touch hehe
 
 
 
-### 2.5.3显示具体内容变化``git log -p``
+### 2.5.3 显示具体内容变化``git log -p``
 
 ```python
 [root@test1 test]# git log -p
@@ -272,7 +272,7 @@ index 0000000..e69de29
 
 
 
-### 2.5.4简要显示文件修改行数``git log --stat``
+### 2.5.4 简要显示文件修改行数``git log --stat``
 
 ```python
 [root@test1 test]# git log --stat
@@ -290,7 +290,7 @@ Date:   Sun Feb 23 21:10:03 2020 +0800
 
 
 
-### 2.5.5根据不同格式展示历史提交信息``git hlog``
+### 2.5.5 根据不同格式展示历史提交信息``git hlog``
 
 > **可以使用format参数来指定具体的输出格式，这样非常便于后期编程的提取分析，常用的格式有：**
 >
@@ -346,9 +346,9 @@ EOF
 
 
 
-## 2.6git恢复数据
+## 2.6 git恢复数据
 
-### 2.6.1恢复历史数据
+### 2.6.1 恢复历史数据
 
 **情况一：修改了本地目录的文件并且提交到了暂存区**
 
@@ -519,9 +519,9 @@ da5695e HEAD@{2}: commit: echo 2 >> bbb
 
 
 
-## 2.7git分支
+## 2.7 git分支
 
-### 2.7.1git分支命令总结
+### 2.7.1 git分支命令总结
 
 - **创建分支**
   - **git branch 分支名**		
@@ -539,7 +539,7 @@ da5695e HEAD@{2}: commit: echo 2 >> bbb
 
 
 
-### 2.7.2git分支合并
+### 2.7.2 git分支合并
 
 ```python
 //master分支创建文件并写入内容
@@ -587,7 +587,7 @@ dev分支创建的内容
 
 
 
-### 2.7.3git合并冲突
+### 2.7.3 git合并冲突
 
 >**合并并不仅仅是简单的文件添加、移除的操作，git 也会合并修改。**
 

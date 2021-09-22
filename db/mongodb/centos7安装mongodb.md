@@ -12,7 +12,7 @@
 
 [mongodb github地址](https://github.com/mongodb/mongo)
 
-# 一、yum安装
+# 1.yum安装
 
 ## 1.1 添加清华yum源
 
@@ -92,7 +92,7 @@ mongodb数据目录`/var/lib/mongo/`
 
 
 
-# 二、二进制安装
+# 2.二进制安装
 
 [mongodb4.2二进制安装官方文档](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat-tarball/)
 

@@ -6,7 +6,7 @@
 
 [gocron github地址](https://github.com/ouqiang/gocron)
 
-# 一、项目简介
+# 1.项目简介
 
 使用Go语言开发的轻量级定时任务集中调度和管理系统，用于替代Linux-crontab [查看文档](https://github.com/ouqiang/gocron/wiki)
 
@@ -77,7 +77,7 @@
 
 
 
-# 二、部署安装
+# 2.部署安装
 
 从[relese](https://github.com/ouqiang/gocron/releases)下载安装包
 
@@ -164,7 +164,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 
 
-# 三、使用示例
+# 3.使用示例
 
 ## 3.1 新增节点
 
@@ -250,7 +250,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 
 
-# 四、使用supervisor管理gocron
+# 4.使用supervisor管理gocron
 
 
 

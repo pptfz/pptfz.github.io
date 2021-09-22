@@ -12,7 +12,7 @@
 
 [这个博客写的不错](https://learnku.com/server/t/34671)
 
-## 1.下载源码包
+# 1.下载源码包
 
 ```shell
 export GIT_VERSION=2.32.0
@@ -21,7 +21,7 @@ wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar
 
 
 
-## 2.安装依赖包
+# 2.安装依赖包
 
 > 系统环境为最小化安装CentOS7.9
 
@@ -52,7 +52,7 @@ make[1]: Leaving directory `/root/git-2.32.0/Documentation'
 
 
 
-## 3.解压缩包
+# 3.解压缩包
 
 ```shell
 tar xf git-${GIT_VERSION}.tar.xz && cd git-${GIT_VERSION}
@@ -60,7 +60,7 @@ tar xf git-${GIT_VERSION}.tar.xz && cd git-${GIT_VERSION}
 
 
 
-## 4.编译安装
+# 4.编译安装
 
 ```shell
 make configure
@@ -71,7 +71,7 @@ make install install-doc install-html install-info
 
 
 
-## 5.导出git命令环境变量
+# 5.导出git命令环境变量
 
 ```shell
 echo 'export PATH=$PATH:/usr/local/git/bin' >/etc/profile.d/git.sh
@@ -80,7 +80,7 @@ source /etc/profile
 
 
 
-## 6.验证
+# 6.验证
 
 ```shell
 $ git --version
@@ -97,7 +97,7 @@ git clone git://git.kernel.org/pub/scm/git/git.git
 
 
 
-## 7.遇到的问题
+# 7.遇到的问题
 
 **<span style=color:red>⚠️此问题无解，折腾了半天还是无法解决</span>**
 

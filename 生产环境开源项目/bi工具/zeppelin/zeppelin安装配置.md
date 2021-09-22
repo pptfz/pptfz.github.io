@@ -12,7 +12,7 @@
 
 
 
-## 一、zeppelin简介
+# 1.zeppelin简介
 
 Apache Zeppelin 
 
@@ -22,9 +22,9 @@ Apache Zeppelin
 
 
 
-## 二、安装
+# 2.安装
 
-### 2.1 下载二进制安装包
+## 2.1 下载二进制安装包
 
 [zeppelin官方下载地址](http://zeppelin.apache.org/download.html)
 
@@ -44,9 +44,9 @@ ln -s /usr/local/zeppelin-0.9.0-bin-all/ /usr/local/zeppelin
 
 
 
-### 2.2 修改配置文件
+## 2.2 修改配置文件
 
-#### 2.2.1 拷贝文件
+### 2.2.1 拷贝文件
 
 `zeppelin-site.xml`是主配置文件
 
@@ -63,7 +63,7 @@ cp shiro.ini.template shiro.ini
 
 
 
-#### 2.2.2 修改配置文件
+### 2.2.2 修改配置文件
 
 **修改 `zeppelin-site.xml`**
 
@@ -135,7 +135,7 @@ PATH=$JAVA_HOME/bin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$HBASE_HOME/bin:$SPARK_HOME/
 
 
 
-### 2.3 启动 zepplin
+## 2.3 启动 zepplin
 
 **<span style=color:red>⚠️需要用 `hadoop` 用户的身份启动，否则后续会有权限拒绝问题</span>**
 
@@ -158,7 +158,7 @@ $ jps|grep ZeppelinServer
 
 
 
-### 2.4 nginx配置反向代理访问zepplin
+## 2.4 nginx配置反向代理访问zepplin
 
 
 

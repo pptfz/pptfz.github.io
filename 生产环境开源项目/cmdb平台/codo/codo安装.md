@@ -12,7 +12,7 @@
 
 
 
-# 一、codo简介
+# 1.codo简介
 
 **简介**
 
@@ -109,7 +109,7 @@ registry.cn-shanghai.aliyuncs.com/ss1917/mysql:5.7              0.0.0.0:3307->33
 
 
 
-# 二、安装部署
+# 2.安装部署
 
 codo部署方式有[单机部署](https://docs.opendevops.cn/zh/guide/install/local/#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87)和[分布式部署](https://docs.opendevops.cn/zh/guide/install/distribute/)，这里采用分布式部署(伪分布式)
 

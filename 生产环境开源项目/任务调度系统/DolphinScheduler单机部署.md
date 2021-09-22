@@ -4,7 +4,7 @@
 
 # DolphinScheduler 单机部署
 
-# 一、DolphinScheduler简介
+# 1.DolphinScheduler简介
 
 **DolphinScheduler说明**
 
@@ -53,7 +53,7 @@
 
 
 
-# 二、DolphinScheduler标准安装
+# 2.DolphinScheduler标准安装
 
 ## 2.1 官方推荐系统配置
 
@@ -660,7 +660,7 @@ sh bin/dolphinscheduler-daemon.sh stop alert-server
 
 
 
-## 三、DolphinScheduler docker安装
+# 3.DolphinScheduler docker安装
 
 [dolphinscheduler源码 清华下载地址](https://mirrors.tuna.tsinghua.edu.cn/apache/incubator/dolphinscheduler)
 

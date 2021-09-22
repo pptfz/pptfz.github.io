@@ -10,7 +10,7 @@
 
 
 
-## 1.使用docker安装
+# 1.使用docker安装
 
 ```sh
 docker run -d --name showdoc --user=root --privileged=true -p 4999:80 \
@@ -19,7 +19,7 @@ docker run -d --name showdoc --user=root --privileged=true -p 4999:80 \
 
 
 
-## 2.修改持久化目录权限
+# 2.修改持久化目录权限
 
 showdoc持久化目录直接777...，确定是php开发无疑了，虽然是docker运行的，有隔离环境，但是为什么要777呢？个人表示非常不习惯
 
@@ -36,7 +36,7 @@ find . -type f|xargs chmod 644
 
 
 
-## 3.访问
+# 3.访问
 
 浏览器访问 `IP:4999`
 

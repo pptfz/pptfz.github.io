@@ -1,3 +1,5 @@
+[toc]
+
 # VuePress
 
 
@@ -10,7 +12,7 @@
 
 
 
-## 1.安装nodejs
+# 1.安装nodejs
 
 [nodejs官网](https://nodejs.org/en/)
 
@@ -18,7 +20,7 @@
 
 [nodejs历史版本官方下载地址](https://nodejs.org/en/download/releases/)
 
-### 1.1 下载二进制包
+## 1.1 下载二进制包
 
 ```shell
 export NODE_VERSION=12.22.3
@@ -27,7 +29,7 @@ wget https://nodejs.org/dist/latest-v12.x/node-v${NODE_VERSION}-linux-x64.tar.xz
 
 
 
-### 1.2 解压缩包、修改名称
+## 1.2 解压缩包、修改名称
 
 ```shell
 tar xf node-v${NODE_VERSION}-linux-x64.tar.xz -C /usr/local/ && mv /usr/local/node-v${NODE_VERSION}-linux-x64/ /usr/local/node-v${NODE_VERSION}
@@ -35,7 +37,7 @@ tar xf node-v${NODE_VERSION}-linux-x64.tar.xz -C /usr/local/ && mv /usr/local/no
 
 
 
-### 1.3 导出环境变量
+## 1.3 导出环境变量
 
 ```shell
 echo "export PATH=$PATH:/usr/local/node-v${NODE_VERSION}/bin" > /etc/profile.d/node.sh  && source /etc/profile
@@ -43,7 +45,7 @@ echo "export PATH=$PATH:/usr/local/node-v${NODE_VERSION}/bin" > /etc/profile.d/n
 
 
 
-### 1.4 验证
+## 1.4 验证
 
 ```shell
 $ node -v
@@ -55,7 +57,7 @@ $ npm -v
 
 
 
-### 1.5 配置npm加速
+## 1.5 配置npm加速
 
 ```shell
 npm config set registry https://registry.npm.taobao.org
@@ -72,7 +74,7 @@ https://registry.npm.taobao.org/
 
 
 
-### 1.6 安装yarn
+## 1.6 安装yarn
 
 ```shell
 npm -g install yarn
@@ -80,9 +82,9 @@ npm -g install yarn
 
 
 
-## 2.安装VuePress
+# 2.安装VuePress
 
-### 2.1 创建一个新目录
+## 2.1 创建一个新目录
 
 ```shell
 [ -d /vuepress ] || mkdir /vuepress && cd /vuepress
@@ -90,7 +92,7 @@ npm -g install yarn
 
 
 
-### 2.2 初始化项目
+## 2.2 初始化项目
 
 ```shell
 # 一路会车默认即可，执行完成后会生成一个 package.json 文件
@@ -112,7 +114,7 @@ yarn init
 
 
 
-### 2.3 将 VuePress 安装为本地依赖
+## 2.3 将 VuePress 安装为本地依赖
 
 ```shell
 # 执行完成后会生成 node_modules 目录和 yarn.lock 文件
@@ -121,7 +123,7 @@ yarn add -D vuepress
 
 
 
-### 2.4 创建第一篇文档
+## 2.4 创建第一篇文档
 
 ```shell
 mkdir docs && echo '# Hello VuePress' > docs/README.md
@@ -129,7 +131,7 @@ mkdir docs && echo '# Hello VuePress' > docs/README.md
 
 
 
-### 2.5 在 `package.json` 中添加一些scripts
+## 2.5 在 `package.json` 中添加一些scripts
 
 ```shell
 {
@@ -142,7 +144,7 @@ mkdir docs && echo '# Hello VuePress' > docs/README.md
 
 
 
-### 2.6 在本地启动服务器
+## 2.6 在本地启动服务器
 
 VuePress 会在 http://localhost:8080 本地启动一个热重载的开发服务器。当你修改你的 Markdown 文件时，浏览器中的内容也会自动更新。
 
@@ -164,7 +166,7 @@ yarn docs:dev < /dev/null  >nohup.out&
 
 
 
-## 3.目录结构
+# 3.目录结构
 
 VuePress 遵循 **“约定优于配置”** 的原则，推荐的目录结构如下：
 
@@ -191,7 +193,7 @@ VuePress 遵循 **“约定优于配置”** 的原则，推荐的目录结构�
 
 
 
-### 3.1 默认的页面路由
+## 3.1 默认的页面路由
 
 此处我们把 `docs` 目录作为 `targetDir` （参考 [命令行接口](https://vuepress.vuejs.org/zh/api/cli.html#基本用法)），下面所有的“文件的相对路径”都是相对于 `docs` 目录的。在项目根目录下的 `package.json` 中添加 `scripts` ：
 
@@ -214,9 +216,9 @@ VuePress 遵循 **“约定优于配置”** 的原则，推荐的目录结构�
 
 
 
-## 4.配置VuePress首页面及目录映射规则简单示例
+# 4.配置VuePress首页面及目录映射规则简单示例
 
-### 4.1 配置VuePress首页面
+## 4.1 配置VuePress首页面
 
 在 `docs/README.md` 中加入以下内容
 
@@ -248,7 +250,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 
 
-### 4.2 配置VuePress目录
+## 4.2 配置VuePress目录
 
 在 `docs` 目录下创建一个目录 `test`
 
@@ -279,9 +281,9 @@ EOF
 
 
 
-## 5.配置VuePress导航栏
+# 5.配置VuePress导航栏
 
-### 5.1 配置VuePress导航栏logo
+## 5.1 配置VuePress导航栏logo
 
 [VuePress1.x导航栏logo官方文档](https://v1.vuepress.vuejs.org/zh/theme/default-theme-config.html#%E5%AF%BC%E8%88%AA%E6%A0%8F-logo)
 
@@ -312,11 +314,11 @@ mkdir -p docs/.vuepress/public/assets/img
 
 
 
-### 5.2 配置VuePress导航栏链接
+## 5.2 配置VuePress导航栏链接
 
 [VuePress1.x 导航栏链接官方文档](https://v1.vuepress.vuejs.org/zh/theme/default-theme-config.html#%E5%AF%BC%E8%88%AA%E6%A0%8F%E9%93%BE%E6%8E%A5)
 
-#### 5.2.1 配置导航栏
+### 5.2.1 配置导航栏
 
 配置示例
 
@@ -489,7 +491,7 @@ module.exports = {
 
 
 
-#### 5.2.2 禁用导航栏
+### 5.2.2 禁用导航栏
 
 禁用导航栏，语法如下
 
@@ -547,9 +549,9 @@ navbar: false
 
 
 
-### 5.3 配置VuePress侧边栏
+## 5.3 配置VuePress侧边栏
 
-#### 5.3.1 自动生成侧边栏
+### 5.3.1 自动生成侧边栏
 
 在md文件中开头写入以下内容
 
@@ -619,7 +621,7 @@ module.exports = {
 
 
 
-#### 5.3.2 侧边栏分组
+### 5.3.2 侧边栏分组
 
 示例代码
 
