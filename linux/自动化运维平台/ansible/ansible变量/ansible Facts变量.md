@@ -802,7 +802,7 @@ devops03                   : ok=2    changed=0    unreachable=0    failed=0    s
 ```shell
 # 编辑一个文件，模拟zabbix agent文件，这里主要是验证Facts变量
 cat > zabbix_agentd.conf << EOF
-Hostname={{ ansible_fqdn}}
+Hostname={{ ansible_fqdn }}
 EOF
 ```
 
