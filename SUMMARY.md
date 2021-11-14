@@ -141,7 +141,8 @@
     * [kubesphere](linux/k8s/kubesphere/在k8s集群安装kubesphere2.1.md)            
 
 * [kvm](README.md)
-  * [安装]()
+  * [kvm安装]()
+  * [kvm知识点]
 
 * [openstack](README.md)
   * [mitaka](README.md)
