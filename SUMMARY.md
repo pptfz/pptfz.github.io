@@ -142,7 +142,7 @@
 
 * [kvm](README.md)
   * [kvm安装]()
-  * [kvm知识点]
+
 
 * [openstack](README.md)
   * [mitaka](README.md)
