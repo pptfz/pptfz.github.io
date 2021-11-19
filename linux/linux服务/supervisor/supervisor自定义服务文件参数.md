@@ -2,7 +2,7 @@
 
 
 
-**supervisor配置文件`/etc/supervisor/supervisord.conf`中定义了include，因此如果想要管理服务，就需要编辑`/etc/supervisor/config.d/*.ini`文件，以下为`/etc/supervisor/config.d/*.ini`文件中用到的参数**
+**supervisor配置文件 `/etc/supervisor/supervisord.conf` 中定义了include，因此如果想要管理服务，就需要编辑 `/etc/supervisor/config.d/*.ini` 文件，以下为 `/etc/supervisor/config.d/*.ini` 文件中用到的参数**
 
 | **参数**                    | **说明**                                                     |
 | --------------------------- | ------------------------------------------------------------ |
