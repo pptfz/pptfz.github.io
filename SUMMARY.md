@@ -142,6 +142,8 @@
 
 * [kvm](README.md)
   * [kvm安装]()
+  * [kvm知识点](README.md)
+    * [kvm虚拟机扩容硬盘](linux/kvm/知识点/kvm虚拟机扩容硬盘.md)
 
 
 * [openstack](README.md)
