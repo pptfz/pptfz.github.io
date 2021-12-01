@@ -141,9 +141,11 @@
     * [kubesphere](linux/k8s/kubesphere/在k8s集群安装kubesphere2.1.md)            
 
 * [kvm](README.md)
-  * [kvm安装]()
+  * [kvm安装](linux/kvm/安装/kvm安装.md)
   * [kvm知识点](README.md)
     * [kvm虚拟机扩容硬盘](linux/kvm/知识点/kvm虚拟机扩容硬盘.md)
+    * [使用 virt-manager 安装虚拟机](/gitbook/linux/kvm/知识点/使用 virt-manager 安装虚拟机.md)
+    * [vncserver安装](linux/kvm/知识点/vncserver安装.md)
 
 
 * [openstack](README.md)
