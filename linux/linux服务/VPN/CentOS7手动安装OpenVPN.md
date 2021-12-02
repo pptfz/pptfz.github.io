@@ -41,8 +41,11 @@ sysctl -p
 # 客户端连接vpn后，默认分配 10.8.0.0/24网段，需要进行nat设置
 iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
 
-# 保存配置
-iptables-save > /etc/sysconfig/iptables
+# 配置开机启动
+echo 'iptables -t nat -A POSTROUTING -s 10.7.0.0/24 -o eth0 -j MASQUERADE' >> /etc/rc.d/rc.local 
+
+# 给rc.local文件增加可执行权限，否则开机不会执行
+chmod u+x /etc/rc.d/rc.local 
 ```
 
 
@@ -477,6 +480,7 @@ dh /etc/openvpn/server/dh.pem
 server 10.8.0.0 255.255.255.0
 ifconfig-pool-persist ipp.txt
 push "route 172.16.0.0 255.255.255.0"
+push "dhcp-option DNS 223.5.5.5"
 client-to-client
 ;duplicate-cn
 keepalive 10 120
@@ -525,17 +529,19 @@ dh dh2048.pem
 # 注意：该网段地址池不要和已有网段冲突或重复。其实一般来说是不用改的。除非当前内网使用了10.8.0.0/24的网段。
 server 10.8.0.0 255.255.255.0
 
-
 # 使用一个文件记录已分配虚拟IP的客户端和虚拟IP的对应关系，以后openvpn重启时，将可以按照此文件继续为对应的客户端分配此前相同的IP。也就是自动续借IP的意思。
 ifconfig-pool-persist ipp.txt
 
 # 使用tap模式的时候考虑此选项。
 server-bridge XXXXXX
 
-# vpn服务端向客户端推送vpn服务端内网网段的路由配置，以便让客户端能够找到服务端内网。多条路由就写多个Push指令 
+# vpn服务端向客户端推送vpn服务端内网网段的路由配置，以便让客户端能够找到服务端内网。多条路由就写多个push指令
 push "route 10.0.10.0 255.255.255.0"
 push "route 192.168.10.0 255.255.255.0"
 push "route 10.206.0.0 255.255.240.0"
+
+# 配置客户端获取的dns
+push "dhcp-option DNS 223.5.5.5"
 
 # 让vpn客户端之间可以互相看见对方，即能互相通信。默认情况客户端只能看到服务端一个人；默认是注释的，不能客户端之间相互看见
 client-to-client
