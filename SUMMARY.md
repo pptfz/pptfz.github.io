@@ -101,7 +101,8 @@
   * [12.docker跨主机通信](README.md)
     * [macvlan](linux/docker/12.1docker跨主机通信之macvlan.md)
     * [overlay](linux/docker/12.2docker跨主机通信之overlay.md)
-  * [docker命令大全](linux/docker/docker命令大全.md)              
+  * [docker命令大全](linux/docker/docker命令大全.md)    
+  * [docker compose 安装](linux/docker/docker-compose安装.md)          
 
 * [kubernetes](README.md)
   * [k8s介绍](linux/k8s/k8s介绍及组件/Kubernetes介绍.md)

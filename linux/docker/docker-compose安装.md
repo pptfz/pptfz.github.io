@@ -2,7 +2,7 @@
 
 
 
-# docker-compose
+# docker-compose安装
 
 # 1.docker-compose简介
 
@@ -26,30 +26,48 @@
 
 # 2.docker-compose安装
 
-## 2.1下载安装包
+## 2.1 下载安装包
 
-```python
-#github地址
-curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+### 2.1.1 github下载
 
-#国内地址，可下载指定版本
-curl -L https://get.daocloud.io/docker/compose/releases/download/1.25.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+[docker compose github地址](https://github.com/docker/compose)
+
+```shell
+curl -L "https://github.com/docker/compose/releases/download/2.2.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
 
 
 
-## 2.2给二进制文件添加可执行权限
+### 2.1.2 国内源下载
 
-```python
+```shell
+wget https://get.daocloud.io/#install-compose
+if [ $? -ne 0 ];then
+    echo "下载错误"
+    exit 1
+fi
+
+VERSION=`awk -F'/' '/get.daocloud.io\/docker\/compose/{print $8}' index.html`
+
+curl -L https://get.daocloud.io/docker/compose/releases/download/${VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+```
+
+
+
+
+
+## 2.2 给二进制文件添加可执行权限
+
+```shell
 chmod +x /usr/local/bin/docker-compose
 ```
 
 
 
-## 2.3完成安装，查看版本
+## 2.3 完成安装，查看版本
 
-```python
-docker-compose -v
-docker-compose version 1.24.1, build 4667896b
+```shell
+$ docker-compose -v
+Docker Compose version v2.2.2
 ```
 
