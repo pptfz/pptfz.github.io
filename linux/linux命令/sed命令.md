@@ -208,6 +208,33 @@ abcdef
 110,fff,COCO
 ```
 
+
+
+sed删除指定内容后的行
+
+```shell
+文件内容
+$ cat haha
+aaa
+bbb
+ccc
+123
+
+例：删除bbb后的所有内容(包含bbb)
+$ sed '/bbb/,$d' haha
+aaa
+
+但是上述写法把包含bbb的行也删除了，如果想要把bbb保留下来，需要这么写，其中N b是固定的字符，其余字符可以替换为任意字母，除了sed中的p和d，既除了a是任意字母外，其余均为固定写法
+$ sed '/bbb/{p;:a;N;$!ba;d}' haha
+aaa
+bbb
+
+
+https://www.soinside.com/question/niV938HWFE7ZhkP4Cn4ygR
+```
+
+
+
 ## 4.3 s	替换
 
 ```python

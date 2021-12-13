@@ -48,3 +48,9 @@ yum -y install virt-manager
 
 
 
+
+
+
+
+
+

@@ -6,7 +6,7 @@
 
 [参考链接](http://www.zhangblog.com/2020/05/09/openvpn01/)
 
-# 一、前期环境准备
+# 1.前期环境准备
 
 ## 1.1 实验环境
 
@@ -102,7 +102,7 @@ hwclock --systohc
 
 
 
-# 二、安装过程
+# 2.安装过程
 
 ## 2.1 安装依赖包
 
@@ -613,7 +613,6 @@ cert client.crt                                  #客户端证书
 key client.key                                   #客户端密钥
 tls-auth ta.key 1                                #ta密钥
 cipher AES-256-CBC
-comp-lzo                                         #传输内容压缩
 verb 3  
 EOF
 ```

@@ -15,7 +15,7 @@
 ## 2.1 下载代码
 
 ```sh
-git clone https://github.com/zabbix/zabbix-docker.git
+git clone https://github.com.cnpmjs.org/zabbix/zabbix-docker.git
 ```
 
 
