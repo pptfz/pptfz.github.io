@@ -467,6 +467,8 @@ cp ta.key /etc/openvpn/server
 
 ⚠️ 一定要添加openvpn服务器私有地址，注意掩码 `push "route 10.0.10.0 255.255.255.0"`
 
+⚠️<span style=color:red>要在配置文件中添加 `crl-verify /etc/openvpn/easy-rsa/pki/crl.pem` 参数，`/etc/openvpn/easy-rsa/pki/crl.pem` 是在进行删除vpn用户时执行命令 `./easyrsa gen-crl` 所产生的文件，这个 `crl.pem` 文件是用于管控被删除用户无法连接vpn</span>
+
 ```shell
 cat > /etc/openvpn/server/server.conf <<EOF
 local 0.0.0.0
@@ -498,7 +500,49 @@ status openvpn-status.log
 log  /var/log/openvpn.log
 verb 3
 ;explicit-exit-notify 1
+crl-verify /etc/openvpn/easy-rsa/pki/crl.pem
 EOF
+```
+
+
+
+执行删除vpn账户的步骤记录，在执行 `./easyrsa revoke 用户名` 删除用户后会提示 `Revocation was successful. You must run gen-crl and upload a CRL to your infrastructure in order to prevent the revoked cert from being accepted.` 这样一段话，按照提示执行 `./easyrsa gen-crl` 后会提示 `crl.pem` 文件所在位置 `CRL file: /etc/openvpn/easy-rsa/pki/crl.pem` ，因此需要在 `server.conf` 中添加 `crl-verify /etc/openvpn/easy-rsa/pki/crl.pem` 一行参数，避免在服务端删除用户后用户还能登陆的情况
+
+```shell
+./easyrsa revoke nima
+
+Note: using Easy-RSA configuration from: /etc/openvpn/easy-rsa/vars
+Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
+
+
+Please confirm you wish to revoke the certificate with the following subject:
+
+subject= 
+    commonName                = nima
+
+
+Type the word 'yes' to continue, or any other input to abort.
+  Continue with revocation: yes
+Using configuration from /etc/openvpn/easy-rsa/pki/easy-rsa-28838.yiflJs/tmp.lFsJfm
+Enter pass phrase for /etc/openvpn/easy-rsa/pki/private/ca.key:
+Revoking Certificate 8AB483C2DC76BC3D0E016323D4BF86A9.
+Data Base Updated
+
+IMPORTANT!!!
+
+Revocation was successful. You must run gen-crl and upload a CRL to your
+infrastructure in order to prevent the revoked cert from being accepted.
+
+
+$ ./easyrsa gen-crl
+
+Note: using Easy-RSA configuration from: /etc/openvpn/easy-rsa/vars
+Using SSL: openssl OpenSSL 1.0.2k-fips  26 Jan 2017
+Using configuration from /etc/openvpn/easy-rsa/pki/easy-rsa-28926.C3C2l3/tmp.A4N3ul
+Enter pass phrase for /etc/openvpn/easy-rsa/pki/private/ca.key:
+
+An updated CRL has been created.
+CRL file: /etc/openvpn/easy-rsa/pki/crl.pem
 ```
 
 
@@ -760,7 +804,7 @@ rtt min/avg/max/mdev = 47.014/53.081/59.148/6.067 ms
 
 ## 2.9 开通、删除vpn步骤
 
-### 2.9.1 开通vpn
+### 2.9.1 开通vpn账户
 
 > 这里以给小明开通vpn为例
 
@@ -781,12 +825,28 @@ find / -name "xiaoming*"
 
 
 
-### 2.9.2 删除vpn
+### 2.9.2 删除vpn账户
 
 执行这个步骤需要输入ca根证书密码
 
 ```shell
 ./easyrsa revoke xiaoming
+```
+
+
+
+执行 `gen-crl` 命令
+
+```shell
+./easyrsa gen-crl
+```
+
+
+
+重启openvpn
+
+```shell
+systemctl restart openvpn
 ```
 
 

@@ -119,7 +119,7 @@ logrotate [OPTION...] <configfile>
 
 日志究竟轮换几次，这个是根据配置文件中的 `rotate` 参数来判定的。
 
-看下 `logrotate.con` f配置：
+看下 `logrotate.conf` 配置：
 
 ```shell
 # see "man logrotate" for details
