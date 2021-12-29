@@ -336,6 +336,7 @@
         * [ansible任务控制-标签tags](linux/自动化运维平台/ansible/ansible任务控制/ansible任务控制-标签tags.md)
         * [ansible任务控制-包含include](linux/自动化运维平台/ansible/ansible任务控制/ansible任务控制-包含include.md)
         * [ansible任务控制-忽略错误ignore_errors](linux/自动化运维平台/ansible/ansible任务控制/ansible任务控制-忽略错误ignore_errors.md)  
+        * [ansible任务控制-错误处理changed_when](linux/自动化运维平台/ansible/ansible任务控制/ansible任务控制-错误处理changed_when.md)
       * [ansible知识点](README.md)
         * [ansible只输出错误信息](linux/自动化运维平台/ansible/ansible知识点/ansible只输出错误信息.md)
         * [ansible配置文件](linux/自动化运维平台/ansible/ansible配置文件.md)
