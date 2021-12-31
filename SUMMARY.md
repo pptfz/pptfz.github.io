@@ -303,6 +303,7 @@
       * [jenkins报错](linux/自动化运维平台/jenkins/jenkins故障/jenkins报错.md)
       * [jenkins无限构建问题](linux/自动化运维平台/jenkins/jenkins故障/jenkins无限构建问题.md)
       * [jenkins配置企业微信通知报错](linux/自动化运维平台/jenkins/jenkins故障/jenkins配置企业微信通知报错.md)
+      * [jenkins前端项目打包报错问题](linux/自动化运维平台/jenkins/jenkins故障/jenkins前端项目打包报错问题.md)
 
   * [自动化运维工具](README.md)
     * [ansible](README.md)
