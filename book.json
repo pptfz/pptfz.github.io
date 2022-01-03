@@ -1,1 +1,103 @@
-/usr/local/lib/node_modules/gitbook-cli/test/fixtures/book1/book.json
+{
+    "gitbook": "3.2.3",
+    "title" : "打工是不可能打工的",
+    "author" : "泡泡吐肥皂o",
+    "description" : "个人技术博客记录",
+    "language" : "zh-hans",
+
+
+    "plugins": [
+        "accordion",
+        "copy-code-button",
+        "-lunr", 
+        "-search", 
+        "search-pro",
+        "advanced-emoji",
+        "github",
+        "splitter",
+        "pageview-count",
+        "auto-scroll-table",
+        "popup",
+        "-sharing", 
+        "sharing-plus",
+        "emphasize",
+        "klipse",
+        "tbfed-pagefooter",
+        "-highlight",
+        "prism",
+        "prism-themes",
+        "theme-comscore",
+        "ancre-navigation",
+        "simple-page-toc",
+        "todo",
+        "donate",
+        "alerts",
+        "flexible-alerts",
+        "chapter-fold",
+        "sidebar-style"
+    ],
+    
+    "links": {
+        "sidebar" : {
+            "百度": "https://www.baidu.com",
+            "谷歌": "https://www.google.com",
+            "我鹏简书^-^": "https://www.jianshu.com/u/4666ca42b320",
+            "阿胜博客": "http://doc.xingyongsheng.top",
+            "泡泡吐肥皂o": "https://www.pptfz.cn"
+            }
+        },
+
+    
+    "pluginsConfig": {
+        "change_girls" : {
+            "time": 5,
+            "urls": [
+                "http://image.pptfz.top/gitbook/1.jpeg",
+                "http://image.pptfz.top/gitbook/2.jpeg"
+            ]
+    },
+        "sidebar-style": {
+            "title": "下班吧，别特么内卷了",
+            "author": "别特么内卷了"
+        },
+        "donate": {
+            "wechat": "https://gitee.com/pptfz/picgo-images/raw/master/img/aaa.jpg",
+            "alipay": "https://gitee.com/pptfz/picgo-images/raw/master/img/bbb.jpg",
+            "title": "",
+            "button": "你过来啊",
+            "alipayText": "这辈子都不可能打工",
+            "wechatText": "打工是不可能打工的"
+        },
+
+        "prism": {
+            "css": [
+                "prism-themes/themes/prism-base16-ateliersulphurpool.light.css"
+            ]
+        },
+
+        "tbfed-pagefooter": {
+          "copyright":"泡泡吐肥皂o &copy gitbook.pptfz.cn 2022",
+          "modify_label": "文件修订时间：",
+          "modify_format": "秃笔南波湾！！！"
+        },
+
+        "github": {
+            "url": "https://github.com/pptfz/gitbook"
+        },
+        
+        "sharing": {
+            "douban": false,
+            "facebook": false,
+            "google": true,
+            "pocket": false,
+            "qq": true,
+            "qzone": true,
+            "twitter": true,
+            "weibo": true,
+            "all": [
+                "douban", "facebook", "google", "instapaper", "linkedin","twitter", "weibo",
+                "messenger","qq", "qzone","viber","whatsapp"
+                ]
+        }
+    }
+}
