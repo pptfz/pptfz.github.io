@@ -34,7 +34,8 @@
         "alerts",
         "flexible-alerts",
         "chapter-fold",
-        "sidebar-style"
+        "sidebar-style",
+        "toggle-chapters"
     ],
     
     "links": {
