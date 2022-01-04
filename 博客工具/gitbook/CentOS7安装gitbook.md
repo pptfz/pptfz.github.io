@@ -24,7 +24,7 @@
 
 ```shell
 export NODE_VERSION=12.22.3
-wget https://nodejs.org/dist/latest-v12.x/node-v${NODE_VERSION}-linux-x64.tar.xz
+wget https://nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz
 ```
 
 

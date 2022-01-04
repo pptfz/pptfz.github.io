@@ -33,9 +33,8 @@
         "donate",
         "alerts",
         "flexible-alerts",
-        "chapter-fold",
-        "sidebar-style",
-        "toggle-chapters"
+        "expandable-chapters-small",
+        "sidebar-style"
     ],
     
     "links": {
