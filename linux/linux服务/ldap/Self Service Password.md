@@ -116,7 +116,7 @@ $ldap_binddn = "cn=admin,dc=qike,dc=com";	// ldap管理员账号
 $ldap_bindpw = '123456';	// ldap管理员密码
 // for GSSAPI authentication, comment out ldap_bind* and uncomment ldap_krb5ccname lines
 //$ldap_krb5ccname = "/path/to/krb5cc";
-$ldap_base = "cn=gitlab,dc=qike,dc=com";	// ldap搜索参数
+$ldap_base = "dc=qike,dc=com";	// ldap搜索参数
 $ldap_login_attribute = "uid";
 $ldap_fullname_attribute = "cn";
 $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";	// 用户搜索规则

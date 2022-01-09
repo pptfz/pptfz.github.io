@@ -204,7 +204,7 @@ gitbook serve &
 ## 4.1 修改gitbook代码框字体大小
 
 ```shell
-prismnode_modules/themes/themes/prism-base16-ateliersulphurpool.light.css
+node_modules/prism-themes/themes/prism-base16-ateliersulphurpool.light.css
 
 13、14行
 font-size: 18px;

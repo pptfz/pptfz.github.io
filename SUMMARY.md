@@ -38,6 +38,10 @@
       * [nacos安装](生产环境开源项目/配置管理/nacos/nacos安装.md)
   * [代码质量检测平台](README.md)
     * [SonarQube](生产环境开源项目/代码质量检测平台/SonarQube/SonarQube.md)
+  * [nexus](README.md)
+    * [安装](生产环境开源项目/nexus/nexus安装.md)
+    * [故障](README.md)
+      * [nexus重启报错](生产环境开源项目/nexus/nexus重启报错.md)
 
 
 * [日志](README.md)
