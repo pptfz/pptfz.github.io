@@ -573,7 +573,8 @@
 * [mac使用记录](README.md)
   * [mac添加多个github账号](mac使用记录/MAC本添加多个github账号.md)
   * [mac使用gitbook记录](mac使用记录/mac使用gitbook记录.md)
-  * [brew替换国内源](mac使用记录/brew替换国内源.md)
+  * [brew安装](mac使用记录/brew安装.md)
+  * [mac配置item2使用rz sz](mac使用记录/mac配置item2使用rz sz.md)
   * [mac ssh密钥转换](mac使用记录/mac ssh密钥转换问题.md)
 
 * [git总结](README.md)
