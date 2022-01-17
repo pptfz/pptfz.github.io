@@ -577,6 +577,8 @@
   * [brew安装](mac使用记录/brew安装.md)
   * [mac配置item2使用rz sz](mac使用记录/mac配置item2使用rz sz.md)
   * [mac ssh密钥转换](mac使用记录/mac ssh密钥转换问题.md)
+  * [mac安装oh-my-zsh](mac使用记录/mac安装oh-my-zsh.md)
+  * [mac安装和配置kubectl](mac使用记录/mac安装和配置kubectl.md)
 
 * [git总结](README.md)
   * [git安装](README.md)
