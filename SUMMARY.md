@@ -240,7 +240,8 @@
     * [Self Service Pasword](linux/linux服务/ldap/Self Service Password.md)
 
   * [邮件服务](README.md)
-    * [linux使用命令发送邮件](linux/linux服务/邮件服务/linux使用命令发送邮件.md)    
+    * [linux使用命令发送邮件](linux/linux服务/邮件服务/linux使用命令发送邮件.md) 
+    * [linux配置企业邮箱smtps 465端口发送邮件](linux/linux服务/邮件服务/linux配置企业邮箱smtps 465端口发送邮件.md)   
 
   * [elk](README.md)
     * [elasticsearch](README.md)
