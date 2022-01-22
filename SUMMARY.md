@@ -1,6 +1,13 @@
 # Summary
 * [兔比喃波湾](README.md)
 
+* [操作小技巧](README.md)
+  * [linux](README.md)
+    * [linux一些扫操作](操作小技巧/linux/linux一些骚操作.md)
+    * [一条命令搞定](操作小技巧/linux/一条命令搞定.md)
+  * [数据库](README.md)
+    * [mysql批量修改字段内容](操作小技巧/数据库/mysql批量修改字段内容.md)
+
 * [翻车问题合集](README.md)
   * [ssh密钥问题](翻车问题合集/翻车问题-ssh密钥问题.md)
   * [证书格式问题](翻车问题合集/翻车问题-证书格式问题.md)
@@ -153,6 +160,7 @@
     * [kvm虚拟机扩容硬盘](linux/kvm/知识点/kvm虚拟机扩容硬盘.md)
     * [使用 virt-manager 安装虚拟机](linux/kvm/知识点/使用 virt-manager 安装虚拟机.md)
     * [vncserver安装](linux/kvm/知识点/vncserver安装.md)
+    * [kvm虚拟机网卡改动无法启动问题](linux/kvm/知识点/kvm虚拟机网卡改动无法启动问题.md)
 
 * [openstack](README.md)
   * [mitaka](README.md)
