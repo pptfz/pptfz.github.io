@@ -24,6 +24,8 @@ containerd官方架构图
 
 # 1.下载安装包
 
+由于 containerd 需要调用 runc，所以我们也需要先安装 runc，不过 containerd 提供了一个包含相关依赖的压缩包 `cri-containerd-cni-${VERSION}.${OS}-${ARCH}.tar.gz` ，直接下载这个包即可
+
 ```shell
 export CONTAINERD_VERSION=1.5.9
 wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/cri-containerd-cni-${CONTAINERD_VERSION}-linux-amd64.tar.gz
@@ -81,8 +83,26 @@ mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.t
     endpoint = ["https://registry.aliyuncs.com/k8sxio"]
 ```
 
+
+
+![iShot2022-02-02 21.37.10](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2022-02-02 21.37.10.png)
+
+
+
 - `registry.mirrors."xxx"`: 表示需要配置 mirror 的镜像仓库，例如 `registry.mirrors."docker.io"` 表示配置 `docker.io` 的 mirror。
 - `endpoint`: 表示提供 mirror 的镜像加速服务，比如我们可以注册一个阿里云的镜像服务来作为 `docker.io` 的 mirror。
+
+
+
+修改 `sandbox_image` 为阿里云地址
+
+```toml
+修改
+	sandbox_image = "k8s.gcr.io/pause:3.5"
+
+修改为
+	sandbox_image = "registry.aliyuncs.com/k8sxio/pause:3.5"
+```
 
 
 
@@ -186,4 +206,88 @@ Server:
 ```
 
 
+
+# 9.卸载containerd
+
+从 [github](https://github.com/containerd/containerd) 下载的  `cri-containerd-cni-1.5.9-linux-amd64.tar.gz` 压缩包解压缩后是 `etc`、 `opt`、 `usr` 3个目录，这3个目录内容如下
+
+```shell
+$ tree etc/ opt/ usr
+etc/
+├── cni
+│   └── net.d
+│       └── 10-containerd-net.conflist
+├── crictl.yaml
+└── systemd
+    └── system
+        └── containerd.service
+opt/
+├── cni
+│   └── bin
+│       ├── bandwidth
+│       ├── bridge
+│       ├── dhcp
+│       ├── firewall
+│       ├── flannel
+│       ├── host-device
+│       ├── host-local
+│       ├── ipvlan
+│       ├── loopback
+│       ├── macvlan
+│       ├── portmap
+│       ├── ptp
+│       ├── sbr
+│       ├── static
+│       ├── tuning
+│       ├── vlan
+│       └── vrf
+└── containerd
+    └── cluster
+        ├── gce
+        │   ├── cloud-init
+        │   │   ├── master.yaml
+        │   │   └── node.yaml
+        │   ├── cni.template
+        │   ├── configure.sh
+        │   └── env
+        └── version
+usr
+└── local
+    ├── bin
+    │   ├── containerd
+    │   ├── containerd-shim
+    │   ├── containerd-shim-runc-v1
+    │   ├── containerd-shim-runc-v2
+    │   ├── containerd-stress
+    │   ├── crictl
+    │   ├── critest
+    │   ├── ctd-decoder
+    │   └── ctr
+    └── sbin
+        └── runc
+
+13 directories, 36 files
+```
+
+
+
+
+
+⚠️<span style=color:red>一般会将cri-containerd-cni-xxx-linux-amd64.tar.gz直接解压到根目录下</span>，因此卸载continerd只需要删除相应文件即可
+
+
+
+停止containerd服务
+
+```shell
+systemctl disable containerd && systemctl stop containerd && systemctl status containerd
+```
+
+
+
+删除目录、文件
+
+```shell
+rm -rf /etc/{cni,crictl.yaml,systemd/system/containerd.service}  /opt/{cni,containerd} /usr/local/{sbin/runc,bin/{containerd,containerd-shim,containerd-shim-runc-v1,containerd-shim-runc-v2,containerd-stress,crictl,critest,ctd-decoder,ctr}}  
+```
 

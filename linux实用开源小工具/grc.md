@@ -35,16 +35,44 @@ cp grc.sh /etc
 
  
 
-## 3.向 `~/.bashrc` 写入内容
+## 3.设置别名
+
+### 3.1 Bash
+
+向 `~/.bashrc` 写入以下内容
 
 ```shell
-echo "[[ -s "/etc/grc.sh" ]] && source /etc/grc.sh" >> ~/.bashrc
+cat >> ~/.bashrc << EOF
+GRC_ALIASES=true
+[[ -s "/etc/profile.d/grc.sh" ]] && source /etc/grc.sh
+EOF
+```
+
+
+
+加载生效
+
+```shell
 source ~/.bashrc
 ```
 
 
 
+### 3.2 ZSH
 
+向 `~/.zshrc` 写入以下内容
+
+```shell
+[[ -s "/etc/grc.zsh" ]] && source /etc/grc.zsh
+```
+
+
+
+加载生效
+
+```shell
+source ~/.zshrc
+```
 
 
 
