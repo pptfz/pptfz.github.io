@@ -14,7 +14,9 @@
 
 ## 2.1 未安装containerd
 
-<span style=color:red>⚠️如果没有安装 containerd，则可以下载 nerdctl-full-\<VERSION>-linux-amd64.tar.gz 包进行安装</span>
+<span style=color:red>⚠️如果没有安装 containerd，则可以下载 nerdctl-full-\<VERSION>-linux-amd64.tar.gz 包进行安装，并且nerdctl-full这个包是与containerd版本一一对应的，即containerd发布一个版本后，nerdctl-full也随即发布一个版本，虽然2者版本号不一致，但是是互相对应的</span>
+
+### 2.1.1 下载包
 
 ```shell
 export NERDCTL_VERSION=0.16.1
@@ -23,11 +25,243 @@ wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}
 
 
 
+### 2.1.2 查看包内容
+
+```shell
+# 查看包内容，解压缩后是bin  lib  libexec  share 4个目录
+$ tar -tf nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz
+bin/
+bin/buildctl
+bin/buildkitd
+bin/containerd
+bin/containerd-fuse-overlayfs-grpc
+bin/containerd-rootless-setuptool.sh
+bin/containerd-rootless.sh
+bin/containerd-shim-runc-v2
+bin/containerd-stargz-grpc
+bin/ctd-decoder
+bin/ctr
+bin/ctr-enc
+bin/ctr-remote
+bin/fuse-overlayfs
+bin/ipfs
+bin/nerdctl
+bin/rootlessctl
+bin/rootlesskit
+bin/runc
+bin/slirp4netns
+lib/
+lib/systemd/
+lib/systemd/system/
+lib/systemd/system/buildkit.service
+lib/systemd/system/containerd.service
+lib/systemd/system/stargz-snapshotter.service
+libexec/
+libexec/cni/
+libexec/cni/bandwidth
+libexec/cni/bridge
+libexec/cni/dhcp
+libexec/cni/firewall
+libexec/cni/host-device
+libexec/cni/host-local
+libexec/cni/ipvlan
+libexec/cni/isolation
+libexec/cni/loopback
+libexec/cni/macvlan
+libexec/cni/portmap
+libexec/cni/ptp
+libexec/cni/sbr
+libexec/cni/static
+libexec/cni/tuning
+libexec/cni/vlan
+libexec/cni/vrf
+share/
+share/doc/
+share/doc/nerdctl/
+share/doc/nerdctl/README.md
+share/doc/nerdctl/docs/
+share/doc/nerdctl/docs/cni.md
+share/doc/nerdctl/docs/compose.md
+share/doc/nerdctl/docs/config.md
+share/doc/nerdctl/docs/cosign.md
+share/doc/nerdctl/docs/dir.md
+share/doc/nerdctl/docs/experimental.md
+share/doc/nerdctl/docs/faq.md
+share/doc/nerdctl/docs/freebsd.md
+share/doc/nerdctl/docs/gpu.md
+share/doc/nerdctl/docs/ipfs.md
+share/doc/nerdctl/docs/multi-platform.md
+share/doc/nerdctl/docs/ocicrypt.md
+share/doc/nerdctl/docs/registry.md
+share/doc/nerdctl/docs/rootless.md
+share/doc/nerdctl/docs/stargz.md
+share/doc/nerdctl-full/
+share/doc/nerdctl-full/README.md
+share/doc/nerdctl-full/SHA256SUMS
+```
+
+
+
+### 2.1.3 解压缩包
+
+<span style=color:red>⚠️解压缩包至 `/usr/local` 下，`buildctl` 、 `buildkitd` 、`containerd` 、`ctr` 、`nerdctl` 、`runc` 等命令就会全部包含，同时使用systemd管理buildkit文件`buildkit.service` 、使用systemd管理containerd文件 `containerd.service` 也会包含</span>
+
+```shell
+tar xf nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz -C /usr/local
+```
+
+<span style=color:red>⚠️也可以只复制部分文件到相关目录，例如 `buildctl` 、 `buildkitd` 、`containerd` 、`ctr` 、`nerdctl` 、`runc` 等命令以及 `buildkit.service` 、`containerd.service`  文件</span>
+
+
+
+### 2.1.4 查看目录结构
+
+```shell
+$ tree
+.
+├── bin
+│   ├── buildctl
+│   ├── buildkitd
+│   ├── containerd
+│   ├── containerd-fuse-overlayfs-grpc
+│   ├── containerd-rootless-setuptool.sh
+│   ├── containerd-rootless.sh
+│   ├── containerd-shim-runc-v2
+│   ├── containerd-stargz-grpc
+│   ├── ctd-decoder
+│   ├── ctr
+│   ├── ctr-enc
+│   ├── ctr-remote
+│   ├── fuse-overlayfs
+│   ├── ipfs
+│   ├── nerdctl
+│   ├── rootlessctl
+│   ├── rootlesskit
+│   ├── runc
+│   └── slirp4netns
+├── lib
+│   └── systemd
+│       └── system
+│           ├── buildkit.service
+│           ├── containerd.service
+│           └── stargz-snapshotter.service
+├── libexec
+│   └── cni
+│       ├── bandwidth
+│       ├── bridge
+│       ├── dhcp
+│       ├── firewall
+│       ├── host-device
+│       ├── host-local
+│       ├── ipvlan
+│       ├── isolation
+│       ├── loopback
+│       ├── macvlan
+│       ├── portmap
+│       ├── ptp
+│       ├── sbr
+│       ├── static
+│       ├── tuning
+│       ├── vlan
+│       └── vrf
+└── share
+    └── doc
+        ├── nerdctl
+        │   ├── docs
+        │   │   ├── cni.md
+        │   │   ├── compose.md
+        │   │   ├── config.md
+        │   │   ├── cosign.md
+        │   │   ├── dir.md
+        │   │   ├── experimental.md
+        │   │   ├── faq.md
+        │   │   ├── freebsd.md
+        │   │   ├── gpu.md
+        │   │   ├── ipfs.md
+        │   │   ├── multi-platform.md
+        │   │   ├── ocicrypt.md
+        │   │   ├── registry.md
+        │   │   ├── rootless.md
+        │   │   └── stargz.md
+        │   └── README.md
+        └── nerdctl-full
+            ├── README.md
+            └── SHA256SUMS
+
+11 directories, 57 files
+```
+
+
+
+### 2.1.5 启动containerd与buildkit
+
+```shell
+systemctl enable containerd buildkit && systemctl start containerd buildkit
+```
+
+
+
+### 2.1.6 验证
+
+```shell
+$ ctr version
+Client:
+  Version:  v1.5.9
+  Revision: 1407cab509ff0d96baa4f0eb6ff9980270e6e620
+  Go version: go1.17.6
+
+Server:
+  Version:  v1.5.9
+  Revision: 1407cab509ff0d96baa4f0eb6ff9980270e6e620
+  UUID: 0fd8e6f7-ba7a-4715-844f-c8261932a201
+
+$ nerdctl version
+Client:
+ Version:	v0.16.1
+ Git commit:	c4bd56b3aa220db037cc6c0a4e0c8cc062f2cc4c
+
+Server:
+ containerd:
+  Version:	v1.5.9
+  GitCommit:	1407cab509ff0d96baa4f0eb6ff9980270e6e620
+
+$ buildctl -v
+buildctl github.com/moby/buildkit v0.9.3 8d2625494a6a3d413e3d875a2ff7dd9b1ed1b1a9
+
+$ buildkitd -v
+buildkitd github.com/moby/buildkit v0.9.3 8d2625494a6a3d413e3d875a2ff7dd9b1ed1b1a9
+```
+
+
+
+### 2.1.7 卸载containerd、nerdctl、buildkit
+
+#### 2.1.7.1 停止containerd与buildkit服务
+
+```shell
+systemctl disable containerd buildkit && systemctl stop containerd buildkit && systemctl status containerd buildkit
+```
+
+
+
+#### 2.1.7.2 卸载containerd、nerdctl、buildkit
+
+**卸载containerd、nerdctl、buildkit删除相关目录文件即可**
+
+```shell
+rm -rf /usr/local/bin/{buildctl,buildkitd,containerd,containerd-fuse-overlayfs-grpc,containerd-rootless-setuptool.sh,containerd-rootless.sh,containerd-shim-runc-v2,containerd-stargz-grpc,ctd-decoder,ctd-decoder,ctr,ctr-enc,ctr-remote,fuse-overlayfs,ipfs,nerdctl,rootlessctl,rootlesskit,runc,slirp4netns} \
+/usr/local/lib/systemd/system/{buildkit.service,containerd.service,stargz-snapshotter.service} \
+/usr/local/libexec/cni \
+/usr/local/share/doc/{nerdctl,nerdctl-full}
+```
+
+
+
 ## 2.2 已安装containerd
 
-下载包
-
 <span style=color:red>如果已经安装过了containerd，则直接下载 nerdctl-<VERSION\>-linux-amd64.tar.gz</span>
+
+### 2.2.1 下载包
 
 ```shell
 export NERDCTL_VERSION=0.16.1
@@ -36,7 +270,7 @@ wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}
 
 
 
-解压缩
+### 2.2.2 查看包内容
 
 ```shell
 # 查看包内容，解压缩后是2个sh文件和nerdctl二进制命令
@@ -44,17 +278,27 @@ $ tar tf nerdctl-${NERDCTL_VERSION}-linux-amd64.tar.gz
 nerdctl
 containerd-rootless-setuptool.sh
 containerd-rootless.sh
+```
 
-# 解压缩包
+
+
+### 2.2.3 解压缩包
+
+```shell
 tar xf nerdctl-${NERDCTL_VERSION}-linux-amd64.tar.gz
+```
 
-# 移动nerdctl至/usr/local/bin
+
+
+### 2.2.4 导出 `nerdctl` 命令
+
+```shell
 mv nerdctl /usr/local/bin
 ```
 
 
 
-验证
+### 2.2.5 验证
 
 ```shell
 $ nerdctl version
@@ -167,7 +411,7 @@ buildkitd github.com/moby/buildkit v0.9.3 8d2625494a6a3d413e3d875a2ff7dd9b1ed1b1
 使用 systemd 管理 buildkitd
 
 ```shell
-cat > /etc/systemd/system/buildkitd.service << EOF
+cat > /etc/systemd/system/buildkit.service << EOF
 [Unit]
 Description=BuildKit
 Documentation=https://github.com/moby/buildkit
@@ -182,10 +426,10 @@ EOF
 
 
 
-启动 buildkitd
+启动 buildkit
 
 ```shell
-systemctl daemon-reload && systemctl enable buildkitd && systemctl start buildkitd
+systemctl daemon-reload && systemctl enable buildkit && systemctl start buildkit
 ```
 
 
@@ -193,24 +437,18 @@ systemctl daemon-reload && systemctl enable buildkitd && systemctl start buildki
 查看启动状态
 
 ```shell
-$ systemctl status buildkitd
-● buildkitd.service - BuildKit
-   Loaded: loaded (/etc/systemd/system/buildkitd.service; enabled; vendor preset: disabled)
-   Active: active (running) since Sat 2022-02-05 13:00:41 CST; 4s ago
+$ systemctl status buildkit
+● buildkit.service - BuildKit
+   Loaded: loaded (/etc/systemd/system/buildkit.service; enabled; vendor preset: disabled)
+   Active: active (running) since Sat 2022-02-05 20:23:38 CST; 8s ago
      Docs: https://github.com/moby/buildkit
- Main PID: 12939 (buildkitd)
-    Tasks: 7
-   Memory: 9.8M
-   CGroup: /system.slice/buildkitd.service
-           └─12939 /usr/local/bin/buildkitd --oci-worker=false --containerd-worker=true
+ Main PID: 16599 (buildkitd)
+    Tasks: 6
+   Memory: 8.6M
+   CGroup: /system.slice/buildkit.service
+           └─16599 /usr/local/bin/buildkitd --oci-worker=false --containerd-worker=true
 
-Feb 05 13:00:41 k8s-test systemd[1]: Started BuildKit.
-Feb 05 13:00:41 k8s-test buildkitd[12939]: time="2022-02-05T13:00:41+08:00" level=warning msg="using host network as the default"
-Feb 05 13:00:41 k8s-test buildkitd[12939]: time="2022-02-05T13:00:41+08:00" level=info msg="found worker \"7ny8c7t43qy4j9gkj8ugutt8q\", labels=map[or...
-Feb 05 13:00:41 k8s-test buildkitd[12939]: time="2022-02-05T13:00:41+08:00" level=info msg="found 1 workers, default=\"7ny8c7t43qy4j9gkj8ugutt8q\""
-Feb 05 13:00:41 k8s-test buildkitd[12939]: time="2022-02-05T13:00:41+08:00" level=warning msg="currently, only the default worker can be used."
-Feb 05 13:00:41 k8s-test buildkitd[12939]: time="2022-02-05T13:00:41+08:00" level=info msg="running server on /run/buildkit/buildkitd.sock"
-Hint: Some lines were ellipsized, use -l to show in full.
+Feb 05 20:23:38 k8s-test systemd[1]: Started BuildKit.
 ```
 
 

@@ -210,7 +210,7 @@
     * [ssh密钥](linux/linux服务/ssh/ssh密钥.md)
     * [ssh config](linux/linux服务/ssh/ssh config.md)
 
-  * [nfs](linux/linux服务/nfs/centos7.7搭建NFS.md)
+  * [nfs](linux/linux服务/nfs/centos7搭建NFS.md)
 
   * [同步服务](README.md)
     * [rsync](linux/linux服务/同步服务/centos7.7搭建rsync.md) 
