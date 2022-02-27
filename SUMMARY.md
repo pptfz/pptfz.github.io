@@ -161,11 +161,13 @@
 
 * [kvm](README.md)
   * [kvm安装](linux/kvm/安装/kvm安装.md)
+  * [kvm虚拟机基本操作](linux/kvm/操作/kvm虚拟机基本操作.md)
   * [kvm知识点](README.md)
     * [kvm虚拟机扩容硬盘](linux/kvm/知识点/kvm虚拟机扩容硬盘.md)
     * [使用 virt-manager 安装虚拟机](linux/kvm/知识点/使用 virt-manager 安装虚拟机.md)
     * [vncserver安装](linux/kvm/知识点/vncserver安装.md)
     * [kvm虚拟机网卡改动无法启动问题](linux/kvm/知识点/kvm虚拟机网卡改动无法启动问题.md)
+    * [kvm虚拟机开机自启](linux/kvm/知识点/kvm虚拟机开机自启.md)
 
 * [openstack](README.md)
   * [mitaka](README.md)
