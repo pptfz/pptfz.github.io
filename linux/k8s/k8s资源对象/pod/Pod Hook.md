@@ -1,111 +1,64 @@
-[toc]
+# pod hook
 
+Kubernetes 支持 postStart 和 preStop 事件。 当一个容器启动后，Kubernetes 将立即发送 postStart 事件；在容器被终结之前， Kubernetes 将发送一个 preStop 事件。容器可以为每个事件指定一个处理程序。
 
+## 定义 postStart 和 preStop 处理函数
 
-# Pod Hook
-
-我们知道`Pod`是`Kubernetes`集群中的最小单元，而 Pod 是有容器组组成的，所以在讨论 Pod 的生命周期的时候我们可以先来讨论下容器的生命周期。
-
-实际上 Kubernetes 为我们的容器提供了生命周期钩子的，就是我们说的`Pod Hook`，Pod Hook 是由 kubelet 发起的，当容器中的进程启动前或者容器中的进程终止之前运行，这是包含在容器的生命周期之中。我们可以同时为 Pod 中的所有容器都配置 hook。
-
-Kubernetes 为我们提供了两种钩子函数：
-
-- PostStart：这个钩子在容器创建后立即执行。但是，并不能保证钩子将在容器`ENTRYPOINT`之前运行，因为没有参数传递给处理程序。主要用于资源部署、环境准备等。不过需要注意的是如果钩子花费太长时间以至于不能运行或者挂起， 容器将不能达到`running`状态。
-- PreStop：这个钩子在容器终止之前立即被调用。它是阻塞的，意味着它是同步的， 所以它必须在删除容器的调用发出之前完成。主要用于优雅关闭应用程序、通知其他系统等。如果钩子在执行期间挂起， Pod阶段将停留在`running`状态并且永不会达到`failed`状态。
-
-如果`PostStart`或者`PreStop`钩子失败， 它会杀死容器。所以我们应该让钩子函数尽可能的轻量。当然有些情况下，长时间运行命令是合理的， 比如在停止容器之前预先保存状态。
-
-另外我们有两种方式来实现上面的钩子函数：
-
-- Exec - 用于执行一段特定的命令，不过要注意的是该命令消耗的资源会被计入容器。
-- HTTP - 对容器上的特定的端点执行`HTTP`请求。
-
-### 示例1 环境准备
-
-以下示例中，定义了一个Nginx Pod，其中设置了`PostStart`钩子函数，即在容器创建成功后，写入一句话到`/usr/share/message`文件中。创建的pod会随机被调度到一个node节点上，到该节点的容器中查看`/usr/share/message`信息验证
+编辑yaml文件
 
 ```yaml
-cat >poststart-pod.yaml <<EOF
+cat > lifecycle-events.yaml << EOF
 apiVersion: v1
 kind: Pod
 metadata:
-  name: hook-demo1
+  name: lifecycle-demo
 spec:
   containers:
-  - name: hook-demo1
+  - name: lifecycle-demo-container
     image: nginx
     lifecycle:
       postStart:
         exec:
           command: ["/bin/sh", "-c", "echo Hello from the postStart handler > /usr/share/message"]
+      preStop:
+        exec:
+          command: ["/bin/sh","-c","nginx -s quit; while killall -0 nginx; do sleep 1; done"]
 EOF
 ```
 
-### 示例2 优雅删除资源对象
 
-当用户请求删除含有 pod 的资源对象时（如Deployment等），K8S 为了让应用程序优雅关闭（即让应用程序完成正在处理的请求后，再关闭软件），K8S提供两种信息通知：
 
-- 默认：K8S 通知 node 执行`docker stop`命令，docker 会先向容器中`PID`为1的进程发送系统信号`SIGTERM`，然后等待容器中的应用程序终止执行，如果等待时间达到设定的超时时间，或者默认超时时间（30s），会继续发送`SIGKILL`的系统信号强行 kill 掉进程。
-- 使用 pod 生命周期（利用`PreStop`回调函数），它执行在发送终止信号之前。
+在上述配置文件中，你可以看到 postStart 命令在容器的 `/usr/share` 目录下写入文件 `message`。 命令 preStop 负责优雅地终止 nginx 服务。当因为失效而导致容器终止时，这一处理方式很有用。
 
-默认所有的优雅退出时间都在30秒内。kubectl delete 命令支持 `--grace-period=`选项，这个选项允许用户用他们自己指定的值覆盖默认值。值'0'代表 强制删除 pod. 在 kubectl 1.5 及以上的版本里，执行强制删除时必须同时指定 `--force --grace-period=0`。
+创建 Pod：
 
-强制删除一个 pod 是从集群状态还有 etcd 里立刻删除这个 pod。 当 Pod 被强制删除时， api 服务器不会等待来自 Pod 所在节点上的 kubelet 的确认信息：pod 已经被终止。在 API 里 pod 会被立刻删除，在节点上， pods 被设置成立刻终止后，在强行杀掉前还会有一个很小的宽限期。
-
-以下示例中，定义了一个Nginx Pod，其中设置了`PreStop`钩子函数，即在容器退出之前，优雅的关闭 Nginx:
-
-```python
-apiVersion: v1
-kind: Pod
-metadata:
-  name: hook-demo2
-spec:
-  containers:
-  - name: hook-demo2
-    image: nginx
-    lifecycle:
-      preStop:
-        exec:
-          command: ["/usr/sbin/nginx","-s","quit"]
+```shell
+kubectl apply -f lifecycle-events.yaml
 ```
 
-但是为了更好的验证采用挂载容器目录的方式
 
-```yaml
-cat >prestop-pod.yaml<<EOF
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: hook-demo2
-  labels:
-    app: hook
-spec:
-  containers:
-  - name: hook-demo2
-    image: nginx
-    ports:
-    - name: webport
-      containerPort: 80
-    volumeMounts:
-    - name: message
-      mountPath: /usr/share/
-    lifecycle:
-      preStop:
-        exec:
-          command: ['/bin/sh', '-c', 'echo Hello from the preStop Handler > /usr/share/message']
-  volumes:
-  - name: message
-    hostPath:
-      path: /tmp
-EOF
+
+验证 Pod 中的容器已经运行：
+
+```shell
+kubectl get pod lifecycle-demo
 ```
 
-另外`Hook`调用的日志没有暴露给 Pod 的 event，所以只能通过`describe`命令来获取，如果有错误将可以看到`FailedPostStartHook`或`FailedPreStopHook`这样的 event。
+
+
+验证 `postStart` 处理函数创建了 `message` 文件
+
+```shell
+$ kubectl exec -it lifecycle-demo -- cat /usr/share/message
+Hello from the postStart handler
+```
 
 
 
-验证``preStop``
+## 讨论
 
-因为``preStop``是在容器退出之前运行的，所以这里使用挂载容器的某一个目录到宿主机上的方式验证，具体操作就是在容器中的``/usr/share/message``文件中写入一些内容，然后把容器中的``/usr/share``挂载到宿主机的``/tmp``下，执行删除pod的操作后然后查看node节点上的``/tmp``中的``usr/share/message``文件内容
+Kubernetes 在容器创建后立即发送 postStart 事件。 然而，postStart 处理函数的调用不保证早于容器的入口点（entrypoint） 的执行。postStart 处理函数与容器的代码是异步执行的，但 Kubernetes 的容器管理逻辑会一直阻塞等待 postStart 处理函数执行完毕。 只有 postStart 处理函数执行完毕，容器的状态才会变成 RUNNING。
 
+Kubernetes 在容器结束前立即发送 preStop 事件。除非 Pod 宽限期限超时，Kubernetes 的容器管理逻辑 会一直阻塞等待 preStop 处理函数执行完毕。更多的相关细节，可以参阅 [Pods 的结束](https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination)。
+
+> **说明：** Kubernetes 只有在 Pod *结束（Terminated）* 的时候才会发送 preStop 事件， 这意味着在 Pod *完成（Completed）* 时 preStop 的事件处理逻辑不会被触发。这个限制在 [issue #55087](https://github.com/kubernetes/kubernetes/issues/55807) 中被追踪。

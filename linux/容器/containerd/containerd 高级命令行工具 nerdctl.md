@@ -14,7 +14,7 @@
 
 ## 2.1 未安装containerd
 
-<span style=color:red>⚠️如果没有安装 containerd，则可以下载 nerdctl-full-\<VERSION>-linux-amd64.tar.gz 包进行安装，并且nerdctl-full这个包是与containerd版本一一对应的，即containerd发布一个版本后，nerdctl-full也随即发布一个版本，虽然2者版本号不一致，但是是互相对应的</span>
+<span style=color:red>⚠️如果没有安装 containerd，则可以下载 nerdctl-full-\<VERSION\>-linux-amd64.tar.gz 包进行安装，并且nerdctl-full这个包是与containerd版本一一对应的，即containerd发布一个版本后，nerdctl-full也随即发布一个版本，虽然2者版本号不一致，但是是互相对应的</span>
 
 ### 2.1.1 下载包
 
