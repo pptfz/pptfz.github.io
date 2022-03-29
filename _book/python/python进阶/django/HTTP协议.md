@@ -1,6 +1,6 @@
 # HTTP协议
 
-![iShot2020-10-16 13.55.06](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.55.06.png)
+![iShot2020-10-16 13.55.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 13.55.06.png)
 
 
 
@@ -12,7 +12,7 @@
 
 **计算机网络体系结构分层**
 
-![iShot2020-10-16 13.55.46](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.55.46.png)
+![iShot2020-10-16 13.55.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 13.55.46.png)
 
 
 
@@ -20,7 +20,7 @@
 
 **利用 TCP/IP 协议族进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端则从链路层往上走。如下：**
 
-![iShot2020-10-16 13.56.38](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.56.38.png)
+![iShot2020-10-16 13.56.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 13.56.38.png)
 
 
 
@@ -33,7 +33,7 @@
 - **在网络层（IP 协议），增加作为通信目的地的 MAC 地址后转发给链路层。这样一来，发往网络的通信请求就准备齐全了。**
 - **接收端的服务器在链路层接收到数据，按序往上层发送，一直到应用层。当传输到应用层，才能算真正接收到由客户端发送过来的 HTTP请求。**
 
-如下图所示：![iShot2020-10-16 13.57.06](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.57.06.png)
+如下图所示：![iShot2020-10-16 13.57.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 13.57.06.png)
 
 
 
@@ -47,7 +47,7 @@
 
 ### 二、HTTP 工作过程
 
-![iShot2020-10-16 13.58.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.58.25.png)
+![iShot2020-10-16 13.58.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 13.58.25.png)
 
 
 
@@ -86,7 +86,7 @@ HTTP 是一种无状态协议。协议自身不对请求和响应之间的通信
 
 Cookie 技术通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态。Cookie 会根据从服务器端发送的响应报文内的一个叫做 Set-Cookie 的首部字段信息，通知客户端保存Cookie。当下次客户端再往该服务器发送请求时，客户端会自动在请求报文中加入 Cookie 值后发送出去。服务器端发现客户端发送过来的 Cookie 后，会去检查究竟是从哪一个客户端发来的连接请求，然后对比服务器上的记录，最后得到之前的状态信息。
 
-![iShot2020-10-16 13.58.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.58.49.png)
+![iShot2020-10-16 13.58.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 13.58.49.png)
 
 
 
@@ -102,7 +102,7 @@ HTTP 协议使用 URI 定位互联网上的资源。正是因为 URI 的特定�
 
 #### 5.告知服务器意图的 HTTP 方法（HTTP/1.1）
 
-![iShot2020-10-16 13.59.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.59.17.png)
+![iShot2020-10-16 13.59.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 13.59.17.png)
 
 - **GET**
   - **向指定的资源发出“显示”请求。使用GET方法应该只用在读取数据，而不应当被用于产生“副作用”的操作中，例如在Web Application中。其中一个原因是GET可能会被网络蜘蛛等随意访问**
@@ -165,13 +165,13 @@ HTTP 协议的初始版本中，每进行一个 HTTP 通信都要断开一次 TC
 
 HTTP 报文大致可分为报文首部和报文主体两部分。两者由最初出现的空行（CR+LF）来划分。通常，并不一定有报文主体。如下：
 
-![iShot2020-10-16 13.59.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.59.39.png)
+![iShot2020-10-16 13.59.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 13.59.39.png)
 
 
 
 ##### 2.1请求报文结构
 
-![iShot2020-10-16 14.00.05](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.00.05.png)
+![iShot2020-10-16 14.00.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.00.05.png)
 
 
 
@@ -184,7 +184,7 @@ HTTP 报文大致可分为报文首部和报文主体两部分。两者由最初
 
 请求报文的示例，如下：
 
-![iShot2020-10-16 14.00.26](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.00.26.png)
+![iShot2020-10-16 14.00.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.00.26.png)
 
 
 
@@ -192,7 +192,7 @@ HTTP 报文大致可分为报文首部和报文主体两部分。两者由最初
 
 ##### 2.2响应报文结构
 
-##### ![iShot2020-10-16 14.00.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.00.48.png)
+##### ![iShot2020-10-16 14.00.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.00.48.png)
 
 
 
@@ -207,7 +207,7 @@ HTTP 报文大致可分为报文首部和报文主体两部分。两者由最初
 
 响应报文的示例，如下：
 
-![iShot2020-10-16 14.01.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.01.18.png)
+![iShot2020-10-16 14.01.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.01.18.png)
 
 
 
@@ -1118,7 +1118,7 @@ HTTP 状态码种类繁多，数量达几十种。其中最常用的有以下 14
 
 #### 1. HTTP 报文实体概述
 
-![iShot2020-10-16 14.02.10](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.02.10.png)
+![iShot2020-10-16 14.02.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.02.10.png)
 
 
 
@@ -1152,7 +1152,7 @@ HTTP 报文结构
 内容编码是对报文的主体进行的可逆变换，是和内容的具体格式细节紧密相关的。
 传输编码也是作用在实体主体上的可逆变换，但使用它们是由于架构方面的原因，同内容的格式无关。使用传输编码是为了改变报文中的数据在网络上传输的方式。
 
-![iShot2020-10-16 14.02.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.02.28.png)
+![iShot2020-10-16 14.02.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.02.28.png)
 
 
 
@@ -1166,7 +1166,7 @@ HTTP 报文结构
 分块编码为这种困难提供了解决方案，只要允许服务器把主体分块发送，说明每块的大小就可以了。因为主体是动态创建的，服务器可以缓冲它的一部分，发送其大小和相应的块，然后在主体发送完之前重复这个过程。服务器可以用大小为 0 的块作为主体结束的信号，这样就可以继续保持连接，为下一个响应做准备。
 来看看一个分块编码的报文示例：
 
-![iShot2020-10-16 14.02.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.02.49.png)
+![iShot2020-10-16 14.02.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.02.49.png)
 
 
 
@@ -1191,7 +1191,7 @@ Range: bytes=20224-
 ···
 ```
 
-![iShot2020-10-16 14.03.10](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.03.10.png)
+![iShot2020-10-16 14.03.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.03.10.png)
 
 
 
@@ -1203,7 +1203,7 @@ HTTP 通信时，除客户端和服务器外，还有一些用于协助通信的
 
 #### 1.代理
 
-![iShot2020-10-16 14.03.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.03.35.png)
+![iShot2020-10-16 14.03.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.03.35.png)
 
 
 
@@ -1214,7 +1214,7 @@ HTTP 代理服务器是 Web 安全、应用集成以及性能优化的重要组�
 
 **浏览器第一次请求：**
 
-![iShot2020-10-16 14.03.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.03.54.png)
+![iShot2020-10-16 14.03.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.03.54.png)
 
 
 
@@ -1224,7 +1224,7 @@ HTTP 代理服务器是 Web 安全、应用集成以及性能优化的重要组�
 
 **浏览器再次请求：**
 
-![iShot2020-10-16 14.04.14](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.04.14.png)
+![iShot2020-10-16 14.04.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.04.14.png)
 
 
 
@@ -1232,7 +1232,7 @@ Web 缓存或代理缓存是一种特殊的 HTTP 代理服务器，可以将经�
 
 #### 3. 网关
 
-![iShot2020-10-16 14.04.36](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.04.36.png)
+![iShot2020-10-16 14.04.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.04.36.png)
 
 
 
@@ -1240,7 +1240,7 @@ Web 缓存或代理缓存是一种特殊的 HTTP 代理服务器，可以将经�
 
 #### 4. 隧道
 
-#### ![iShot2020-10-16 14.04.53](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.04.53.png)
+#### ![iShot2020-10-16 14.04.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.04.53.png)
 
 
 
@@ -1253,7 +1253,7 @@ HTTP 隧道的一种常见用途就是通过 HTTP 连接承载加密的安全套
 
 #### 5. Agent 代理
 
-![iShot2020-10-16 14.05.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.05.18.png)
+![iShot2020-10-16 14.05.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.05.18.png)
 
 
 

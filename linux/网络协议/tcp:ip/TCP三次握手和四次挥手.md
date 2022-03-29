@@ -11,7 +11,7 @@
 
 下面来看看三次握手的流程图：
 
-![iShot2020-04-0717.04.34](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.09.38.png)
+![iShot2020-04-0717.09.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.09.38.png)
 
 - **<span style=color:red>第一次握手：客户端将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给服务器端，客户端进入SYN_SENT状态，等待服务器端确认。</span>**
 
@@ -28,7 +28,7 @@
 
 下面来看看四次挥手的流程图：
 
-![iShot2020-04-0717.24.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.21.15.png)
+![iShot2020-04-0717.23.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.23.37.png)
 
 
 
@@ -41,7 +41,7 @@
 **上面是一方主动关闭，另一方被动关闭的情况，实际中还会出现同时发起主动关闭的情况，**
 具体流程如下图：
 
-![iShot2020-04-0717.21.15](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.23.37.png)
+![iShot2020-04-0717.23.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.23.37.png)
 
 
 
@@ -62,13 +62,17 @@
 
 红框内为第一次握手时IP为192.168.56.1的请求端（请求连接端）发送的seq，值为0（实际中此值不一定为0）
 
-![iShot2020-04-0819.11.43](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0819.11.43.png)
+
+
+![iShot2020-04-0819.11.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.11.43.png)
 
 **第二次握手**
 
 红框内为第二次握手时IP为192.168.56.130的服务端（被请求连接端）发送的seq，因为是服务端发给请求端的一个新的seq，所以值为0（实际中此值不一定为0）
 
-蓝框内为Ack（Acknowledgement Number确认编号）即我理解的小写的<font color=Red>ack</font>，值为第一次握手时![iShot2020-04-0819.27.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0819.27.40.png)请求端发送来的seq+1即0+1=1
+蓝框内为Ack（Acknowledgement Number确认编号）即我理解的小写的<font color=Red>ack</font>，值为第一次握手时，请求端发送来的seq+1即0+1=1
+
+![iShot2020-04-0819.27.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.27.40.png)
 
 
 
@@ -77,19 +81,15 @@
 红框内为第三次握手时IP为192.168.56.1的请求端（请求连接端）发送的seq，因为第一次握手时它发送给服务端的seq为0（黄框内），在上次的基础上+1，值就是1。
 蓝框内的Ack（Acknowledgement Number确认编号）还是我理解的小写的<font color=Red>ack</font>，值为第二次握手时请求端发来的seq+1，即绿框中的seq+1，值为0+1=1
 
-![iShot2020-04-0819.28.21](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0819.28.21.png)
-
-
+![iShot2020-04-0819.28.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.28.21.png)
 
 那么问题来了，那个起确认连接作用的确认值即我理解的那个大写的<font color=Red>ACK</font>在哪呢？
 
-![iShot2020-04-0819.34.12](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0819.34.12.png)
-
-
+![iShot2020-04-0819.34.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.34.12.png)
 
 在这里，展开看一下：
 
-![iShot2020-04-0819.54.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0819.54.16.png)
+![iShot2020-04-0819.54.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.54.16.png)
 
 
 
@@ -99,24 +99,22 @@
 确认位即ACK，为1即为确认进行连接
 同步位即SYN，从第一次握手时，此位就为1
 
-![iShot2020-04-0819.40.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0819.40.42.png)
+![iShot2020-04-0819.40.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.40.42.png)
 
 下面是网上找到的三次握手的标志图，供参考：
 
 **第一次握手的标志位**
 我们可以看到标志位里面只有个同步位，也就是在做请求(SYN)
 
-![iShot2020-04-0819.42.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0819.42.54.png)
+![iShot2020-04-0819.42.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.42.54.png)
 
 **第二次握手的标志位**
 我们可以看到标志位里面有个确认位和同步位，也就是在做应答(SYN + ACK)
 
-![iShot2020-04-0819.43.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0819.43.25.png)
+![iShot2020-04-0819.43.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.43.25.png)
 
 **第三次握手的标志位**
 我们可以看到标志位里面只有个确认位，也就是再做再次确认(ACK)
 
-![iShot2020-04-0819.43.46](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0819.43.46.png)
-
-
+![iShot2020-04-0819.43.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.43.46.png)
 

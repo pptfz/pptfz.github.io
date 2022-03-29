@@ -161,19 +161,19 @@ cd grafana-8.0.2/
 
 **初始默认账户和密码都是`admin`**
 
-![iShot2020-06-1110.14.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-06-1110.14.33.png)
+![iShot2020-06-1110.14.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.14.33.png)
 
 
 
 **登陆成功后会提示修改密码，也可以选择跳过不修改**
 
-![iShot2020-06-1110.33.24](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-06-1110.15.21.png)
+![iShot2020-06-1110.33.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.15.21.png)
 
 
 
 **登陆后首界面**
 
-![iShot2020-06-1110.31.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-06-1110.16.16.png)
+![iShot2020-06-1110.31.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.16.16.png)
 
 
 

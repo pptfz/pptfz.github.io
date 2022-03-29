@@ -193,9 +193,7 @@ gitbook serve &
 
 浏览器访问 `IP:4000`
 
-![iShot2021-06-12 18.07.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-12 18.07.22.png)
-
-
+![iShot2021-06-12 18.07.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-12%2018.07.22.png)
 
 
 

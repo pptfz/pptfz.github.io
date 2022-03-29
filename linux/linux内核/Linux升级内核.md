@@ -13,7 +13,7 @@ $ uname -r
 
 **可根据自己实际需求下载对应版本**
 
-![iShot2020-09-21 14.29.15](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-09-21 14.29.15.png)
+![iShot2020-09-21 14.29.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-21 14.29.15.png)
 
 
 

@@ -26,19 +26,19 @@ snmpwalk  -v 2c -c public100 10.0.0.123
 
 SNMP接口处填写交换机的IP，端口默认161
 
-![iShot2021-06-07 12.44.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-07 12.44.22.png)
+![iShot2021-06-07 12.44.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-07 12.44.22.png)
 
 
 
 交换机是华为的，所以模版选择 `Template Net Huawei VRP SNMPv2`
 
-![iShot2021-06-07 13.00.45](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-07 13.00.45.png)
+![iShot2021-06-07 13.00.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-07 13.00.45.png)
 
 
 
 ⚠️这里的宏必须填写正确，要和交换机中设置的 `snmp-agent community read  public100` 名称对应
 
-![iShot2021-06-07 12.59.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-07 12.59.42.png)
+![iShot2021-06-07 12.59.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-07 12.59.42.png)
 
 
 
@@ -50,5 +50,5 @@ SNMP接口处填写交换机的IP，端口默认161
 
 效果示意图
 
-![iShot2021-06-07 13.04.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-07 13.04.33.png)
+![iShot2021-06-07 13.04.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-07 13.04.33.png)
 

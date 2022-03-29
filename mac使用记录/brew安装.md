@@ -7,7 +7,7 @@
 国外源
 
 ```shell
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw/branch.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 
@@ -15,7 +15,7 @@
 国内源
 
 ```shell
-/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
+/bin/zsh -c "$(curl -fsSL https://gitea.pptfz.cn/cunkai/HomebrewCN/raw/branch/master/Homebrew.sh)"
 ```
 
 

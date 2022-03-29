@@ -70,8 +70,8 @@ tar xf docker-20.10.2.tgz && cp docker/* /usr/bin
 ⚠️需要下载的是``docker.service.rpm``和``docker.socket``这两个文件，需要把``docker.service.rpm``重命名为``docker.service``，然后再移动到``/etc/systemd/system``下
 
 ```python
-wget https://github.com/moby/moby/blob/master/contrib/init/systemd/docker.service.rpm
-wget https://github.com/moby/moby/blob/master/contrib/init/systemd/docker.socket  
+wget https://github.com/moby/moby/raw/branch/branch/master/contrib/init/systemd/docker.service.rpm
+wget https://github.com/moby/moby/raw/branch/branch/master/contrib/init/systemd/docker.socket  
 ```
 
 
@@ -297,11 +297,11 @@ server {
 
 密码：`spug.dev`
 
-![iShot2021-02-03 10.02.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-02-03 10.02.25.png)
+![iShot2021-02-03 10.02.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-03 10.02.25.png)
 
 
 
-![iShot2021-02-03 10.03.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-02-03 10.03.25.png)
+![iShot2021-02-03 10.03.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-03 10.03.25.png)
 
 
 
@@ -313,7 +313,7 @@ server {
 
 **问题一：主机console连接空白**
 
-![iShot2021-02-02 15.45.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-02-02 15.45.57.png)
+![iShot2021-02-02 15.45.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-02 15.45.57.png)
 
 **原因：**
 

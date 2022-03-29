@@ -177,9 +177,7 @@ server {
 
 浏览器访问会发现提示 `WebSocket Disconnected` ，原因在于nginx的隧道需要把client端的upgrade请求发送给zeppelin，所以upgrade和connection的头信息需要显式设置
 
-![iShot2021-01-25 16.20.46](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-01-25 16.20.46.png)
-
-
+![iShot2021-01-25 16.20.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-01-25%2016.20.46.png)
 
 解决方法，修改ngxin配置文件
 
@@ -203,5 +201,4 @@ server {
 
 重启nginx后刷新即可
 
-![iShot2021-01-25 11.50.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-01-25 11.50.33.png)
-
+![iShot2021-01-25 11.50.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-01-25%2011.50.33.png)

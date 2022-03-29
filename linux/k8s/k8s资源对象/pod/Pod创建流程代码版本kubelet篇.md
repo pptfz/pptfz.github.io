@@ -737,7 +737,7 @@ func (ds *dockerService) StartContainer(_ context.Context, r *runtimeapi.StartCo
 
 # 6. 总结
 
-![iShot2020-10-15 16.30.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.30.11.png)
+![iShot2020-10-15 16.30.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.30.11.png)
 
 Pod启动的核心流程大概就这些，里面会有一些笔认购具体参数数据的构建，没有写明，但是如果对代码感兴趣的，可以顺着这个核心流程基本可以读下来，如果对代码不感兴趣，则后面这张图可以算作一个精简版的，面试可用的Pod创建流程图
 

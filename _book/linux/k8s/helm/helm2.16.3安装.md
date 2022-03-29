@@ -52,7 +52,7 @@
 
 # Helm工作原理
 
-![iShot2020-10-15 14.44.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 14.44.49.png)
+![iShot2020-10-15 14.44.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 14.44.49.png)
 
 
 
@@ -125,7 +125,7 @@ helm repo update
 #创建服务端
 helm init --service-account tiller --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.16.3  --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 
-#创建TLS认证服务端，参考地址：https://github.com/gjmzj/kubeasz/blob/master/docs/guide/helm.md
+#创建TLS认证服务端，参考地址：https://github.com/gjmzj/kubeasz/raw/branch/branch/master/docs/guide/helm.md
 
 helm init --service-account tiller --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.16.3 --tiller-tls-cert /etc/kubernetes/ssl/tiller001.pem --tiller-tls-key /etc/kubernetes/ssl/tiller001-key.pem --tls-ca-cert /etc/kubernetes/ssl/ca.pem --tiller-namespace kube-system --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts    
 ```

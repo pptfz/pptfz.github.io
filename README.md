@@ -1,5 +1,5 @@
 # 😂 😂  😂
 
-![readme](https://gitee.com/pptfz/picgo-images/raw/master/img/readme.gif)
+![readme](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/readme.gif)
 
-![rm](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-28 15.06.18.png)
+![rm](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-28 15.06.18.png)

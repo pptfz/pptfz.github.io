@@ -48,11 +48,7 @@ sh bin/startup.sh -m standalone
 
 [http://nacos.com](http://nacos.com/):port/openAPI 域名 + SLB模式(内网SLB，不可暴露到公网，以免带来安全风险)，可读性好，而且换ip方便，推荐模式
 
-
-
-![iShot2021-05-25 20.00.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-05-25 20.00.37.png)
-
-
+![iShot2021-05-25 20.00.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-25%2020.00.37.png)
 
 ## 2.0 实验环境
 
@@ -110,9 +106,7 @@ export JAVA_HOME PATH CLASSPATH
 
 **⚠️<span style=color:red>maven版本需要3.2.5以上，否则后续有坑</span>**
 
-![iShot2021-05-27 10.35.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-05-27 10.35.39.png)
-
-
+![iShot2021-05-27 10.35.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-27%2010.35.39.png)
 
 下载maven3.2.5
 
@@ -187,9 +181,7 @@ mvn -Prelease-nacos clean install -U
 
 编译从未成功过，各种报错，直接放弃！
 
-![iShot2021-05-27 11.25.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-05-27 11.25.51.png)
-
-
+![iShot2021-05-27 11.25.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-27%2011.25.51.png)
 
 
 
@@ -304,15 +296,11 @@ sh bin/startup.sh
 
 默认用户名密码都是 `nacos`
 
-![iShot2021-05-26 19.54.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-05-26 19.54.35.png)
-
-
+![iShot2021-05-26 19.54.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-26%2019.54.35.png)
 
 登陆后首页面
 
-![iShot2021-05-26 19.56.52](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-05-26 19.56.52.png)
-
-
+![iShot2021-05-26 19.56.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-26%2019.56.52.png)
 
 
 

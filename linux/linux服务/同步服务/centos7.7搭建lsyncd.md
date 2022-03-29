@@ -255,7 +255,7 @@ sync为同步配置，部分参数如下：
 
 官方说明
 
-![iShot2020-04-0516.36.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0516.36.55.png)
+![iShot2020-04-0516.36.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0516.36.55.png)
 
 ```python
 # 在/etc/lsyncd.conf配置文件中多加几个sync标签即为同步到多台机器，需要注意的是，如果采用密码文件的方式，则每一个sync标签中都必须包含一个rsync标签，用来指定密码文件
@@ -313,7 +313,7 @@ sync {
 
 官方配置文件示意图
 
-![iShot2020-04-0522.18.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0522.18.09.png)
+![iShot2020-04-0522.18.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0522.18.09.png)
 
 
 

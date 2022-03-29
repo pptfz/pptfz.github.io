@@ -162,17 +162,13 @@ yarn docs:dev < /dev/null  >nohup.out&
 
 浏览器访问 `IP:8080`，初始效果如下
 
-![iShot2021-07-18 23.45.34](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-07-18 23.45.34.png)
-
-
+![iShot2021-07-18 23.45.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-18%2023.45.34.png)
 
 # 3.目录结构
 
 VuePress 遵循 **“约定优于配置”** 的原则，推荐的目录结构如下：
 
-![iShot2021-07-18 23.50.14](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-07-18 23.50.14.png)
-
-
+![iShot2021-07-18 23.50.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-18%2023.50.14.png)
 
 - `docs/.vuepress`: 用于存放全局的配置、组件、静态资源等。
 - `docs/.vuepress/components`: 该目录中的 Vue 组件将会被自动注册为全局组件。
@@ -189,7 +185,7 @@ VuePress 遵循 **“约定优于配置”** 的原则，推荐的目录结构�
 
 
 
-> 当你想要去自定义 `templates/ssr.html` 或 `templates/dev.html` 时，最好基于 [默认的模板文件](https://github.com/vuejs/vuepress/blob/master/packages/%40vuepress/core/lib/client/index.dev.html)来修改，否则可能会导致构建出错。
+> 当你想要去自定义 `templates/ssr.html` 或 `templates/dev.html` 时，最好基于 [默认的模板文件](https://github.com/vuejs/vuepress/raw/branch/branch/master/packages/%40vuepress/core/lib/client/index.dev.html)来修改，否则可能会导致构建出错。
 
 
 
@@ -246,9 +242,7 @@ footer: MIT Licensed | Copyright © 2018-present Evan You
 
 效果如下
 
-![iShot2021-07-19 00.22.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-07-19 00.22.09.png)
-
-
+![iShot2021-07-19 00.22.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-19%2000.22.09.png)
 
 ## 4.2 配置VuePress目录
 
@@ -273,9 +267,7 @@ EOF
 
 浏览器访问 `IP:port/test/test.html`，效果如下
 
-![iShot2021-07-19 00.38.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-07-19 00.38.44.png)
-
-
+![iShot2021-07-19 00.38.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-19%2000.38.44.png)
 
 > VuePress是以docs目录下的目录为映射路径的，即默认的根目录为docs
 
@@ -310,9 +302,7 @@ mkdir -p docs/.vuepress/public/assets/img
 
 效果如下
 
-![iShot2021-07-19 00.58.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-07-19 00.58.57.png)
-
-
+![iShot2021-07-19 00.58.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-19%2000.58.57.png)
 
 ## 5.2 配置VuePress导航栏链接
 
@@ -344,9 +334,7 @@ module.exports = {
 
 效果如下
 
-![iShot2021-08-01 22.18.56](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 22.18.56.png)
-
-
+![iShot2021-08-01 22.18.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-08-01%2022.18.56.png)
 
 
 
@@ -406,9 +394,7 @@ module.exports = {
 
 效果如下
 
-![iShot2021-08-01 22.49.36](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 22.49.36.png)
-
-
+![iShot2021-08-01 22.49.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-08-01%2022.49.36.png)
 
 如果想要增加多个导航链接，写法如下
 
@@ -429,9 +415,7 @@ module.exports = {
 
 效果如下
 
-![iShot2021-08-01 23.00.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 23.00.37.png)
-
-
+![iShot2021-08-01 23.00.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-08-01%2023.00.37.png)
 
 使用示例
 
@@ -487,9 +471,7 @@ module.exports = {
 
 效果如下
 
-![iShot2021-08-01 23.05.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 23.05.17.png)
-
-
+![iShot2021-08-01 23.05.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-08-01%2023.05.17.png)
 
 ### 5.2.2 禁用导航栏
 
@@ -527,9 +509,7 @@ navbar: false
 
 浏览器访问 `ip:port/about/about.html`
 
-![iShot2021-08-01 23.13.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 23.13.23.png)
-
-
+![iShot2021-08-01 23.13.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-08-01%2023.13.23.png)
 
 修改 `docs/about/about.md` 文件
 
@@ -545,9 +525,7 @@ navbar: false
 
 浏览器再次访问 `ip:port/about/about.html`
 
-![iShot2021-08-01 23.15.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-01 23.15.39.png)
-
-
+![iShot2021-08-01 23.15.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-08-01%2023.15.39.png)
 
 ## 5.3 配置VuePress侧边栏
 
@@ -598,9 +576,7 @@ navbar: false
 
 浏览器访问 `ip:port/about/about.html`，效果如下
 
-![iShot2021-08-02 20.30.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-02 20.30.25.png)
-
-
+![iShot2021-08-02 20.30.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-08-02%2020.30.25.png)
 
 编辑 `config.js` ，配置自动生成侧边栏
 
@@ -617,9 +593,7 @@ module.exports = {
 
 效果如下
 
-![iShot2021-08-02 20.34.50](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-02 20.34.50.png)
-
-
+![iShot2021-08-02 20.34.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-08-02%2020.34.50.png)
 
 ### 5.3.2 侧边栏分组
 
@@ -696,4 +670,4 @@ module.exports = {
 
 效果如下
 
-![iShot2021-08-02 21.45.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-08-02 21.45.28.png)
+![iShot2021-08-02 21.45.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-08-02%2021.45.28.png)

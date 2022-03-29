@@ -18,17 +18,9 @@
 
 
 
-连接提示认证失败
+连接提示认证失败，在jumpserver群中提问，果然没有失望，还是熟悉的味道，没人回答😂
 
-![QQ20210308-0](https://gitee.com/pptfz/picgo-images/raw/master/img/QQ20210308-0.png)
-
-
-
-在jumpserver群中提问，果然没有失望，还是熟悉的味道，没人回答😂
-
-![iShot2021-03-08 12.52.391](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-03-08 12.52.391.png)
-
-
+![iShot2021-03-08 12.52.391](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-08%2012.52.391.png)
 
 **诡异的问题**
 

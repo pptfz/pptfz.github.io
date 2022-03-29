@@ -105,7 +105,7 @@ registry.cn-shanghai.aliyuncs.com/ss1917/mysql:5.7              0.0.0.0:3307->33
 - 微服务部署完成后，需在Apigateway进行注册
 - 一台MySQL Master示例，不同的微服务使用单独的库
 
-![iShot2021-03-02 14.47.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-03-02 14.47.02.png)
+![iShot2021-03-02 14.47.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-02 14.47.02.png)
 
 
 
@@ -179,7 +179,7 @@ codo部署方式有[单机部署](https://docs.opendevops.cn/zh/guide/install/lo
 
 ### 2.1.3 优化系统
 
-[官方提供的优化脚本，请根据实际情况操作](https://github.com/opendevops-cn/opendevops/blob/master/scripts/system_init_v1.sh)
+[官方提供的优化脚本，请根据实际情况操作](https://github.com/opendevops-cn/opendevops/raw/branch/branch/master/scripts/system_init_v1.sh)
 
 
 
@@ -1757,7 +1757,7 @@ cd /opt/codo/ && git clone https://github.com/ss1917/api-gateway.git && cd /opt/
 
 ### 2.9.2 修改相关配置
 
-> 主要修改`nginx.conf`配置信息和`config.lua`配置，具体参考API网关块：[API网关修改配置](https://github.com/ss1917/api-gateway/blob/master/README.md#二-修改配置)
+> 主要修改`nginx.conf`配置信息和`config.lua`配置，具体参考API网关块：[API网关修改配置](https://github.com/ss1917/api-gateway/raw/branch/branch/master/README.md#二-修改配置)
 
 
 
@@ -1981,13 +1981,8 @@ curl -I -X GET -m 10 -o /dev/null -s -w %{http_code} http://gw.opendevops.cn:888
 
 密码 `admin@opendevops`
 
-
-
-![iShot2021-03-13 15.20.00](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-03-13 15.20.00.png)
-
-
+![iShot2021-03-13 15.20.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-13%2015.20.00.png)
 
 登陆后页面
 
-![iShot2021-03-03 16.48.05](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-03-03 16.48.05.png)
-
+![iShot2021-03-03 16.48.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-03%2016.48.05.png)

@@ -87,9 +87,7 @@ This account is currently not available.
 
 点击 `next` ，接下里就是设置 `admin` 用户密码以及是否允许匿名用户登陆
 
-![iShot2022-01-09 16.58.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2022-01-09 16.58.02.png)
-
-
+![iShot2022-01-09 16.58.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-09%2016.58.02.png)
 
 ### 使用systemd管理nexus
 

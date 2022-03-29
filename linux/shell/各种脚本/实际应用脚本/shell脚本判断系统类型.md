@@ -111,7 +111,7 @@ LSB Version:	core-9.20160110ubuntu0.2-amd64:core-9.20160110ubuntu0.2-noarch:secu
 
 在生产我们常用的方法就是根据 `/etc/os-release` 返回的内容进行判断
 
-[openvpn一键安装脚本](https://github.com/Nyr/openvpn-install/blob/master/openvpn-install.sh) 中有写对系统类型的判断
+[openvpn一键安装脚本](https://github.com/Nyr/openvpn-install/raw/branch/branch/master/openvpn-install.sh) 中有写对系统类型的判断
 
 ```sh
 # Detect OS

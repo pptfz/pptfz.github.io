@@ -8,7 +8,7 @@
 
 **整个项目的目录及文件**
 
-![iShot2020-10-16 14.07.24](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.07.24.png)
+![iShot2020-10-16 14.07.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.07.24.png)
 
 
 
@@ -111,7 +111,7 @@ MIDDLEWARE = [
 
 
 
-![iShot2020-10-16 14.08.08](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.08.08.png)
+![iShot2020-10-16 14.08.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.08.08.png)
 
 
 
@@ -257,7 +257,7 @@ MIDDLEWARE = [
 
 **第一步、在项目的同级目录下创建一个名为static_file的目录，用于存放静态文件，并且在这个目录下引入bootstrap**
 
-![iShot2020-10-16 14.08.43](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.08.43.png)
+![iShot2020-10-16 14.08.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.08.43.png)
 
 
 
@@ -290,7 +290,7 @@ os.path.join(BASE_DIR,'static_file')这一项中的static_file是django项目同
 
 **输入正确的用户名返回index.html，登陆失败还是则重定向到登陆界面**
 
-![login2](https://gitee.com/pptfz/picgo-images/raw/master/img/login2.gif)
+![login2](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/login2.gif)
 
 
 
@@ -529,13 +529,13 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-![iShot2020-10-16 14.09.27](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.09.27.png)
+![iShot2020-10-16 14.09.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.09.27.png)
 
 
 
 **同步完数据库查看表**
 
-![iShot2020-10-16 14.09.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.09.48.png)
+![iShot2020-10-16 14.09.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.09.48.png)
 
 
 
@@ -775,7 +775,7 @@ book_add.html
 
 **最终效果**
 
-![book](https://gitee.com/pptfz/picgo-images/raw/master/img/book.gif)
+![book](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/book.gif)
 
 
 
@@ -787,7 +787,7 @@ book_add.html
 
 **表字段及表之间的关系**
 
-![iShot2020-10-16 14.10.45](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.10.45.png)
+![iShot2020-10-16 14.10.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.10.45.png)
 
 
 
@@ -1053,7 +1053,7 @@ html文件中引用
 {{ book.get_all_authors }}
 ```
 
-![iShot2020-10-16 14.12.24](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 14.12.24.png)
+![iShot2020-10-16 14.12.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 14.12.24.png)
 
 
 

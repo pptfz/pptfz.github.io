@@ -4,7 +4,7 @@
 
 [docker compose github地址](https://github.com/docker/compose)
 
-[docker compose 官方安装地址](https://github.com/docker/docker.github.io/blob/master/compose/install.md)
+[docker compose 官方安装地址](https://github.com/docker/docker.github.io/raw/branch/branch/master/compose/install.md)
 
 [官方安装文档](https://docs.docker.com/compose/install/)
 

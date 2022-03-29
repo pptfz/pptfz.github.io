@@ -310,7 +310,7 @@ missing c /etc/pam.d/login
 
 > **客户反馈系统无法远程登陆，实际系统启动本身就有问题。**
 
-![iShot2020-08-0412.07.21](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0412.07.21.png)
+![iShot2020-08-0412.07.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0412.07.21.png)
 
 根据报错信息来看，是系统内读取 user 有问题，需要挂盘查看。
 
@@ -330,11 +330,11 @@ missing c /etc/pam.d/login
   grep -i "no such" ch.out.pid |grep "so"
   ```
 
-  ![iShot2020-08-0412.09.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0412.09.49.png)
+  ![iShot2020-08-0412.09.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0412.09.49.png)
 
 - 查看对应文件的关系（测试机补图）。
 
-  ![iShot2020-08-0412.10.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0412.10.23.png)
+  ![iShot2020-08-0412.10.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0412.10.23.png)
 
 - 确认系统上丢了最终的`libnss_files-2.12.so`，尝试拷贝一个。
 
@@ -343,11 +343,11 @@ missing c /etc/pam.d/login
   route add default gw < 网关 IP>
   ```
 
-  ![iShot2020-08-0412.11.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0412.11.11.png)
+  ![iShot2020-08-0412.11.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0412.11.11.png)
 
 - 此时已经可以上网了，去拷贝一个同版本的文件试试吧。
 
-  ![iShot2020-08-0412.12.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0412.12.44.png)
+  ![iShot2020-08-0412.12.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0412.12.44.png)
 
 
 
@@ -407,19 +407,17 @@ auth required pam_succeed_if.so user != root quiet
 
 > **系统登陆卡住，需要 ctrl +c 才能进去，如图。**
 
-![iShot2020-08-0412.21.52](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0412.21.52.png)
+![iShot2020-08-0412.21.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0412.21.52.png)
 
 如果一直等的话，会提示如下截图：
 
-![iShot2020-08-0412.22.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0412.22.25.png)
+![iShot2020-08-0412.22.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0412.22.25.png)
 
 **原因**
 
 > **/etc/profile 里面有 source /etc/profile 引起死循环，注释即可。**
 
-![iShot2020-08-0412.23.10](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0412.23.10.png)
-
-
+![iShot2020-08-0412.23.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0412.23.10.png)
 
 
 
@@ -890,29 +888,23 @@ Killed process 10366 (nginx) total-vm:84784kB，anon-rss:49156kB， file-rss:520
 
 > **收到报警，系统的内存使用率触发阈值（部分图是后补的）。**
 
-![iShot2020-08-0510.02.30](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0510.02.30.png)
+![iShot2020-08-0510.02.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.02.30.png)
 
 登陆系统，使用命令(top 按M)查看内存分配。
 
-![iShot2020-08-0510.04.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0510.04.33.png)
-
-
+![iShot2020-08-0510.04.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.04.33.png)
 
 使用命令`free -m`查看内存使用情况
 
-![iShot2020-08-0510.05.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0510.05.17.png)
-
-
+![iShot2020-08-0510.05.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.05.17.png)
 
 使用命令`atop`看下内存分配（cat /proc/meminfo 也可以看到一些细化的内存使用信息）。
 
-![iShot2020-08-0510.06.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0510.06.49.png)
-
-
+![iShot2020-08-0510.06.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.06.49.png)
 
 发现 cache 才 1.7G，slab 非常高，4.4G，**<span style=color:red>slab 内存简单理解为是系统占用的</span>**。 使用 slabtop 继续分析。
 
-![iShot2020-08-0510.10.52](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0510.10.52.png)
+![iShot2020-08-0510.10.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.10.52.png)
 
 看到 `proc_inode_cache` 使用的最多， 这个代表是 proc 文件系统的 inode 占用的。
 
@@ -920,9 +912,7 @@ Killed process 10366 (nginx) total-vm:84784kB，anon-rss:49156kB， file-rss:520
 
 使用命令`ps -eLf`查进程，但是进程不多，再查线程，可以通过如下命令进行检查。得到如下的结果：( 原图缺失，使用测试机查看到的截图来补充说明 )
 
-![iShot2020-08-0510.11.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0510.11.49.png)
-
-
+![iShot2020-08-0510.11.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.11.49.png)
 
 计算 socket
 
@@ -940,7 +930,7 @@ $ ll /proc/22360/task/*/fd/ | wc -l
 
 每个 socket 的 inode 也不一样。
 
-![iShot2020-08-0510.17.07](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0510.17.07.png)
+![iShot2020-08-0510.17.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.17.07.png)
 
 当时看到的现场有几万个 fd， 基本全是 socket， 每个 inode 都是占用空间的， 且 proc 文件系统是全内存的。 所以我们才会看到 slab 中 proc_inode_cache 内存占用高。
 
@@ -976,11 +966,11 @@ $ ll /proc/22360/task/*/fd/ | wc -l
 
 **RPS（Receive Packet Steering）主要是把软中断的负载均衡到各个 cpu**，简单来说，是网卡驱动对每个流生成一个 hash 标识， 这个 HASH 值得计算可以通过四元组来计算（SIP，SPORT，DIP，DPORT），然后由中断处理的地方根据这个 hash 标识分配到相应的 CPU 上去，这样就可以比较充分的发挥多核的能力了。通俗点说就是在软件层面模拟实现硬件的多队列网卡功能，**如果网卡本身支持多队列功能的话 RPS 就不会有任何的作用**。**该功能主要针对单队列网卡多 CPU 环境**，如网卡支持多队列则可使用 `SMP irq affinity` 直接绑定硬中断。
 
-![iShot2020-08-0510.21.08](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0510.21.08.png)
+![iShot2020-08-0510.21.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.21.08.png)
 
 由于 RPS 只是单纯把数据包均衡到不同的 cpu，这个时候如果应用程序所在的 cpu 和软中断处理的 cpu 不是同一个， 此时对于 cpu cache 的影响会很大， 那么 RFS （Receive flow steering）确保应用程序处理的 cpu 跟软中断处理的 cpu 是同一个，这样就充分利用 cpu 的 cache，这两个补丁往往都是一起设置，来达到最好的优化效果，主要是针对单队列网卡多 CPU 环境。
 
-![iShot2020-08-0510.21.46](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0510.21.46.png)
+![iShot2020-08-0510.21.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.21.46.png)
 
 `rps_flow_cnt`，`rps_sock_flow_entries`， 参数的值会被进位到最近的2的幂次方值，对于单队列设备， 单队列的 `rps_flow_cnt` 值被配置成与`rps_sock_flow_ entries` 相同。
 
@@ -1391,15 +1381,15 @@ scd0              0.00     0.00    0.00    0.00     0.00     0.00     0.00     0
 
 > **主机网络不通，登录主机看网卡没有正确配置。**
 
-![iShot2020-08-0512.31.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.31.17.png)
-
-
+![iShot2020-08-0512.31.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.31.17.png)
 
 **解决方法**
 
 > **尝试重启网卡，发现 ifdown ifup 命令不存在：**
 
-![iShot2020-08-0512.32.06](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.32.06.png)
+![iShot2020-08-0512.32.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.32.06.png)
+
+
 
 通过 `ifconfig` 配置 IP 信息
 
@@ -1436,9 +1426,7 @@ yum -y install initscripts
 
 安装上 ifup ifdown 相关的包
 
-![iShot2020-08-0512.34.15](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.34.15.png)
-
-
+![iShot2020-08-0512.34.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.34.15.png)
 
 
 
@@ -1448,45 +1436,47 @@ yum -y install initscripts
 
 > **主机网络不通，路由不正确，0.0.0.0 指向了 eth0。**
 
-![iShot2020-08-0512.35.25-6602152](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.35.25-6602152.png)
-
-
+![iShot2020-08-0512.35.25-6602152](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.35.25-6602152.png)
 
 **问题分析**
 
 尝试重启 network 服务，发现不行。
 
-![iShot2020-08-0512.36.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.36.33.png)
-
-![iShot2020-08-0512.37.12](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.37.12.png)
+![iShot2020-08-0512.36.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.36.33.png)
 
 
+
+![iShot2020-08-0512.37.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.37.12.png)
 
 
 
 尝试停止网络服务，然后通过 `ifup eth1` 发现路由是正常的。
 
-![iShot2020-08-0512.39.08](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.39.08.png)
+![iShot2020-08-0512.39.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.39.08.png)
 
-![iShot2020-08-0512.39.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.39.39.png)
+
+
+![iShot2020-08-0512.39.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.39.39.png)
 
 
 
 然后 `ifup eth0` 发现路由就异常了，基本定位在启动 eth0 网卡的时候出现了异常。
 
-![iShot2020-08-0512.40.15](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.40.15.png)
+![iShot2020-08-0512.40.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.40.15.png)
 
-![iShot2020-08-0512.40.43](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.40.43.png)
+
+
+![iShot2020-08-0512.40.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.40.43.png)
 
 
 
 用 `strace -f -e open ifup eth0|more` 追踪一下。
 
-![iShot2020-08-0512.41.30](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.41.30.png)
+![iShot2020-08-0512.41.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.41.30.png)
 
 运气加眼神比较好，发现调用了 `/etc/sysconfig/network` 文件。
 
-![iShot2020-08-0512.42.03](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.42.03.png)
+![iShot2020-08-0512.42.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.42.03.png)
 
 打开 `/etc/sysconfig/network` 文件，发现多了一行 `GATEWAYDEV=eth0`。
 
@@ -1496,17 +1486,17 @@ yum -y install initscripts
 
 注释 `/etc/sysconfig/network` 文件的 `GATEWAYDEV=eth0`，重启网络服务。
 
-![iShot2020-08-0512.43.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.43.23.png)
-
-![iShot2020-08-0512.43.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.43.48.png)
+![iShot2020-08-0512.43.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.43.23.png)
 
 
+
+![iShot2020-08-0512.43.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.43.48.png)
 
 
 
 ## 3.3 TIME_WAIT & CLOSE_WAIT 的讨论总结 
 
-![iShot2020-08-0512.44.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.44.23.png)
+![iShot2020-08-0512.44.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.44.23.png)
 
 TIME_WAIT 是 TCP 连接关闭过程中的一个状态，具体是这么形成的：
 
@@ -1612,7 +1602,7 @@ net.ipv4.tcp_max_tw_buckets = 180000
 
 关于 net.ipv4.tcp_max_tw_buckets 到底要不要放大，目前云上 ecs 多数是设置了 5000，在很多场景下可能是不够的。
 
-![iShot2020-08-0512.54.07](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0512.54.07.png)
+![iShot2020-08-0512.54.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0512.54.07.png)
 
 简单来说 net.ipv4.tcp_max_tw_buckets 的作用是为了 "优雅" 的关闭连接。
 
@@ -1696,13 +1686,13 @@ FRAG			0				0			0
 15000个socket消耗30多m内存
 ```
 
-![iShot2020-08-0519.43.59](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0519.43.59.png)
 
 
+![iShot2020-08-0519.43.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0519.43.59.png)
 
 ### 3.3.7 关于CLOSE_WAIT
 
-![iShot2020-08-0519.44.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0519.44.48.png)
+![iShot2020-08-0519.44.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0519.44.48.png)
 
 
 
@@ -1744,9 +1734,7 @@ FRAG			0				0			0
 
 在互 ping 的测试中我们确实发现有百毫秒以上的延迟，那么随后我们为了排除物理网络的影响，选择一台机器进行对网关的 ping 测试，同样发现了类似的延迟：
 
-![iShot2020-08-0519.49.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0519.49.49.png)
-
-
+![iShot2020-08-0519.49.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0519.49.49.png)
 
 来看看上面的 ping 测试结果吧，初看也仅仅是一些百毫秒延迟的集中发生而已，但是仔细观察就会发现每次发生都有这样的情况，就是延迟在一组连续的 ping 上发生的，并且延迟是倒序排列的。那么这意味着什么呢？
 
@@ -1768,11 +1756,11 @@ FRAG			0				0			0
 
 然而问题就隐藏在一类系统的内存资源上，即系统的 slab 占用量相比正常系统要高出不少：
 
-![iShot2020-08-0519.51.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0519.51.44.png)
+![iShot2020-08-0519.51.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0519.51.44.png)
 
 我们可以看到其中 dentry 在 slab 中的占用量达到了非常高的程度，dentry 是内存中表示目录和文件的对象，作为与 inode 的链接存在，在一般情况下如此高数字的 dentry 项可能代表这系统有大量被打开的文件。 然而此时我们首先需要解释大量的 dentry 项与禁用中断的关系，我们来看看 2.6 内核的这一段代码：
 
-![iShot2020-08-0519.52.31](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0519.52.31.png)
+![iShot2020-08-0519.52.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0519.52.31.png)
 
 这是一段计算 slab 总量的代码，我们注意到它是以遍历链表的方式来统计 slab 总量的，而在进入链表之前调用了 `spin_lock_irq` 函数，我们来看看它的实现：
 
@@ -1886,7 +1874,7 @@ WantedBy=multi-user.target
 
 查看配置效果
 
-![iShot2020-08-0520.03.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.03.33.png)
+![iShot2020-08-0520.03.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.03.33.png)
 
 这个是 systemd 的 bug，低于 240 的版本需要手动设置才可以生效。
 
@@ -1942,9 +1930,9 @@ minfds=655350		; min. avail startup file descriptors;default 1024
 minprocs=65535	; min. avail process descriptors;default 200
 ```
 
-![iShot2020-08-0520.10.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.10.02.png)
 
 
+![iShot2020-08-0520.10.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.10.02.png)
 
 [关于 file-max nr_open file_nr 的解释可参考此文章](https://www.kernel.org/doc/Documentation/sysctl/fs.txt)
 
@@ -1968,7 +1956,7 @@ minprocs=65535	; min. avail process descriptors;default 200
 
 **ss 的结果，closed 状态的有 3w 多**
 
-![iShot2020-08-0520.15.45](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.15.45.png)
+![iShot2020-08-0520.15.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.15.45.png)
 
 **netstat 统计只有一百来个连接**
 
@@ -1982,11 +1970,13 @@ TIME_WAIT 79
 
 **<span style=color:red>ss 直接取自 /proc/net/sockstat。</span>**
 
-![iShot2020-08-0520.16.53](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.16.53.png)
+
+
+![iShot2020-08-0520.16.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.16.53.png)
 
 **<span style=color:red>netstat 是读取的 /proc/pid/fd 下面关联 tcp 的 socket。</span>**
 
-![iShot2020-08-0520.18.53](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.18.53.png)
+![iShot2020-08-0520.18.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.18.53.png)
 
 **netstat 也有扫到三万多个 socket， 为什么输出的时候没有展示呢？**
 
@@ -2023,7 +2013,9 @@ for d in /proc/[0-9]*;do pid=$(basename $d);s=$(ls -l $d/fd | egrep -i socket | 
 
 **排查如下**
 
-![iShot2020-08-0520.23.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.23.37.png)
+![iShot2020-08-0520.23.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.23.37.png)
+
+
 
 oom 的记录显示为申请 4g 内存失败。
 
@@ -2060,9 +2052,7 @@ HugePages_Total 为 0 说明没有设置 nr_hugepage。
 
 MemAvailable: 7418172 kB 说明这么多内存可用。
 
-![iShot2020-08-0520.26.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.26.48.png)
-
-
+![iShot2020-08-0520.26.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.26.48.png)
 
 ```shell
 # sysctl -p
@@ -2297,15 +2287,11 @@ elapsed time: 0 seconds (0d 0h 0m 0s)
 
 4.java 测试证明正常申请内存不会有问题，超额的内存才会 oom，那么为什么超额呢，视线回归到 sysctl -p 有所发现。
 
-![iShot2020-08-0520.39.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.39.33.png)
-
-
+![iShot2020-08-0520.39.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.39.33.png)
 
 5.两相对照，说明客户设置的 vm.overcommit_memory 在生效， 建议改回 0 再试试。
 
-![iShot2020-08-0520.40.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.40.16.png)
-
-
+![iShot2020-08-0520.40.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.40.16.png)
 
 ## 4.4 请不要忽略 min_free_kbytes 的设置
 
@@ -2317,9 +2303,7 @@ elapsed time: 0 seconds (0d 0h 0m 0s)
 
 > **LINUX tmpfs 空间使用未达到 100%，内存也未占满。 执行任何命令提示 bash: fork: Cannot allocate memory 过几秒时间系统会自动重启。 但在客户本地环境是没有这种情况的，即使 tmpfs 使用达到 100% 系统未提示 Cannot allocate memory。**
 
-![iShot2020-08-0520.42.24](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.42.24.png)
-
-
+![iShot2020-08-0520.42.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.42.24.png)
 
 **处理过程**
 
@@ -2327,9 +2311,7 @@ elapsed time: 0 seconds (0d 0h 0m 0s)
 
 2.当进程 Process 比较多， 导致无法分配 pid， 也会提示 Cannot allocate memory，执行命令 pstree -a | wc -l 统计下进程数，排除进程数过多导致的内存无法分配。
 
-![iShot2020-08-0520.43.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.43.42.png)
-
-
+![iShot2020-08-0520.43.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.43.42.png)
 
 3.登录主机内部查看客户客户内部设置 min_free_kbytes 值为 1G。
 
@@ -2339,9 +2321,7 @@ elapsed time: 0 seconds (0d 0h 0m 0s)
 
 `vm.panic_on_oom=0` 系统会提示 oom ，并启动 oom-killer 杀掉占用最高内存的进程。 `vm.panic_on_oom =1`. 系统关闭 oom, 不会启动 oom-killer，而是会自动重启。
 
-![iShot2020-08-0520.44.52](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.44.52.png)
-
-
+![iShot2020-08-0520.44.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.44.52.png)
 
 **解决方案**
 
@@ -2362,7 +2342,7 @@ elapsed time: 0 seconds (0d 0h 0m 0s)
 
 **原始架构图示 & 分析（2月2号晚上 22 点左右的原始架构）。**
 
-![iShot2020-08-0520.48.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.48.57.png)
+![iShot2020-08-0520.48.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.48.57.png)
 
 - 客户端走 https 协议直接访问 ecs。
 
@@ -2375,9 +2355,7 @@ elapsed time: 0 seconds (0d 0h 0m 0s)
 
 **我方介入后的二代架构（24点左右找的我们，早上9点要开服，时间太紧，任务太重， 程序不能动的情况下，几十万的并发架构如何做？ 2月3号早上9点左右的架构，4号也恢复了这个架构）。**
 
-![iShot2020-08-0520.51.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.51.16.png)
-
-
+![iShot2020-08-0520.51.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.51.16.png)
 
 - 接入 slb，通过镜像横向扩展负载能力。
 
@@ -2395,7 +2373,7 @@ elapsed time: 0 seconds (0d 0h 0m 0s)
 
 **知耻而后勇的第三代架构（2月4号 & 2月5号的架构，5号应用）。**
 
-![iShot2020-08-0520.53.38](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.53.38.png)
+![iShot2020-08-0520.53.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.53.38.png)
 
 - 接入 CDN 分流超大带宽。
 
@@ -2413,7 +2391,7 @@ elapsed time: 0 seconds (0d 0h 0m 0s)
 
 **理想架构**
 
-![iShot2020-10-14 15.17.59](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.17.59.png)
+![iShot2020-10-14 15.17.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2015.17.59.png)
 
 - 主域名接入 CDN，
 
@@ -2451,7 +2429,7 @@ elapsed time: 0 seconds (0d 0h 0m 0s)
 
 最后的成果统计（采样分析，实际数据比这个还大）：
 
-![iShot2020-08-0520.57.36](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-08-0520.57.36.png)
+![iShot2020-08-0520.57.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.57.36.png)
 
 最后上线的三代架构，为了保险起见上了 150 台机器，但是根据活动期间的观察，以及对压测结果的评估，上50台机器应该就可以抗住了，从持续5小时一直崩溃被终端用户骂街，到7分钟库存售罄的领导赞赏，虽然经历了3个通宵的戮战，依然可以隐隐约约感觉到身心都得到了升华 ~
 

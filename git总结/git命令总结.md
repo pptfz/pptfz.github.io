@@ -6,23 +6,17 @@
 
 ## 1.1 git工作流程
 
-
-
-![iShot2020-10-14 14.11.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.11.28.png)
-
-
+![iShot2020-10-14 14.11.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.11.28.png)
 
 ## 1.2 git四种状态
 
-![iShot2020-10-14 14.12.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.12.17.png)
-
-
+![iShot2020-10-14 14.12.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.12.17.png)
 
 # 2.git命令总结
 
 ## 2.1 git工作区域及文件颜色
 
-![iShot2020-10-14 14.13.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 14.13.04.png)
+![iShot2020-10-14 14.13.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.13.04.png)
 
 <h4>git status 文件三种颜色的变化</h4>
 - **<span style=color:red>红色</span>**

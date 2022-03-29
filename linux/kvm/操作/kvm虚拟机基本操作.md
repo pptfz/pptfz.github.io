@@ -371,8 +371,8 @@ $ virsh vncdisplay --domain linux-new-xxx
 
 | 磁盘格式 | 说明                                           |
 | -------- | ---------------------------------------------- |
-| raw      | 裸格式，不支持快照，性能好，磁盘存储是连续性的 |
-| qcow2    | 支持快照，性能比raw差一点，磁盘存储是不连续的  |
+| raw/branch      | 裸格式，不支持快照，性能好，磁盘存储是连续性的 |
+| qcow2    | 支持快照，性能比raw/branch差一点，磁盘存储是不连续的  |
 
 
 
@@ -399,22 +399,22 @@ Format specific information:
 
 ### 7.2.2 创建虚拟磁盘
 
-创建 `raw` 格式虚拟磁盘
+创建 `raw/branch` 格式虚拟磁盘
 
 ```shell
-# 不指定格式默认就是 `raw` 格式
-$ qemu-img create /opt/test.raw 2G
-Formatting '/opt/test.raw', fmt=raw size=2147483648 
+# 不指定格式默认就是 `raw/branch` 格式
+$ qemu-img create /opt/test.raw/branch 2G
+Formatting '/opt/test.raw/branch', fmt=raw/branch size=2147483648 
 
 # 查看虚拟磁盘，此时是空的
-$ qemu-img info /opt/test.raw 
-image: /opt/test.raw
-file format: raw
+$ qemu-img info /opt/test.raw/branch 
+image: /opt/test.raw/branch
+file format: raw/branch
 virtual size: 2.0G (2147483648 bytes)
 disk size: 0
 
-$ du -sh /opt/test.raw 
-0	/opt/test.raw
+$ du -sh /opt/test.raw/branch 
+0	/opt/test.raw/branch
 ```
 
 
@@ -447,20 +447,20 @@ $ du -sh /opt/test.qcow2
 
 ```shell
 # 查看虚拟磁盘大小
-$ qemu-img info /opt/test.raw 
-image: /opt/test.raw
-file format: raw
+$ qemu-img info /opt/test.raw/branch 
+image: /opt/test.raw/branch
+file format: raw/branch
 virtual size: 2.0G (2147483648 bytes)
 disk size: 0
 
 # 调整磁盘大小，使用 n 直接指定大小，使用 +nG 指定增加多少
-$ qemu-img resize /opt/test.raw +1G
+$ qemu-img resize /opt/test.raw/branch +1G
 Image resized.
 
 # 再次查看虚拟磁盘大小，可以看到大小已经增加
-$ qemu-img info /opt/test.raw 
-image: /opt/test.raw
-file format: raw
+$ qemu-img info /opt/test.raw/branch 
+image: /opt/test.raw/branch
+file format: raw/branch
 virtual size: 3.0G (3221225472 bytes)
 disk size: 0
 ```
@@ -471,11 +471,11 @@ disk size: 0
 
 `qemu-img convert -f 源磁盘类型 -O 目标磁盘类型 源文件 目标文件`
 
-`raw` 格式转换为 `qcow2` 格式
+`raw/branch` 格式转换为 `qcow2` 格式
 
 ```shell
 # 转换
-$ qemu-img convert -f raw -O qcow2 /opt/test.raw /opt/newtest.qcow2
+$ qemu-img convert -f raw/branch -O qcow2 /opt/test.raw/branch /opt/newtest.qcow2
 
 # 查看
 $ qemu-img info /opt/newtest.qcow2 
@@ -491,16 +491,16 @@ Format specific information:
 
 
 
-`qcow2` 格式转换为 `raw` 格式
+`qcow2` 格式转换为 `raw/branch` 格式
 
 ```shell
 # 转换
-$ qemu-img convert -f qcow2 -O raw /opt/test.qcow2 /opt/newtest.raw 
+$ qemu-img convert -f qcow2 -O raw/branch /opt/test.qcow2 /opt/newtest.raw/branch 
 
 # 查看
-$ qemu-img info /opt/newtest.raw 
-image: /opt/newtest.raw
-file format: raw
+$ qemu-img info /opt/newtest.raw/branch 
+image: /opt/newtest.raw/branch
+file format: raw/branch
 virtual size: 2.0G (2147483648 bytes)
 disk size: 0
 ```
@@ -509,7 +509,7 @@ disk size: 0
 
 # 8.快照
 
-**<span style=color:red>⚠️raw格式不支持快照</span>**
+**<span style=color:red>⚠️raw/branch格式不支持快照</span>**
 
 <span style=color:red>**快照默认存放路径是 `/var/lib/libvirt/qemu/snapshot`** </span>
 

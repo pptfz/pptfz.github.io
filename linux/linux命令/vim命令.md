@@ -58,7 +58,7 @@ vim**模式**
 
 **/** 
 
-![iShot2020-10-15 21.13.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 21.13.51.png)
+![iShot2020-10-15 21.13.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 21.13.51.png)
 
 # 3.vim打开文件方式
 

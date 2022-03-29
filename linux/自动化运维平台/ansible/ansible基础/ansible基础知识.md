@@ -52,9 +52,9 @@
 
 **最重要的一点是 ansible是模块化的 它所有的操作都依赖于模块**
 
-![iShot2020-10-14 15.54.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.54.35.png)
 
 
+![iShot2020-10-14 15.54.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2015.54.35.png)
 
 # 2. Ansible安装配置
 
@@ -159,7 +159,7 @@ command				command模块，完成基础命令
   
   - **`ansible all -m ping`** 
   
-    ![iShot2021-06-28 22.07.31](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-06-28 22.07.31.png)
+    ![iShot2021-06-28 22.07.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-28%2022.07.31.png)
 
 
 

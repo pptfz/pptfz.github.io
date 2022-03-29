@@ -264,4 +264,4 @@ root     16842  0.3  2.8 198808 28936 pts/0    Sl   18:58   0:00 /usr/bin/Xvnc :
 
 
 
-![iShot2021-12-01 19.05.10](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-12-01 19.05.10.png)
+![iShot2021-12-01 19.05.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-01 19.05.10.png)

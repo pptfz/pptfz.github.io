@@ -6,7 +6,7 @@
 
 浏览器中访问 jenkins 报错如下
 
-![iShot2021-03-19 08.59.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-03-19 08.59.55.png)
+![iShot2021-03-19 08.59.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-19 08.59.55.png)
 
 
 
@@ -38,7 +38,7 @@ This Jenkins:	158454546 contextPath="" at 1541@localhost
 Other Jenkins:	1455232034 contextPath="/jenkins20190612" at 1541@localhost
 ```
 
-![iShot2021-03-19 11.56.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-03-19 11.56.19.png)
+![iShot2021-03-19 11.56.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-19 11.56.19.png)
 
 
 

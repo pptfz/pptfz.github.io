@@ -38,7 +38,7 @@ Pod 被设计成支持形成内聚服务单元的多个协作过程（形式为�
 
 例如，你可能有一个容器，为共享卷中的文件提供 Web 服务器支持，以及一个单独的 “sidecar（挂斗）”容器负责从远端更新这些文件，如下图所示：
 
-![iShot2022-03-13 18.16.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2022-03-13 18.16.55.png)
+![iShot2022-03-13 18.16.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-13 18.16.55.png)
 
 有些 Pod 具有 [Init 容器](https://kubernetes.io/zh/docs/reference/glossary/?all=true#term-init-container) 和 [应用容器](https://kubernetes.io/zh/docs/reference/glossary/?all=true#term-app-container)。 Init 容器会在启动应用容器之前运行并完成。
 

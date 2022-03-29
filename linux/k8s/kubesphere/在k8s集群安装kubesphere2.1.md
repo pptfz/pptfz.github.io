@@ -591,9 +591,9 @@ k8s-node2    Ready    <none>   9m22s   v1.16.9
 
 ```python
 //下载文件  v2.0.0-rc3是中文版本，beta8是英文版本
-wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
+wget https://raw/branch.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
 
-wget https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc3/aio/deploy/recommended.yaml  
+wget https://raw/branch.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc3/aio/deploy/recommended.yaml  
   
 //修改Service为NodePort类型
 42行下增加一行
@@ -654,7 +654,7 @@ kubernetes-dashboard   NodePort   10.96.142.172   <none>        443:30001/TCP   
 
 **⚠️k8s1.16.9这个版本中，使用的dashboard版本是2.0.0-beta8，只有火狐浏览器可以访问，其余浏览器都不能访问，会报错如下**
 
-![iShot2020-04-2815.27.24](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-2815.27.24.png)
+![iShot2020-04-2815.27.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-2815.27.24.png)
 
 > **使用火狐浏览器访问，由于 dashboard 默认是自建的 https 证书，该证书是不受浏览器信任的，所以我们需要强制跳转就可以了**
 
@@ -794,7 +794,7 @@ helm repo update
 #创建服务端 使用-i指定阿里云仓库
 helm init --service-account tiller --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.16.3  --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts
 
-#创建TLS认证服务端，参考地址：#https://github.com/gjmzj/kubeasz/blob/master/docs/guide/helm.md
+#创建TLS认证服务端，参考地址：#https://github.com/gjmzj/kubeasz/raw/branch/branch/master/docs/guide/helm.md
 
 helm init --service-account tiller --upgrade -i registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.16.3 --tiller-tls-cert /etc/kubernetes/ssl/tiller001.pem --tiller-tls-key /etc/kubernetes/ssl/tiller001-key.pem --tls-ca-cert /etc/kubernetes/ssl/ca.pem --tiller-namespace kube-system --stable-repo-url https://kubernetes.oss-cn-hangzhou.aliyuncs.com/charts    
 ```
@@ -1048,7 +1048,7 @@ nfs-storage (default)   fuseim.pri/ifs   7m22s
 ### 3.3.1最小化安装 KubeSphere
 
 ```python
-kubectl apply -f https://raw.githubusercontent.com/kubesphere/ks-installer/master/kubesphere-minimal.yaml
+kubectl apply -f https://raw/branch.githubusercontent.com/kubesphere/ks-installer/master/kubesphere-minimal.yaml
 ```
 
 
@@ -1148,11 +1148,11 @@ kubesphere-system              redis-6fd6c6d6f9-dqh2s                      1/1  
 
 密码：`P@88w0rd`
 
-![iShot2020-04-2815.29.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-2815.28.13.png)
+![iShot2020-04-2815.29.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-2815.28.13.png)
 
 
 
 **登陆后首界面**
 
-![iShot2020-04-2815.28.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-2815.29.11.png)
+![iShot2020-04-2815.28.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-2815.29.11.png)
 

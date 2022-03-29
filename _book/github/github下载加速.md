@@ -1,10 +1,10 @@
 # github下载加速
 
-## 方法一：利用[码云](https://gitee.com/)实现github下载加速
+## 方法一：利用[码云](https://gitea.pptfz.cn/)实现github下载加速
 
 先来看一下直接从github下载的速度，3kB/s，这。。。
 
-![iShot2020-03-0916.49.50](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-03-0916.49.50.png)
+![iShot2020-03-0916.49.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0916.49.50.png)
 
 
 
@@ -12,13 +12,13 @@
 
 **第一步、点击码云首页右上角的➕，选择从``GitHub/GitLab导入仓库``**
 
-![iShot2020-03-0917.05.14](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-03-0917.05.14.png)
+![iShot2020-03-0917.05.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0917.05.14.png)
 
 **第二步、填写要下载的github链接并导入**
 
 这一步还是非常快的
 
-![iShot2020-03-0917.10.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-03-0917.10.22.png)
+![iShot2020-03-0917.10.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0917.10.22.png)
 
 导入成功后直接下载速度就会很快了！
 

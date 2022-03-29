@@ -6,7 +6,7 @@
 
 
 
-![iShot2020-10-15 16.24.55](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.24.55.png)
+![iShot2020-10-15 16.24.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.24.55.png)
 
 
 

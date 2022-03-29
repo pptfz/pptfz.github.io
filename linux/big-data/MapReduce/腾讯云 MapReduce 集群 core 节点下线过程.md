@@ -70,31 +70,31 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 在 `基本信息`  ->  `实例信息` 中点击 `组件信息`
 
-![](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 13.58.38.png)
+![](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 13.58.38.png)
 
 
 
 在 `HDFS` 处点击下拉框，选择 `配置管理`
 
-![iShot2021-04-10 14.01.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.01.04.png)
+![iShot2021-04-10 14.01.04](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.01.04.png)
 
 
 
 选择 `hdfs-site.xml` ，然后点击 `修改配置`
 
-![iShot2021-04-10 14.03.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.03.35.png)
+![iShot2021-04-10 14.03.35](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.03.35.png)
 
 
 
 选择 `新增配置项`，然后把上述5个值依次添加并保存
 
-![iShot2021-04-10 14.05.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.05.19.png)
+![iShot2021-04-10 14.05.19](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.05.19.png)
 
 
 
 ### 1.2 重启 NameNode
 
-![iShot2021-04-10 14.08.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.08.17.png)
+![iShot2021-04-10 14.08.17](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.08.17.png)
 
 
 
@@ -102,7 +102,7 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 角色选择 `NameNode`，重启方式选择 `安全重启模式`，重启NameNode
 
-![iShot2021-04-10 14.09.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.09.40.png)
+![iShot2021-04-10 14.09.40](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.09.40.png)
 
 **到此，加速副本复制速度操作完成！**
 
@@ -116,7 +116,7 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 > HDFS web UI 页面出现如下状况:下线进度停止 `blocks with no live replicas` 栏出现大量块
 
-![iShot2021-04-12 14.55.07](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 14.55.07.png)
+![iShot2021-04-12 14.55.07](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 14.55.07.png)
 
 
 
@@ -156,7 +156,7 @@ for hdfsfile in `cat /tmp/single_replica`; do su hadoop -c "hadoop fs -setrep 3 
 
 运行完，如下即表示问题修复：
 
-![iShot2021-04-12 15.00.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 15.00.44.png)
+![iShot2021-04-12 15.00.44](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 15.00.44.png)
 
 
 
@@ -166,7 +166,7 @@ for hdfsfile in `cat /tmp/single_replica`; do su hadoop -c "hadoop fs -setrep 3 
 
 `Threads quota is exceeded` 或者 `dataxceiver error` 说明 `DataNode` 线程不足
 
-![iShot2021-04-12 15.02.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 15.02.22.png)
+![iShot2021-04-12 15.02.22](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 15.02.22.png)
 
 
 
@@ -178,7 +178,7 @@ dfs.datanode.max.xcievers =16384
 
 
 
-![iShot2021-04-12 15.07.27](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 15.07.27.png)
+![iShot2021-04-12 15.07.27](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 15.07.27.png)
 
 
 
@@ -190,7 +190,7 @@ core节点就是DataNode
 
 `Active NameNode` 在hdfs web UI界面查看，生产中我们的 `Active NameNode`是master节点
 
-![iShot2021-04-08 16.45.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-08 16.45.13.png)
+![iShot2021-04-08 16.45.13](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-08 16.45.13.png)
 
 
 
@@ -206,7 +206,7 @@ vim /usr/local/service/hadoop/etc/hadoop/hdfsexcludedhosts
 
 
 
-![iShot2021-04-08 16.56.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-08 16.56.16.png)
+![iShot2021-04-08 16.56.16](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-08 16.56.16.png)
 
 
 
@@ -268,19 +268,19 @@ Refresh nodes successful for /10.0.100.11:4007
 
 
 
-![iShot2021-04-08 17.05.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-08 17.05.22.png)
+![iShot2021-04-08 17.05.22](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-08 17.05.22.png)
 
 
 
 在最下边可以查看数据复制进度
 
-![iShot2021-04-08 17.25.08](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-08 17.25.08.png)
+![iShot2021-04-08 17.25.08](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-08 17.25.08.png)
 
 
 
 所有数据块被复制完成后，要下线节点的状态就由 `Decommissioned in Progress` 变成 `Decommissioned`
 
-![iShot2021-04-10 14.19.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.19.09.png)
+![iShot2021-04-10 14.19.09](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.19.09.png)
 
 
 
@@ -292,23 +292,23 @@ Refresh nodes successful for /10.0.100.11:4007
 
 在集群服务HDFS选项中，找到要下线的 `DataNode` 节点，选中，然后点击 `暂停`
 
-![iShot2021-04-10 14.22.53](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.22.53.png)
+![iShot2021-04-10 14.22.53](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.22.53.png)
 
 
 
 分别选中两个要下线的 `DataNode` 节点，依次暂停
 
-![iShot2021-04-10 14.26.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.26.42.png)
+![iShot2021-04-10 14.26.42](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.26.42.png)
 
 暂停中的 `DataNode`，模式为 `维护模式`
 
-![iShot2021-04-10 14.28.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.28.09.png)
+![iShot2021-04-10 14.28.09](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.28.09.png)
 
 
 
 两个 `DataNode` 节点暂停后，在HDFS web UI 中就可以看到两个节点的状态变为了`Dead, Decommissioned`
 
-![iShot2021-04-10 14.41.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.41.25.png)
+![iShot2021-04-10 14.41.25](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.41.25.png)
 
 
 
@@ -348,7 +348,7 @@ Refresh nodes successful for /10.0.100.11:4007
 
 执行完成后，在HDFS中要下线的NameNode就没了，之前在emr控制台中暂停的2个NameNode状态如下
 
-![iShot2021-04-10 14.41.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.41.25.png)
+![iShot2021-04-10 14.41.25](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.41.25.png)
 
 **HDFS 原生 web UI 将不再存在以上两节点，至此 DataNode 下线完毕！**
 
@@ -393,13 +393,13 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 
 在 `Decommisioned Nodes(退役节点)` 处点击下方的对应的数字
 
-![iShot2021-04-10 14.59.14](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.59.14.png)
+![iShot2021-04-10 14.59.14](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 14.59.14.png)
 
 
 
 搜索要下线节点的IP，如果出现要下线的节点IP则说明这个节点目前已经处于退役状态
 
-![iShot2021-04-10 15.01.43o](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.01.43o.png)
+![iShot2021-04-10 15.01.43o](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.01.43o.png)
 
 
 
@@ -409,23 +409,23 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 
 **在集群服务中点击 `YARN`**
 
-![iShot2021-04-10 15.06.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.06.33.png)
+![iShot2021-04-10 15.06.33](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.06.33.png)
 
 
 
 角色处选择 `NodeManager`，找到要下线的节点，选择并 `暂停`
 
-![iShot2021-04-10 15.08.20](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.08.20.png)
+![iShot2021-04-10 15.08.20](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.08.20.png)
 
 
 
-![iShot2021-04-10 15.10.03](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.10.03.png)
+![iShot2021-04-10 15.10.03](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.10.03.png)
 
 
 
 暂停完成后，节点维护状态就会变为 `维护模式`
 
-![iShot2021-04-10 15.11.12](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.11.12.png)
+![iShot2021-04-10 15.11.12](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.11.12.png)
 
 
 
@@ -477,31 +477,31 @@ YARN 原生 web UI 将不再存在以上两节点(腾讯云给的文档中说此
 
 在集群列表中选择 `HBASE`
 
-![iShot2021-04-10 15.28.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.28.18.png)
+![iShot2021-04-10 15.28.18](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.28.18.png)
 
 
 
 角色选择 `RegionServer`
 
-![iShot2021-04-10 15.33.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.33.16.png)
+![iShot2021-04-10 15.33.16](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.33.16.png)
 
 
 
 选择要下线的 `RegionServer` 节点，设置状态为 `暂停`
 
-![iShot2021-04-10 15.35.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.35.35.png)
+![iShot2021-04-10 15.35.35](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.35.35.png)
 
 
 
 点击暂停后稍等一会，节点的状态就变为了暂停中，维护状态就变为了 `维护模式`
 
-![iShot2021-04-10 15.37.09](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.37.09.png)
+![iShot2021-04-10 15.37.09](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.37.09.png)
 
 
 
 在HBASE web UI 中可以看到 `RegionServer` 的状态变为了 `Dead`
 
-![iShot2021-04-10 15.44.27](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.44.27.png)
+![iShot2021-04-10 15.44.27](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 15.44.27.png)
 
 
 
@@ -588,19 +588,19 @@ HBASE 原生web UI 查看下线节点 region 为0即代表 `RegionServer` 下线
 
 在控制台 `集群资源` -> `资源管理` 选择 `Core`，找到要下线的节点，点击 `缩容` 即可
 
-![iShot2021-04-12 10.51.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 10.51.35.png)
+![iShot2021-04-12 10.51.35](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-12 10.51.35.png)
 
 
 
 勾选 `已阅读并同意`，然后点击 `下一步`
 
-![iShot2021-04-10 16.23.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 16.23.40.png)
+![iShot2021-04-10 16.23.40](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 16.23.40.png)
 
 
 
 点击 `开始销毁`
 
-![iShot2021-04-10 16.24.46](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 16.24.46.png)
+![iShot2021-04-10 16.24.46](https://gitea.com/pptfz/picgo-images/raw/master/img/iShot2021-04-10 16.24.46.png)
 
 
 

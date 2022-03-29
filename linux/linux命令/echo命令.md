@@ -89,13 +89,13 @@ hehe
 
 **\e写法**
 
-![iShot2020-10-15 17.35.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 17.35.18.png)
+![iShot2020-10-15 17.35.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 17.35.18.png)
 
 
 
 **\033写法**
 
-![iShot2020-10-15 17.35.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 17.35.35.png)
+![iShot2020-10-15 17.35.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 17.35.35.png)
 
 
 
@@ -133,13 +133,13 @@ hehe
 
 **windows终端下的效果**
 
-![iShot2020-10-15 17.35.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 17.35.57.png)
+![iShot2020-10-15 17.35.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 17.35.57.png)
 
 
 
 **mac终端下的效果**
 
-![iShot2020-10-15 17.36.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 17.36.13.png)
+![iShot2020-10-15 17.36.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 17.36.13.png)
 
 
 

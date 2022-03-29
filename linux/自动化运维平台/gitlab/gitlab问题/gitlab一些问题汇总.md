@@ -23,7 +23,7 @@ root
 
 **注册gitlab时提示如下**
 
-![iShot2020-10-14 15.36.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-14 15.36.33.png)
+![iShot2020-10-14 15.36.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14 15.36.33.png)
 
 
 

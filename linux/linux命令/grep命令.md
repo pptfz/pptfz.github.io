@@ -8,79 +8,79 @@
 
 ## 1.1基本正则表达式
 
-![iShot2020-05-1113.32.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-1113.32.19.png)
+![iShot2020-05-1113.32.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-05-1113.32.19.png)
 
 
 
 ## 1.2扩展正则表达式
 
-![iShot2020-05-1113.32.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-05-1113.32.42.png)
+![iShot2020-05-1113.32.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-05-1113.32.42.png)
 
 ## 1.3特殊字字符类
 
 ### [:alnum:]		[a-zA-Z0-9]匹配人一个字母或数字字符
 
-![iShot2020-10-15 19.35.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.35.35.png)
+![iShot2020-10-15 19.35.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.35.35.png)
 
 
 
 ### [:alpha:]		匹配任意一个字母（包括大小写）
 
-![iShot2020-10-15 19.36.01](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.36.01.png)
+![iShot2020-10-15 19.36.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.36.01.png)
 
 
 
 ### [:digit:]		匹配任意一个数字
 
-![iShot2020-10-15 19.36.24](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.36.24.png)
+![iShot2020-10-15 19.36.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.36.24.png)
 
 
 
 ### [:lower:]		匹配小写字母
 
-![iShot2020-10-15 19.36.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.36.44.png)
+![iShot2020-10-15 19.36.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.36.44.png)
 
 
 
 ### [:upper:]		匹配大写字母
 
-![iShot2020-10-15 19.37.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.37.04.png)
+![iShot2020-10-15 19.37.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.37.04.png)
 
 
 
 ### [:punct:]		匹配标点符号
 
-![iShot2020-10-15 19.37.29](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.37.29.png)
+![iShot2020-10-15 19.37.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.37.29.png)
 
 
 
 ### [:blank:]		匹配空格与制表符
 
-![iShot2020-10-15 19.37.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.37.51.png)
+![iShot2020-10-15 19.37.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.37.51.png)
 
 
 
 ### [:space:]		匹配一个包括换行符、回车等在内的所有空白字符
 
-![iShot2020-10-15 19.42.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.42.04.png)
+![iShot2020-10-15 19.42.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.42.04.png)
 
 
 
 ### [:graph:]		匹配任意可看的见的且可打印的字符
 
-![iShot2020-10-15 19.42.27](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.42.27.png)
+![iShot2020-10-15 19.42.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.42.27.png)
 
 
 
 ### [:print:]		匹配任何一个可以打印的字符
 
-![iShot2020-10-15 19.42.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.42.49.png)
+![iShot2020-10-15 19.42.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.42.49.png)
 
 
 
 ### [:xdigit:]		匹配任意一个16进制数（0-9，a-f，A-F）
 
-![iShot2020-10-15 19.43.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.43.11.png)
+![iShot2020-10-15 19.43.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.43.11.png)
 
 
 
@@ -104,13 +104,13 @@
 
 ### **-E	如果加这个选项，那么后面的匹配模式就是扩展的正则表达式，也就是 grep -E = egrep**
 
-![iShot2020-10-15 19.43.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.43.33.png)
+![iShot2020-10-15 19.43.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.43.33.png)
 
 
 
 ### -i	比较字符时忽略大小写区别
 
-![iShot2020-10-15 19.43.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.43.51.png)
+![iShot2020-10-15 19.43.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.43.51.png)
 
 
 
@@ -118,47 +118,47 @@
 
 **找出包含sshd的文件**
 
-![iShot2020-10-15 19.44.14](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.44.14.png)
+![iShot2020-10-15 19.44.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.44.14.png)
 
 
 
 ### -w	把表达式作为词来查找，相当于正则中的"\\<...\\>"(...表示你自定义的规则)
 
-![iShot2020-10-15 19.44.34](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.44.34.png)
+![iShot2020-10-15 19.44.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.44.34.png)
 
 
 
 ### -x	被匹配到的内容，正好是整个行，相当于正则"^...$"
 
-![iShot2020-10-15 19.44.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.44.57.png)
+![iShot2020-10-15 19.44.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.44.57.png)
 
 
 
 ### **-v**	取反
 
-![iShot2020-10-15 19.45.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.45.19.png)
+![iShot2020-10-15 19.45.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.45.19.png)
 
 ### **-c**	count，统计，统计匹配结果的行数，不是匹配结果的次数，是行数
 
-![iShot2020-10-15 19.45.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.45.40.png)
+![iShot2020-10-15 19.45.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.45.40.png)
 
 
 
 ### **-m**	只匹配规定的行数，之后的内容就不再匹配了
 
-![iShot2020-10-15 19.45.58](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.45.58.png)
+![iShot2020-10-15 19.45.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.45.58.png)
 
 
 
 ### **-n**	在输出的结果里显示行号，这里的行号是该行内容在原文件中的行号，而不是在输出结果中行号
 
-![iShot2020-10-15 19.46.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.46.33.png)
+![iShot2020-10-15 19.46.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.46.33.png)
 
 
 
 ### **-o**	只显示匹配内容，grep 默认是显示满足匹配条件的一行，加上这个参数就只显示匹配结果，比如我们要匹配一个 ip 地址，就只需要结果，而不需要该行的内容
 
-![iShot2020-10-15 19.46.57](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.46.57.png)
+![iShot2020-10-15 19.46.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.46.57.png)
 
 
 
@@ -190,7 +190,7 @@ echo '1222233333222444455556666669999'|egrep -o '([0-9])\1+'
 
 **命令后边如果写+就会无法截取1,因为1只有一个**
 
-![iShot2020-10-15 19.48.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.48.44.png)
+![iShot2020-10-15 19.48.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.48.44.png)
 
 ---
 
@@ -200,7 +200,7 @@ echo '1222233333222444455556666669999'|egrep -o '([0-9])\1+'
 echo '1222233333222444455556666669999'|egrep -o '([0-9])\1+|[0-9]'
 ```
 
-![iShot2020-10-15 19.49.05](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.49.05.png)
+![iShot2020-10-15 19.49.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.49.05.png)
 
 **另外两种写法**
 
@@ -210,9 +210,9 @@ echo '1222233333222444455556666669999'|egrep -o '([0-9])\1*'
 echo '1222233333222444455556666669999'|egrep -o '(.)\1*'
 ```
 
-![iShot2020-10-15 19.49.29](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.49.29.png)
+![iShot2020-10-15 19.49.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.49.29.png)
 
-![iShot2020-10-15 19.49.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.49.49.png)
+![iShot2020-10-15 19.49.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.49.49.png)
 
 
 
@@ -248,7 +248,7 @@ grep -Po "(?<=:)[0-9]+" a.txt
 (?<=:)为固定格式,等号右边的冒号表示要截取冒号右边的内容,[0-9]+表示冒号右边为数字
 ```
 
-![iShot2020-10-15 19.50.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 19.50.17.png)
+![iShot2020-10-15 19.50.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.50.17.png)
 
 
 

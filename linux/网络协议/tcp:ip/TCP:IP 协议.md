@@ -8,7 +8,7 @@
 
 **总纲**
 
-![iShot2020-04-0716.46.00](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0716.46.00.png)
+![iShot2020-04-0716.46.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0716.46.00.png)
 
 
 
@@ -16,11 +16,11 @@
 
 **计算机网络体系结构分层**
 
-![iShot2020-04-0716.51.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0716.52.46.png)
+![iShot2020-04-0716.52.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0716.52.46.png)
 
 
 
-![iShot2020-04-0716.52.46](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0716.51.48.png)
+![iShot2020-04-0716.51.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0716.51.48.png)
 
 
 
@@ -39,7 +39,7 @@
 
 **网际协议群**
 
-![iShot2020-04-0716.55.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0716.55.40.png)
+![iShot2020-04-0716.55.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0716.55.40.png)
 
 
 
@@ -60,7 +60,7 @@
 
 **数据包首部**
 
-![iShot2020-04-0716.56.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.04.19.png)
+![iShot2020-04-0717.04.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.04.19.png)
 
 网络中传输的数据包由两部分组成：一部分是协议所要用到的首部，另一部分是上一层传过来的数据。首部的结构由协议的具体规范详细定义。在数据包的首部，明确标明了协议应该如何读取数据。反过来说，看到首部，也就能够了解该协议必要的信息以及所要处理的数据。**包首部就像协议的脸。**
 
@@ -72,9 +72,7 @@
 
 **数据处理流程**
 
-![iShot2020-04-0716.57.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0716.56.37.png)
-
-
+![iShot2020-04-0716.56.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0716.56.37.png)
 
 ### ① 应用程序处理
 
@@ -133,7 +131,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **数据端口号识别应用**
 
-![iShot2020-04-0717.03.15](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.03.15.png)
+![iShot2022-03-28 20.22.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28%2020.22.33.png)
 
 
 
@@ -143,9 +141,11 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **通过端口号、IP地址、协议号进行通信识别**
 
-![iShot2020-04-0717.04.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.04.34.png)
+![iShot2020-04-0717.04.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.04.34.png)
 
-![iShot2020-04-0717.04.34](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.09.38.png)
+
+
+![iShot2020-04-0717.09.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.09.38.png)
 
 
 
@@ -191,7 +191,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 下面来看看三次握手的流程图：
 
-![iShot2020-04-0717.09.38](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0716.57.18.png)
+![iShot2020-04-0716.57.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0716.57.18.png)
 
 - **<span style=color:red>第一次握手：客户端将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给服务器端，客户端进入SYN_SENT状态，等待服务器端确认。</span>**
 
@@ -208,7 +208,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 下面来看看四次挥手的流程图：
 
-![iShot2020-04-0717.21.15](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.23.37.png)
+![iShot2020-04-0717.23.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.23.37.png)
 
 
 
@@ -221,7 +221,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 **上面是一方主动关闭，另一方被动关闭的情况，实际中还会出现同时发起主动关闭的情况，**
 具体流程如下图：
 
-![iShot2020-04-0717.23.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.38.48.png)
+![iShot2020-04-0717.38.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.38.48.png)
 
 
 
@@ -236,7 +236,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **序列号和确认应答**
 
-![iShot2020-04-0717.24.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.21.15.png)
+![iShot2020-04-0717.21.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.21.15.png)
 
 
 
@@ -261,7 +261,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **窗口控制**
 
-![iShot2020-04-0717.37.53](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.24.40.png)
+![iShot2020-04-0717.24.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.24.40.png)
 
 - 窗口大小就是指无需等待确认应答而可以继续发送数据的最大值。上图中窗口大小为4个段。这个机制实现了使用大量的缓冲区，通过对多个段同时进行确认应答的功能。
 
@@ -269,7 +269,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 ### 3.3.7 滑动窗口控制
 
-![iShot2020-04-0717.38.48](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0717.37.53.png)
+![iShot2020-04-0717.37.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0717.37.53.png)
 
 - 上图中的窗口内的数据即便没有收到确认应答也可以被发送出去。不过，在整个窗口的确认应答没有到达之前，如果其中部分数据出现丢包，那么发送端仍然要负责重传。为此，发送端主机需要设置缓存保留这些待被重传的数据，直到收到他们的确认应答。
 
@@ -283,13 +283,15 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 在使用窗口控制中， 出现丢包一般分为两种情况：
 
-- ① 确认应答未能返回的情况。在这种情况下，数据已经到达对端，是不需要再进行重发的，如下图：
+- ① 确认应答未能返回的情况。在这种情况下，数据已经到达对端，是不需要再进行重发的，如下图：![iShot2020-04-0719.47.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.47.28.png)
 
-![iShot2020-04-0719.45.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.47.28.png)
+
 
 - ② 某个报文段丢失的情况。接收主机如果收到一个自己应该接收的序列号以外的数据时，会针对当前为止收到数据返回确认应答。如下图所示，当某一报文段丢失后，发送端会一直收到序号为1001的确认应答，因此，在窗口比较大，又出现报文段丢失的情况下，同一个序列号的确认应答将会被重复不断地返回。而发送端主机如果连续3次收到同一个确认应答，就会将其对应的数据进行重发。这种机制比之前提到的超时管理更加高效，因此也被称为高速重发控制。
 
-![iShot2020-04-0719.46.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.46.19.png)
+  ![iShot2020-04-0719.46.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.46.19.png)
+
+
 
 
 
@@ -312,7 +314,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 - 不论一台主机与哪种数据链路连接，其 IP 地址的形式都保持不变。
 - IP 地址（IPv4 地址）由32位正整数来表示。IP 地址在计算机内部以二进制方式被处理。然而，由于我们并不习惯于采用二进制方式，我们将32位的 IP 地址以每8位为一组，分成4组，每组以 “.” 隔开，再将每组数转换成十进制数。如下：
 
-![iShot2020-04-0719.47.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.49.07.png)
+![iShot2020-04-0719.49.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.49.07.png)
 
 
 
@@ -322,13 +324,13 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **IP地址的主机标识**
 
-![iShot2020-04-0719.48.26](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.51.11.png)
+![iShot2020-04-0719.51.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.51.11.png)
 
 - 如下图，IP 包被转发到途中某个路由器时，正是利用目标 IP 地址的网络标识进行路由。因为即使不看主机标识，只要一见到网络标识就能判断出是否为该网段内的主机。
 
 **IP地址的网络标识**
 
-![iShot2020-04-0719.49.07](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.50.13.png)
+![iShot2020-04-0719.50.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.50.13.png)
 
 
 
@@ -353,7 +355,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **IP多播**
 
-![iShot2020-04-0719.50.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.51.36.png)
+![iShot2020-04-0719.51.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.51.36.png)
 
 - 多播使用 D 类地址。因此，如果从首位开始到第 4 位是 “1110”，就可以认为是多播地址。而剩下的 28 位可以成为多播的组编号。
 
@@ -367,11 +369,11 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 - 子网掩码用二进制方式表示的话，也是一个 32 位的数字。它对应 IP 地址网络标识部分的位全部为 “1”，对应 IP 地址主机标识的部分则全部为 “0”。由此，一个 IP 地址可以不再受限于自己的类别，而是可以用这样的子网掩码自由地定位自己的网络标识长度。当然，子网掩码必须是 IP 地址的首位开始连续的 “1”。
 - 对于子网掩码，目前有两种表示方式。第一种是，将 IP 地址与子网掩码的地址分别用两行来表示。以 172.20.100.52 的前 26 位是网络地址的情况为例，如下：
 
-![iShot2020-04-0719.51.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.45.25.png)
+![iShot2020-04-0719.45.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.45.25.png)
 
 - 第二种表示方式是，在每个 IP 地址后面追加网络地址的位数用 “/ ” 隔开，如下：
 
-![iShot2020-04-0719.51.36](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.55.41.png)
+![iShot2020-04-0719.55.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.55.41.png)
 
 - 另外，在第二种方式下记述网络地址时可以省略后面的 “0” 。例如：172.20.0.0/26 跟 172.20/26 其实是一个意思。
 
@@ -389,7 +391,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **路由控制表与IP包发送**
 
-![iShot2020-04-0719.53.01](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.56.36.png)
+![iShot2020-04-0719.56.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.56.36.png)
 
 ## 4.3 IP 分包与组包
 
@@ -425,7 +427,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 - IPv6 类似 IPv4，也是通过 IP 地址的前几位标识 IP 地址的种类。
 - 在互联网通信中，使用一种全局的单播地址。它是互联网中唯一的一个地址，不需要正式分配 IP 地址。
 
-![iShot2020-04-0719.55.03](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.57.14.png)
+![iShot2022-03-28 21.07.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28%2021.07.38.png)
 
 
 
@@ -436,7 +438,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **全局单播地址**
 
-![iShot2020-04-0719.55.41](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.55.03.png)
+![iShot2020-04-0719.55.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.55.03.png)
 
 ### 4.4.5 链路本地单播地址
 
@@ -444,7 +446,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **链路本地单播地址**
 
-**![iShot2020-04-0719.56.36](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0720.00.02.png)**
+![iShot2020-04-0720.00.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0720.00.02.png)
 
 ### 4.4.6 唯一本地地址
 
@@ -457,7 +459,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **唯一本地地址**
 
-![iShot2020-04-0719.57.14](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.53.01.png)
+![iShot2020-04-0719.53.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0719.53.01.png)
 
 
 
@@ -504,7 +506,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **夹着 IPv4 网络的两个 IPv6 网络**
 
-![iShot2020-04-0720.00.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0719.48.26.png)
+![iShot2022-03-28 21.10.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28%2021.10.27.png)
 
 - 如上图的网络环境中，网络 A 与网络 B 之间无法直接进行通信，为了让它们之间正常通信，这时必须得采用 IP 隧道的功能。
 

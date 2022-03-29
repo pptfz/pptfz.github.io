@@ -83,7 +83,7 @@
 
 ## 五、图片
 
-![iShot2020-10-16 11.52.42](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 11.52.42.png)
+![iShot2020-10-16 11.52.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 11.52.42.png)
 
 
 
@@ -153,4 +153,4 @@
   - ``<span style="color:颜色单词">内容</span>``
 
 
-![iShot2020-10-16 11.48.30](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 11.48.30.png)
+![iShot2020-10-16 11.48.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 11.48.30.png)
