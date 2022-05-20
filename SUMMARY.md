@@ -252,6 +252,7 @@
   * [VPN](README.md) 
     * [OpenVPN一键安装](linux/linux服务/VPN/CentOS7一键安装OpenVPN.md)
     * [OpenVPN手动安装](linux/linux服务/VPN/CentOS7手动安装OpenVPN.md)
+    * [OpenVPN对接ldap](linux/linux服务/VPN/openvpn对接ldap.md)
 
   * [ldap](README.md)
     * [安装](linux/linux服务/ldap/CentOS7搭建OpenLDAP服务端.md)
@@ -308,6 +309,7 @@
       * [gitlab迁移](linux/自动化运维平台/gitlab/gitlab知识点/7.gitlab迁移.md)
       * [gitlab集成ldap](linux/自动化运维平台/gitlab/gitlab知识点/8.gitlab集成ldap.md)
       * [gitlab配置邮件](linux/自动化运维平台/gitlab/gitlab知识点/9.gitlab配置邮件.md)
+      * [gitlab Server hooks](linux/自动化运维平台/gitlab/gitlab知识点/gitlab Server hooks.md)
 
   * [jenkins](README.md)
     * [jenkins安装](README.md)

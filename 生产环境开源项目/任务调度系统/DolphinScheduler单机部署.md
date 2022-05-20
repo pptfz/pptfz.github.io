@@ -49,9 +49,7 @@
 
 **与同类调度系统的对比**
 
-![iShot2020-09-05 16.00.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05 16.00.22.png)
-
-
+![iShot2020-09-05 16.00.22 21.09.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2016.00.22%2021.09.14.png)
 
 # 2.DolphinScheduler标准安装
 
@@ -167,13 +165,11 @@ ln -s /usr/local/jdk1.8.0_251/bin/java /usr/bin
 
 **下载二进制安装包**
 
-![iShot2020-09-05 16.32.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05 16.32.17.png)
-
-
+![iShot2020-09-05 16.32.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2016.32.17.png)
 
 **选择官方推荐的下载地址**
 
-![iShot2020-09-05 16.41.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05 16.41.01.png)
+![iShot2020-09-05 16.41.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2016.41.01.png)
 
 **安装过程**
 
@@ -253,11 +249,11 @@ clientPort=2181
 
 **选择相应版本的二进制包**
 
-![iShot2020-09-05 17.03.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05 17.03.39.png)
+![iShot2020-09-05 17.03.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2017.03.39.png)
 
 **选择官方推荐的下载地址**
 
-![iShot2020-09-05 17.04.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05 17.04.21.png)
+![iShot2020-09-05 17.04.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2017.04.21.png)
 
 **下载二进制包并解压缩**
 
@@ -343,7 +339,7 @@ mysql -uroot -e "flush privileges"
 
 [mysql驱动官方下载地址](https://downloads.mysql.com/archives/c-j/)
 
-![iShot2020-09-05 17.29.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05 17.29.56.png)
+![iShot2020-09-05 17.29.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2017.29.56.png)
 
 ```shell
 # 1.下载mysql驱动包
@@ -579,17 +575,13 @@ logs/
 
 密码：`dolphinscheduler123`
 
-![iShot2020-09-05 18.30.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05 18.30.57.png)
-
-
+![iShot2020-09-05 18.30.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2018.30.57.png)
 
 
 
 **登陆后首界面**
 
-![iShot2020-09-05 18.33.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05 18.33.01.png)
-
-
+![iShot2020-09-05 18.33.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2018.33.01.png)
 
 **<span style=color:red> 到此，dolphinscheduler单机版部署完成！</span>**
 
@@ -930,8 +922,6 @@ volumes:
 用户名：`admin`
 
 密码：`dolphinscheduler123`
-
-![iShot2020-09-05 18.30.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05 18.30.57.png)
 
 
 

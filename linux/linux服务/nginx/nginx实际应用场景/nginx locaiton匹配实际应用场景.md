@@ -108,6 +108,47 @@ location / {
 
 
 
+在ingress中配置为如下，以nacos为例
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header Upgrade "websocket";
+      proxy_set_header Connection "Upgrade";
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    nginx.ingress.kubernetes.io/proxy-body-size: 4096m
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/app-root: /nacos/
+    nginx.ingress.kubernetes.io/rewrite-target: /nacos/$2
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      rewrite ^(/nacos)$ $1/ redirect;
+  generation: 1
+  name: nacos-uat
+  namespace: ops
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nacos-uat.rd.com
+    http:
+      paths:
+      - path: /nacos(/|$)(.*)
+        pathType: Prefix
+        backend:
+          service:
+            name: nacos-uat
+            port:
+              number: 8848
+status:
+  loadBalancer:
+    ingress:
+    - ip: 172.18.4.112
+```
+
+
+
 ## 2.location 配置静态资源
 
 ```nginx

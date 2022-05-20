@@ -62,8 +62,8 @@
             "author": "别特么内卷了"
         },
         "donate": {
-            "wechat": "https://gitee.com/pptfz/picgo-images/raw/master/img/aaa.jpg",
-            "alipay": "https://gitee.com/pptfz/picgo-images/raw/master/img/bbb.jpg",
+            "wechat": "https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/aaa.jpg",
+            "alipay": "https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/bbb.jpg",
             "title": "",
             "button": "你过来啊",
             "alipayText": "这辈子都不可能打工",
