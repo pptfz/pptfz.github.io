@@ -276,8 +276,6 @@ Refresh nodes successful for /10.0.100.11:4007
 
 ![iShot2021-04-10 14.41.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-04-10%2014.41.25.png)
 
-
-
 ### 2.5 编辑配置文件，删除要下线机器的IP
 
 **第一个文件**
@@ -313,8 +311,6 @@ Refresh nodes successful for /10.0.100.11:4007
 执行完成后，在HDFS中要下线的NameNode就没了，之前在emr控制台中暂停的2个NameNode状态如下
 
 ![iShot2021-04-10 14.41.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-04-10%2014.41.25.png)
-
-
 
 
 

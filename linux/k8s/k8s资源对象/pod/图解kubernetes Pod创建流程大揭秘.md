@@ -14,19 +14,19 @@ kubernetes中的容器创建无疑是个复杂的过程，涉及内部各种组�
 
 ## 1.1 容器管理线程模型
 
-![iShot2020-10-15 16.26.35](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.26.35.png)
+![iShot2020-10-15 16.26.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.26.35.png)
 
 kubelet中的线程模型属于master/wroker模型，通过单master来监听各种事件源，并为每个Pod创建一个goroutine来进行Pod业务逻辑的处理，master和wroker之间通过一个状态管道来进行通信
 
 ## 1.2 基于事件驱动的状态最终一致性
 
-![iShot2020-10-15 16.26.59](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.26.59.png)
+![iShot2020-10-15 16.26.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.26.59.png)
 
 在通过yaml创建Pod之后，kubernetes会根据当前的事件和当前的Pod状态，来不断进行调整，从而达到最终目标状态的一致性
 
 ## 1.3 组件协作流程
 
-![iShot2020-10-15 16.27.31](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.27.31.png)
+![iShot2020-10-15 16.27.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.27.31.png)
 
 
 
@@ -34,7 +34,7 @@ kubelet的结构体声明就高达300多行代码，可见其复杂程度，但�
 
 # 2.Kubelet创建容器流程
 
-![iShot2020-10-15 16.27.50](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.27.50.png)
+![iShot2020-10-15 16.27.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.27.50.png)
 
 
 
@@ -72,7 +72,7 @@ kubelet接收到一个新创建的Pod首先会为其创建一个事件管道，�
 
 # 3.ContainerRuntime
 
-![iShot2020-10-15 16.28.11](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.28.11.png)前面我们提到过针对Pod的操作，最终都是基于事件和状态的同步而完成，在containerRUntime并不会区分对应的事件是创建还是更新操作，只是根据当前的Pod的信息与目标状态来进行对比，从而构建出对应的操作，达到目标状态
+![iShot2020-10-15 16.28.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.28.11.png)前面我们提到过针对Pod的操作，最终都是基于事件和状态的同步而完成，在containerRUntime并不会区分对应的事件是创建还是更新操作，只是根据当前的Pod的信息与目标状态来进行对比，从而构建出对应的操作，达到目标状态
 
 ## 3.1 计算Pod容器变更
 
@@ -116,7 +116,7 @@ Pod的容器目前分为三大类：短生命周期容器、初始化容器、�
 
 # 4. 运行沙箱容器
 
-![iShot2020-10-15 16.28.56](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.28.56.png)
+![iShot2020-10-15 16.28.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.28.56.png)
 
 
 
@@ -152,13 +152,13 @@ checkpoint主要是将当前sandbox的配置信息进行序列化，并且存储
 
 # 5. Pod容器启动总结
 
-![iShot2020-10-15 16.29.20](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.29.20.png)
+![iShot2020-10-15 16.29.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.29.20.png)
 
 
 
 kubelet是容器管理的核心大管家，其负责各种准入控制、状态管理、探测管理、volume管理、QOS管理、CSI对接的统一调度，并且为Runtime运行时准备基础的数据和并反馈Pod当前的最新状态
 
-![iShot2020-10-15 16.29.38](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-15 16.29.38.png)
+![iShot2020-10-15 16.29.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.29.38.png)
 
 
 
