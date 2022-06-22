@@ -271,6 +271,7 @@
       * [elasticsearch安装](linux/linux服务/elk/elasticsearch/elasticsearch安装.md) 
     * [kibana](README.md)
       * [kibana安装](linux/linux服务/elk/kibana/kibana安装.md)
+      * [kibana报错](linux/linux服务/elk/kibana/kibana报错.md)
 
 * [Linux内核](README.md)
   * [Linux升级内核](linux/linux内核/Linux升级内核.md)
