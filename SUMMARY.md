@@ -315,6 +315,9 @@
       * [gitlab配置邮件](linux/自动化运维平台/gitlab/gitlab知识点/9.gitlab配置邮件.md)
       * [gitlab Server hooks](linux/自动化运维平台/gitlab/gitlab知识点/gitlab Server hooks.md)
       * [gitlab文档](linux/自动化运维平台/gitlab/gitlab知识点/gitlab文档.md)
+    * [gitlab runner](README.md)
+      * [安装配置](linux/自动化运维平台/gitlab/gitlab runner/gitlab runner安装配置.md)
+      * [gitlab ci报错](linux/自动化运维平台/gitlab/gitlab runner/gitlab ci报错.md)
 
   * [jenkins](README.md)
     * [jenkins安装](README.md)
