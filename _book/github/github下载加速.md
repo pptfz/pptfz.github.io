@@ -1,12 +1,14 @@
+[toc]
+
+
+
 # github下载加速
 
-## 方法一：利用[码云](https://gitea.pptfz.cn/)实现github下载加速
+# 方法一：利用[码云](https://gitea.pptfz.cn/)实现github下载加速
 
 先来看一下直接从github下载的速度，3kB/s，这。。。
 
 ![iShot2020-03-0916.49.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0916.49.50.png)
-
-
 
 接下来使用码云实现下载加速
 
@@ -38,15 +40,15 @@ git remote add origin
 
 
 
-## 方法二：使用加速地址
+# 方法二：使用加速地址
 
-**将``github.com``修改为``github.com.cnpmjs.org``**
+**将``github.com``修改为``gitclone.com/github.com``**
 
-```python
-#原先下载方式
+```shell
+# 原先下载方式
 git clone https://github.com/xxx
 
-#修改为如下地址
-git clone https://github.com.cnpmjs.org/xxx
+# 修改为如下地址
+git clone https://gitclone.com/github.com/xxx
 ```
 

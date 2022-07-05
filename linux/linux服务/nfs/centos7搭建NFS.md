@@ -109,12 +109,12 @@ yum -y install nfs-utils
 | ro             | 只读权限                                                     |
 | root_squash    | 当NFS客户端以root管理员访问时，映射为NFS服务器的匿名用户     |
 | no_root_squash | 当NFS客户端以root管理员访问时，映射为NFS服务器的root管理员   |
-| all_squash     | 无论NFS客户端使用什么账户访问，均映射为NFS服务器的匿名用户   |
-| no_all_squash  | 无论NFS客户端使用什么账户访问，都不进行压缩                  |
+| all_squash     | 无论NFS客户端使用什么账户访问，均映射为NFS服务器的匿名用户（默认选项）   |
+| no_all_squash  | 无论NFS客户端使用什么账户访问，不映射为NFS服务器的匿名用户                 |
 | sync           | 同时将数据写入到内存与硬盘中，保证不丢失数据                 |
 | async          | 优先将数据保存到内存，然后再写入硬盘；这样效率更高，但可能会丢失数据 |
-| anonuid        | 配置all_squash使用,指定NFS的用户UID,必须存在系统             |
-| anongid        | 配置all_squash使用,指定NFS的用户UID,必须存在系统             |
+| anonuid        | 配置all_squash使用,指定NFS的用户UID,必须存在于系统中             |
+| anongid        | 配置all_squash使用,指定NFS的用户UID,必须存在于系统中             |
 
 
 

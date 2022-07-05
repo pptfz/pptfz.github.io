@@ -1,6 +1,8 @@
+[toc]
 
 
-# dcentos8.2二进制安装k8s1.16.6
+
+# centos8.2二进制安装k8s1.16.6
 
 [本文抄袭至github](https://github.com/opsnull/follow-me-install-kubernetes-cluster)
 

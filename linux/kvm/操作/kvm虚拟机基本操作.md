@@ -529,20 +529,24 @@ $ virsh snapshot-list linux-new-xxx
 
 `virsh snapshot-create 虚拟机名称` 
 
+
+
+### 8.2.1 指定快照名称
+
 ```shell
-# 不指定快照名称默认会以时间戳名称，1646575935是时间戳，用的是格林威治时间，意思是从1970年1月1日到现在经过了多少秒
+$ virsh snapshot-create-as --domain linux-new-xxx hehe
+Domain snapshot hehe created
+```
+
+
+
+### 8.2.2 不指定快照名称
+
+> 不指定快照名称默认会以时间戳名称，1646575935是时间戳，用的是格林威治时间，意思是从1970年1月1日到现在经过了多少秒
+
+```shell
 $ virsh snapshot-create linux-new-xxx 
 Domain snapshot 1646575935 created
-
-# 指定快照名称 
-virsh snapshot-create-as --domain linux-new-xxx hehe
-
-# 查看快照
-$ virsh snapshot-list linux-new-xxx 
- Name                 Creation Time             State
-------------------------------------------------------------
- 1646575935           2022-03-06 22:12:15 +0800 running
- hehe                 2022-03-06 22:14:43 +0800 running
 ```
 
 

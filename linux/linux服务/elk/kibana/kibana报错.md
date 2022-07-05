@@ -35,6 +35,12 @@ kibana是通过从 [artifacthub](https://artifacthub.io/)  中下载的chart安�
 
 官方给到的解释是当存储空间很低时，kibana会把 `.kibana` 索引设置为只读，从而导致日志中的只读报错，可以通过如下命令解决此问题
 
+
+
+在这个链接中可以看到解决方法[](https://discuss.elastic.co/t/forbidden-12-index-read-only-allow-delete-api/110282/2?u=larry_gregory)
+
+
+
 ```json
 PUT _settings
   {

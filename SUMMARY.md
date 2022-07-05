@@ -52,6 +52,8 @@
     * [安装](生产环境开源项目/nexus/nexus安装.md)
     * [故障](README.md)
       * [nexus重启报错](生产环境开源项目/nexus/nexus重启报错.md)
+  * [kooder](README.md)
+    * [安装使用](生产环境开源项目/kooder/kooder.md)
 
 
 * [日志](README.md)
@@ -136,6 +138,7 @@
     * [k8s设置通过kubeconfig登陆dashboard](linux/k8s/k8s知识点/k8s设置通过kubeconfig登陆dashboard.md)
     * [k8s给node节点添加角色标签](linux/k8s/k8s知识点/k8s给node节点添加角色标签.md)
     * [本机通过config文件连接多个k8s集群](linux/k8s/k8s知识点/本机通过config文件连接多个k8s集群.md)
+    * [k8s强制删除命名空间](linux/k8s/k8s知识点/k8s强制删除namespace.md)
   * [k8s安装](README.md)
     * [kubeadm安装](README.md)
       * [1.15](linux/k8s/k8s安装/1.使用 kubeadm 搭建 v1.15.3 版本 Kubernetes 集群.md)
@@ -311,6 +314,7 @@
       * [gitlab集成ldap](linux/自动化运维平台/gitlab/gitlab知识点/8.gitlab集成ldap.md)
       * [gitlab配置邮件](linux/自动化运维平台/gitlab/gitlab知识点/9.gitlab配置邮件.md)
       * [gitlab Server hooks](linux/自动化运维平台/gitlab/gitlab知识点/gitlab Server hooks.md)
+      * [gitlab文档](linux/自动化运维平台/gitlab/gitlab知识点/gitlab文档.md)
 
   * [jenkins](README.md)
     * [jenkins安装](README.md)
@@ -329,7 +333,6 @@
         * [gitlab webhook 报错 ](linux/自动化运维平台/jenkins/jenkins知识点/webhook/gitlab webhook 报错.md)
         * [gitea+jenkins实现webhook](linux/自动化运维平台/jenkins/jenkins知识点/webhook/gitea+jenkins实现webhook.md)
         * [gitlab+jenkins实现webhook](linux/自动化运维平台/jenkins/jenkins知识点/webhook/gitlab+jenkins实现webhook.md)
-        * [gitea+jenkins实现webhook](linux/自动化运维平台/jenkins/jenkins知识点/webhook/gitea+jenkins实现webhook.md)
     * [jenkins故障](README.md)
       * [jenkins报错](linux/自动化运维平台/jenkins/jenkins故障/jenkins报错.md)
       * [jenkins无限构建问题](linux/自动化运维平台/jenkins/jenkins故障/jenkins无限构建问题.md)

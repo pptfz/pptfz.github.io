@@ -1,3 +1,7 @@
+[toc]
+
+
+
 # CentOS8部署kubeadm高可用k8s-v1.18 
 
 [本文严重抄袭至张馆长的博客](http://zhangguanzhang.github.io/2019/11/24/kubeadm-base-use/)，然后虾改了一些东西
