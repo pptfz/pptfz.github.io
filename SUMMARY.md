@@ -165,7 +165,9 @@
       * [helm2](README.md)
         * [helm2.16.安装记录](linux/k8s/helm/helm2.16.3安装.md)
       * [helm3](README.md)
-    * [kubesphere](linux/k8s/kubesphere/在k8s集群安装kubesphere2.1.md)            
+    * [kubesphere](linux/k8s/kubesphere/在k8s集群安装kubesphere2.1.md)   
+  * [k8s故障](README.md)
+    * [使用config连接k8s集群遇到的问题](linux/k8s/k8s故障/使用config文件连接k8s集群遇到的问题.md)         
 
 * [kvm](README.md)
   * [kvm安装](linux/kvm/安装/kvm安装.md)
