@@ -20,7 +20,7 @@ GitLab Runner 是一个与 GitLab CI/CD 一起使用以在管道中运行作业�
 
 **特性**
 
-GitLab Runner 具有以下功能。
+GitLab Runner 具有以下功能
 
 - 同时运行多个作业。
 - 对多个服务器（甚至每个项目）使用多个令牌。

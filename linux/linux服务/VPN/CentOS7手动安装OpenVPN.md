@@ -131,7 +131,7 @@ wget https://github.com/OpenVPN/openvpn/archive/v2.4.9.tar.gz
 ### 2.2.2 解压缩并进入源码目录
 
 ```shell
-tar xf openvpn-2.4.9.tar.gz && cd openvpn-2.4.9/
+tar xf v2.4.9.tar.gz && cd openvpn-2.4.9
 ```
 
 
