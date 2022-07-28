@@ -10,6 +10,85 @@
 
 
 
+# 遇到的报错
+
+## **报错1** 访问报错 `Token encryption requires a random string in keyphrase setting`
+
+[github issue中有提到这个问题](https://github.com/ltb-project/self-service-password/issues/199)
+
+[问题说明链接](https://ltb-project.org/documentation/self-service-password/latest/config_general#security)
+
+![iShot2021-09-18 15.21.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-18 15.21.21.png)
+
+
+
+解决方法
+
+```shell
+修改
+	$keyphrase = "secret";
+修改为任意字符的随机字符串
+	$keyphrase = "yaldnfaopewnrganadnfa";
+```
+
+
+
+
+
+## **报错2** `无法修改密码，日志报错用户未发现`
+
+```shell
+[Sat Sep 18 08:06:20.175684 2021] [php7:notice] [pid 18] [client 10.0.17.251:56444] LDAP - User xiaoming not found, referer: http://172.30.100.4:8000/index.php
+10.0.17.251 - - [18/Sep/2021:08:06:20 +0000] "POST /index.php HTTP/1.1" 200 1841 "http://172.30.100.4:8000/index.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36"
+```
+
+
+
+问题所在，需要修改以下配置，`objectClass=person` 是官方示例的写法，需要把person修改为具体的过滤内容，例如修改为 `*`
+
+```shell
+$ldap_filter = "(&(objectClass=person)($ldap_login_attribute={login}))";
+```
+
+
+
+修改为如下
+
+```shell
+$ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
+```
+
+
+
+## 报错3 `密码被LDAP服务器拒绝`
+
+![iShot_2022-07-28_17.34.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-07-28_17.34.09.png)
+
+
+
+日志报错如下
+
+```shell
+[Thu Jul 28 09:17:27.537279 2022] [php7:warn] [pid 18] [client 172.20.20.2:54960] PHP Warning:  ldap_mod_replace(): Modify: Insufficient access in /var/www/lib/functions.inc.php on line 499, referer: http://172.20.20.4:8000/
+[Thu Jul 28 09:17:27.537321 2022] [php7:notice] [pid 18] [client 172.20.20.2:54960] LDAP - Modify password error 50 (Insufficient access), referer: http://172.20.20.4:8000/
+172.20.20.2 - - [28/Jul/2022:09:17:27 +0000] "POST / HTTP/1.1" 200 2016 "http://172.20.20.4:8000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
+[Thu Jul 28 09:18:16.669056 2022] [php7:warn] [pid 19] [client 172.20.20.2:54991] PHP Warning:  ldap_mod_replace(): Modify: Insufficient access in /var/www/lib/functions.inc.php on line 499, referer: http://172.20.20.4:8000/
+[Thu Jul 28 09:18:16.669104 2022] [php7:notice] [pid 19] [client 172.20.20.2:54991] LDAP - Modify password error 50 (Insufficient access), referer: http://172.20.20.4:8000/
+172.20.20.2 - - [28/Jul/2022:09:18:16 +0000] "POST / HTTP/1.1" 200 2012 "http://172.20.20.4:8000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36"
+172.20.20.2 - - [28/Jul/2022:09:19:07 +0000] "-" 408 0 "-" "-"
+```
+
+![iShot_2022-07-28_17.42.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-07-28_17.42.50.png)
+
+
+
+解决方法
+
+```php
+修改 $who_change_password = "user";
+修改为 $who_change_password = "manager";
+```
+
 
 
 # 1.Self Service Password简介
@@ -285,64 +364,6 @@ $reset_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . "://" . $_SERVER['HTTP_X_FORWA
 重置密码的邮箱必须是ldap中用户绑定的邮箱，输入其他邮箱会报错邮箱与用户不一致
 
 ![iShot2021-09-20 21.17.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20 21.17.37.png)
-
-
-
-# 遇到的报错
-
-**报错1**
-
-访问报错 `Token encryption requires a random string in keyphrase setting`
-
-[github issue中有提到这个问题](https://github.com/ltb-project/self-service-password/issues/199)
-
-[问题说明链接](https://ltb-project.org/documentation/self-service-password/latest/config_general#security)
-
-![iShot2021-09-18 15.21.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-18 15.21.21.png)
-
-
-
-解决方法
-
-```shell
-修改
-	$keyphrase = "secret";
-修改为任意字符的随机字符串
-	$keyphrase = "yaldnfaopewnrganadnfa";
-```
-
-
-
-
-
-**报错2**
-
-无法修改密码，日志报错用户未发现
-
-```shell
-[Sat Sep 18 08:06:20.175684 2021] [php7:notice] [pid 18] [client 10.0.17.251:56444] LDAP - User xiaoming not found, referer: http://172.30.100.4:8000/index.php
-10.0.17.251 - - [18/Sep/2021:08:06:20 +0000] "POST /index.php HTTP/1.1" 200 1841 "http://172.30.100.4:8000/index.php" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36"
-```
-
-
-
-问题所在，需要修改以下配置，`objectClass=person` 是官方示例的写法，需要把person修改为具体的过滤内容，例如修改为 `*`
-
-```shell
-$ldap_filter = "(&(objectClass=person)($ldap_login_attribute={login}))";
-```
-
-
-
-修改为如下
-
-```shell
-$ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
-```
-
-
-
-
 
 
 
