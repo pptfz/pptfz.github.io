@@ -19,6 +19,50 @@
 npx create-docusaurus@latest my-website classic
 ```
 
+
+
+```shell
+$ npx create-docusaurus@latest my-website classic
+Need to install the following packages:
+  create-docusaurus@2.0.1
+Ok to proceed? (y) y
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+[INFO] Creating new Docusaurus project...
+[INFO] Installing dependencies with npm...
+npm WARN deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+
+added 1083 packages in 39s
+[SUCCESS] Created my-website.
+[INFO] Inside that directory, you can run several commands:
+
+  `npm start`
+    Starts the development server.
+
+  `npm run build`
+    Bundles your website into static files for production.
+
+  `npm run serve`
+    Serves the built website locally.
+
+  `npm deploy`
+    Publishes the website to GitHub pages.
+
+We recommend that you begin by typing:
+
+  `cd my-website`
+  `npm start`
+
+Happy building awesome websites!
+
+npm notice 
+npm notice New minor version of npm available! 8.15.0 -> 8.18.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v8.18.0
+npm notice Run npm install -g npm@8.18.0 to update!
+npm notice 
+```
+
+
+
 安装完成后会生成 `my-website` 目录，目录结构如下
 
 ![iShot_2022-06-22_17.24.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-06-22_17.24.06.png)
@@ -96,4 +140,12 @@ yarn run start
 
 
 
+
+
+
+
+
+```
+
+```
 
