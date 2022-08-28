@@ -1,8 +1,7 @@
 
-<span style={{color: 'blue'}}>角色</span>
+<span style={{color: 'red'}}>角色</span>
 
-:::note
 
-到此，安装完成
-
+:::tip
+到此，安装完成!!!
 :::
