@@ -196,7 +196,7 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 | **-m**   | **设置FACL权限**                                  |
 | **-x**   | **取消FACL权限**                                  |
 | **-R**   | **递归设置，-R需要写在-m选项前边**                |
-| **-b**   | <span style=color:red>**删除全部FACL权限**</span> |
+| **-b**   | **删除全部FACL权限**
 
 **设置FACL示例**
 
@@ -242,5 +242,5 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 
 ![iShot2020-10-15 19.58.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 19.58.22.png)
 
-
+# test
 
