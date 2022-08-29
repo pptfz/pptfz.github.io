@@ -46,7 +46,7 @@ ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi
 
 :::tip
 
-**<span style={{color: 'red'}}>⚠️官方文档中只说明了需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi` 这个命令，但是实际上还需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi`，否则后续make的时候会有如下报错** </span>
+**<span style={{color: 'red'}}>⚠️官方文档中只说明了需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi` 这个命令，但是实际上还需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi`，否则后续make的时候会有如下报错</span>**
 
 :::
 
