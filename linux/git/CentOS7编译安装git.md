@@ -23,7 +23,7 @@ wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar
 
 # 2.安装依赖包
 
-::tip
+:::tip
 
 **系统环境为最小化安装CentOS7.9**
 
