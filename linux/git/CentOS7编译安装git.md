@@ -23,7 +23,11 @@ wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar
 
 # 2.安装依赖包
 
-> 系统环境为最小化安装CentOS7.9
+::tip
+
+**系统环境为最小化安装CentOS7.9**
+
+:::
 
 ```shell
 yum -y install curl zlib zlib-devel openssl openssl-devel expat libiconv autoconf gcc gcc-c++ asciidoc xmlto util-linux docbook2X
