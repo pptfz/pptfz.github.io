@@ -22,7 +22,7 @@
 - **<span style={{color: 'red'}}>红色</span>**
   - **新增文件或者修改的旧文件-->执行命令``git add .或者git add 文件名``**
 
-- **<span style=color:green>绿色</span>**
+- **<span style={{color: 'green'}}>绿色</span>**
   - **git已经管理起来的文件-->执行命令``git commit -m '描述信息'``**
 
 - **白色**
@@ -140,7 +140,7 @@ nothing to commit, working tree clean
 
 
 
-### 2.4.2 git移动数据，有时会将已经添加至暂存区的文件重命名``git mv 原文件 新文件``
+### 2.4.2 git移动数据，有时会将已经添加至暂存区的文件重命名 `git mv 原文件 新文件`
 
 ```shell
 # 此时文件是绿色的
