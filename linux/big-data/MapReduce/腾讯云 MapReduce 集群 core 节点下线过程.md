@@ -4,41 +4,45 @@
 
 **背景**
 
-> **官方版**
->
-> 当 EMR 的 core 节点需进行升级，对老的 core 节点进行下线操作来替换新的 core 节点 上线。
+:::info
 
-> **实际情况**
->
-> 之前的傻逼领导和傻逼运维不根据实际业务的数据量大小就瞎🐔8⃣️开一堆配置特别高的机器(数量50多台，总核心1000+、总内存5T+、总磁盘800T+，这还不算之前退的机器)，然后总体利用率连一半都不到，40%左右，😠，这简直是艹泥🐎啊，现在傻逼老板让减配(他的理念就是既不想花钱又想要用高的配置)，然后不懂技术的"技术总监"就天天催着下边的人赶紧把机器退了，👍
+当前 EMR 的 core 节点需进行升级，对老的 core 节点进行下线操作来替换新的 core 节点 上线。
 
-
+:::
 
 **目标**
 
-> 集群在下线 Core 节点后，数据仍保证完整可靠性，同时集群服务仍正常运行
+:::info
 
+集群在下线 Core 节点后，数据仍保证完整可靠性，同时集群服务仍正常运行
 
+:::
 
 **下线步骤**
 
-> 一、hadoop fsck / 运行健康检查，确认hdfs健康状态为healthy，如果有单副本情况存在，务必调整为多副本。
->
-> 二、如果数据量较大，务必先调优，否则下线数据迁移异常缓慢。
-> 参考文档： 加快副本复制速度文档
->
-> 三、开始下线节点
-> 参考文档： 大数据EMR-core节点下线操作
->
-> 四、申请白名单，控制台缩容节点
+:::info
 
+1、hadoop fsck / 运行健康检查，确认hdfs健康状态为healthy，如果有单副本情况存在，务必调整为多副本。
 
+2、如果数据量较大，务必先调优，否则下线数据迁移异常缓慢。
+参考文档： 加快副本复制速度文档
+
+3、开始下线节点
+参考文档： 大数据EMR-core节点下线操作
+
+4、申请白名单，控制台缩容节点
+
+:::
 
 
 
 ## 第一步 加快副本复制速度
 
-**⚠️<span style=color:red>一定要做加快副本复制速度操作，否则复制会特别慢(第一次操作由于没有做此步骤，导致后续复制速度特别慢，经和腾讯云沟通30T数据(2台机器)在不加速的情况下需要大概2周以上！)</span>**
+:::tip
+
+**⚠️<span style={{color: 'red'}}>一定要做加快副本复制速度操作，否则复制会特别慢(第一次操作由于没有做此步骤，导致后续复制速度特别慢，经和腾讯云沟通30T数据(2台机器)在不加速的情况下需要大概2周以上！)</span>**
+
+:::
 
 ### 1.1 在 emr 控制台的 `hdfs-site.xml` 里增加如下 5 个参数，下发 NameNode 节点
 
@@ -258,7 +262,11 @@ Refresh nodes successful for /10.0.100.11:4007
 
 ### 2.4 在 emr 控制台停止如上 2 个节点的 DataNode 服务
 
-⚠️<span style=color:red>一定要等2.3步骤中执行完成，即想要下线的节点状态变为 `Decommission` 才可以继续后续操作</span>
+:::caution
+
+**⚠️<span style={{color: 'red'}}>一定要等2.3步骤中执行完成，即想要下线的节点状态变为 `Decommission` 才可以继续后续操作</span>**
+
+:::
 
 在集群服务HDFS选项中，找到要下线的 `DataNode` 节点，选中，然后点击 `暂停`
 
@@ -417,13 +425,19 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 
 YARN 原生 web UI 将不再存在以上两节点(腾讯云给的文档中说此步骤操作后，YARN 原生 web UI中不存在以上两个节点，但是实际上是存在的，经与腾讯云沟通后对方说存在也不影响)，至此 Nodemanager 下线完毕
 
-**⚠️<span style=color:red>对于 NodeManager 下线，emr-V1.3.1 版本需重启两个 ResourceManager 后，WEB 页面才剔除节点， 但实际影响不大。在执行完步骤 3.6 后，下线节点的 NodeManager 实际已从集群中移除，任务不会再分配到该下线的 NodeManmager 节点</span>**
+:::caution
 
+**⚠️<span style={{color: 'red'}}>对于 NodeManager 下线，emr-V1.3.1 版本需重启两个 ResourceManager 后，WEB 页面才剔除节点， 但实际影响不大。在执行完步骤 3.6 后，下线节点的 NodeManager 实际已从集群中移除，任务不会再分配到该下线的 NodeManmager 节点</span>**
 
+:::
 
 ## 第四步、RegionServer 下线操作
 
-**<span style=color:red>⚠️若存在 HBASE，请将 DataNode 下线完成后操作</span>**
+:::caution
+
+**<span style={{color: 'red'}}>⚠️若存在 HBASE，请将 DataNode 下线完成后操作</span>**
+
+:::
 
 ### 4.1 登录 EMR 控制台，将下线节点的 RegionServer 进入维护模式
 
@@ -522,7 +536,7 @@ no regionserver to stop because no pid file /data/emr/hbase/pid/hbase-hadoop-reg
 2021-04-10T15:46:43 Restoring balancer state to true
 ```
 
-⚠️<span style=color:red>报错可以忽略</span>
+⚠️<span style={{color: 'red'}}>报错可以忽略</span>
 
 HBASE 原生web UI 查看下线节点 region 为0即代表 `RegionServer` 下线完毕
 
