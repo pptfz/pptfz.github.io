@@ -40,7 +40,11 @@ ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi
 
 
 
-<span style=color:red>⚠️官方文档中只说明了需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi` 这个命令，但是实际上还需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi`，否则后续make的时候会有如下报错 </span>
+:::tip
+
+**<span style={{color: 'red'}}>⚠️官方文档中只说明了需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi` 这个命令，但是实际上还需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi`，否则后续make的时候会有如下报错** </span>
+
+:::
 
 ```
 docbook2texi:/book: no description for directory entry
@@ -99,7 +103,11 @@ git clone git://git.kernel.org/pub/scm/git/git.git
 
 # 7.遇到的问题
 
-**<span style=color:red>⚠️此问题无解，折腾了半天还是无法解决</span>**
+:::caution
+
+**<span style={{color: 'red'}}>⚠️此问题无解，折腾了半天还是无法解决</span>**
+
+:::
 
 ```shell
 $ git clone https://github.com./garabik/grc.git
