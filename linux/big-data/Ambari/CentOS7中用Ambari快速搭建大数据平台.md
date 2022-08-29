@@ -134,7 +134,11 @@ reboot
 
 ## 2.2 配置ssh免密
 
-**⚠️<span style=color:red>如无特殊说明，以下操作均在 ambari-server01 节点</span>**
+:::tip
+
+如无特殊说明，以下操作均在 `ambari-server01` 节点
+
+:::
 
 ### 2.2.1 编辑环境变量文件
 
@@ -161,9 +165,13 @@ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &>/dev/null
 
 ### 2.2.3 编辑expect自动化交互脚本
 
-- **这里机器用户名是`root`，密码是国际标准通用密码`1`，ssh端口`22`**
+:::tip
 
-- **⚠️执行路径在 `/opt/ambari/script`**
+**这里机器用户名是 `root`，密码是国际标准通用密码 `1`，ssh端口 `22`**
+
+**⚠️执行路径在 `/opt/ambari/script`**
+
+:::
 
 ```shell
 cat > ssh.exp <<'EOF'
@@ -248,13 +256,17 @@ sed -i '7s/enforcing/disabled/' /etc/selinux/config
 
 ### 2.5.1 安装说明
 
-- **<span style=color:red>⚠️⚠️⚠️集群中每一个节点都需要安装jdk</span>**
+:::tip
 
-- **⚠️jdk需要登陆到 [oracle](https://www.oracle.com/) 官网才可以下载，这里下载的是版本是 `jdk-8u251`**
+**<span style={{color: 'red'}}>⚠️⚠️⚠️集群中每一个节点都需要安装jdk</span>**
 
-- **jdk安装包下载至 `/opt/ambari/pkg`**
+**⚠️jdk需要登陆到 [oracle](https://www.oracle.com/) 官网才可以下载，这里下载的是版本是 `jdk-8u251`**
 
-- [jdk官方下载地址](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+**jdk安装包下载至 `/opt/ambari/pkg`**
+
+[jdk官方下载地址](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+
+:::
 
 ```shell
 mkdir -p /opt/ambari/pkg
@@ -330,7 +342,11 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
+:::tip
+
 **⚠️sed中有变量替换，需要使用双引号**
+
+:::
 
 ### 2.6.1 各节点安装chrony
 
@@ -426,19 +442,25 @@ systemctl enable httpd && systemctl start httpd
 
 ## 2.8 安装mysql
 
-⚠️⚠️⚠️
+:::tip
 
-> **二进制安装的mysql启动脚本 `/etc/init.d/mysql` 和  `安装目录/mysql/bin/mysqld_safe`  这两个文件中都是默认在 `/usr/local/mysql`，如果安装目录不在 `/usr/local/` 下，需要修改这两个文件中的路径，即把 `/usr/local` 替换为mysql安装目录**
->
-> **sed -i 's#/usr/local#你的mysql安装目录#g' /etc/init.d/mysql /你的mysql安装目录/mysql/bin/mysqld_safe**
+**二进制安装的mysql启动脚本 `/etc/init.d/mysql` 和  `安装目录/mysql/bin/mysqld_safe`  这两个文件中都是默认在 `/usr/local/mysql`，如果安装目录不在 `/usr/local/` 下，需要修改这两个文件中的路径，即把 `/usr/local` 替换为mysql安装目录，使用如下命令**
 
+```shell
+sed -i 's#/usr/local#你的mysql安装目录#g' /etc/init.d/mysql /你的mysql安装目录/mysql/bin/mysqld_safe
+```
 
+:::
 
 ### 2.8.1 下载二进制包
 
 [mysql官方下载地址](https://downloads.mysql.com/archives/community/)
 
-> **mysql5.7.30 md5值  `611be3b18a30498b705db773293ad341`** 
+:::tip
+
+**mysql5.7.30 md5值  `611be3b18a30498b705db773293ad341`**
+
+:::
 
 ```shell
 wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.30-linux-glibc2.12-x86_64.tar.gz
@@ -473,7 +495,11 @@ useradd -M -s /bin/nologin mysql
 
 ### 2.8.5 编辑主配置文件，myql-5.7.30二进制包默认没有mysql配置文件
 
-**<span style=color:red>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会默认从 /tmp下找socket文件</span>**
+:::tip
+
+**⚠️如果指定了mysql的socket文件位置，则必须添加 `[client]` 标签并同时指定socket文件位置，否则客户端会默认从 `/tmp` 下找socket文件**
+
+:::
 
 ```python
 # 备份/etc/my.cnf
@@ -497,7 +523,11 @@ EOF
 
 ### 2.8.6 创建socker文件目录、目录文件授权
 
-**⚠️⚠️⚠️<span style=color:red>如果mysql配置文件中指定了socket文件目录，则这个目录的权限必须是mysql，否则mysql会启动失败</span>**
+:::caution
+
+**⚠️⚠️⚠️如果mysql配置文件中指定了socket文件目录，则这个目录的权限必须是mysql，否则mysql会启动失败**
+
+:::
 
 ```shell
 mkdir -p /var/lib/mysql
@@ -517,7 +547,11 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 ### 2.8.8 初始化mysql
 
-**<span style=color:red>⚠️⚠️⚠️mysql-5.7.22初始化没有提示！！！</span>**
+:::caution
+
+**⚠️⚠️⚠️mysql-5.7.22初始化没有提示！！！**
+
+:::
 
 ```python
 /usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
@@ -652,7 +686,11 @@ yum -y install yum-utils createrepo
 
 ## 3.3 创建ambari、HDP、HDP-UTILS的repo仓库
 
-**⚠️<span style=color:red>如果下载的版本不同，则需要修改 `baseurl`和`gpgcheck`中的url路径</span>**
+:::caution
+
+**⚠️如果下载的版本不同，则需要修改  `baseurl` 和 `gpgcheck` 中的url路径**
+
+:::
 
 ### 3.3.1 创建ambari的repo仓库
 
@@ -705,7 +743,11 @@ yum clean all && yum makecache
 
 ### 3.3.4 通过本地源安装ambari
 
-**⚠️<span style=color:red>执行此命令会安装 ambari2.6.2.2 和 pg9.2.24 </span>**
+:::tip
+
+**⚠️执行此命令会安装 ambari2.6.2.2 和 pg9.2.24**
+
+:::
 
 ```shell
 yum -y install ambari-server
@@ -719,9 +761,13 @@ yum -y install ambari-server
 
 [mysql驱动官方下载地址](https://downloads.mysql.com/archives/c-j/)
 
-**由于使用的是mysql5.7，因此必须下载mysql5.7驱动，<span style=color:red>且必须放于 `/usr/share/java` 下</span>**
+:::caution
+
+**由于使用的是mysql5.7，因此必须下载mysql5.7驱动，<span style={{color: 'red'}}>且必须放于 `/usr/share/java` 下</span>**
 
 否则后续会有如下报错，原因是 ambari 默认的 mysql jdbc 驱动不支持 5.6 以上版本
+
+:::
 
 ```shell
 Configuring ambari database...
@@ -859,7 +905,11 @@ Configuring ambari database...
 
 ### 4.2.9 继续配置远程数据库连接属性	输入：y
 
-**⚠️<span style=color:red>需要导入 `/var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql`到ambari数据库中</span>**
+:::caution
+
+**⚠️需要导入 `/var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql`到ambari数据库中**
+
+:::
 
 ```shell
 WARNING: Before starting Ambari Server, you must run the following DDL against the database to create the schema: /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql
@@ -932,9 +982,7 @@ Ambari Server 'start' completed successfully.
 
 
 
-**<span style=color:red>到此，ambari安装成功！！！</span>**
-
-
+**<span style={{color: 'red'}}>到此，ambari安装成功！！！</span>**
 
 
 
@@ -1023,7 +1071,11 @@ sed -i.bak '/^verify/cverify=disable' /etc/python/cert-verification.cfg
 
 **2.修改 `/etc/ambari-agent/conf/ambari-agent.ini` 中 `[security]` 标签后加入以下两行内容**
 
-**⚠️<span style=color:red>这一步必须在 `Confirm Hosts` 进行安装后才会有相应的文件，也就是说进入到 `Confirm Hosts` 这一步中注册主机稍等一会才可以进行修改文件操作(目前了解是这样，不知道有没有更好的方法)</span>**
+:::caution
+
+**⚠️这一步必须在 `Confirm Hosts` 进行安装后才会有相应的文件，也就是说进入到 `Confirm Hosts` 这一步中注册主机稍等一会才可以进行修改文件操作(目前了解是这样，不知道有没有更好的方法)**
+
+:::
 
 ![iShot2020-09-17 18.38.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-17 18.38.49.png)
 
@@ -1064,9 +1116,11 @@ ambari-agent restart
 10.0.0.138 ambari-agent02.test.com
 ```
 
+:::caution
 
+**⚠️⚠️⚠️<span style={{color: 'red'}}>`Target Hosts` 处一定不要写IP地址，一定要写成FQDN式的主机名</span>**
 
-**⚠️⚠️⚠️<span style=color:red>`Target Hosts` 处一定不要写IP地址，一定要写成FQDN式的主机名</span>**
+:::
 
 **集群节点 `Target Hosts` 处要写成如下**
 
@@ -1096,19 +1150,25 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 
 
-**⚠️<span style=color:red>5.3.3为遇到的问及记录</span>**
+:::caution
+
+**⚠️5.3.3为遇到的问及记录**
+
+:::
 
 ### 5.3.3 ambari安装到 `Confirm Hosts`遇到的报错
 
 #### 5.3.3.1 报错1	找不到 ambari server
 
-![iShot2020-09-14 17.00.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-14 17.00.15.png)
+![iShot2020-09-14 17.00.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-14%2017.00.15.png)
+
+
 
 
 
 **重要日志**
 
-![iShot2020-09-14 17.01.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-14 17.01.54.png)
+![iShot2020-09-14 17.01.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-14%2017.01.54.png)
 
 
 
@@ -1146,7 +1206,11 @@ http://10.0.0.136/ambari/HDP-UTILS/centos7/1.1.0.22
 
 **解决方法**
 
-**⚠️<span style=color:red>以下操作需要在所有节点修改</span>**
+:::caution
+
+**⚠️<span style={{color: 'red'}}>以下操作需要在所有节点修改</span>**
+
+:::
 
 1.修改 `/etc/python/cert-verification.cfg` 中 `verify=platform_default`  为 `verify=disable`
 
@@ -1287,7 +1351,11 @@ mysql -uroot -e "flush privileges"
 
 ### 5.6.5 Atlas
 
-**<span style=color:red>⚠️⚠️⚠️最好不要选择这个Atlas，网上查了半天也不知道标红的这两处该怎么写以及怎么查找</span>**
+:::caution
+
+**⚠️⚠️⚠️最好不要选择这个Atlas，网上查了半天也不知道标红的这两处该怎么写以及怎么查找**
+
+:::
 
 ![iShot2020-09-15 17.08.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15 17.08.42.png)
 
