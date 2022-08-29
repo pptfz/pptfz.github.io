@@ -19,14 +19,17 @@
 ![iShot2020-10-14 14.13.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.13.04.png)
 
 <h4>git status 文件三种颜色的变化</h4>
-- <span style={{color: 'red'}}>红色</span>
-  - 新增文件或者修改的旧文件-->执行命令 `git add .` 或者 `git add 文件名`
+<span style={{color: 'red'}}>红色</span>
 
-- <span style={{color: 'green'}}>绿色</span>
-  - git已经管理起来的文件-->执行命令 `git commit -m '描述信息'`
+- 新增文件或者修改的旧文件-->执行命令 `git add .` 或者 `git add 文件名`
 
-- 白色
-  - 已经生成版本的文件
+<span style={{color: 'green'}}>绿色</span>
+
+- git已经管理起来的文件-->执行命令 `git commit -m '描述信息'`
+
+白色
+
+- 已经生成版本的文件
 
 
 
