@@ -53,7 +53,11 @@ systemctl daemon-reload
 
 第四步、设置vnc密码
 
-> <span style=color:red>⚠️必须在启动vnc前设置密码，否则启动会失败</span>
+:::tip
+
+**必须在启动vnc前设置密码，否则启动会失败**
+
+:::
 
 ```shell
 # 输入2次密码
@@ -68,7 +72,11 @@ A view-only password is not used
 
 第四步、启动vncserver
 
-> 使用命令 `systemctl enable vncserver@:<display>.service` 把想要开启的vnc窗口加入开机自启，其中 `<display>` 为具体的窗口号
+:::tip
+
+**使用命令 `systemctl enable vncserver@:<display>.service` 把想要开启的vnc窗口加入开机自启，其中 `<display>` 为具体的窗口号**
+
+:::
 
 ```shell
 systemctl start vncserver@:1.service
@@ -79,11 +87,15 @@ systemctl enable vncserver@:1.service
 
 查看启动
 
-> 默认的启动脚本路径 `/root/.vnc/xstartup`
->
-> 默认的配置文件路径 `/root/.vnc/config`
->
-> 默认的日志文件路径 `/root/.vnc/devops01:1.log` 其中 `devops01` 是主机名0
+:::tip
+
+**默认的启动脚本路径 `/root/.vnc/xstartup`**
+
+**默认的配置文件路径 `/root/.vnc/config`**
+
+**默认的日志文件路径 `/root/.vnc/devops01:1.log` 其中 `devops01` 是主机名**
+
+:::
 
 ```shell
 $ systemctl status vncserver@:1
@@ -196,9 +208,11 @@ $ cat ~/.vnc/config
 
 修改为想要的分辨率，然后重启进程
 
-<span style=color:red>⚠️重启vncserver进程不能使用system命令，重启会不生效并且报错</span>
+:::caution
 
+**重启vncserver进程不能使用system命令，重启会不生效并且报错**
 
+:::
 
 使用 `systemctl` 命令重启vncserver
 
@@ -264,4 +278,4 @@ root     16842  0.3  2.8 198808 28936 pts/0    Sl   18:58   0:00 /usr/bin/Xvnc :
 
 
 
-![iShot2021-12-01 19.05.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-01 19.05.10.png)
+![iShot2021-12-01 19.05.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-01%2019.05.10.png)
