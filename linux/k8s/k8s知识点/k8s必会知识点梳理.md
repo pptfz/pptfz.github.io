@@ -26,7 +26,7 @@
 
 
 
-![640](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/sadfasdfas.jpg)
+![iShot_2022-08-30_11.14.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.14.37.png)
 
 在K8s中， 通过创建资源对象（当前的实现中实现了 ConfigMap 和 Endpoint 两种类型的资源）来维护锁的状态。这两种资源对象存在etcd里，也可以说是用etcd来实现的。
 
@@ -49,7 +49,7 @@
 - leader-elect-retry-period为其它副本获取锁的时间间隔(竞争leader)和leader更新间隔。
 - leader-elect-resource-lock是k8s分布式资源锁的资源对象，目前只支持endpoints和configmaps。
 
-![123x](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/123x.png)
+![iShot_2022-08-30_11.16.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.16.05.png)
 
 
 
@@ -68,9 +68,11 @@ K8s中所有元数据的增删改查都是由kube-apiserver来执行的。ETCD�
 
 k8s主要把自己的数据注册在/registry/前缀下面（在ETCD-v3版本后没有了目录的概念，只能一切皆前缀了）。通过观察k8s中deployment、namespace、pod等在ETCD中的表示，可以知道这部分资源的key的格式为/registry/{k8s对象}/{命名空间}/{具体实例名}。
 
-![img](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/1.jpg)
+![iShot_2022-08-30_11.20.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.20.25.png)
 
-![sadfasdfas](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/640.png)
+
+
+![iShot_2022-08-30_11.22.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.22.31.png)
 
 
 
@@ -258,9 +260,7 @@ kube-scheduler监视没有分配节点的新创建的 Pod，选择一个节点�
 
 默认的预选、优选调度算法远不止以上这些。可以通过kube-scheduler的启动参数中加policy-config-file文件、configmaps（过时）、或者--config指定调度器用哪些预选、优选算法。
 
-![1](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/640-5569055.png)
-
-
+![iShot_2022-08-30_11.23.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.23.57.png)
 
 **调度算法的扩展**
 
@@ -289,7 +289,7 @@ leaderElection:
 
 
 
-![img](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/640-20200330194246913.jpeg)
+![iShot_2022-08-30_11.25.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.25.39.png)
 
 
 
@@ -370,15 +370,19 @@ leaderElection:
 
 里面指定了默认调度器用到的预选、优选算法，以及调用扩展调度器的service地址，预选和Bind接口URI。
 
-![640123](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/640.jpeg)
+![iShot_2022-08-30_11.26.47](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.26.47.png)
 
 
 
 在/etc/kubernetes/manifests目录下的kube-scheduler.yaml中启动参数中加--config=/etc/kubernetes/scheduler.yaml，该文件通过hostPath的方式挂载到容器内。
 
-![img](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/640123.jpg)
+![iShot_2022-08-30_11.28.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.28.08.png)
 
-![6401](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/6401.jpg)
+
+
+![iShot_2022-08-30_11.29.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.29.59.png)
+
+
 
 
 
@@ -511,7 +515,7 @@ kube-proxy提供了三种负载均衡器（LB）模式: 一种是基于用户态
 
   iptables模式和ipvs模式的对比
 
-![img](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/640-20200330194246554.jpeg)
+![iShot_2022-08-30_11.32.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.32.17.png)
 
 
 
@@ -523,7 +527,7 @@ kube-proxy提供了三种负载均衡器（LB）模式: 一种是基于用户态
 
 NodePort服务是引导外部流量到你的服务的最原始方式。可以通过访问集群内的每个NodeIP:NodePort的方式，访问到对应Service后端的Endpoint。在所有节点（虚拟机）上开放一个特定端口，任何发送到该端口的流量都被转发到对应服务。
 
-![img](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/640-20200330194246589.jpeg)
+![iShot_2022-08-30_11.33.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.33.20.png)
 
 NodePort 服务的 YAML 文件类似如下：
 
