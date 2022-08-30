@@ -96,31 +96,3 @@ hehe
 
 
 
-# 4.中的颜色
-
-## 4.1设置前景颜色
-
-![iShot_2022-08-30_15.07.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_15.07.30.png)
-
-
-
-## 4.2设置背景颜色
-
-![iShot_2022-08-30_15.38.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_15.38.59.png)
-
-
-
-**windows终端下的效果**
-
-![iShot2020-10-15 17.35.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2017.35.57.png)
-
-
-
-**mac终端下的效果**
-
-![iShot2020-10-15 17.36.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2017.36.13.png)
-
-
-
-
-
