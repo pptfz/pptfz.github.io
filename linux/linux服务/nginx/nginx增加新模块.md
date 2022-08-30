@@ -49,7 +49,11 @@ tar xf v0.61.tar.gz -C /usr/local
 
 ## 1.3 重新编译nginx
 
-**<span style=color:red>⚠️make之后不要执行make install   ！！！</span>**
+:::caution
+
+**<span style={{color: 'red'}}>⚠️make之后不要执行make install   ！！！</span>**
+
+:::
 
 ```shell
 #进入nginx源码目录
@@ -192,7 +196,11 @@ cd cd nginx-1.16.1/
 
 
 
-**<span style=color:red>⚠️make之后不要执行make install   ！！！</span>**
+:::caution
+
+**<span style={{color: 'red'}}>⚠️make之后不要执行make install   ！！！</span>**
+
+:::
 
 ```shell
 #重新./configure
@@ -238,7 +246,11 @@ server {
 
 
 
-**<span style=color:red>⚠️因为是rpm包安装的nginx，因此需要使用systemctl命名重启一下nginx</span>**
+:::caution
+
+**<span style={{color: 'red'}}>⚠️因为是rpm包安装的nginx，因此需要使用systemctl命名重启一下nginx</span>**
+
+:::
 
 ```shell
 systemctl restart nginx
