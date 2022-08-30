@@ -44,6 +44,58 @@ hehe[root@aliyun ~]#
 
 
 
+### 3.2.1 `\n`	换行
+
+```shell
+[root@exercise1 ~]# echo -e 'hehe\nhehe'
+hehe
+hehe
+```
+
+
+
+### 3.2.2 `\t`	输出制表符
+
+```shell
+[root@exercise1 ~]# echo -e 'hehe\thehe'
+hehe    hehe
+```
+
+
+
+### 3.2.3 `\c`	不换行
+
+```shell
+[root@exercise1 ~]# echo -e 'hehehehe\c'
+hehehehe[root@exercise1 ~]#
+```
+
+
+
+### 3.2.4 `\v`	垂直制表符
+
+```shell
+[root@exercise1 ~]# echo -e 'hehe\vhehe'
+hehe
+    hehe
+```
+
+
+
+### 3.2.5 `\e`	转义	等同于 `\033`
+
+**`\e` 写法**
+
+![iShot2020-10-15 17.35.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2017.35.18.png)
+
+
+
+**`\033` 写法**
+
+![iShot2020-10-15 17.35.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2017.35.35.png)
+
+
+
 ```shell
 \033[31;47;1mhello world\033[0m
 ```
