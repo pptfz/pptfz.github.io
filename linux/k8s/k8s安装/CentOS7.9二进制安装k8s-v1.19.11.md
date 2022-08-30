@@ -14,7 +14,7 @@
 
 **多master架构图**
 
-![iShot2021-06-06 22.19.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-06 22.19.59.png)
+![iShot2021-06-06 22.19.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-06%2022.19.59.png)
 
 
 
@@ -101,9 +101,11 @@ reboot
 
 
 
+:::tip
 
+**如无特殊说明，以下操作均在k8s-master01节点操作**
 
-<h3 style=color:red>⚠️如无特殊说明，以下操作均在k8s-master01节点操作</h3>
+:::
 
 ## 1.2 编辑环境变量脚本
 
@@ -419,7 +421,7 @@ $ uname -r
 
 **可根据自己实际需求下载对应版本**
 
-![iShot2020-09-21 14.29.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-21 14.29.15.png)
+![iShot2020-09-21 14.29.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-21%2014.29.15.png)
 
 
 
@@ -664,7 +666,7 @@ etcd 集群节点名称和 IP 如下：
 ### 3.1.1 创建证书签名请求
 
 - `hosts`：指定授权使用该证书的 etcd 节点 IP 列表，**需要将 etcd 集群所有节点 IP 都列在其中**
-- **<span style=color:red>⚠️文件中的IP是etcd节点的IP，哪些节点部署了etcd就写哪些节点的IP，为了方便后期扩展这里还可以多写几个IP</span>**
+- **<span style={{color: 'red'}}>⚠️文件中的IP是etcd节点的IP，哪些节点部署了etcd就写哪些节点的IP，为了方便后期扩展这里还可以多写几个IP</span>**
 
 ```shell
 source /opt/k8s/script/env.sh
@@ -1029,7 +1031,13 @@ etcdctl \
 
 
 
-<h4 style=color:red>所有节点操作</h4>
+:::tip
+
+**所有节点操作**
+
+:::
+
+
 
 ## 4.1 下载二进制安装包并解压缩
 
@@ -1519,30 +1527,6 @@ EOF
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### 5.2.2 systemd管理 kube-controller-manager
 
 ```shell
@@ -1694,13 +1678,16 @@ kubernetes worker 节点运行如下组件：
 
 - flannel
 
-  
-
-**<span style=color:red>⚠️如果后续有pod需要部署在master节点，则在master节点也需要部署kubelet和kube-proxy</span>**
-
-**⚠️<span style=color:red>这里把master节点也复用为node节点，即master节点上部署node</span>**
 
 
+
+:::tip
+
+**<span style={{color: 'red'}}>⚠️如果后续有pod需要部署在master节点，则在master节点也需要部署kubelet和kube-proxy</span>**
+
+**⚠️<span style={{color: 'red'}}>这里把master节点也复用为node节点，即master节点上部署node</span>**
+
+:::
 
 ## 6.1 Worker Node节点创建工作目录
 
@@ -1721,9 +1708,15 @@ for node_ip in ${NODE_IPS[@]}
 
 ### 6.2.1 创建 kukelet 配置文件
 
-**pause-amd64:3.0原先地址是gcr.io/google-containers/pause-amd64:3.0**
+:::tip
 
-**<span style=color:red>⚠️kubelet配置文件中的`--hostname-override`要与主机名相对应</span>**
+**pause-amd64:3.0原先地址是 `gcr.io/google-containers/pause-amd64:3.0`**
+
+**<span style={{color: 'red'}}>⚠️kubelet配置文件中的 `--hostname-override` 要与主机名相对应</span>**
+
+:::
+
+
 
 先做一个模版，后续会用sed替换文件中的主机名`--hostname-override`
 
@@ -1743,7 +1736,7 @@ KUBELET_OPTS="--logtostderr=false \\
 EOF
 ```
 
-- –hostname-override：**<span style=color:red>显示名称，集群中唯一</span>**
+- –hostname-override：**显示名称，集群中唯一**
 - –network-plugin：启用CNI
 - –kubeconfig：空路径，会自动生成，后面用于连接apiserver
 - –bootstrap-kubeconfig：首次启动向apiserver申请证书
@@ -1786,7 +1779,11 @@ for node_ip in ${NODE_IPS[@]}
 
 ### 6.2.2 创建 kubelet 参数配置文件
 
-**<span style=color:red>⚠️因为安装的docker已经使用了systemd，因此参数配置文件中的`cgroupDriver: systemd`也要做修改</span>**
+:::tip
+
+**⚠️因为安装的docker已经使用了systemd，因此参数配置文件中的`cgroupDriver: systemd`也要做修改**
+
+:::
 
 ```shell
 source /opt/k8s/script/env.sh
@@ -1959,7 +1956,11 @@ for node_ip in ${NODE_IPS[@]}
 
 ### 6.2.7 批准kubelet证书申请并加入集群
 
-**<span style=color:red>⚠️当kubelet启动成功的时候就会有节点过来请求颁发证书，使用命令`kubectl get csr`查看</span>**
+:::tip
+
+**当kubelet启动成功的时候就会有节点过来请求颁发证书，使用命令`kubectl get csr`查看**
+
+:::
 
 **查看kukelet证书请求，可以看到有3个节点请求颁发证书**
 
@@ -2359,7 +2360,11 @@ k8s-node2     Ready    <none>   18m   v1.18.5
 
 **删除node节点的kubelet证书文件**
 
-<span style=color:red>⚠️这几个文件是证书申请审批后自动生成的，每个Node不同，必须删除重新生成</span>
+:::tip
+
+**这几个文件是证书申请审批后自动生成的，每个Node不同，必须删除重新生成**
+
+:::
 
 ```shell
 export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]})
@@ -2538,7 +2543,7 @@ kubectl describe secrets -n kube-system $(kubectl -n kube-system get secret | aw
 
 **浏览器访问 `https://集群任意节点IP:30001`**
 
-**<span style=color:red>⚠️只能用火狐浏览器访问</span>**
+
 
 ![iShot2020-07-0410.58.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-0912.22.20.png)
 
