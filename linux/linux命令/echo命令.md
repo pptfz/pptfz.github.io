@@ -112,7 +112,7 @@ hehe
 | **[30m**                                             | **将字符的显示颜色改为黑色**                                 |
 | **<span style={{color: 'red'}}>[31m</span>**         | **<span style={{color: 'red'}}>将字符的显示颜色改为红色</span>** |
 | **<span style={{color: 'green'}}>[32m</span>**       | **<span style={{color: 'green'}}>将字符的显示颜色改为绿色</span>** |
-| **<span style={{color: ''#807e01'}}>[33m</span>**    | **<span style={{color: ''#807e01'}}>将字符的显示颜色改为淡黄色</span>** |
+| **<span style={{color: '#807e01'}}>[33m</span>**     | **<span style={{color: '#807e01'}}>将字符的显示颜色改为淡黄色</span>** |
 | **<span style={{color: 'blue'}}>[34m</span>**        | **<span style={{color: 'blue'}}>将字符的显示颜色改为蓝色</span>** |
 | **<span style={{color: 'purple'}}>[35m</span>**      | **<span style={{color: 'purple'}}>将字符的显示颜色改为紫色</span>** |
 | **<span style={{color: 'deepskyblue'}}>[36m</span>** | **<span style={{color: 'deepskyblue'}}>将字符的显示颜色改为天蓝色</span>** |
