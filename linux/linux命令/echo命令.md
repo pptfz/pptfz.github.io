@@ -89,13 +89,13 @@ hehe
 
 **\e写法**
 
-![iShot2020-10-15 17.35.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 17.35.18.png)
+![iShot2020-10-15 17.35.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2017.35.18.png)
 
 
 
 **\033写法**
 
-![iShot2020-10-15 17.35.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 17.35.35.png)
+![iShot2020-10-15 17.35.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2017.35.35.png)
 
 
 
@@ -105,16 +105,18 @@ hehe
 
 ## 4.1设置前景颜色
 
-| 写法                                          | 含义                                                         |
-| --------------------------------------------- | ------------------------------------------------------------ |
-| **[30m**                                      | **将字符的显示颜色改为黑色**                                 |
-| **<span style=color:red>[31m</span>**         | **<span style=color:red>将字符的显示颜色改为红色</span>**    |
-| **<span style=color:green>[32m</span>**       | **<span style=color:green>将字符的显示颜色改为绿色</span>**  |
-| **<span style=color:#807e01>[33m</span>**     | **<span style=color:#807e01>将字符的显示颜色改为淡黄色</span>** |
-| **<span style=color:blue>[34m</span>**        | **<span style=color:blue>将字符的显示颜色改为蓝色</span>**   |
-| **<span style=color:purple>[35m</span>**      | **<span style=color:purple>将字符的显示颜色改为紫色</span>** |
-| **<span style=color:deepskyblue>[36m</span>** | **<span style=color:deepskyblue>将字符的显示颜色改为天蓝色</span>** |
-| **<span style=color:gray>[37m</span>**        | **<span style=color:gray>将字符的显示颜色改为灰色</span>**   |
+![iShot_2022-08-30_15.07.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_15.07.30.png)
+
+| 写法                                                 | 含义                                                         |
+| ---------------------------------------------------- | ------------------------------------------------------------ |
+| **[30m**                                             | **将字符的显示颜色改为黑色**                                 |
+| **<span style={{color: 'red'}}>[31m</span>**         | **<span style={{color: 'red'}}>将字符的显示颜色改为红色</span>** |
+| **<span style={{color: 'green'}}>[32m</span>**       | **<span style={{color: 'green'}}>将字符的显示颜色改为绿色</span>** |
+| **<span style={{color: ''#807e01'}}>[33m</span>**    | **<span style={{color: ''#807e01'}}>将字符的显示颜色改为淡黄色</span>** |
+| **<span style={{color: 'blue'}}>[34m</span>**        | **<span style={{color: 'blue'}}>将字符的显示颜色改为蓝色</span>** |
+| **<span style={{color: 'purple'}}>[35m</span>**      | **<span style={{color: 'purple'}}>将字符的显示颜色改为紫色</span>** |
+| **<span style={{color: 'deepskyblue'}}>[36m</span>** | **<span style={{color: 'deepskyblue'}}>将字符的显示颜色改为天蓝色</span>** |
+| **<span style={{color: 'gray'}}>[37m</span>**        | **<span style={{color: 'gray'}}>将字符的显示颜色改为灰色</span>** |
 
 
 
@@ -133,13 +135,15 @@ hehe
 
 **windows终端下的效果**
 
-![iShot2020-10-15 17.35.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 17.35.57.png)
+![iShot2020-10-15 17.35.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2017.35.57.png)
 
 
 
 **mac终端下的效果**
 
-![iShot2020-10-15 17.36.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 17.36.13.png)
+![iShot2020-10-15 17.36.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2017.36.13.png)
+
+
 
 
 
