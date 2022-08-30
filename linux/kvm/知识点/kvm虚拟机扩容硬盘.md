@@ -20,11 +20,11 @@ Format specific information:
 
 # 2.宿主机扩容kvm磁盘文件大小
 
-**⚠️<span style=color:red>执行扩容命令前一定要先关闭虚拟机</span>**
+:::caution
 
-**⚠️<span style=color:red>执行扩容命令前一定要先关闭虚拟机</span>**
+**⚠️<span style={{color: 'red'}}>执行扩容命令前一定要先关闭虚拟机</span>**
 
-**⚠️<span style=color:red>执行扩容命令前一定要先关闭虚拟机</span>**
+:::
 
 ```shell
 $ qemu-img resize abc.qcow2 500G
@@ -53,13 +53,13 @@ Format specific information:
 
 > 可以看到当前硬盘 `/dev/sda` 大小为500G
 
-![iShot2021-11-24 21.23.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24 21.23.37.png)
+![iShot2021-11-24 21.23.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.23.37.png)
 
 
 
 使用命令 `df -h` 查看，此时硬盘还未扩容
 
-![iShot2021-11-24 21.25.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24 21.25.59.png)
+![iShot2021-11-24 21.25.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.25.59.png)
 
 
 
@@ -69,7 +69,7 @@ Format specific information:
 
 ## 4.1 新建一个分区
 
-![iShot2021-11-24 21.30.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24 21.30.29.png)
+![iShot2021-11-24 21.30.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.30.29.png)
 
 
 
@@ -79,7 +79,7 @@ Format specific information:
 
 > 修改分区格式为8e，即lvm格式
 
-![iShot2021-11-24 21.32.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24 21.32.40.png)
+![iShot2021-11-24 21.32.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.32.40.png)
 
 
 
@@ -89,15 +89,19 @@ Format specific information:
 
 ## 4.3 再次查看虚拟机硬盘
 
-> 可以看到新建的分区/dev/sda3，并且硬盘Id为8e
+> 可以看到新建的分区 `/dev/sda3` ，并且硬盘Id为8e
 
-![iShot2021-11-24 21.34.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24 21.34.36.png)
+![iShot2021-11-24 21.34.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.34.36.png)
+
+
+
+
 
 
 
 ## 4.4 查看新增的分区
 
-![iShot2021-11-24 21.41.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24 21.41.06.png)
+![iShot2021-11-24 21.41.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.41.06.png)
 
 
 
@@ -236,9 +240,13 @@ $ lvextend -L +450G /dev/centos/root
 
 ### 4.5.4 扩容硬盘
 
-> 如果硬盘分区类型是ext4，则使用 `resize2fs` 命令
->
-> 如果硬盘分区类型是xfs，则使用 `xfs_growfs` 命令
+:::tip
+
+如果硬盘分区类型是 `ext4` ，则使用 `resize2fs` 命令
+
+如果硬盘分区类型是 `xfs` ，则使用 `xfs_growfs` 命令
+
+:::
 
 这里硬盘分区类型是xfs
 
@@ -260,7 +268,7 @@ data blocks changed from 12318720 to 130283520
 
 查看磁盘，扩容完成
 
-![iShot2021-11-24 22.24.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24 22.24.06.png)
+![iShot2021-11-24 22.24.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2022.24.06.png)
 
 
 
