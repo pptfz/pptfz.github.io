@@ -94,6 +94,12 @@ hehe
 
 ![iShot2020-10-15 17.35.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2017.35.35.png)
 
+# 4.bash里面的颜色
+
+## 4.1设置前景颜色
+
+![iShot_2022-08-30_15.07.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_15.07.30.png)
+
 
 
 ```shell
