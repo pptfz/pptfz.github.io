@@ -12,7 +12,7 @@ Kubernetes的名字起源于希腊语，含义是 `舵手`、`领航员`、`向�
 
 以下是使用 google trends 对比 `kubernetes` 、 `docker swarm`、 `mesos` 三个关键词的截图。
 
-![iShot2020-10-15 15.08.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 15.08.11.png)
+![iShot2020-10-15 15.08.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2015.08.11.png)
 
 
 

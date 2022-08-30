@@ -28,19 +28,19 @@ kubectl top 是基础命令，但是需要部署配套的组件才能获取到�
 
 kubectl top node: 查看node的使用情况
 
-![iShot2020-04-0822.39.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.39.51.png)
+![iShot2020-04-0822.39.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.39.51.png)
 
 
 
 kubectl top pod: 查看 pod 的使用情况
 
-![iShot2020-04-0822.40.30](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.40.30.png)
+![iShot2020-04-0822.40.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.40.30.png)
 
 
 
 不指定pod 名称，则显示命名空间下所有 pod，–containers可以显示 pod 内所有的container
 
-![iShot2020-04-0822.41.06](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.41.44.png)
+![iShot2020-04-0822.41.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.41.44.png)
 
 指标含义：
 
@@ -56,19 +56,21 @@ kubectl top pod: 查看 pod 的使用情况
 
 kubectl top 、 k8s dashboard 以及 HPA 等调度组件使用的数据是一样，数据链路如下：
 
-![iShot2020-04-0822.41.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.41.06.png)
+![iShot2020-04-0822.41.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.41.06.png)
+
+
 
 使用 heapster 时：apiserver 会直接将 metric 请求通过 proxy 的方式转发给集群内的 hepaster 服务。
 
-![iShot2020-04-0822.42.12](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.42.12.png)
+![iShot2020-04-0822.42.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.42.12.png)
 
 而使用 metrics-server 时：apiserver 是通过 /apis/metrics.k8s.io/ 的地址访问 metric
 
-![iShot2020-04-0822.42.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.43.16.png)
+![iShot2020-04-0822.43.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.43.16.png)
 
 这里可以对比下 kubect get pod 时的日志：
 
-![iShot2020-04-0822.43.16](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.44.03.png)
+![iShot2020-04-0822.44.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.44.03.png)
 
 ## 3.2 metric api
 
@@ -86,11 +88,15 @@ kubectl top 、 k8s dashboard 以及 HPA 等调度组件使用的数据是一样
 
 kube-aggregator 是对 apiserver 的有力扩展，它允许 k8s 的开发人员编写一个自己的服务，并把这个服务注册到 k8s 的 api 里面，即扩展 API，metric-server 其实在 1.7版本就已经完成了，只是在等 kube-aggregator 的出现。
 
-kube-aggregator 是 apiserver 中的实现，有些 k8s 版本默认没开启，你可以加上这些配置来开启，他的核心功能是**动态注册、发现汇总、安全代理**。![iShot2020-04-0822.44.03](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.44.39.png)
+kube-aggregator 是 apiserver 中的实现，有些 k8s 版本默认没开启，你可以加上这些配置来开启，他的核心功能是**动态注册、发现汇总、安全代理**。
+
+![iShot2020-04-0822.44.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.44.39.png)
+
+
 
 如 metric-server 注册 pod 和 node 时:
 
-![iShot2020-04-0822.44.39](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.45.46.png)
+![iShot2020-04-0822.45.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.45.46.png)
 
 ## 3.4 监控体系
 
@@ -99,7 +105,9 @@ kube-aggregator 是 apiserver 中的实现，有些 k8s 版本默认没开启，
 - Core metrics(核心指标)：从 Kubelet、cAdvisor 等获取度量数据，再由metrics-server 提供给 Dashboard、HPA 控制器等使用。
 - Custom Metrics(自定义指标)：由 Prometheus Adapter 提供 API custom.metrics.k8s.io，由此可支持任意Prometheus采集到的指标。
 
-![iShot2020-04-0822.45.46](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.42.40.png)
+![iShot2020-04-0822.42.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.42.40.png)
+
+
 
 
 
@@ -116,7 +124,7 @@ kube-aggregator 是 apiserver 中的实现，有些 k8s 版本默认没开启，
 
 示例，容器的内存使用量：
 
-![iShot2020-04-0822.46.29](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.46.29.png)
+![iShot2020-04-0822.46.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.46.29.png)
 
 Kubelet 虽然提供了 metric 接口，但实际监控逻辑由内置的 cAdvisor 模块负责，演变过程如下：
 
@@ -136,11 +144,11 @@ cadvisor 由谷歌开源，使用 Go 开发，cadvisor 不仅可以搜集一台�
 
 cadvisor 拿到的数据结构示例：
 
-![iShot2020-04-0822.47.01](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.50.02.png)
+![iShot2020-04-0822.50.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.50.02.png)
 
 核心逻辑是通过 new 出来的 memoryStorage 以及 sysfs 实例，创建一个manager 实例，manager 的 interface 中定义了许多用于获取容器和 machine 信息的函数
 
-![iShot2020-04-0822.49.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.50.29.png)
+![iShot2020-04-0822.50.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.50.29.png)
 
 cadvisor的指标解读：cgroup-v1(https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt)
 
@@ -158,15 +166,17 @@ cgroup 文件中的值是监控数据的最终来源，如
 
 一般情况下，cgroup文件夹下的内容包括CPU、内存、磁盘、网络等信息：
 
-![iShot2020-04-0822.50.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.47.01.png)
+![iShot2020-04-0822.47.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.47.01.png)
 
 如 memory 下的几个常用的指标含义：
 
-![iShot2020-04-0822.50.29](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.52.04.png)
+![iShot2020-04-0822.52.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.52.04.png)
+
+
 
 memory.stat 中的信息是最全的：
 
-![iShot2020-04-0822.50.52](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.52.47.png)
+![iShot2020-04-0822.52.47](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.52.47.png)
 
 
 
@@ -199,7 +209,7 @@ container_memory_working_set_bytes 是容器真实使用的内存量，也是 li
 
 cadvisor 中的 container_memory_usage_bytes 对应 cgroup 中的 memory.usage_in_bytes 文件，但 container_memory_working_set_bytes 并没有具体的文件，他的计算逻辑在 cadvisor 的代码中，如下：
 
-![iShot2020-04-0822.51.33](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.51.33.png)
+![iShot2020-04-0822.51.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.51.33.png)
 
 同理，node 的内存使用量也是 container_memory_working_set_bytes。
 
@@ -207,7 +217,7 @@ cadvisor 中的 container_memory_usage_bytes 对应 cgroup 中的 memory.usage_i
 
 kubectl top node 得到的 cpu 和内存值，并不是节点上所有 pod 的总和，不要直接相加。top node 是机器上 cgroup 根目录下的汇总统计
 
-![iShot2020-04-0822.52.04](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.49.23.png)
+![iShot2020-04-0822.49.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.49.23.png)
 
 在机器上直接 top 命令看到的值和 kubectl top node 不能直接对比，因为计算逻辑不同，如内存，大致的对应关系是(前者是机器上 top，后者是 kubectl top):
 
@@ -215,7 +225,7 @@ kubectl top node 得到的 cpu 和内存值，并不是节点上所有 pod 的�
 rss + cache = (in)active_anon + (in)active_file
 ```
 
-![iShot2020-04-0822.52.47](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.50.52.png)
+![iShot2020-04-0822.50.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.50.52.png)
 
 
 
@@ -230,7 +240,7 @@ top 命令的差异和上边一致，无法直接对比，同时，就算你对 
 
 docker stats dockerID 可以看到容器当前的使用量：
 
-![iShot2020-04-0822.53.19](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-04-0822.53.19.png)
+![iShot2020-04-0822.53.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.53.19.png)
 
 如果你的 pod 中只有一个 container，你会发现 docker stats 值不等于kubectl top 的值，既不等于 container_memory_usage_bytes，也不等于container_memory_working_set_bytes。
 

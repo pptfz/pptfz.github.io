@@ -4,7 +4,7 @@
 
 # helm3安装
 
-[helm官方](https://helm.sh/)
+[helm官网](https://helm.sh/)
 
 [helm github地址](https://github.com/helm/helm)
 
@@ -43,8 +43,9 @@ helm3相较于helm2的变化
 
 
 ```shell
-wget https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz
-tar xf helm-v3.2.4-linux-amd64.tar.gz
+export HELM_VERSION=3.2.4
+wget https://get.helm.sh/helm-v{HELM_VERSION}-linux-amd64.tar.gz
+tar xf helm-v{HELM_VERSION}-linux-amd64.tar.gz
 mv linux-amd64/helm /usr/local/bin
 ```
 
