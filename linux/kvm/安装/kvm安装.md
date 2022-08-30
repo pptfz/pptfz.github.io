@@ -34,15 +34,15 @@ yum -y install virt-manager
 
 安装完成后在 `Applications` -> `System Tools` -> `Virtual Machine Manager(kvm图形化管理工具)`
 
-![iShot2021-11-27 21.47.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27 21.47.45.png)
+![iShot2021-11-27 21.47.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27%2021.47.45.png)
+
+
 
 
 
 打开后是这样的
 
-![iShot2021-11-27 22.06.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27 22.06.03.png)
-
-
+![iShot2021-11-27 22.06.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27%2022.06.03.png)
 
 
 

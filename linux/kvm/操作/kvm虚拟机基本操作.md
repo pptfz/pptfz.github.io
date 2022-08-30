@@ -63,7 +63,11 @@ the console to complete the installation process.
 
 ## 1.2 删除虚拟机
 
-<span style=color:red>⚠️删除虚拟机之前虚拟机必须为关闭状态</span>
+:::tip
+
+**删除虚拟机之前虚拟机必须为关闭状态**
+
+:::
 
 `virsh undefine 虚拟机名称`
 
@@ -143,7 +147,11 @@ virsh reboot linux-templet-mini-clone
 
 ## 3.1 备份
 
-<span style=color:red>⚠️备份虚拟机主要就是备份虚拟机磁盘文件和配置文件</span>
+:::tip
+
+**备份虚拟机主要就是备份虚拟机磁盘文件和配置文件**
+
+:::
 
 `virsh dumpxml 虚拟机名称`
 
@@ -159,7 +167,11 @@ cp /data/KVM_imgs/linux-templet-mini-clone.qcow2 /opt/bak
 
 ## 3.2 恢复
 
-<span style=color:red>⚠️                恢复虚拟机，磁盘文件和配置文件必须在相同目录              </span>
+:::tip
+
+**恢复虚拟机，磁盘文件和配置文件必须在相同目录**
+
+:::
 
 `virsh define 虚拟机备份文件`
 
@@ -173,7 +185,11 @@ virsh define linux-templet-mini-clone.xml
 
 ## 4.1 完整克隆
 
-<span style=color:red>⚠️克隆虚拟机之前虚拟机必须为关闭状态</span>
+:::tip
+
+**克隆虚拟机之前虚拟机必须为关闭状态**
+
+:::
 
 `virt-clone --auto-clone -o 源虚拟机名称 -n 新虚拟机名称`
 
@@ -335,7 +351,11 @@ virsh suspend linux-new
 
 再次查看，可以看到虚拟机状态变为了 `paused`
 
-<span style=color:red>挂起状态的虚拟机并不是出于关机状态，同时不能做任何操作</span>
+:::tip
+
+**挂起状态的虚拟机并不是处于关机状态，同时不能做任何操作**
+
+:::
 
 ```shell
 $ virsh list --all |grep linux-new
@@ -509,9 +529,13 @@ disk size: 0
 
 # 8.快照
 
-**<span style=color:red>⚠️raw/branch格式不支持快照</span>**
+:::tip
 
-<span style=color:red>**快照默认存放路径是 `/var/lib/libvirt/qemu/snapshot`** </span>
+**raw/branch格式不支持快照**
+
+**快照默认存放路径是 `/var/lib/libvirt/qemu/snapshot`** 
+
+:::
 
 ## 8.1 查看快照
 
