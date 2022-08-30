@@ -175,7 +175,11 @@ Compile time defines: enable_async_push=no enable_comp_stub=no enable_crypto=yes
 
 ### 2.2.6 修改启动配置文件
 
-<font color=red>`/usr/local/openvpn/lib/systemd/system/` 在此目录下存放着openvpn的客户服务启动文件和openvpn的启动服务文件</font>
+:::tip
+
+**`/usr/local/openvpn/lib/systemd/system/` 在此目录下存放着openvpn的客户服务启动文件和openvpn的启动服务文件**
+
+:::
 
 ```shell
 编辑文件 /usr/local/openvpn/lib/systemd/system/openvpn-server@.service
@@ -286,13 +290,19 @@ EOF
 
 ### 2.3.3 生成服务端证书和CA证书
 
-> ./easyrsa 命令生成各类证书的时候，如果不想设置密码，只需要在最后添加参数 `nopass` 即可
+:::tip
 
+**`./easyrsa` 命令生成各类证书的时候，如果不想设置密码，只需要在最后添加参数 `nopass` 即可**
 
+:::
 
 #### 2.3.3.1 初始化
 
-执行命令 `./easyrsa init-pki` 会生成 `pki` 目录，用于存储一些中间变量及最终生成的证书
+:::tip
+
+**执行命令 `./easyrsa init-pki` 会生成 `pki` 目录，用于存储一些中间变量及最终生成的证书**
+
+:::
 
 ```shell
 # 切换目录
@@ -322,7 +332,11 @@ drwx------ 2 root root 4096 May 27 17:03 reqs
 
 #### 2.3.3.2 创建CA根证书
 
-如果不想给CA根证书设置密码，可以执行命令  `./easyrsa build-ca nopass`
+:::tip
+
+**如果不想给CA根证书设置密码，可以执行命令  `./easyrsa build-ca nopass`**
+
+:::
 
 ```shell
 $ ./easyrsa build-ca
@@ -355,7 +369,11 @@ Your new CA certificate file for publishing is at:
 
 #### 2.3.3.3 生成服务端证书
 
-为服务端生成证书对并在本地签名。nopass参数生成一个无密码的证书；在此过程中会让你确认ca密码
+:::tip
+
+**为服务端生成证书对并在本地签名。nopass参数生成一个无密码的证书；在此过程中会让你确认ca密码**
+
+:::
 
 ```shell
 $ ./easyrsa build-server-full server nopass
@@ -383,7 +401,11 @@ Data Base Updated
 
 #### 2.3.3.4 创建 `Diffie-Hellman`
 
-> 确保key穿越不安全网络的操作，需要执行 `./easyrsa gen-dh`
+:::tip
+
+**确保key穿越不安全网络的操作，需要执行 `./easyrsa gen-dh`**
+
+:::
 
 ```shell
 $ ./easyrsa gen-dh
@@ -402,7 +424,11 @@ DH parameters of size 2048 created at /etc/openvpn/easy-rsa/pki/dh.pem
 
 #### 2.3.4.1 生成客户端证书
 
-> 这里客户端证书名称为test
+:::tip
+
+**这里客户端证书名称为test**
+
+:::
 
 为客户端生成证书对并在本地签名。nopass参数生成一个无密码的证书；在此过程中都会让你确认ca密码
 
@@ -436,7 +462,11 @@ Data Base Updated
 
 #### 2.3.4.2 为了提高安全性，生成ta.key
 
-加强认证方式，防攻击。如果配置文件中启用此项(默认是启用的)，就需要执行以下命令，并把ta.key放到 /etc/openvpn/server目录。配置文件中服务端第二个参数为0，同时客户端也要有此文件，且client.conf中此指令的第二个参数需要为1。【服务端有该配置，那么客户端也必须要有】
+:::tip
+
+加强认证方式，防攻击。如果配置文件中启用此项(默认是启用的)，就需要执行以下命令，并把ta.key放到 `/etc/openvpn/server` 目录。配置文件中服务端第二个参数为0，同时客户端也要有此文件，且 `client.conf` 中此指令的第二个参数需要为1。服务端有该配置，那么客户端也必须要有
+
+:::
 
 ```shell
 openvpn --genkey --secret ta.key
@@ -465,9 +495,13 @@ cp ta.key /etc/openvpn/server
 
 直接创建 `server.conf` 文件
 
-⚠️ 一定要添加openvpn服务器私有地址，注意掩码 `push "route 10.0.10.0 255.255.255.0"`
+:::tip
 
-⚠️<span style=color:red>要在配置文件中添加 `crl-verify /etc/openvpn/easy-rsa/pki/crl.pem` 参数，`/etc/openvpn/easy-rsa/pki/crl.pem` 是在进行删除vpn用户时执行命令 `./easyrsa gen-crl` 所产生的文件，这个 `crl.pem` 文件是用于管控被删除用户无法连接vpn</span>
+**一定要添加openvpn服务器私有地址，注意掩码 `push "route 10.0.10.0 255.255.255.0"`**
+
+**<span style={{color: 'red'}}>要在配置文件中添加 `crl-verify /etc/openvpn/easy-rsa/pki/crl.pem` 参数，`/etc/openvpn/easy-rsa/pki/crl.pem` 是在进行删除vpn用户时执行命令 `./easyrsa gen-crl` 所产生的文件，这个 `crl.pem` 文件是用于管控被删除用户无法连接vpn**</span>
+
+:::
 
 ```shell
 cat > /etc/openvpn/server/server.conf <<EOF

@@ -1,23 +1,27 @@
 # grc
 
-> 加强Linux颜色显示，效果如下
->
-> ⚠️grc依赖python3
+:::tip
 
-![iShot2020-10-13 10.06.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-13 10.06.16.png)
+**grc依赖python3**
+
+:::
+
+**作用**
+
+> 加强Linux颜色显示，效果如下
+
+![iShot2020-10-13 10.06.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-13%2010.06.16.png)
+
+
 
 [grc github地址](https://github.com/garabik/grc)
-
-
-
----
 
 
 
 ## 1.下载源码
 
 ```shell
-git clone https://github.com.cnpmjs.org/garabik/grc.git
+git clone https://github.com/garabik/grc.git
 ```
 
 

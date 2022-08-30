@@ -18,21 +18,39 @@
 
 **语法高亮显示**
 
-`bat`支持大量编程和`mark**`语言的语法高亮显示:
-
-![iShot2021-06-21 20.07.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21 20.07.50.png)
+`bat` 对大部分编程语言和标记语言提供语法高亮：
 
 
+
+![iShot2021-06-21 20.07.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21%2020.07.50.png)
 
 **Git集成**
 
-`bat`与`git`沟通,显示关于修改的索引 (参见左侧栏) :
+**`bat` 与 `git` 沟通,显示关于修改的索引 (参见左侧栏) :**
 
-![iShot2021-06-21 20.09.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21 20.09.12.png)
-
-
+![iShot2021-06-21 20.09.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21%2020.09.12.png)
 
 
+
+**不可打印(non-printable)字符可视化**
+
+添加 `-A`/`--show-all `参数可以文件文件中的不可打印字符:
+
+![iShot_2022-08-30_19.22.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_19.22.28.png)
+
+
+
+**自动分页**
+
+`bat`会在一般情况下将大于屏幕可显示范围的内容输出到分页器(pager, e.g. `less`)。
+
+你可以在调用时添加`--paging=never`参数来使`bat`不使用分页器（就像`cat`一样）。如果你想要用为`cat`使用`bat`别名，可以在 shell 配置文件（shell configuration）中添加`alias cat='bat --paging=never'`。
+
+
+
+**智能输出**
+
+`bat`能够在设置了分页器选项的同时进行管道😉。 当`bat`检测到当前环境为非可交互终端或管道时（例如使用`bat`并将内容用管道输出到文件），`bat`会像`cat`一样，一次输出文件内容为纯文本且无视`--paging`参数。
 
 
 
@@ -84,9 +102,7 @@ bat 0.18.1
 
 使用 `bat --list-themes` 获取语法高亮显示的所有可用主题的列表
 
-
-
-![iShot2021-06-21 20.25.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21 20.25.05.png)
+![iShot2021-06-21 20.25.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21%2020.25.05.png)
 
 
 
@@ -108,11 +124,15 @@ bat test
 
 **未使用主题前**
 
-```
+```shell
 cat /etc/profile
 ```
 
-![iShot2021-06-21 20.54.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21 20.54.02.png)
+![iShot2021-06-21 20.54.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21%2020.54.02.png)
+
+
+
+
 
 
 
@@ -123,7 +143,7 @@ export BAT_THEME="Monokai Extended Origin"
 bat /etc/profile
 ```
 
-![iShot2021-06-21 20.54.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21 20.54.40.png)
+![iShot2021-06-21 20.54.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21%2020.54.40.png)
 
 
 

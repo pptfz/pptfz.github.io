@@ -319,9 +319,11 @@ The client configuration is available in: /root/pptfz.ovpn
 New clients can be added by running this script again.
 ```
 
-**<span style=color:red>客户端文件是 `/root/pptfz.ovpn` ，在最后的输出中有提示，这里的客户端文件名称是自定义的，然后把这个文件下载到本地，后续配置VPN认证的时候需要用到这个客户端文件</span>**
+:::tip
 
+**客户端文件是 `/root/pptfz.ovpn` ，在最后的输出中有提示，这里的客户端文件名称是自定义的，然后把这个文件下载到本地，后续配置VPN认证的时候需要用到这个客户端文件**
 
+:::
 
 ## 1.3 查看OpenVPN相关信息
 
@@ -368,7 +370,11 @@ Compile time defines: enable_async_push=no enable_comp_stub=no enable_crypto=yes
 
 **编辑如下脚本，后续openvpn的配置文件 `/etc/openvpn/server/server.conf` 中会引用这个脚本**
 
-**<span style=color:red>⚠️openvpn运行用户对于这个脚本至少有rx权限，否则认证会失败</span>**
+:::tip
+
+**openvpn运行用户对于这个脚本至少有rx权限，否则认证会失败**
+
+:::
 
 ```shell
 cat >> /etc/openvpn/checkpsw.sh <<'EOF'
@@ -536,19 +542,19 @@ sed -i '14aauth-user-pass' /root/pptfz.ovpn
 
 选择安装的用户
 
-![iShot2020-11-30 20.20.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-11-30 20.20.36.png)
+![iShot2020-11-30 20.20.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-11-30%2020.20.36.png)
 
 
 
 输入本机密码
 
-![iShot2020-11-30 20.21.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-11-30 20.21.56.png)
+![iShot2020-11-30 20.21.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-11-30%2020.21.56.png)
 
 
 
 输入完成后会提示如下
 
-![iShot2020-11-30 20.22.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-11-30 20.22.21.png)
+![iShot2020-11-30 20.22.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-11-30%2020.22.21.png)
 
 
 
@@ -556,21 +562,19 @@ sed -i '14aauth-user-pass' /root/pptfz.ovpn
 
 找到相应图标，点击要连接的VPN
 
-![iShot2020-12-01 11.43.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01 11.43.18.png)
-
-
+![iShot2020-12-01 11.43.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2011.43.18.png)
 
 
 
 输入用户名和密码
 
-![iShot2020-12-01 11.44.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01 11.44.37.png)
+![iShot2020-12-01 11.44.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2011.44.37.png)
 
 
 
 连接成功
 
-![iShot2020-12-01 14.16.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01 14.16.11.png)
+![iShot2020-12-01 14.16.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2014.16.11.png)
 
 
 
@@ -627,19 +631,19 @@ windows安装就是一路下一步
 
 导入客户端文件
 
-![iShot2020-12-01 15.00.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01 15.00.29.png)
+![iShot2020-12-01 15.00.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2015.00.29.png)
 
 
 
 输入用户名和密码
 
-![iShot2020-12-01 15.11.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01 15.11.36.png)
+![iShot2020-12-01 15.11.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2015.11.36.png)
 
 
 
 连接成功
 
-![iShot2020-12-01 15.12.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01 15.12.14.png)
+![iShot2020-12-01 15.12.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2015.12.14.png)
 
 
 
