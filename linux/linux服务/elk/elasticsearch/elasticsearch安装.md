@@ -61,7 +61,11 @@ su es -c './bin/elasticsearch'
 
 
 
-**⚠️<span style=color:red>使用root用户启动会报错 `java.lang.RuntimeException: can not run elasticsearch as root`</span>**
+::caution
+
+**使用root用户启动会报错 `java.lang.RuntimeException: can not run elasticsearch as root`**
+
+:::
 
 ```sh
 Future versions of Elasticsearch will require Java 11; your Java version from [/usr/local/jdk1.8.0_251/jre] does not meet this requirement. Consider switching to a distribution of Elasticsearch with a bundled JDK. If you are already using a distribution with a bundled JDK, ensure the JAVA_HOME environment variable is not set.
