@@ -20,7 +20,7 @@ kubeadm 属于第二层，用于管理集群。
 
 > phase 阶段
 
-```python
+```shell
 preflight                  预置检查
 kubelet-start                生成 kubelet 配置，并重启kubelet
 certs                        生成认证
@@ -72,7 +72,7 @@ kubeadm init [flags]
 
 参数说明
 
-```python
+```shell
 --apiserver-advertise-address string   设置 apiserver 绑定的 IP.
 
 --apiserver-bind-port int32            设置apiserver 监听的端口. (默认 6443)
@@ -146,8 +146,8 @@ kubeadm init通过执行以下步骤来引导Kubernetes控制平面节点：
 
 **kubelet 使用4个文件的方式如下**
 
-```python
-[root@rancher ~]# systemctl status kubelet
+```shell
+$ systemctl status kubelet
 ● kubelet.service - kubelet: The Kubernetes Node Agent
    Loaded: loaded (/usr/lib/systemd/system/kubelet.service; disabled; vendor preset: disabled)
   Drop-In: /usr/lib/systemd/system/kubelet.service.d
@@ -183,8 +183,8 @@ control plane 的pod 启动后，init 开始继续执行后面的流程。
 
 ## 查看 kubeadm init phase 列表
 
-```python
-[root@rancher ~]# kubeadm init phase
+```shell
+$ kubeadm init phase
 Use this command to invoke single phase of the init workflow
 
 Usage:
@@ -208,8 +208,8 @@ Available Commands:
 
 ## 可以查看某个具体的phase下的子phase 列表
 
-```python
-[root@rancher ~]# kubeadm init phase control-plane --help
+```shell
+$ kubeadm init phase control-plane --help
 This command is not meant to be run on its own. See list of available subcommands.
 
 Usage:
@@ -227,8 +227,8 @@ Available Commands: #下面的就是子phase
 
 ## 查看 control-plane phase 下 controller-manager 子 phase 的用法详情
 
-```python
-[root@rancher ~]# kubeadm init phase control-plane controller-manager --help
+```shell
+$ kubeadm init phase control-plane controller-manager --help
 Generates the kube-controller-manager static Pod manifest
 
 Usage:
@@ -248,7 +248,7 @@ Flags:
 
 ## 执行某个 phase 或者跳过某个 phase
 
-```python
+```shell
 sudo kubeadm init phase control-plane all --config=configfile.yaml
 sudo kubeadm init phase etcd local --config=configfile.yaml
 # you can now modify the control plane and etcd manifest files
@@ -263,7 +263,7 @@ sudo kubeadm init --skip-phases=control-plane,etcd --config=configfile.yaml
 
 查看 kubeadm config print的帮助
 
-```python
+```shell
 [root@rancher ~]# kubeadm config print -h
 This command prints configurations for subcommands provided.
 
@@ -280,13 +280,13 @@ Available Commands:
 
 打印默认的init 配置文件
 
-```python
-[root@rancher ~]# kubeadm config print init-defaults > initconfig.yaml
+```shell
+kubeadm config print init-defaults > initconfig.yaml
 ```
 
 打开 initconfig， 内容如下
 
-```python
+```yaml
 apiVersion: kubeadm.k8s.io/v1beta2
 bootstrapTokens:
 - groups:
@@ -332,7 +332,7 @@ scheduler: {}
 上面的内容只包含额了最简话的InitConfiguration type 的内容，kubeadm 完整的内容包含5大部分，如下，每个type 之间，需要用yaml的 `---` 文档隔离进行分离。
  init-full-config.yaml 文件结构
 
-```python
+```yaml
 ---
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: InitConfiguration
@@ -353,7 +353,7 @@ kind: JoinConfiguration
 想细的内容可以参阅[kubeadm api](https://links.jianshu.com/go?to=https%3A%2F%2Fgodoc.org%2Fk8s.io%2Fkubernetes%2Fcmd%2Fkubeadm%2Fapp%2Fapis%2Fkubeadm%2Fv1beta2)，kube-proxy配置部分的内容细节在这里[KubeProxyConfiguration ](https://links.jianshu.com/go?to=https%3A%2F%2Fgodoc.org%2Fk8s.io%2Fkubernetes%2Fpkg%2Fproxy%2Fapis%2Fconfig%23KubeProxyConfiguration)
  比如我要修改kube-proxy的模式为IPVS 那么修改后的init-full-config.yaml 内容为如下
 
-```python
+```yaml
 ---
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: InitConfiguration
@@ -381,7 +381,7 @@ kind: JoinConfiguration
 
 对于google 提供的镜像，在众所周知的原因下，无法访问。所以需要使用国内镜像或者自建的镜像仓库。 kubeadm 提供了参数，同事也支持修改 kubeadm config 文件来指定定制化的仓库
 
-```python
+```yaml
 # imageRepository: k8s.gcr.io
 imageRepository: registry.cn-hangzhou.aliyuncs.com/google_containers 
 ```
@@ -416,7 +416,7 @@ kubelet 默认使用 `docker` 作为runtime 并使用内建的 `dockershim` 进�
 2.配置 kubelet 使用远程 CRI runtime （实际是使用linux sockets），记得修改 RUNTIME_ENDPOINT 为你自己对应的值，比如  /var/run/{your_runtime}.sock:
  比如，如下是cri的配置文件。
 
-```python
+```shell
 cat > /etc/systemd/system/kubelet.service.d/20-cri.conf <<EOF
 [Service]
 Environment="KUBELET_EXTRA_ARGS=--container-runtime=remote --container-runtime-endpoint=$RUNTIME_ENDPOINT"
@@ -437,7 +437,7 @@ systemctl daemon-reload
 
 1.使用 kubeadm 生成令牌（token）
 
-```python
+```shell
 kubeadm token generate
 ```
 
@@ -445,7 +445,7 @@ kubeadm token generate
 
 3.可以用同样的方法来添加master节点，通过设置 `--certificate-key` 参数来达到加入的目的。可以通过如下命令来生成key，给每个master 节点使用
 
-```python
+```shell
 kubeadm alpha certs certificate-key
 ```
 

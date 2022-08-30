@@ -66,4 +66,8 @@ kubectl config use-context dashboard-admin@kubernetes --kubeconfig=/root/dashbor
 
 
 
-**下载dashboard-admin.conf然后登陆的时候选择这个文件即可**
+:::tip
+
+**下载 `dashboard-admin.conf` 然后登陆的时候选择这个文件即可**
+
+:::
