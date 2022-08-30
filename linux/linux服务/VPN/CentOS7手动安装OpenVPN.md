@@ -499,7 +499,7 @@ cp ta.key /etc/openvpn/server
 
 **一定要添加openvpn服务器私有地址，注意掩码 `push "route 10.0.10.0 255.255.255.0"`**
 
-**<span style={{color: 'red'}}>要在配置文件中添加 `crl-verify /etc/openvpn/easy-rsa/pki/crl.pem` 参数，`/etc/openvpn/easy-rsa/pki/crl.pem` 是在进行删除vpn用户时执行命令 `./easyrsa gen-crl` 所产生的文件，这个 `crl.pem` 文件是用于管控被删除用户无法连接vpn**</span>
+**要在配置文件中添加 `crl-verify /etc/openvpn/easy-rsa/pki/crl.pem` 参数，`/etc/openvpn/easy-rsa/pki/crl.pem` 是在进行删除vpn用户时执行命令 `./easyrsa gen-crl` 所产生的文件，这个 `crl.pem` 文件是用于管控被删除用户无法连接vpn**
 
 :::
 
