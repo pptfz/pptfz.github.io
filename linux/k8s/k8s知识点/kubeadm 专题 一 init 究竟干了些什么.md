@@ -128,11 +128,11 @@ kubeadm init [flags]
 
 kubeadm init通过执行以下步骤来引导Kubernetes控制平面节点：
 
-1.在进行更改之前运行一系列飞行前检查以验证系统状态。某些检查仅触发警告，其他检查被视为错误，并将退出kubeadm，直到问题得到纠正或用户指定--ignore-preflight-errors = <list-of-errors>。 来忽略错误。
+1.在进行更改之前运行一系列飞行前检查以验证系统状态。某些检查仅触发警告，其他检查被视为错误，并将退出kubeadm，直到问题得到纠正或用户指定 `--ignore-preflight-errors = <list-of-errors>` 来忽略错误。
 
-2.生成自签名 CA（或使用现有CA），以便为群集中的每个组件设置标识。如果用户通过将其放在通过--cert-dir配置的cert目录（默认情况下为`/etc/kubernetes/pki`）中提供了自己的CA证书和/或密钥，则会跳过此步骤，如使[用自定义证书文档](https://links.jianshu.com/go?to=https%3A%2F%2Fkubernetes.io%2Fdocs%2Freference%2Fsetup-tools%2Fkubeadm%2Fkubeadm-init%2F%23custom-certificates)中所述。 APIServer证书将`--apiserver-cert-extra-sans`参数提供的额外SAN条目添加到证书信息中，如果需要，可以小写。
+2.生成自签名 CA（或使用现有CA），以便为群集中的每个组件设置标识。如果用户通过将其放在通过--cert-dir配置的cert目录（默认情况下为`/etc/kubernetes/pki`）中提供了自己的CA证书和/或密钥，则会跳过此步骤，如使[用自定义证书文档](https://links.jianshu.com/go?to=https%3A%2F%2Fkubernetes.io%2Fdocs%2Freference%2Fsetup-tools%2Fkubeadm%2Fkubeadm-init%2F%23custom-certificates)中所述。 APIServer证书将 `--apiserver-cert-extra-sans` 参数提供的额外SAN条目添加到证书信息中，如果需要，可以小写。
 
-3.在`/etc/kubernetes/`中为 kubelet， controller-manager和scheduler 写入kubeconfig文件，用于连接到API服务器，每个都有自己的标识，以及另一个名为admin.conf的管理员kubeconfig文件。
+3.在 `/etc/kubernetes/` 中为 kubelet， controller-manager和scheduler 写入kubeconfig文件，用于连接到API服务器，每个都有自己的标识，以及另一个名为 `admin.conf` 的管理员kubeconfig文件。
 
 4.生成启动 kubelet 服务所需的配置文件和环境变量，并启动kubelet （systemd 方式）生成文件如下
 
