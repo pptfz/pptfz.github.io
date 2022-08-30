@@ -18,7 +18,11 @@
 
 
 
-**<span style=color:red>sealos就是一条命令部署 Kubernetes 高可用集群，基于kubeadm</span>**
+:::info
+
+**sealos就是一条命令部署 Kubernetes 高可用集群，基于kubeadm**
+
+:::
 
 
 
@@ -285,9 +289,9 @@ tar xf kubernetes-server-linux-amd64.tar.gz
 
 其中`kube-apiserver.tar`、`kube-controller-manager.tar`、`kube-proxy.tar`、`kube-scheduler.tar`就是kubeadm安装所需要的组件镜像
 
-![iShot2020-07-1015.31.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1015.57.35.png)
 
 
+![iShot2020-07-1015.57.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1015.57.35.png)
 
 
 
@@ -319,9 +323,9 @@ kubernetesVersion: v1.18.5
 
 解压后就是这些内容，可以从`目录/json`文件中查看是哪个镜像，但是没有找到一种很好的区分方法，所以选择重新生成这个`images.tar`文件
 
-![iShot2020-07-1015.57.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1014.21.17.png)
 
 
+![iShot2020-07-1014.21.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1014.21.17.png)
 
 
 

@@ -62,7 +62,11 @@ metadata:
 
 我们可以看到 name 和 labels 是相同级别的缩进，所以 YAML 处理器就知道了他们属于同一个 MAP，而 app 是 labels 的值是因为 app 的缩进更大。
 
-> **<span style=color:red>注意：在 YAML 文件中绝对不要使用 tab 键。</span>**
+:::caution
+
+**在 YAML 文件中绝对不要使用 `tab` 键**
+
+:::
 
 同样的，我们可以将上面的 YAML 文件转换成 JSON 文件：
 

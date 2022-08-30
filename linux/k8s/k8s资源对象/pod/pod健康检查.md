@@ -351,7 +351,13 @@ startupProbe:
 
 > **注意：** 活跃性探测器 *不等待* 就绪性探测器成功。 如果要在执行活跃性探测器之前等待，应该使用 initialDelaySeconds 或 startupProbe。
 
-**<span style=color:red>就绪探测器的配置和存活探测器的配置相似。 唯一区别就是要使用 `readinessProbe` 字段，而不是 `livenessProbe` 字段。</span>**
+
+
+:::tip
+
+**就绪探测器的配置和存活探测器的配置相似。 唯一区别就是要使用 `readinessProbe` 字段，而不是 `livenessProbe` 字段。**
+
+:::
 
 ```yaml
 readinessProbe:
