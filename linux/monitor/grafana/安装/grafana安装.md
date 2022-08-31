@@ -116,7 +116,11 @@ docker run -d --name=grafana -p 3000:3000 grafana/grafana
 
 [docker安装grafana持久化官方文档](https://grafana.com/docs/grafana/latest/administration/configure-docker/)
 
-⚠️<span style=color:red>以挂载宿主机目录的形式启动grafana的时候必须指定用户为root，否则后续会报权限错误；而以volume形式挂载则没有问题</span>
+:::tip
+
+**以挂载宿主机目录的形式启动grafana的时候必须指定用户为root，否则后续会报权限错误；而以volume形式挂载则没有问题**
+
+:::
 
 ```shell
 docker run \
