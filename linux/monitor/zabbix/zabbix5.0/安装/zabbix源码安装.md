@@ -37,7 +37,7 @@ useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monito
 
 
 
-**<span style={{color: 'red'}}>官方特别说明</span>**
+**官方特别说明**
 
 :::tip
 
@@ -52,9 +52,11 @@ useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monito
 
 - 如果 Zabbix[服务器](https://www.zabbix.com/documentation/current/manual/concepts/server)和[代理](https://www.zabbix.com/documentation/current/manual/concepts/agent)在同一台机器上运行，建议使用不同的用户来运行服务器而不是运行代理。否则，如果两者都以同一用户身份运行，则代理可以访问服务器配置文件，Zabbix 中的任何管理员级别用户都可以很容易地检索，例如，数据库密码。
 
+- 以`root`、`bin`或任何其他具有特殊权限的帐户运行 Zabbix存在安全风险。
+
 :::
 
-**<span style={{color: 'red'}}>以`root`、`bin`或任何其他具有特殊权限的帐户运行 Zabbix存在安全风险。</span>**
+
 
 
 
