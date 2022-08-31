@@ -199,7 +199,11 @@ mkdir /backup && chown rsync.rsync /backup
 
 ## 4.创建用户密码文件
 
-**⚠️<span style=color:red>用户密码文件权限必须为600！！！</span>**
+:::tip
+
+**⚠️<span style={{color: 'red'}}>用户密码文件权限必须为600！！！</span>**
+
+:::
 
 ```python
 #创建密码文件，密码文件要与/etc/rsyncd.conf中"secrets file = /etc/rsync.passwor"相同
@@ -237,7 +241,11 @@ systemctl start rsyncd && systemctl enable rsyncd
 
 ## 测试一、客户端推送及拉取不需要输入密码
 
-**⚠️<span style=color:red>客户端使用``--password-file=``选项时，密码文件的权限必须为600！！！</span>**
+:::tip
+
+**⚠️<span style={{color: 'red'}}>客户端使用 `--password-file=` 选项时，密码文件的权限必须为600！！！</span>**
+
+:::
 
 ```python
 #拉取语法
@@ -287,7 +295,11 @@ total size is 0  speedup is 0.00
 
 ## 测试二、实现数据无差异同步		--delete选项     此选项非常危险，生产环境不要使用！！！
 
-**⚠️<span style=color:red>生产环境千万不要使用``--delete``选项</span>**
+:::danger
+
+**⚠️<span style={{color: 'red'}}>生产环境千万不要使用 `--delete` 选项</span>**
+
+:::
 
 ```python
 服务端   10.0.0.10

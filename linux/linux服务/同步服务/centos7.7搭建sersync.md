@@ -34,7 +34,7 @@ sersync已于2015年8月停止更新，作者推荐使用[lsyncd](https://axkibe
 
 **同步原理图**
 
-![iShot2020-10-15 16.32.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.32.29.png)
+![iShot2020-10-15 16.32.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2016.32.29.png)
 
 
 
@@ -135,7 +135,11 @@ mkdir /backup && chown rsync.rsync /backup
 
 ### 4.创建用户密码文件
 
-⚠️**<span style=color:red>用户密码文件权限必须为600！！！</span>**
+:::tip
+
+⚠️**<span style={{color: 'red'}}>用户密码文件权限必须为600！！！</span>**
+
+:::
 
 ```python
 #创建密码文件，密码文件要与/etc/rsyncd.conf中"secrets file = /etc/rsync.password"相同
@@ -181,7 +185,11 @@ mv GNU-Linux-x86/ /usr/local/sersync
 
 ### 3.配置sersync
 
-⚠️**<span style=color:red>13行``<delete start="false"/>``这个选项是否开启完全同步，比较危险，一般设置为false</span>**
+:::caution
+
+⚠️**<span style={{color: 'red'}}>13行 `<delete start="false"/>` 这个选项是否开启完全同步，比较危险，一般设置为false</span>**
+
+:::
 
 ```python
 #查看sersync目录内容，包含配置文件confxml.xml和启动文件sersync2
@@ -236,7 +244,11 @@ confxml.xml  sersync2
 
 ### 4.创建用户认证密码文件及共享目录
 
-⚠️**<span style=color:red>密码文件权限必须为600！！！</span>**
+:::tip
+
+⚠️**<span style={{color: 'red'}}>密码文件权限必须为600！！！</span>**
+
+:::
 
 ```python
 #创建用户认证密码文件

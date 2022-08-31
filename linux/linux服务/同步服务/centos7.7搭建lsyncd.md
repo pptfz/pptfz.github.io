@@ -120,7 +120,11 @@ mkdir /backup && chown rsync.rsync /backup
 
 ### 4.创建用户密码文件
 
-⚠️**<span style=color:red>用户密码文件权限必须为600！！！</span>**
+:::tip
+
+⚠️**<span style={{color: 'red'}}>用户密码文件权限必须为600！！！</span>**
+
+:::
 
 ```python
 # 创建密码文件，密码文件要与/etc/rsyncd.conf中"secrets file = /etc/rsync.password"相同
@@ -181,11 +185,15 @@ sync{default.rsyncssh, source="/var/www/html", host="localhost", targetdir="/tmp
 
 
 
-<h3 style=color:red>同步一台机器(密码文件方式)</h3>
+<h3 style={{color: 'red'}}>同步一台机器(密码文件方式)</h3>
 
 **编辑``/etc/lsyncd.conf``**
 
-**⚠️<span style=color:red>``--delete = true``这个选项千万不要在生产环境中使用！！！</span>**
+:::danger
+
+**⚠️<span style={{color: 'red'}}>`--delete = true` 这个选项千万不要在生产环境中使用！！！</span>**
+
+:::
 
 ```python
 # 备份文件
@@ -249,7 +257,7 @@ sync为同步配置，部分参数如下：
 
 
 
-<h3 style=color:red>同步多台机器(密码文件方式)</h3>
+<h3 style={{color: 'red'}}>同步多台机器(密码文件方式)</h3>
 
 **以上为仅同步一台机器，如果需要同步到多台机器，只需要在加几个``sync{xxx}``配置即可，同时需要注意的是如果采用密码文件的方式，则每一个sync标签中都必须包含rsync标签，用来指定密码文件**
 
@@ -309,7 +317,7 @@ sync {
 
 
 
-<h3 style=color:red>使用ssh免密方式同步(非密码文件方式)</h3>
+<h3 style={{color: 'red'}}>使用ssh免密方式同步(非密码文件方式)</h3>
 
 官方配置文件示意图
 
@@ -416,7 +424,11 @@ sync {
 
 ### 3.创建用户认证密码文件及共享目录
 
-⚠️**<span style=color:red>密码文件权限必须为600！！！</span>**
+:::tip
+
+⚠️**<span style={{color: 'red'}}>密码文件权限必须为600！！！</span>**
+
+:::
 
 ```python
 # 创建用户认证密码文件
