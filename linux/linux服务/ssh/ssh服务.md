@@ -73,9 +73,13 @@ cd .ssh && cat id_rsa.pub >authorized_keys
 chmod 644 authorized_keys
 ```
 
-**<span style=color:red>⚠️ssh服务配置文件`/etc/ssh/sshd_config`中有一项配置是`AuthorizedKeysFile      .ssh/authorized_keys`，如果想要使用私钥免密登陆，则公钥必须写入到文件`.ssh/authorized_keys`中，即注册私钥，否则免密会失败！！！</span>**
 
 
+:::tip
+
+**<span style={{color: 'red'}}>⚠️ssh服务配置文件`/etc/ssh/sshd_config`中有一项配置是`AuthorizedKeysFile      .ssh/authorized_keys`，如果想要使用私钥免密登陆，则公钥必须写入到文件`.ssh/authorized_keys`中，即注册私钥，否则免密会失败！！！</span>**
+
+:::
 
 ## 4.配置完后验证
 
@@ -114,9 +118,11 @@ ssh-keygen -t rsa -f /root/.ssh/id_dsa -P "" -q
 
 
 
-**<span style=color:red>⚠️ssh服务配置文件`/etc/ssh/sshd_config`中有一项配置是`AuthorizedKeysFile      .ssh/authorized_keys`，如果想要使用私钥免密登陆，则公钥必须写入到文件`.ssh/authorized_keys`中，即注册私钥，否则免密会失败！！！</span>**
+:::tip
 
+**<span style={{color: 'red'}}>⚠️ssh服务配置文件`/etc/ssh/sshd_config`中有一项配置是`AuthorizedKeysFile      .ssh/authorized_keys`，如果想要使用私钥免密登陆，则公钥必须写入到文件`.ssh/authorized_keys`中，即注册私钥，否则免密会失败！！！</span>**
 
+:::
 
 ## ssh-copy免交互推送密钥
 
