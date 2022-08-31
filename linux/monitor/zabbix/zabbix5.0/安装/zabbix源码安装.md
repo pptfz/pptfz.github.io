@@ -103,7 +103,7 @@ useradd -M -s /bin/nologin mysql
 
 :::tip
 
-**<span style={{color: 'red'}}>如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从 `/tmp` 下找socket文件</span>**
+**如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从 `/tmp` 下找socket文件**
 
 :::
 
@@ -293,7 +293,7 @@ yum -y install libxml2-devel net-snmp-devel libevent-devel curl-devel
 
 :::tip
 
-**<span style={{color: 'red'}}>运行`make install`将默认在 `/usr/local/sbin` 中安装守护程序二进制文件（zabbix_server、zabbix_agentd、zabbix_proxy），在 `/usr/local/bin` 中安装客户端二进制文件（zabbix_get、zabbix_sender）。如果要指定与 `/usr/local` 不同的位置，需要添加参数 `--prefix` 来指定安装目录，例如 `--prefix=/usr/local/zabbix`。在这种情况下，守护程序二进制文件将安装在 <prefix>/sbin 下，而实用程序将安装在 <prefix>/bin 下。手册页将安装在 <prefix>/share 下。</span>**
+**运行`make install`将默认在 `/usr/local/sbin` 中安装守护程序二进制文件（zabbix_server、zabbix_agentd、zabbix_proxy），在 `/usr/local/bin` 中安装客户端二进制文件（zabbix_get、zabbix_sender）。如果要指定与 `/usr/local` 不同的位置，需要添加参数 `--prefix` 来指定安装目录，例如 `--prefix=/usr/local/zabbix`。在这种情况下，守护程序二进制文件将安装在 `<prefix>/sbin` 下，而实用程序将安装在 `<prefix>/bin` 下。手册页将安装在 `<prefix>/share` 下。**
 
 :::
 
