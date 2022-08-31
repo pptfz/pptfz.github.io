@@ -39,7 +39,7 @@
 
 
 
-<h4 style=color:red>重要参数</h4>
+<h4 style={{color: 'red'}}>重要参数</h4>
 
 **服务自动重启设置，supervisor提供了当服务挂掉时自动重启服务的功能`autorestart`**
 
