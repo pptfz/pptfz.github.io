@@ -39,9 +39,11 @@ useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monito
 
 **<span style={{color: 'red'}}>官方特别说明</span>**
 
+:::tip
+
 - Zabbix 进程不需要主目录，这就是我们不建议创建它的原因。但是，如果您正在使用某些需要它的功能（例如将 MySQL 凭据存储在 `$HOME/.my.cnf` 中），您可以使用以下命令自由创建它。
 
-  ```
+  ```shell
   mkdir -m u=rwx,g=rwx,o= -p /usr/lib/zabbix
   chown zabbix:zabbix /usr/lib/zabbix
   ```
@@ -49,6 +51,8 @@ useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monito
 - Zabbix 前端安装不需要单独的用户帐户。
 
 - 如果 Zabbix[服务器](https://www.zabbix.com/documentation/current/manual/concepts/server)和[代理](https://www.zabbix.com/documentation/current/manual/concepts/agent)在同一台机器上运行，建议使用不同的用户来运行服务器而不是运行代理。否则，如果两者都以同一用户身份运行，则代理可以访问服务器配置文件，Zabbix 中的任何管理员级别用户都可以很容易地检索，例如，数据库密码。
+
+:::
 
 **<span style={{color: 'red'}}>以`root`、`bin`或任何其他具有特殊权限的帐户运行 Zabbix存在安全风险。</span>**
 
