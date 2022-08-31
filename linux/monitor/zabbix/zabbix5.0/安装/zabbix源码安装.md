@@ -37,7 +37,7 @@ useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monito
 
 
 
-**⚠️<span style=color:red>官方特别说明</span>**
+**⚠️<span style={{color: 'red'}}>官方特别说明</span>**
 
 - Zabbix 进程不需要主目录，这就是我们不建议创建它的原因。但是，如果您正在使用某些需要它的功能（例如将 MySQL 凭据存储在 `$HOME/.my.cnf` 中），您可以使用以下命令自由创建它。
 
@@ -50,7 +50,7 @@ useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monito
 
 - 如果 Zabbix[服务器](https://www.zabbix.com/documentation/current/manual/concepts/server)和[代理](https://www.zabbix.com/documentation/current/manual/concepts/agent)在同一台机器上运行，建议使用不同的用户来运行服务器而不是运行代理。否则，如果两者都以同一用户身份运行，则代理可以访问服务器配置文件，Zabbix 中的任何管理员级别用户都可以很容易地检索，例如，数据库密码。
 
-**⚠️<span style=color:red>以`root`、`bin`或任何其他具有特殊权限的帐户运行 Zabbix存在安全风险。</span>**
+**⚠️<span style={{color: 'red'}}>以`root`、`bin`或任何其他具有特殊权限的帐户运行 Zabbix存在安全风险。</span>**
 
 
 
@@ -58,11 +58,15 @@ useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monito
 
 ### 3.1 安装mysql
 
-**⚠️<span style=color:red>源码安装的zabbix5.4中提示mysql版本需要5.7.28以上</span>**
+:::tip
 
-![iShot2021-06-14 17.19.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 17.19.59.png)
+**源码安装的zabbix5.4中提示mysql版本需要5.7.28以上**
+
+:::
 
 
+
+![iShot2021-06-14 17.19.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2017.19.59.png)
 
 #### 3.1.1 下载MySQL-5.7.32二进制包
 
@@ -91,7 +95,11 @@ useradd -M -s /bin/nologin mysql
 
 #### 3.1.5 编辑主配置文件，myql-5.7.32二进制包默认没有mysql配置文件
 
-**<span style=color:red>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
+:::tip
+
+**<span style={{color: 'red'}}>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从 `/tmp` 下找socket文件</span>**
+
+:::
 
 ```python
 # 备份/etc/my.cnf
@@ -144,7 +152,11 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 
 
-⚠️**<span style=color:red>mysql5.7初始化没有提示！！！</span>**
+:::tip
+
+**mysql5.7初始化没有提示！！！**
+
+:::
 
 | **参数**                  | **说明**              |
 | ------------------------- | --------------------- |
@@ -271,7 +283,13 @@ yum -y install libxml2-devel net-snmp-devel libevent-devel curl-devel
 ./configure --enable-server --enable-agent --with-mysql --enable-ipv6 --with-net-snmp --with-libcurl --with-libxml2 --prefix=/usr/local/zabbix
 ```
 
-**<span style=color:red>⚠️运行`make install`将默认在 `/usr/local/sbin` 中安装守护程序二进制文件（zabbix_server、zabbix_agentd、zabbix_proxy），在 `/usr/local/bin` 中安装客户端二进制文件（zabbix_get、zabbix_sender）。如果要指定与 `/usr/local` 不同的位置，需要添加参数 `--prefix` 来指定安装目录，例如 `--prefix=/usr/local/zabbix`。在这种情况下，守护程序二进制文件将安装在 <prefix>/sbin 下，而实用程序将安装在 <prefix>/bin 下。手册页将安装在 <prefix>/share 下。</span>**
+
+
+:::tip
+
+**<span style={{color: 'red'}}>⚠️运行`make install`将默认在 `/usr/local/sbin` 中安装守护程序二进制文件（zabbix_server、zabbix_agentd、zabbix_proxy），在 `/usr/local/bin` 中安装客户端二进制文件（zabbix_get、zabbix_sender）。如果要指定与 `/usr/local` 不同的位置，需要添加参数 `--prefix` 来指定安装目录，例如 `--prefix=/usr/local/zabbix`。在这种情况下，守护程序二进制文件将安装在 <prefix>/sbin 下，而实用程序将安装在 <prefix>/bin 下。手册页将安装在 <prefix>/share 下。</span>**
+
+:::
 
 
 
@@ -289,7 +307,11 @@ yum -y install libxml2-devel net-snmp-devel libevent-devel curl-devel
 
 **开始编译安装**
 
-- ⚠️<span style=color:red>zabbix只需要运行 `make install`即可，不需要运行 `make`</span>
+:::tip
+
+**zabbix只需要运行 `make install`即可，不需要运行 `make`**
+
+:::
 
 ```shell
 make install 
@@ -697,7 +719,9 @@ EOF
 
 ### 9.1 默认语言选择中文
 
-![iShot2021-06-14 16.42.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 16.42.23.png)
+![iShot2021-06-14 16.42.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2016.42.23.png)
+
+
 
 
 
@@ -707,13 +731,15 @@ EOF
 
 如检测失败则需要修改php的相关配置，本文安装的php的配置文件路径为 `/etc/opt/remi/php73`
 
-![iShot2021-06-14 16.44.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 16.44.22.png)
+![iShot2021-06-14 16.44.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2016.44.22.png)
+
+
 
 
 
 以下选项只是为警告，不修改也可以
 
-![iShot2021-06-14 16.46.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 16.46.16.png)
+![iShot2021-06-14 16.46.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2016.46.16.png)
 
 
 
@@ -738,7 +764,7 @@ sed -i.bak -e '/^post_max_size/cpost_max_size = 16M' \
 
 重新检测，都为ok即可
 
-![iShot2021-06-14 16.59.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 16.59.50.png)
+![iShot2021-06-14 16.59.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2016.59.50.png)
 
 
 
@@ -746,25 +772,27 @@ sed -i.bak -e '/^post_max_size/cpost_max_size = 16M' \
 
 ### 9.3 配置数据库连接
 
-![iShot2021-06-14 16.58.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 16.58.04.png)
+![iShot2021-06-14 16.58.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2016.58.04.png)
+
+
 
 
 
 ### 9.4 配置zabbix服务器详细信息
 
-![iShot2021-06-14 17.01.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 17.01.33.png)
+![iShot2021-06-14 17.01.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2017.01.33.png)
 
 
 
 ### 9.5 设置时区
 
-![iShot2021-06-14 17.03.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 17.03.54.png)
+![iShot2021-06-14 17.03.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2017.03.54.png)
 
 
 
 ### 9.6 确认安装信息
 
-![iShot2021-06-14 17.05.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 17.05.03.png)
+![iShot2021-06-14 17.05.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2017.05.03.png)
 
 
 
@@ -772,7 +800,7 @@ sed -i.bak -e '/^post_max_size/cpost_max_size = 16M' \
 
 如遇如下界面，则需要按照提示下载配置文件 `zabbix.conf.php` 并上传至 `/var/www/html/zabbix/conf`
 
-![iShot2021-06-14 17.05.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 17.05.54.png)
+![iShot2021-06-14 17.05.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2017.05.54.png)
 
 
 
@@ -786,7 +814,7 @@ chown zabbix.zabbix zabbix.conf.php
 
 再次检测
 
-![iShot2021-06-14 17.13.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 17.13.30.png)
+![iShot2021-06-14 17.13.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2017.13.30.png)
 
 
 
@@ -796,7 +824,9 @@ chown zabbix.zabbix zabbix.conf.php
 >
 > 密码 `zabbix`
 
-![iShot2021-06-14 17.13.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 17.13.12.png)
+![iShot2021-06-14 17.13.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14%2017.13.12.png)
+
+
 
 
 
@@ -804,5 +834,5 @@ chown zabbix.zabbix zabbix.conf.php
 
 前端有问题！
 
-![iShot2021-06-14 17.15.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14 17.15.33.png)
+
 
