@@ -154,4 +154,4 @@ hdparm -t --direct /dev/vda1
 >
 > perl删除：**用时33秒**
 
-**<span style=color:red>rsync删除最快</span>**
+**<span style={{color: 'red'}}>rsync删除最快</span>**
