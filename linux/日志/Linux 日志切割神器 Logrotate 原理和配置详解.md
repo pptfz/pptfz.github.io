@@ -198,7 +198,7 @@ include /etc/logrotate.d
 | rotate count             | 指定日志文件删除之前转储的次数，0 指没有备份，5 指保留5 个备份 |
 | dateext                  | 使用当期日期作为命名格式                                     |
 | dateformat .%s           | 配合dateext使用，紧跟在下一行出现，定义文件切割后的文件名，必须配合dateext使用，只支持 %Y %m %d %s 这四个参数 |
-| size(或minsize) log-size | 当日志文件到达指定的大小时才转储，log-size能指定bytes(缺省)及KB (sizek)或MB(sizem). <br>当日志文件 >= log-size 的时候就转储。 以下为合法格式：（其他格式的单位大小写没有试过）<br>size = 5 或 size 5 （>= 5 个字节就转储）<br>size = 100k 或 size 100k <br>size = 100M 或 size 100M |
+| size(或minsize) log-size | 当日志文件到达指定的大小时才转储，log-size能指定bytes(缺省)及KB (sizek)或MB(sizem).  <br />当日志文件 >= log-size 的时候就转储。 以下为合法格式：（其他格式的单位大小写没有试过）<br />size = 5 或 size 5 （>= 5 个字节就转储）<br />size = 100k 或 size 100k <br />size = 100M 或 size 100M |
 
 
 
