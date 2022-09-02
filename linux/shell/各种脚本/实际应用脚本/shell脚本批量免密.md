@@ -12,7 +12,7 @@
 
 **编辑expect自动化交互脚本**
 
-**<span style=color:red>⚠️在expect脚本中设置变量是 set 变量名=变量</span>**
+**在expect脚本中设置变量是 `set 变量名=变量`**
 
 ```sh
 cat > ssh.exp <<'EOF'
