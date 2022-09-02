@@ -353,7 +353,7 @@ mysql> desc t1;
 
 **alter table 表名 change 旧列名 新列名 数据类型;**
 
-**<span style="color:red">change既可以修改列名，又可以修改列类型</span>**
+**<span style={{color: 'red'}}>change既可以修改列名，又可以修改列类型</span>**
 
 ```python
 #查看t1表，表中有id和name两个列，现在要将name列修改为address列
