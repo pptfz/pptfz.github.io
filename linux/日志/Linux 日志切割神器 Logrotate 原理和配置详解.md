@@ -836,11 +836,7 @@ exit 0
 
 最后重启下cron服务：
 
-```sh
+```shell
 systemctl restart crond.service 
 ```
-
-
-
-
 
