@@ -62,7 +62,7 @@
 
 # 4.实验过程
 
-<h3 style=color:hotpink>主库10.0.0.10操作</h3>
+<h3 style={{color: 'hotpink'}}>主库10.0.0.10操作</h3>
 
 ## 1.修改配置文件
 
@@ -116,7 +116,7 @@ Query OK, 0 rows affected (0.02 sec)
 
 
 
-<h3 style=color:green>从库10.0.0.11、10.0.0.12操作</h3>
+<h3 style={{color: 'green'}}>从库10.0.0.11、10.0.0.12操作</h3>
 
 ## 1.修改配置文件
 
@@ -254,4 +254,4 @@ mysql> show databases;
 
 
 
-<h4 style=color:red>以上过程同样适用于mysql-5.7</h4>
+<h4 style={{color: 'red'}}>以上过程同样适用于mysql-5.7</h4>

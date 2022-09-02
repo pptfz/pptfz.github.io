@@ -66,7 +66,7 @@
 
 <h2 style={{color: 'red'}}>半同步复制的前提是已经做好了普通的主从复制</h2>
 
-<h3 style=color:hotpink>Master配置</h3>
+<h3 style={{color: 'hotpink'}}>Master配置</h3>
 
 ## 3.1 master安装半同步模块并启动
 
@@ -106,7 +106,7 @@ rpl_semi_sync_master_timeout = 2000;
 
 ---
 
-<h3 style=color:green>slave配置</h3>
+<h3 style={{color: 'green'}}>slave配置</h3>
 
 ## 3.2 slave安装半同步模块并启动
 
