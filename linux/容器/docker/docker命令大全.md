@@ -499,7 +499,7 @@ $ docker attach --sig-proxy=false mynginx
 192.168.239.1 - - [10/Jul/2016:16:54:26 +0000] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36" "-"
 ```
 
-<h4 style=color:red>--sig-proxy=false  保证ctrl+c或者ctrl+d不会关闭容器</h4>
+<h4 style={{color: 'red'}}>--sig-proxy=false  保证ctrl+c或者ctrl+d不会关闭容器</h4>
 
 
 
