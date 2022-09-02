@@ -68,3 +68,41 @@ exit 0
 ```
 
 
+
+### 1.2 logrotate 命令格式
+
+```shell
+logrotate [OPTION...] <configfile>
+-d， --debug ：debug模式，测试配置文件是否有错误。
+-f， --force ：强制转储文件。
+-m， --mail=command ：压缩日志后，发送日志到指定邮箱。
+-s， --state=statefile ：使用指定的状态文件。
+-v， --verbose ：显示转储过程。
+```
+
+
+
+### 1.3 logrotate手动操作示例
+
+根据日志切割设置进行操作，并显示详细信息：
+
+```sh
+/usr/sbin/logrotate -v /etc/logrotate.conf
+
+/usr/sbin/logrotate -v /etc/logrotate.d/php
+```
+
+
+
+根据日志切割设置进行执行，并显示详细信息，但是不进行具体操作，debug模式
+
+```sh
+/usr/sbin/logrotate -d /etc/logrotate.conf
+
+/usr/sbin/logrotate -d /etc/logrotate.d/nginx
+```
+
+
+
+可在 `/var/lib/logrotate/logrotate.status` 查看各log文件的具体执行情况
+
