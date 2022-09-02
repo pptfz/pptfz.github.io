@@ -20,7 +20,9 @@ logrotate 程序是一个日志文件管理工具。用于分割日志文件，�
 
 
 
-<h3 style={{color: 'red'}}>原文未说明示例是哪个linux发行版，这里以CentOS7.6为例</h3>
+**原文未说明示例是哪个linux发行版，这里以CentOS7.6为例**
+
+
 
 ## 一、logrotate介绍
 
