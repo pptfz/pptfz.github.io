@@ -12,9 +12,11 @@
 
 **原因：**
 
-**<span style=color:red>⚠️centos7ssh服务配置文件`/etc/ssh/sshd_config`中有一项配置是`AuthorizedKeysFile      .ssh/authorized_keys`，如果想要使用私钥免密登陆，则公钥必须写入到文件`.ssh/authorized_keys`中，即注册私钥，否则免密会失败！！！</span>**
+:::tip
 
+**centos7ssh服务配置文件`/etc/ssh/sshd_config`中有一项配置是`AuthorizedKeysFile      .ssh/authorized_keys`，如果想要使用私钥免密登陆，则公钥必须写入到文件`.ssh/authorized_keys`中，即注册私钥，否则免密会失败！！！**
 
+:::
 
 **手动执行命令`cat id_rsa.pub >> authorized_keys`，把公钥注册后问题解决**
 
@@ -24,7 +26,7 @@
 
 **背景说明：**
 
-> **mac本机，在根目录下创建了一个目录，准备把这个目录下的内容推送到码云新建的仓库中，已经手动把<span style=color:red>user</span>用户的公钥粘贴到了码云的个人账户中(码云中只有把公钥放到个人账户中才能对仓库有写权限)，但是推送的时候始终提示权限拒绝，而使用命令`ssh -T git@gitea.pptfz.cn`确是提示认证成功的**
+> **mac本机，在根目录下创建了一个目录，准备把这个目录下的内容推送到码云新建的仓库中，已经手动把user用户的公钥粘贴到了码云的个人账户中(码云中只有把公钥放到个人账户中才能对仓库有写权限)，但是推送的时候始终提示权限拒绝，而使用命令`ssh -T git@gitee.com`却是提示认证成功的**
 
 
 
