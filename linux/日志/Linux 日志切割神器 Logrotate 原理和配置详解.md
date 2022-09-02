@@ -106,3 +106,66 @@ logrotate [OPTION...] <configfile>
 
 可在 `/var/lib/logrotate/logrotate.status` 查看各log文件的具体执行情况
 
+## 二、切割介绍
+
+### 2.1 切割说明
+
+比如以系统日志 `/var/log/message` 做切割来简单说明下：
+
+- 第一次执行完rotate(轮转)之后，原本的messages会变成messages.1，而且会制造一个空的messages给系统来储存日志；
+- 第二次执行之后，messages.1会变成messages.2，而messages会变成messages.1，又造成一个空的messages来储存日志！
+
+
+
+如果仅设定保留三个日志（即轮转3次）的话，那么执行第三次时，则 messages.3这个档案就会被删除，并由后面的较新的保存日志所取代！也就是会保存最新的几个日志。
+
+
+
+日志究竟轮换几次，这个是根据配置文件中的 `rotate` 参数来判定的。
+
+看下 `logrotate.conf` 配置：
+
+```shell
+# see "man logrotate" for details
+# rotate log files weekly(默认每一周执行一次rotate轮转工作)
+weekly
+
+# keep 4 weeks worth of backlogs(保留多少个日志文件(轮转几次).默认保留四个.就是指定日志文件删除之前轮转的次数，0 指没有备份)
+rotate 4
+
+# create new (empty) log files after rotating old ones(自动创建新的日志文件，新的日志文件具有和原来的文件相同的权限；因为日志被改名，因此要创建一个新的来继续存储之前的日志)
+create
+
+# use date as a suffix of the rotated file(这个参数很重要！就是切割后的日志文件以当前日期为格式结尾，如xxx.log-20131216这样，如果注释掉，切割出来是按数字递增，即前面说的 xxx.log-1这种格式)
+dateext
+
+# uncomment this if you want your log files compressed(是否通过gzip压缩转储以后的日志文件，如xxx.log-20131216.gz ；如果不需要压缩，注释掉就行)
+#compress
+
+# RPM packages drop log rotation information into this directory(将 /etc/logrotate.d/ 目录中的所有文件都加载进来)
+include /etc/logrotate.d
+
+# no packages own wtmp and btmp -- we'll rotate them here()
+/var/log/wtmp {			# 仅针对 /var/log/wtmp 所设定的参数
+    monthly			# 每月一次切割，取代默认的一周
+    create 0664 root utmp			# 文件大小超过 1M 后才会切割
+			minsize 1M			# 文件大小超过 1M 后才会切割
+    rotate 1			# 只保留一个日志
+}
+# 这个 wtmp 可记录用户登录系统及系统重启的时间，因为有 minsize 的参数，因此不见得每个月一定会执行一次喔.要看文件大小。
+
+
+/var/log/btmp {
+    missingok
+    monthly
+    create 0600 root utmp
+    rotate 1
+}
+
+# system-specific logs may be also be configured here.
+```
+
+由这个文件的设定可以知道 `/etc/logrotate.d` 其实就是由 `/etc/logrotate.conf` 所规划出来的目录，虽然可以将所有的配置都写入 `/etc/logrotate.conf` ，但是这样一来这个文件就实在是太复杂了，尤其是当使用很多的服务在系统上面时， 每个服务都要去修改 `/etc/logrotate.conf` 的设定也似乎不太合理了。
+
+所以，如果独立出来一个目录，那么每个要切割日志的服务， 就可以独自成为一个文件，并且放置到 `/etc/logrotate.d/` 当中。
+
