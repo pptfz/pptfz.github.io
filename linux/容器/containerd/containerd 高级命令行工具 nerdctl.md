@@ -110,7 +110,7 @@ share/doc/nerdctl-full/SHA256SUMS
 
 :::tip
 
-<span {{style=color: 'red'}}>⚠️解压缩包至 `/usr/local` 下，`buildctl` 、 `buildkitd` 、`containerd` 、`ctr` 、`nerdctl` 、`runc` 等命令就会全部包含，同时使用systemd管理buildkit文件`buildkit.service` 、使用systemd管理containerd文件 `containerd.service` 也会包含</span>
+<span style={{color: 'red'}}>⚠️解压缩包至 `/usr/local` 下，`buildctl` 、 `buildkitd` 、`containerd` 、`ctr` 、`nerdctl` 、`runc` 等命令就会全部包含，同时使用systemd管理buildkit文件`buildkit.service` 、使用systemd管理containerd文件 `containerd.service` 也会包含</span>
 
 :::
 
@@ -122,7 +122,7 @@ tar xf nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz -C /usr/local
 
 :::tip
 
-<span {{style=color: 'red'}}>⚠️也可以只复制部分文件到相关目录，例如 `buildctl` 、 `buildkitd` 、`containerd` 、`ctr` 、`nerdctl` 、`runc` 等命令以及 `buildkit.service` 、`containerd.service`  文件</span>
+<span style={{color: 'red'}}>⚠️也可以只复制部分文件到相关目录，例如 `buildctl` 、 `buildkitd` 、`containerd` 、`ctr` 、`nerdctl` 、`runc` 等命令以及 `buildkit.service` 、`containerd.service`  文件</span>
 
 :::
 
@@ -275,7 +275,7 @@ rm -rf /usr/local/bin/{buildctl,buildkitd,containerd,containerd-fuse-overlayfs-g
 
 :::tip
 
-<span {{style=color: 'red'}}>如果已经安装过了containerd，则直接下载 nerdctl-<VERSION\>-linux-amd64.tar.gz</span>
+<span style={{color: 'red'}}>如果已经安装过了containerd，则直接下载 nerdctl-<VERSION\>-linux-amd64.tar.gz</span>
 
 :::
 
