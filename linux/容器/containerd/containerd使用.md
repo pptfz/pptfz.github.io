@@ -151,7 +151,11 @@ docker.io/library/nginx:alpine
 
 ## 2.5 删除镜像 `ctr image rm`
 
-**<span style=color:red>加上 `--sync` 选项可以同步删除镜像和所有相关的资源</span>**
+:::tip
+
+**<span style={{color: 'red'}}>加上 `--sync` 选项可以同步删除镜像和所有相关的资源</span>**
+
+:::
 
 ```shell
 # 查看镜像
@@ -444,7 +448,11 @@ nginx    6684    RUNNING
 
 ## 4.4 进入容器 `ctr task exec`
 
-<span style=color:red>⚠️这里需要注意必须要指定 `--exec-id` 参数，这个 id 可以随便写，只要唯一就行</span>
+:::tip
+
+**<span style={{color: 'red'}}>⚠️这里需要注意必须要指定 `--exec-id` 参数，这个 id 可以随便写，只要唯一就行</span>**
+
+:::
 
 ```
 ctr task exec --exec-id 0 -t nginx /bin/sh
@@ -482,7 +490,11 @@ nginx    6684    RUNNING
 
 ## 4.6 停止容器 `ctr task kill`
 
-<span style=color:red>⚠️ctr 没有 stop 容器的功能，只能暂停或者杀死容器</span>
+:::tip
+
+**<span style={{color: 'red'}}>⚠️ctr 没有 stop 容器的功能，只能暂停或者杀死容器</span>**
+
+:::
 
 ```shell
 # kill容器

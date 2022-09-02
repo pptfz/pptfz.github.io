@@ -14,7 +14,11 @@
 
 ## 2.1 未安装containerd
 
-<span style=color:red>⚠️如果没有安装 containerd，则可以下载 nerdctl-full-\<VERSION\>-linux-amd64.tar.gz 包进行安装，并且nerdctl-full这个包是与containerd版本一一对应的，即containerd发布一个版本后，nerdctl-full也随即发布一个版本，虽然2者版本号不一致，但是是互相对应的</span>
+:::tip
+
+**如果没有安装 containerd，则可以下载 nerdctl-full-\<VERSION\>-linux-amd64.tar.gz 包进行安装，并且nerdctl-full这个包是与containerd版本一一对应的，即containerd发布一个版本后，nerdctl-full也随即发布一个版本，虽然2者版本号不一致，但是是互相对应的**
+
+:::
 
 ### 2.1.1 下载包
 
@@ -104,13 +108,23 @@ share/doc/nerdctl-full/SHA256SUMS
 
 ### 2.1.3 解压缩包
 
-<span style=color:red>⚠️解压缩包至 `/usr/local` 下，`buildctl` 、 `buildkitd` 、`containerd` 、`ctr` 、`nerdctl` 、`runc` 等命令就会全部包含，同时使用systemd管理buildkit文件`buildkit.service` 、使用systemd管理containerd文件 `containerd.service` 也会包含</span>
+:::tip
+
+<span {{style=color: 'red'}}>⚠️解压缩包至 `/usr/local` 下，`buildctl` 、 `buildkitd` 、`containerd` 、`ctr` 、`nerdctl` 、`runc` 等命令就会全部包含，同时使用systemd管理buildkit文件`buildkit.service` 、使用systemd管理containerd文件 `containerd.service` 也会包含</span>
+
+:::
 
 ```shell
 tar xf nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz -C /usr/local
 ```
 
-<span style=color:red>⚠️也可以只复制部分文件到相关目录，例如 `buildctl` 、 `buildkitd` 、`containerd` 、`ctr` 、`nerdctl` 、`runc` 等命令以及 `buildkit.service` 、`containerd.service`  文件</span>
+
+
+:::tip
+
+<span {{style=color: 'red'}}>⚠️也可以只复制部分文件到相关目录，例如 `buildctl` 、 `buildkitd` 、`containerd` 、`ctr` 、`nerdctl` 、`runc` 等命令以及 `buildkit.service` 、`containerd.service`  文件</span>
+
+:::
 
 
 
@@ -259,7 +273,11 @@ rm -rf /usr/local/bin/{buildctl,buildkitd,containerd,containerd-fuse-overlayfs-g
 
 ## 2.2 已安装containerd
 
-<span style=color:red>如果已经安装过了containerd，则直接下载 nerdctl-<VERSION\>-linux-amd64.tar.gz</span>
+:::tip
+
+<span {{style=color: 'red'}}>如果已经安装过了containerd，则直接下载 nerdctl-<VERSION\>-linux-amd64.tar.gz</span>
+
+:::
 
 ### 2.2.1 下载包
 

@@ -8,13 +8,13 @@
 
 containerd官方架构图
 
-![iShot2022-02-02 21.10.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-02-02 21.10.06.png)
+![iShot2022-02-02 21.10.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-02-02%2021.10.06.png)
 
 
 
 总体来看 containerd 可以分为三个大块：`Storage`、`Metadata` 和 `Runtime`
 
-![iShot2022-02-02 21.06.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-02-02 21.06.05.png)
+![iShot2022-02-02 21.06.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-02-02%2021.06.05.png)
 
 
 
@@ -85,7 +85,7 @@ mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.t
 
 
 
-![iShot2022-02-02 21.37.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-02-02 21.37.10.png)
+![iShot2022-02-02 21.37.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-02-02%2021.37.10.png)
 
 
 
@@ -273,7 +273,11 @@ usr
 
 
 
-⚠️<span style=color:red>一般会将cri-containerd-cni-xxx-linux-amd64.tar.gz直接解压到根目录下</span>，因此卸载continerd只需要删除相应文件即可
+:::tip
+
+**⚠️<span style={{color: 'red'}}>一般会将cri-containerd-cni-xxx-linux-amd64.tar.gz直接解压到根目录下</span>，因此卸载continerd只需要删除相应文件即可**
+
+:::
 
 
 
