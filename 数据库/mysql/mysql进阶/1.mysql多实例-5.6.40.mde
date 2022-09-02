@@ -344,7 +344,7 @@ chmod +x /usr/bin/mysql330*
 
 
 
-<h3 style={{color: 'red'}}>到此，mysql多实例配置完成！！！</h3>
+<h3 style=color:red>到此，mysql多实例配置完成！！！</h3>
 
 
 
@@ -499,7 +499,7 @@ mysql> show databases;
 
 
 
-<h3 style={{color: 'red'}}>到此，mysql基于多实例实现主从复制完成！！！</h3>
+<h3 style=color:red>到此，mysql基于多实例实现主从复制完成！！！</h3>
 
 
 

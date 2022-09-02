@@ -2,7 +2,7 @@
 
 
 
-# mysql多实例-5.6.40
+# mysql多实例-5.7.23
 
 # 1.mysql多实例介绍
 
@@ -70,10 +70,10 @@ groupadd mysql && useradd -g mysql -s /sbin/nologin mysql
 
 
 
-## 3.3 下载mysql-5.6.40二进制包
+## 3.3 下载mysql-5.7.23二进制包
 
 ```python
-wget https://downloads.mysql.com/archives/get/file/mysql-5.6.40-linux-glibc2.12-x86_64.tar.gz
+wget https://downloads.mysql.com/archives/get/file/mysql-5.7.23-linux-glibc2.12-x86_64.tar.gz
 ```
 
 
@@ -81,8 +81,8 @@ wget https://downloads.mysql.com/archives/get/file/mysql-5.6.40-linux-glibc2.12-
 ## 3.4 解压缩并修改目录名称
 
 ```python
-tar xf mysql-5.6.40-linux-glibc2.12-x86_64.tar.gz && \
-mv mysql-5.6.40-linux-glibc2.12-x86_64/ mysql-5.6.40
+tar xf mysql-5.7.23-linux-glibc2.12-x86_64.tar.gz && \
+mv mysql-5.7.23-linux-glibc2.12-x86_64/ mysql-5.7.23
 ```
 
 
@@ -90,7 +90,7 @@ mv mysql-5.6.40-linux-glibc2.12-x86_64/ mysql-5.6.40
 ## 3.5 修改目录所有者为mysql
 
 ```python
-chown -R mysql.mysql mysql-5.6.40
+chown -R mysql.mysql mysql-5.7.23
 ```
 
 
@@ -106,7 +106,7 @@ mkdir -p /data/mysql330{6..8}
 ## 3.7 将mysql包分别拷贝到3个安装目录
 
 ```python
-for i in {6..8};do cp -rp mysql-5.6.40  /data/mysql330$i ;done
+for i in {6..8};do cp -rp mysql-5.7.23  /data/mysql330$i ;done
 ```
 
 
@@ -114,7 +114,7 @@ for i in {6..8};do cp -rp mysql-5.6.40  /data/mysql330$i ;done
 ## 3.8 做软连接
 
 ```python
-for i in {6..8};do ln -s /data/mysql330$i/mysql-5.6.40 /data/mysql330$i/mysql;done
+for i in {6..8};do ln -s /data/mysql330$i/mysql-5.7.23 /data/mysql330$i/mysql;done
 ```
 
 
@@ -171,7 +171,7 @@ EOF
 
 ```python
 //分别拷贝3个实例启动脚本
-for i in {6..8};do cp mysql-5.6.40/support-files/mysql.server /etc/init.d/mysqld330$i ;done
+for i in {6..8};do cp mysql-5.7.23/support-files/mysql.server /etc/init.d/mysqld330$i ;done
 
 //修改文件
 sed -i.bak 's#/usr/local#/data/mysql3306#g' /etc/init.d/mysqld3306 /data/mysql3306/mysql/bin/mysqld_safe
@@ -187,13 +187,13 @@ sed -i.bak 's#/usr/local#/data/mysql3308#g' /etc/init.d/mysqld3308 /data/mysql33
 
 ```python
 //初始化第一个实例
-/data/mysql3306/mysql/scripts/mysql_install_db --user=mysql --basedir=/data/mysql3306/mysql --datadir=/data/mysql3306/mysql/data
+/data/mysql3306/bin/mysqld --initialize-insecure --user=mysql --basedir=/data/mysql3306 --datadir=/data/mysql3306/data
 
 //初始化第二个实例
-/data/mysql3307/mysql/scripts/mysql_install_db --user=mysql --basedir=/data/mysql3307/mysql --datadir=/data/mysql3307/mysql/data
+/data/mysql3306/bin/mysqld --initialize-insecure --user=mysql --basedir=/data/mysql3306 --datadir=/data/mysql3306/data
 
 //初始化第三个实例
-/data/mysql3308/mysql/scripts/mysql_install_db --user=mysql --basedir=/data/mysql3308/mysql --datadir=/data/mysql3308/mysql/data
+/data/mysql3306/bin/mysqld --initialize-insecure --user=mysql --basedir=/data/mysql3306 --datadir=/data/mysql3306/data
 ```
 
 
@@ -344,7 +344,7 @@ chmod +x /usr/bin/mysql330*
 
 
 
-<h3 style={{color: 'red'}}>到此，mysql多实例配置完成！！！</h3>
+<h3 style=color:red>到此，mysql多实例配置完成！！！</h3>
 
 
 
@@ -499,7 +499,7 @@ mysql> show databases;
 
 
 
-<h3 style={{color: 'red'}}>到此，mysql基于多实例实现主从复制完成！！！</h3>
+<h3 style=color:red>到此，mysql基于多实例实现主从复制完成！！！</h3>
 
 
 

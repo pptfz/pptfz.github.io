@@ -64,7 +64,7 @@ MHA在写入器阻塞后的0.5-2秒内提供正常的主设备切换。通常可
 
 
 
-**<span style={{color: 'red'}}>工作过程：manager节点定时检测复制集群中的每一个node,如果master宕机会选出数据与master最接近的一台slave来作为新master，去到旧master中拷贝binlog到新master中并应用binlog以保证新master与旧master数据一致，然后将剩余的slave重新changer master to,将slave的主切换为新master</span>**
+**<span style=color:red>工作过程：manager节点定时检测复制集群中的每一个node,如果master宕机会选出数据与master最接近的一台slave来作为新master，去到旧master中拷贝binlog到新master中并应用binlog以保证新master与旧master数据一致，然后将剩余的slave重新changer master to,将slave的主切换为新master</span>**
 
 
 
@@ -120,7 +120,7 @@ MHA在写入器阻塞后的0.5-2秒内提供正常的主设备切换。通常可
 
 ## 3.2 所有机器做相互免密钥配置
 
-**<span style={{color: 'red'}}>⚠️复制集群中的每个节点都有可能成为master，都得开启binlog和ssh密钥认证，因为当旧master宕机后，mha要拷贝binlog到所有node节点上，而且所有节点都有可能成为master，故每个节点都要彼此密钥认证</span>**
+**<span style=color:red>⚠️复制集群中的每个节点都有可能成为master，都得开启binlog和ssh密钥认证，因为当旧master宕机后，mha要拷贝binlog到所有node节点上，而且所有节点都有可能成为master，故每个节点都要彼此密钥认证</span>**
 
 lowB脚本运行一下
 
@@ -166,7 +166,7 @@ done < $file
 
 
 
-**<span style={{color: 'red'}}>master操作(mysql01 10.0.0.133)</span>**
+**<span style=color:red>master操作(mysql01 10.0.0.133)</span>**
 
 ## 3.3 mysql主从配置-GTID
 
@@ -234,7 +234,7 @@ mysql> show global variables like '%gtid%';
 
 ### 3.3.2 创建专用复制用户和设置监控用户
 
-**<span style={{color: 'red'}}>允许从slave上连接过来的复制用户，3台mysql服务器都要创建复制用户和监控用户！！！</span>**
+**<span style=color:red>允许从slave上连接过来的复制用户，3台mysql服务器都要创建复制用户和监控用户！！！</span>**
 
 **⚠️复制用户名称为repl，也可以在MHA配置文件中修改复制用户**
 
@@ -249,7 +249,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 **设置监控用户**
 
-**<span style={{color: 'red'}}>⚠️所有节点进行授权</span>**
+**<span style=color:red>⚠️所有节点进行授权</span>**
 
 ```python
 mysql> grant all privileges on *.* to 'mha'@'10.0.0.%' identified by 'Bxb123.com';
@@ -268,7 +268,7 @@ set global relay_log_purge=0;
 
 
 
-**<span style={{color: 'red'}}>slave操作(mysql02、03 10.0.0.134、135)</span>**
+**<span style=color:red>slave操作(mysql02、03 10.0.0.134、135)</span>**
 
 ### 3.3.3 配置文件 `/etc/my.cnf`
 
@@ -433,7 +433,7 @@ $ make && make install
 
 
 
-**<span style={{color: 'red'}}>manager操作(mha 10.0.0.130)</span>**
+**<span style=color:red>manager操作(mha 10.0.0.130)</span>**
 
 ## 3.5 部署MHA Manager
 
@@ -490,7 +490,7 @@ $ make && make install
 
 ### 3.5.4 mysql主库节点配置eth0:0网卡，用作VIP，这里设置为10.0.0.200
 
-**<span style={{color: 'red'}}>这一步在mysql主库上(10.0.0.133)执行</span>**
+**<span style=color:red>这一步在mysql主库上(10.0.0.133)执行</span>**
 
 ```python
 $ ifconfig eth0:0 10.0.0.200
@@ -511,7 +511,7 @@ eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group
 
 **⚠️需要修改的是VIP的地址和网卡的名称**
 
-**<span style={{color: 'red'}}>VIP是绑定在主库上的，这样当主库宕机后VIP才会漂移到新主库上</span>**
+**<span style=color:red>VIP是绑定在主库上的，这样当主库宕机后VIP才会漂移到新主库上</span>**
 
 ```python
 cat > /usr/local/bin/master_ip_failover <<'EOF'
@@ -626,7 +626,7 @@ mkdir -p /var/log/masterha/app1
 
 **编辑mha配置文件`/etc/masterha/app1.conf`**
 
-**<span style={{color: 'red'}}>`mha4mysql-manager-0.58/samples/conf/app1.conf`是mha的默认配置文件</span>**
+**<span style=color:red>`mha4mysql-manager-0.58/samples/conf/app1.conf`是mha的默认配置文件</span>**
 
 ```python
 cat > /etc/masterha/app1.cnf <<EOF
@@ -947,7 +947,7 @@ masterha_stop --conf=/etc/masterha/app1.cnf  &&  nohup masterha_manager --conf=/
 
 
 
-**<span style={{color: 'red'}}>到此，MHA部署完成！</span>**
+**<span style=color:red>到此，MHA部署完成！</span>**
 
 
 
@@ -955,7 +955,7 @@ masterha_stop --conf=/etc/masterha/app1.cnf  &&  nohup masterha_manager --conf=/
 
 ### 3.6.1 手动关闭主库，模拟宕机
 
-**<span style={{color: 'red'}}>10.0.0.133 mysql01操作</span>**
+**<span style=color:red>10.0.0.133 mysql01操作</span>**
 
 ```python
 systemctl stop mysqld
@@ -969,7 +969,7 @@ systemctl stop mysqld
 
 
 
-**<span style={{color: 'red'}}>10.0.0.135 mysql02操作</span>**
+**<span style=color:red>10.0.0.135 mysql02操作</span>**
 
 **可以看到，当主库10.0.0.133宕机后，10.0.0.134成为了新的主库**
 
@@ -1021,7 +1021,7 @@ $ ip a s eth0
 
 ### 第二步、从MHA配置文件`/etc/masterha/app1.conf`中的`[server default]`标签下定义的`manager_log=/var/log/masterha/app1/manager.log`日志文件中找到`change master to`语句，修改从库复制用户的密码，并且指定主库为新主库
 
-**<span style={{color: 'red'}}>MHA节点操作</span>**
+**<span style=color:red>MHA节点操作</span>**
 
 ```python
 $ grep -i 'change master to' /var/log/masterha/app1/manager.log 
@@ -1032,7 +1032,7 @@ Sun Jun  7 13:17:49 2020 - [info]  All other slaves should start replication fro
 
 ### 第三步、连接旧主库，执行上一步找到的`change master to`语句并打开IO、SQL线程
 
-**<span style={{color: 'red'}}>10.0.0.133 mysql01(旧主库)操作</span>**
+**<span style=color:red>10.0.0.133 mysql01(旧主库)操作</span>**
 
 ```python
 # 执行change master to
@@ -1113,8 +1113,8 @@ mkdir -p /data/mysql/binlog && chown mysql.mysql /data/mysql/binlog
 
 ## 4.2 手动备份binlog
 
-- **<span style={{color: 'red'}}>⚠️备份binlog，--host后的IP一定要填写VIP地址</span>**
-- **<span style={{color: 'red'}}>⚠️一定要注意写对mysql binlog文件的名称</span>**
+- **<span style=color:red>⚠️备份binlog，--host后的IP一定要填写VIP地址</span>**
+- **<span style=color:red>⚠️一定要注意写对mysql binlog文件的名称</span>**
 
 ```python
 # 进入binlog备份目录

@@ -2,7 +2,7 @@
 
 
 
-# CentOS7编译安装MySQL5.7
+# CentOS7编译安装MySQL8.0
 
 [mysql历史版本官方下载地址](https://downloads.mysql.com/archives/community/)
 
@@ -15,8 +15,89 @@
 # 1.安装依赖包
 
 ```python
-yum -y install -y gcc gcc-c++ automake autoconf cmake bison-devel ncurses-devel libaio-devel openssl-devel
+yum -y install -y gcc gcc-c++ automake autoconf bison-devel ncurses-devel libaio-devel openssl-devel gmp-devel mpfr-devel flex
 ```
+
+
+
+# 2.安装cmake
+
+**<span style=color:red>⚠️mysql8.0.22需要cmake 3.5+</span>**
+
+```shell
+# 下载源码包
+wget https://github.com/Kitware/CMake/releases/download/v3.21.1/cmake-3.21.1.tar.gz
+
+# 解压缩
+tar xf cmake-3.21.1.tar.gz
+
+# 编译安装
+cd cmake-3.21.1
+./configure --prefix=/usr/local/cmake
+make -j`nproc` && make install
+
+# 导出cmake命令环境变量
+echo 'export PATH=/usr/local/cmake/bin:$PATH' > /etc/profile.d/cmake.sh
+source /etc/profile.d/cmake.sh 
+
+# 验证版本
+$ cmake --version
+cmake version 3.21.1
+```
+
+
+
+# 3.安装mpc
+
+```
+configure: error: Building GCC requires GMP 4.2+, MPFR 2.4.0+ and MPC 0.8.0+.
+```
+
+
+
+
+
+```
+wget http://www.multiprecision.org/downloads/mpc-0.9.tar.gz
+tar xf mpc-0.9.tar.gz 
+cd mpc-0.9
+./configure --prefix=/usr/local/mpc
+make -j`nproc` && make install
+```
+
+
+
+
+
+# 3.安装gcc
+
+**<span style=color:red>⚠️mysql8.0.22需要gcc 5.3+</span>**
+
+```shell
+# 下载源码包
+wget https://github.com/gcc-mirror/gcc/archive/refs/tags/releases/gcc-5.3.0.tar.gz
+
+# 解压缩
+tar xf gcc-releases-gcc-5.3.0.tar.gz 
+
+# 编译安装
+cd gcc-releases-gcc-5.3.0
+./configure --prefix=/usr/local/gcc --with-mpc=/usr/local/mpc --disable-multilib
+make -j`nproc` && make install
+```
+
+
+
+
+
+```
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/gcc-4.6.3/mpc-0.9/mpc_install/lib:/opt/gcc-4.6.3/gmp-5.0.4/gmp_install/lib:/opt/gcc-4.6.3/mpfr-3.1.0/mpfr_install/lib
+
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/mpc/lib
+```
+
+
 
 
 
@@ -38,11 +119,11 @@ tar xf boost_1_59_0.tar.gz -C /usr/local
 
 
 
-# 4.下载MySQL5.7源码包
+# 4.下载MySQL8.0源码包
 
 ```python
-export MYSQL_VERSION=5.7.30
-wget https://cdn.mysql.com/archives/mysql-5.7/mysql-${MYSQL_VERSION}.tar.gz
+export MYSQL_VERSION=8.0.22
+wget https://cdn.mysql.com/archives/mysql-8.0/mysql-${MYSQL_VERSION}.tar.gz
 ```
 
 
@@ -75,6 +156,7 @@ cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql-${MYSQL_VERSION} \
 -DWITH_SYSTEMD=1 \
 -DDOWNLOAD_BOOST=0 \
 -DWITH_DEBUG=0 \
+-DFORCE_INSOURCE_BUILD=1 \
 -DWITH_BOOST=/usr/local/boost_1_59_0
 
 # 编译并安装
@@ -101,20 +183,17 @@ useradd -M -s /bin/nologin mysql
 
 # 9.编辑主配置文件
 
-**<span style={{color: 'red'}}>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
+**<span style=color:red>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
 
 ```python
-# 备份/etc/my.cnf
-mv /etc/my.cnf /etc/my.cnf.old
-
-# 以下配置为最精简版，可根据实际情况进行相应设置
+# 备份/etc/my.cnfmv /etc/my.cnf /etc/my.cnf.old# 以下配置为最精简版，可根据实际情况进行相应设置
 cat > /etc/my.cnf <<'EOF'
 [mysqld]
 basedir=/usr/local/mysql
 datadir=/usr/local/mysql/data
 socket=/var/lib/mysql/mysql.sock
 user=mysql
-log-error=/usr/local/mysql/data/error.log
+logerror=/usr/local/mysql/data/error.log
 
 [client]
 socket=/var/lib/mysql/mysql.sock
@@ -149,25 +228,18 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 # 13.初始化mysql
 
-**<span style={{color: 'red'}}>⚠️MySQL 5.7.6之前的版本使用如下方式初始化数据库</span>**
+**<span style=color:red>⚠️MySQL 5.7.6之前的版本使用如下方式初始化数据库</span>**
 
 ```shell
-/usr/local/mysql/bin/mysql_install_db \
---user=mysql \
---basedir=/usr/local/mysql \ 
---datadir=/usr/local/mysql/data
+/usr/local/mysql/bin/mysql_install_db \--user=mysql \--basedir=/usr/local/mysql \ --datadir=/usr/local/mysql/data
 ```
 
 
 
-**<span style={{color: 'red'}}>⚠️MySQL 5.7.6之后的版本使用如下方式初始化数据库</span>**
+**<span style=color:red>⚠️MySQL 5.7.6之后的版本使用如下方式初始化数据库</span>**
 
 ```shell
-/usr/local/mysql/bin/mysqld \
---user=mysql \
---basedir=/usr/local/mysql \
---datadir=/usr/local/mysql/data \
---initialize-insecure 
+/usr/local/mysql/bin/mysqld \--user=mysql \--basedir=/usr/local/mysql \--datadir=/usr/local/mysql/data \--initialize-insecure 
 ```
 
 
@@ -182,86 +254,4 @@ mysql5.7初始化参数说明
 | **--initialize-insecure** | **不生成随机密码**    |
 
 通过 `mysqld --verbose --help|grep initialize` 查看说明
-
-
-
-
-
-# 14.导出mysql命令环境变量
-
-```python
-# 导出mysql命令环境变量
-echo "export PATH=/usr/local/mysql/bin:$PATH" > /etc/profile.d/mysql.sh
-
-# 使配置生效
-source /etc/profile
-```
-
-
-
-# 15.systemd管理mysql
-
-```python
-cat > /usr/lib/systemd/system/mysqld.service <<'EOF'
-[Unit]
-Description=MySQL Server
-Documentation=man:mysqld(8)
-Documentation=http://dev.mysql.com/doc/refman/en/using-systemd.html
-After=network.target
-After=syslog.target
-
-[Install]
-WantedBy=multi-user.target
-
-[Service]
-User=mysql
-Group=mysql
-ExecStart=/usr/local/mysql/bin/mysqld --defaults-file=/etc/my.cnf
-LimitNOFILE = 5000
-EOF
-```
-
-
-
-
-
-# 16.启动mysql、检查启动
-
-**启动mysql**
-
-```sh
-# 重新加载systemd系统服务
-systemctl daemon-reload
-
-# 启动mysql并加入开机自启
-systemctl start mysqld && systemctl enable mysqld
-```
-
-
-
-**查看**
-
-```python
-# 查看mysql端口
-$ netstat -ntpl  | grep 3306
-tcp6       0      0 :::3306                 :::*                    LISTEN      31349/mysqld  
-```
-
-
-
-# 17.进入mysql并设置密码
-
-```python
-# 进入mysql
-mysql
-
-# 设置mysql密码
-mysql> set password='123';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> flush privileges;
-Query OK, 0 rows affected (0.01 sec)
-```
-
-**到此，mysql5.7源码安装完成！！！**
 

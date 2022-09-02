@@ -2,7 +2,7 @@
 
 
 
-# CentOS7编译安装MySQL5.7
+# CentOS7二进制安装MySQL5.7
 
 [mysql历史版本官方下载地址](https://downloads.mysql.com/archives/community/)
 
@@ -12,96 +12,57 @@
 
 
 
+⚠️⚠️⚠️
+
+**二进制安装mysql的启动脚本`support-files/mysql.server` 和安装目录下的 `bin/mysqld_safe`  这两个文件中都是默认使用 `/usr/local/mysql`，如果安装目录不在 `/usr/local/` 下，需要修改这两个文件中的路径，即把 `/usr/local` 替换为mysql安装目录**
+
+
+
 # 1.安装依赖包
 
 ```python
-yum -y install -y gcc gcc-c++ automake autoconf cmake bison-devel ncurses-devel libaio-devel openssl-devel
+yum -y install -y gcc gcc-c++ autoconf bison-devel ncurses-devel libaio-devel numactl
 ```
 
 
 
-# 2.下载boost
-
-**5.7版本源码编译安装需要下载一个Boost C++ 1.59.0（这是一组扩充C++功能的经过同行评审（Peer-reviewed）且开放源代码程序库。大多数的函数为了能够以开放源代码、封闭项目的方式运作，而授权于Boost软件许可协议（Boost Software License）之下。）**
-
-```python
-wget https://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz
-```
-
-
-
-# 3.解压缩boost至 `/usr/local` 下
-
-```python
-tar xf boost_1_59_0.tar.gz -C /usr/local
-```
-
-
-
-# 4.下载MySQL5.7源码包
+# 2.下载MySQL5.7二进制包
 
 ```python
 export MYSQL_VERSION=5.7.30
-wget https://cdn.mysql.com/archives/mysql-5.7/mysql-${MYSQL_VERSION}.tar.gz
+wget https://cdn.mysql.com/archives/mysql-5.7/mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.gz
 ```
 
 
 
-# 5.解压缩源码包
+# 3.解压缩mysql二进制包到 `/usr/local`
 
 ```python
-tar xf mysql-${MYSQL_VERSION}.tar.gz
+tar xf mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.gz -C /usr/local
 ```
 
 
 
-# 6.进入解压目录，开始编译安装
+# 4.修改目录名称、做软连接
 
 ```python
-# 进入到解压目录
-cd mysql-${MYSQL_VERSION}
-
-# 进行cmake
-cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql-${MYSQL_VERSION} \
--DMYSQL_USER=mysql \
--DWITH_MYISAM_STORAGE_ENGINE=1 \
--DWITH_INNOBASE_STORAGE_ENGINE=1 \
--DEXTRA_CHARSETS=all \
--DDEFAULT_CHARSET=utf8 \
--DDEFAULT_COLLATION=utf8_general_ci \
--DWITH_DEBUG=0 \
--DMYSQL_MAINTAINER_MODE=0 \
--DWITH_ZLIB:STRING=bundled \
--DWITH_SYSTEMD=1 \
--DDOWNLOAD_BOOST=0 \
--DWITH_DEBUG=0 \
--DWITH_BOOST=/usr/local/boost_1_59_0
-
-# 编译并安装
-make -j`nproc` && make install
+mv /usr/local/mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64 /usr/local/mysql-${MYSQL_VERSION}
+ln -s /usr/local/mysql-${MYSQL_VERSION} /usr/local/mysql
 ```
 
 
 
-# 7.做目录软连接
+# 5.创建mysql用户
 
-```shell
-ln -s /usr/local/mysql-${MYSQL_VERSION}  /usr/local/mysql
-```
-
-
-
-# 8.创建mysql用户
-
-```shell
+```python
 useradd -M -s /bin/nologin mysql
 ```
 
 
 
-# 9.编辑主配置文件
+# 6.编辑主配置文件，myql5.7二进制包默认没有mysql配置文件
 
-**<span style={{color: 'red'}}>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
+**<span style=color:red>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
 
 ```python
 # 备份/etc/my.cnf
@@ -123,7 +84,7 @@ EOF
 
 
 
-# 10.创建socket文件目录
+# 7.创建socket文件目录
 
 ```
 mkdir -p /var/lib/mysql
@@ -131,7 +92,7 @@ mkdir -p /var/lib/mysql
 
 
 
-# 11.相关目录、文件授权
+# 8.相关目录、文件授权
 
 ```shell
 chown -R mysql.mysql /usr/local/mysql* /var/lib/mysql /etc/my.cnf
@@ -139,7 +100,7 @@ chown -R mysql.mysql /usr/local/mysql* /var/lib/mysql /etc/my.cnf
 
 
 
-# 12.拷贝启动脚本
+# 9.拷贝启动脚本
 
 ```python
 cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
@@ -147,22 +108,11 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 
 
-# 13.初始化mysql
+# 10.初始化mysql
 
-**<span style={{color: 'red'}}>⚠️MySQL 5.7.6之前的版本使用如下方式初始化数据库</span>**
+⚠️**<span style=color:red>mysql5.7初始化没有提示！！！</span>**
 
-```shell
-/usr/local/mysql/bin/mysql_install_db \
---user=mysql \
---basedir=/usr/local/mysql \ 
---datadir=/usr/local/mysql/data
-```
-
-
-
-**<span style={{color: 'red'}}>⚠️MySQL 5.7.6之后的版本使用如下方式初始化数据库</span>**
-
-```shell
+```python
 /usr/local/mysql/bin/mysqld \
 --user=mysql \
 --basedir=/usr/local/mysql \
@@ -181,13 +131,9 @@ mysql5.7初始化参数说明
 | **--datadir**             | **指定mysql数据目录** |
 | **--initialize-insecure** | **不生成随机密码**    |
 
-通过 `mysqld --verbose --help|grep initialize` 查看说明
 
 
-
-
-
-# 14.导出mysql命令环境变量
+# 11.导出mysql命令环境变量
 
 ```python
 # 导出mysql命令环境变量
@@ -199,7 +145,7 @@ source /etc/profile
 
 
 
-# 15.systemd管理mysql
+# 12.配置systemd管理mysql
 
 ```python
 cat > /usr/lib/systemd/system/mysqld.service <<'EOF'
@@ -223,9 +169,7 @@ EOF
 
 
 
-
-
-# 16.启动mysql、检查启动
+# 13.启动mysql、检查启动
 
 **启动mysql**
 
@@ -249,7 +193,7 @@ tcp6       0      0 :::3306                 :::*                    LISTEN      
 
 
 
-# 17.进入mysql并设置密码
+# 14.进入mysql并设置密码
 
 ```python
 # 进入mysql
@@ -263,5 +207,4 @@ mysql> flush privileges;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-**到此，mysql5.7源码安装完成！！！**
-
+**到此，mysql5.7二进制安装完成！！！**

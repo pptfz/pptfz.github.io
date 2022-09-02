@@ -415,11 +415,11 @@ save 60 1000
 
 ## 5.2 redis备份、恢复
 
-**<span style={{color: 'red'}}>redis持久化就是redis备份</span>**
+**<span style=color:red>redis持久化就是redis备份</span>**
 
 
 
-**<span style={{color: 'red'}}>将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可，使用``CONFIG GET dir``命令获取redis目录</span>**
+**<span style=color:red>将备份文件 (dump.rdb) 移动到 redis 安装目录并启动服务即可，使用``CONFIG GET dir``命令获取redis目录</span>**
 
 
 

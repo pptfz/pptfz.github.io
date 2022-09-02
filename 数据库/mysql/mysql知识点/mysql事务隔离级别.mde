@@ -55,7 +55,7 @@ mysql> show create table t1;
 
 **mysql5.7 InnoDB存储引擎默认的事务隔离级别，全局和当前会话都是REPEATABLE-READ(可重复读)**
 
-**<span style={{color: 'red'}}>RR的并发性没有RC好</span>**
+**<span style=color:red>RR的并发性没有RC好</span>**
 
 ```python
 #mysql5.7.22
@@ -736,9 +736,9 @@ mysql> select * from t1 for update;
 
 
 
-- **<span style={{color: 'red'}}>很多人容易搞混不可重复读和幻读，确实这两者有些相似。但不可重复读重点在于update和delete，而幻读的重点在于insert。</span>**
+- **<span style=color:red>很多人容易搞混不可重复读和幻读，确实这两者有些相似。但不可重复读重点在于update和delete，而幻读的重点在于insert。</span>**
 
 
 
-- **<span style={{color: 'red'}}>总的来说幻读就是事务A对数据进行操作，事务B还是可以用insert插入数据的，因为使用的是行锁，这样导致的各种奇葩问题就是幻读</span>**
+- **<span style=color:red>总的来说幻读就是事务A对数据进行操作，事务B还是可以用insert插入数据的，因为使用的是行锁，这样导致的各种奇葩问题就是幻读</span>**
 

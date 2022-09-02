@@ -20,7 +20,7 @@ mysqladmin -u用户名 -p旧密码 password 新密码
 
 **示例：使用`mysqladmin`命令给root设置密码**
 
-**<span style={{color: 'red'}}>mysql5.7和mysql8中在命令行使用命令`mysqladmin`会有警告信息，mysql5.6没有</span>**
+**<span style=color:red>mysql5.7和mysql8中在命令行使用命令`mysqladmin`会有警告信息，mysql5.6没有</span>**
 
 ```python
 $ mysqladmin -uroot -p password
@@ -52,11 +52,11 @@ set password='新密码'	或		set password=password('新密码');
 
 ## 方法三	update更新user表
 
-**<span style={{color: 'red'}}>⚠️mysql5.6中user表中密码的字段是`password`</span>**
+**<span style=color:red>⚠️mysql5.6中user表中密码的字段是`password`</span>**
 
-**<span style={{color: 'red'}}>⚠️mysql5.7和8中user表中密码的字段是`authentication_string`</span>**
+**<span style=color:red>⚠️mysql5.7和8中user表中密码的字段是`authentication_string`</span>**
 
-**<span style={{color: 'red'}}>⚠️mysql8中user表中密码的字段`authentication_string`后边直接跟字符串即可，不能写password</span>**
+**<span style=color:red>⚠️mysql8中user表中密码的字段`authentication_string`后边直接跟字符串即可，不能写password</span>**
 
 **mysql5.6**
 
@@ -98,7 +98,7 @@ mysqladmin -u用户名 -p旧密码 password 新密码
 
 **示例：使用`mysqladmin`命令给root设置密码**
 
-**<span style={{color: 'red'}}>mysql5.7和mysql8中在命令行使用命令`mysqladmin`会有警告信息，mysql5.6没有</span>**
+**<span style=color:red>mysql5.7和mysql8中在命令行使用命令`mysqladmin`会有警告信息，mysql5.6没有</span>**
 
 ```python
 $ mysqladmin -uroot -p password
@@ -134,11 +134,11 @@ set password='新密码'	或		set password=password('新密码');
 
 ## 方法三	update更新user表
 
-**<span style={{color: 'red'}}>⚠️mysql5.6中user表中密码的字段是`password`</span>**
+**<span style=color:red>⚠️mysql5.6中user表中密码的字段是`password`</span>**
 
-**<span style={{color: 'red'}}>⚠️mysql5.7和8中user表中密码的字段是`authentication_string`</span>**
+**<span style=color:red>⚠️mysql5.7和8中user表中密码的字段是`authentication_string`</span>**
 
-**<span style={{color: 'red'}}>⚠️mysql8中user表中密码的字段`authentication_string`后边直接跟字符串即可，不能写password</span>**
+**<span style=color:red>⚠️mysql8中user表中密码的字段`authentication_string`后边直接跟字符串即可，不能写password</span>**
 
 **mysql5.6**
 
@@ -178,7 +178,7 @@ mysqladmin -u用户名 -p旧密码 password 新密码
 
 **示例：使用`mysqladmin`命令给root设置密码**
 
-**<span style={{color: 'red'}}>mysql5.7和mysql8中在命令行使用命令`mysqladmin`会有警告信息，mysql5.6没有</span>**
+**<span style=color:red>mysql5.7和mysql8中在命令行使用命令`mysqladmin`会有警告信息，mysql5.6没有</span>**
 
 ```mysql
 $ mysqladmin -uroot -p password
@@ -194,7 +194,7 @@ Warning: Since password will be sent to server in plain text, use ssl connection
 
 ## 方法二	set password
 
-**<span style={{color: 'red'}}>⚠️mysql8中以下两种方式不可用</span>**
+**<span style=color:red>⚠️mysql8中以下两种方式不可用</span>**
 
 ```mysql
 set password=password('新密码');
@@ -214,11 +214,11 @@ set password='新密码'
 
 ## 方法三	update更新user表
 
-**<span style={{color: 'red'}}>⚠️mysql5.6中user表中密码的字段是`password`</span>**
+**<span style=color:red>⚠️mysql5.6中user表中密码的字段是`password`</span>**
 
-**<span style={{color: 'red'}}>⚠️mysql5.7和8中user表中密码的字段是`authentication_string`</span>**
+**<span style=color:red>⚠️mysql5.7和8中user表中密码的字段是`authentication_string`</span>**
 
-**<span style={{color: 'red'}}>⚠️mysql8中user表中密码的字段`authentication_string`后边直接跟字符串即可，不能写password</span>**
+**<span style=color:red>⚠️mysql8中user表中密码的字段`authentication_string`后边直接跟字符串即可，不能写password</span>**
 
 **mysql5.6**
 

@@ -2,7 +2,7 @@
 
 
 
-# MHA基于GTID主从复制高可用
+# MHA基于普通主从复制高可用
 
 [MHA gIthub地址](https://github.com/yoshinorim/mha4mysql-manager)
 
@@ -44,8 +44,6 @@ MHA在写入器阻塞后的0.5-2秒内提供正常的主设备切换。通常可
 
 ![iShot2020-06-0517.48.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-0517.48.35.png)
 
-
-
 **主库down机时架构**
 
 ![iShot2020-06-0517.49.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-0517.49.03.png)
@@ -64,7 +62,7 @@ MHA在写入器阻塞后的0.5-2秒内提供正常的主设备切换。通常可
 
 
 
-**<span style={{color: 'red'}}>工作过程：manager节点定时检测复制集群中的每一个node,如果master宕机会选出数据与master最接近的一台slave来作为新master，去到旧master中拷贝binlog到新master中并应用binlog以保证新master与旧master数据一致，然后将剩余的slave重新changer master to,将slave的主切换为新master</span>**
+**<span style=color:red>工作过程：manager节点定时检测复制集群中的每一个node,如果master宕机会选出数据与master最接近的一台slave来作为新master，去到旧master中拷贝binlog到新master中并应用binlog以保证新master与旧master数据一致，然后将剩余的slave重新changer master to,将slave的主切换为新master</span>**
 
 
 
@@ -120,7 +118,7 @@ MHA在写入器阻塞后的0.5-2秒内提供正常的主设备切换。通常可
 
 ## 3.2 所有机器做相互免密钥配置
 
-**<span style={{color: 'red'}}>⚠️复制集群中的每个节点都有可能成为master，都得开启binlog和ssh密钥认证，因为当旧master宕机后，mha要拷贝binlog到所有node节点上，而且所有节点都有可能成为master，故每个节点都要彼此密钥认证</span>**
+**<span style=color:red>⚠️复制集群中的每个节点都有可能成为master，都得开启binlog和ssh密钥认证，因为当旧master宕机后，mha要拷贝binlog到所有node节点上，而且所有节点都有可能成为master，故每个节点都要彼此密钥认证</span>**
 
 lowB脚本运行一下
 
@@ -166,20 +164,20 @@ done < $file
 
 
 
-**<span style={{color: 'red'}}>master操作(mysql01 10.0.0.133)</span>**
+**<span style=color:red>master操作(mysql01 10.0.0.133)</span>**
 
-## 3.3 mysql主从配置-GTID
+## 3.3 mysql主从配置
 
 >  **这里是把10.0.0.133(mysql01)、10.0.0.134(mysql02)、10.0.0.135(mysql03)搭建为ABB，即一主两从，其中mysql01是主库，其余两个节点是从库**
 
 
 
-### 3.3.1 编辑 `/etc/my.cnf`
+### 3.3.1 编辑`/etc/my.cnf`
 
 > **指定`serverid`，并开启`binlog`**
 
 ```python
-# 指定server id
+# 指定serverid，越小优先级越大
 server_id=1
 
 # 开启binlog日志，位置在mysql数据目录data下
@@ -188,17 +186,8 @@ log_bin=binlog
 # 开启binlog日志索引，位置在mysql数据目录data下
 log_bin_index=binlog.index	
 
-# 开启GTID
-gtid_mode=ON
-
-# 开启GTID的一些安全限制 执行GTID一致
-enforce_gtid_consistency
-
-# 通常情况，从服务器从主服务器接收到的更新不记入它的二进制日志。该选项告诉从服务器将其SQL线程执行的更新记入到从服务器自己的二进制日志，mysql-5.6必须加这个参数，5.7可以不加
-log-slave-updates
-
-# 禁止mysql域名解析
-skip_name_resolve
+# 开启半同步复制
+log_slave_updates=1
 ```
 
 
@@ -211,32 +200,11 @@ systemctl restart mysqld
 
 
 
-**查看git开启情况，`enforce_gtid_consistency`与`gtid_mode`都为on即为正确**
-
-```python
-mysql> show global variables like '%gtid%';
-+----------------------------------+-------+
-| Variable_name                    | Value |
-+----------------------------------+-------+
-| binlog_gtid_simple_recovery      | ON    |
-| enforce_gtid_consistency         | ON    |
-| gtid_executed                    |       |
-| gtid_executed_compression_period | 1000  |
-| gtid_mode                        | ON    |
-| gtid_owned                       |       |
-| gtid_purged                      |       |
-| session_track_gtids              | OFF   |
-+----------------------------------+-------+
-8 rows in set (0.00 sec)
-```
-
-
-
 ### 3.3.2 创建专用复制用户和设置监控用户
 
-**<span style={{color: 'red'}}>允许从slave上连接过来的复制用户，3台mysql服务器都要创建复制用户和监控用户！！！</span>**
+**<span style=color:red>允许从slave上连接过来的复制用户，3台mysql服务器都要创建复制用户和监控用户！！！</span>**
 
-**⚠️复制用户名称为repl，也可以在MHA配置文件中修改复制用户**
+**⚠️复制用户名称为repl，否在在后续检测mysql集群连接情况会报错，也可以在配置文件中修改复制用户**
 
 **创建专用复制用户**
 
@@ -249,7 +217,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 **设置监控用户**
 
-**<span style={{color: 'red'}}>⚠️所有节点进行授权</span>**
+**<span style=color:red>⚠️所有节点进行授权</span>**
 
 ```python
 mysql> grant all privileges on *.* to 'mha'@'10.0.0.%' identified by 'Bxb123.com';
@@ -268,33 +236,32 @@ set global relay_log_purge=0;
 
 
 
-**<span style={{color: 'red'}}>slave操作(mysql02、03 10.0.0.134、135)</span>**
+**查看master当前的binlog日志及位置信息**
+
+```mysql
+mysql> show master status;
+```
+
+
+
+**<span style=color:red>slave操作(mysql02、03 10.0.0.134、135)</span>**
 
 ### 3.3.3 配置文件 `/etc/my.cnf`
 
-> **指定serverid，并开启binlog日志**
+> `指定serverid，并开启binlog日志`
 
 ```python
-# 指定server id mysql02为2 mysql03为3
+# 指定serverid，要比mysql-master大，slave1设置为2，slave2设置为3
 server_id=2
 
 # 开启binlog日志，位置在mysql数据目录data下
 log_bin=binlog
 
-# 开启binlog日志索引，位置在mysql数据目录data下
+#  开启binlog日志索引，位置在mysql数据目录data下
 log_bin_index=binlog.index	
 
-# 开启GTID
-gtid_mode=ON
-
-# 开启GTID的一些安全限制 执行GTID一致
-enforce_gtid_consistency
-
-# 通常情况，从服务器从主服务器接收到的更新不记入它的二进制日志。该选项告诉从服务器将其SQL线程执行的更新记入到从服务器自己的二进制日志，mysql-5.6必须加这个参数，5.7可以不加
-log-slave-updates
-
-# 禁止mysql域名解析
-skip_name_resolve
+# 开启半同步复制  否则自动切换主从的时候会报主键错误
+log_slave_updates = 1
 ```
 
 
@@ -307,28 +274,7 @@ systemctl restart mysqld
 
 
 
-**查看git开启情况，`enforce_gtid_consistency`与`gtid_mode`都为on即为正确**
-
-```python
-mysql> show variables like '%gtid%';
-+----------------------------------+-----------+
-| Variable_name                    | Value     |
-+----------------------------------+-----------+
-| binlog_gtid_simple_recovery      | ON        |
-| enforce_gtid_consistency         | ON        |
-| gtid_executed_compression_period | 1000      |
-| gtid_mode                        | ON        |
-| gtid_next                        | AUTOMATIC |
-| gtid_owned                       |           |
-| gtid_purged                      |           |
-| session_track_gtids              | OFF       |
-+----------------------------------+-----------+
-8 rows in set (0.00 sec)
-```
-
-
-
-### 3.3.4 从库拉取
+### 3.3.4 设置slave从master拉取binlog，及拉取的位置
 
 ```python
 # 设置只读，不要在配置文件里写
@@ -338,13 +284,14 @@ Query OK, 0 rows affected (0.00 sec)
 # 禁用自动删除relay log
 set global relay_log_purge=0;
 
-# 拉取
-change master to \
-    master_host='10.0.0.133', \
-    master_user='repl', \
-    master_password='Bxb123.com', \
-    master_auto_position=1;
-Query OK, 0 rows affected, 2 warnings (0.00 sec)    
+# 拉取binlog
+change master to master_host='10.0.0.133', \
+master_port=3306, \
+master_user='repl', \
+master_password='Bxb123.com', \
+master_log_file='binlog.000001', \
+master_log_pos=155;
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
 ```
 
 
@@ -356,10 +303,9 @@ Query OK, 0 rows affected, 2 warnings (0.00 sec)
 mysql> start slave;
 Query OK, 0 rows affected (0.00 sec)
 
-# 查看slave状态，SQL和IO线程都为Yes并且Auto_Position为1即为正确
+#  查看slave状态，SQL和IO线程都为Yes即为正确
 Slave_IO_Running: Yes
 Slave_SQL_Running: Yes
-Auto_Position: 1  
   
 # 这个值是主从延迟，即slave落后master的秒数，也是一个比较重要的查看主从是否正常的标准值  
 Seconds_Behind_Master: 0  
@@ -431,9 +377,7 @@ $ make && make install
 
 ---
 
-
-
-**<span style={{color: 'red'}}>manager操作(mha 10.0.0.130)</span>**
+**<span style=color:red>manager操作(mha 10.0.0.130)</span>**
 
 ## 3.5 部署MHA Manager
 
@@ -490,7 +434,7 @@ $ make && make install
 
 ### 3.5.4 mysql主库节点配置eth0:0网卡，用作VIP，这里设置为10.0.0.200
 
-**<span style={{color: 'red'}}>这一步在mysql主库上(10.0.0.133)执行</span>**
+**<span style=color:red>这一步在mysql主库上(10.0.0.133)执行</span>**
 
 ```python
 $ ifconfig eth0:0 10.0.0.200
@@ -511,7 +455,7 @@ eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group
 
 **⚠️需要修改的是VIP的地址和网卡的名称**
 
-**<span style={{color: 'red'}}>VIP是绑定在主库上的，这样当主库宕机后VIP才会漂移到新主库上</span>**
+**<span style=color:red>VIP是绑定在主库上的，这样当主库宕机后VIP才会漂移到新主库上</span>**
 
 ```python
 cat > /usr/local/bin/master_ip_failover <<'EOF'
@@ -626,7 +570,7 @@ mkdir -p /var/log/masterha/app1
 
 **编辑mha配置文件`/etc/masterha/app1.conf`**
 
-**<span style={{color: 'red'}}>`mha4mysql-manager-0.58/samples/conf/app1.conf`是mha的默认配置文件</span>**
+**<span style=color:red>`mha4mysql-manager-0.58/samples/conf/app1.conf`是mha的默认配置文件</span>**
 
 ```python
 cat > /etc/masterha/app1.cnf <<EOF
@@ -646,11 +590,11 @@ master_ip_failover_script=/usr/local/bin/master_ip_failover
 # 设置手动切换时候的切换脚本
 master_ip_online_change_script=/usr/local/bin/master_ip_online_change
 
-# 设置mysql中mha用户的密码，这个密码是前文中创建监控用户mha的密码
+# 设置mysql中mha用户的密码，这个密码是前文中创建监控用户的密码
 password=Bxb123.com         
 
-# 设置监控用户root
-user=mha   
+# 设置监控用户mha
+user=mha    
 
 # 设置监控主库，发送ping包的时间间隔，默认是3秒，尝试三次没有回应的时候自动进行railover
 ping_interval=1   
@@ -665,7 +609,7 @@ repl_password=Bxb123.com
 repl_user=repl          
 
 # 设置发生切换后发送的报警的脚本
-report_script=/etc/masterha/send_report
+report_script=/etc/mha/send_report
 
 # 检测两个从库
 secondary_check_script=/usr/local/bin/masterha_secondary_check -s 10.0.0.134 -s 10.0.0.135
@@ -703,7 +647,7 @@ EOF
 **编辑发生切换后发送报警的脚本，需要自行配置邮箱设置**
 
 ```python
-cat > /etc/masterha/send_report <<'EOF'
+cat > /etc/mha/send_report <<'EOF'
 #!/usr/bin/perl
   
 use strict;
@@ -901,22 +845,8 @@ nohup masterha_manager --conf=/etc/masterha/app1.cnf --remove_dead_master_conf -
 **启动参数说明**
 
 > **--remove_dead_master_conf** 	该参数代表当发生主从切换后，老的主库的ip将会从配置文件中移除。 
-> **< /dev/null > /var/log/masterha/app1/manager.log 2>&1 &**		打印日志 
+> **--manger_log** 	日志存放位置 
 > **--ignore_last_failover** 	在缺省情况下，如果MHA检测到连续发生宕机，且两次宕机间隔不足8小时的话，则不会进行Failover，之所以这样限制是为了避免ping-pong效应。该参数代表忽略上次MHA触发切换产生的文件，默认情况下，MHA发生切换后会在日志目录，也就是上面我设置的/data产生app1.failover.complete文件，下次再次切换的时候如果发现该目录下存在该文件将不允许触发切换，除非在第一次切换后收到删除该文件，为了方便，这里设置为--ignore_last_failover
-
-
-
-MHA切换机制
-
-> **1、切换后会生成一个临时文件，在MHA的工作目录下** 
->
-> **2、下一次切换之前先监测是否存在这个临时文件** 
->
-> **3、如果存在，则不做切换** 
->
-> **4、如果不存在，则切换** 
->
-> **5、该临时文件存在时间8小时**    
 
 
 
@@ -947,7 +877,7 @@ masterha_stop --conf=/etc/masterha/app1.cnf  &&  nohup masterha_manager --conf=/
 
 
 
-**<span style={{color: 'red'}}>到此，MHA部署完成！</span>**
+**<span style=color:red>到此，MHA部署完成！</span>**
 
 
 
@@ -955,7 +885,7 @@ masterha_stop --conf=/etc/masterha/app1.cnf  &&  nohup masterha_manager --conf=/
 
 ### 3.6.1 手动关闭主库，模拟宕机
 
-**<span style={{color: 'red'}}>10.0.0.133 mysql01操作</span>**
+**<span style=color:red>10.0.0.133 mysql01操作</span>**
 
 ```python
 systemctl stop mysqld
@@ -969,7 +899,7 @@ systemctl stop mysqld
 
 
 
-**<span style={{color: 'red'}}>10.0.0.135 mysql02操作</span>**
+**<span style=color:red>10.0.0.135 mysql02操作</span>**
 
 **可以看到，当主库10.0.0.133宕机后，10.0.0.134成为了新的主库**
 
@@ -1011,157 +941,7 @@ $ ip a s eth0
 
 
 
-## 3.7 修复宕机主库步骤
-
-### 第一步、修复宕机主库
-
-**用各种方法把宕掉的旧主库成功启动**
-
-
-
-### 第二步、从MHA配置文件`/etc/masterha/app1.conf`中的`[server default]`标签下定义的`manager_log=/var/log/masterha/app1/manager.log`日志文件中找到`change master to`语句，修改从库复制用户的密码，并且指定主库为新主库
-
-**<span style={{color: 'red'}}>MHA节点操作</span>**
-
-```python
-$ grep -i 'change master to' /var/log/masterha/app1/manager.log 
-Sun Jun  7 13:17:49 2020 - [info]  All other slaves should start replication from here. Statement should be: CHANGE MASTER TO MASTER_HOST='10.0.0.134', MASTER_PORT=3306, MASTER_AUTO_POSITION=1, MASTER_USER='repl', MASTER_PASSWORD='xxx';
-```
-
-
-
-### 第三步、连接旧主库，执行上一步找到的`change master to`语句并打开IO、SQL线程
-
-**<span style={{color: 'red'}}>10.0.0.133 mysql01(旧主库)操作</span>**
-
-```python
-# 执行change master to
-mysql> CHANGE MASTER TO \
-       MASTER_HOST='10.0.0.134', \
-       MASTER_PORT=3306, \
-       MASTER_AUTO_POSITION=1, \
-       MASTER_USER='repl', \
-       MASTER_PASSWORD='Bxb123.com';
-Query OK, 0 rows affected, 2 warnings (0.01 sec)
-
-# 启动IO、SQL线程
-mysql> start slave;
-Query OK, 0 rows affected (0.01 sec)
-```
-
-
-
-### 第四步、把旧主库的server标签在MHA配置文件中添加回来，MHA执行切换后，会把down机的主机server标签删除
-
-**编辑MHA配置文件`/etc/masterha/app1.cnf`添加`server1`标签**
-
-```python
-[server1]
-hostname=10.0.0.133
-port=3306
-```
-
-
-
-## 第五步、启动MHA
-
-```python
-nohup masterha_manager --conf=/etc/masterha/app1.cnf --remove_dead_master_conf --ignore_last_failover < /dev/null > /var/log/masterha/app1/manager.log 2>&1 &
-```
-
-
-
-# 4.配置binlog-server
-
-[mysql5.7官方binlog-server文档](https://dev.mysql.com/doc/refman/5.7/en/mysqlbinlog-backup.html#mysqlbinlog-backup-options)
-
-[MHA官方对于binlog-server的简单说明](https://github.com/yoshinorim/mha4mysql-manager/wiki/Configuration)
-
-> **从MHA版本0.56开始，MHA支持new部分`[binlogN]`。在binlog部分，您可以定义[mysqlbinlog流服务器](http://dev.mysql.com/doc/refman/5.6/en/mysqlbinlog-backup.html)。当MHA进行基于GTID的故障转移时，MHA会检查binlog服务器，并且如果binlog服务器在其他从服务器之前，则MHA会在恢复之前将差分binlog事件应用于新的主服务器。当MHA进行基于非GTID的（传统）故障转移时，MHA将忽略二进制日志服务器。**
-
-
-
-**作用:	防止master断电或其他原因导致binlog缺失**
-
-**前提:	mysql主从必须为GTID模式**
-
----
-
-**配置好GTID主从后执行以下步骤**
-
-## 4.1 MHA配置文件`/etc/masterha/app1.cnf`加入binlog-server配置
-
-**这里把mysql03 10.0.0.135当作binlog-server**
-
-```python
-[binlog1]
-# 不让这个机器当主库
-no_master=1
-hostname=10.0.0.135
-master_binlog_dir=/data/mysql/binlog
-```
-
-
-
-**创建binlog备份目录**
-
-```python
-mkdir -p /data/mysql/binlog && chown mysql.mysql /data/mysql/binlog
-```
-
-
-
-## 4.2 手动备份binlog
-
-- **<span style={{color: 'red'}}>⚠️备份binlog，--host后的IP一定要填写VIP地址</span>**
-- **<span style={{color: 'red'}}>⚠️一定要注意写对mysql binlog文件的名称</span>**
-
-```python
-# 进入binlog备份目录
-cd /data/mysql/binlog
-
-# 手动备份
-mysqlbinlog -R --host=10.0.0.200 --user=mha --password=Bxb123.com --raw/branch --stop-never binlog.000001 &
-```
-
-
-
-## 4.3 启动MHA
-
-```python
-nohup masterha_manager --conf=/etc/masterha/app1.cnf --remove_dead_master_conf --ignore_last_failover < /dev/null > /var/log/masterha/app1/manager.log 2>&1 &
-```
-
-
-
-## 4.4 验证
-
-**mysql master节点执行命令`flush logs`刷新binlog**
-
-```python
-master刷新binlog，多执行几次
-mysql> flush logs;
-Query OK, 0 rows affected (0.01 sec)
-```
-
-
-
-**mysql03 10.0.0.135节点`/data/mysql/binlog`查看binlog，会同步master上的binlog**
-
-```python
-$ pwd
-/data/mysql/binlog
-$ ls
-binlog.000001  binlog.000002  binlog.000003
-```
-
-
-
-
-
-# 5.MHA常用命令总结
-
-
+# 4.MHA常用命令总结
 
 **1、检查mha的ssh免密登录状态**
 

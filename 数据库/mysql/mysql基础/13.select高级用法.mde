@@ -6,7 +6,7 @@
 
 # 1.多表连接查询
 
-<span style={{color: 'red'}}>**select 表1.列名,表2.列名 from 表1,表2 where 表1.列1=表2.列1 and 表1.列2=值**</span>
+<span style=color:red>**select 表1.列名,表2.列名 from 表1,表2 where 表1.列1=表2.列1 and 表1.列2=值**</span>
 
 ---
 
@@ -208,7 +208,7 @@ mysql> select * from person inner join address on person.person_id=address.addre
 
 ![iShot2020-10-14 14.03.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.03.32.png)
 
-**<span style={{color: 'red'}}>select 查询内容 from 左表 left join 右表 on 左表.列=右表.列</span>**
+**<span style=color:red>select 查询内容 from 左表 left join 右表 on 左表.列=右表.列</span>**
 
 ```python
 //人名表person为左表，地址表address为右表	左外连接
@@ -245,7 +245,7 @@ mysql> select * from address right join person on person.person_id=address.perso
 
 ![iShot2020-10-14 14.03.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.03.51.png)
 
-<span style={{color: 'red'}}>**select 查询内容 from 左表 right join 右表 on 右表.列=左表.列**</span>
+<span style=color:red>**select 查询内容 from 左表 right join 右表 on 右表.列=左表.列**</span>
 
 ```python
 //人名表person为左表，地址表address为右表

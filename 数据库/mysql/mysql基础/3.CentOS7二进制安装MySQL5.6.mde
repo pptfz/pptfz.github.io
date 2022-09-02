@@ -2,7 +2,7 @@
 
 
 
-# CentOS7二进制安装MySQL8.0
+# CentOS7二进制安装MySQL5.6
 
 [mysql历史版本官方下载地址](https://downloads.mysql.com/archives/community/)
 
@@ -20,11 +20,11 @@ yum -y install -y gcc gcc-c++ autoconf bison-devel ncurses-devel libaio-devel nu
 
 
 
-# 2.下载MySQL8.0二进制包
+# 2.下载MySQL5.6二进制包
 
 ```python
-export MYSQL_VERSION=8.0.22
-wget https://cdn.mysql.com/archives/mysql-8.0/mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.xz  
+export MYSQL_VERSION=5.6.51
+wget https://cdn.mysql.com/archives/mysql-5.6/mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.gz
 ```
 
 
@@ -32,7 +32,7 @@ wget https://cdn.mysql.com/archives/mysql-8.0/mysql-${MYSQL_VERSION}-linux-glibc
 # 3.解压缩mysql二进制包到 `/usr/local`
 
 ```python
-tar xf mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.xz -C /usr/local/
+tar xf mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.gz -C /usr/local
 ```
 
 
@@ -49,21 +49,24 @@ ln -s /usr/local/mysql-${MYSQL_VERSION} /usr/local/mysql
 # 5.创建mysql用户
 
 ```python
-useradd -M -s /sbin/nologin mysql
+# 创建mysql用户
+useradd mysql -s /bin/nologin -M
 ```
 
 
 
-# 6.编辑主配置文件，myql8.0二进制包默认没有mysql配置文件
+# 6.编辑主配置文件
 
-**<span style={{color: 'red'}}>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
+> mysql5.6二进制包中 `support-files/my-default.cnf`  有示例配置文件，这里选择手动编辑基础配置文件
+>
+> **<span style=color:red>⚠️如果指定了mysql的socket文件位置，则必须添加 `[client]` 标签并同时指定socket文件位置，否则客户端会从 `/tmp` 下找socket文件</span>**
 
 ```python
-# 备份原有/etc/my.cnf
+# 备份/etc/my.cnf
 mv /etc/my.cnf /etc/my.cnf.old
 
-# 以下为精简版主配置文件，后续根据实际情况修改
-cat >> /etc/my.cnf <<'EOF'
+# 以下配置为最精简版，可根据实际情况进行相应设置
+cat > /etc/my.cnf <<'EOF'
 [mysqld]
 basedir=/usr/local/mysql
 datadir=/usr/local/mysql/data
@@ -80,7 +83,7 @@ EOF
 
 # 7.创建socket文件目录
 
-```
+```shell
 mkdir -p /var/lib/mysql
 ```
 
@@ -104,28 +107,22 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 # 10.初始化mysql
 
-⚠️**<span style={{color: 'red'}}>mysql8.0初始化没有提示！！！</span>**
-
 ```python
-/usr/local/mysql/bin/mysqld \
+/usr/local/mysql/scripts/mysql_install_db \
 --user=mysql \
 --basedir=/usr/local/mysql \
---datadir=/usr/local/mysql/data \
---initialize-insecure 
+--datadir=/usr/local/mysql/data
 ```
 
 
 
-mysql8.0初始化参数说明
+mysql5.6初始化参数说明
 
-| **参数**                  | **说明**              |
-| ------------------------- | --------------------- |
-| **--user**                | **指定mysql用户**     |
-| **--basedir**             | **指定mysql安装目录** |
-| **--datadir**             | **指定mysql数据目录** |
-| **--initialize-insecure** | **不生成随机密码**    |
-
-
+| **参数**      | **说明**              |
+| ------------- | --------------------- |
+| **--user**    | **指定mysql用户**     |
+| **--basedir** | **指定mysql安装目录** |
+| **--datadir** | **指定mysql数据目录** |
 
 
 
@@ -167,9 +164,7 @@ EOF
 
 # 13.启动mysql、检查启动
 
-**启动mysql**
-
-```sh
+```python
 # 重新加载systemd系统服务
 systemctl daemon-reload
 
@@ -189,7 +184,7 @@ tcp6       0      0 :::3306                 :::*                    LISTEN      
 
 
 
-# 14.连接mysql并设置密码
+# 14.进入mysql并设置密码
 
 ```python
 # 进入mysql
@@ -203,4 +198,41 @@ mysql> flush privileges;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-**到此，mysql8.0二进制安装完成！！！**
+**到此，mysql5.6二进制安装完成！！！**
+
+
+
+如果设置mysql密码遇到报错，这是因为mysql要求输入16进制
+
+```
+mysql> set password='123';
+ERROR 1372 (HY000): Password hash should be a 41-digit hexadecimal number
+```
+
+
+
+先查询16进制
+
+```shell
+mysql> select password('123');
++-------------------------------------------+
+| password('PAPAqike.com!1')                |
++-------------------------------------------+
+| *23AE809DDACAF96AF0FD78ED04B6A265E05AA257 |
++-------------------------------------------+
+1 row in set (0.00 sec)
+```
+
+
+
+再进行设置即可
+
+```shell
+mysql> set password='*23AE809DDACAF96AF0FD78ED04B6A265E05AA257';
+Query OK, 0 rows affected (0.00 sec)
+```
+
+
+
+
+

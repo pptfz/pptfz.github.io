@@ -64,7 +64,7 @@
 
 # 3.MySQL 5.6半同步复制配置
 
-<h2 style={{color: 'red'}}>半同步复制的前提是已经做好了普通的主从复制</h2>
+<h2 style=color:red>半同步复制的前提是已经做好了普通的主从复制</h2>
 
 <h3 style=color:hotpink>Master配置</h3>
 
@@ -102,7 +102,7 @@ rpl_semi_sync_master_enabled = 1;
 rpl_semi_sync_master_timeout = 2000;
 ```
 
-<h4 style={{color: 'red'}}>安装后启动和定制主从连接错误的超时时间默认是10s，可改为2s，一旦有一次超时自动降级为异步</h4>
+<h4 style=color:red>安装后启动和定制主从连接错误的超时时间默认是10s，可改为2s，一旦有一次超时自动降级为异步</h4>
 
 ---
 

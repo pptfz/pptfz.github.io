@@ -8,7 +8,7 @@
 
 
 
-<h3 style={{color: 'red'}}>⚠️ keys * 命令不要在生产环境中使用！！！ 这里仅仅是为了实验使用这个命令</h3>
+<h3 style=color:red>⚠️ keys * 命令不要在生产环境中使用！！！ 这里仅仅是为了实验使用这个命令</h3>
 
 # redis-cli	
 

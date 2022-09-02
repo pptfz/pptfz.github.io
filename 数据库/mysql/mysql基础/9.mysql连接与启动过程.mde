@@ -105,9 +105,9 @@ Connection:		10.0.0.11 via TCP/IP
 
 ![iShot2020-10-14 13.59.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.59.50.png)
 
-**<span style={{color: 'red'}}>命令行中加上--defaults-file=xxx，以上文件都不读取</span>**
+**<span style=color:red>命令行中加上--defaults-file=xxx，以上文件都不读取</span>**
 
-**⚠️⚠️⚠️<span style={{color: 'red'}}>配置文件顺序优先，但是配置优先级最低</span>**
+**⚠️⚠️⚠️<span style=color:red>配置文件顺序优先，但是配置优先级最低</span>**
 
 
 
