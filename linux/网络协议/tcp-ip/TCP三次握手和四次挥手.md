@@ -70,7 +70,7 @@
 
 红框内为第二次握手时IP为192.168.56.130的服务端（被请求连接端）发送的seq，因为是服务端发给请求端的一个新的seq，所以值为0（实际中此值不一定为0）
 
-蓝框内为Ack（Acknowledgement Number确认编号）即我理解的小写的<font color=Red>ack</font>，值为第一次握手时，请求端发送来的seq+1即0+1=1
+蓝框内为Ack（Acknowledgement Number确认编号）即我理解的小写的ack，值为第一次握手时，请求端发送来的seq+1即0+1=1
 
 ![iShot2020-04-0819.27.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.27.40.png)
 
@@ -79,7 +79,7 @@
 **第三次握手**
 
 红框内为第三次握手时IP为192.168.56.1的请求端（请求连接端）发送的seq，因为第一次握手时它发送给服务端的seq为0（黄框内），在上次的基础上+1，值就是1。
-蓝框内的Ack（Acknowledgement Number确认编号）还是我理解的小写的<font color=Red>ack</font>，值为第二次握手时请求端发来的seq+1，即绿框中的seq+1，值为0+1=1
+蓝框内的Ack（Acknowledgement Number确认编号）还是我理解的小写的ack，值为第二次握手时请求端发来的seq+1，即绿框中的seq+1，值为0+1=1
 
 ![iShot2020-04-0819.28.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.28.21.png)
 
