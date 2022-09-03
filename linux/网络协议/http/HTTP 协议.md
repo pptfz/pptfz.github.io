@@ -111,16 +111,13 @@ HTTP 协议使用 URI 定位互联网上的资源。正是因为 URI 的特定�
 
 ![iShot2020-04-0722.10.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0722.10.52.png)
 
-| 方法    | 描述                                                         | 请求                                                         | 响应                                                         |
-| ------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| GET     | 用来请求访问已被URI识别的资源<br >指定的资源经服务器端解析后返回响应内容 | GET /index.html HTTP/1.1<br >Host: www.baidu.com             | 返回index.html的页面资源                                     |
-| POST    | 用来传输实体的主体<br >虽然用GET方法也可以传输实体的主体，但一般不用GET方法进行传输，而是用POST方法<br >虽说POST的功能与GET相似，但POST的主要目的并不是获取响应的主体内容 | POST /submit.cgi HTTP/1.1<br >Host: www.baidu.com<br >Content-Length: 1500(1500字节的数据) | 返回submit.cgi接收数据的处理结果                             |
-| PUT     | 用来传输文件<br >就像FTP协议的文件上传一样，要求在请求报文的主体中包含文件的内容，然后保存到请求URI指定的位置 | PUT /example.html HTTP/1.1<br >Host: www.baidu.com<br >Content-Type: text/html<br >Content-Length: 1560(1560字节的数据) | 响应返回状态吗 204 No Content(比如：该html已存在于服务器上)  |
-| HEAD    | 用于确认URI的有效性及资源更新的日期时间等，和GET方法一样，只是不返回报文主体部分 | HEAD /index.html HTTP/1.1<br >Host: www.baidu.com            | 返回index.html有关的响应头部                                 |
-| DELETE  | 用来删除文件，是与PUT 相反的方法<br >按请求URI删除指定的资源 | DELETE /example.html HTTP/1.1<br >Host: www.baidu.com        | 响应返回状态吗 204 No Content(比如：该html已存在于服务器上)  |
-| OPTIONS | 用来查询针对请求URI指定的资源支持的方法                      | OPTIONS \* HTTP/1.1<br >Host: www.baidu.com                  | HTTP/1.1 200 OK<br >Allow: GET,POST,HEAD,OPTIONS(返回服务器支持的方法) |
-| TRACE   | 让web服务器端将之前的请求通信环回给客户端的方法<br >发送请求时，在Max-Forwards首部字段中填入数值，每经过一个服务端就将该数字减1，当数值刚好剑到0时就停止持续传输，最后接收到请求的服务端则返回状态码 200 OK 的响应 | TRACE /HTTP/1.1<br >Host: www.baidu.com<br >Max-Forwards: 2  | HTTP/1.1 200 Ok<br >Content-Type: message/http<br >Content-Length: 1024<br >TRACE / HTTP/1.1<br >Host: www.baidu.com<br >Max-Forwards: 2(返回响应包含请求内容) |
-| CONNECT | 要求在与代理服务器通信时建立隧道，实现用隧道协议进行TCP通信，主要使用SSL和TLS协议把通信内容加密后经网络隧道传输 | CONNECT proxy.sample.com:8000 HTTP/1.1<br >Host: proxy.sample.com | HTTP/1.1 200 OK(之后进入网络隧道)                            |
+
+
+
+
+
+
+
 
 
 
