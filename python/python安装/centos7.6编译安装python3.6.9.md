@@ -40,7 +40,7 @@ echo 'PATH=/usr/local/python36/bin:$PATH' >/etc/profile.d/python36.sh && source 
 
 :::tip
 
-**⚠️如果把python环境变量写在 `/etc/profile.d/*.sh` ，在使用pip3安装的时候<span style={{color: 'red'}}>可能</span>会报错 `Caused by SSLError("Can't connect to HTTPS URL because the SSL module is not available.",）`，但是导入到 `/etc/profile` 中就没有问题，<span style={{color: 'red'}}>不知道怎么解决，并且绝对不是网上说的openssl问题</span>**
+**⚠️如果把python环境变量写在 `/etc/profile.d/*.sh` ，在使用pip3安装的时候可能会报错 `Caused by SSLError("Can't connect to HTTPS URL because the SSL module is not available.",）`，但是导入到 `/etc/profile` 中就没有问题，不知道怎么解决，并且绝对不是网上说的openssl问题**
 
 :::
 
