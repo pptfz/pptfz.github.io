@@ -113,9 +113,7 @@ HTTP 协议使用 URI 定位互联网上的资源。正是因为 URI 的特定�
 
 
 
-
-
-
+![iShot_2022-09-03_14.17.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-03_14.17.01.png)
 
 
 
