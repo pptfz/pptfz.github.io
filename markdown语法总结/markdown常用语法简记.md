@@ -154,7 +154,7 @@
 
 - 语法
 
-  - ``<span style="color:颜色单词">内容</span>``
+  - `<span style=color:颜色名或十六进制>内容</span>`
 
 
 ![iShot2020-10-16 11.48.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 11.48.30.png)
