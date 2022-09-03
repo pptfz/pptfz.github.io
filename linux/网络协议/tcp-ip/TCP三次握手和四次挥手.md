@@ -83,7 +83,7 @@
 
 ![iShot2020-04-0819.28.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.28.21.png)
 
-那么问题来了，那个起确认连接作用的确认值即我理解的那个大写的<font color=Red>ACK</font>在哪呢？
+那么问题来了，那个起确认连接作用的确认值即我理解的那个大写的ACK在哪呢？
 
 ![iShot2020-04-0819.34.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0819.34.12.png)
 
