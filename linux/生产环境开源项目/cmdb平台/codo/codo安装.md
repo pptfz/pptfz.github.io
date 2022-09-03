@@ -706,7 +706,7 @@ fi
 
 
 
-<h3 style=color:red>到此，基础依赖部署完成！</h3>
+<h3 style={{color: 'red'}}>到此，基础依赖部署完成！</h3>
 
 
 
@@ -780,7 +780,11 @@ EOF
 
 #### 2.2.1.3 创建 docker-compose.yml
 
-**⚠️<span style=color:red>这里的端口就是后续访问codo的端口</span>**
+:::tip
+
+**这里的端口就是后续访问codo的端口**
+
+:::
 
 ```sh
 cat >docker-compose.yml <<EOF
@@ -818,7 +822,7 @@ tailf  /var/log/nginx/codo-access.log
 
 
 
-<h3 style=color:red>到此，项目前端 codo-web 部署完成！</h3>
+<h3 style={{color: 'red'}}>到此，项目前端 codo-web 部署完成！</h3>
 
 
 
@@ -955,7 +959,7 @@ tailf  /var/log/supervisor/mg.log
 
 
 
-<h3 style=color:red>到此，项目后端 codo-admin 部署完成！</h3>
+<h3 style={{color: 'red'}}>到此，项目后端 codo-admin 部署完成！</h3>
 
 
 
@@ -1112,7 +1116,7 @@ tailf /var/log/supervisor/cmdb_cron.log
 
 
 
-<h3 style=color:red>到此，资产管理 codo-cmdb 部署完成！</h3>
+<h3 style={{color: 'red'}}>到此，资产管理 codo-cmdb 部署完成！</h3>
 
 
 
@@ -1232,7 +1236,7 @@ tailf /var/log/supervisor/cron.log
 
 
 
-<h3 style=color:red>到此，定时任务系统部署完成！</h3>
+<h3 style={{color: 'red'}}>到此，定时任务系统部署完成！</h3>
 
 
 
@@ -1259,7 +1263,11 @@ cd codo-task
 
 #### 2.6.2.1 修改 `settings.py` 配置
 
-**⚠️ <span style=color:red>如果mq默认端口不是 5672 ，需要修改 `DEFAULT_MQ_PORT`</span>**
+:::tip
+
+**如果mq默认端口不是 5672 ，需要修改 `DEFAULT_MQ_PORT`**
+
+:::
 
 ```sh
 # 导入环境变量文件，最开始准备的环境变量文件
@@ -1364,7 +1372,7 @@ tailf /var/log/supervisor/exec_task.log
 
 
 
-<h3 style=color:red>到此，任务系统 codo-task 部署完成！</h3>
+<h3 style={{color: 'red'}}>到此，任务系统 codo-task 部署完成！</h3>
 
 
 
@@ -1481,7 +1489,7 @@ tailf /var/log/supervisor/cron_jobs.log
 
 
 
-<h3 style=color:red>到此，运维工具系统 codo-tools 部署完成！</h3> 
+<h3 style={{color: 'red'}}>到此，运维工具系统 codo-tools 部署完成！</h3> 
 
 
 
@@ -1590,7 +1598,7 @@ tailf /var/log/supervisor/kerrigan.log
 
 
 
-<h3 style=color:red>到此，配置中心 kerrigan 部署完成！</h3>
+<h3 style={{color: 'red'}}>到此，配置中心 kerrigan 部署完成！</h3>
 
 
 
@@ -1703,13 +1711,13 @@ tailf /var/log/supervisor/codo_dns.log
 
 
 
-<h3 style=color:red>到此，域名管理 codo-dns 部署完成！</h3>
+<h3 style={{color: 'red'}}>到此，域名管理 codo-dns 部署完成！</h3>
 
 
 
 ## 2.9 API网关 api-gateway（部署容易出问题的地方)
 
-**⚠️⚠️⚠️<span style=color:red>重点部分，请仔细阅读 由于此项目是模块化、微服务化，因此需要在借助API网关，需要在API网关注册，此步骤是必须的。</span>**
+**⚠️⚠️⚠️<span style={{color: 'red'}}>重点部分，请仔细阅读 由于此项目是模块化、微服务化，因此需要在借助API网关，需要在API网关注册，此步骤是必须的。</span>**
 
 **注意事项**
 
@@ -1969,7 +1977,7 @@ curl -I -X GET -m 10 -o /dev/null -s -w %{http_code} http://gw.opendevops.cn:888
 
 
 
-<h3 style=color:red>到此，API网关 部署完成！</h3>
+<h3 style={{color: 'red'}}>到此，API网关 部署完成！</h3>
 
 
 

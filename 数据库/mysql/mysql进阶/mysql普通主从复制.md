@@ -6,13 +6,16 @@
 
 # 1.mysql主从复制过程
 
-<p style={{color: '#528cd8'}}>1.master开启binlog（二进制）日志、授权slave复制用户，slave开启relay-log（中继）日志</p>
+1.master开启binlog（二进制）日志、授权slave复制用户，slave开启relay-log（中继）日志
 
-<p style={{color: '#E66C00'}}>2.slave IO线程会通过在master上已经授权的复制用户权限请求连接master服务器，带着change master to信息（user、host、password、binlog、binlog_pos、port）去问master dump线程有没有slave指定的binlog、binlog_pos,有则拉取binlog</p>
+2.slave IO线程会通过在master上已经授权的复制用户权限请求连接master服务器，带着change master to信息（user、host、password、binlog、binlog_pos、port）去问master dump线程有没有slave指定的binlog、binlog_pos,有则拉取binlog
 
-<p style={{color: '#9ABC52'}}>3.IO线程拉取binlog后会先写入到TCP/IP缓存，TCP/IP缓存完成后会给IO线程返回ACK，告知IO线程缓存完成，然后再写入到relay-log中，relay-log写入完成后缓存就会清空，同时会把这一次拉取的binlog文件、binlog_pos记录到master.info中，以便于下一次去拉取的时候知道上一次拉取的位置
+2.slave IO线程会通过在master上已经授权的复制用户权限请求连接master服务器，带着change master to信息（user、host、password、binlog、binlog_pos、port）去问master dump线程有没有slave指定的binlog、binlog_pos,有则拉取binlog
 
-<p style={{color: '#60487C'}}>4.SQL线程会从relay-log中读取binlog解析成sql语句执行，同时会把上一次读取的relay-log位置记录到relay-log.info，以便于下一次读取的时候知道从什么位置读取，因为SQL线程从relay-log中读取binlog并不是一次全部读完的
+4.SQL线程会从relay-log中读取binlog解析成sql语句执行，同时会把上一次读取的relay-log位置记录到relay-log.info，以便于下一次读取的时候知道从什么位置读取，因为SQL线程从relay-log中读取binlog并不是一次全部读完的
+
+
+
 
 ![iShot2022-03-27 16.48.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-27%2016.48.07.png)
 
@@ -178,7 +181,13 @@ mysql> show databases;			#可以看到，在master上创建的数据库DB1已经
 
 **3.还可以把延迟从库当做一些问题、案例研究的对象。个别时候，可能有些binlog event在普通从库上会有问题（例如早期版本中无主键会导致从库更新非常慢的经典问题），这时就有时间在延迟从库上慢慢琢磨研究了。**
 
-<h4 style={{color: 'red'}}>普通主从最大的缺点：主库误删除数据后从库上的数据也会被同步删除</h4>
+
+
+:::tip
+
+**普通主从最大的缺点：主库误删除数据后从库上的数据也会被同步删除**
+
+:::
 
 
 

@@ -12,7 +12,7 @@ brew install lrzsz
 
 # 2.手动编辑 `iterm2-send-zmodem.sh` 和 `iterm2-recv-zmodem.sh`
 
-**<span style=color:red>别尼玛从github下载了，作者都特么把[github仓库](https://github.com/aikuyun/iterm2-zmodem)删除了</span>**
+**<span style={{color: 'red'}}>别尼玛从github下载了，作者都特么把[github仓库](https://github.com/aikuyun/iterm2-zmodem)删除了</span>**
 
 编辑2个脚本并放到 `/usr/local/bin/` 下，然后授予执行权限
 

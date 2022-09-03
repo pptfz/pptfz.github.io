@@ -24,7 +24,11 @@
 
 `Manage Jenkins` -> `Extended E-mail Notification`
 
-**⚠️<span style=color:red>SMTP Password 处填写的是邮箱授权码</span>**
+:::tip
+
+**SMTP Password 处填写的是邮箱授权码**
+
+:::
 
 ![iShot2021-09-05 16.43.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-05 16.43.44.png)
 

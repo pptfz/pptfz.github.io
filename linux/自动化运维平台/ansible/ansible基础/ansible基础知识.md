@@ -58,7 +58,11 @@
 
 # 2. Ansible安装配置
 
-<span style=color:red>**⚠️所有的受控主机必须与ansible服务端做ssh免密登陆**</span>
+:::tip
+
+**所有的受控主机必须与ansible服务端做ssh免密登陆**
+
+:::
 
 ## 2.1 安装ansible(需要配置epel源)
 

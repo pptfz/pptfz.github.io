@@ -8,7 +8,7 @@
 
 ## 1.1 yum安装默认路径
 
-**/var/log/mysqld.log**
+**`/var/log/mysqld.log`**
 
 ```python
 mysql> show variables like "%log_error%";
@@ -24,7 +24,7 @@ mysql> show variables like "%log_error%";
 
 ## 1.2 二进制安装、编译安装路径
 
-**$MYSQL_HOME/data/主机名.err**
+**`$MYSQL_HOME/data/主机名.err`**
 
 ```python
 //编辑配置文件
@@ -64,15 +64,19 @@ mysql> show variables like 'log_error';
 
 ![iShot2020-10-14 14.04.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.04.42.png)
 
-<h3>statement：语句模式，上图中将update语句进行记录（默认模式）
+
+
+**statement：语句模式，上图中将update语句进行记录（默认模式）**
+
 
 - **优点**
   - **简单明了，容易被看懂，就是sql语句，记录时不需要太多的磁盘空间**
 - **缺点**
   - **记录不够严谨**
 
-<h3>row：行模式，即数据行的变化过程，上图中Age=19修改成Age=20的过程事件。 mixed：以上两者的混合模式。 企业推荐使用row模式
 
+
+**row：行模式，即数据行的变化过程，上图中Age=19修改成Age=20的过程事件。 mixed：以上两者的混合模式。 企业推荐使用row模式**
 
 - **优点**
   - **记录更加严谨**
@@ -319,7 +323,7 @@ mysql> select * from binlog_table;
 
 # 3.通用查询日志
 
-**/var/run/mysqld/mysqld.log** 				
+**`/var/run/mysqld/mysqld.log`** 				
 
 ```python
 #对MySQL所有增删改查都会记录，默认关闭
@@ -342,7 +346,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 # 4.慢查询日志
 
-**/var/run/mysqld/mysqld-slow.log**	
+**`/var/run/mysqld/mysqld-slow.log`**	
 
 ```python
 #记录查询时间长的语句，用来优化，默认10s为慢查询

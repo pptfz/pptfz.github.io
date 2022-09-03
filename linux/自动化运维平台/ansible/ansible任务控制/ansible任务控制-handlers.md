@@ -20,7 +20,11 @@
 
 编辑yml文件
 
-**<span style=color:red>⚠️notify后的内容可以任意，但是handlers后的name下的内容必须与notify后定义的名称一致</span>**
+:::tip
+
+**notify后的内容可以任意，但是handlers后的name下的内容必须与notify后定义的名称一致**
+
+:::
 
 handlers会在所有任务正确执行完成后执行，只会执行一次，并且只有当tasks改变后才会触发handlers
 

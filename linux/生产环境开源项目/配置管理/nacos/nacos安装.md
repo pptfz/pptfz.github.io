@@ -102,9 +102,13 @@ export JAVA_HOME PATH CLASSPATH
 
 [maven历史版本官方下载地址](https://archive.apache.org/dist/maven/binaries/)
 
-**⚠️<span style=color:red>只有采用从github下载源码包自行编译的方式才需要安装maven</span>**
+:::tip
 
-**⚠️<span style=color:red>maven版本需要3.2.5以上，否则后续有坑</span>**
+**只有采用从github下载源码包自行编译的方式才需要安装maven**
+
+**maven版本需要3.2.5以上，否则后续有坑**
+
+:::
 
 ![iShot2021-05-27 10.35.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-27%2010.35.39.png)
 
@@ -201,7 +205,11 @@ tar xf nacos-server-1.4.2.tar.gz -C /usr/local
 
 在nacos的解压目录 `conf` 下，编辑配置文件 `cluster.conf` ，请每行配置成 `ip:port` （请配置3个或3个以上节点）
 
-**⚠️<span style=color:red>nacos集群模式必须指定IP，不支持域名，否则会报错！</span>**
+:::tip
+
+**nacos集群模式必须指定IP，不支持域名，否则会报错！**
+
+:::
 
 ```shell
 cat > cluster.conf << EOF
@@ -220,9 +228,11 @@ EOF
 
 ### 2.4.1 使用内置数据源
 
-**<span style=color:red>使用内置数据源无需进行任何配置</span>**
+:::tip
 
+**使用内置数据源无需进行任何配置**
 
+:::
 
 ### 2.4.2 使用外置数据源
 

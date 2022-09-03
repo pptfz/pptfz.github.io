@@ -4,7 +4,11 @@
 
 
 
-**<span style=color:red>ansible playbook使用 -C 选项进行模拟执行，和sed命令 -i 选项类似</span>**
+:::tip
+
+**ansible playbook使用 `-C` 选项进行模拟执行，和sed命令不加 `-i` 选项类似**
+
+:::
 
 
 
@@ -221,7 +225,11 @@ tasks:
 
 ## 1.3 Handlers
 
-**<span style=color:red>Handlers 最佳的应用场景是用来重启服务，或者触发系统重启操作，除此以外很少用到了</span>**
+:::tip
+
+**Handlers 最佳的应用场景是用来重启服务，或者触发系统重启操作，除此以外很少用到了**
+
+:::
 
 > handlers:在发生改变时执行的操作
 
@@ -345,7 +353,7 @@ ansible基于pull模式的工作流程
 
 #### 1.4.2.1 ansible pull 模式测试
 
-ansible主控制机编辑yaml文件并上传至git，⚠️<span style=color:red>yml文件中的 `- hosts` 参数必须为 `127.0.0.1` </span>
+**ansible主控制机编辑yaml文件并上传至git，⚠️<span style={{color: 'red'}}>yml文件中的 `- hosts` 参数必须为 `127.0.0.1` </span>**
 
 ```yaml
 cat > local.yml << EOF

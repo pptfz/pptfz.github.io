@@ -902,7 +902,7 @@ Killed process 10366 (nginx) total-vm:84784kB，anon-rss:49156kB， file-rss:520
 
 ![iShot2020-08-0510.06.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.06.49.png)
 
-发现 cache 才 1.7G，slab 非常高，4.4G，**<span style=color:red>slab 内存简单理解为是系统占用的</span>**。 使用 slabtop 继续分析。
+发现 cache 才 1.7G，slab 非常高，4.4G，**<span style={{color: 'red'}}>slab 内存简单理解为是系统占用的</span>**。 使用 slabtop 继续分析。
 
 ![iShot2020-08-0510.10.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0510.10.52.png)
 
@@ -954,9 +954,9 @@ $ ll /proc/22360/task/*/fd/ | wc -l
 
 从 2.4 内核开始，Linux 改进了分配特定中断到指定的处理器 ( 或处理器组 ) 的功能。 这被称为 `SMP IRQ affinity`，它可以控制系统如何响应各种硬件事件。允许你限制或者重新分配服务器的工作负载，从而让服务器更有效的工作。
 
-**<span style=color:red>以网卡中断为例，在没有设置 `SMP IRQ affinity` 时，所有网卡中断都关联到 CPU0， 这导致了 CPU0 负载过高，而无法有效快速的处理网络数据包，导致了瓶颈。</span>**
+**<span style={{color: 'red'}}>以网卡中断为例，在没有设置 `SMP IRQ affinity` 时，所有网卡中断都关联到 CPU0， 这导致了 CPU0 负载过高，而无法有效快速的处理网络数据包，导致了瓶颈。</span>**
 
-**<span style=color:blue>通过 `SMP IRQ affinity`，把网卡多个中断分配到多个 CPU 上，可以分散 CPU 压力， 提高数据处理速度。 但是 `smp_affinity` 要求网卡支持多队列， 如果网卡支持多队列则设置才有作用，网卡有多队列，才会有多个中断号，这样就可以把不同的中断号分配到不同 CPU 上，这样中断号就能相对均匀的分配到不同的 CPU 上。</span>**
+**<span style={{color: 'blue'}}>通过 `SMP IRQ affinity`，把网卡多个中断分配到多个 CPU 上，可以分散 CPU 压力， 提高数据处理速度。 但是 `smp_affinity` 要求网卡支持多队列， 如果网卡支持多队列则设置才有作用，网卡有多队列，才会有多个中断号，这样就可以把不同的中断号分配到不同 CPU 上，这样中断号就能相对均匀的分配到不同的 CPU 上。</span>**
 
 而单队列的网卡可以通过 RPS/RFS 来模拟多队列的情况，但是该效果并不如网卡本身多队列 + 开启 RPSRFS 来的有效。
 
@@ -1896,7 +1896,7 @@ LimitNOFILE=102400
 -bash: ulimit: open files: cannot modify limit: Operation not permitted
 ```
 
-原因是 **<span style=color:red>CentOS7里 openfile 不能大于 nr_open</span>**。
+原因是 **<span style={{color: 'red'}}>CentOS7里 openfile 不能大于 nr_open</span>**。
 
 ```shell
 [root@iZwz98aynkjcxvtra0f375Z ~]# cat /proc/sys/fs/nr_open
@@ -1968,13 +1968,13 @@ TIME_WAIT 79
 
 **通过 strace 看看二者的统计方式得不同**
 
-**<span style=color:red>ss 直接取自 /proc/net/sockstat。</span>**
+**<span style={{color: 'red'}}>ss 直接取自 /proc/net/sockstat。</span>**
 
 
 
 ![iShot2020-08-0520.16.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.16.53.png)
 
-**<span style=color:red>netstat 是读取的 /proc/pid/fd 下面关联 tcp 的 socket。</span>**
+**<span style={{color: 'red'}}>netstat 是读取的 /proc/pid/fd 下面关联 tcp 的 socket。</span>**
 
 ![iShot2020-08-0520.18.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-08-0520.18.53.png)
 

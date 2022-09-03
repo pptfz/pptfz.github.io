@@ -266,7 +266,7 @@ wget -c https://sealyun.oss-cn-beijing.aliyuncs.com/d551b0b9e67e0416d0f9dce870a1
 
 
 
-<marquee style=color:red>对于重度白嫖用户来讲，花钱下载包是不可能的，这辈子都不可能花钱下载包</marquee>
+<marquee style={{color: 'red'}}>对于重度白嫖用户来讲，花钱下载包是不可能的，这辈子都不可能花钱下载包</marquee>
 
 
 

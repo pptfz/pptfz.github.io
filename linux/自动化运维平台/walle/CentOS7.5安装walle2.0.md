@@ -305,9 +305,9 @@ sh admin.sh migration # Migration，数据迁移
 
 
 
-**<span style=color:red>到此，瓦力2.0标准安装完成！！！</span>**
+**<span style={{color: 'red'}}>到此，瓦力2.0标准安装完成！！！</span>**
 
----
+
 
 # docker安装
 

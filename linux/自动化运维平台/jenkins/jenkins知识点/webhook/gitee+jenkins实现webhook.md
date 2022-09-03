@@ -145,8 +145,8 @@
 - 输入你的仓库地址，例如 `git@your.gitea.server:gitea_group/gitea_project.git`
 
 - 点击 `Advanced` 按钮，`Name` 字段中输入 `origin`， `Refspec` 字段输入 `+refs/heads/*:refs/remotes/origin/* +refs/pull/*/MERGE:refs/pull/*/MERGE`
-  ，**<span style=color:blue>注意新版jenkins不再接受多条同时包含 `*` 通配符的refs描述，如只对push触发可写前半部分(`+refs/heads/*:refs/remotes/origin/*`)，如只对PR触发可只写后半段(`+refs/pull/*/MERGE:refs/pull/*/MERGE`)</span>**，**<span style=color:red>这里场景只针对于push触发，因此填写 `+refs/heads/*:refs/remotes/origin/*`</span>**
-- 凭据 `Credentials` 中请输入 git 仓库 `https` 地址对应的 `用户名密码` 凭据，或者 `ssh` 对应的 `ssh key` 凭据，**<span style=color:red>注意 `Gitee API Token` 凭据不可用于源码管理的凭据，只用于 gitea 插件的 API 调用凭据</span>**，**这里选择输入上一步(1.5.3.1)中创建的jenkins key凭据**
+  ，**<span style={{color: 'blue'}}>注意新版jenkins不再接受多条同时包含 `*` 通配符的refs描述，如只对push触发可写前半部分(`+refs/heads/*:refs/remotes/origin/*`)，如只对PR触发可只写后半段(`+refs/pull/*/MERGE:refs/pull/*/MERGE`)</span>**，**<span style={{color: 'red'}}>这里场景只针对于push触发，因此填写 `+refs/heads/*:refs/remotes/origin/*`</span>**
+- 凭据 `Credentials` 中请输入 git 仓库 `https` 地址对应的 `用户名密码` 凭据，或者 `ssh` 对应的 `ssh key` 凭据，**<span style={{color: 'red'}}>注意 `Gitee API Token` 凭据不可用于源码管理的凭据，只用于 gitea 插件的 API 调用凭据</span>**，**这里选择输入上一步(1.5.3.1)中创建的jenkins key凭据**
 - `Branch Specifier` 选项
   - 对于单仓库工作流输入: `origin/${giteaSourceBranch}`
   - 对于 PR 工作流输入: `pull/${giteaPullRequestIid}/MERGE`
@@ -171,7 +171,11 @@
 
 
 
-<span style=color:red>⚠️gitea中的webhook密码是在jenkins中`Build Triggers` 下 `Gitee WebHook 密码` 处生成的</span>
+:::tip
+
+**gitea中的webhook密码是在jenkins中 `Build Triggers` 下  `Gitee WebHook 密码` 处生成的**
+
+:::
 
 ![iShot2021-06-16 10.22.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-16 10.22.39.png)
 

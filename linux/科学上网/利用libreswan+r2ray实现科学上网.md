@@ -29,7 +29,7 @@
 
 ## 1.0 编辑环境变量文件
 
-<span style=color:red>北京、香港区服务器操做</span>
+北京、香港区服务器操做
 
 ```shell
 # 编辑文件
@@ -50,7 +50,7 @@ source /opt/wall_env
 
 ## 1.1 安装依赖包
 
-<span style=color:red>北京、香港区服务器操做</span>
+北京、香港区服务器操做
 
 ```shell
 yum -y install audit-libs-devel bison curl-devel fipscheck-devel flex gcc ldns-devel libcap-ng-devel libevent-devel libseccomp-devel libselinux-devel make nspr-devel nss-devel pam-devel pkgconfig systemd-devel unbound-devel xmlto
@@ -60,7 +60,7 @@ yum -y install audit-libs-devel bison curl-devel fipscheck-devel flex gcc ldns-d
 
 ## 1.2 安装libreswan
 
-<span style=color:red>北京、香港区服务器操做</span>
+北京、香港区服务器操做
 
 ```shell
 yum -y install libreswan
@@ -70,7 +70,7 @@ yum -y install libreswan
 
 ## 1.3 配置内核参数
 
-<span style=color:red>北京、香港区服务器操做</span>
+北京、香港区服务器操做
 
 ```shell
 # 开启路由转发
@@ -124,7 +124,7 @@ Mar 29 10:38:39 hk pluto[6483]: no secrets filename matched "/etc/ipsec.d/*.secr
 
 ## 1.5 防火墙配置
 
-<span style=color:red>香港区服务器操作</span>
+香港区服务器操作
 
 防火墙策略开放 udp 500 和 udp 4500 端口，允许北京区主机公网IP访问
 
@@ -132,7 +132,7 @@ Mar 29 10:38:39 hk pluto[6483]: no secrets filename matched "/etc/ipsec.d/*.secr
 
 ## 1.6 验证端口连通性
 
-<span style=color:red>北京区服务器操作</span>
+北京区服务器操作
 
 ```sh
 $ nmap -sU 2.2.2.2 -p 500,4500 -Pn
@@ -151,7 +151,7 @@ Nmap done: 1 IP address (1 host up) scanned in 3.17 seconds
 
 ## 1.7 配置预共享密钥
 
-<span style=color:red>北京、香港区服务器操做</span>
+北京、香港区服务器操做
 
 `/etc/ipsec.secrets` 配置文件中有 `include /etc/ipsec.d/*.secrets` ，因此我们在 `/etc/ipsec.d` 目录下新建 `*.secrets` 文件 
 
@@ -181,7 +181,7 @@ EOF
 
 Libreswan 不使用术语 `source` 或 `destination`。相反，它用术语  `left` 和 `right`来代指终端（主机）。虽然大多数管理员用 `left` 表示本地主机，`right` 表示远程主机，但是这样可以在大多数情况下在两个终端上使用相同的配置。
 由于我们的服务器使用的是vpc网络，采用静态nat的形式，在配置 `left` 和 `right` 时，本端的ip需要使用内网ip或 `%defaultroute`。`left` 和 `right` 是两端的ip地址，而 `leftid` 和 `rightid` 为代号id。
-<span style=color:red>这里我们指定北京区为 `left`  、香港区为 `right`</span>
+这里我们指定北京区为 `left`  、香港区为 `right`
 
 ```shell
 cat > /etc/ipsec.d/vm.conf << EOF
@@ -214,7 +214,7 @@ EOF
 
 Libreswan 不使用术语 `source` 或 `destination`。相反，它用术语  `left` 和 `right`来代指终端（主机）。虽然大多数管理员用 `left` 表示本地主机，`right` 表示远程主机，但是这样可以在大多数情况下在两个终端上使用相同的配置。
 由于我们的服务器使用的是vpc网络，采用静态nat的形式，在配置 `left` 和 `right` 时，本端的ip需要使用内网ip或 `%defaultroute`。`left` 和 `right` 是两端的ip地址，而 `leftid` 和 `rightid` 为代号id。
-<span style=color:red>这里我们指定香港区为本端机器，北京区为对端机器，即香港区为 `left`  、 北京区为 `right`</span>
+这里我们指定香港区为本端机器，北京区为对端机器，即香港区为 `left`  、 北京区为 `right`
 
 ```shell
 cat > /etc/ipsec.d/vm.conf << EOF
@@ -245,7 +245,7 @@ EOF
 
 ### 1.8.3 开启ipsec日志
 
-<span style=color:red>北京、香港区服务器操做</span>
+北京、香港区服务器操做
 
 > 这里需要编辑 `/etc/ipsec.conf` 把日志打开，默认日志路径为 `/var/log/pluto.log`
 
@@ -257,7 +257,7 @@ sed -i 's/#logfile=/logfile=/' /etc/ipsec.conf
 
 ### 1.8.4 重启ipsec
 
-<span style=color:red>北京、香港区服务器操做</span>
+北京、香港区服务器操做
 
 ```sh
 systemctl restart ipsec
@@ -390,7 +390,7 @@ Mar 23 21:00:38.020561: "bj-vm-hk/1x1"[1] 42.193.112.127 #2: STATE_QUICK_R2: IPs
 
 ### 2.1 香港区服务器操作
 
-<span style=color:red>截止2022.3.23，v2ray最新稳定版本为4.44</span>
+截止2022.3.23，v2ray最新稳定版本为4.44
 
 香港区服务器可以直接执行脚本安装即可
 
@@ -476,7 +476,7 @@ wget https://raw/branch.githubusercontent.com/v2fly/fhs-install-v2ray/master/ins
 
 #### 2.2.2 下载安装包
 
-<span style=color:red>截止2022.3.23，v2ray最新稳定版本为4.44</span>
+截止2022.3.23，v2ray最新稳定版本为4.44
 
 由于 `https://github.com/v2fly/v2ray-core/releases/download/v4.44.0/v2ray-linux-64.zip` 下载太慢了，可以使用如下加速地址
 
@@ -561,7 +561,7 @@ Please execute the command: systemctl enable v2ray; systemctl start v2ray
 
 ### 2.3 启动v2ray
 
-<span style=color:red>北京、香港区服务器操做</span>
+北京、香港区服务器操做
 
 ```shell
 systemctl enable v2ray && systemctl start v2ray
@@ -596,7 +596,7 @@ Mar 23 21:36:38 bj v2ray[13273]: 2022/03/23 21:36:38 [Warning] V2Ray 4.44.0 star
 
 [v2ray配置文件官方模板](https://github.com/v2fly/v2ray-examples)
 
-<span style=color:red>香港区服务器操做</span>
+香港区服务器操做
 
 ```json
 cat > /usr/local/etc/v2ray/config.json << EOF
@@ -662,7 +662,7 @@ EOF
 
 
 
-<span style=color:red>北京区服务器操做</span>
+北京区服务器操做
 
 > 配置文件中的 `address` 要写香港区服务器的内网IP
 >
@@ -768,7 +768,7 @@ EOF
 
 ### 2.5 重启v2ray
 
-<span style=color:red>北京、香港区服务器操做</span>
+北京、香港区服务器操做
 
 编辑完配置文件重启生效
 
@@ -780,7 +780,7 @@ systemctl restart v2ray
 
 ### 2.6 查看启动
 
-<span style=color:red>香港区服务器操做</span>
+香港区服务器操做
 
 ```shell
 $ netstat -ntpl|grep v2ray
@@ -791,7 +791,7 @@ tcp6       0      0 :::1087                 :::*                    LISTEN      
 
 
 
-<span style=color:red>北京区服务器操做</span>
+北京区服务器操做
 
 ```shell
 $ netstat -ntpl|grep v2ray

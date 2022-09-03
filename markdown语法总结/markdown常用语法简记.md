@@ -146,7 +146,7 @@
 
 - 示例
 
-  - <span style="color:green">颜色</span>
+  - <span style="{{color: 'green'}}>颜色</span>
 
 - 语法
 

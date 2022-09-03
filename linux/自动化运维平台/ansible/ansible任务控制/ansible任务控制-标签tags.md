@@ -38,7 +38,11 @@ EOF
 
 执行yml文件，使用 `-t` 选项指定tags，这里只执行标签为 `install nginx` 的tasks
 
-**<span style=color:red>使用 `--skip-tags` 选项排除要执行的tags</span>**
+:::tip
+
+**使用 `--skip-tags` 选项排除要执行的tags**
+
+:::
 
 ```shell
 $ ansible-playbook task_tags.yml -t "install nginx"

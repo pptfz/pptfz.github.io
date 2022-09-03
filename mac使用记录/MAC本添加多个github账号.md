@@ -69,7 +69,11 @@ Hi one! You've successfully authenticated, but GitHub does not provide shell acc
 
 ## 第四步、配置git信息
 
-**<span style=color:red>因为一台电脑上配置了多个 github 账号，所以就不能再配置全局的用户名和邮箱了，而是在不同的仓库下，如果需要连接不同的 git 账号，配置相应的局部用户名和邮箱即可，如果之前配置过全局的用户名和邮箱，需要取消配置</span>**
+:::tip
+
+**因为一台电脑上配置了多个 github 账号，所以就不能再配置全局的用户名和邮箱了，而是在不同的仓库下，如果需要连接不同的 git 账号，配置相应的局部用户名和邮箱即可，如果之前配置过全局的用户名和邮箱，需要取消配置**
+
+:::
 
 ```python
 //取消之前的全局配置
@@ -113,7 +117,11 @@ git remote rm origin
 git remote add origin git@one.github.com:one/仓库名.git
 ```
 
-⚠️⚠️⚠️**<span style=color:red>这里有个坑，添加远程仓库时，从github仓库的``Clone or download``下的``Use SSH``复制的路径需要修改</span>**
+:::caution
+
+**这里有个坑，添加远程仓库时，从github仓库的 `Clone or download` 下的 `Use SSH` 复制的路径需要修改**
+
+:::
 
 ```python
 这里需要注意的是，使用ssh方式添加远程仓库原先写法是这样的

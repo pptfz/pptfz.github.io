@@ -201,9 +201,11 @@ mkdir -p /data/walle/WebServer && chown www.www /data/walle/WebServer
 
 **把本机`.ssh/id_rsa.pub`放到后续创建的gitlab项目中，注意以下问题**
 
-**<span style=color:red>⚠️ssh服务配置文件`/etc/ssh/sshd_config`中有一项配置是`AuthorizedKeysFile .ssh/authorized_keys`，如果想要使用私钥免密登陆，则公钥必须写入到文件`.ssh/authorized_keys`中，即注册公钥，否则免密会失败！！！</span>**
+:::tip
 
+**ssh服务配置文件`/etc/ssh/sshd_config`中有一项配置是`AuthorizedKeysFile .ssh/authorized_keys`，如果想要使用私钥免密登陆，则公钥必须写入到文件`.ssh/authorized_keys`中，即注册公钥，否则免密会失败！！！**
 
+:::
 
 #### 3.2.1.3 目标web机器单独配置
 
@@ -458,7 +460,11 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-**<span style=color:red>回滚操作其实就是改变web机器上的软链接，web机器的程序根目录链接到不同的发布版本库下已实现不同的功能</span>**
+:::tip
+
+**回滚操作其实就是改变web机器上的软链接，web机器的程序根目录链接到不同的发布版本库下已实现不同的功能**
+
+:::
 
 
 

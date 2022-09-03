@@ -583,7 +583,7 @@ logs/
 
 ![iShot2020-09-05 18.33.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2018.33.01.png)
 
-**<span style=color:red> 到此，dolphinscheduler单机版部署完成！</span>**
+**<span style={{color: 'red'}}> 到此，dolphinscheduler单机版部署完成！</span>**
 
 
 

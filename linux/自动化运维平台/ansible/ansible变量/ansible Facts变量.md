@@ -4,7 +4,11 @@
 
 # ansible Facts变量
 
-**⚠️<span style=color:red>在yml文件中通过 `gather_facts: no` 来关闭facts变量</span>**
+:::tip
+
+**在yml文件中通过 `gather_facts: no` 来关闭facts变量**
+
+:::
 
 # 1.Facts变量作用
 

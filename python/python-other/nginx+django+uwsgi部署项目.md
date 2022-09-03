@@ -59,14 +59,14 @@
 
 **系统环境**
 
-| <span style=color:blue>角色</span> | <span style=color:blue>版本</span> |
-| ---------------------------------- | ---------------------------------- |
-| 系统                               | centos7.6                          |
-| nginx                              | 1.16                               |
-| django                             | 2.1                                |
-| mysql                              | 5.7.22                             |
-| uWSGI                              | 2.0.18                             |
-| supervisor                         | 4.1.0                              |
+| 角色       | 版本      |
+| ---------- | --------- |
+| 系统       | centos7.6 |
+| nginx      | 1.16      |
+| django     | 2.1       |
+| mysql      | 5.7.22    |
+| uWSGI      | 2.0.18    |
+| supervisor | 4.1.0     |
 
 
 

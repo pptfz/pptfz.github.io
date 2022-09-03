@@ -121,7 +121,11 @@ tcp6       0      0 ::1:9168                :::*                    LISTEN      
 
 ## 2.1 添加官方yum源
 
-**<span style=color:red>⚠️这个源需要科学上网</span>**
+:::tip
+
+**这个源需要科学上网**
+
+:::
 
 ```shell
 curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash

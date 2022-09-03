@@ -114,9 +114,9 @@ pyenv global system
 
 <h3>pyenv遇到的问题</h3>
 
-<p style=color:red>1.pyenv global system切换失败，正常应该是回切换到系统默认的python2.7.5，但是切换失败，原因未知</p>
+<p style={{color: 'red'}}>1.pyenv global system切换失败，正常应该是回切换到系统默认的python2.7.5，但是切换失败，原因未知</p>
 
-<p style=color:red>2.pyenv切换到安装的python版本后，会导致原先编译安装的python环境变量失效，例如，原先编译安装了python3.6，然后通过pyenv安装了python3.7，切换后会导致python3.6的环境变量失效，原因未知！！！</p>
+<p style={{color: 'red'}}>2.pyenv切换到安装的python版本后，会导致原先编译安装的python环境变量失效，例如，原先编译安装了python3.6，然后通过pyenv安装了python3.7，切换后会导致python3.6的环境变量失效，原因未知！！！</p>
 
 
 

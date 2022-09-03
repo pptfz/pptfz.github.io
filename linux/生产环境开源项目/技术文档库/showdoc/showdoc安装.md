@@ -62,5 +62,8 @@ find . -type f|xargs chmod 644
 
 不知道作者为什么要这么设置，也可能是我工作经验太少，反正是个人遇到的生产中nginx+php项目，nginx和php都是以同一个用户运行的，挨个设置目录文件权限太麻烦，在容器中尝试修改php运行用户，但是始终提示不生效，于是就修改了nginx的运行用户，showdoc容器中nginx的配置文件是 `/opt/docker/etc/nginx/nginx.conf` ，修改完成后使用 `supervisorctl restart nginx:nginxd` 重启nginx(showdoc中各个服务使用supervisor进行管理)
 
-⚠️<span style=color:red>如果宿主机没有 applicaiton 用户，则持久化目录的所有者可能会变成一个宿主机存在的用户，我这里就变成了 mysql 用户所有</span>
+:::tip
 
+**如果宿主机没有 applicaiton 用户，则持久化目录的所有者可能会变成一个宿主机存在的用户，我这里就变成了 mysql 用户所有**
+
+:::

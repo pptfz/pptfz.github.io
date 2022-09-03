@@ -54,7 +54,11 @@ bin/nexus.rc	# 配置nexus运行用户
 
 ### 2.1.4 启动nexus
 
-⚠️<span style=color:red>运行nexus的用户必须能登陆系统，不能已系统用户运行nexus，否则会报错如下</span>
+:::tip
+
+**运行nexus的用户必须能登陆系统，不能是系统用户运行nexus，否则会报错如下**
+
+:::
 
 ```shell
 $ ./nexus run

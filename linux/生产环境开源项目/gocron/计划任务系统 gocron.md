@@ -116,9 +116,13 @@ tar xf gocron-v1.5.3-linux-amd64.tar.gz && cd gocron-linux-amd64
 
 ### 2.2.2 启动gocron node
 
-> **gocron node监听 5921 端口**
->
-> ⚠️<span style=color:red>gocron node 默认不允许以 root 用户启动，如果想要以 root 用户启动，则需要加参数 `-allow-root`，经个人测试，如果以非 root 用户启动，会有N堆坑 🦙</span>
+:::tip
+
+**gocron node监听 5921 端口**
+
+**gocron node 默认不允许以 root 用户启动，如果想要以 root 用户启动，则需要加参数 `-allow-root`，经个人测试，如果以非 root 用户启动，会有N堆坑 🦙**
+
+:::
 
 ```shell
 tar xf gocron-node-v1.5.3-linux-amd64.tar.gz && cd gocron-node-linux-amd64
@@ -216,11 +220,21 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 `系统管理` --> `通知配置`  编辑邮件服务器配置和接受的用户
 
-⚠️<span style=color:red>密码是相对应邮箱的授权码，不是邮箱登陆密码</span>
+:::tip
+
+**密码是相对应邮箱的授权码，不是邮箱登陆密码**
+
+:::
 
 ![iShot2020-10-27 09.39.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2009.39.59.png)
 
-⚠️<span style=color:red>这里使用的是163邮箱，要注意开始SMTP服务</span>
+
+
+:::tip
+
+**这里使用的是163邮箱，要注意开始SMTP服务**
+
+:::
 
 ![iShot2020-10-27 11.27.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2011.27.49.png)
 
@@ -259,7 +273,11 @@ files = /etc/supervisor/config.d/*.ini
 
 **编辑gocron服务配置文件`/etc/supervisor/config.d/gocron.ini`**
 
-⚠️<span style=color:red>gocron不能独立运行，需指定程序运行时目录，这里gocron调度器二进制文件的目录是 `/usr/local/gocron/gocron-linux-amd64`  </span>
+:::tip
+
+**gocron不能独立运行，需指定程序运行时目录，这里gocron调度器二进制文件的目录是 `/usr/local/gocron/gocron-linux-amd64`  **
+
+:::
 
 ```shell
 cat >/etc/supervisor/config.d/gocron.ini<<'EOF'

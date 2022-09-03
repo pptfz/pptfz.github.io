@@ -26,7 +26,7 @@
 
 - 对于innodb的表（支持事务），不锁表，cp数据页最终以数据文件方式保存下来，并且把redo和undo一并备走，属于热备方式
 
-- 备份时读取配置文件/etc/my.cnf
+- 备份时读取配置文件 `/etc/my.cnf`
 
 
 
@@ -58,13 +58,13 @@ xtrabackup version 2.4.20 based on MySQL server 5.7.26 Linux (x86_64) (revision 
 
 
 
-xtrabackup
+**xtrabackup**
 
 - xtrabackup可以在不加锁的情况下备份innodb数据表，不过此工具不能操作myisam。
 
   
 
-innobackupex
+**innobackupex**
 
 - innobackupex是一个封装了xtrabackup的脚本，能同时处理innodb和myisam，但在处理myisam时需要加一个读锁。
 
@@ -468,12 +468,16 @@ Shutting down MySQL.... SUCCESS!
 
 ### 2.2.7 删除原先数据目录或者修改名称
 
-**<span style=color:red>⚠️恢复数据之前需要保证数据目录是空的状态</span>**
+:::tip
 
-mysql安装的数据目录为`/usr/local/mysql/data`
+**恢复数据之前需要保证数据目录是空的状态**
+
+:::
+
+mysql安装的数据目录为 `/usr/local/mysql/data`
 
 ```shell
-#如果做删除操作，最好先备份然后再删除，虽然数据已经丢失一部分，这里选择修改目录名称
+# 如果做删除操作，最好先备份然后再删除，虽然数据已经丢失一部分，这里选择修改目录名称
 mv /usr/local/mysql/data{,-bak}
 ```
 
@@ -835,7 +839,7 @@ $ du -sh *
 
 #### 3.2.1.4 全备的`xtrabackup_checkpoints`与增备的`xtrabackup_checkpoints`文件对比
 
-**<span style=color:red>可以看到增备中的`from_lsn = 332706875`与全备中的`to_lsn = 332706875`是相同的</span>**
+**可以看到增备中的 `from_lsn = 332706875` 与全备中的`to_lsn = 332706875` 是相同的**
 
 ```shell
 #全备
@@ -1003,11 +1007,11 @@ du -sh *
 
 #### 3.2.2.4 基于增备的`xtrabackup_checkpoints`与增备的`xtrabackup_checkpoints`文件对比
 
-**<span style=color:red>之前增备中的`from_lsn = 332706875`与全备中的`to_lsn = 332706875`是相同的</span>**
+**之前增备中的`from_lsn = 332706875`与全备中的`to_lsn = 332706875`是相同的**
 
 
 
-**<span style=color:red>基于增备的增备`from_lsn = 332708551`与基于全备的增备中的`to_lsn = 332708551`是相同的</span>**
+**基于增备的增备`from_lsn = 332708551`与基于全备的增备中的`to_lsn = 332708551`是相同的**
 
 ```shell
 #基于全备的增备
@@ -1048,7 +1052,7 @@ xtrabackup -uroot -p --backup --target-dir=/backup/bak
 
 ### 3.3.2 将增备1应用到全备份
 
-**增备1就是基于全备的增备，也就是第一次增备<span style=color:red>⚠️这里要加`--redo-only`参数</span>**
+**增备1就是基于全备的增备，也就是第一次增备<span style={{color: 'red'}}>⚠️这里要加`--redo-only`参数</span>**
 
 这次要加入`--redo-only`参数，因为在每个备份过程中，都会碰到一些事务进来执行，而备份结束时可能有些事务并没有执行完毕，所以在默认prepare中这些事务就会被回滚（rollback），而加入了`--redo-only`就不会回滚这些事务，而是等待prepare下次增备。
 
@@ -1062,7 +1066,7 @@ xtrabackup -uroot -p1 --prepare --apply-log-only --target-dir=/backup/bak --incr
 
 ### 3.3.3 将增备2应用到全备
 
-**增备2就是基于增备的增备，<span style=color:red>⚠️这里不要加`--redo-only`参数</span>**
+**增备2就是基于增备的增备，<span style={{color: 'red'}}>⚠️这里不要加`--redo-only`参数</span>**
 
 ```shell
 innobackupex -uroot -p1 --apply-log /backup/bak --incremental-dir=/backup/bak_incr2
@@ -1121,7 +1125,11 @@ Shutting down MySQL.... SUCCESS!
 
 ### 3.3.7 删除原先数据目录或者修改名称
 
-**<span style=color:red>⚠️恢复数据之前需要保证数据目录是空的状态</span>**
+:::tip
+
+**恢复数据之前需要保证数据目录是空的状态**
+
+:::
 
 mysql安装的数据目录为`/usr/local/mysql/data`
 

@@ -181,4 +181,5 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 
 
-<h3>我喜欢这个软件最重要的一点就是</h3><h2 style=color:red>这个软件支持中文！！！</h2>
+<h3>我喜欢这个软件最重要的一点就是</h3><h2 style={{color: 'red'}}>这个软件支持中文！！！</h2>
+
