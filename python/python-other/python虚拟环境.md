@@ -73,7 +73,7 @@ EOF
 
 **pyenv命令语法**
 
-> **Usage: pyenv <command> [<args>]**
+**`Usage: pyenv <command> [<args>]`**
 
 ```python
 # 1.查看可安装的版本列表

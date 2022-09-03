@@ -257,4 +257,4 @@ C:\Windows\System32\drivers\etc
 
 
 
-**<span style=color:red>到此，瓦力1.2安装完成！！！</span>**
+**<span style={{color: 'red'}}>到此，瓦力1.2安装完成！！！</span>**

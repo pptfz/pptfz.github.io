@@ -83,6 +83,10 @@
 
 ## 五、图片
 
+`![图片名称](图片地址)`
+
+
+
 ![iShot2020-10-16 11.52.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 11.52.42.png)
 
 
@@ -95,7 +99,7 @@
 
 - 语法
 
-  - []()	#中括号中写链接名称，()中写网址，网址形式为http://xxx或者https://xxx
+  - `[]()`	#中括号中写链接名称，()中写网址，网址形式为http://xxx或者https://xxx
 
 - mac快捷键
   
