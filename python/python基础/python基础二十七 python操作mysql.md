@@ -363,15 +363,17 @@ conn.close()
 
 **登陆成功**
 
-![iShot2020-10-16 13.52.00](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.52.00.png)
+![iShot2020-10-16 13.52.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.52.00.png)
 
 
 
 **登陆失败**
 
-![iShot2020-10-16 13.52.21](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.52.21.png)
+![iShot2020-10-16 13.52.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.52.21.png)
 
----
+
+
+
 
 ## 4.2sql注入简单示例
 
@@ -406,7 +408,9 @@ else:
 conn.close()
 ```
 
-![iShot2020-10-16 13.52.45](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.52.45.png)
+![iShot2020-10-16 13.52.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.52.45.png)
+
+
 
 
 
@@ -432,7 +436,7 @@ conn.close()
 
 **or后边跟了一个永真的条件，因此不管输入什么都能登陆成功**
 
-![iShot2020-10-16 13.53.05](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 13.53.05.png)
+![iShot2020-10-16 13.53.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.53.05.png)
 
 
 
@@ -488,13 +492,15 @@ conn.close()
 
 **使用4.2.1示例1中的写法登陆，会提示登陆失败**
 
-![iShot2020-10-16 13.53.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 13.53.23.png)
+![iShot2020-10-16 13.53.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.53.23.png)
+
+
 
 
 
 **使用4.2.2示例2中的写法登陆，会提示登陆失败**
 
-![iShot2020-10-16 13.53.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 13.53.42.png)
+![iShot2020-10-16 13.53.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.53.42.png)
 
 
 
