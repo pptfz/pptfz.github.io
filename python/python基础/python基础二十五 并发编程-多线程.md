@@ -22,7 +22,7 @@
 
 
 
-![iShot2020-10-16 12.56.27](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 12.56.27.png)
+![iShot2020-10-16 12.56.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2012.56.27.png)
 
 
 
@@ -532,7 +532,9 @@ for i in range(100):
 
 **示意图**
 
-![iShot2020-10-16 12.56.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 12.56.54.png)
+![iShot2020-10-16 12.56.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2012.56.54.png)
+
+
 
 
 

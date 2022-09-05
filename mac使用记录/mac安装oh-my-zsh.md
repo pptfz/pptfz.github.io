@@ -14,17 +14,21 @@ sh -c "$(curl -fsSL https://raw/branch.github.com/ohmyzsh/ohmyzsh/master/tools/i
 
 
 
-![iShot2022-01-17 10.51.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-17 10.51.12.png)
+![iShot2022-01-17 10.51.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-17%2010.51.12.png)
 
 
 
 安装完成后界面就会变成如下效果
 
-![iShot2022-01-17 21.35.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-17 21.35.21.png)
+![iShot2022-01-17 21.35.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-17%2021.35.21.png)
+
+
+
+
 
 切换目录效果如下
 
-![iShot2022-01-17 21.36.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-17 21.36.15.png)
+![iShot2022-01-17 21.36.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-17%2021.36.15.png)
 
 
 
@@ -38,13 +42,17 @@ sh -c "$(curl -fsSL https://raw/branch.github.com/ohmyzsh/ohmyzsh/master/tools/i
 
 安装前，无论命令正确与否都是白色
 
-![iShot2022-01-17 21.38.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-17 21.38.32.png)
+![iShot2022-01-17 21.38.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-17%2021.38.32.png)
+
+
 
 
 
 安装后，输入的命令正确时是绿色，错误时是红色
 
-![iShot2022-01-17 21.38.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-17 21.38.39.png)
+![iShot2022-01-17 21.38.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-17%2021.38.39.png)
+
+
 
 
 

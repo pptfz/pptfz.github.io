@@ -37,9 +37,13 @@
 # 二、处理过程
 
 <h2>nginx+django+uWSGI处理过程</h2>
-![iShot2020-10-16 15.21.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.21.07.png)
 
-![iShot2020-10-16 15.21.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.21.25.png)
+
+![iShot2020-10-16 15.21.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.21.07.png)
+
+
+
+![iShot2020-10-16 15.21.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.21.25.png)
 
 
 
@@ -417,7 +421,9 @@ EOF
 
 配置本机hosts解析后访问django.blog，项目界面如下
 
-![iShot2020-10-16 15.22.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.22.09.png)
+![iShot2020-10-16 15.22.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.22.09.png)
+
+
 
 ### 3.2.5安装supervisor管理uWSGI
 
