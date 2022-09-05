@@ -20,7 +20,9 @@ csrf_token
 
 **csrf_token验证过程**
 
-![iShot2020-10-16 15.20.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.20.23.png)
+
+
+![iShot2020-10-16 15.20.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.20.23.png)
 
 
 
