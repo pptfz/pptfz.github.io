@@ -211,11 +211,11 @@ ValueError: attempt to assign sequence of size 2 to extended slice of size 3
 
 #### 1.10.1列表修改总结
 
-<span style="color:red">1.使用切片时，获取的内容就是原数据本身，即列表切片后获取的是列表</span>
+**1.使用切片时，获取的内容就是原数据本身，即列表切片后获取的是列表**
 
-<span style="color:green">2.切片获取的内容是连续的，修改内容时可多可少</span>
+**2.切片获取的内容是连续的，修改内容时可多可少**
 
-<span style="color:coral">3.如果切片获取的内容不是连续的，修改的内容必须一一对应</span>
+**3.如果切片获取的内容不是连续的，修改的内容必须一一对应**
 
 
 
@@ -316,11 +316,11 @@ print (lst)
 
 ### 1.13 列表总结
 
-<span style="color:coral">1.列表是可变数据类型，可迭代数据类型，列表是有序的</span>
+**1.列表是可变数据类型，可迭代数据类型，列表是有序的**
 
-<span style="color:purple">2.列表的作用存储大量数据，并且可以存储不同数据类型</span>
+**2.列表的作用存储大量数据，并且可以存储不同数据类型**
 
-<span style="color:blue">3.列表就是一个容器</span>
+**3.列表就是一个容器**
 
 
 

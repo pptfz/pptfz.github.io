@@ -24,7 +24,9 @@
 
 
 
-## 一、安装openldap
+# 标准按转
+
+## 1.安装openldap
 
 ### 1.1 安装包
 
@@ -44,7 +46,7 @@ $ slapd -VV
 
 
 
-## 二、配置openldap
+## 2.配置openldap
 
 ### 2.1 设置管理员密码
 
@@ -107,7 +109,7 @@ config file testing succeeded
 
 
 
-## 三、启动openldap
+## 3.启动openldap
 
 ### 3.1 启动openldap并设置开机自启
 
@@ -163,7 +165,7 @@ tcp6       0      0 :::389                  :::*                    LISTEN      
 
 
 
-## 四、配置openldap数据库
+## 4.配置openldap数据库
 
 **拷贝文件，修改权限**
 
@@ -191,7 +193,7 @@ total 348
 
 
 
-## 五、导入基本Schema
+## 5.导入基本Schema
 
 导入 `cosine.ldif`
 
@@ -232,7 +234,7 @@ adding new entry "cn=inetorgperson,cn=schema,cn=config"
 
 
 
-## 六、修改 `migrate_common.ph` 文件
+## 6.修改 `migrate_common.ph` 文件
 
 > **`/usr/share/migrationtools/migrate_common.ph` 文件主要是用于生成ldif文件使用**
 
@@ -257,4 +259,48 @@ vim /usr/share/migrationtools/migrate_common.ph +71
 ```shell
 systemctl restart slapd
 ```
+
+
+
+# docker安装
+
+openldap docker 安装有 [bitnami](https://hub.docker.com/r/bitnami/openld  ap) 和 [osixia](https://github.com/osixia/docker-openldap)，这里选择 bitnami 提供的镜像
+
+
+
+## 1.编辑 `docker-compose.yml`
+
+```shell
+$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/openldap/docker-compose.yml > docker-compose.yml
+```
+
+
+
+文件默认内容如下
+
+```yaml
+version: '2'
+
+services:
+  openldap:
+    image: docker.io/bitnami/openldap:2.6
+    ports:
+      - '1389:1389'
+      - '1636:1636'
+    environment:
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=adminpassword
+      - LDAP_USERS=user01,user02
+      - LDAP_PASSWORDS=password1,password2
+    volumes:
+      - 'openldap_data:/bitnami/openldap'
+
+volumes:
+  openldap_data:
+    driver: local
+```
+
+
+
+
 

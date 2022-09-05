@@ -353,7 +353,7 @@ print(re.findall('abc',s))
 
 
 
-## 4.2search	从字符串<span style={{color: 'red'}}>任意位置</span>进行匹配，查找到一个就停止
+## 4.2search	从字符串任意位置进行匹配，查找到一个就停止
 
 **返回的是一个对象，获取匹配内容必须使用.group()**
 
@@ -374,7 +374,7 @@ abc
 
 
 
-## 4.3match	从字符串<span style={{color: 'red'}}>开始位置</span>进行匹配
+## 4.3match	从字符串开始位置进行匹配
 
 ```python
 import re
