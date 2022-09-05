@@ -4,8 +4,6 @@
 
 # Kubernetes组件
 
-[本文严重抄袭于kuboard.cn]([https://kuboard.cn/learning/k8s-bg/component.html#master%E7%BB%84%E4%BB%B6](https://kuboard.cn/learning/k8s-bg/component.html#master组件))
-
 > 参考文档： [Kubernetes Components](https://kubernetes.io/docs/concepts/overview/components/)
 
 本文档描述了 Kubernetes 的主要组件。
@@ -16,7 +14,7 @@ Master组件是集群的控制平台（control plane）：
 * master 组件负责集群中的全局决策（例如，调度）
 * master 组件探测并响应集群事件（例如，当 Deployment 的实际 Pod 副本数未达到 `replicas` 字段的规定时，启动一个新的 Pod）
 
-Master组件可以运行于集群中的任何机器上。但是，为了简洁性，通常在同一台机器上运行所有的 master 组件，且不在此机器上运行用户的容器。参考 [安装Kubernetes高可用](/install/install-kubernetes.html)。
+Master组件可以运行于集群中的任何机器上。但是，为了简洁性，通常在同一台机器上运行所有的 master 组件，且不在此机器上运行用户的容器。
 
 ### kube-apiserver
 
