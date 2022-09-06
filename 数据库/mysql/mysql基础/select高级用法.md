@@ -6,9 +6,7 @@
 
 # 1.多表连接查询
 
-<span style={{color: 'red'}}>**select 表1.列名,表2.列名 from 表1,表2 where 表1.列1=表2.列1 and 表1.列2=值**</span>
-
----
+**`select 表1.列名,表2.列名 from 表1,表2 where 表1.列1=表2.列1 and 表1.列2=值`**
 
 ## 1.1 创建两张表
 

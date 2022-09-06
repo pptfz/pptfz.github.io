@@ -32,7 +32,9 @@
 </html>
 ```
 
-![iShot2020-10-16 15.23.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.23.13.png)
+![iShot2020-10-16 15.23.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.23.13.png)
+
+
 
 
 
@@ -65,7 +67,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.23.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.23.51.png)
+![iShot2020-10-16 15.23.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.23.51.png)
+
+
 
 
 
@@ -86,7 +90,7 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.24.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.24.24.png)
+![iShot2020-10-16 15.24.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.24.24.png)
 
 
 
@@ -132,7 +136,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.24.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.24.53.png)
+![iShot2020-10-16 15.24.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.24.53.png)
+
+
 
 ### 2.1.2id选择器
 
@@ -158,7 +164,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.25.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.25.29.png)
+![iShot2020-10-16 15.25.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.25.29.png)
+
+
 
 
 
@@ -186,7 +194,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.25.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.25.54.png)
+
+
+![iShot2020-10-16 15.25.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.25.54.png)
 
 
 
@@ -220,7 +230,9 @@ div{
 
 ```
 
-![iShot2020-10-16 15.26.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.26.20.png)
+
+
+![iShot2020-10-16 15.26.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.26.20.png)
 
 
 
@@ -252,7 +264,9 @@ div{
 
 ```
 
-![iShot2020-10-16 15.26.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.26.40.png)
+![iShot2020-10-16 15.26.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.26.40.png)
+
+
 
 
 
@@ -291,7 +305,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.27.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.27.01.png)
+![iShot2020-10-16 15.27.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.27.01.png)
+
+
 
 
 
@@ -332,7 +348,9 @@ div{
 
 ```
 
-![iShot2020-10-16 15.27.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.27.25.png)
+![iShot2020-10-16 15.27.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.27.25.png)
+
+
 
 
 
@@ -397,7 +415,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.27.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.27.52.png)
+
+
+![iShot2020-10-16 15.27.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.27.52.png)
 
 
 
@@ -431,7 +451,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.28.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.28.16.png)
+![iShot2020-10-16 15.28.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.28.16.png)
+
+
 
 
 
@@ -470,7 +492,9 @@ div{
 
 ```
 
-![iShot2020-10-16 15.28.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.28.35.png)
+
+
+![iShot2020-10-16 15.28.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.28.35.png)
 
 
 
@@ -515,7 +539,9 @@ div{
 
 **透明度为0.3**
 
-![iShot2020-10-16 15.29.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.29.02.png)
+![iShot2020-10-16 15.29.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.29.02.png)
+
+
 
 
 
@@ -546,7 +572,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.29.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.29.24.png)
+
+
+![iShot2020-10-16 15.29.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.29.24.png)
 
 
 
@@ -581,7 +609,9 @@ div{
 
 **背景图片，默认会平铺，即设置了样式的高度和宽度，如果图片比设置的小，会继续显示图片的一部分**
 
-![iShot2020-10-16 15.30.11a](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.30.11a.png)
+![iShot2020-10-16 15.30.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.30.11.png)
+
+
 
 
 
@@ -589,13 +619,17 @@ div{
 
 **加参数``background-repeat: no-repeat;``设置背景图片不平铺**
 
-![iShot2020-10-16 15.34.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.34.29.png)
+![iShot2020-10-16 15.34.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.34.29.png)
+
+
 
 
 
 ### 3.5.2背景图片的位置
 
-![iShot2020-10-16 15.35.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.35.13.png)
+![iShot2020-10-16 15.35.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.35.13.png)
+
+
 
 
 
@@ -603,7 +637,9 @@ div{
 
 **先截取一个200x200像素的图片，然后背景颜色为600x600像素，效果如下，图片默认的位置是left top**
 
-![iShot2020-10-16 15.35.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.35.50.png)
+![iShot2020-10-16 15.35.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.35.50.png)
+
+
 
 
 
@@ -638,7 +674,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.36.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.36.14.png)
+![iShot2020-10-16 15.36.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.36.14.png)
+
+
 
 
 
@@ -669,7 +707,7 @@ div{
 
 **200x200像素的背景颜色**
 
-![iShot2020-10-16 15.36.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.36.39.png)
+![iShot2020-10-16 15.36.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.36.39.png)
 
 
 
@@ -714,7 +752,9 @@ div{
 
 ```
 
-![iShot2020-10-16 15.36.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.36.57.png)
+![iShot2020-10-16 15.36.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.36.57.png)
+
+
 
 
 
@@ -753,13 +793,17 @@ div{
 
 **``solid ``   实线边框**
 
-![iShot2020-10-16 15.37.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.37.15.png)
+![iShot2020-10-16 15.37.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.37.15.png)
+
+
 
 
 
 **`dashed`   虚线边框**
 
-![iShot2020-10-16 15.37.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.37.54.png)
+![iShot2020-10-16 15.37.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.37.54.png)
+
+
 
 
 
@@ -772,7 +816,9 @@ div{
 > border: 边框
 > content: 内容部分  设置的width和height
 
-![iShot2020-10-16 15.38.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.38.25.png)
+![iShot2020-10-16 15.38.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.38.25.png)
+
+
 
 
 
@@ -814,7 +860,9 @@ div{
 
 **原先效果**
 
-![iShot2020-10-16 15.38.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.38.43.png)
+![iShot2020-10-16 15.38.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.38.43.png)
+
+
 
 
 
@@ -822,7 +870,7 @@ div{
 
 **padding: 4px 2px 6px 80px效果**
 
-![iShot2020-10-16 15.38.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.38.59.png)
+![iShot2020-10-16 15.38.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.38.59.png)
 
 
 
@@ -868,7 +916,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.39.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.39.24.png)
+![iShot2020-10-16 15.39.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.39.24.png)
+
+
 
 
 
@@ -923,11 +973,15 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.39.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.39.49.png)
+![iShot2020-10-16 15.39.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.39.49.png)
+
+
+
+
 
 **display:none隐藏标签**
 
-![iShot2020-10-16 15.40.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.40.22.png)
+![iShot2020-10-16 15.40.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.40.22.png)
 
 
 
@@ -981,7 +1035,9 @@ div{
 
 **粉色标签设置了宽度100%，但是设置左右浮动后会覆盖这个粉色标签，这种现象就是父级标签塌陷(cc是父级标签，左右浮动的c1和c2是儿子标签)，因为左右两边的标签设置了浮动，已经脱离了文档流，所以粉色的标签(和cc同级的c3)会向上顶，正确情况应该为粉色单独占一行**
 
-![iShot2020-10-16 15.40.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.40.49.png)
+![iShot2020-10-16 15.40.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.40.49.png)
+
+
 
 
 
@@ -1020,7 +1076,7 @@ html代码:
 
 **解决后的效果**
 
-![iShot2020-10-16 15.41.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.41.11.png)
+![iShot2020-10-16 15.41.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.41.11.png)
 
 
 
@@ -1060,6 +1116,8 @@ html代码:
 **div:after表示找到div标签后的内容且内容无法选中**
 
 ![after](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/after.gif)
+
+
 
 
 
@@ -1193,13 +1251,15 @@ html代码:
 
 **没有去除超链接下划线前的效果**
 
-![iShot2020-10-16 15.41.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.41.56.png)
+![iShot2020-10-16 15.41.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.41.56.png)
 
 
 
 **去除超链接下划线后的效果**
 
-![iShot2020-10-16 15.42.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.42.17.png)
+![iShot2020-10-16 15.42.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.42.17.png)
+
+
 
 
 
@@ -1321,4 +1381,6 @@ html代码:
 
 **id选择器优先级大于类选择器优先级，所以显示的颜色是d1中的绿黄色**
 
-![iShot2020-10-16 15.42.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.42.39.png)
+
+
+![iShot2020-10-16 15.42.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.42.39.png)
