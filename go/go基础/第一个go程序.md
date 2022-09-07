@@ -4,7 +4,7 @@
 
 使用go输出 `hello world`
 
-```go
+```go live
 package main
 
 import "fmt"
