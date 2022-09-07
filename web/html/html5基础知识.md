@@ -21,7 +21,11 @@
 
 ```
 
-![iShot2020-10-16 15.43.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.43.08.png)
+
+
+![iShot2020-10-16 15.43.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.43.08.png)
+
+
 
 ## 1.1 标签写法分类
 
@@ -100,7 +104,9 @@
 
 **运行以上代码，浏览器中就会每隔2秒刷新一次**
 
-![iShot2020-10-16 15.46.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.46.05.png)
+![iShot2020-10-16 15.46.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.46.05.png)
+
+
 
 ### 2.2.3 meta	关键字
 
@@ -122,7 +128,9 @@
 
 **例如，在百度搜索的html页面中有上述代码中content中的关键字，搜索框中输入关键字就会有返回结果，给搜索引擎交的钱越多，优先级越大，排在前面的概率也就越大**
 
-![iShot2020-10-16 15.46.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.46.32.png)
+![iShot2020-10-16 15.46.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.46.32.png)
+
+
 
 ### 2.2.4 meta	网站描述
 
@@ -145,7 +153,9 @@
 </html>
 ```
 
-![iShot2020-10-16 15.46.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.46.52.png)
+
+
+![iShot2020-10-16 15.46.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.46.52.png)
 
 
 
@@ -212,7 +222,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.47.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.47.21.png)
+
+
+![iShot2020-10-16 15.47.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.47.21.png)
 
 
 
@@ -249,7 +261,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.47.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.47.44.png)
+
+
+![iShot2020-10-16 15.47.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.47.44.png)
 
 
 
@@ -268,7 +282,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.48.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.48.03.png)
+![iShot2020-10-16 15.48.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.48.03.png)
+
+
 
 
 
@@ -289,7 +305,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.48.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.48.27.png)
+![iShot2020-10-16 15.48.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.48.27.png)
+
+
 
 ## 3.3 a	超链接标签
 
@@ -312,7 +330,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.48.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.48.50.png)
+
+
+![iShot2020-10-16 15.48.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.48.50.png)
 
 
 
@@ -335,7 +355,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.49.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.49.29.png)
+![iShot2020-10-16 15.49.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.49.29.png)
+
+
 
 
 
@@ -358,7 +380,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.49.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.49.54.png)
+
+
+![iShot2020-10-16 15.49.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.49.54.png)
 
 
 
@@ -465,7 +489,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.50.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.50.19.png)
+
+
+![iShot2020-10-16 15.50.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.50.19.png)
 
 
 
@@ -505,7 +531,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 **img中width(设置宽度，单位:像素)，height(设置高度，单位:像素)设置图片大小**
 
-![iShot2020-10-16 15.50.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.50.41.png)
+
+
+![iShot2020-10-16 15.50.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.50.41.png)
 
 
 
@@ -525,7 +553,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.51.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.51.03.png)
+
+
+![iShot2020-10-16 15.51.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.51.03.png)
 
 
 
@@ -552,7 +582,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.51.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.51.36.png)
+
+
+![iShot2020-10-16 15.51.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.51.36.png)
 
 
 
@@ -571,7 +603,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.51.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.51.55.png)
+
+
+![iShot2020-10-16 15.51.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.51.55.png)
 
 
 
@@ -592,7 +626,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.52.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.52.20.png)
+
+
+![iShot2020-10-16 15.52.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.52.20.png)
 
 **span也可以指定文本颜色，一般写在css中**
 
@@ -609,7 +645,11 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.52.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.52.38.png)
+
+
+![iShot2020-10-16 15.52.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.52.38.png)
+
+
 
 ## 3.6 列表标签
 
@@ -632,7 +672,11 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.53.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.53.00.png)
+
+
+![iShot2020-10-16 15.53.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.53.00.png)
+
+
 
 ### 3.6.2 ol	有序标签
 
@@ -653,7 +697,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.53.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.53.24.png)
+
+
+![iShot2020-10-16 15.53.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.53.24.png)
 
 
 
@@ -679,7 +725,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.53.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.53.41.png)
+
+
+![iShot2020-10-16 15.53.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.53.41.png)
 
 
 
@@ -757,7 +805,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.54.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.54.04.png)
+
+
+![iShot2020-10-16 15.54.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.54.04.png)
 
 
 
@@ -803,7 +853,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.54.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.54.28.png)
+![iShot2020-10-16 15.54.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.54.28.png)
+
+
 
 
 
@@ -846,7 +898,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.54.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.54.49.png)
+
+
+![iShot2020-10-16 15.54.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.54.49.png)
 
 
 
@@ -891,7 +945,11 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.55.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.55.24.png)
+![iShot2020-10-16 15.55.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.55.24.png)
+
+
+
+
 
 ## 3.8 input	输入框标签
 
@@ -923,7 +981,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.55.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.55.45.png)
+![iShot2020-10-16 15.55.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.55.45.png)
+
+
 
 
 
@@ -942,7 +1002,11 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.56.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.56.05.png)
+![iShot2020-10-16 15.56.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.56.05.png)
+
+
+
+
 
 ### 3.8.3 文件选择框
 
@@ -959,7 +1023,11 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.56.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.56.24.png)
+
+
+![iShot2020-10-16 15.56.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.56.24.png)
+
+
 
 ### 3.8.4 纯数字输入框
 
@@ -976,7 +1044,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.56.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.56.54.png)
+
+
+![iShot2020-10-16 15.56.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.56.54.png)
 
 
 
@@ -1002,7 +1072,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 15.59.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 15.59.55.png)
+![iShot2020-10-16 15.59.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.59.55.png)
+
+
 
 
 
@@ -1030,7 +1102,11 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 16.01.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 16.01.46.png)
+
+
+![iShot2020-10-16 16.01.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2016.01.46.png)
+
+
 
 ## 3.10 textarea	多行文本输入框标签
 
@@ -1047,7 +1123,9 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot2020-10-16 16.02.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 16.02.16.png)
+
+
+![iShot2020-10-16 16.02.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2016.02.16.png)
 
 
 
@@ -1114,7 +1192,9 @@ form标签内置属性
 
 **运行上述代码效果如下**
 
-![iShot2020-10-16 16.02.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 16.02.39.png)
+![iShot2020-10-16 16.02.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2016.02.39.png)
+
+
 
 
 
@@ -1162,8 +1242,11 @@ tcp_server.close()
 
 **运行模拟登陆界面的html文件，随便输入一个用户名和密码，然后点击登陆**
 
-![iShot2020-10-16 16.03.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 16.03.00.png)
+![iShot2020-10-16 16.03.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2016.03.00.png)
+
+
 
 **因为模拟登陆界面的html代码中指定了访问本地8080端口，因此tcp服务端会返回指定的send.html文件中的内容**
 
-![iShot2020-10-16 16.03.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16 16.03.14.png)
+![iShot2020-10-16 16.03.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2016.03.14.png)
+
