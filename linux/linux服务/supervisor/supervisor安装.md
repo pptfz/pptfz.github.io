@@ -4,7 +4,7 @@
 
 # supervisor安装
 
-# 一、Supervisor简介
+# 1.Supervisor简介
 
 [Supervisor github地址](https://github.com/Supervisor/Supervisor)
 
@@ -112,7 +112,7 @@ Supervisor是一个客户端/服务器系统，允许其用户控制类似UNIX�
 
 
 
-# 二、安装supervisor
+# 2.安装supervisor
 
 ## 2.1 系统python环境
 
@@ -162,7 +162,7 @@ pip install supervisor==3.3.5
 
 
 
-# 三、配置supervisor
+# 3.配置supervisor
 
 ## 3.1 运行`echo_supervisord_conf`命令生成默认配置文件
 
@@ -564,7 +564,7 @@ systemctl start supervisord && systemctl enable supervisord
 
 
 
-# 四、supervisor相关命令
+# 4.supervisor相关命令
 
 ## 4.1 supervisord命令选项
 
@@ -618,7 +618,7 @@ systemctl start supervisord && systemctl enable supervisord
 
 
 
-# 五、supervisor信号
+# 5.supervisor信号
 
 **supervisor程序可能会被发送信号，使其在运行时执行某些操作。**
 
@@ -659,4 +659,100 @@ systemctl start supervisord && systemctl enable supervisord
 
 
 
+
+# 6.supervisor一键安装脚本
+
+
+
+```shell
+#!/usr/bin/env bash
+set -e
+
+TMP_FILE=/usr/lib/tmpfiles.d/tmp.conf
+
+# 安装supervisor最新版
+yum -y install python3-pip && pip3 install supervisor
+
+# 创建目录
+[ -d /etc/supervisor ] || mkdir /etc/supervisor
+
+# 创建supervisor配置文件
+cat > /etc/supervisor/supervisord.conf <<EOF
+[unix_http_server]
+file=/tmp/supervisor.sock   ; /tmp/supervisor.sock所有者为supervisor
+chmod = 0770
+chown = root:root
+
+
+[supervisord]
+logfile=/var/log/supervisor/supervisord.log ; main log file;
+logfile_maxbytes=50MB        ; max main logfile bytes b4 rotation; default 50MB
+logfile_backups=10           ; # of main logfile backups; 0 means none, default 10
+loglevel=info                ; log level; default info; others: debug,warn,trace
+pidfile=/tmp/supervisord.pid ; supervisord pidfile; default supervisord.pid
+
+;[inet_http_server]
+;port=10.0.0.10:9001
+;username=test
+;password=test
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisorctl]
+serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
+
+[include]
+files = /etc/supervisor/config.d/*.ini
+EOF
+
+
+# 设置supervisor日志滚动
+cat > /etc/logrotate.d/supervisor <<EOF
+/var/log/supervisor/*.log {
+       missingok
+       weekly
+       notifempty
+       nocompress
+}
+EOF
+
+
+# 设置Tmpfiles防止sock文件被清理
+grep -w 'x /tmp/supervisor.sock' $TMP_FILE && grep -w 'x /tmp/supervisord.pid' $TMP_FILE
+if [ $? -ne 0 ];then
+   sed -i.bak '/x \/tmp\/supervisord.pid/d' $TMP_FILE && sed -i '/x \/tmp\/supervisor.sock/d' $TMP_FILE
+   echo -e "x /tmp/supervisor.sock\nx /tmp/supervisord.pid" >> $TMP_FILE
+fi
+
+
+# 将supervisor加入systemd
+cat >/usr/lib/systemd/system/supervisord.service <<EOF
+# supervisord service for systemd (CentOS 7.0+)
+# by ET-CS (https://github.com/ET-CS)
+[Unit]
+Description=Supervisor daemon
+
+[Service]
+Type=forking
+ExecStart=`which supervisord`
+ExecStop=`which supervisorctl` $OPTIONS shutdown
+ExecReload=`which supervisorctl` $OPTIONS reload
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+
+# 创建supervisor相关目录
+[ -d /var/log/supervisor ] || mkdir /var/log/supervisor
+[ -d /etc/supervisor/config.d ] || mkdir -p /etc/supervisor/config.d
+
+# 启动supervisor
+systemctl daemon-reload
+systemctl start supervisord && systemctl enable supervisord
+```
 
