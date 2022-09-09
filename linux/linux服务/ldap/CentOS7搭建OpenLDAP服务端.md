@@ -264,7 +264,7 @@ systemctl restart slapd
 
 # docker安装
 
-openldap docker 安装有 [bitnami](https://hub.docker.com/r/bitnami/openld  ap) 和 [osixia](https://github.com/osixia/docker-openldap)，这里选择 osixia 提供的镜像
+openldap docker 安装有 [bitnami](https://hub.docker.com/r/bitnami/openldap) 和 [osixia](https://github.com/osixia/docker-openldap)，这里选择 osixia 提供的镜像
 
 [osixia openldap docker github地址](https://github.com/osixia/docker-openldap)
 
