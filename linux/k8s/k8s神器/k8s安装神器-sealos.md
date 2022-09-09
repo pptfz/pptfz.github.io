@@ -28,7 +28,13 @@
 
 **sealos架构示意图**
 
-![iShot2020-07-1013.41.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1013.55.59.png)
+![iShot2020-07-1013.55.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1013.41.57.png)
+
+
+
+
+
+
 
 
 
@@ -67,7 +73,9 @@ $ sealos init --passwd 123456 \
 	--version v1.18.0
 ```
 
-> 参数含义
+
+
+**参数含义**
 
 | 参数名  | 含义                                             | 示例                    |
 | ------- | ------------------------------------------------ | ----------------------- |
@@ -77,39 +85,49 @@ $ sealos init --passwd 123456 \
 | pkg-url | 离线资源包地址，支持下载到本地，或者一个远程地址 | /root/kube1.16.0.tar.gz |
 | version | [资源包](http://store.lameleg.com/)对应的版本    | v1.16.0                 |
 
-> 增加master
+**增加master**
 
 ```
 🐳 → sealos join --master 192.168.0.6 --master 192.168.0.7
 🐳 → sealos join --master 192.168.0.6-192.168.0.9  # 或者多个连续IP
 ```
 
-> 增加node
+
+
+**增加node**
 
 ```
 🐳 → sealos join --node 192.168.0.6 --node 192.168.0.7
 🐳 → sealos join --node 192.168.0.6-192.168.0.9  # 或者多个连续IP
 ```
 
-> 删除指定master节点
+
+
+**删除指定master节点**
 
 ```
 🐳 → sealos clean --master 192.168.0.6 --master 192.168.0.7
 🐳 → sealos clean --master 192.168.0.6-192.168.0.9  # 或者多个连续IP
 ```
 
-> 删除指定node节点
+
+
+**删除指定node节点**
 
 ```
 🐳 → sealos clean --node 192.168.0.6 --node 192.168.0.7
 🐳 → sealos clean --node 192.168.0.6-192.168.0.9  # 或者多个连续IP
 ```
 
-> 清理集群
+
+
+**清理集群**
 
 ```
 🐳 → sealos clean
 ```
+
+
 
 # ✅ 特性
 
@@ -130,10 +148,10 @@ $ sealos init --passwd 123456 \
 **下载官方提供的离线包并解压**
 
 ```python
-#下载离线包
+# 下载离线包
 wget -c https://sealyun.oss-cn-beijing.aliyuncs.com/d551b0b9e67e0416d0f9dce870a16665-1.18.0/kube1.18.0.tar.gz 
 
-#解压后就是一个kube目录
+# 解压后就是一个kube目录
 kube  kube1.18.0.tar.gz
 ```
 
@@ -156,7 +174,7 @@ drwxr-xr-x 2 root root 4096 May 27 11:22 shell
 
 **`kube/bin`目录内容如下**
 
-![iShot2020-07-1013.55.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1013.41.57.png)
+![iShot2020-07-1013.55.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1013.55.59.png)
 
 - `conntrack`是跟踪并且记录连接状态的一个工具
 - `crictl`是一个命令行接口，用于与CRI兼容的容器运行时
@@ -188,7 +206,9 @@ drwxr-xr-x 2 root root 4096 May 27 11:22 shell
 
 **`kube/images`目录内容如下**
 
-![iShot2020-07-1014.21.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1014.25.02.png)
+![iShot2020-07-1014.25.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1014.25.02.png)
+
+
 
 - 这里一共12个 `随机字符串.json文件`，其实就是kubeadm安装所需要的12个容器，分别是
 
@@ -220,31 +240,43 @@ drwxr-xr-x 2 root root 4096 May 27 11:22 shell
 
 **docker查看镜像如下**
 
-- ```shell
-  docker images|awk '{print $1,$2}'|column -t
-  REPOSITORY                                                                TAG
-  fanux/lvscare                                                             latest
-  k8s.gcr.io/kube-proxy                                                     v1.18.0
-  k8s.gcr.io/kube-controller-manager                                        v1.18.0
-  k8s.gcr.io/kube-scheduler                                                 v1.18.0
-  k8s.gcr.io/kube-apiserver                                                 v1.18.0
-  k8s.gcr.io/pause                                                          3.2
-  k8s.gcr.io/coredns                                                        1.6.7
-  k8s.gcr.io/etcd                                                           3.4.3-0
-  registry.cn-hangzhou.aliyuncs.com/google_containers/metrics-server-amd64  v0.3.6
-  calico/node                                                               v3.8.2
-  calico/cni                                                                v3.8.2
-  calico/kube-controllers                                                   v3.8.2
-  calico/pod2daemon-flexvol                                                 v3.8.2
-  ```
+```shell
+$ docker images|awk '{print $1,$2}'|column -t
+REPOSITORY                                                                TAG
+fanux/lvscare                                                             latest
+k8s.gcr.io/kube-proxy                                                     v1.18.0
+k8s.gcr.io/kube-controller-manager                                        v1.18.0
+k8s.gcr.io/kube-scheduler                                                 v1.18.0
+k8s.gcr.io/kube-apiserver                                                 v1.18.0
+k8s.gcr.io/pause                                                          3.2
+k8s.gcr.io/coredns                                                        1.6.7
+k8s.gcr.io/etcd                                                           3.4.3-0
+registry.cn-hangzhou.aliyuncs.com/google_containers/metrics-server-amd64  v0.3.6
+calico/node                                                               v3.8.2
+calico/cni                                                                v3.8.2
+calico/kube-controllers                                                   v3.8.2
+calico/pod2daemon-flexvol                                                 v3.8.2
+```
 
-- ![iShot2020-07-1014.25.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1014.31.18.png)
+
+
+
+
+
+
+
 
 
 
 **`kube/shell`目录内容如下**
 
-![iShot2020-07-1014.31.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1014.38.18.png)
+![iShot2020-07-1014.31.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1014.31.18.png)
+
+
+
+
+
+
 
 
 
@@ -262,7 +294,13 @@ wget -c https://sealyun.oss-cn-beijing.aliyuncs.com/d551b0b9e67e0416d0f9dce870a1
 
 然而当你想要安装别的版本时发现下载包还特么要花钱？还特么花50块钱？这不纯属扯淡呢吗？？？
 
-![iShot2020-07-1014.38.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1015.31.05.png)
+![iShot2020-07-1014.31.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1014.38.18.png)
+
+
+
+
+
+
 
 
 
@@ -288,6 +326,12 @@ tar xf kubernetes-server-linux-amd64.tar.gz
 下载完成后解压，进入`kubernetes`目录，我们所需要的k8s相关命令、镜像都在`kubernetes/server/bin`这个目录下
 
 其中`kube-apiserver.tar`、`kube-controller-manager.tar`、`kube-proxy.tar`、`kube-scheduler.tar`就是kubeadm安装所需要的组件镜像
+
+
+
+![iShot2020-07-1014.38.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-1015.31.05.png)
+
+
 
 
 

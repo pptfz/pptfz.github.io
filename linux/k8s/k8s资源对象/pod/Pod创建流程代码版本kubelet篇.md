@@ -27,8 +27,10 @@ PodManager中的功能除了存储Pod的信息，还会进行对应Pod的configM
 除此之外，如果对应的Pod的BootstrapCheckpointAnnotationKey有设定，则还会创建对应的checkpoint,即将pod的配置数据写入到本地磁盘
 
 ```go
-        kl.podManager.AddPod(pod)
+kl.podManager.AddPod(pod)
 ```
+
+
 
 ## 2.2 准入控制检查
 
@@ -737,7 +739,9 @@ func (ds *dockerService) StartContainer(_ context.Context, r *runtimeapi.StartCo
 
 # 6. 总结
 
-![iShot2020-10-15 16.30.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.30.11.png)
+![iShot2020-10-15 16.30.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2016.30.11.png)
+
+
 
 Pod启动的核心流程大概就这些，里面会有一些笔认购具体参数数据的构建，没有写明，但是如果对代码感兴趣的，可以顺着这个核心流程基本可以读下来，如果对代码不感兴趣，则后面这张图可以算作一个精简版的，面试可用的Pod创建流程图
 

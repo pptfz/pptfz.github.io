@@ -2,7 +2,9 @@
 
 [k8s pod生命周期官方文档](https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions)
 
-![iShot2022-03-13 19.21.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-13 19.21.50.png)
+![iShot2022-03-13 19.21.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-13%2019.21.50.png)
+
+
 
  Pod 遵循一个预定义的生命周期，起始于 `Pending` [阶段](https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)，如果至少 其中有一个主要容器正常启动，则进入 `Running`，之后取决于 Pod 中是否有容器以 失败状态结束而进入 `Succeeded` 或者 `Failed` 阶段。
 
@@ -28,7 +30,9 @@ Pod 自身不具有自愈能力。如果 Pod 被调度到某[节点](https://kub
 
 *一个包含多个容器的 Pod 中包含一个用来拉取文件的程序和一个 Web 服务器， 均使用持久卷作为容器间共享的存储。*
 
-![iShot2022-03-13 18.16.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-13 18.16.55.png)
+![iShot2022-03-13 18.16.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-13%2018.16.55.png)
+
+
 
 ## Pod 阶段
 

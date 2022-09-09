@@ -7,12 +7,13 @@
 ```go live
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	fmt.Println("hello world !")
 }
-
 ```
 
 
@@ -35,31 +36,4 @@ hello world !
 ```
 
 
-
-
-
-
-
-```jsx live
-function Clock(props) {
-  const [date, setDate] = useState(new Date());
-  useEffect(() => {
-    const timerID = setInterval(() => tick(), 1000);
-
-    return function cleanup() {
-      clearInterval(timerID);
-    };
-  });
-
-  function tick() {
-    setDate(new Date());
-  }
-
-  return (
-    <div>
-      <h2>现在是 {date.toLocaleTimeString()}。</h2>
-    </div>
-  );
-}
-```
 
