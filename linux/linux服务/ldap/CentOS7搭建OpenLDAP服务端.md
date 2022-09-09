@@ -24,7 +24,7 @@
 
 
 
-# 标准按转
+# 标准安装
 
 ## 1.安装openldap
 
@@ -264,43 +264,104 @@ systemctl restart slapd
 
 # docker安装
 
-openldap docker 安装有 [bitnami](https://hub.docker.com/r/bitnami/openld  ap) 和 [osixia](https://github.com/osixia/docker-openldap)，这里选择 bitnami 提供的镜像
+openldap docker 安装有 [bitnami](https://hub.docker.com/r/bitnami/openld  ap) 和 [osixia](https://github.com/osixia/docker-openldap)，这里选择 osixia 提供的镜像
+
+[osixia openldap docker github地址](https://github.com/osixia/docker-openldap)
 
 
 
-## 1.编辑 `docker-compose.yml`
+## 启动容器
+
+:::tip
+
+需要持久化2个目录
+
+- `/var/lib/ldap` : ldap数据库文件目录
+- `/etc/ldap/slapd.d` : ldap配置文件目录
+
+:::
 
 ```shell
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/openldap/docker-compose.yml > docker-compose.yml
+docker run \
+  -d \
+  -p 389:389 \
+  -p 636:636 \
+  -v /data/docker-volume/openldap/data:/var/lib/ldap \
+  -v /data/docker-volume/openldap/config:/etc/ldap/slapd.d \
+  --env LDAP_ORGANISATION="pptfz" \
+  --env LDAP_DOMAIN="pptfz.com" \
+  --env LDAP_ADMIN_PASSWORD="123456" \
+  --name openldap \
+  --hostname openldap \
+  --network bridge \
+  --restart=always \
+  osixia/openldap:1.5.0
 ```
 
 
 
-文件默认内容如下
+**ldap参数说明**
 
-```yaml
-version: '2'
+| 参数                        | 说明           |
+| --------------------------- | -------------- |
+| `--env LDAP_ORGANISATION`   | ldap组织名称   |
+| `--env LDAP_DOMAIN`         | ldap域名称     |
+| `--env LDAP_ADMIN_PASSWORD` | ldap管理员密码 |
 
-services:
-  openldap:
-    image: docker.io/bitnami/openldap:2.6
-    ports:
-      - '1389:1389'
-      - '1636:1636'
-    environment:
-      - LDAP_ADMIN_USERNAME=admin
-      - LDAP_ADMIN_PASSWORD=adminpassword
-      - LDAP_USERS=user01,user02
-      - LDAP_PASSWORDS=password1,password2
-    volumes:
-      - 'openldap_data:/bitnami/openldap'
 
-volumes:
-  openldap_data:
-    driver: local
+
+可以执行如下命令在容器中进行搜索
+
+```shell
+docker exec 容器名称 ldapsearch -x -H ldap://localhost -b dc=example,dc=org -D "cn=admin,dc=example,dc=org" -w 密码
 ```
 
 
 
+输出结果
 
+```shell
+$ docker exec openldap ldapsearch -x -H ldap://localhost -b dc=pptfz,dc=com -D "cn=admin,dc=pptfz,dc=com" -w 123456
+# extended LDIF
+#
+# LDAPv3
+# base <dc=pptfz,dc=com> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# pptfz.com
+dn: dc=pptfz,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: pptfz
+dc: pptfz
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1
+```
+
+
+
+## 使用docker备份ldap
+
+[docker备份openldap github地址](https://github.com/osixia/docker-openldap-backup)
+
+
+
+```shell
+docker run \
+  -d \
+  --env LDAP_BACKUP_CONFIG_CRON_EXP="0 5 * * *" \
+  -v /data/openldap/backup:/data/backup \
+  --name openldap-backup \
+  -h openldap-backup \
+  --detach \
+  osixia/openldap-backup:1.5.0
+```
 

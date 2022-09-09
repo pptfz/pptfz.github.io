@@ -6,6 +6,8 @@
 
 
 
+# 标准安装
+
 ## 1.安装phpldapadmin
 
 > **安装phpldapadmin会同时安装php5.4以及httpd2.4**
@@ -271,3 +273,45 @@ systemctl restart slapd httpd
 模板不能使用提示没了
 
 ![iShot2021-07-01 15.39.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01%2015.39.58.png)
+
+
+
+# docker安装
+
+[phpldapadmin github地址](https://github.com/osixia/docker-phpLDAPadmin)
+
+
+
+启动容器
+
+```shell
+docker run \
+  -d \
+  -p 8081:80 \
+  -v phpldapadmin:/container/service/phpldapadmin/assets/config \
+  --privileged \
+  --name phpldapadmin \
+  --hostname phpldapadmin \
+  --env PHPLDAPADMIN_HTTPS=false \
+  --env PHPLDAPADMIN_LDAP_HOSTS=10.0.8.4 \
+  --restart=always \
+  --detach \
+  osixia/phpldapadmin:0.9.0
+```
+
+
+
+浏览器访问
+
+`IP:端口`
+
+![iShot_2022-09-09_22.16.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-09_22.16.56.png)
+
+
+
+
+
+登录后
+
+![iShot_2022-09-09_22.17.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-09_22.17.54.png)
+
