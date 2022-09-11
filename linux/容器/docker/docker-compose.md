@@ -87,6 +87,9 @@ composerize是将 `docker run` 命令转换为 `Docker Compose` 文件格式的�
 
 ### 1.2 安装
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <Tabs
   defaultValue="apple"
   values={[
