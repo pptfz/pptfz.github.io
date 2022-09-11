@@ -87,19 +87,9 @@ composerize是将 `docker run` 命令转换为 `Docker Compose` 文件格式的�
 
 ### 1.2 安装
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+可以使用 `npm` 或 `yarn` 进行安装
 
-<Tabs
-  defaultValue="apple"
-  values={[
-    {label: 'yarn', value: '`yarn global add composerize`'},
-    {label: 'npm', value: '`npm install composerize -g`'},
-  ]}>
-
-
-
-
+npm
 
 ```shell
 npm install composerize -g
@@ -107,9 +97,15 @@ npm install composerize -g
 
 
 
-```
+yarn
+
+```shell
 yarn global add composerize
 ```
+
+
+
+
 
 
 
