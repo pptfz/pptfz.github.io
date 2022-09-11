@@ -105,11 +105,34 @@ yarn global add composerize
 
 
 
+### 1.3 使用
+
+```shell
+$ composerize docker run -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro --restart always --log-opt max-size=1g nginx
+
+version: '3.3'
+services:
+    nginx:
+        ports:
+            - '80:80'
+        volumes:
+            - '/var/run/docker.sock:/tmp/docker.sock:ro'
+        restart: always
+        logging:
+            options:
+                max-size: 1g
+        image: nginx
+```
 
 
 
+![iShot_2022-09-11_14.03.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-11_14.03.58.png)
 
 
+
+还可以在 [composerize官网](https://www.composerize.com/) 自动生成compose文件
+
+![iShot_2022-09-11_14.14.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-11_14.14.26.png)
 
 
 
