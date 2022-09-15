@@ -22,7 +22,7 @@
 
 
 
-## 1.0 执行系统初始化脚本
+## 1.1 执行系统初始化脚本
 
 **CentOS7.9采用最小化安装，并执行了以下脚本**
 
@@ -30,7 +30,7 @@
 #!/usr/bin/env bash
 #
 
-#修改系统yum源为aliyun并添加epel源
+# 修改系统yum源为aliyun并添加epel源
 mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
 [ ! -e /etc/yum.repos.d/CentOS-Base.repo ] && curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo && sed -i -e '/mirrors.cloud.aliyuncs.com/d' -e '/mirrors.aliyuncs.com/d' /etc/yum.repos.d/CentOS-Base.repo
 
@@ -38,15 +38,18 @@ mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
 yum makecache
 yum -y install git vim tree lrzsz htop iftop iotop psmisc python-devel zlib zlib-devel python2-pip python-setuptools gcc gcc-c++
 
-#关闭防火墙、selinux、NetworkManager
+# 关闭防火墙、selinux、NetworkManager
 systemctl disable firewalld NetworkManager
 sed -i '7s/enforcing/disabled/' /etc/selinux/config
 
-#同步时间计划任务
+# 关闭swap
+sed -i 's/.*swap.*/#&/' /etc/fstab
+
+# 同步时间计划任务
 sed -i '/*\/10 \* \* \* \* \/usr\/sbin\/ntpdate ntp2\.aliyun\.com &>\/dev\/null/d' /var/spool/cron/root
 echo "*/10 * * * * /usr/sbin/ntpdate ntp2.aliyun.com &>/dev/null" >>/var/spool/cron/root
 
-#历史命令显示时间
+# 历史命令显示时间
 sed -i '/HISTFILESIZE=2000/d' /etc/bashrc
 sed -i '/HISTSIZE=2000/d' /etc/bashrc
 sed -i '/HISTTIMEFORMAT="%Y-%m-%d %H:%M:%S "/d' /etc/bashrc
@@ -59,7 +62,7 @@ export HISTTIMEFORMAT
 EOF
 source /etc/bashrc
 
-#修改系统最大文件描述符
+# 修改系统最大文件描述符
 sed -i '/root soft nofile 65535/d' /etc/security/limits.conf
 sed -i '/root hard nofile 65535/d' /etc/security/limits.conf
 sed -i '/* soft nofile 65535/d' /etc/security/limits.conf
@@ -71,14 +74,14 @@ root hard nofile 65535
 * hard nofile 65535
 EOF
 
-#设置pip国内源
+# 设置pip国内源
 mkdir ~/.pip
 cat >~/.pip/pip.conf<<EOF
 [global]
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple/
 EOF
 
-#重启系统使部分配置生效
+# 重启系统使部分配置生效
 reboot
 ```
 
@@ -88,35 +91,37 @@ reboot
 
 
 
-## 1.1 实验环境
+## 1.2 实验环境
 
-| 角色         | IP地址        | 主机名           | docker版本   | k8s版本     | etcd版本  | 硬件配置 | 系统          | 内核                   | 安装组件                                                     |
-| ------------ | ------------- | ---------------- | ------------ | ----------- | --------- | -------- | ------------- | ---------------------- | ------------------------------------------------------------ |
-| **master01** | **10.0.0.30** | **k8s-master01** | **19.03.12** | **1.19.11** | **3.4.9** | **2c4g** | **CentOS7.9** | 3.10.0-1160.el7.x86_64 | **kube-apiserver，kube-controller-manager，kube-scheduler，etcd** |
-| **master02** | **10.0.0.31** | **k8s-master02** |              | **1.19.11** |           | **2c4g** | **CentOS7.9** | 3.10.0-1160.el7.x86_64 |                                                              |
-| **master03** | **10.0.0.32** | **k8s-master03** |              | **1.19.11** |           | **2c4g** | **CentOS7.9** | 3.10.0-1160.el7.x86_64 |                                                              |
-| **node01**   | **10.0.0.33** | **k8s-node01**   | **19.03.12** | **1.19.11** | **3.4.9** | **2c4g** | **CentOS7.9** | 3.10.0-1160.el7.x86_64 | **kubelet，kube-proxy，docker，etcd**                        |
-| **node02**   | **10.0.0.34** | **k8s-node02**   | **19.03.12** | **1.19.11** | **3.4.9** | **2c4g** | **CentOS7.9** | 3.10.0-1160.el7.x86_64 | **kubelet，kube-proxy，docker，etcd**                        |
-| node03       | 10.0.0.35     | k8s-node03       |              | 1.19.11     |           | **2c4g** | **CentOS7.9** | 3.10.0-1160.el7.x86_64 |                                                              |
+| **角色**     | **IP地址**    | **主机名**       | **docker版本** | **k8s版本** | **etcd版本** | **硬件配置** | **系统**      | **内核**                   | **安装组件**                                                |
+| ------------ | ------------- | ---------------- | -------------- | ----------- | ------------ | ------------ | ------------- | -------------------------- | ----------------------------------------------------------- |
+| **master01** | **10.0.0.30** | **k8s-master01** | **19.03.12**   | **1.19.11** | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kube-apiserver，kube-controller-manager，kube-scheduler** |
+| **node01**   | **10.0.0.33** | **k8s-node01**   | **19.03.12**   | **1.19.11** | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kubelet，kube-proxy，docker，etcd**                       |
+| **node02**   | **10.0.0.34** | **k8s-node02**   | **19.03.12**   | **1.19.11** | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kubelet，kube-proxy，docker，etcd**                       |
+| node03       | 10.0.0.35     | k8s-node03       |                | 1.19.11     | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kubelet，kube-proxy，docker，etcd**                       |
 
 
 
 :::tip
 
-**如无特殊说明，以下操作均在k8s-master01节点操作**
+**如无特殊说明，以下操作均在 `k8s-master01` 节点操作**
 
 :::
 
-## 1.2 编辑环境变量脚本
+## 1.3 编辑环境变量脚本
 
-> **后续的文件内容都是读取以下文件中的变量值**
+:::tip
+
+**后续的文件内容都是读取以下文件中的变量值**
+
+:::
 
 ```shell
 [ -d /opt/k8s/script ] || mkdir -p /opt/k8s/script
 cat >/opt/k8s/script/env.sh <<EOF
-export NODE_IPS=(10.0.0.30 10.0.0.31 10.0.0.32 10.0.0.33 10.0.0.34 10.0.0.35)
+export NODE_IPS=(10.0.0.30 10.0.0.33 10.0.0.34 10.0.0.35)
 export ETCD_NAMES=(etcd-01 etcd-02 etcd-03)
-export NODE_NAMES=(k8s-master01 k8s-master02 k8s-master03 k8s-node01 k8s-node02 k8s-node03)
+export NODE_NAMES=(k8s-master01 k8s-node01 k8s-node02 k8s-node03)
 export NODE_SCRIPT=/opt/k8s/script
 export NODE_SUBNET=10.0.0.0/24
 EOF
@@ -136,7 +141,7 @@ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &>/dev/null
 
 **编辑expect自动化交互脚本**
 
-这里机器用户名是 `root`，密码是国际标准通用密码 `1`
+这里机器用户名是 `root`，密码是国际标准通用密码 `1` ，ssh端口是 `22`
 
 ```shell
 [ -d /opt/k8s/script ] || mkdir -p /opt/k8s/script
@@ -1683,9 +1688,9 @@ kubernetes worker 节点运行如下组件：
 
 :::tip
 
-**<span style={{color: 'red'}}>⚠️如果后续有pod需要部署在master节点，则在master节点也需要部署kubelet和kube-proxy</span>**
+**⚠️如果后续有pod需要部署在master节点，则在master节点也需要部署kubelet和kube-proxy**
 
-**⚠️<span style={{color: 'red'}}>这里把master节点也复用为node节点，即master节点上部署node</span>**
+**⚠️这里把master节点也复用为node节点，即master节点上部署node**
 
 :::
 

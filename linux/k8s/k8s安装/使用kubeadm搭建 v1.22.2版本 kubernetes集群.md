@@ -24,7 +24,7 @@
 
 
 
-:::caution
+:::caution说明
 
 **如无特殊说明，以下所有操作均在master节点**
 

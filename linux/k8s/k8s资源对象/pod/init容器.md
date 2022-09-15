@@ -284,7 +284,7 @@ Pod 重启会导致 Init 容器重新执行，主要有如下几个原因：
 ## 创建一个包含 Init 容器的 Pod 
 
 ```yaml
-cat > init-containers.yaml < EOF
+cat > init-containers.yaml << EOF
 apiVersion: v1
 kind: Pod
 metadata:
