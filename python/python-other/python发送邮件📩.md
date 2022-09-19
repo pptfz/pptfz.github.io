@@ -15,15 +15,15 @@ def send_mail():
 
     # 第三方 SMTP 服务
     mail_host = "smtp.qq.com"  # 设置服务器
-    mail_user = "465001064@qq.com"  # 用户名
-    mail_pass = "aybpwyktmitecaga"  # 口令
+    mail_user = "xxx@qq.com"  # 用户名
+    mail_pass = "xxx"  # 口令
 
     
-    #发送方
-    sender = '465001064@qq.com'
+    # 发送方
+    sender = 'xxx@qq.com'
 
-    #接收方
-    receivers = ['2953056730@qq.com']
+    # 接收方
+    receivers = ['xxx@qq.com']
 
     # 创建一个带附件的实例
     message = MIMEMultipart()
