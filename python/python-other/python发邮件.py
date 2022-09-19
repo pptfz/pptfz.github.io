@@ -11,19 +11,19 @@ from email.header import Header
 
 # 第三方 SMTP 服务
 mail_host = "smtp.qq.com"  # 设置服务器
-mail_user = "465001064@qq.com"  # 用户名
-mail_pass = "aybpwyktmitecaga"  # 口令
+mail_user = "xxx@qq.com"  # 用户名
+mail_pass = "xxx"  # 口令
 
 # sender = '1206180814@qq.com'  # 谁发送
 # receivers = ['1206180814@qq.com']  # 接收邮件，可设置为你的QQ邮箱或者其他邮箱
 
 
-#发送方
-sender = '465001064@qq.com'
+# 发送方
+sender = 'xxx@qq.com'
 # receivers = ['fasongceshiyoujian@163.com']
 
-#接收方
-receivers = ['2953056730@qq.com']
+# 接收方
+receivers = ['xxx@qq.com']
 
 # 创建一个带附件的实例
 message = MIMEMultipart()

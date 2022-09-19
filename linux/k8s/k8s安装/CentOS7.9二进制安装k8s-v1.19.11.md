@@ -2,9 +2,9 @@
 
 
 
-# CentOS7.6二进制安装k8s-v1.19.11
+# CentOS7.9二进制安装k8s-v1.20.15
 
-# 一、环境准备
+# 1.环境准备
 
 **单master架构图**
 
@@ -17,12 +17,6 @@
 ![iShot2021-06-06 22.19.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-06%2022.19.59.png)
 
 
-
-
-
-
-
-## 1.1 执行系统初始化脚本
 
 **CentOS7.9采用最小化安装，并执行了以下脚本**
 
@@ -91,14 +85,14 @@ reboot
 
 
 
-## 1.2 实验环境
+## 1.1 实验环境
 
 | **角色**     | **IP地址**    | **主机名**       | **docker版本** | **k8s版本** | **etcd版本** | **硬件配置** | **系统**      | **内核**                   | **安装组件**                                                |
 | ------------ | ------------- | ---------------- | -------------- | ----------- | ------------ | ------------ | ------------- | -------------------------- | ----------------------------------------------------------- |
-| **master01** | **10.0.0.30** | **k8s-master01** | **19.03.12**   | **1.19.11** | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kube-apiserver，kube-controller-manager，kube-scheduler** |
-| **node01**   | **10.0.0.33** | **k8s-node01**   | **19.03.12**   | **1.19.11** | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kubelet，kube-proxy，docker，etcd**                       |
-| **node02**   | **10.0.0.34** | **k8s-node02**   | **19.03.12**   | **1.19.11** | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kubelet，kube-proxy，docker，etcd**                       |
-| node03       | 10.0.0.35     | k8s-node03       |                | 1.19.11     | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kubelet，kube-proxy，docker，etcd**                       |
+| **master01** | **10.0.0.30** | **k8s-master01** | **19.03.12**   | **1.20.15** | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kube-apiserver，kube-controller-manager，kube-scheduler** |
+| **node01**   | **10.0.0.33** | **k8s-node01**   | **19.03.12**   | **1.20.15** | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kubelet，kube-proxy，docker，etcd**                       |
+| **node02**   | **10.0.0.34** | **k8s-node02**   | **19.03.12**   | **1.20.15** | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kubelet，kube-proxy，docker，etcd**                       |
+| **node03**   | **10.0.0.35** | **k8s-node03**   | **19.03.12**   | **1.20.15** | **3.4.9**    | **2c4g**     | **CentOS7.9** | **3.10.0-1160.el7.x86_64** | **kubelet，kube-proxy，docker，etcd**                       |
 
 
 
@@ -108,7 +102,7 @@ reboot
 
 :::
 
-## 1.3 编辑环境变量脚本
+## 1.2 编辑环境变量脚本
 
 :::tip
 
@@ -117,10 +111,10 @@ reboot
 :::
 
 ```shell
-[ -d /opt/k8s/script ] || mkdir -p /opt/k8s/script
+[ -d /opt/k8s/script ] || mkdir -p /opt/k8s/script && cd /opt/k8s/script
 cat >/opt/k8s/script/env.sh <<EOF
 export NODE_IPS=(10.0.0.30 10.0.0.33 10.0.0.34 10.0.0.35)
-export ETCD_NAMES=(etcd-01 etcd-02 etcd-03)
+export ETCD_NAMES=(etcd etcd-01 etcd-02 etcd-03)
 export NODE_NAMES=(k8s-master01 k8s-node01 k8s-node02 k8s-node03)
 export NODE_SCRIPT=/opt/k8s/script
 export NODE_SUBNET=10.0.0.0/24
@@ -193,15 +187,13 @@ cd /opt/k8s/script && source ssh.sh
 
 ## 1.4  每个节点配置host信息
 
-```python
+```shell
 source /opt/k8s/script/env.sh  
 cat >> /etc/hosts <<EOF
 ${NODE_IPS[0]} ${NODE_NAMES[0]}
 ${NODE_IPS[1]} ${NODE_NAMES[1]}
 ${NODE_IPS[2]} ${NODE_NAMES[2]}
 ${NODE_IPS[3]} ${NODE_NAMES[3]}
-${NODE_IPS[4]} ${NODE_NAMES[4]}
-${NODE_IPS[5]} ${NODE_NAMES[5]}
 EOF
 for node_ip in ${NODE_IPS[@]}
   do
@@ -231,16 +223,20 @@ sed -i '7s/enforcing/disabled/' /etc/selinux/config
 
 ## 1.6 关闭swap
 
+:::tip
+
 **⚠️centos7中是 `/dev/mapper/centos-swap swap                    swap    defaults        0 0`**
 
-**⚠️centos8中`/dev/mapper/cl-swap     swap                    swap    defaults        0 0`**
+**⚠️centos8中 `/dev/mapper/cl-swap     swap                    swap    defaults        0 0`**
+
+:::
 
 ```shell
 source /opt/k8s/script/env.sh
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} "swapoff -a && sed -i 's/^\/dev\/mapper\/cl-swap/#&/' /etc/fstab"
+    ssh root@${node_ip} "swapoff -a && sed -i 's/.*swap.*/#&/' /etc/fstab"
   done
 ```
 
@@ -267,8 +263,6 @@ EOF' && modprobe br_netfilter && sysctl -p /etc/sysctl.d/k8s.conf
 
 **master01节点操作**
 
-
-
 ### 1.8.1 加载变量脚本
 
 ```shell
@@ -292,7 +286,8 @@ for node_ip in ${NODE_IPS[@]}
 ### 1.8.3 master节点修改服务器地址为阿里云
 
 ```shell
-sed -i.bak '3,6d' /etc/chrony.conf && sed -i -e '3cserver ntp1.aliyun.com iburst' -e "/^#allow/callow ${NODE_SUBNET}" /etc/chrony.conf
+sed -i.bak '3,6d' /etc/chrony.conf && \
+sed -i -e '3cserver ntp1.aliyun.com iburst' -e "/^#allow/callow ${NODE_SUBNET}" /etc/chrony.conf
 ```
 
 
@@ -300,7 +295,7 @@ sed -i.bak '3,6d' /etc/chrony.conf && sed -i -e '3cserver ntp1.aliyun.com iburst
 ### 1.8.4 所有节点修改同步服务器为master01节点
 
 ```shell
-export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]} ${NODE_IPS[4]} ${NODE_IPS[5]})
+export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
@@ -340,24 +335,18 @@ for node_ip in ${NODE_IPS[@]}
 
 ```shell
 >>> 10.0.0.30
-udp        0      0 0.0.0.0:123             0.0.0.0:*                           9177/chronyd        
-udp        0      0 127.0.0.1:323           0.0.0.0:*                           9177/chronyd        
-udp6       0      0 ::1:323                 :::*                                9177/chronyd        
->>> 10.0.0.31
-udp        0      0 127.0.0.1:323           0.0.0.0:*                           6122/chronyd        
-udp6       0      0 ::1:323                 :::*                                6122/chronyd        
->>> 10.0.0.32
-udp        0      0 127.0.0.1:323           0.0.0.0:*                           6074/chronyd        
-udp6       0      0 ::1:323                 :::*                                6074/chronyd        
+udp        0      0 0.0.0.0:123             0.0.0.0:*                           8867/chronyd        
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           8867/chronyd        
+udp6       0      0 ::1:323                 :::*                                8867/chronyd        
 >>> 10.0.0.33
-udp        0      0 127.0.0.1:323           0.0.0.0:*                           6485/chronyd        
-udp6       0      0 ::1:323                 :::*                                6485/chronyd        
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           6320/chronyd        
+udp6       0      0 ::1:323                 :::*                                6320/chronyd        
 >>> 10.0.0.34
-udp        0      0 127.0.0.1:323           0.0.0.0:*                           6255/chronyd        
-udp6       0      0 ::1:323                 :::*                                6255/chronyd        
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           6016/chronyd        
+udp6       0      0 ::1:323                 :::*                                6016/chronyd        
 >>> 10.0.0.35
-udp        0      0 127.0.0.1:323           0.0.0.0:*                           6244/chronyd        
-udp6       0      0 ::1:323                 :::*                                6244/chronyd  
+udp        0      0 127.0.0.1:323           0.0.0.0:*                           5908/chronyd        
+udp6       0      0 ::1:323                 :::*                                5908/chronyd        
 ```
 
 
@@ -381,32 +370,22 @@ for node_ip in ${NODE_IPS[@]}
 210 Number of sources = 1
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
-^* 120.25.115.20                 2   6    37    45  +1224us[-3569us] +/-   27ms
->>> 10.0.0.31
-210 Number of sources = 1
-MS Name/IP address         Stratum Poll Reach LastRx Last sample               
-===============================================================================
-^* k8s-master01                  3   6    37    40    -28us[-5204us] +/-   34ms
->>> 10.0.0.32
-210 Number of sources = 1
-MS Name/IP address         Stratum Poll Reach LastRx Last sample               
-===============================================================================
-^* k8s-master01                  3   6    37    42    -19us[-5113us] +/-   34ms
+^* 120.25.115.20                 2   6   161    10  -1674us[-2826us] +/-   28ms
 >>> 10.0.0.33
 210 Number of sources = 1
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
-^* k8s-master01                  3   6    37    41  -3072ns[-4871us] +/-   34ms
+^* k8s-master01                  3   6    17    12  +4585ns[ +127us] +/- 6427ms
 >>> 10.0.0.34
 210 Number of sources = 1
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
-^* k8s-master01                  3   6    37    41  -1148ns[ -878us] +/-   35ms
+^* k8s-master01                  3   6    17    13    +42us[ +243us] +/- 6709ms
 >>> 10.0.0.35
 210 Number of sources = 1
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
-^* k8s-master01                  3   6    37    41  -2105ns[ -867us] +/-   34ms
+^* k8s-master01                  3   6    17    13  +9139ns[  +99us] +/- 6955ms
 ```
 
 
@@ -426,7 +405,9 @@ $ uname -r
 
 **可根据自己实际需求下载对应版本**
 
-![iShot2020-09-21 14.29.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-21%2014.29.15.png)
+![iShot_2022-09-15_22.41.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-15_22.41.52.png)
+
+
 
 
 
@@ -481,14 +462,6 @@ for node_ip in ${NODE_IPS[@]}
     echo -e ">>> ${node_ip}"
     ssh root@${node_ip} uname -r
   done
-  
-# 正确输出
->>> 10.0.0.130
-5.8.12-1.el7.elrepo.x86_64
->>> 10.0.0.133
-5.8.12-1.el7.elrepo.x86_64
->>> 10.0.0.134
-5.8.12-1.el7.elrepo.x86_64
 ```
 
 
@@ -518,27 +491,6 @@ CA根证书说明
 
 
 ## 2.2 下载并配置cfssl工具集
-
-[cfssl官网](https://cfssl.org/)
-
-[cfssl github地址](https://github.com/cloudflare/cfssl)
-
-**cfssl是一个开源的证书管理工具，使用json文件生成证书，相比openssl更方便使用。**
-
-```shell
-# 下载cfssl工具集
-wget https://github.com/cloudflare/cfssl/releases/download/v1.4.1/cfssl-certinfo_1.4.1_linux_amd64
-wget https://github.com/cloudflare/cfssl/releases/download/v1.4.1/cfssljson_1.4.1_linux_amd64
-wget https://github.com/cloudflare/cfssl/releases/download/v1.4.1/cfssl_1.4.1_linux_amd64
-
-# 给予执行权限
-chmod +x cfssl*
-
-# 修改名称并移动到/usr/local/bin
-mv cfssl_1.4.1_linux_amd64 /usr/local/bin/cfssl
-mv cfssljson_1.4.1_linux_amd64 /usr/local/bin/cfssljson
-mv cfssl-certinfo_1.4.1_linux_amd64 /usr/local/bin/cfssl-certinfo
-```
 
 
 
@@ -643,9 +595,9 @@ ca.csr ca-key.pem ca.pem
 
 
 
-# 三、部署etcd集群
+# 2.部署etcd集群
 
-etcd 是基于 Raft 的分布式 KV 存储系统，由 CoreOS 开发，常用于服务发现、共享配置以及并发控制（如 leader 选举、分布式锁等）。
+[etcd](https://github.com/etcd-io/etcd) 是基于 Raft 的分布式 KV 存储系统，由 CoreOS 开发，常用于服务发现、共享配置以及并发控制（如 leader 选举、分布式锁等）。
 
 kubernetes 使用 etcd 集群持久化存储所有 API 对象、运行数据。
 
@@ -658,34 +610,133 @@ kubernetes 使用 etcd 集群持久化存储所有 API 对象、运行数据。
 
 etcd 集群节点名称和 IP 如下：
 
-| 节点名称     | IP        | etcd版本 |
-| ------------ | --------- | -------- |
-| k8s-master01 | 10.0.0.30 | 3.4.13   |
-| k8s-master02 | 10.0.0.31 | 3.4.13   |
-| k8s-master03 | 10.0.0.32 | 3.4.13   |
+| 节点名称   | IP        | etcd版本 |
+| ---------- | --------- | -------- |
+| k8s-node01 | 10.0.0.33 | 3.4.9    |
+| k8s-node02 | 10.0.0.34 | 3.4.9    |
+| k8s-node03 | 10.0.0.35 | 3.4.9    |
 
 
 
-## 3.1 创建etcd证书和私钥
+## 2.1 准备cfsll证书生成工具
 
-### 3.1.1 创建证书签名请求
+[cfssl官网](https://cfssl.org/)
 
-- `hosts`：指定授权使用该证书的 etcd 节点 IP 列表，**需要将 etcd 集群所有节点 IP 都列在其中**
-- **<span style={{color: 'red'}}>⚠️文件中的IP是etcd节点的IP，哪些节点部署了etcd就写哪些节点的IP，为了方便后期扩展这里还可以多写几个IP</span>**
+[cfssl github地址](https://github.com/cloudflare/cfssl)
+
+**cfssl是一个开源的证书管理工具，使用json文件生成证书，相比openssl更方便使用。**
 
 ```shell
-source /opt/k8s/script/env.sh
-cd /opt/k8s/cert
+export CFSSL_VERSION=1.6.2
+
+# 下载cfssl工具集
+wget https://github.com/cloudflare/cfssl/releases/download/v${CFSSL_VERSION}/cfssl-certinfo_${CFSSL_VERSION}_linux_amd64
+wget https://github.com/cloudflare/cfssl/releases/download/v${CFSSL_VERSION}/cfssljson_${CFSSL_VERSION}_linux_amd64
+wget https://github.com/cloudflare/cfssl/releases/download/v${CFSSL_VERSION}/cfssl_${CFSSL_VERSION}_linux_amd64
+
+# 给予执行权限
+chmod +x cfssl*
+
+# 修改名称并移动到/usr/local/bin
+mv cfssl_${CFSSL_VERSION}_linux_amd64 /usr/local/bin/cfssl
+mv cfssljson_${CFSSL_VERSION}_linux_amd64 /usr/local/bin/cfssljson
+mv cfssl-certinfo_${CFSSL_VERSION}_linux_amd64 /usr/local/bin/cfssl-certinfo
+```
+
+
+
+## 2.2 生成etcd证书
+
+### 2.2.1 自签证书颁发机构(CA)
+
+创建工作目录
+
+```shell
+[ -d /opt/k8s/tls ] || mkdir -p /opt/k8s/tls
+```
+
+
+
+自签CA
+
+```json
+cd /opt/k8s/tls
+cat > ca-config.json << EOF
+{
+  "signing": {
+    "default": {
+      "expiry": "87600h"
+    },
+    "profiles": {
+      "www": {
+         "expiry": "87600h",
+         "usages": [
+            "signing",
+            "key encipherment",
+            "server auth",
+            "client auth"
+        ]
+      }
+    }
+  }
+}
+EOF
+
+
+cat > ca-csr.json << EOF
+{
+    "CN": "etcd CA",
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "L": "Beijing",
+            "ST": "Beijing"
+        }
+    ]
+}
+EOF
+```
+
+
+
+生成证书
+
+:::tip
+
+会生成 `ca-key.pem` 、`ca.pem`
+
+:::
+
+```shell
+cfssl gencert -initca ca-csr.json | cfssljson -bare ca 
+```
+
+
+
+### 2.2.2 使用自签CA签发Etcd HTTPS证书
+
+创建证书申请文件
+
+:::tip
+
+`hosts` 指定授权使用该证书的 etcd 节点 IP 列表，**需要将etcd集群所有节点IP都列在其中**
+
+**文件中的IP是etcd节点的IP，哪些节点部署了etcd就写哪些节点的IP，为了方便后期扩展这里还可以多写几个IP**
+
+:::
+
+```json
 cat > etcd-csr.json <<EOF
 {
   "CN": "etcd",
   "hosts": [
-    "${NODE_IPS[0]}",
     "${NODE_IPS[1]}",
     "${NODE_IPS[2]}",
-    "${NODE_IPS[3]}",
-    "${NODE_IPS[4]}",
-    "${NODE_IPS[5]}"
+    "${NODE_IPS[3]}"
   ],
   "key": {
     "algo": "rsa",
@@ -704,42 +755,37 @@ EOF
 
 
 
-### 3.1.2 生成证书和私钥
+生成证书和私钥
+
+:::tip
+
+会生成 `etcd.pem` 、`etcd-key.pem` 
+
+:::
 
 ```shell
-cd /opt/k8s/cert
-cfssl gencert -ca=ca.pem \
-    -ca-key=ca-key.pem \
-    -config=ca-config.json \
-    -profile=kubernetes etcd-csr.json | cfssljson -bare etcd
-ls etcd*
-```
-
-
-
-**以上命令执行成功后会生成如下文件**
-
-```shell
-etcd.csr  etcd-key.pem  etcd.pem
+cfssl gencert \
+  -ca=ca.pem \
+  -ca-key=ca-key.pem \
+  -config=ca-config.json \
+  -profile=www etcd-csr.json | cfssljson -bare etcd
 ```
 
 
 
 **参数说明**
 
-- `gencert`: 生成新的key(密钥)和签名证书
-
-- `-ca`：指明ca的证书
-
-- `-ca-key`：指明ca的私钥文件 
-
-- `-config`：指明请求证书的json文件
-
-- `-profile`：与`config`中的`profile`对应，是指根据`config`中的`profile`段来生成证书的相关信息
+| 参数     | 说明                                                         |
+| -------- | ------------------------------------------------------------ |
+| gencert  | 生成新的key(密钥)和签名证书                                  |
+| -ca      | 指明ca的证书                                                 |
+| -ca-key  | 指明ca的私钥文件                                             |
+| -config  | 指明请求证书的json文件                                       |
+| -profile | 与`config`中的`profile`对应，是指根据`config`中的`profile`段来生成证书的相关信息 |
 
 
 
-## 3.2 下载etcd二进制文件
+## 2.3 下载etcd二进制文件
 
 [etcd github地址](https://github.com/etcd-io/etcd)
 
@@ -750,7 +796,7 @@ etcd.csr  etcd-key.pem  etcd.pem
 **创建目录**
 
 ```shell
-[ -d /opt/k8s/etcd ] || mkdir /opt/k8s/etcd && cd /opt/k8s/etcd
+[ -d /opt/k8s/pkg/etcd ] || mkdir -p /opt/k8s/pkg/etcd && cd /opt/k8s/pkg/etcd
 ```
 
 
@@ -758,36 +804,37 @@ etcd.csr  etcd-key.pem  etcd.pem
 **下载二进制文件**
 
 ```shell
-wget https://github.com/etcd-io/etcd/releases/download/v3.4.13/etcd-v3.4.13-linux-amd64.tar.gz
-tar xf etcd-v3.4.13-linux-amd64.tar.gz
+export ETCD_VERSION=3.4.9
+wget https://github.com/etcd-io/etcd/releases/download/v${ETCD_VERSION}/etcd-v${ETCD_VERSION}-linux-amd64.tar.gz
+tar xf etcd-v${ETCD_VERSION}-linux-amd64.tar.gz
 ```
 
 
 
-拷贝etcd命令到`/usr/local/bin`
+**拷贝etcd命令到 `/usr/local/bin`**
 
 ```shell
-cp etcd-v3.4.13-linux-amd64/{etcd,etcdctl} /usr/local/bin
+cp etcd-v${ETCD_VERSION}-linux-amd64/{etcd,etcdctl} /usr/local/bin
 ```
 
 
 
-## 3.3 创建etcd配置文件
+## 2.4 创建etcd配置文件
 
 这里先创建一个template模版，后续会用sed替换
 
 ```shell
-[ -d /opt/k8s/etcd/cfg ] || mkdir /opt/k8s/etcd/cfg && cd /opt/k8s/etcd/cfg
+[ -d /opt/k8s/cfg ] || mkdir /opt/k8s/cfg && cd /opt/k8s/cfg
 cat > etcd.conf.template << EOF
-#[Member]
+# [Member]
 ETCD_NAME="##ETCD_NAME##"
 ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
 ETCD_LISTEN_PEER_URLS="https://##NODE_IP##:2380"
 ETCD_LISTEN_CLIENT_URLS="https://##NODE_IP##:2379"
-#[Clustering]
+# [Clustering]
 ETCD_INITIAL_ADVERTISE_PEER_URLS="https://##NODE_IP##:2380"
 ETCD_ADVERTISE_CLIENT_URLS="https://##NODE_IP##:2379"
-ETCD_INITIAL_CLUSTER="etcd-01=https://10.0.0.30:2380,etcd-02=https://10.0.0.31:2380,etcd-03=https://10.0.0.32:2380"
+ETCD_INITIAL_CLUSTER="etcd-01=https://${NODE_IPS[1]}:2380,etcd-02=https://${NODE_IPS[2]}:2380,etcd-03=https://${NODE_IPS[3]}:2380"
 ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
 ETCD_INITIAL_CLUSTER_STATE="new"
 EOF
@@ -811,10 +858,10 @@ EOF
 
 
 
-## 3.4 使用systemd管理etcd
+## 2.5 创建etcd systemd 文件
 
 ```shell
-cat > /usr/lib/systemd/system/etcd.service <<EOF
+cat > etcd.service <<EOF
 [Unit]
 Description=Etcd Server
 After=network.target
@@ -822,14 +869,14 @@ After=network-online.target
 Wants=network-online.target
 [Service]
 Type=notify
-EnvironmentFile=/opt/k8s/etcd/cfg/etcd.conf
+EnvironmentFile=/opt/k8s/cfg/etcd.conf
 ExecStart=/usr/local/bin/etcd \
---cert-file=/opt/k8s/cert/etcd.pem \
---key-file=/opt/k8s/cert/etcd-key.pem \
---peer-cert-file=/opt/k8s/cert/etcd.pem \
---peer-key-file=/opt/k8s/cert/etcd-key.pem \
---trusted-ca-file=/opt/k8s/cert/ca.pem \
---peer-trusted-ca-file=/opt/k8s/cert/ca.pem \
+--cert-file=/opt/k8s/tls/etcd.pem \
+--key-file=/opt/k8s/tls/etcd-key.pem \
+--peer-cert-file=/opt/k8s/tls/etcd.pem \
+--peer-key-file=/opt/k8s/tls/etcd-key.pem \
+--trusted-ca-file=/opt/k8s/tls/ca.pem \
+--peer-trusted-ca-file=/opt/k8s/tls/ca.pem \
 --logger=zap
 Restart=on-failure
 LimitNOFILE=65536
@@ -853,18 +900,18 @@ EOF
 
 
 
-## 3.5 拷贝相关文件到其余master节点
+## 2.6 拷贝相关文件到其余node节点
 
 **拷贝证书**
 
 ```shell
 source /opt/k8s/script/env.sh
-export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]})
+export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} mkdir -p /opt/k8s/cert
-    scp -p /opt/k8s/cert/{etcd-key.pem,etcd.pem,ca-key.pem,ca.pem} root@${node_ip}:/opt/k8s/cert
+    ssh root@${node_ip} mkdir -p /opt/k8s/tls
+    scp -p /opt/k8s/tls/{etcd-key.pem,etcd.pem,ca-key.pem,ca.pem} root@${node_ip}:/opt/k8s/tls
   done  
 ```
 
@@ -874,11 +921,11 @@ for node_ip in ${NODE_IPS[@]}
 
 ```shell
 source /opt/k8s/script/env.sh
-export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]})
+export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    scp -r /usr/lib/systemd/system/etcd.service root@${node_ip}:/usr/lib/systemd/system/
+    scp -r /opt/k8s/cfg/etcd.service root@${node_ip}:/usr/lib/systemd/system/
   done
 ```
 
@@ -889,20 +936,20 @@ for node_ip in ${NODE_IPS[@]}
 ```shell
 # 先做sed替换，把之前的模版文件中的NODE_IP和ETCD_NAME替换成相对应的节点
 source /opt/k8s/script/env.sh
-cd /opt/k8s/etcd/cfg
-for (( i=0; i < 3; i++ ))
+cd /opt/k8s/cfg
+for (( i=1; i < 4; i++ ))
   do
     sed -e "s/##NODE_IP##/${NODE_IPS[i]}/" -e "s/##ETCD_NAME##/${ETCD_NAMES[i]}/" etcd.conf.template > etcd-${NODE_IPS[i]}.conf
   done
 
 
-# 拷贝etcd配置文件到3个master节点
-export NODE_IPS=(${NODE_IPS[0]} ${NODE_IPS[1]} ${NODE_IPS[2]})
+# 拷贝etcd配置文件到3个node节点
+export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} mkdir -p /opt/k8s/etcd/cfg
-    scp etcd-${node_ip}.conf root@${node_ip}:/opt/k8s/etcd/cfg/etcd.conf
+    ssh root@${node_ip} mkdir -p /opt/k8s/cfg
+    scp etcd-${node_ip}.conf root@${node_ip}:/opt/k8s/cfg/etcd.conf
   done
 ```
 
@@ -912,7 +959,7 @@ for node_ip in ${NODE_IPS[@]}
 
 ```shell
 source /opt/k8s/script/env.sh
-export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]})
+export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
@@ -922,11 +969,11 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-## 3.6 启动etcd
+## 2.7 启动etcd
 
 ```shell
 source /opt/k8s/script/env.sh
-export NODE_IPS=(${NODE_IPS[0]} ${NODE_IPS[1]} ${NODE_IPS[2]})
+export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
@@ -936,11 +983,11 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-**检查启动结果，确保状态为 `active (running)`，否则使用命令`journalctl -u etcd`查看日志，确认原因**
+**检查启动结果，确保状态为 `active (running)`，否则使用命令 `journalctl -u etcd`查看日志，确认原因**
 
 ```shell
 source /opt/k8s/script/env.sh
-export NODE_IPS=(${NODE_IPS[0]} ${NODE_IPS[1]} ${NODE_IPS[2]})
+export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
@@ -953,31 +1000,32 @@ for node_ip in ${NODE_IPS[@]}
 **正确输出**
 
 ```shell
->>> 10.0.0.30
-   Active: active (running) since Sun 2021-06-06 23:50:00 CST; 25s ago
->>> 10.0.0.31
-   Active: active (running) since Sun 2021-06-06 23:50:00 CST; 25s ago
->>> 10.0.0.32
-   Active: active (running) since Sun 2021-06-06 23:50:00 CST; 25s ago
+>>> 10.0.0.33
+   Active: active (running) since Fri 2022-09-16 00:39:47 CST; 15s ago
+>>> 10.0.0.34
+   Active: active (running) since Fri 2022-09-16 00:39:47 CST; 15s ago
+>>> 10.0.0.35
+   Active: active (running) since Fri 2022-09-16 00:39:47 CST; 15s ago
 ```
 
 
 
-## 3.7 验证服务状态
+## 2.8 验证服务状态
 
 **部署完 etcd 集群后，在 master01 节点上执行如下命令**
 
 ```shell
 source /opt/k8s/script/env.sh
-export NODE_IPS=(${NODE_IPS[0]} ${NODE_IPS[1]} ${NODE_IPS[2]})
+export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
+    ssh root@${node_ip} "
     /usr/local/bin/etcdctl \
     --endpoints=https://${node_ip}:2379 \
-    --cacert=/opt/k8s/cert/ca.pem \
-    --cert=/opt/k8s/cert/etcd.pem \
-    --key=/opt/k8s/cert/etcd-key.pem endpoint health
+    --cacert=/opt/k8s/tls/ca.pem \
+    --cert=/opt/k8s/tls/etcd.pem \
+    --key=/opt/k8s/tls/etcd-key.pem endpoint health"
   done
 ```
 
@@ -986,39 +1034,39 @@ for node_ip in ${NODE_IPS[@]}
 **正确输出**
 
 ```shell
->>> 10.0.0.30
-https://10.0.0.30:2379 is healthy: successfully committed proposal: took = 7.716059ms
->>> 10.0.0.31
-https://10.0.0.31:2379 is healthy: successfully committed proposal: took = 7.366472ms
->>> 10.0.0.32
-https://10.0.0.32:2379 is healthy: successfully committed proposal: took = 7.521003ms
+>>> 10.0.0.33
+https://10.0.0.33:2379 is healthy: successfully committed proposal: took = 6.463569ms
+>>> 10.0.0.34
+https://10.0.0.34:2379 is healthy: successfully committed proposal: took = 7.060414ms
+>>> 10.0.0.35
+https://10.0.0.35:2379 is healthy: successfully committed proposal: took = 6.483606ms
 ```
 
 
 
-## 3.8 查看当前etcd集群 leader
+## 2.9 查看当前etcd集群 leader
 
 ```shell
 source /opt/k8s/script/env.sh
-export ETCD_ENDPOINTS="https://${NODE_IPS[0]}:2379,https://${NODE_IPS[1]}:2379,https://${NODE_IPS[2]}:2379"
+export ETCD_ENDPOINTS="https://${NODE_IPS[1]}:2379,https://${NODE_IPS[2]}:2379,https://${NODE_IPS[3]}:2379"
 etcdctl \
-  -w table --cacert=/opt/k8s/cert/ca.pem \
-  --cert=/opt/k8s/cert/etcd.pem \
-  --key=/opt/k8s/cert/etcd-key.pem \
+  -w table --cacert=/opt/k8s/tls/ca.pem \
+  --cert=/opt/k8s/tls/etcd.pem \
+  --key=/opt/k8s/tls/etcd-key.pem \
   --endpoints=${ETCD_ENDPOINTS} endpoint status 
 ```
 
 
 
-**输出结果，可见当前的 etcd leader 是10.0.0.31**
+**输出结果，可见当前的 etcd leader 是10.0.0.33**
 
 ```shell
 +------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
 |        ENDPOINT        |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |
 +------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
-| https://10.0.0.30:2379 | dd4b95995dc266b1 |  3.4.13 |   20 kB |     false |      false |        64 |          9 |                  9 |        |
-| https://10.0.0.31:2379 | 1f46bee47a4f04aa |  3.4.13 |   16 kB |      true |      false |        64 |          9 |                  9 |        |
-| https://10.0.0.32:2379 | 6443b97f5544707b |  3.4.13 |   16 kB |     false |      false |        64 |          9 |                  9 |        |
+| https://10.0.0.33:2379 | f1ec1f6015c9d4a4 |   3.4.9 |   20 kB |      true |      false |       756 |          8 |                  8 |        |
+| https://10.0.0.34:2379 | 22353e8ece256e71 |   3.4.9 |   25 kB |     false |      false |       756 |          8 |                  8 |        |
+| https://10.0.0.35:2379 | 64051d53b5971b69 |   3.4.9 |   20 kB |     false |      false |       756 |          8 |                  8 |        |
 +------------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
 ```
 
@@ -1026,7 +1074,7 @@ etcdctl \
 
 
 
-# 四、安装docker
+# 3.安装docker
 
 [docker官网](https://www.docker.com/)
 
@@ -1044,39 +1092,39 @@ etcdctl \
 
 
 
-## 4.1 下载二进制安装包并解压缩
+## 3.1 下载二进制安装包并解压缩
 
-**创建目录**
-
-```shell
-[ -d /opt/k8s/docker ] || mkdir /opt/k8s/docker && cd /opt/k8s/docker
-```
-
-
-
-**下载包并解压缩**
+**创建目录、下载包并解压缩**
 
 ```shell
-wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.12.tgz && tar xf docker-19.03.12.tgz
-```
-
-
-
-## 4.2 导出docker命令环境变量
-
-```shell
-cd /opt/k8s/docker
 source /opt/k8s/script/env.sh
 for node_ip in ${NODE_IPS[@]}
   do
+    {
+      echo ">>> ${node_ip}"
+      ssh root@${node_ip} "[ -d /opt/k8s/docker ] || mkdir /opt/k8s/docker && cd /opt/k8s/docker && wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.12.tgz && tar xf docker-19.03.12.tgz"
+    }&
+  done
+  wait
+```
+
+
+
+
+
+## 3.2 导出docker命令环境变量
+
+```shell
+for node_ip in ${NODE_IPS[@]}
+  do
     echo ">>> ${node_ip}"
-    scp -p docker/* root@${node_ip}:/usr/local/bin
+    ssh root@${node_ip} "cp /opt/k8s/docker/docker/* /usr/local/bin"
   done
 ```
 
 
 
-## 4.3 使用systemd管理docker
+## 3.3 使用systemd管理docker
 
 ```shell
 cat > /usr/lib/systemd/system/docker.service <<'EOF'
@@ -1109,7 +1157,6 @@ EOF
 
 ```shell
 source /opt/k8s/script/env.sh
-export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]} ${NODE_IPS[4]} ${NODE_IPS[5]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
@@ -1119,12 +1166,12 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-## 4.4 创建docker配置文件
+## 3.4 创建docker配置文件
 
 [所有机器配置加速源并配置docker的启动参数使用systemd，使用systemd是官方的建议](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
 
 ```shell
-mkdir /etc/docker
+[ -d /etc/docker ] || mkdir /etc/docker
 cat > /etc/docker/daemon.json<<'EOF'
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
@@ -1150,12 +1197,11 @@ EOF
 
 ```shell
 source /opt/k8s/script/env.sh
-export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]} ${NODE_IPS[4]} ${NODE_IPS[5]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} mkdir /etc/docker
-    scp -p /etc/docker/daemon.json root@${node_ip}:/etc/docker/daemon.json
+    ssh root@${node_ip} "[ -d /etc/docker ] || mkdir /etc/docker"
+    scp -p /etc/docker/daemon.json root@${node_ip}:/etc/docker
   done
 ```
 
@@ -1193,24 +1239,20 @@ for node_ip in ${NODE_IPS[@]}
 
 ```shell
 >>> 10.0.0.30
-   Active: active (running) since Sun 2021-06-06 23:56:06 CST; 8s ago
->>> 10.0.0.31
-   Active: active (running) since Sun 2021-06-06 23:56:06 CST; 7s ago
->>> 10.0.0.32
-   Active: active (running) since Sun 2021-06-06 23:56:07 CST; 7s ago
+   Active: active (running) since Sun 2022-09-18 11:30:04 CST; 7s ago
 >>> 10.0.0.33
-   Active: active (running) since Sun 2021-06-06 23:56:07 CST; 7s ago
+   Active: active (running) since Sun 2022-09-18 11:30:05 CST; 7s ago
 >>> 10.0.0.34
-   Active: active (running) since Sun 2021-06-06 23:56:08 CST; 6s ago
+   Active: active (running) since Sun 2022-09-18 11:30:05 CST; 6s ago
 >>> 10.0.0.35
-   Active: active (running) since Sun 2021-06-06 23:56:08 CST; 6s ago
+   Active: active (running) since Sun 2022-09-18 11:30:06 CST; 6s ago
 ```
 
 
 
 ## 4.7 设置docker命令自动补全
 
-> **yum安装的docker会有一个文件`/usr/share/bash-completion/completions/docker`，这个文件就是自动补全docker命令的文件，二进制安装的没有，从已经yum安装的docker机器上把这个文件拷贝过来即可**
+> **yum安装的docker会有一个文件 `/usr/share/bash-completion/completions/docker`，这个文件就是自动补全docker命令的文件，二进制安装的没有，从已经yum安装的docker机器上把这个文件拷贝过来即可**
 
 
 
@@ -1218,7 +1260,6 @@ for node_ip in ${NODE_IPS[@]}
 
 ```shell
 source /opt/k8s/script/env.sh
-export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]} ${NODE_IPS[4]} ${NODE_IPS[5]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
@@ -1230,7 +1271,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-# 五、部署Mster Node
+# 4.部署Master Node
 
 kubernetes master 节点运行如下组件：
 
@@ -1240,7 +1281,7 @@ kubernetes master 节点运行如下组件：
 
 
 
-## 5.1 部署 kube-apiserver
+## 4.1 部署 kube-apiserver
 
 **操作的流程**
 
@@ -1253,35 +1294,99 @@ kubernetes master 节点运行如下组件：
 
 说明
 
-- kubernetes证书路径是`/etc/kubernetes/ssl`
+- kubernetes证书路径是 `/etc/kubernetes/ssl`
 
-- 配置文件路径是`/etc/kubernetes/cfg`
+- 配置文件路径是 `/etc/kubernetes/cfg`
 
-- 二进制可执行程序包直接放在环境变量`/usr/local/bin`
+- 二进制可执行程序包直接放在 `/usr/local/bin`
 
-- 日志路径是`/var/log/kubernetes`
+- 日志路径是 `/var/log/kubernetes`
 
 
 
-### 5.1.1 生成 kube-apiserver 证书和私钥
+### 4.1.1 生成 kube-apiserver 证书
 
-**创建证书签名请求**
+**创建目录**
 
 ```shell
-cd /opt/k8s/cert
+[ -d /opt/k8s/cert/kube-apiserver ] || mkdir -p /opt/k8s/cert/kube-apiserver && cd /opt/k8s/cert/kube-apiserver
+```
+
+
+
+**自签证书颁发机构（CA）**
+
+```shell
+cat > ca-config.json << EOF
+{
+  "signing": {
+    "default": {
+      "expiry": "87600h"
+    },
+    "profiles": {
+      "kubernetes": {
+         "expiry": "87600h",
+         "usages": [
+            "signing",
+            "key encipherment",
+            "server auth",
+            "client auth"
+        ]
+      }
+    }
+  }
+}
+EOF
+
+cat > ca-csr.json << EOF
+{
+    "CN": "kubernetes",
+    "key": {
+        "algo": "rsa",
+        "size": 2048
+    },
+    "names": [
+        {
+            "C": "CN",
+            "L": "Beijing",
+            "ST": "Beijing",
+            "O": "k8s",
+            "OU": "System"
+        }
+    ]
+}
+EOF
+```
+
+
+
+**生成证书**
+
+:::tip
+
+会生成 `ca.pem` 、`ca-key.pem`
+
+:::
+
+```shell
+cfssl gencert -initca ca-csr.json | cfssljson -bare ca -
+```
+
+
+
+### 4.1.2 使用自签CA签发kube-apiserver HTTPS证书
+
+**创建证书申请文件**
+
+```shell
 cat > kube-apiserver-csr.json <<EOF
 {
   "CN": "kubernetes",
   "hosts": [
-    "127.0.0.1",
     "10.0.0.30",
-    "10.0.0.31",
-    "10.0.0.32",
     "10.0.0.33",
     "10.0.0.34",
     "10.0.0.35",
-    "10.244.1.1",
-    "172.16.0.1",
     "kubernetes",
     "kubernetes.default",
     "kubernetes.default.svc",
@@ -1309,9 +1414,15 @@ EOF
 
 **生成证书和私钥**
 
+:::tip
+
+会生成 `kube-apiserver.csr` 、`kube-apiserver-key.pem` 、`kube-apiserver.pem`
+
+:::
+
 ```shell
-cd /opt/k8s/cert
-cfssl gencert -ca=ca.pem \
+cfssl gencert \
+  -ca=ca.pem \
   -ca-key=ca-key.pem \
   -config=ca-config.json \
   -profile=kubernetes kube-apiserver-csr.json | cfssljson -bare kube-apiserver
@@ -1319,16 +1430,16 @@ ls kube-api*pem
   
   
 #上述命令执行成功后会生成如下文件
-kube-apiserver.csr  kube-apiserver-key.pem  kube-apiserver.pem
 ```
 
 
 
-### 5.1.2 下载 kubernetes-server 二进制包
+### 4.1.2 下载 kubernetes-server 二进制包
 
 ```shell
-[ -d /opt/k8s/kubernetes-server ] || mkdir /opt/k8s/kubernetes-server && cd /opt/k8s/kubernetes-server
-wget https://dl.k8s.io/v1.18.6/kubernetes-server-linux-amd64.tar.gz
+[ -d /opt/k8s/pkg/master ] || mkdir /opt/k8s/pkg/master && cd /opt/k8s/pkg/master
+export K8S_VERSION=1.20.15
+wget https://dl.k8s.io/v${K8S_VERSION}/kubernetes-server-linux-amd64.tar.gz
 tar xf kubernetes-server-linux-amd64.tar.gz
 ```
 
@@ -1342,20 +1453,23 @@ cp kubernetes/server/bin/{apiextensions-apiserver,kubeadm,kube-apiserver,kube-co
 
 
 
-### 5.1.3 创建 kube-apiserver 配置文件
+### 4.1.3 创建 kube-apiserver 配置文件
 
-> **为了使EOF保留换行符，所以要写两个`\\`**
+:::tip
+
+**为了使EOF保留换行符，所以要写两个 `\\`**
+
+:::
 
 ```shell
-[[ -d /opt/k8s/{cfg,logs} ]] || mkdir /opt/k8s/{cfg,logs}
 cat > /opt/k8s/cfg/kube-apiserver.conf << EOF
 KUBE_APISERVER_OPTS="--logtostderr=false \\
 --v=2 \\
 --log-dir=/opt/k8s/logs \\
---etcd-servers=https://10.0.0.130:2379,https://10.0.0.133:2379,https://10.0.0.134:2379 \\
---bind-address=10.0.0.130 \\
+--etcd-servers=https://10.0.0.33:2379,https://10.0.0.34:2379,https://10.0.0.35:2379 \\
+--bind-address=10.0.0.30 \\
 --secure-port=6443 \\
---advertise-address=10.0.0.130 \\
+--advertise-address=10.0.0.30 \\
 --allow-privileged=true \\
 --service-cluster-ip-range=172.16.0.0/24 \\
 --enable-admission-plugins=NamespaceLifecycle,LimitRanger,ServiceAccount,ResourceQuota,NodeRestriction \\
@@ -1363,21 +1477,33 @@ KUBE_APISERVER_OPTS="--logtostderr=false \\
 --enable-bootstrap-token-auth=true \\
 --token-auth-file=/opt/k8s/cfg/token.csv \\
 --service-node-port-range=30000-32767 \\
---kubelet-client-certificate=/opt/k8s/cert/kube-apiserver.pem \\
---kubelet-client-key=/opt/k8s/cert/kube-apiserver-key.pem \\
---tls-cert-file=/opt/k8s/cert/kube-apiserver.pem  \\
---tls-private-key-file=/opt/k8s/cert/kube-apiserver-key.pem \\
---client-ca-file=/opt/k8s/cert/ca.pem \\
---service-account-key-file=/opt/k8s/cert/ca-key.pem \\
---etcd-cafile=/opt/k8s/cert/ca.pem \\
---etcd-certfile=/opt/k8s/cert/etcd.pem \\
---etcd-keyfile=/opt/k8s/cert/etcd-key.pem \\
+--kubelet-client-certificate=/opt/k8s/cert/kube-apiserver/kube-apiserver.pem \\
+--kubelet-client-key=/opt/k8s/cert/kube-apiserver/kube-apiserver-key.pem \\
+--tls-cert-file=/opt/k8s/cert/kube-apiserver/kube-apiserver.pem  \\
+--tls-private-key-file=/opt/k8s/cert/kube-apiserver/kube-apiserver-key.pem \\
+--client-ca-file=/opt/k8s/cert/kube-apiserver/ca.pem \\
+--service-account-key-file=/opt/k8s/cert/kube-apiserver/ca-key.pem \\
+--service-account-issuer=api \\
+--service-account-signing-key-file=/opt/k8s/cert/kube-apiserver/kube-apiserver-key.pem \\
+--etcd-cafile=/opt/k8s/cert/etcd/ca.pem \\
+--etcd-certfile=/opt/k8s/cert/etcd/etcd.pem \\
+--etcd-keyfile=/opt/k8s/cert/etcd/etcd-key.pem \\
+--requestheader-client-ca-file=/opt/k8s/cert/kube-apiserver/ca.pem \\
+--proxy-client-cert-file=/opt/k8s/cert/kube-apiserver/kube-apiserver.pem \\
+--proxy-client-key-file=/opt/k8s/cert/kube-apiserver/kube-apiserver-key.pem \\
+--requestheader-allowed-names=kubernetes \\
+--requestheader-extra-headers-prefix=X-Remote-Extra- \\
+--requestheader-group-headers=X-Remote-Group \\
+--requestheader-username-headers=X-Remote-User \\
+--enable-aggregator-routing=true \\
 --audit-log-maxage=30 \\
 --audit-log-maxbackup=3 \\
 --audit-log-maxsize=100 \\
 --audit-log-path=/opt/k8s/logs/k8s-audit.log"
 EOF
 ```
+
+
 
 
 
@@ -1402,7 +1528,7 @@ EOF
 
 
 
-### 5.1.4 启用 TLS Bootstrapping 机制
+### 4.1.4 启用 TLS Bootstrapping 机制
 
 TLS Bootstraping：
 
@@ -1414,7 +1540,7 @@ TLS bootstraping 工作流程：
 
 
 
-**创建kube-apiserver配置文件中`/opt/k8s/cfg/kube-apiserver.conf`指定的 `--token-auth-file=/opt/k8s/cfg/token.csv`**
+**创建kube-apiserver配置文件中 `/opt/k8s/cfg/kube-apiserver.conf` 指定的 `--token-auth-file=/opt/k8s/cfg/token.csv`**
 
 - 格式：token，用户名，UID，用户组
 
@@ -1428,7 +1554,7 @@ EOF
 
 
 
-### 5.1.5 使用systemd管理kube-apiserver
+### 4.1.5 使用systemd管理kube-apiserver
 
 ```shell
 cat > /usr/lib/systemd/system/kube-apiserver.service << 'EOF'
@@ -1446,7 +1572,7 @@ EOF
 
 
 
-### 5.1.6 启动 kube-apiserver 并设置开机自启
+### 4.1.6 启动 kube-apiserver 并设置开机自启
 
 ```shell
 systemctl daemon-reload && 
@@ -1455,7 +1581,7 @@ systemctl start kube-apiserver && systemctl enable kube-apiserver
 
 
 
-**检查 kube-apiserver 是否正确启动，如果没有正确启动，使用命令`journalctl -u kube-apiserver`查看日志**
+**检查 kube-apiserver 是否正确启动，如果没有正确启动，使用命令 `journalctl -u kube-apiserver` 查看日志**
 
 ```shell
 systemctl status kube-apiserver |grep Active            
@@ -1466,12 +1592,12 @@ systemctl status kube-apiserver |grep Active
 **正确输出**
 
 ```shell
-Active: active (running) since Tue 2020-07-07 10:01:15 CST; 37s ago
+Active: active (running) since Sun 2022-09-18 14:54:33 CST; 27s ago
 ```
 
 
 
-### 5.1.7 授权 kubelet-bootstrap 用户允许请求证书
+### xxx !!!授权 kubelet-bootstrap 用户允许请求证书
 
 ```shell
 kubectl create clusterrolebinding kubelet-bootstrap \
@@ -1481,34 +1607,41 @@ kubectl create clusterrolebinding kubelet-bootstrap \
 
 
 
-## 5.2 部署 kube-controller-manager
+## 4.2 部署 kube-controller-manager
 
-> **kube-controller-manager（k8s控制器管理器）是一个守护进程，它通过 kube-apiserver 监视集群的共享状态（kube-apiserver收集或监视到的一些集群资源状态，供 kube-controller-manager 或其它客户端watch）, 控制器管理器并尝试将当前的状态向所定义的状态迁移（移动、靠近），它本身是有状态的，会修改集群状态信息，如果多个控制器管理器同时生效，则会有一致性问题，所以 kube-controller-manager 的高可用，只能是主备模式，而kubernetes集群是采用租赁锁实现leader选举，需要在启动参数中加入  `--leader-elect=true`。**
+:::tip
+
+**kube-controller-manager（k8s控制器管理器）是一个守护进程，它通过 kube-apiserver 监视集群的共享状态（kube-apiserver收集或监视到的一些集群资源状态，供 kube-controller-manager 或其它客户端watch）, 控制器管理器并尝试将当前的状态向所定义的状态迁移（移动、靠近），它本身是有状态的，会修改集群状态信息，如果多个控制器管理器同时生效，则会有一致性问题，所以 kube-controller-manager 的高可用，只能是主备模式，而kubernetes集群是采用租赁锁实现leader选举，需要在启动参数中加入  `--leader-elect=true`。**
+
+:::
 
 
 
-### 5.2.1 创建配置文件
+### 4.2.1 创建配置文件
 
 ```shell
-cat > /opt/k8s/cfg/kube-controller-manager.conf << EOF
+cat > /opt/k8s/cfg/kube-controller-manager.kubeconfig << EOF
 KUBE_CONTROLLER_MANAGER_OPTS="--logtostderr=false \\
 --v=2 \\
 --log-dir=/opt/k8s/logs \\
 --leader-elect=true \\
---master=127.0.0.1:8080 \\
+--kubeconfig=/opt/k8s/cfg/kube-controller-manager.kubeconfig \\
 --bind-address=127.0.0.1 \\
 --allocate-node-cidrs=true \\
 --cluster-cidr=10.244.0.0/16 \\
 --service-cluster-ip-range=172.16.0.0/24 \\
---cluster-signing-cert-file=/opt/k8s/cert/ca.pem \\
---cluster-signing-key-file=/opt/k8s/cert/ca-key.pem  \\
---root-ca-file=/opt/k8s/cert/ca.pem \\
---service-account-private-key-file=/opt/k8s/cert/ca-key.pem \\
---experimental-cluster-signing-duration=876000h0m0s"
+--cluster-signing-cert-file=/opt/k8s/cert/kube-apiserver/ca.pem \\
+--cluster-signing-key-file=/opt/k8s/cert/kube-apiserver/ca-key.pem \\
+--root-ca-file=/opt/k8s/cert/kube-apiserver/ca.pem \\
+--service-account-private-key-file=/opt/k8s/cert/kube-apiserver/ca-key.pem \\
+--experimental-cluster-signing-duration=87600h0m0s"
 EOF
 ```
 
-- –master：通过本地非安全端口8080连接apiserver。
+
+
+- --kubeconfig：连接apiserver配置文件
+
 - –leader-elect：当该组件启动多个时，自动选举（HA）
 - –cluster-signing-cert-file/–cluster-signing-key-file：自动为kubelet颁发证书的CA，与apiserver保持一致
 
@@ -1530,9 +1663,73 @@ EOF
 
 
 
+### 4.2.2 生成 kubeconfig 文件
+
+#### 4.2.2.1 生成kube-controller-manager证书
+
+创建证书请求文件
+
+```json
+cat > /opt/k8s/cfg/kube-controller-manager-csr.json << EOF
+{
+  "CN": "system:kube-controller-manager",
+  "hosts": [],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "L": "BeiJing", 
+      "ST": "BeiJing",
+      "O": "system:masters",
+      "OU": "System"
+    }
+  ]
+}
+EOF
+```
 
 
-### 5.2.2 systemd管理 kube-controller-manager
+
+生成证书
+
+```shell
+cd /opt/k8s/cert/kube-apiserver
+cfssl gencert \
+  -ca=ca.pem \
+  -ca-key=ca-key.pem \
+  -config=ca-config.json \
+  -profile=kubernetes /opt/k8s/cfg/kube-controller-manager-csr.json | cfssljson \
+  -bare kube-controller-manager
+```
+
+
+
+#### 4.2.2.2 生成 kubeconfig文件
+
+```shell
+export KUBE_CONFIG="/opt/k8s/cfg/kube-controller-manager.kubeconfig"
+export KUBE_APISERVER="https://10.0.0.30:6443"
+
+
+
+kubectl config set-credentials kube-controller-manager \
+  --client-certificate=./kube-controller-manager.pem \
+  --client-key=./kube-controller-manager-key.pem \
+  --embed-certs=true \
+  --kubeconfig=${KUBE_CONFIG}
+kubectl config set-context default \
+  --cluster=kubernetes \
+  --user=kube-controller-manager \
+  --kubeconfig=${KUBE_CONFIG}
+kubectl config use-context default --kubeconfig=${KUBE_CONFIG}
+```
+
+
+
+### 4.2.3 使用 systemd管理 kube-controller-manager
 
 ```shell
 cat > /usr/lib/systemd/system/kube-controller-manager.service << 'EOF'

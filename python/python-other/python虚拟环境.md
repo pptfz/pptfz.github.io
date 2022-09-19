@@ -69,7 +69,7 @@ EOF
 
 
 
-## 1.4 通过oyenv管理多版本python
+## 1.4 通过pyenv管理多版本python
 
 **pyenv命令语法**
 
