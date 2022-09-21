@@ -18,7 +18,9 @@ spug上线方式分为 `常规发布`和`自定义发布`，其中常规发布�
 
 walle github
 
-![iShot2021-02-07 20.38.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 20.38.49.png)
+![iShot2021-02-07 20.38.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2020.38.49.png)
+
+
 
 
 
@@ -26,7 +28,9 @@ walle github
 
 spug上线方式，常规发布是沿用了瓦力的上线逻辑
 
-![iShot2021-02-07 20.35.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 20.35.55.png)
+![iShot2021-02-07 20.35.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2020.35.55.png)
+
+
 
 
 
@@ -74,13 +78,15 @@ git地址
 
 spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全局密钥` 和 `独立密钥` 两种，如果上传了独立密钥则以上传的为主，反之以全局密钥为主，生产中我们是选择的修改全局密钥，因为我们是有一台跳板机，可以免密登陆其他机器
 
-![iShot2021-02-07 21.57.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 21.57.17.png)
+![iShot2021-02-07 21.57.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2021.57.17.png)
 
 
 
 
 
-![iShot2021-02-07 22.02.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 22.02.22.png)
+![iShot2021-02-07 22.02.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2022.02.22.png)
+
+
 
 
 
@@ -90,25 +96,35 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 机器导入有 `单个新建` 和 `批量导入` 两种方式，批量导入按照官方提供的模版填写导入即可，这里仅作演示，选择新建即可
 
-![iShot2021-02-07 21.36.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 21.36.28.png)
+![iShot2021-02-07 21.36.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2021.36.28.png)
+
+
+
+
 
 
 
 新建主机会让你选择主机类别，如果是第一次添加的话需要手动设置类别
 
-![iShot2021-02-07 21.46.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 21.46.10.png)
+![iShot2021-02-07 21.46.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2021.46.10.png)
+
+
 
 
 
 自定义主机类别
 
-![iShot2021-02-07 21.47.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 21.47.13.png)
+![iShot2021-02-07 21.47.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2021.47.13.png)
+
+
 
 
 
 填写其他信息，包括 `主机名称`，`连接信息`，`备注信息`
 
-![iShot2021-02-08 13.04.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 13.04.39.png)
+![iShot2021-02-08 13.04.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2013.04.39.png)
+
+
 
 
 
@@ -116,13 +132,15 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 如果连接成功则会提示操作成功
 
-![iShot2021-02-08 13.05.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 13.05.06.png)
+![iShot2021-02-08 13.05.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2013.05.06.png)
+
+
 
 
 
 这样我们就手动添加了一台主机，如果想要批量添加主机则下载官方提供的主机导入模版填写上传即可
 
-![iShot2021-02-07 22.12.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 22.12.29.png)
+![iShot2021-02-07 22.12.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2022.12.29.png)
 
 
 
@@ -132,19 +150,23 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 在 `应用发布` 中选择 `应用管理`，点击 `新建`
 
-![iShot2021-02-07 21.26.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 21.26.14.png)
+
+
+![iShot2021-02-07 21.26.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2021.26.14.png)
+
+
 
 
 
 新建应用
 
-![iShot2021-02-07 21.32.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 21.32.59.png)
+![iShot2021-02-07 21.32.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2021.32.59.png)
 
 
 
 新建后的应用
 
-![iShot2021-02-07 21.35.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 21.35.18.png)
+![iShot2021-02-07 21.35.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2021.35.18.png)
 
 
 
@@ -152,31 +174,39 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 在要发布的项目中点击 `新建发布`
 
-![iShot2021-02-07 22.20.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 22.20.20.png)
+![iShot2021-02-07 22.20.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2022.20.20.png)
+
+
 
 
 
 选择 `常规发布`
 
-![iShot2021-02-07 22.21.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 22.21.35.png)
+![iShot2021-02-07 22.21.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2022.21.35.png)
+
+
 
 
 
 需要选择发布环境，如果是第一次发布则需要新建环境
 
-![iShot2021-02-07 22.22.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 22.22.22.png)
+![iShot2021-02-07 22.22.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2022.22.22.png)
+
+
 
 
 
 新建环境可以在新建发布中选择 `新建环境`，也可以在 `配置中心`中选择 `环境管理`然后再新建环境
 
-![iShot2021-02-07 22.23.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 22.23.34.png)
+![iShot2021-02-07 22.23.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2022.23.34.png)
+
+
 
 
 
 这里我们新建一个测试环境
 
-![iShot2021-02-07 22.26.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 22.26.10.png)
+![iShot2021-02-07 22.26.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2022.26.10.png)
 
 
 
@@ -190,7 +220,9 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 >
 > 需要修改为&emsp;&emsp;ssh://git@10.0.0.11:10022/web_test/web_test_one.git
 
-![iShot2021-02-07 22.40.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 22.40.17.png)
+![iShot2021-02-07 22.40.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2022.40.17.png)
+
+
 
 
 
@@ -208,7 +240,9 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 - **发布目标主机**
   - 代码部署到机器，可以是单个，也可以是多个
 
-![iShot2021-02-07 22.53.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07 22.53.59.png)
+
+
+![iShot2021-02-07 22.53.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-07%2022.53.59.png)
 
 
 
@@ -216,7 +250,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 这里可以做自定义配置
 
-![iShot2021-02-08 10.33.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 10.33.11.png)
+![iShot2021-02-08 10.33.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2010.33.11.png)
 
 
 
@@ -229,7 +263,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
   - spug官网[内置了全局变量](https://spug.dev/docs/deploy-config/#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F)，当然也可以自定义全局变量
 
-    ![iShot2021-02-08 10.39.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 10.39.58.png)
+    ![iShot2021-02-08 10.39.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2010.39.58.png)
 
 
 
@@ -239,7 +273,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
   - 在部署spug的服务器上执行
 
-    ![iShot2021-02-08 10.43.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 10.43.09.png)
+    ![iShot2021-02-08 10.43.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2010.43.09.png)
 
 
 
@@ -249,7 +283,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
   - 在这里一般进行项目的依赖包安装和编译工作
 
-    ![iShot2021-02-08 10.45.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 10.45.10.png)
+    ![iShot2021-02-08 10.45.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2010.45.10.png)
 
 
 
@@ -259,7 +293,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
   - 在发布的目标主机上运行，当前目录为目标主机上待发布的源代码目录，生产中我们设置为 `/data/release/项目名(一般为域名)`
 
-    ![iShot2021-02-08 10.56.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 10.56.52.png)
+    ![iShot2021-02-08 10.56.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2010.56.52.png)
 
 
 
@@ -286,7 +320,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
     chown -R www.www /data/release/$PROJECT_NAME /data/xmadx_api/$PROJECT_NAME
     ```
 
-    ![iShot2021-02-08 10.59.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 10.59.48.png)
+    ![iShot2021-02-08 10.59.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2010.59.48.png)
 
 
 
@@ -296,7 +330,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 在 `应用发布` 中选择 `发布申请` ，然后点击 `新建发布申请`
 
-![iShot2021-02-08 11.10.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 11.10.52.png)
+![iShot2021-02-08 11.10.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2011.10.52.png)
 
 
 
@@ -344,33 +378,45 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 开始发布，选择应用的环境(如测试、生产、灰度等)，点击要上线的项目
 
-![iShot2021-02-08 12.02.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 12.02.18.png)
+![iShot2021-02-08 12.02.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2012.02.18.png)
 
 
 
 填写发布相关信息
 
-![iShot2021-02-08 12.05.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 12.05.03.png)
+![iShot2021-02-08 12.05.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2012.05.03.png)
+
+
 
 
 
 开始发布，点击 `发布`
 
-![iShot2021-02-08 12.06.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 12.06.30.png)
+![iShot2021-02-08 12.06.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2012.06.30.png)
+
+
 
 
 
 还需要再点击 `发布`
 
-![iShot2021-02-08 12.54.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 12.54.34.png)
+![iShot2021-02-08 12.54.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2012.54.34.png)
+
+
 
 
 
 发布成功
 
-![iShot2021-02-08 13.05.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 13.05.42.png)
+![iShot2021-02-08 13.05.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2013.05.42.png)
 
-![iShot2021-02-08 13.06.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 13.06.07.png)
+
+
+
+
+![iShot2021-02-08 13.06.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2013.06.07.png)
+
+
 
 
 
@@ -378,17 +424,21 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 浏览器访问
 
-![iShot2021-02-08 14.31.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 14.31.09.png)
+![iShot2021-02-08 14.31.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2014.31.09.png)
+
+
 
 
 
 这里可以看到nginx配置文件中的root根目录 `/data/a01_web/webtest.pptfz.com`实际上是软链接到了 `/data/release/webtest.pptfz.com/时间目录`
 
-![iShot2021-02-08 13.07.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 13.07.42.png)
+![iShot2021-02-08 13.07.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2013.07.42.png)
 
 
 
-![iShot2021-02-08 13.08.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 13.08.14.png)
+![iShot2021-02-08 13.08.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2013.08.14.png)
+
+
 
 
 
@@ -412,52 +462,70 @@ EOF
 
 在gogs中查看提交的文件
 
-![iShot2021-02-08 14.37.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 14.37.06.png)
+![iShot2021-02-08 14.37.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2014.37.06.png)
+
+
+
+
 
 
 
 spug上线发布，操作流程和之前一样，找到对应的项目，然后点击发布
 
-![iShot2021-02-08 14.38.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 14.38.13.png)
+![iShot2021-02-08 14.38.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2014.38.13.png)
+
+
 
 
 
 浏览器查看，已经更新
 
-![iShot2021-02-08 14.38.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 14.38.53.png)
+![iShot2021-02-08 14.38.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2014.38.53.png)
+
+
 
 
 
 web机器查看，可以看到 `/data/release/webtest.pptfz.com`下已经有2个时间命名的目录了，这就是每一次发布的源码，而nginx中配置的root根目录总是指向最新的软链接， `1_1_20210208125502` 是第一次发布的内容，`1_2_20210208143842`是第二次发布的内容
 
-![iShot2021-02-08 14.40.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 14.40.36.png)
+![iShot2021-02-08 14.40.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2014.40.36.png)
 
 
 
-现在做一下回滚操作，再要回滚的项目中点击 `回滚`
 
-![iShot2021-02-08 14.44.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 14.44.35.png)
+
+现在做一下回滚操作，在要回滚的项目中点击 `回滚`
+
+![iShot2021-02-08 14.44.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2014.44.35.png)
+
+
 
 
 
 回滚确认
 
-![iShot2021-02-08 14.45.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 14.45.10.png)
+![iShot2021-02-08 14.45.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2014.45.10.png)
+
+
 
 
 
 点击 `回滚` 后会重新生成上线单，点击 `发布` 即可，和正常上线流程一样
 
-![iShot2021-02-08 14.45.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 14.45.48.png)
+![iShot2021-02-08 14.45.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2014.45.48.png)
+
+
 
 
 
 回滚成功
 
-![iShot2021-02-08 14.47.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 14.47.23.png)
+![iShot2021-02-08 14.47.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2014.47.23.png)
+
+
 
 
 
 浏览器验证，可以看到，内容又回到了第一次提交的内容 `第一次测试`
 
-![iShot2021-02-08 14.47.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08 14.47.50.png)
+![iShot2021-02-08 14.47.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-08%2014.47.50.png)

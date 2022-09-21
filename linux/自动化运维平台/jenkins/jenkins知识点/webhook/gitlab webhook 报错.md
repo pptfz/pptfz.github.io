@@ -20,6 +20,8 @@ gitlab+jenkins 配置webhook自动触发，在gitlab项目中配置好webhook后
 
 
 
+
+
 # 报错2 `Hook executed successfully but returned HTTP 403`
 
 gitlab+jenkins 配置webhook自动触发，在gitlab项目中配置好webhook后点击 `Test Push events` 报错如下
