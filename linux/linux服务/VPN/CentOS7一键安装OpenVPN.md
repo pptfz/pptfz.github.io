@@ -677,7 +677,7 @@ windows安装就是一路下一步
 
 
 
-```sh
+```shell
 #!/bin/bash
 #
 # https://github.com/Nyr/openvpn-install

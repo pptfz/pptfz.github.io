@@ -110,7 +110,7 @@ DolphinScheduler正常运行提供如下的网络端口配置：
 
 ## 2.3 安装过程
 
-[DolphinScheduler最新版1.3.2官方文档(截止2002.9.5)](https://dolphinscheduler.apache.org/zh-cn/docs/1.3.2/user_doc/standalone-deployment.html)
+[DolphinScheduler最新版1.3.2官方文档(截止2020.9.5)](https://dolphinscheduler.apache.org/zh-cn/docs/1.3.2/user_doc/standalone-deployment.html)
 
 
 

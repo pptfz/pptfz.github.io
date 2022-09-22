@@ -199,7 +199,7 @@ cd9e038ab419        goharbor/harbor-registryctl:v1.8.1                  "/harbor
 
 
 
-<span style={{color: 'red'}}>**到此，harbor http方式安装完成！！！**</span>
+**<span style={{color: 'red'}}>到此，harbor http方式安装完成！！！</span>**
 
 
 

@@ -137,7 +137,7 @@ PATH=$JAVA_HOME/bin:$HADOOP_HOME/bin:$HIVE_HOME/bin:$HBASE_HOME/bin:$SPARK_HOME/
 
 ## 2.3 启动 zepplin
 
-::tip
+:::tip
 
 **需要用 `hadoop` 用户的身份启动，否则后续会有权限拒绝问题**
 

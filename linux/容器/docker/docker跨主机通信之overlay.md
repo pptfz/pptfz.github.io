@@ -313,7 +313,7 @@ PING www.baidu.com (61.135.169.125): 56 data bytes
 round-trip min/avg/max = 4.792/4.927/5.063 ms
 ```
 
-<span style={{color: 'red'}}>**到此，跨主机间容器通信完成！！！**</span>
+**<span style={{color: 'red'}}>到此，跨主机间容器通信完成！！！</span>**
 
 
 
