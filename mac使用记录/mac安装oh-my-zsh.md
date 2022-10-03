@@ -9,7 +9,7 @@
 # 1.安装oh-my-zsh
 
 ```shell
-sh -c "$(curl -fsSL https://raw/branch.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 

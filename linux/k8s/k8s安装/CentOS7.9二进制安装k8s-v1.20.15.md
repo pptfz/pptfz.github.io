@@ -276,9 +276,12 @@ source /opt/k8s/script/env.sh
 ```shell
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    ssh root@${node_ip} yum -y install chrony
+    {
+      echo ">>> ${node_ip}"
+      ssh root@${node_ip} yum -y install chrony
+    }&
   done
+  wait
 ```
 
 
@@ -472,6 +475,8 @@ for node_ip in ${NODE_IPS[@]}
 
 CA根证书说明
 
+:::tip
+
 - 为确保安全，`kubernetes` 系统各组件需要使用 `x509` 证书对通信进行加密和认证。
 
 - CA (Certificate Authority) 是自签名的根证书，用来签名后续创建的其它证书。
@@ -479,6 +484,10 @@ CA根证书说明
 - CA证书是集群所有节点共享的，**只需要创建一次**，后续用它签名其它所有证书。
 
 - 本文档使用 `CloudFlare` 的 PKI 工具集 [cfssl](https://github.com/cloudflare/cfssl) 创建所有证书。
+
+:::
+
+
 
 
 
@@ -618,7 +627,7 @@ etcd 集群节点名称和 IP 如下：
 
 
 
-## 2.1 准备cfsll证书生成工具
+## 2.1 准备cfssl证书生成工具
 
 [cfssl官网](https://cfssl.org/)
 
@@ -652,7 +661,7 @@ mv cfssl-certinfo_${CFSSL_VERSION}_linux_amd64 /usr/local/bin/cfssl-certinfo
 创建工作目录
 
 ```shell
-[ -d /opt/k8s/tls ] || mkdir -p /opt/k8s/tls
+[ -d /opt/k8s/cert ] || mkdir -p /opt/k8s/cert && cd /opt/k8s/cert
 ```
 
 
@@ -660,7 +669,6 @@ mv cfssl-certinfo_${CFSSL_VERSION}_linux_amd64 /usr/local/bin/cfssl-certinfo
 自签CA
 
 ```json
-cd /opt/k8s/tls
 cat > ca-config.json << EOF
 {
   "signing": {
@@ -707,7 +715,7 @@ EOF
 
 :::tip
 
-会生成 `ca-key.pem` 、`ca.pem`
+会生成 `ca-key.pem` 、`ca.pem` 、`ca.csr`
 
 :::
 
@@ -759,7 +767,7 @@ EOF
 
 :::tip
 
-会生成 `etcd.pem` 、`etcd-key.pem` 
+会生成 `etcd.pem` 、`etcd-key.pem` 、`etcd.csr`
 
 :::
 
@@ -871,12 +879,12 @@ Wants=network-online.target
 Type=notify
 EnvironmentFile=/opt/k8s/cfg/etcd.conf
 ExecStart=/usr/local/bin/etcd \
---cert-file=/opt/k8s/tls/etcd.pem \
---key-file=/opt/k8s/tls/etcd-key.pem \
---peer-cert-file=/opt/k8s/tls/etcd.pem \
---peer-key-file=/opt/k8s/tls/etcd-key.pem \
---trusted-ca-file=/opt/k8s/tls/ca.pem \
---peer-trusted-ca-file=/opt/k8s/tls/ca.pem \
+--cert-file=/opt/k8s/cert/etcd.pem \
+--key-file=/opt/k8s/cert/etcd-key.pem \
+--peer-cert-file=/opt/k8s/cert/etcd.pem \
+--peer-key-file=/opt/k8s/cert/etcd-key.pem \
+--trusted-ca-file=/opt/k8s/cert/ca.pem \
+--peer-trusted-ca-file=/opt/k8s/cert/ca.pem \
 --logger=zap
 Restart=on-failure
 LimitNOFILE=65536
@@ -910,8 +918,8 @@ export NODE_IPS=(${NODE_IPS[1]} ${NODE_IPS[2]} ${NODE_IPS[3]})
 for node_ip in ${NODE_IPS[@]}
   do
     echo ">>> ${node_ip}"
-    ssh root@${node_ip} mkdir -p /opt/k8s/tls
-    scp -p /opt/k8s/tls/{etcd-key.pem,etcd.pem,ca-key.pem,ca.pem} root@${node_ip}:/opt/k8s/tls
+    ssh root@${node_ip} mkdir -p /opt/k8s/cert
+    scp -p /opt/k8s/cert/{etcd-key.pem,etcd.pem,ca-key.pem,ca.pem} root@${node_ip}:/opt/k8s/cert
   done  
 ```
 
@@ -1023,9 +1031,9 @@ for node_ip in ${NODE_IPS[@]}
     ssh root@${node_ip} "
     /usr/local/bin/etcdctl \
     --endpoints=https://${node_ip}:2379 \
-    --cacert=/opt/k8s/tls/ca.pem \
-    --cert=/opt/k8s/tls/etcd.pem \
-    --key=/opt/k8s/tls/etcd-key.pem endpoint health"
+    --cacert=/opt/k8s/cert/ca.pem \
+    --cert=/opt/k8s/cert/etcd.pem \
+    --key=/opt/k8s/cert/etcd-key.pem endpoint health"
   done
 ```
 
@@ -1050,9 +1058,9 @@ https://10.0.0.35:2379 is healthy: successfully committed proposal: took = 6.483
 source /opt/k8s/script/env.sh
 export ETCD_ENDPOINTS="https://${NODE_IPS[1]}:2379,https://${NODE_IPS[2]}:2379,https://${NODE_IPS[3]}:2379"
 etcdctl \
-  -w table --cacert=/opt/k8s/tls/ca.pem \
-  --cert=/opt/k8s/tls/etcd.pem \
-  --key=/opt/k8s/tls/etcd-key.pem \
+  -w table --cacert=/opt/k8s/cert/ca.pem \
+  --cert=/opt/k8s/cert/etcd.pem \
+  --key=/opt/k8s/cert/etcd-key.pem \
   --endpoints=${ETCD_ENDPOINTS} endpoint status 
 ```
 
@@ -1364,7 +1372,7 @@ EOF
 
 :::tip
 
-会生成 `ca.pem` 、`ca-key.pem`
+会生成 `ca.pem` 、`ca-key.pem` 、`ca.csr`
 
 :::
 
@@ -1426,10 +1434,6 @@ cfssl gencert \
   -ca-key=ca-key.pem \
   -config=ca-config.json \
   -profile=kubernetes kube-apiserver-csr.json | cfssljson -bare kube-apiserver
-ls kube-api*pem  
-  
-  
-#上述命令执行成功后会生成如下文件
 ```
 
 
@@ -1437,7 +1441,7 @@ ls kube-api*pem
 ### 4.1.2 下载 kubernetes-server 二进制包
 
 ```shell
-[ -d /opt/k8s/pkg/master ] || mkdir /opt/k8s/pkg/master && cd /opt/k8s/pkg/master
+[ -d /opt/k8s/pkg/master ] || mkdir -p /opt/k8s/pkg/k8s-master && cd /opt/k8s/pkg/k8s-master
 export K8S_VERSION=1.20.15
 wget https://dl.k8s.io/v${K8S_VERSION}/kubernetes-server-linux-amd64.tar.gz
 tar xf kubernetes-server-linux-amd64.tar.gz
@@ -1695,12 +1699,18 @@ EOF
 
 生成证书
 
+:::tip
+
+会生成 `kube-controller-manager.csr` 、 `kube-controller-manager-key.pem`  、 `kube-controller-manager.pem`
+
+:::
+
 ```shell
-cd /opt/k8s/cert/kube-apiserver
+[ -d kube-controller-manager ] || mkdir /opt/k8s/cert/kube-controller-manager && cd /opt/k8s/cert/kube-controller-manager
 cfssl gencert \
-  -ca=ca.pem \
-  -ca-key=ca-key.pem \
-  -config=ca-config.json \
+  -ca=/opt/k8s/cert/kube-apiserver/ca.pem \
+  -ca-key=/opt/k8s/cert/kube-apiserver/ca-key.pem \
+  -config=/opt/k8s/cert/kube-apiserver/ca-config.json \
   -profile=kubernetes /opt/k8s/cfg/kube-controller-manager-csr.json | cfssljson \
   -bare kube-controller-manager
 ```
