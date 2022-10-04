@@ -1289,7 +1289,7 @@ kubectl get secret `kubectl get secret -n kubernetes-dashboard | grep admin-toke
 
 ### 2.5.6 访问dashboard
 
-:::coution
+:::tip
 
 浏览器访问 `https://ip:30001`，注意是 `https`
 
