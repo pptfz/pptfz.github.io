@@ -914,7 +914,7 @@ kubeadm join 172.30.100.101:6443 --token abcdef.0123456789abcdef \
 
 **`kubeadm init` 遇到的问题**
 
-执行初始化报错 kubelet 超时
+执行初始化报错 kubelet check 超时
 
 ![iShot_2022-10-11_18.19.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-11_18.19.14.png)
 
