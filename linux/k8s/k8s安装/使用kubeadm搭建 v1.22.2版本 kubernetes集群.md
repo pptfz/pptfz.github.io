@@ -910,6 +910,28 @@ kubeadm join 172.30.100.101:6443 --token abcdef.0123456789abcdef \
 	--discovery-token-ca-cert-hash sha256:4dbb97534e8304bb78023352236b898730062a35569e1c7f9247e6c7e81f250d  
 ```
 
+
+
+**`kubeadm init` 遇到的问题**
+
+执行初始化报错 kubelet 超时
+
+![iShot_2022-10-11_18.19.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-11_18.19.14.png)
+
+
+
+执行命令 `kubeadm reset` 重置后加参数 `-v=7` 查看详细日志，发现并没有明显的排查思路
+
+![iShot_2022-10-11_18.27.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-11_18.27.29.png)
+
+
+
+由于使用的是containerd，因此查看containerd日志，执行命令 `journalctl -xe -u containerd` 发现日志报错 `exit status 127: runc: error while loading shared libraries: libseccomp.so.2: cannot open shared object file: No such file or directory\\n\"\n"` ，提示缺少 `libseccomp.so.2`，执行命令 `yum -y install libseccomp` 安装这个包即可
+
+![iShot_2022-10-11_18.28.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-11_18.28.33.png)
+
+
+
 `kubeadm init` 命令执行流程如下图所示
 
 ![iShot2020-10-20 16.02.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-20%2016.02.59.png)
@@ -1317,7 +1339,7 @@ kubectl get secret `kubectl get secret -n kubernetes-dashboard | grep admin-toke
 
 **登陆后的首界面**
 
-![iShot2021-11-14 18.19.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14 18.19.11.png)
+![iShot2021-11-14 18.19.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14%2018.19.11.png)
 
 
 

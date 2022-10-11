@@ -30,7 +30,7 @@ wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar
 :::
 
 ```shell
-yum -y install curl zlib zlib-devel openssl openssl-devel expat libiconv autoconf gcc gcc-c++ asciidoc xmlto util-linux docbook2X
+yum -y install curl zlib zlib-devel openssl openssl-devel expat libiconv autoconf gcc gcc-c++ asciidoc xmlto util-linux docbook2X libcurl-devel
 ```
 
 
@@ -46,7 +46,7 @@ ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi
 
 :::tip
 
-**<span style={{color: 'red'}}>⚠️官方文档中只说明了需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi` 这个命令，但是实际上还需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi`，否则后续make的时候会有如下报错</span>**
+**官方文档中只说明了需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi` 这个命令，但是实际上还需要执行 `ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2texi`，否则后续make的时候会有如下报错**
 
 :::
 
@@ -107,11 +107,7 @@ git clone git://git.kernel.org/pub/scm/git/git.git
 
 # 7.遇到的问题
 
-:::caution
-
-**<span style={{color: 'red'}}>⚠️此问题无解，折腾了半天还是无法解决</span>**
-
-:::
+使用 `git clone` 报错 `git: 'remote-https' is not a git command. See 'git --help'.`
 
 ```shell
 $ git clone https://github.com./garabik/grc.git
@@ -121,7 +117,20 @@ git: 'remote-https' is not a git command. See 'git --help'.
 
 
 
+在 [StackExchange](https://unix.stackexchange.com/questions/694507/git-clone-from-https-url-fails-says-its-remote-https-is-not-a-git-command-an) 中找到了答案
+
+![iShot_2022-10-11_23.09.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-11_23.09.03.png)
 
 
 
+在 [github](https://github.com/git/git/blob/b896f729e240d250cf56899e6a0073f6aa469f5d/INSTALL#L141-L149) 中官方有相关说明
 
+![iShot_2022-10-11_23.10.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-11_23.10.48.png)
+
+
+
+原因是git使用 `libcurl` 库匹配 `http://` 或 `https://` ，需要的版本是 `7.19.4` 及以上，因此安装这个包重新编辑git即可
+
+```shell
+yum -y install libcurl-devel
+```
