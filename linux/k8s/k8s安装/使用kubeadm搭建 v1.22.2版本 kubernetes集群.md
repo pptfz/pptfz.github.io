@@ -46,7 +46,7 @@ cat > /opt/k8s/script/env.sh <<EOF
 export NODE_IPS=(172.30.100.101 172.30.100.102 172.30.100.103)
 export NODE_NAMES=(k8s-master01 k8s-node01 k8s-node02)
 export SSH_USER=root
-export SSH_PORT=2299
+export SSH_PORT=22
 export SSH_KEY_FILE=/root/.ssh/id_rsa
 export K8S_VERSION=1.22.2
 export POD_SUBNET=10.244.0.0/16
@@ -72,8 +72,10 @@ EOF
 # 拷贝hosts文件到node节点
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    scp -o StrictHostKeyChecking=no -P${SSH_PORT} -i${SSH_KEY_FILE} /etc/hosts ${SSH_USER}@${node_ip}:/etc 
+    {
+      echo ">>> ${node_ip}"
+      scp -o StrictHostKeyChecking=no -P${SSH_PORT} -i${SSH_KEY_FILE} /etc/hosts ${SSH_USER}@${node_ip}:/etc 
+    }&  
   done  
 ```
 
@@ -84,20 +86,24 @@ for node_ip in ${NODE_IPS[@]}
 ```python
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'cat > /etc/sysctl.d/k8s.conf << EOF
+    {
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'cat > /etc/sysctl.d/k8s.conf << EOF
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 net.ipv4.ip_forward = 1
 vm.swappiness = 0
 EOF'
+    }&  
   done  
 
 # 使配置生效  
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'modprobe br_netfilter && sysctl -p /etc/sysctl.d/k8s.conf'
+    {
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'modprobe br_netfilter && sysctl -p /etc/sysctl.d/k8s.conf'
+    }&
   done    
 ```
 
@@ -124,8 +130,9 @@ bridge-nf 使得 netfilter 可以对 Linux 网桥上的 IPv4/ARP/IPv6 包过滤�
 # 编辑文件
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'cat > /etc/sysconfig/modules/ipvs.modules << EOF
+    {
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'cat > /etc/sysconfig/modules/ipvs.modules << EOF
 modprobe -- ip_vs
 modprobe -- ip_vs_rr
 modprobe -- ip_vs_wrr
@@ -133,13 +140,16 @@ modprobe -- ip_vs_sh
 modprobe -- nf_conntrack
 modprobe -- nf_conntrack_ipv4
 EOF'
+    }&
   done  
 
 # 使配置生效  
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'chmod 755 /etc/sysconfig/modules/ipvs.modules && bash /etc/sysconfig/modules/ipvs.modules && lsmod | grep -e ip_vs -e nf_conntrack_ipv4'
+    {
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'chmod 755 /etc/sysconfig/modules/ipvs.modules && bash /etc/sysconfig/modules/ipvs.modules && lsmod | grep -e ip_vs -e nf_conntrack_ipv4'
+    }&
   done
 ```
 
@@ -150,8 +160,10 @@ for node_ip in ${NODE_IPS[@]}
 ```shell
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'yum -y install ipset ipvsadm'
+    {
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'yum -y install ipset ipvsadm'
+    }&
   done
 ```
 
@@ -176,8 +188,10 @@ for node_ip in ${NODE_IPS[@]}
 ```shell
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'wget -P /opt https://github.com/containerd/containerd/releases/download/v1.5.5/cri-containerd-cni-1.5.5-linux-amd64.tar.gz'
+    {
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'wget -P /opt https://github.com/containerd/containerd/releases/download/v1.5.5/cri-containerd-cni-1.5.5-linux-amd64.tar.gz'
+    }
   done
 ```
 
@@ -197,9 +211,9 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     {
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'tar xf /opt/cri-containerd-cni-1.5.5-linux-amd64.tar.gz -C /'
-    }
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'tar xf /opt/cri-containerd-cni-1.5.5-linux-amd64.tar.gz -C /'
+    }&
   done
 ```
 
@@ -211,9 +225,9 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     {
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'echo "export PATH=$PATH:/usr/local/bin:/usr/local/sbin" > /etc/profile.d/containerd.sh && source /etc/profile'
-    }
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'echo "export PATH=$PATH:/usr/local/bin:/usr/local/sbin" > /etc/profile.d/containerd.sh && source /etc/profile'
+    }&
   done
 ```
 
@@ -227,9 +241,9 @@ containerd 的默认配置文件为 `/etc/containerd/config.toml`，我们可以
 for node_ip in ${NODE_IPS[@]}
   do
     {
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.toml'
-    }
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.toml'
+    }&
   done
 ```
 
@@ -276,7 +290,7 @@ for node_ip in ${NODE_IPS[@]}
 `/etc/containerd/config.toml `  最终内容
 
 ```toml
-cat > /etc/containerd/config.toml << EOF
+cat > /opt/k8s/config.toml << 'EOF'
 disabled_plugins = []
 imports = []
 oom_score = 0
@@ -507,8 +521,10 @@ EOF
 ```shell
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    scp -o StrictHostKeyChecking=no -P${SSH_PORT} -i${SSH_KEY_FILE} /etc/containerd/config.toml ${SSH_USER}@${node_ip}:/etc/containerd
+    {
+      echo ">>> ${node_ip}"
+      scp -o StrictHostKeyChecking=no -P${SSH_PORT} -i${SSH_KEY_FILE} /opt/k8s/config.toml ${SSH_USER}@${node_ip}:/etc/containerd
+    }&
   done  
 ```
 
@@ -522,15 +538,27 @@ for node_ip in ${NODE_IPS[@]}
 for node_ip in ${NODE_IPS[@]}
   do
     {
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'systemctl daemon-reload && systemctl enable containerd && systemctl start containerd'
-    }
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'systemctl daemon-reload && systemctl enable containerd && systemctl start containerd'
+    }&
   done
 ```
 
 
 
 ### 1.6.4 验证
+
+查看运行状态
+
+```shell
+for node_ip in ${NODE_IPS[@]}
+  do
+    echo ">>> ${node_ip}"
+    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'systemctl status containerd|grep Active'
+  done
+```
+
+
 
 启动完成后就可以使用 containerd 的本地 CLI 工具 `ctr` 和 `crictl` 了，比如查看版本
 
@@ -568,8 +596,9 @@ Server:
 ```python
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'cat > /etc/yum.repos.d/kubernetes.repo << EOF
+    {
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'cat > /etc/yum.repos.d/kubernetes.repo << EOF
 [kubernetes]
 name=Kubernetes
 baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
@@ -579,6 +608,7 @@ repo_gpgcheck=0
 gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
         http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
 EOF' 
+    }&
   done 
 ```
 
@@ -595,8 +625,10 @@ EOF'
 ```python
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'export K8S_VERSION=1.22.2 && yum -y install kubelet-${K8S_VERSION} kubeadm-${K8S_VERSION} kubectl-${K8S_VERSION}'
+    {
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'export K8S_VERSION=1.22.2 && yum -y install kubelet-${K8S_VERSION} kubeadm-${K8S_VERSION} kubectl-${K8S_VERSION}'
+    }&
   done
 ```
 
@@ -637,11 +669,13 @@ for node_ip in ${NODE_IPS[@]}
 ```python
 for node_ip in ${NODE_IPS[@]}
   do
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'yum -y reinstall bash-completion && \
+    {
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'yum -y reinstall bash-completion && \
 source /usr/share/bash-completion/bash_completion && \
 source <(kubectl completion bash) && \
 echo "source <(kubectl completion bash)" >> ~/.bashrc'
+    }&
   done
 ```
 
@@ -953,19 +987,17 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 ## 2.3 master添加节点
 
-**node1和node2相同操作**
-
 **将master节点上的 `/root/.kube/config` 文件拷贝到node节点对应的文件中**
 
 ```python
 for node_ip in ${NODE_IPS[@]}
   do
     {
-    echo ">>> ${node_ip}"
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'mkdir -p $HOME/.kube'
-    scp -P${SSH_PORT} -i${SSH_KEY_FILE} $HOME/.kube/config ${SSH_USER}@${node_ip}:$HOME/.kube
-    ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'chown $(id -u):$(id -g) $HOME/.kube/config' 
-    }
+      echo ">>> ${node_ip}"
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'mkdir -p $HOME/.kube'
+      scp -P${SSH_PORT} -i${SSH_KEY_FILE} $HOME/.kube/config ${SSH_USER}@${node_ip}:$HOME/.kube
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'chown $(id -u):$(id -g) $HOME/.kube/config' 
+    }&
   done  
 ```
 
