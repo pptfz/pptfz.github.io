@@ -78,7 +78,9 @@ systemctl enable gitlab-runsvdir.service
 
 **重载配置文件成功提示如下**
 
-![iShot2021-06-20 01.20.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20 01.20.14.png)
+![iShot2021-06-20 01.20.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20%2001.20.14.png)
+
+
 
 
 
@@ -207,26 +209,58 @@ gitlab-ctl reconfigure
 
 ## 3.1 编辑docker-compose.yml文件
 
+默认 `https` 和 `ssh` 端口
+
 ```yaml
 # 自行修改相对应的域名、映射的端口、挂载的卷
 cat > docker-compose.yml <<EOF
-web:
-  image: 'gitlab/gitlab-ce:latest'
-  restart: always
-  hostname: 'gitlab.example.com'
-  container_name: gitlab
-  environment:
-    GITLAB_OMNIBUS_CONFIG: |
-      external_url 'https://gitlab.example.com'
-      # Add any other gitlab.rb configuration here, each on its own line
-  ports:
-    - '80:80'
-    - '443:443'
-    - '222:22'
-  volumes:
-    - '/srv/gitlab/config:/etc/gitlab'
-    - '/srv/gitlab/logs:/var/log/gitlab'
-    - '/srv/gitlab/data:/var/opt/gitlab'
+version: '3.6'
+services:
+  web:
+    image: 'gitlab/gitlab-ee:latest'
+    restart: always
+    hostname: 'gitlab.example.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.example.com'
+        # Add any other gitlab.rb configuration here, each on its own line
+    ports:
+      - '80:80'
+      - '443:443'
+      - '22:22'
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+    shm_size: '256m'
+EOF
+```
+
+
+
+自定义 `http` 和 `ssh` 端口
+
+```yaml
+# 自行修改相对应的域名、映射的端口、挂载的卷
+cat > docker-compose.yml <<EOF
+version: '3.6'
+services:
+  web:
+    image: 'gitlab/gitlab-ee:latest'
+    restart: always
+    hostname: 'gitlab.example.com'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.example.com:8929'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2224
+    ports:
+      - '8929:8929'
+      - '2224:22'
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+    shm_size: '256m'
 EOF
 ```
 
