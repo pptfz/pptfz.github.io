@@ -31,17 +31,17 @@
 
 对于大多数 Pod 级别的字段，你可以将它们作为环境变量或使用 `downwardAPI` 卷提供给容器。 通过这两种机制可用的字段有：
 
-| 字段名                        | 含义                                                         |
-| ----------------------------- | ------------------------------------------------------------ |
-| metadata.name                 | Pod 的名称                                                   |
-| metadata.namespace            | Pod 的[命名空间](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/namespaces/) |
-| metadata.uid                  | Pod 的唯一 ID                                                |
-| metadata.annotations['<KEY>'] | Pod 的[注解](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/annotations/) `<KEY>` 的值（例如：`metadata.annotations['myannotation']`） |
-| metadata.labels['<KEY>']      | Pod 的[标签](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/labels/) `<KEY>` 的值（例如：`metadata.labels['mylabel']`） |
-| spec.serviceAccountName       | Pod 的[服务账号](https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/configure-service-account/)名称 |
-| spec.nodeName                 | Pod 运行时所处的[节点](https://kubernetes.io/zh-cn/docs/concepts/architecture/nodes/)名称 |
-| status.hostIP                 | Pod 所在节点的主 IP 地址                                     |
-| status.podIP                  | Pod 的主 IP 地址（通常是其 IPv4 地址）                       |
+| 字段名                           | 含义                                                         |
+| -------------------------------- | ------------------------------------------------------------ |
+| metadata.name                    | Pod 的名称                                                   |
+| metadata.namespace               | Pod 的[命名空间](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/namespaces/) |
+| metadata.uid                     | Pod 的唯一 ID                                                |
+| metadata.annotations['KEY_NAME'] | Pod 的[注解](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/annotations/) `<KEY>` 的值（例如：`metadata.annotations['myannotation']`） |
+| metadata.labels['KEY_NAME']      | Pod 的[标签](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/labels/) `<KEY>` 的值（例如：`metadata.labels['mylabel']`） |
+| spec.serviceAccountName          | Pod 的[服务账号](https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/configure-service-account/)名称 |
+| spec.nodeName                    | Pod 运行时所处的[节点](https://kubernetes.io/zh-cn/docs/concepts/architecture/nodes/)名称 |
+| status.hostIP                    | Pod 所在节点的主 IP 地址                                     |
+| status.podIP                     | Pod 的主 IP 地址（通常是其 IPv4 地址）                       |
 
 
 
