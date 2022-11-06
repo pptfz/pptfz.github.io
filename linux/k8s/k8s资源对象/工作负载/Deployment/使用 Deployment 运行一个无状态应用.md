@@ -21,12 +21,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: nginx
+      app: nginx # 必须匹配 .spec.template.metadata.labels
   replicas: 2 # 告知 Deployment 运行 2 个与该模板匹配的 Pod
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx # 必须匹配 .spec.selector.matchLabels
     spec:
       containers:
       - name: nginx
