@@ -4,6 +4,12 @@
 
 ## 创建Deployment
 
+:::tip说明
+
+`spec.selector.matchLabels` 下的标签必须和 `spec.template.metadata.labels` 下的标签相同，否则创建的时候会报错 `The Deployment "nginx-deployment" is invalid: spec.template.metadata.labels: Invalid value: map[string]string{"app":"nginx"}: `selector` does not match template `labels``
+
+:::
+
 编辑yaml文件
 
 ```yaml

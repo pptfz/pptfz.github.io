@@ -140,14 +140,14 @@ EOF
 **安装最新版**
 
 ```shell
-#方法一
+# 方法一
 pip install supervisor
 
-#方法二
+# 方法二
 yum -y install python-setuptools
 easy_install supervisor
 
-#查看版本
+# 查看版本
 $ supervisord -v
 4.2.0
 ```
@@ -164,7 +164,7 @@ pip install supervisor==3.3.5
 
 # 3.配置supervisor
 
-## 3.1 运行`echo_supervisord_conf`命令生成默认配置文件
+## 3.1 运行 `echo_supervisord_conf` 命令生成默认配置文件
 
 **运行`echo_supervisord_conf`命令，会在当前终端的标准输出中打印一个样本Supervisor配置文件**
 
@@ -467,7 +467,7 @@ password=test
 
 
 
-浏览器访问IP:9001，用户名和密码都是test
+浏览器访问 `IP:9001` ，用户名和密码都是test
 
 ![iShot2020-06-3011.46.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-3011.46.06.png)
 
@@ -515,7 +515,7 @@ centos-systemd-etcs  gentoo-matagus       redhat-init-equeffelec  redhat-sysconf
 debian-norrgard      opensuse-garymonson  redhat-init-jkoppe      redhat-sysconfig-jkoppe
 fedora-bmbouter      README.md            redhat-init-mingalevme  slackware
 
-#将centos-systemd-etcs中的内容拷贝到/usr/lib/systemd/system/supervisord.service
+# 将centos-systemd-etcs中的内容拷贝到/usr/lib/systemd/system/supervisord.service
 cat centos-systemd-etcs >/usr/lib/systemd/system/supervisord.service
 ```
 
@@ -530,7 +530,7 @@ cat centos-systemd-etcs >/usr/lib/systemd/system/supervisord.service
 :::
 
 ```shell
-#centos-systemd-etcs文件内容
+# centos-systemd-etcs文件内容
 cat > /usr/lib/systemd/system/supervisord.service <<'EOF'
 # supervisord service for systemd (CentOS 7.0+)
 # by ET-CS (https://github.com/ET-CS)
@@ -539,9 +539,9 @@ Description=Supervisor daemon
 
 [Service]
 Type=forking
-ExecStart=/usr/bin/supervisord
-ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
-ExecReload=/usr/bin/supervisorctl $OPTIONS reload
+ExecStart=`which supervisord`
+ExecStop=`which supervisorctl` $OPTIONS shutdown
+ExecReload=`which /usr/bin/supervisorctl` $OPTIONS reload
 KillMode=process
 Restart=on-failure
 RestartSec=42s
@@ -559,8 +559,6 @@ EOF
 systemctl daemon-reload
 systemctl start supervisord && systemctl enable supervisord
 ```
-
-
 
 
 
