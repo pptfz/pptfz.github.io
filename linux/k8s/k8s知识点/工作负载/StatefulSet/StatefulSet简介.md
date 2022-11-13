@@ -429,3 +429,5 @@ StatefulSet [控制器](https://kubernetes.io/zh-cn/docs/concepts/architecture/c
 
 如果 [HorizontalPodAutoscaler](https://kubernetes.io/zh-cn/docs/tasks/run-application/horizontal-pod-autoscale/) （或任何类似的水平扩缩 API）正在管理 StatefulSet 的扩缩， 请不要设置 `.spec.replicas`。 相反，允许 Kubernetes 控制平面自动管理 `.spec.replicas` 字段。
 
+
+
