@@ -446,3 +446,4 @@ metadata:
 ```
 
 可以看到挂载的nfs目录为 `/data/nfs/test-nfs-sc-pvc-pvc-e1357f25-9ffe-41d7-8607-4d311f0338bb` ，命名格式为  `${namespace}-${pvcName}-${pvName}`，其中 `test` 是命名空间名称，`nfs-sc-pvc` 是pvc名称，`pvc-e1357f25-9ffe-41d7-8607-4d311f0338bb` 是pv名称
+
