@@ -79,14 +79,14 @@ spec:
         #image: registry.k8s.io/nginx-slim:0.8
         image: mirrorgooglecontainers/nginx-slim:0.8
         ports:
-        - containerPort: 80
+        - containerPort: 80 # 这个端口只是声明，不会起到访问的作用
           name: web
         volumeMounts:
         - name: www
           mountPath: /usr/share/nginx/html
   volumeClaimTemplates:
   - metadata:
-      name: www
+      name: www # 这里的名称要和上边的volumeMounts下的名称一致
     spec:
       accessModes: [ "ReadWriteOnce" ]
       storageClassName: "nfs-client" # sc名称
@@ -162,8 +162,10 @@ pod名称.svc名称.命名空间.svc.cluster.local
 
 启动一个busybox容器测试一下
 
+
+
 ```shell
-kubectl run -it --image busybox test --restart=Never --rm /bin/sh
+kubectl run -it --image busybox:1.28.3 test --restart=Never --rm /bin/sh
 ```
 
 
@@ -171,14 +173,55 @@ kubectl run -it --image busybox test --restart=Never --rm /bin/sh
 进入到busybox容器进行ping测试
 
 ```shell
-$ ping -c1 web-0.nginx.test.svc.cluster.local
-PING web-0.nginx.test.svc.cluster.local (10.244.0.5): 56 data bytes
-64 bytes from 10.244.0.5: seq=0 ttl=64 time=0.073 ms
+/ # ping -c1 web-0.nginx.test.svc.cluster.local
+PING web-0.nginx.test.svc.cluster.local (100.108.251.2): 56 data bytes
+64 bytes from 100.108.251.2: seq=0 ttl=63 time=0.093 ms
 
 --- web-0.nginx.test.svc.cluster.local ping statistics ---
 1 packets transmitted, 1 packets received, 0% packet loss
-round-trip min/avg/max = 0.073/0.073/0.073 ms
+round-trip min/avg/max = 0.093/0.093/0.093 ms
 ```
+
+
+
+进入到busybox容器进行nslookup Headless Service测试
+
+:::caution注意
+
+busybox镜像要使用1.28.x，其余版本会有问题
+
+```shell
+/ # nslookup nginx
+Server:		10.96.0.10
+Address:	10.96.0.10:53
+
+** server can't find nginx.test.svc.cluster.local: NXDOMAIN
+
+*** Can't find nginx.svc.cluster.local: No answer
+*** Can't find nginx.cluster.local: No answer
+*** Can't find nginx.openstacklocal: No answer
+*** Can't find nginx.test.svc.cluster.local: No answer
+*** Can't find nginx.svc.cluster.local: No answer
+*** Can't find nginx.cluster.local: No answer
+*** Can't find nginx.openstacklocal: No answer
+```
+
+:::
+
+
+
+```shell
+/ # nslookup nginx
+Server:    10.96.0.10
+Address 1: 10.96.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      nginx
+Address 1: 100.108.251.48 web-2.nginx.test.svc.cluster.local
+Address 2: 100.108.251.12 web-1.nginx.test.svc.cluster.local
+Address 3: 100.108.251.2 web-0.nginx.test.svc.cluster.local
+```
+
+
 
 
 
