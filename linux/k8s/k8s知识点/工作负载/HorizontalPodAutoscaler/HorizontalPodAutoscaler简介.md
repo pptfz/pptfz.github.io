@@ -375,12 +375,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs>
-  <TabItem label="客户端apply操作(默认行为)" default>
+  <TabItem value="客户端" label="客户端apply操作(默认行为)" default>
 
 1
 
  </TabItem>
-  <TabItem value="orange" label="服务器端apply操作">
+  <TabItem value="服务器端" label="服务器端apply操作">
 2
   </TabItem>
 </Tabs>
