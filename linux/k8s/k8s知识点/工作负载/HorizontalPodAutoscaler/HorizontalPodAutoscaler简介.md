@@ -375,7 +375,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs>
-  <TabItem value="apple" label="客户端apply操作(默认行为)" default>
+  <TabItem label="客户端apply操作(默认行为)" default>
 
 1
 
