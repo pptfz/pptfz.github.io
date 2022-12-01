@@ -377,7 +377,7 @@ import TabItem from '@theme/TabItem';
 <Tabs>
   <TabItem value="客户端" label="客户端apply操作(默认行为)" default>
 
-
+1.`kubectl apply edit-last-applied deployment/<Deployment 名称>`
 
  </TabItem>
   <TabItem value="服务器端" label="服务器端apply操作">
