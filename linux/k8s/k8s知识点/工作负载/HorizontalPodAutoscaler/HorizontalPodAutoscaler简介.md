@@ -381,6 +381,10 @@ import TabItem from '@theme/TabItem';
 
 2.在编辑器中，删除 `spec.replicas`。当你保存并退出编辑器时，`kubectl` 会应用更新。 在此步骤中不会更改 Pod 计数。
 
+3.你现在可以从清单中删除 `spec.replicas`。如果你使用源代码管理， 还应提交你的更改或采取任何其他步骤来修改源代码，以适应你如何跟踪更新。
+
+4.从这里开始，你可以运行 `kubectl apply -f deployment.yaml`
+
  </TabItem>
   <TabItem value="服务器端" label="服务器端apply操作">
 使用[服务器端 Apply](https://kubernetes.io/zh-cn/docs/reference/using-api/server-side-apply/) 机制， 你可以遵循[交出所有权](https://kubernetes.io/zh-cn/docs/reference/using-api/server-side-apply/#transferring-ownership)说明， 该指南涵盖了这个确切的用例。
