@@ -379,6 +379,8 @@ import TabItem from '@theme/TabItem';
 
 1.`kubectl apply edit-last-applied deployment/<Deployment 名称>`
 
+2.在编辑器中，删除 `spec.replicas`。当你保存并退出编辑器时，`kubectl` 会应用更新。 在此步骤中不会更改 Pod 计数。
+
  </TabItem>
   <TabItem value="服务器端" label="服务器端apply操作">
 使用[服务器端 Apply](https://kubernetes.io/zh-cn/docs/reference/using-api/server-side-apply/) 机制， 你可以遵循[交出所有权](https://kubernetes.io/zh-cn/docs/reference/using-api/server-side-apply/#transferring-ownership)说明， 该指南涵盖了这个确切的用例。
