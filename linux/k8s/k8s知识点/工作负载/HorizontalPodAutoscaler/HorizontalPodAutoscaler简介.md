@@ -377,11 +377,11 @@ import TabItem from '@theme/TabItem';
 <Tabs>
   <TabItem value="客户端" label="客户端apply操作(默认行为)" default>
 
-1
+
 
  </TabItem>
   <TabItem value="服务器端" label="服务器端apply操作">
-2
+使用[服务器端 Apply](https://kubernetes.io/zh-cn/docs/reference/using-api/server-side-apply/) 机制， 你可以遵循[交出所有权](https://kubernetes.io/zh-cn/docs/reference/using-api/server-side-apply/#transferring-ownership)说明， 该指南涵盖了这个确切的用例。
   </TabItem>
 </Tabs>
 
