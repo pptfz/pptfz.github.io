@@ -387,7 +387,7 @@ import TabItem from '@theme/TabItem';
 
  </TabItem>
   <TabItem value="服务器端" label="服务器端apply操作">
-使用 [服务器端 Apply](https://kubernetes.io/zh-cn/docs/reference/using-api/server-side-apply/){:target="_blank"} 机制， 你可以遵循 [交出所有权](https://kubernetes.io/zh-cn/docs/reference/using-api/server-side-apply/#transferring-ownership) 说明， 该指南涵盖了这个确切的用例。
+使用 [服务器端 Apply](https://kubernetes.io/zh-cn/docs/reference/using-api/server-side-apply/)机制， 你可以遵循 [交出所有权](https://kubernetes.io/zh-cn/docs/reference/using-api/server-side-apply/#transferring-ownership) 说明， 该指南涵盖了这个确切的用例。
   </TabItem>
 </Tabs>
 
