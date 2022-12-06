@@ -531,6 +531,3 @@ $ kubectl create -f php-apache.yaml
 horizontalpodautoscaler.autoscaling/php-apache created
 ```
 
-
-
-t
