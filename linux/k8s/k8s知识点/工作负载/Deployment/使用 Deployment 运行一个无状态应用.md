@@ -156,7 +156,7 @@ deployment.apps/nginx-deployment configured
 
 
 
-查看pod，可以看到之间的旧pod正在被删除
+查看pod，可以看到之前的旧pod正在被删除
 
 ```shell
 $ kubectl get pods -l app=nginx
