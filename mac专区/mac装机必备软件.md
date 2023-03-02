@@ -12,11 +12,19 @@
 
 ### fig
 
-[fig](https://fig.io/) 是一款在终端中弹出子命令、选项等具有提示功能的工具
+[fig](https://fig.io/) 是一款在终端中提示子命令、选项等具有提示功能的工具
 
 ![fig](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/fig.gif)
 
 
+
+
+
+## 图片压缩
+
+[uPic](https://upic.iluoxiao.com/) / [ImageOptim](https://upic.iluoxiao.com/) 
+
+![upic](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/upic.gif)
 
 
 
