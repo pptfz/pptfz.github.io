@@ -20,6 +20,26 @@
 
 
 
+## 编辑器
+
+### macvim
+
+[macvim](https://github.com/macvim-dev/macvim) 是一款适用于macOS的vim文本编辑器
+
+
+
+### Sublime Text
+
+[Sublime Text](https://www.sublimetext.com/) 是一款非常好用且同时适用于文本编辑、多语言代码编辑的编辑器
+
+
+
+### Builder x
+
+[HBuilder X](https://www.dcloud.io/hbuilderx.html) 是**轻如编辑器、强如IDE**的合体版本
+
+
+
 
 
 ## 视频工具
@@ -71,10 +91,6 @@
 [智图](https://zhitu.isux.us/)是腾讯 ISUX 团队开发的一款图片压缩工具
 
 
-
-## 编辑器
-
-[HBuilder X](https://www.dcloud.io/hbuilderx.html) 是**轻如编辑器、强如IDE**的合体版本
 
 
 
