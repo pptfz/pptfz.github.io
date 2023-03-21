@@ -139,9 +139,13 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 # 三、k8s架构
 
-## 3.1k8s架构图
+## 3.1 k8s架构图
 
-![iShot2020-10-15 16.23.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.23.03.png)
+
+
+![iShot2020-10-15 16.23.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2016.23.03.png)
+
+
 
 
 

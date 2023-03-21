@@ -14,9 +14,13 @@
 
 #### ZenTermLite
 
-- [ZenTermLite](https://apps.apple.com/cn/app/zen-term-lite-ssh%E5%AE%A2%E6%88%B7%E7%AB%AF/id1422475219) 是mac上一款非常好用且免费的ssh工具
+- [ZenTermLite](https://apps.apple.com/cn/app/zen-term-lite-ssh%E5%AE%A2%E6%88%B7%E7%AB%AF/id1422475219) 是mac上一款非常好用且免费的国产ssh工具
 
 
+
+#### iTerm2
+
+- [iTerm2](https://github.com/gnachman/iTerm2)是mac上一款非常经典的开源ssh工具
 
 
 
