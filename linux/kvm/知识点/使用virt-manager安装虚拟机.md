@@ -1,4 +1,4 @@
-# 使用 `virt-manager` 安装虚拟机
+# 使用 virt-manager 安装虚拟机
 
 # 1.安装图形化管理工具 `virt-manager`
 
