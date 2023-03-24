@@ -20,9 +20,9 @@ Format specific information:
 
 # 2.宿主机扩容kvm磁盘文件大小
 
-:::caution
+:::caution注意
 
-**⚠️<span style={{color: 'red'}}>执行扩容命令前一定要先关闭虚拟机</span>**
+**<span style={{color: 'red'}}>执行扩容命令前一定要先关闭虚拟机</span>**
 
 :::
 
@@ -51,7 +51,7 @@ Format specific information:
 
 # 3.查看虚拟机硬盘大小
 
-> 可以看到当前硬盘 `/dev/sda` 大小为500G
+可以看到当前硬盘 `/dev/sda` 大小为500G
 
 ![iShot2021-11-24 21.23.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.23.37.png)
 
@@ -77,7 +77,7 @@ Format specific information:
 
 ## 4.2 修改分区格式
 
-> 修改分区格式为8e，即lvm格式
+修改分区格式为8e，即lvm格式
 
 ![iShot2021-11-24 21.32.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.32.40.png)
 
@@ -89,7 +89,7 @@ Format specific information:
 
 ## 4.3 再次查看虚拟机硬盘
 
-> 可以看到新建的分区 `/dev/sda3` ，并且硬盘Id为8e
+可以看到新建的分区 `/dev/sda3` ，并且硬盘Id为8e
 
 ![iShot2021-11-24 21.34.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.34.36.png)
 
@@ -148,7 +148,7 @@ $ vgdisplay
 
 将创建的pv加入vg
 
-> 这里vg名称为 centos
+这里vg名称为 `centos`
 
 ```shell
 $ vgextend centos /dev/sda3
@@ -240,7 +240,7 @@ $ lvextend -L +450G /dev/centos/root
 
 ### 4.5.4 扩容硬盘
 
-:::tip
+:::tip说明
 
 如果硬盘分区类型是 `ext4` ，则使用 `resize2fs` 命令
 
