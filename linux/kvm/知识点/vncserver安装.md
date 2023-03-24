@@ -1,6 +1,6 @@
-# vncserver安装
+## vncserver安装
 
-# 1.安装包
+## 1.安装包
 
 ```shell
 yum -y install tigervnc tigervnc-server
@@ -8,7 +8,7 @@ yum -y install tigervnc tigervnc-server
 
 
 
-# 2.配置systemd管理vncserver
+## 2.配置systemd管理vncserver
 
 安装完包后会生产一个文件 `/usr/lib/systemd/system/vncserver@.service` 
 
@@ -130,13 +130,13 @@ root      9544  0.0  2.3 194016 24140 ?        Sl   10:37   0:00 /usr/bin/Xvnc :
 
 
 
-# 3.vncserver一些操作说明
+## 3.vncserver一些操作说明
 
-## 3.1 启动、关闭
+### 3.1 启动、关闭
 
 **启动**
 
-方式一： systemd管理
+方式一：systemd管理
 
 ```shell
 systemctl start vncserver@:1.service
@@ -146,7 +146,7 @@ systemctl start vncserver@:1.service
 
 方式二：vncserver命令
 
-> 直接运行 `vncserver :数字` 启动
+直接运行 `vncserver :数字` 启动
 
 ```shell
 $ vncserver :1
@@ -178,7 +178,7 @@ Killing Xvnc process ID 16654
 
 
 
-## 3.2 修改vncserver窗口分辨率
+### 3.2 修改vncserver窗口分辨率
 
 通过查看vnc进程可以看到，vncserver默认的窗口分辨率是 `1024x768`
 
@@ -208,9 +208,9 @@ $ cat ~/.vnc/config
 
 修改为想要的分辨率，然后重启进程
 
-:::caution
+:::caution注意
 
-**重启vncserver进程不能使用system命令，重启会不生效并且报错**
+**重启vncserver进程不能使用 `system` 命令，重启会不生效并且报错**
 
 :::
 

@@ -83,7 +83,7 @@ DNS2=114.114.114.114
 
 新增以下内容
 
-> `NM_CONTROLLED=no` 表示关闭服务 `NetworkManager`
+`NM_CONTROLLED=no` 表示关闭服务 `NetworkManager`
 
 ```shell
 BRIDGE=br0
@@ -141,7 +141,11 @@ systemctl restart network
 
 修改为如下内容
 
-> 需要修改 `type='virtio'` 的mac地址和pci
+:::tip说明
+
+需要修改 `type='virtio'` 的mac地址和pci
+
+:::
 
 ```xml
 <interface type='bridge'>
