@@ -6,7 +6,7 @@
 
 ## 第一步、初次使用需要进行全局配置
 
-- 操作命令
+操作命令
 
 ```shell
 git config --global user.name "你的用户名"
@@ -83,7 +83,8 @@ git push -u origin master			#输入远程仓库的用户名和密码即可
 初始化git仓库完成后，需要将代码目录下的内容提交至本地仓库
 
 ```shell
-git add .  		#.表示匹配当前代码路径下所有内容					
+# .表示匹配当前代码路径下所有内容		
+git add .  					
 ```
 
 
@@ -112,7 +113,7 @@ git push -u origin master			#输入远程仓库的用户名和密码即可
 
 # 3.关于git拉取代码冲突问题
 
-### 3.1 遵守原则
+## 3.1 遵守原则
 
 - **不删除远程仓库的代码**
 - 如需删除代码，则只删除本地的
@@ -121,9 +122,9 @@ git push -u origin master			#输入远程仓库的用户名和密码即可
 
 
 
-### **3.2手贱删除远程仓库文件导致代码冲突**恢复演示
+## 3.2 手贱删除远程仓库文件导致代码冲突恢复演示
 
-#### 3.2.1 远程代码仓库中有以下内容，此时远程仓库和本地仓库中的内容相同
+### 3.2.1 远程代码仓库中有以下内容，此时远程仓库和本地仓库中的内容相同
 
 ![iShot2020-10-14 14.16.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.16.23.png)
 
@@ -131,19 +132,19 @@ git push -u origin master			#输入远程仓库的用户名和密码即可
 
 ![iShot2020-10-14 14.15.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.15.28.png)
 
-#### 3.2.2 手动删除远程仓库中的test文件，删除后内容为下
+### 3.2.2 手动删除远程仓库中的test文件，删除后内容为下
 
 ![iShot2020-10-14 14.16.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.16.50.png)
 
-#### 3.2.3 手动删除远程仓库文件后，远程仓库和本地仓库中的内容就不同了，此时再次新建文件提交就会有冲突
+### 3.2.3 手动删除远程仓库文件后，远程仓库和本地仓库中的内容就不同了，此时再次新建文件提交就会有冲突
 
-本地仓库中新建文件test111，尝试提交，报错
+本地仓库中新建文件 `test111` ，尝试提交，报错
 
 ![iShot2020-10-14 14.09.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.09.48.png)
 
 ### 解决方法
 
-#### 3.2.4 先拉取代码
+### 3.2.4 先拉取代码
 
 ```shell
 git pull origin master
@@ -153,7 +154,7 @@ git pull origin master
 
 ![iShot2020-10-14 14.10.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.10.19.png)
 
-#### 3.2.5 加选项 --allow-unrelated-histories (允许合并不相关的历史记录)再次拉取
+### 3.2.5 加选项 `--allow-unrelated-histories` (允许合并不相关的历史记录)再次拉取
 
 ```shell
 git pull origin master --allow-unrelated-histories
@@ -161,11 +162,11 @@ git pull origin master --allow-unrelated-histories
 
 ![iShot2020-10-14 14.14.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.14.55.png)
 
-#### 3.2.6 再次提交代码即可,不会报错
+### 3.2.6 再次提交代码即可，不会报错
 
-⚠️**因为已经删除了远程仓库中的目录，因此本地的目录在提交之后也会被删除**
+**因为已经删除了远程仓库中的目录，因此本地的目录在提交之后也会被删除**
 
-**因此,不要删除远程仓库中的文件！！！**
+**因此，不要删除远程仓库中的文件！！！**
 
 ```shell
 git push origin master

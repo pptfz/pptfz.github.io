@@ -86,7 +86,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 
 
-### 2.3.2 git删除工作区和暂存区中的文件``git rm -f 文件名``
+### 2.3.2 git删除工作区和暂存区中的文件 `git rm -f 文件名`
 
 ```shell
 # 查看暂存区中的文件，此时是绿色的
@@ -289,7 +289,7 @@ Date:   Sun Feb 23 21:10:03 2020 +0800
 
 ### 2.5.5 根据不同格式展示历史提交信息 `git hlog`
 
-:::info
+:::tip说明
 
 **可以使用format参数来指定具体的输出格式，这样非常便于后期编程的提取分析，常用的格式有：**
 
@@ -327,7 +327,7 @@ $ git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgree
 * 7e353d7 - 增加test文件内容 (27 hours ago) 什么都不会"
 * 9f30440 - touch test (28 hours ago) 什么都不会"
 
-# 设置命令别名，用git hlog代替以上复杂命令
+# 设置命令别名，用 git hlog 代替以上复杂命令
 cat >>.git/config<<'EOF'
 [alias]
         hlog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %cn' --abbrev-commit --date=relative
@@ -504,13 +504,25 @@ da5695e HEAD@{2}: commit: echo 2 >> bbb
 
 **git恢复版本说明**
 
-> **git服务程序中有一个叫做HEAD的版本指针，当用户申请还原数据时，其实就是将HEAD指针指向到某个特定的提交版本，但是因为git是分布式版本控制系统，为了避免历史记录冲突，故使用了SHA-1计算出十六进制的哈希字串来区分每个提交版本，另外默认的HEAD版本指针会指向到最近的一次提交版本记录**
+:::tip说明
+
+**git服务程序中有一个叫做HEAD的版本指针，当用户申请还原数据时，其实就是将HEAD指针指向到某个特定的提交版本，但是因为git是分布式版本控制系统，为了避免历史记录冲突，故使用了SHA-1计算出十六进制的哈希字串来区分每个提交版本，另外默认的HEAD版本指针会指向到最近的一次提交版本记录**
+
+:::
+
+
 
 **git恢复版本重点**
+
+:::tip说明
 
 **1.查看日志，获取对应的操作HEAD指针**
 
 **2.根据获取到的HEAD指针然后进行 `git reset --hard` 指针编号**
+
+:::
+
+
 
 
 

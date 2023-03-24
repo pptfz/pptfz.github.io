@@ -129,7 +129,7 @@ git: 'remote-https' is not a git command. See 'git --help'.
 
 
 
-原因是git使用 `libcurl` 库匹配 `http://` 或 `https://` ，需要的版本是 `7.19.4` 及以上，因此安装这个包重新编辑git即可
+原因是git使用 `libcurl` 库匹配 `http://` 或 `https://` ，需要的版本是 `7.19.4` 及以上，因此安装这个包重新编译git即可
 
 ```shell
 yum -y install libcurl-devel

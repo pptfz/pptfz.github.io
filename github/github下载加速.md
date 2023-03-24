@@ -30,11 +30,11 @@
 
 经过码云中转后的仓库地址发生了改变，已经不是原先的github地址了，如果我们想要对原github仓库做一些仓库操作，就需要修改链接地址了
 
-```python
-//进入克隆后的仓库中，先移除码云的链接
+```shell
+# 进入克隆后的仓库中，先移除码云的链接
 git remote rm origin
 
-//然后再添加原先github仓库的链接
+# 然后再添加原先github仓库的链接
 git remote add origin
 ```
 
@@ -42,13 +42,12 @@ git remote add origin
 
 # 方法二：使用加速地址
 
-**将``github.com``修改为``gitclone.com/github.com``**
+安装谷歌浏览器插件 `GitHub加速`，[项目github地址](https://github.com/fhefh2015/Fast-GitHub)
 
-```shell
-# 原先下载方式
-git clone https://github.com/xxx
+![iShot_2023-03-24_16.53.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-03-24_16.53.58.png)
 
-# 修改为如下地址
-git clone https://gitclone.com/github.com/xxx
-```
 
+
+安装完成后就可以选择加速地址进行加速下载了
+
+![iShot_2023-03-24_16.55.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-03-24_16.55.56.png)
