@@ -12,7 +12,7 @@
 
 
 
-# 1.安装依赖包
+## 1.安装依赖包
 
 ```python
 yum -y install -y gcc gcc-c++ automake autoconf cmake bison-devel ncurses-devel libaio-devel openssl-devel
@@ -20,9 +20,13 @@ yum -y install -y gcc gcc-c++ automake autoconf cmake bison-devel ncurses-devel 
 
 
 
-# 2.下载boost
+## 2.下载boost
 
-**5.7版本源码编译安装需要下载一个Boost C++ 1.59.0（这是一组扩充C++功能的经过同行评审（Peer-reviewed）且开放源代码程序库。大多数的函数为了能够以开放源代码、封闭项目的方式运作，而授权于Boost软件许可协议（Boost Software License）之下。）**
+:::tip说明
+
+5.7版本源码编译安装需要下载一个Boost C++ 1.59.0（这是一组扩充C++功能的经过同行评审（Peer-reviewed）且开放源代码程序库。大多数的函数为了能够以开放源代码、封闭项目的方式运作，而授权于Boost软件许可协议（Boost Software License）之下。）
+
+:::
 
 ```python
 wget https://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz
@@ -30,7 +34,7 @@ wget https://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.
 
 
 
-# 3.解压缩boost至 `/usr/local` 下
+## 3.解压缩boost至 `/usr/local` 下
 
 ```python
 tar xf boost_1_59_0.tar.gz -C /usr/local
@@ -38,7 +42,7 @@ tar xf boost_1_59_0.tar.gz -C /usr/local
 
 
 
-# 4.下载MySQL5.7源码包
+## 4.下载MySQL5.7源码包
 
 ```python
 export MYSQL_VERSION=5.7.30
@@ -47,7 +51,7 @@ wget https://cdn.mysql.com/archives/mysql-5.7/mysql-${MYSQL_VERSION}.tar.gz
 
 
 
-# 5.解压缩源码包
+## 5.解压缩源码包
 
 ```python
 tar xf mysql-${MYSQL_VERSION}.tar.gz
@@ -55,7 +59,7 @@ tar xf mysql-${MYSQL_VERSION}.tar.gz
 
 
 
-# 6.进入解压目录，开始编译安装
+## 6.进入解压目录，开始编译安装
 
 ```python
 # 进入到解压目录
@@ -83,7 +87,7 @@ make -j`nproc` && make install
 
 
 
-# 7.做目录软连接
+## 7.做目录软连接
 
 ```shell
 ln -s /usr/local/mysql-${MYSQL_VERSION}  /usr/local/mysql
@@ -91,7 +95,7 @@ ln -s /usr/local/mysql-${MYSQL_VERSION}  /usr/local/mysql
 
 
 
-# 8.创建mysql用户
+## 8.创建mysql用户
 
 ```shell
 useradd -M -s /bin/nologin mysql
@@ -99,9 +103,13 @@ useradd -M -s /bin/nologin mysql
 
 
 
-# 9.编辑主配置文件
+## 9.编辑主配置文件
+
+:::caution注意
 
 **<span style={{color: 'red'}}>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
+
+:::
 
 ```python
 # 备份/etc/my.cnf
@@ -123,7 +131,7 @@ EOF
 
 
 
-# 10.创建socket文件目录
+## 10.创建socket文件目录
 
 ```
 mkdir -p /var/lib/mysql
@@ -131,7 +139,7 @@ mkdir -p /var/lib/mysql
 
 
 
-# 11.相关目录、文件授权
+## 11.相关目录、文件授权
 
 ```shell
 chown -R mysql.mysql /usr/local/mysql* /var/lib/mysql /etc/my.cnf
@@ -139,7 +147,7 @@ chown -R mysql.mysql /usr/local/mysql* /var/lib/mysql /etc/my.cnf
 
 
 
-# 12.拷贝启动脚本
+## 12.拷贝启动脚本
 
 ```python
 cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
@@ -147,7 +155,9 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 
 
-# 13.初始化mysql
+## 13.初始化mysql
+
+:::tip说明
 
 **<span style={{color: 'red'}}>⚠️MySQL 5.7.6之前的版本使用如下方式初始化数据库</span>**
 
@@ -170,6 +180,8 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 --initialize-insecure 
 ```
 
+:::
+
 
 
 mysql5.7初始化参数说明
@@ -187,7 +199,7 @@ mysql5.7初始化参数说明
 
 
 
-# 14.导出mysql命令环境变量
+## 14.导出mysql命令环境变量
 
 ```python
 # 导出mysql命令环境变量
@@ -199,7 +211,7 @@ source /etc/profile
 
 
 
-# 15.systemd管理mysql
+## 15.systemd管理mysql
 
 ```python
 cat > /usr/lib/systemd/system/mysqld.service <<'EOF'
@@ -225,7 +237,7 @@ EOF
 
 
 
-# 16.启动mysql、检查启动
+## 16.启动mysql、检查启动
 
 **启动mysql**
 
@@ -249,7 +261,7 @@ tcp6       0      0 :::3306                 :::*                    LISTEN      
 
 
 
-# 17.进入mysql并设置密码
+## 17.进入mysql并设置密码
 
 ```python
 # 进入mysql

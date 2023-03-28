@@ -12,7 +12,7 @@
 
 
 
-# 1.安装依赖包
+## 1.安装依赖包
 
 ```python
 yum -y install gcc gcc-c++ automake autoconf cmake bison-devel ncurses-devel libaio-devel openssl-devel
@@ -20,7 +20,7 @@ yum -y install gcc gcc-c++ automake autoconf cmake bison-devel ncurses-devel lib
 
 
 
-# 2.下载MySQL5.6源码包
+## 2.下载MySQL5.6源码包
 
 ```python
 export MYSQL_VERSION=5.6.51
@@ -29,7 +29,7 @@ wget https://cdn.mysql.com/archives/mysql-5.6/mysql-${MYSQL_VERSION}.tar.gz
 
 
 
-# 3.解压缩源码包
+## 3.解压缩源码包
 
 ```python
 tar xf mysql-${MYSQL_VERSION}.tar.gz
@@ -37,7 +37,7 @@ tar xf mysql-${MYSQL_VERSION}.tar.gz
 
 
 
-# 4.进入解压缩目录，进行编译安装
+## 4.进入解压缩目录，进行编译安装
 
 ```python
 # 进入到解压目录
@@ -64,7 +64,7 @@ make -j`nproc` && make install
 
 
 
-# 5.做目录软连接
+## 5.做目录软连接
 
 ```shell
 ln -s /usr/local/mysql-${MYSQL_VERSION}  /usr/local/mysql
@@ -72,7 +72,7 @@ ln -s /usr/local/mysql-${MYSQL_VERSION}  /usr/local/mysql
 
 
 
-# 6.创建mysql用户
+## 6.创建mysql用户
 
 ```shell
 useradd -M -s /bin/nologin mysql
@@ -80,7 +80,7 @@ useradd -M -s /bin/nologin mysql
 
 
 
-# 7.初始化数据库
+## 7.初始化数据库
 
 ```shell
 /usr/local/mysql/scripts/mysql_install_db \
@@ -101,7 +101,7 @@ mysql5.6初始化参数说明
 
 
 
-# 8.编辑主配置文件
+## 8.编辑主配置文件
 
 ```shell
 # 以下配置为最精简版，可根据实际情况进行相应设置
@@ -120,7 +120,7 @@ EOF
 
 
 
-# 9.创建socket文件目录
+## 9.创建socket文件目录
 
 ```
 mkdir -p /var/lib/mysql
@@ -128,7 +128,7 @@ mkdir -p /var/lib/mysql
 
 
 
-# 10.相关目录、文件授权
+## 10.相关目录、文件授权
 
 ```shell
 chown -R mysql.mysql /usr/local/mysql* /var/lib/mysql /etc/my.cnf
@@ -136,7 +136,7 @@ chown -R mysql.mysql /usr/local/mysql* /var/lib/mysql /etc/my.cnf
 
 
 
-# 11.拷贝mysql启动文件
+## 11.拷贝mysql启动文件
 
 ```python
 cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
@@ -144,7 +144,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 
 
-# 12.导出mysql命令环境变量
+## 12.导出mysql命令环境变量
 
 ```python
 # 导出mysql命令环境变量
@@ -156,7 +156,7 @@ source /etc/profile
 
 
 
-# 13.用systemd管理mysql
+## 13.用systemd管理mysql
 
 ```python
 cat > /usr/lib/systemd/system/mysqld.service <<'EOF'
@@ -180,7 +180,7 @@ EOF
 
 
 
-# 14.启动mysql、检查启动
+## 14.启动mysql、检查启动
 
 ```python
 # 重新加载systemd系统服务
@@ -202,7 +202,7 @@ tcp6       0      0 :::3306                 :::*                    LISTEN      
 
 
 
-# 15.进入mysql并设置密码
+## 15.进入mysql并设置密码
 
 ```python
 # 进入mysql
@@ -220,21 +220,23 @@ Query OK, 0 rows affected (0.01 sec)
 
 
 
-# **扩展：一台主机mysql已经编译好，通过拷贝相关目录和文件的方式快速部署其他mysql**实例
+## **扩展：一台主机mysql已经编译好，通过拷贝相关目录和文件的方式快速部署其他mysql**实例
 
-**步骤：**
+:::tip步骤
 
-- **1.几台机器的环境要一致，操作系统、硬件环境**
+1.几台机器的环境要一致，操作系统、硬件环境
 
-- **2.拷贝mysql编译安装路径目录，本文为 `/usr/local/mysql-5.6.51`**
+2.拷贝mysql编译安装路径目录，本文为 `/usr/local/mysql-5.6.51`
 
-- **3.拷贝mysql配置文件、启动文件、mysql命令环境变量文件 `/etc/profile.d/mysql.sh `(建议在另外的mysql主机手动填写，避免覆盖原先的PATH环境变量)**
+3.拷贝mysql配置文件、启动文件、mysql命令环境变量文件 `/etc/profile.d/mysql.sh `(建议在另外的mysql主机手动填写，避免覆盖原先的PATH环境变量)
 
-- **4.拷贝systemd管理文件 `/usr/lib/systemd/system/mysqld.service`**
+4.拷贝systemd管理文件 `/usr/lib/systemd/system/mysqld.service`
 
-- **5.创建mysql用户和组**
+5.创建mysql用户和组
 
-# 1.已经编译安装好的mysql主机拷贝相关包
+:::
+
+### 1.已经编译安装好的mysql主机拷贝相关包
 
 ```python
 # 打包mysql编译安装目录然后将压缩包拷贝至另一台mysql主机下的/usr/local
@@ -250,7 +252,7 @@ tar cf mysql.tar /usr/local/mysql-5.6.51
 /usr/lib/systemd/system/mysqld.service
 ```
 
-# 2.另外一台mysql主机操作
+### 2.另外一台mysql主机操作
 
 ```python
 # 创建mysql用户

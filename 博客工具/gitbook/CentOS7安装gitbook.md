@@ -12,7 +12,7 @@
 
 
 
-# 1.安装nodejs
+## 1.安装nodejs
 
 [nodejs官网](https://nodejs.org/en/)
 
@@ -20,7 +20,7 @@
 
 [nodejs历史版本官方下载地址](https://nodejs.org/en/download/releases/)
 
-## 1.1 下载二进制包
+### 1.1 下载二进制包
 
 ```shell
 export NODE_VERSION=12.22.3
@@ -29,7 +29,7 @@ wget https://nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSION}-
 
 
 
-## 1.2 解压缩包、修改名称
+### 1.2 解压缩包、修改名称
 
 ```shell
 tar xf node-v${NODE_VERSION}-linux-x64.tar.xz -C /usr/local/ && mv /usr/local/node-v${NODE_VERSION}-linux-x64/ /usr/local/node-v${NODE_VERSION}
@@ -37,7 +37,7 @@ tar xf node-v${NODE_VERSION}-linux-x64.tar.xz -C /usr/local/ && mv /usr/local/no
 
 
 
-## 1.3 导出环境变量
+### 1.3 导出环境变量
 
 ```shell
 echo "export PATH=$PATH:/usr/local/node-v${NODE_VERSION}/bin" > /etc/profile.d/node.sh  && source /etc/profile
@@ -45,7 +45,7 @@ echo "export PATH=$PATH:/usr/local/node-v${NODE_VERSION}/bin" > /etc/profile.d/n
 
 
 
-## 1.4 验证
+### 1.4 验证
 
 ```shell
 $ node -v
@@ -57,7 +57,7 @@ $ npm -v
 
 
 
-## 1.5 配置npm加速
+### 1.5 配置npm加速
 
 ```shell
 npm config set registry https://registry.npm.taobao.org
@@ -76,9 +76,9 @@ https://registry.npm.taobao.org/
 
 
 
-# 2.安装gitbook
+## 2.安装gitbook
 
-## 2.1 安装 gitbook-cli
+### 2.1 安装 gitbook-cli
 
 `gitbook-cli` 是在同一系统上安装和使用多个版本的 GitBook 的实用程序。它将自动安装所需版本的 GitBook 以构建一本书。
 
@@ -88,7 +88,7 @@ npm install gitbook-cli -g
 
 
 
-## 2.2 安装gitbook
+### 2.2 安装gitbook
 
 第一次执行 `gitbook -V` 开始安装gitbook
 
@@ -127,9 +127,9 @@ GitBook version: 3.2.3
 
 
 
-# 3.gitbook使用
+## 3.gitbook使用
 
-## 3.1 创建gitbook目录
+### 3.1 创建gitbook目录
 
 ```shell
 mkdir /gitbook 
@@ -137,7 +137,7 @@ mkdir /gitbook
 
 
 
-## 3.2 初始化gitbook
+### 3.2 初始化gitbook
 
 ```sh
 cd /gitbook && gitbook init
@@ -154,7 +154,7 @@ SUMMARY.md		#gitbook目录结构
 
 
 
-## 3.3 配置gitbook生成书籍
+### 3.3 配置gitbook生成书籍
 
 > **编辑 SUMMARY.md ，写入以下内容(这里仅做示例)**
 >
@@ -171,7 +171,7 @@ SUMMARY.md		#gitbook目录结构
 
 
 
-## 3.4 构建书籍
+### 3.4 构建书籍
 
 > **⚠️构建命令必须在SUMMARY.md同路径下执行**
 
@@ -181,7 +181,7 @@ gitbook build
 
 
 
-## 3.5 启动gitbook
+### 3.5 启动gitbook
 
 > **gitbook默认监听tcp 4000端口**
 
@@ -197,9 +197,9 @@ gitbook serve &
 
 
 
-# 4.gitbook设置
+## 4.gitbook设置
 
-## 4.1 修改gitbook代码框字体大小
+### 4.1 修改gitbook代码框字体大小
 
 ```shell
 node_modules/prism-themes/themes/prism-base16-ateliersulphurpool.light.css

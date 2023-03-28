@@ -12,13 +12,15 @@
 
 
 
-⚠️⚠️⚠️
+:::caution注意
 
 **二进制安装mysql的启动脚本`support-files/mysql.server` 和安装目录下的 `bin/mysqld_safe`  这两个文件中都是默认使用 `/usr/local/mysql`，如果安装目录不在 `/usr/local/` 下，需要修改这两个文件中的路径，即把 `/usr/local` 替换为mysql安装目录**
 
+:::
 
 
-# 1.安装依赖包
+
+## 1.安装依赖包
 
 ```python
 yum -y install -y gcc gcc-c++ autoconf bison-devel ncurses-devel libaio-devel numactl
@@ -26,7 +28,7 @@ yum -y install -y gcc gcc-c++ autoconf bison-devel ncurses-devel libaio-devel nu
 
 
 
-# 2.下载MySQL5.7二进制包
+## 2.下载MySQL5.7二进制包
 
 ```python
 export MYSQL_VERSION=5.7.30
@@ -35,7 +37,7 @@ wget https://cdn.mysql.com/archives/mysql-5.7/mysql-${MYSQL_VERSION}-linux-glibc
 
 
 
-# 3.解压缩mysql二进制包到 `/usr/local`
+## 3.解压缩mysql二进制包到 `/usr/local`
 
 ```python
 tar xf mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.gz -C /usr/local
@@ -43,7 +45,7 @@ tar xf mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.gz -C /usr/local
 
 
 
-# 4.修改目录名称、做软连接
+## 4.修改目录名称、做软连接
 
 ```python
 mv /usr/local/mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64 /usr/local/mysql-${MYSQL_VERSION}
@@ -52,7 +54,7 @@ ln -s /usr/local/mysql-${MYSQL_VERSION} /usr/local/mysql
 
 
 
-# 5.创建mysql用户
+## 5.创建mysql用户
 
 ```python
 useradd -M -s /bin/nologin mysql
@@ -60,9 +62,13 @@ useradd -M -s /bin/nologin mysql
 
 
 
-# 6.编辑主配置文件，myql5.7二进制包默认没有mysql配置文件
+## 6.编辑主配置文件，myql5.7二进制包默认没有mysql配置文件
 
-**<span style={{color: 'red'}}>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
+:::caution注意
+
+**<span style={{color: 'red'}}>如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
+
+:::
 
 ```python
 # 备份/etc/my.cnf
@@ -84,7 +90,7 @@ EOF
 
 
 
-# 7.创建socket文件目录
+## 7.创建socket文件目录
 
 ```
 mkdir -p /var/lib/mysql
@@ -92,7 +98,7 @@ mkdir -p /var/lib/mysql
 
 
 
-# 8.相关目录、文件授权
+## 8.相关目录、文件授权
 
 ```shell
 chown -R mysql.mysql /usr/local/mysql* /var/lib/mysql /etc/my.cnf
@@ -100,7 +106,7 @@ chown -R mysql.mysql /usr/local/mysql* /var/lib/mysql /etc/my.cnf
 
 
 
-# 9.拷贝启动脚本
+## 9.拷贝启动脚本
 
 ```python
 cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
@@ -108,9 +114,13 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 
 
-# 10.初始化mysql
+## 10.初始化mysql
 
-⚠️**<span style={{color: 'red'}}>mysql5.7初始化没有提示！！！</span>**
+:::tip说明
+
+**<span style={{color: 'red'}}>mysql5.7初始化没有提示！！！</span>**
+
+:::
 
 ```python
 /usr/local/mysql/bin/mysqld \
@@ -133,7 +143,7 @@ mysql5.7初始化参数说明
 
 
 
-# 11.导出mysql命令环境变量
+## 11.导出mysql命令环境变量
 
 ```python
 # 导出mysql命令环境变量
@@ -145,7 +155,7 @@ source /etc/profile
 
 
 
-# 12.配置systemd管理mysql
+## 12.配置systemd管理mysql
 
 ```python
 cat > /usr/lib/systemd/system/mysqld.service <<'EOF'
@@ -169,7 +179,7 @@ EOF
 
 
 
-# 13.启动mysql、检查启动
+## 13.启动mysql、检查启动
 
 **启动mysql**
 
@@ -193,7 +203,7 @@ tcp6       0      0 :::3306                 :::*                    LISTEN      
 
 
 
-# 14.进入mysql并设置密码
+## 14.进入mysql并设置密码
 
 ```python
 # 进入mysql

@@ -6,11 +6,11 @@
 
 
 
-# 1.安装nodejs
+## 1.安装nodejs
 
 
 
-# 2.安装docusaurus
+## 2.安装docusaurus
 
 
 
@@ -120,7 +120,7 @@ blog: {
 
 
 
-# 3.运行
+## 3.运行
 
 ```
 cd my-website

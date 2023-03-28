@@ -12,56 +12,59 @@
 
 
 
-# 1.安装依赖包
+## 1.安装依赖包
 
-```python
+```shell
 yum -y install -y gcc gcc-c++ autoconf bison-devel ncurses-devel libaio-devel numactl
 ```
 
 
 
-# 2.下载MySQL5.6二进制包
+## 2.下载MySQL5.6二进制包
 
-```python
+```shell
 export MYSQL_VERSION=5.6.51
 wget https://cdn.mysql.com/archives/mysql-5.6/mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.gz
 ```
 
 
 
-# 3.解压缩mysql二进制包到 `/usr/local`
+## 3.解压缩mysql二进制包到 `/usr/local`
 
-```python
+```shell
 tar xf mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64.tar.gz -C /usr/local
 ```
 
 
 
-# 4.修改目录名称、做软连接
+## 4.修改目录名称、做软连接
 
-```python
+```shell
 mv /usr/local/mysql-${MYSQL_VERSION}-linux-glibc2.12-x86_64 /usr/local/mysql-${MYSQL_VERSION}
 ln -s /usr/local/mysql-${MYSQL_VERSION} /usr/local/mysql
 ```
 
 
 
-# 5.创建mysql用户
+## 5.创建mysql用户
 
-```python
-# 创建mysql用户
+```shell
 useradd mysql -s /bin/nologin -M
 ```
 
 
 
-# 6.编辑主配置文件
+## 6.编辑主配置文件
 
-> mysql5.6二进制包中 `support-files/my-default.cnf`  有示例配置文件，这里选择手动编辑基础配置文件
->
-> **<span style={{color: 'red'}}>⚠️如果指定了mysql的socket文件位置，则必须添加 `[client]` 标签并同时指定socket文件位置，否则客户端会从 `/tmp` 下找socket文件</span>**
+:::caution
 
-```python
+mysql5.6二进制包中 `support-files/my-default.cnf`  有示例配置文件，这里选择手动编辑基础配置文件
+
+**<span style={{color: 'red'}}>⚠️如果指定了mysql的socket文件位置，则必须添加 `[client]` 标签并同时指定socket文件位置，否则客户端会从 `/tmp` 下找socket文件</span>**
+
+:::
+
+```shell
 # 备份/etc/my.cnf
 mv /etc/my.cnf /etc/my.cnf.old
 
@@ -81,7 +84,7 @@ EOF
 
 
 
-# 7.创建socket文件目录
+## 7.创建socket文件目录
 
 ```shell
 mkdir -p /var/lib/mysql
@@ -89,7 +92,7 @@ mkdir -p /var/lib/mysql
 
 
 
-# 8.相关目录、文件授权
+## 8.相关目录、文件授权
 
 ```shell
 chown -R mysql.mysql /usr/local/mysql* /var/lib/mysql /etc/my.cnf
@@ -97,17 +100,17 @@ chown -R mysql.mysql /usr/local/mysql* /var/lib/mysql /etc/my.cnf
 
 
 
-# 9.拷贝启动脚本
+## 9.拷贝启动脚本
 
-```python
+```shell
 cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 ```
 
 
 
-# 10.初始化mysql
+## 10.初始化mysql
 
-```python
+```shell
 /usr/local/mysql/scripts/mysql_install_db \
 --user=mysql \
 --basedir=/usr/local/mysql \
@@ -126,9 +129,9 @@ mysql5.6初始化参数说明
 
 
 
-# 11.导出mysql命令环境变量
+## 11.导出mysql命令环境变量
 
-```python
+```shell
 # 导出mysql命令环境变量
 echo "export PATH=/usr/local/mysql/bin:$PATH" > /etc/profile.d/mysql.sh
 
@@ -138,9 +141,9 @@ source /etc/profile
 
 
 
-# 12.配置systemd管理mysql
+## 12.配置systemd管理mysql
 
-```python
+```shell
 cat > /usr/lib/systemd/system/mysqld.service <<'EOF'
 [Unit]
 Description=MySQL Server
@@ -162,9 +165,9 @@ EOF
 
 
 
-# 13.启动mysql、检查启动
+## 13.启动mysql、检查启动
 
-```python
+```shell
 # 重新加载systemd系统服务
 systemctl daemon-reload
 
@@ -176,7 +179,7 @@ systemctl start mysqld && systemctl enable mysqld
 
 **查看**
 
-```python
+```shell
 # 查看mysql端口
 $ netstat -ntpl  | grep 3306
 tcp6       0      0 :::3306                 :::*                    LISTEN      31349/mysqld  
@@ -184,9 +187,9 @@ tcp6       0      0 :::3306                 :::*                    LISTEN      
 
 
 
-# 14.进入mysql并设置密码
+## 14.进入mysql并设置密码
 
-```python
+```shell
 # 进入mysql
 mysql
 
@@ -204,7 +207,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 如果设置mysql密码遇到报错，这是因为mysql要求输入16进制
 
-```
+```shell
 mysql> set password='123';
 ERROR 1372 (HY000): Password hash should be a 41-digit hexadecimal number
 ```
