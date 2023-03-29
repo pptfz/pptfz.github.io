@@ -275,7 +275,7 @@ Query OK, 0 rows affected (0.20 sec)
 
 修改列中不支持before，只有after和first
 
-::;
+:::
 
 `alter table 表名 add 列名 数据类型;`
 
