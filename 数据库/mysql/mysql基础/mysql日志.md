@@ -4,9 +4,9 @@
 
 # mysql日志
 
-# 1.错误日志
+## 1.错误日志
 
-## 1.1 yum安装默认路径
+### 1.1 yum安装默认路径
 
 **`/var/log/mysqld.log`**
 
@@ -22,7 +22,7 @@ mysql> show variables like "%log_error%";
 
 
 
-## 1.2 二进制安装、编译安装路径
+### 1.2 二进制安装、编译安装路径
 
 **`$MYSQL_HOME/data/主机名.err`**
 
@@ -44,21 +44,21 @@ mysql> show variables like 'log_error';
 
 
 
-# 2.二进制日志
+## 2.二进制日志
 
-## 2.1 含义
+### 2.1 含义
 
 **binlog日志，记录对mysql的所有更新的操作，插入的操作(增删改操作)**
 
 
 
-## 2.2 作用
+### 2.2 作用
 
 **恢复数据，MySQL AB复制，记录所有对数据库发生修改的操作**
 
 
 
-## 2.3 二进制日志模式
+### 2.3 二进制日志模式
 
 
 
@@ -85,7 +85,7 @@ mysql> show variables like 'log_error';
 
 
 
-## 2.4 开启方式
+### 2.4 开启方式
 
 ```python
 //开启二进制日志
@@ -105,7 +105,7 @@ server_id=1
 
 
 
-## 2.5 二进制日志的操作
+### 2.5 二进制日志的操作
 
 ```python
 //物理查看
@@ -141,9 +141,9 @@ mysql> show binlog events in 'mysql-bin.000001';
 
 
 
-## 2.6 事件
+### 2.6 事件
 
-### 2.6.1 事件含义
+#### 2.6.1 事件含义
 
 **1.在binlog中最小的记录单元为event**
 
@@ -151,7 +151,7 @@ mysql> show binlog events in 'mysql-bin.000001';
 
 
 
-### 2.6.2 事件特性
+#### 2.6.2 事件特性
 
 **1.每个event都有一个开始位置（start position）和结束位置（stop position）**
 
@@ -163,7 +163,7 @@ mysql> show binlog events in 'mysql-bin.000001';
 
 
 
-### 2.6.3 利用二进制日志恢复数据示例
+#### 2.6.3 利用二进制日志恢复数据示例
 
 ```python
 1.修改mysql二进制日志为row模式
@@ -321,7 +321,7 @@ mysql> select * from binlog_table;
 
 
 
-# 3.通用查询日志
+## 3.通用查询日志
 
 **`/var/run/mysqld/mysqld.log`** 				
 
@@ -344,7 +344,7 @@ Query OK, 0 rows affected (0.00 sec)
 
 
 
-# 4.慢查询日志
+## 4.慢查询日志
 
 **`/var/run/mysqld/mysqld-slow.log`**	
 

@@ -6,9 +6,9 @@
 
 
 
-# mysql5.6
+## mysql5.6
 
-## 方法一	mysqladmin
+### 方法一	mysqladmin
 
 **修改指定用户密码**
 
@@ -32,7 +32,7 @@ Warning: Since password will be sent to server in plain text, use ssl connection
 
 
 
-## 方法二	set password
+### 方法二	set password
 
 **修改指定用户密码**
 
@@ -50,7 +50,7 @@ set password='新密码'	或		set password=password('新密码');
 
 
 
-## 方法三	update更新user表
+### 方法三	update更新user表
 
 **<span style={{color: 'red'}}>⚠️mysql5.6中user表中密码的字段是`password`</span>**
 
@@ -84,9 +84,9 @@ update mysql.user set authentication_string='新密码' where user='root' and ho
 
 
 
-# mysql5.7
+## mysql5.7
 
-## 方法一	mysqladmin
+### 方法一	mysqladmin
 
 **修改指定用户密码**
 
@@ -112,7 +112,7 @@ Warning: Since password will be sent to server in plain text, use ssl connection
 
 
 
-## 方法二	set password
+### 方法二	set password
 
 **修改指定用户密码**
 
@@ -132,7 +132,7 @@ set password='新密码'	或		set password=password('新密码');
 
 
 
-## 方法三	update更新user表
+### 方法三	update更新user表
 
 **<span style={{color: 'red'}}>⚠️mysql5.6中user表中密码的字段是`password`</span>**
 
@@ -164,9 +164,9 @@ update mysql.user set authentication_string='新密码' where user='root' and ho
 
 
 
-# mysql8.0
+## mysql8.0
 
-## 方法一	mysqladmin
+### 方法一	mysqladmin
 
 **修改指定用户密码**
 
@@ -192,7 +192,7 @@ Warning: Since password will be sent to server in plain text, use ssl connection
 
 
 
-## 方法二	set password
+### 方法二	set password
 
 **<span style={{color: 'red'}}>⚠️mysql8中以下两种方式不可用</span>**
 
@@ -212,7 +212,7 @@ set password='新密码'
 
 
 
-## 方法三	update更新user表
+### 方法三	update更新user表
 
 **<span style={{color: 'red'}}>⚠️mysql5.6中user表中密码的字段是`password`</span>**
 
@@ -246,7 +246,7 @@ update mysql.user set authentication_string='新密码' where user='root' and ho
 
 
 
-# mysql忘记密码
+## mysql忘记密码
 
 **第一步、停止mysql数据库**
 

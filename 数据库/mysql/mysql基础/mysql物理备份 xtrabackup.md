@@ -30,9 +30,9 @@
 
 
 
-# 1.安装xtrabackup
+## 1.安装xtrabackup
 
-## 1.1 下载软件包并安装
+### 1.1 下载软件包并安装
 
 ```shell
 wget https://www.percona.com/downloads/Percona-XtraBackup-2.4/Percona-XtraBackup-2.4.20/binary/redhat/7/x86_64/percona-xtrabackup-24-2.4.20-1.el7.x86_64.rpm
@@ -42,7 +42,7 @@ yum -y localinstall percona-xtrabackup-24-2.4.20-1.el7.x86_64.rpm
 
 
 
-## 1.2 查看版本
+### 1.2 查看版本
 
 ```shell
 $ xtrabackup -v
@@ -54,7 +54,7 @@ xtrabackup version 2.4.20 based on MySQL server 5.7.26 Linux (x86_64) (revision 
 
 
 
-# 2.xtrabackup全备
+## 2.xtrabackup全备
 
 
 
@@ -172,9 +172,9 @@ mysql> select * from t3;
 
 
 
-## 2.1 全备
+### 2.1 全备
 
-### 2.1.1 备份方法一	`xtrabackup --backup`
+#### 2.1.1 备份方法一	`xtrabackup --backup`
 
 [xtrabackup2.4 xtrabackup选项](https://www.percona.com/doc/percona-xtrabackup/2.4/xtrabackup_bin/xbk_option_reference.html)
 
@@ -210,7 +210,7 @@ drwxr-x--- 2 root root     8192 7月   2 22:43 sys
 
 
 
-### 2.1.2 备份方法二	`innobackupex`
+#### 2.1.2 备份方法二	`innobackupex`
 
 [xtrabackup2.4 innobackupex选项](https://www.percona.com/doc/percona-xtrabackup/2.4/innobackupex/innobackupex_option_reference.html)
 
@@ -307,9 +307,9 @@ $ ll xtrabackup_logfile
 
 
 
-## 2.2 全备恢复
+### 2.2 全备恢复
 
-### 2.2.1 查看原有数据库
+#### 2.2.1 查看原有数据库
 
 有3个库(db1，db2，db3)，
 
@@ -331,7 +331,7 @@ mysql> show databases;
 
 
 
-### 2.2.2 原有数据库中的表
+#### 2.2.2 原有数据库中的表
 
 ```shell
 #db1，有两张表，每张表中有10万条数据
@@ -411,7 +411,7 @@ mysql> select count(*) from t3;
 
 
 
-### 2.2.3 进行全库备份
+#### 2.2.3 进行全库备份
 
 ```shell
 innobackupex -uroot -p1 --no-timestamp /backup/bak
@@ -419,7 +419,7 @@ innobackupex -uroot -p1 --no-timestamp /backup/bak
 
 
 
-### 2.2.4 删除db1-3数据库
+#### 2.2.4 删除db1-3数据库
 
 ```mysql
 mysql> drop database db1;
@@ -445,7 +445,7 @@ mysql> show databases;
 
 
 
-### 2.2.5 将redo进行重做，已提交的写到数据文件，未提交的使用undo回滚，模拟CSR的过程
+#### 2.2.5 将redo进行重做，已提交的写到数据文件，未提交的使用undo回滚，模拟CSR的过程
 
 `--apply-log`参数的作用是应用 BACKUP-DIR 中的 `xtrabackup_logfile` 事务日志文件。一般情况下，在备份完成后，数据尚且不能用于恢复操作，因为备份的数据中可能会包含尚未提交的事务或已经提交但尚未同步至数据文件中的事务。因此，此时数据文件仍处于不一致状态。"准备"的主要作用正是通过回滚未提交的事务及同步已经提交的事务至数据文件使得数据文件处于一致性状态。
 
@@ -455,7 +455,7 @@ innobackupex -uroot -p1 --apply-log /backup/bak
 
 
 
-### 2.2.6 停止mysql，删除原先数据目录
+#### 2.2.6 停止mysql，删除原先数据目录
 
 **停止mysql**
 
@@ -466,7 +466,7 @@ Shutting down MySQL.... SUCCESS!
 
 
 
-### 2.2.7 删除原先数据目录或者修改名称
+#### 2.2.7 删除原先数据目录或者修改名称
 
 :::tip
 
@@ -483,7 +483,7 @@ mv /usr/local/mysql/data{,-bak}
 
 
 
-### 2.2.8 进行数据恢复
+#### 2.2.8 进行数据恢复
 
 **这里要注意，恢复的时候mysql配置文件`[mysqld]`下一定要指定mysql data目录**
 
@@ -495,7 +495,7 @@ xtrabackup -uroot p1 --copy-back --target-dir=/backup/bak
 
 
 
-### 2.2.9 给恢复的目录重新授权所有者为mysql
+#### 2.2.9 给恢复的目录重新授权所有者为mysql
 
 ```shell
 chown -R mysql.mysql /usr/local/mysql/data
@@ -503,7 +503,7 @@ chown -R mysql.mysql /usr/local/mysql/data
 
 
 
-### 2.2.10 启动mysql
+#### 2.2.10 启动mysql
 
 ```shell
 $ /etc/init.d/mysqld start
@@ -513,7 +513,7 @@ Starting MySQL.Logging to '/usr/local/mysql/data/error.log'.
 
 
 
-### 2.2.11 验证数据恢复
+#### 2.2.11 验证数据恢复
 
 **验证数据库是否还原**
 
@@ -617,13 +617,13 @@ mysql> select count(*) from t3;
 
 
 
-# 三、xtrabackup增量备份
+## 3.xtrabackup增量备份
 
 [xtrabackup2.4 增量备份官方文档](https://www.percona.com/doc/percona-xtrabackup/2.4/backup_scenarios/incremental_backup.html)
 
 
 
-## 3.1 做全备
+### 3.1 做全备
 
 **db1、db2、db3数据库及表数据说明**
 
@@ -675,9 +675,9 @@ flushed_lsn = 332706884
 
 
 
-## 3.2 开始增量备份
+### 3.2 开始增量备份
 
-### 3.2.1 基于全备的的增备
+#### 3.2.1 基于全备的的增备
 
 开始第一次增备，只要全备和多个增备的LSN号连续，那么就可以逐个进行恢复。可以在备份目录`xtrabackup_checkpoints`文件中看到，**其中全备的`from_lsn=0`,增备的`from_lsn`应该等于上一个增备或者全备的`to_lsn`**
 
@@ -694,7 +694,7 @@ flushed_lsn = 332706884
 
 
 
-#### 3.2.1.1 插入数据
+##### 3.2.1.1 插入数据
 
 **db1、db2、db3每个数据库中的表都插入一条数据**
 
@@ -773,7 +773,7 @@ mysql> select count(*) from t3;
 
 
 
-#### 3.2.1.2 执行增备命令
+##### 3.2.1.2 执行增备命令
 
 增备就是在全备的命令基础上加一个参数`--incremental-basedir=`指定增备的目录
 
@@ -791,7 +791,7 @@ xtrabackup -uroot -p1 --backup --target-dir=/backup/bak_incr1 --incremental-base
 
 
 
-#### 3.2.1.3 增备完成查看备份的数据目录大小
+##### 3.2.1.3 增备完成查看备份的数据目录大小
 
 ```shell
 $ pwd
@@ -837,7 +837,7 @@ $ du -sh *
 
 
 
-#### 3.2.1.4 全备的`xtrabackup_checkpoints`与增备的`xtrabackup_checkpoints`文件对比
+##### 3.2.1.4 全备的`xtrabackup_checkpoints`与增备的`xtrabackup_checkpoints`文件对比
 
 **可以看到增备中的 `from_lsn = 332706875` 与全备中的`to_lsn = 332706875` 是相同的**
 
@@ -866,9 +866,9 @@ flushed_lsn = 332708560
 
 
 
-### 3.2.2 基于增备的增备
+#### 3.2.2 基于增备的增备
 
-#### 3.2.2.1 插入数据
+##### 3.2.2.1 插入数据
 
 **db1、db2、db3每个数据库中的表都插入一条数据**
 
@@ -947,7 +947,7 @@ mysql> select count(*) from t3;
 
 
 
-#### 3.2.2.2 执行增备命令
+##### 3.2.2.2 执行增备命令
 
 ```shell
 innobackupex -uroot -p1  --no-timestamp --incremental /backup/bak_incr2 --incremental-basedir=/backup/bak_incr1
@@ -957,7 +957,7 @@ xtrabackup -uroot -p1 --backup --target-dir=/backup/bak_incr2 --incremental-base
 
 
 
-#### 3.2.2.3 增备完成查看备份的数据目录大小
+##### 3.2.2.3 增备完成查看备份的数据目录大小
 
 ```shell
 $ pwd
@@ -1005,7 +1005,7 @@ du -sh *
 
 
 
-#### 3.2.2.4 基于增备的`xtrabackup_checkpoints`与增备的`xtrabackup_checkpoints`文件对比
+##### 3.2.2.4 基于增备的`xtrabackup_checkpoints`与增备的`xtrabackup_checkpoints`文件对比
 
 **之前增备中的`from_lsn = 332706875`与全备中的`to_lsn = 332706875`是相同的**
 
@@ -1038,9 +1038,9 @@ flushed_lsn = 332710188
 
 
 
-## 3.3 增备恢复
+### 3.3 增备恢复
 
-### 3.3.1 先准备一个全备
+#### 3.3.1 先准备一个全备
 
 ```shell
 innobackupex -uroot -p1 --apply-log --redo-only /backup/bak
@@ -1050,7 +1050,7 @@ xtrabackup -uroot -p --backup --target-dir=/backup/bak
 
 
 
-### 3.3.2 将增备1应用到全备份
+#### 3.3.2 将增备1应用到全备份
 
 **增备1就是基于全备的增备，也就是第一次增备<span style={{color: 'red'}}>⚠️这里要加`--redo-only`参数</span>**
 
@@ -1064,7 +1064,7 @@ xtrabackup -uroot -p1 --prepare --apply-log-only --target-dir=/backup/bak --incr
 
 
 
-### 3.3.3 将增备2应用到全备
+#### 3.3.3 将增备2应用到全备
 
 **增备2就是基于增备的增备，<span style={{color: 'red'}}>⚠️这里不要加`--redo-only`参数</span>**
 
@@ -1076,7 +1076,7 @@ xtrabackup -uroot -p1 --prepare --target-dir=/backup/bak --incremental-dir=/back
 
 
 
-### 3.3.4 把所有合在一起的完全备份整体进行一次apply操作，回滚未提交的数据
+#### 3.3.4 把所有合在一起的完全备份整体进行一次apply操作，回滚未提交的数据
 
 ```shell
 innobackupex -uroot -p1 --apply-log /backup/bak
@@ -1086,7 +1086,7 @@ xtrabackup --prepare --apply-log --target-dir=/backup/bak
 
 
 
-### 3.3.5 删除db1-3数据库
+#### 3.3.5 删除db1-3数据库
 
 ```mysql
 mysql> drop database db1;
@@ -1112,7 +1112,7 @@ mysql> show databases;
 
 
 
-### 3.3.6 停止mysql，删除原先数据目录
+#### 3.3.6 停止mysql，删除原先数据目录
 
 **停止mysql**
 
@@ -1123,7 +1123,7 @@ Shutting down MySQL.... SUCCESS!
 
 
 
-### 3.3.7 删除原先数据目录或者修改名称
+#### 3.3.7 删除原先数据目录或者修改名称
 
 :::tip
 
@@ -1140,7 +1140,7 @@ mv /usr/local/mysql/data{,-bak}
 
 
 
-### 3.3.8 进行数据恢复
+#### 3.3.8 进行数据恢复
 
 **这里要注意，恢复的时候mysql配置文件`[mysqld]`下一定要指定mysql data目录**
 
@@ -1152,7 +1152,7 @@ xtrabackup -uroot p1 --copy-back --target-dir=/backup/bak
 
 
 
-### 3.3.9 给恢复的目录重新授权所有者为mysql
+#### 3.3.9 给恢复的目录重新授权所有者为mysql
 
 ```shell
 chown -R mysql.mysql /usr/local/mysql/data
@@ -1160,7 +1160,7 @@ chown -R mysql.mysql /usr/local/mysql/data
 
 
 
-### 3.3.10 启动mysql
+#### 3.3.10 启动mysql
 
 ```shell
 $ /etc/init.d/mysqld start
@@ -1170,7 +1170,7 @@ Starting MySQL.Logging to '/usr/local/mysql/data/error.log'.
 
 
 
-### 3.3.11 验证数据恢复
+#### 3.3.11 验证数据恢复
 
 **验证数据库是否还原**
 
@@ -1302,7 +1302,7 @@ xtrabackup -uroot -p1 --backup --target-dir=/backup/bak_incr2 --incremental-base
 
 
 
-# 4.备份脚本
+## 4.备份脚本
 
 **授权**
 
