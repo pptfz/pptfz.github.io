@@ -4,7 +4,7 @@
 
 使用go输出 `hello world`
 
-```go live
+```go
 package main
 
 import (

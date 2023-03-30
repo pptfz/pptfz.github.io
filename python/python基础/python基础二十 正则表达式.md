@@ -4,7 +4,7 @@
 
 # python基础二十	正则表达式
 
-# 1.正则表达式说明
+## 1.正则表达式说明
 
 **正则就是用一些具有特殊含义的符号组合到一起去匹配相应的内容的方法，在python中，使用正则需要导入re模块正则表达式模式被编译成一系列的字节码，然后用c编写的匹配引擎执行**
 
@@ -39,9 +39,9 @@
 
 
 
-# 2.匹配模式
+## 2.匹配模式
 
-## 2.1字符串常用操作
+### 2.1 字符 串常用操作
 
 ```python
 s1 = 'python正则练习'
@@ -57,9 +57,9 @@ print(s1.find('abc'))
 
 
 
-## 2.2正则匹配示例
+### 2.2 正则匹配示例
 
-### \w	匹配中文、字母、数字、下划线
+#### \w	匹配中文、字母、数字、下划线
 
 ```python
 import re
@@ -73,7 +73,7 @@ print(re.findall('\w',s))
 
 
 
-### \W	和\w相反，不匹配中文、字母、数字、下划线
+#### \W	和\w相反，不匹配中文、字母、数字、下划线
 
 ```python
 import re
@@ -87,7 +87,7 @@ print(re.findall('\W',s))
 
 
 
-### \s	匹配任意空白符
+#### \s	匹配任意空白符
 
 ```python
 import re
@@ -101,7 +101,7 @@ print(re.findall('\s',s))
 
 
 
-### \d	匹配数字
+#### \d	匹配数字
 
 ```python
 import re
@@ -115,7 +115,7 @@ print(re.findall('\d',s))
 
 
 
-### \D	与\d相反，匹配非数字
+#### \D	与\d相反，匹配非数字
 
 ```python
 import re
@@ -129,7 +129,7 @@ print(re.findall('\D',s))
 
 
 
-### \A与^	以什么开头
+#### \A与^	以什么开头
 
 ```python
 import re
@@ -144,7 +144,7 @@ print(re.findall('^python',s))
 
 
 
-### \Z与$	以什么结尾
+#### \Z与$	以什么结尾
 
 ```python
 import re
@@ -159,7 +159,7 @@ print(re.findall('1.11$',s))
 
 
 
-### \n	匹配换行符
+#### \n	匹配换行符
 
 ```python
 import re
@@ -173,7 +173,7 @@ print(re.findall('\n',s))
 
 
 
-### \t	匹配制表符
+#### \t	匹配制表符
 
 ```python
 import re
@@ -189,7 +189,7 @@ print(re.findall('\t',s))
 
 
 
-# 3.匹配方式
+## 3.匹配方式
 
 ### .	匹配除换行符外的任意字符
 
@@ -338,9 +338,9 @@ print(re.findall('[^a-z]',s))
 
 
 
-# 4.常用方法
+## 4.常用方法
 
-## 4.1findall	全部找到并返回一个列表
+### 4.1 findall	全部找到并返回一个列表
 
 ```python
 import re
@@ -353,7 +353,7 @@ print(re.findall('abc',s))
 
 
 
-## 4.2search	从字符串任意位置进行匹配，查找到一个就停止
+### 4.2 search	从字符串任意位置进行匹配，查找到一个就停止
 
 **返回的是一个对象，获取匹配内容必须使用.group()**
 
@@ -374,7 +374,7 @@ abc
 
 
 
-## 4.3match	从字符串开始位置进行匹配
+### 4.3 match	从字符串开始位置进行匹配
 
 ```python
 import re
@@ -391,7 +391,7 @@ AttributeError: 'NoneType' object has no attribute 'group'
 
 
 
-## 4.4split	分隔，可按照任意分隔符进行分隔
+### 4.4 split	分隔，可按照任意分隔符进行分隔
 
 ```python
 import re
@@ -405,7 +405,7 @@ print(re.split('bb',s))	#以bb为分隔符
 
 
 
-## 4.5sub	替换
+### 4.5 sub	替换
 
 ```python
 import re
@@ -419,7 +419,7 @@ ab-呵呵-abc-abc-a呵呵c
 
 
 
-## 4.6compile	定义匹配规则
+### 4.6 compile	定义匹配规则
 
 ```python
 import re
@@ -434,7 +434,7 @@ print(obj.findall(s))
 
 
 
-## 4.7finditer	返回一个迭代器
+### 4.7 finditer	返回一个迭代器
 
 ```python
 格式
@@ -452,7 +452,7 @@ ab
 
 
 
-## 4.8给分组()起名字
+### 4.8 给分组()起名字
 
 ```python
 格式

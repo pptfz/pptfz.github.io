@@ -4,15 +4,15 @@
 
 # mysql多实例-5.7.23
 
-# 1.mysql多实例介绍
+## 1.mysql多实例介绍
 
-## 1.1 什么是MySQL多实例
+### 1.1 什么是MySQL多实例
 
 **MySQL多实例就是在一台机器上开启多个不同的服务端口（如：3306,3307），运行多个MySQL服务进程，通过不同的socket监听不同的服务端口来提供各自的服务**
 
 
 
-## 1.2 MySQL多实例的特点有以下几点
+### 1.2 MySQL多实例的特点有以下几点
 
 **1：有效利用服务器资源，当单个服务器资源有剩余时，可以充分利用剩余的资源提供更多的服务**
 
@@ -22,7 +22,7 @@
 
 
 
-## 1.3 部署mysql多实例的两种方式
+### 1.3 部署mysql多实例的两种方式
 
 **第一种是使用多个配置文件启动不同的进程来实现多实例，这种方式的优势逻辑简单，配置简单，缺点是管理起来不太方便**
 
@@ -30,7 +30,7 @@
 
 
 
-## 1.4 同一开发环境下安装两个数据库，必须处理以下问题
+### 1.4 同一开发环境下安装两个数据库，必须处理以下问题
 
 - **配置文件安装路径不能相同**
 - **数据库目录不能相同**
@@ -40,7 +40,7 @@
 
 
 
-# 2.mysql多实例安装路径说明
+## 2.mysql多实例安装路径说明
 
 **mysql安装路径**
 
@@ -52,9 +52,9 @@
 
 
 
-# 3.安装部署过程
+## 3.安装部署过程
 
-## 3.1 安装依赖包
+### 3.1 安装依赖包
 
 ```python
 yum -y install gcc gcc-c++ autoconf bison-devel ncurses-devel libaio-devel
@@ -62,7 +62,7 @@ yum -y install gcc gcc-c++ autoconf bison-devel ncurses-devel libaio-devel
 
 
 
-## 3.2 创建mysql用户和组
+### 3.2 创建mysql用户和组
 
 ```python
 groupadd mysql && useradd -g mysql -s /sbin/nologin mysql
@@ -70,7 +70,7 @@ groupadd mysql && useradd -g mysql -s /sbin/nologin mysql
 
 
 
-## 3.3 下载mysql-5.7.23二进制包
+### 3.3 下载mysql-5.7.23二进制包
 
 ```python
 wget https://downloads.mysql.com/archives/get/file/mysql-5.7.23-linux-glibc2.12-x86_64.tar.gz
@@ -78,7 +78,7 @@ wget https://downloads.mysql.com/archives/get/file/mysql-5.7.23-linux-glibc2.12-
 
 
 
-## 3.4 解压缩并修改目录名称
+### 3.4 解压缩并修改目录名称
 
 ```python
 tar xf mysql-5.7.23-linux-glibc2.12-x86_64.tar.gz && \
@@ -87,7 +87,7 @@ mv mysql-5.7.23-linux-glibc2.12-x86_64/ mysql-5.7.23
 
 
 
-## 3.5 修改目录所有者为mysql
+### 3.5 修改目录所有者为mysql
 
 ```python
 chown -R mysql.mysql mysql-5.7.23
@@ -95,7 +95,7 @@ chown -R mysql.mysql mysql-5.7.23
 
 
 
-## 3.6 创建3个mysql安装目录
+### 3.6 创建3个mysql安装目录
 
 ```python
 mkdir -p /data/mysql330{6..8}
@@ -103,7 +103,7 @@ mkdir -p /data/mysql330{6..8}
 
 
 
-## 3.7 将mysql包分别拷贝到3个安装目录
+### 3.7 将mysql包分别拷贝到3个安装目录
 
 ```python
 for i in {6..8};do cp -rp mysql-5.7.23  /data/mysql330$i ;done
@@ -111,7 +111,7 @@ for i in {6..8};do cp -rp mysql-5.7.23  /data/mysql330$i ;done
 
 
 
-## 3.8 做软连接
+### 3.8 做软连接
 
 ```python
 for i in {6..8};do ln -s /data/mysql330$i/mysql-5.7.23 /data/mysql330$i/mysql;done
@@ -119,7 +119,7 @@ for i in {6..8};do ln -s /data/mysql330$i/mysql-5.7.23 /data/mysql330$i/mysql;do
 
 
 
-## 3.9 编辑配置文件
+### 3.9 编辑配置文件
 
 **basedir、datadir、log-error、port、socket文件位置不同，如果要做主从，serverid要不同**
 
@@ -167,7 +167,7 @@ EOF
 
 
 
-## 3.10 拷贝启动脚本
+### 3.10 拷贝启动脚本
 
 ```python
 //分别拷贝3个实例启动脚本
@@ -183,7 +183,7 @@ sed -i.bak 's#/usr/local#/data/mysql3308#g' /etc/init.d/mysqld3308 /data/mysql33
 
 
 
-## 3.11 初始化mysql
+### 3.11 初始化mysql
 
 ```python
 //初始化第一个实例
@@ -198,7 +198,7 @@ sed -i.bak 's#/usr/local#/data/mysql3308#g' /etc/init.d/mysqld3308 /data/mysql33
 
 
 
-## 3.12 添加mysql命令环境变量
+### 3.12 添加mysql命令环境变量
 
 ```python
 //这里只需要导出一个即可
@@ -208,7 +208,7 @@ source /etc/profile
 
 
 
-## 3.13 配置systemd管理mysql
+### 3.13 配置systemd管理mysql
 
 ```python
 //配置第一个实例
@@ -274,7 +274,7 @@ EOF
 
 
 
-## 3.14 启动mysql、检查启动
+### 3.14 启动mysql、检查启动
 
 ```python
 //启动mysql
@@ -291,7 +291,7 @@ tcp6       0      0 :::3308                 :::*                    LISTEN      
 
 
 
-## 3.15 进入mysql，设置密码
+### 3.15 进入mysql，设置密码
 
 ```python
 //设置第一个实例密码
@@ -312,7 +312,7 @@ mysql> flush privileges;
 
 
 
-## 3.16 设置快捷登陆
+### 3.16 设置快捷登陆
 
 ```python
 //原有登陆方式，需要指定mysql用户名密码和套接字文件
@@ -350,13 +350,13 @@ chmod +x /usr/bin/mysql330*
 
 
 
-# 扩展：基于以上多实例实现mysql主从复制
+## 扩展：基于以上多实例实现mysql主从复制
 
 **3306为主**
 
 **3307、3308为从**
 
-# 1.编辑主库3306（master）配置文件/etc/my-3306.cnf
+### 1.编辑主库3306（master）配置文件/etc/my-3306.cnf
 
 ```python
 vim /etc/my-3306.cnf		#[mysqld]下方增加以下3行
@@ -370,7 +370,7 @@ systemctl restart mysqld3306
 
 
 
-# 2.创建专用复制用户
+### 2.创建专用复制用户
 
 ```python
 mysql3306
@@ -380,7 +380,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 
 
-# 3.查看master状态
+### 3.查看master状态
 
 ```python
 mysql> show master status;
@@ -394,7 +394,7 @@ mysql> show master status;
 
 
 
-# 4.编辑从库配置文件
+### 4.编辑从库配置文件
 
 ```python
 //编辑3307配置文件
@@ -415,7 +415,7 @@ relay_log_index=/data/mysql3308/mysql/relay_log.index
 
 
 
-# 5.设置slave从master拉取binlog及拉取的位置
+### 5.设置slave从master拉取binlog及拉取的位置
 
 ```python
 //3307
@@ -449,7 +449,7 @@ Slave_SQL_Running: Yes
 
 
 
-# 6.验证，在3306中创建一个数据库，看3307和3308是否会同步
+### 6.验证，在3306中创建一个数据库，看3307和3308是否会同步
 
 ```python
 //3306中创建一个数据库

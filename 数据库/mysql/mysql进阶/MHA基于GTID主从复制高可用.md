@@ -10,7 +10,7 @@
 
 
 
-# 1.MHA简介
+## 1.MHA简介
 
 MHA通常在10到30秒内以最少的停机时间执行自动的主故障转移和从升级。MHA可以防止复制一致性问题，并节省了必须购买其他服务器的费用。所有这些都具有零性能下降，无复杂性（易于安装）并且无需更改现有部署的情况。
 
@@ -36,7 +36,7 @@ MHA在写入器阻塞后的0.5-2秒内提供正常的主设备切换。通常可
 
 
 
-# 2.MHA架构
+## 2.MHA架构
 
 [MHA架构官方文档](https://raw/branch.githubusercontent.com/wiki/yoshinorim/mha4mysql-manager/Architecture.md)
 
@@ -68,7 +68,7 @@ MHA在写入器阻塞后的0.5-2秒内提供正常的主设备切换。通常可
 
 
 
-# 3.部署过程
+## 3.部署过程
 
 **实验环境**
 
@@ -83,7 +83,7 @@ MHA在写入器阻塞后的0.5-2秒内提供正常的主设备切换。通常可
 
 
 
-## 3.1 下载安装包
+### 3.1 下载安装包
 
 [MHA manager0.58下载地址](https://github.com/yoshinorim/mha4mysql-manager/releases)
 
@@ -118,7 +118,7 @@ MHA在写入器阻塞后的0.5-2秒内提供正常的主设备切换。通常可
 
 
 
-## 3.2 所有机器做相互免密钥配置
+### 3.2 所有机器做相互免密钥配置
 
 **<span style={{color: 'red'}}>⚠️复制集群中的每个节点都有可能成为master，都得开启binlog和ssh密钥认证，因为当旧master宕机后，mha要拷贝binlog到所有node节点上，而且所有节点都有可能成为master，故每个节点都要彼此密钥认证</span>**
 
@@ -168,13 +168,13 @@ done < $file
 
 **<span style={{color: 'red'}}>master操作(mysql01 10.0.0.133)</span>**
 
-## 3.3 mysql主从配置-GTID
+### 3.3 mysql主从配置-GTID
 
 >  **这里是把10.0.0.133(mysql01)、10.0.0.134(mysql02)、10.0.0.135(mysql03)搭建为ABB，即一主两从，其中mysql01是主库，其余两个节点是从库**
 
 
 
-### 3.3.1 编辑 `/etc/my.cnf`
+#### 3.3.1 编辑 `/etc/my.cnf`
 
 > **指定`serverid`，并开启`binlog`**
 
@@ -232,7 +232,7 @@ mysql> show global variables like '%gtid%';
 
 
 
-### 3.3.2 创建专用复制用户和设置监控用户
+#### 3.3.2 创建专用复制用户和设置监控用户
 
 **<span style={{color: 'red'}}>允许从slave上连接过来的复制用户，3台mysql服务器都要创建复制用户和监控用户！！！</span>**
 
@@ -270,7 +270,7 @@ set global relay_log_purge=0;
 
 **<span style={{color: 'red'}}>slave操作(mysql02、03 10.0.0.134、135)</span>**
 
-### 3.3.3 配置文件 `/etc/my.cnf`
+#### 3.3.3 配置文件 `/etc/my.cnf`
 
 > **指定serverid，并开启binlog日志**
 
@@ -328,7 +328,7 @@ mysql> show variables like '%gtid%';
 
 
 
-### 3.3.4 从库拉取
+#### 3.3.4 从库拉取
 
 ```python
 # 设置只读，不要在配置文件里写
@@ -369,7 +369,7 @@ Seconds_Behind_Master: 0
 
 
 
-### 3.3.5 验证主从同步
+#### 3.3.5 验证主从同步
 
 **master操作**
 
@@ -401,7 +401,7 @@ mysql> show databases;
 
 
 
-## 3.4 部署MHA node
+### 3.4 部署MHA node
 
 **所有节点执行**
 
@@ -435,9 +435,9 @@ $ make && make install
 
 **<span style={{color: 'red'}}>manager操作(mha 10.0.0.130)</span>**
 
-## 3.5 部署MHA Manager
+### 3.5 部署MHA Manager
 
-### 3.5.1 增加epel源
+#### 3.5.1 增加epel源
 
 ```python
 wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
@@ -445,7 +445,7 @@ wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
 
 
 
-### 3.5.2 安装依赖包
+#### 3.5.2 安装依赖包
 
 ```python
 yum -y install perl-DBD-MySQL perl-Config-Tiny perl-Log-Dispatch perl-Parallel-ForkManager perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker perl-ExtUtils-Embed perl-CPAN
@@ -453,7 +453,7 @@ yum -y install perl-DBD-MySQL perl-Config-Tiny perl-Log-Dispatch perl-Parallel-F
 
 
 
-### 3.5.3 安装manager
+#### 3.5.3 安装manager
 
 ```python
 # 下载包
@@ -488,7 +488,7 @@ $ make && make install
 
 
 
-### 3.5.4 mysql主库节点配置eth0:0网卡，用作VIP，这里设置为10.0.0.200
+#### 3.5.4 mysql主库节点配置eth0:0网卡，用作VIP，这里设置为10.0.0.200
 
 **<span style={{color: 'red'}}>这一步在mysql主库上(10.0.0.133)执行</span>**
 
@@ -507,7 +507,7 @@ eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group
 
 
 
-### 3.5.5 使用脚本管理vip 
+#### 3.5.5 使用脚本管理vip 
 
 **⚠️需要修改的是VIP的地址和网卡的名称**
 
@@ -613,7 +613,7 @@ chmod +x /usr/local/bin/master_ip_failover
 
 
 
-### 3.5.6 配置mha配置文件
+#### 3.5.6 配置mha配置文件
 
 **创建mha配置文件目录及日志目录**
 
@@ -762,9 +762,9 @@ EOF
 
 
 
-### 3.5.7 测试MHA Manager
+#### 3.5.7 测试MHA Manager
 
-#### 3.5.7.1 测试ssh连接
+##### 3.5.7.1 测试ssh连接
 
 ```python
 $ masterha_check_ssh --conf=/etc/masterha/app1.cnf
@@ -792,7 +792,7 @@ Sat Jun  6 10:27:34 2020 - [info] All SSH connection tests passed successfully.
 
 
 
-#### 3.5.7.2 测试mysql集群连接情况
+##### 3.5.7.2 测试mysql集群连接情况
 
 ```python
 $ masterha_check_repl --conf=/etc/masterha/app1.cnf
@@ -888,7 +888,7 @@ MySQL Replication Health is OK.
 
 
 
-### 3.5.8 启动mha
+#### 3.5.8 启动mha
 
 **启动mha**
 
@@ -951,9 +951,9 @@ masterha_stop --conf=/etc/masterha/app1.cnf  &&  nohup masterha_manager --conf=/
 
 
 
-## 3.6 测试MHA
+### 3.6 测试MHA
 
-### 3.6.1 手动关闭主库，模拟宕机
+#### 3.6.1 手动关闭主库，模拟宕机
 
 **<span style={{color: 'red'}}>10.0.0.133 mysql01操作</span>**
 
@@ -963,7 +963,7 @@ systemctl stop mysqld
 
 
 
-### 3.6.2 验证slave1，即10.0.0.134
+#### 3.6.2 验证slave1，即10.0.0.134
 
 **因为在mha配置文件`/etc/masterha/app1.conf`中定义了参数`candidate_master=1`，即设置为候选master，如果设置该参数以后，发生主从切换以后将会将此从库提升为主库，即使这个主库不是集群中事件最新的slave，因此，当主库挂掉时，slave1 10.0.0.134会成为新的主库**
 
@@ -1011,15 +1011,15 @@ $ ip a s eth0
 
 
 
-## 3.7 修复宕机主库步骤
+### 3.7 修复宕机主库步骤
 
-### 第一步、修复宕机主库
+#### 第一步、修复宕机主库
 
 **用各种方法把宕掉的旧主库成功启动**
 
 
 
-### 第二步、从MHA配置文件`/etc/masterha/app1.conf`中的`[server default]`标签下定义的`manager_log=/var/log/masterha/app1/manager.log`日志文件中找到`change master to`语句，修改从库复制用户的密码，并且指定主库为新主库
+#### 第二步、从MHA配置文件`/etc/masterha/app1.conf`中的`[server default]`标签下定义的`manager_log=/var/log/masterha/app1/manager.log`日志文件中找到`change master to`语句，修改从库复制用户的密码，并且指定主库为新主库
 
 **<span style={{color: 'red'}}>MHA节点操作</span>**
 
@@ -1030,7 +1030,7 @@ Sun Jun  7 13:17:49 2020 - [info]  All other slaves should start replication fro
 
 
 
-### 第三步、连接旧主库，执行上一步找到的`change master to`语句并打开IO、SQL线程
+#### 第三步、连接旧主库，执行上一步找到的`change master to`语句并打开IO、SQL线程
 
 **<span style={{color: 'red'}}>10.0.0.133 mysql01(旧主库)操作</span>**
 
@@ -1051,7 +1051,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 
 
-### 第四步、把旧主库的server标签在MHA配置文件中添加回来，MHA执行切换后，会把down机的主机server标签删除
+#### 第四步、把旧主库的server标签在MHA配置文件中添加回来，MHA执行切换后，会把down机的主机server标签删除
 
 **编辑MHA配置文件`/etc/masterha/app1.cnf`添加`server1`标签**
 
@@ -1063,7 +1063,7 @@ port=3306
 
 
 
-## 第五步、启动MHA
+#### 第五步、启动MHA
 
 ```python
 nohup masterha_manager --conf=/etc/masterha/app1.cnf --remove_dead_master_conf --ignore_last_failover < /dev/null > /var/log/masterha/app1/manager.log 2>&1 &
@@ -1071,7 +1071,7 @@ nohup masterha_manager --conf=/etc/masterha/app1.cnf --remove_dead_master_conf -
 
 
 
-# 4.配置binlog-server
+## 4.配置binlog-server
 
 [mysql5.7官方binlog-server文档](https://dev.mysql.com/doc/refman/5.7/en/mysqlbinlog-backup.html#mysqlbinlog-backup-options)
 
@@ -1089,7 +1089,7 @@ nohup masterha_manager --conf=/etc/masterha/app1.cnf --remove_dead_master_conf -
 
 **配置好GTID主从后执行以下步骤**
 
-## 4.1 MHA配置文件`/etc/masterha/app1.cnf`加入binlog-server配置
+### 4.1 MHA配置文件`/etc/masterha/app1.cnf`加入binlog-server配置
 
 **这里把mysql03 10.0.0.135当作binlog-server**
 
@@ -1111,7 +1111,7 @@ mkdir -p /data/mysql/binlog && chown mysql.mysql /data/mysql/binlog
 
 
 
-## 4.2 手动备份binlog
+### 4.2 手动备份binlog
 
 - **<span style={{color: 'red'}}>⚠️备份binlog，--host后的IP一定要填写VIP地址</span>**
 - **<span style={{color: 'red'}}>⚠️一定要注意写对mysql binlog文件的名称</span>**
@@ -1126,7 +1126,7 @@ mysqlbinlog -R --host=10.0.0.200 --user=mha --password=Bxb123.com --raw/branch -
 
 
 
-## 4.3 启动MHA
+### 4.3 启动MHA
 
 ```python
 nohup masterha_manager --conf=/etc/masterha/app1.cnf --remove_dead_master_conf --ignore_last_failover < /dev/null > /var/log/masterha/app1/manager.log 2>&1 &
@@ -1134,7 +1134,7 @@ nohup masterha_manager --conf=/etc/masterha/app1.cnf --remove_dead_master_conf -
 
 
 
-## 4.4 验证
+### 4.4 验证
 
 **mysql master节点执行命令`flush logs`刷新binlog**
 
@@ -1159,7 +1159,7 @@ binlog.000001  binlog.000002  binlog.000003
 
 
 
-# 5.MHA常用命令总结
+## 5.MHA常用命令总结
 
 
 

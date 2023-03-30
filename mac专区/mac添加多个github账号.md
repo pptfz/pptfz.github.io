@@ -4,13 +4,13 @@
 
 # MAC本添加多个github账号
 
-## 使用需求
+### 使用需求
 
 > **通常情况下，我们会有两个 github 账号：一个是公司的，另一个是私人的。由于 github 是使用 SSH key 的 fingerprint (对应的公钥id_rsa_pub)来判定你是哪个账户，而不是通过用户名，如果是在多台电脑上使用一个账号，可以为该账号添加多个 SSH key，如果是一台电脑使用多个账号，则分别生成多个 SSH key 添加到对应的账户即可。所以本文要实现的是公号和私号在 git 上同时使用，两者互不干扰。**
 
 
 
-## 第一步、生成多个sshkey
+### 第一步、生成多个sshkey
 
 **``cd ~/.ssh``切换到用户家目录，然后生成sshkey，执行以下命令，一路回车即可**
 
@@ -30,7 +30,7 @@ id_rsa.two.pub  //账号two的公钥
 
 
 
-## 第二步、创建配置文件config
+### 第二步、创建配置文件config
 
 **在 `~/.ssh`目录下新建 config 文件，令不同 Host 实际映射到同一 HostName，但密钥文件不同，这里举例为one和two，可自行修改为自己使用的用户**
 
@@ -52,7 +52,7 @@ IdentityFile ~/.ssh/id_rsa_two
 
 
 
-## 第三步、github添加sshkey及测试
+### 第三步、github添加sshkey及测试
 
 **分别登陆两个 github 账号，在 Settings —> SSH and GPG keys 中，点击 “new SSH key”，把 “id_rsa.one.pub” 和 "id_rsa.two.pub"这两个公钥的内容分别添加到相应的账号中。**
 **为了确认我们可以通过 SSH 连接 github，可通过输入下面命令来验证**
@@ -67,7 +67,7 @@ Hi one! You've successfully authenticated, but GitHub does not provide shell acc
 
 
 
-## 第四步、配置git信息
+### 第四步、配置git信息
 
 :::tip
 
@@ -88,7 +88,7 @@ git config --local user.email "xx@xx.com"
 
 
 
-## 第五步、使用git
+### 第五步、使用git
 
 **git的使用一般是从其他仓库直接clone或本地新建仓库**
 

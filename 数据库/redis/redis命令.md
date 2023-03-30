@@ -10,7 +10,7 @@
 
 <h3 style={{color: 'red'}}>⚠️ keys * 命令不要在生产环境中使用！！！ 这里仅仅是为了实验使用这个命令</h3>
 
-# redis-cli	
+## redis-cli	
 
 **语法**
 
@@ -58,7 +58,7 @@ CONFIG set requirepass "password"
 
 
 
-# redis-server	
+## redis-server	
 
 示例：指定配置文件启动redis
 
@@ -72,9 +72,9 @@ redis-server /etc/redis/6379/redis.conf
 
 
 
-# keys命令
+## keys命令
 
-## del key
+### del key
 
 含义：该命令用于在key存在时删除 key
 
@@ -91,7 +91,7 @@ redis-server /etc/redis/6379/redis.conf
 
 
 
-## dump key
+### dump key
 
 含义：序列化key，并返回被序列化的值
 示例：
@@ -105,7 +105,7 @@ redis-server /etc/redis/6379/redis.conf
 
 
 
-## exists key
+### exists key
 
 含义：检查指定key是否存在，存在返回1，不存在返回0
 示例：
@@ -119,7 +119,7 @@ redis-server /etc/redis/6379/redis.conf
 
 
 
-## expire key seconds
+### expire key seconds
 
 含义：为给定key设置过期时间，以秒为单位
 示例：
@@ -139,7 +139,7 @@ redis-server /etc/redis/6379/redis.conf
 
 
 
-## expireat key timestamp
+### expireat key timestamp
 
 含义：EXPIREAT 的作用和 EXPIRE 类似，都用于为key设置过期时间。 不同在于 EXPIREAT 命令接受的时间参数是 UNIX 时间戳(unix timestamp)
 示例：
@@ -153,7 +153,7 @@ redis-server /etc/redis/6379/redis.conf
 
 
 
-## pexpire  key milliseconds
+### pexpire  key milliseconds
 
 含义：设置key的过期时间以毫秒计
 示例：
@@ -169,7 +169,7 @@ redis-server /etc/redis/6379/redis.conf
 
 
 
-## pexpireat key milliseconds-timestamp
+### pexpireat key milliseconds-timestamp
 
 含义：设置key过期时间的时间戳(unix timestamp) 以毫秒计
 示例：
@@ -183,7 +183,7 @@ redis-server /etc/redis/6379/redis.conf
 
 
 
-## keys pattern
+### keys pattern
 
 含义：查找所有符合给定模式( pattern)的 key
 示例：
@@ -205,7 +205,7 @@ OK
 
 
 
-## move key db
+### move key db
 
 含义：将当前数据库的key移动到给定的数据库db当中
 示例：
@@ -239,7 +239,7 @@ OK
 
 
 
-## persist key
+### persist key
 
 含义：移除key的过期时间，key将持久保持
 示例：
@@ -256,7 +256,7 @@ OK
 
 
 
-## pttl key
+### pttl key
 
 含义：以毫秒为单位返回key的剩余的过期时间
 示例：
@@ -273,7 +273,7 @@ OK
 
 
 
-## ttl key
+### ttl key
 
 含义：以秒为单位，返回给定 key 的剩余生存时间(TTL, time to live)
 示例：
@@ -287,7 +287,7 @@ OK
 
 
 
-## randomkey
+### randomkey
 
 含义：从当前数据库中随机返回一个 key
 示例：
@@ -313,7 +313,7 @@ OK
 
 
 
-## pename key newkey
+### pename key newkey
 
 含义：修改key的名称
 示例：
@@ -329,7 +329,7 @@ OK
 
 
 
-## renamenx key newkey
+### renamenx key newkey
 
 含义：仅当newkey不存在时，将key改名为newkey
 示例：
@@ -345,7 +345,7 @@ OK
 
 
 
-## type key
+### type key
 
 含义：返回key所存储值的类型
 示例：

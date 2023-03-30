@@ -4,7 +4,7 @@
 
 # mysql事务隔离级别
 
-# mysql事务
+## mysql事务
 
 一般来说，事务是必须满足4个条件（ACID）：：原子性（**A**tomicity，或称不可分割性）、一致性（**C**onsistency）、隔离性（**I**solation，又称独立性）、持久性（**D**urability）。
 
@@ -15,7 +15,7 @@
 
 
 
-# mysql 4种事务隔离级别
+## mysql 4种事务隔离级别
 
 | 级别     | symbol           | 对应值 | 含义                                                   | 存在问题                                                     |
 | -------- | ---------------- | ------ | ------------------------------------------------------ | ------------------------------------------------------------ |
@@ -160,7 +160,7 @@ mysql> select * from t1;
 
 
 
-## 1 读未提交	Read Uncommitted
+### 1 读未提交	Read Uncommitted
 
 含义：一个事务可以读到另一个事务未提交的数据！
 
@@ -213,7 +213,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 
 
-## 2 读提交	Read Committed
+### 2 读提交	Read Committed
 
 含义：一个事务能读到另一个事务已提交的数据
 
@@ -271,7 +271,7 @@ Query OK, 0 rows affected (0.08 sec)
 
 
 
-## 3 可重复读	Repeatable Read
+### 3 可重复读	Repeatable Read
 
 [官网对**幻读**定义的地址](https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_phantom)
 
@@ -353,7 +353,7 @@ mysql> select * from t1 lock in share mode;
 
 
 
-## 4 串行化	Serializable Read
+### 4 串行化	Serializable Read
 
 在该隔离级别下，所有的`select`语句后都自动加上`lock in share mode`。因此，在该隔离级别下，无论你如何进行查询，都会使用`next-key locks`。所有的`select`操作均为当前读!
 
@@ -401,7 +401,7 @@ OK,注意看上表红色部分！就是因为使用了`next-key locks`,innodb将
 
 
 
-# 脏读、不可重复度、幻读
+## 脏读、不可重复度、幻读
 
 根据事务的隔离级别不同，会有三种情况发生，即脏读、不可重复度、幻读，这三种情况有如下包含关系
 
@@ -424,9 +424,9 @@ OK,注意看上表红色部分！就是因为使用了`next-key locks`,innodb将
 
 
 
-## 脏读
+### 脏读
 
-### 定义
+#### 定义
 
 [官网对**脏读**定义的地址](https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_dirty_read)
 其内容为
@@ -440,7 +440,7 @@ OK,注意看上表红色部分！就是因为使用了`next-key locks`,innodb将
 
 根据我们最开始的推理，如果存在脏读，那么不可重复读和幻读一定是存在的。
 
-### 示例
+#### 示例
 
 新建一张表，并且隔离级别设置为读未提交 READ-UNCOMMITTED
 
@@ -492,9 +492,9 @@ mysql> select @@autocommit;
 
 
 
-## 不可重复读
+### 不可重复读
 
-### 定义
+#### 定义
 
 [官网对**不可重复读**定义的地址](https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_non_repeatable_read)
 
@@ -514,7 +514,7 @@ mysql> select @@autocommit;
 - 这个不可重复读的定义，放到脏读的现象里是不是也可以说的通。显然脏读的现象，也就是**读未提交(READ_UNCOMMITTED)**的那个例子，是不是也符合在同一个事务中返回了不同结果！
 - 但是反过来就不一定通了，一个事务A中查询两次的结果在被另一个事务B改变的情况下，如果事务B未提交就改变了事务A的结果，就属于脏读，也属于不可重复读。如果该事务B提交了才改变事务A的结果，就不属于脏读，但属于不可重复读。
 
-### 示例-读提交
+#### 示例-读提交
 
 新建一张表，并且隔离级别设置为读提交 READ-COMMITTED
 
@@ -564,7 +564,7 @@ mysql> select @@autocommit;
 
 
 
-### 示例-可重复读
+#### 示例-可重复读
 
 新建一张表，并且隔离级别设置为可重复读 REPEATABLE-READ
 
@@ -616,9 +616,9 @@ mysql> select @@autocommit;
 
 
 
-## 幻读
+### 幻读
 
-### 定义
+#### 定义
 
 [官网对**幻读**定义的地址](https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_phantom)
 
@@ -655,7 +655,7 @@ mysql> select @@autocommit;
 
 
 
-### 示例
+#### 示例
 
 新建一张表，并且隔离级别设置为可重复读 REPEATABLE-READ
 

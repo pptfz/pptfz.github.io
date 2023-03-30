@@ -4,7 +4,7 @@
 
 # mysql普通主从复制
 
-# 1.mysql主从复制过程
+## 1.mysql主从复制过程
 
 1.master开启binlog（二进制）日志、授权slave复制用户，slave开启relay-log（中继）日志
 
@@ -25,7 +25,7 @@
 
 ![iShot2022-03-27 16.49.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-27%2016.49.26.png)
 
-# 2.实验环境
+## 2.实验环境
 
 | 角色   | IP         | 主机名 | mysql版本 |
 | ------ | ---------- | ------ | --------- |
@@ -34,11 +34,11 @@
 
 
 
-# 3.实验过程
+## 3.实验过程
 
 <h3 style={{color: 'hotpink'}}>master10.0.0.100操作</h3>
 
-## 1.master编辑/etc/my.cnf，指定serverid，并开启binlog和binlog索引
+### 1.master编辑/etc/my.cnf，指定serverid，并开启binlog和binlog索引
 
 ```python
 [root@db01 ~]# vim /etc/my.cnf		#在[mysqld]下方写入以下3行
@@ -52,7 +52,7 @@ log_bin_index=binlog.index			#开启binlog日志索引
 
 
 
-## 2.创建专用复制用户，允许从slave上连接过来的复制用户
+### 2.创建专用复制用户，允许从slave上连接过来的复制用户
 
 ```python
 mysql> grant replication slave on *.* to backup@'10.0.0.%' identified by '123';
@@ -60,7 +60,7 @@ mysql> grant replication slave on *.* to backup@'10.0.0.%' identified by '123';
 
 
 
-## 3.查看master当前的binlog日志及位置信息
+### 3.查看master当前的binlog日志及位置信息
 
 ```python
 mysql> show master status;
@@ -76,7 +76,7 @@ mysql> show master status;
 
 <h3 style={{color: 'green'}}>slave10.0.0.101操作</h3>
 
-## 1.slave编辑配置文件/etc/my.cnf，指定serverid，并开启中继日志
+### 1.slave编辑配置文件/etc/my.cnf，指定serverid，并开启中继日志
 
 ```python
 [root@db02 ~]# vim /etc/my.cnf				    #在[mysqld]下放写入以下3行
@@ -90,7 +90,7 @@ relay_log_index=/var/lib/mysql/relay_log.index	#开启中继日志索引
 
 
 
-## 2.设置slave从master拉取binlog，及拉取的位置
+### 2.设置slave从master拉取binlog，及拉取的位置
 
 ```python
 mysql> change master to master_host='10.0.0.100', \
@@ -120,7 +120,7 @@ master_log_pos=155;
 
 
 
-## 3.启动slave并查看slave状态
+### 3.启动slave并查看slave状态
 
 ```python
 //启动slave
@@ -134,7 +134,7 @@ Slave_SQL_Running: Yes
 
 
 
-## 4.验证，在master上创建数据库和表，然后在slave上看是否可以同步
+### 4.验证，在master上创建数据库和表，然后在slave上看是否可以同步
 
 ```python
 //master操作
@@ -169,9 +169,9 @@ mysql> show databases;			#可以看到，在master上创建的数据库DB1已经
 
 ---
 
-# 4.延时从库
+## 4.延时从库
 
-## 4.1 延时从库优点
+### 4.1 延时从库优点
 
 **1.误删除时，能更快恢复数据。**
 
@@ -191,7 +191,7 @@ mysql> show databases;			#可以看到，在master上创建的数据库DB1已经
 
 
 
-## 4.2 配置延时从库
+### 4.2 配置延时从库
 
 <h3 style={{color: 'red'}}>从库10.0.0.101操作</h3>
 

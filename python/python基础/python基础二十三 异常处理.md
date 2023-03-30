@@ -4,11 +4,11 @@
 
 # python基础二十三	异常处理
 
-# 1.异常和错误
+## 1.异常和错误
 
-## 1.1错误
+### 1.1 错误
 
-### 1.1.1语法错误
+#### 1.1.1 语法错误
 
 ```python
 #if后边没有加冒号，属于语法错误，无法通过python解释器，必须运行前修改  
@@ -22,7 +22,7 @@ SyntaxError: invalid syntax
 
 
 
-### 1.1.2逻辑错误
+#### 1.1.2 逻辑错误
 
 ```python
 #除数为0
@@ -38,7 +38,7 @@ ZeroDivisionError: division by zero
 
 
 
-## 1.2异常
+### 1.2 异常
 
 **什么是异常？**
 
@@ -56,7 +56,7 @@ ZeroDivisionError: division by zero
 
 
 
-## 1.3python中异常的类
+### 1.3 python中异常的类
 
 **错误示例**
 
@@ -132,7 +132,7 @@ KeyError: 'k3'
 
 
 
-# 2.异常处理
+## 2.异常处理
 
 **捕捉异常可以使用try/except语句。**
 
@@ -142,7 +142,7 @@ KeyError: 'k3'
 
 
 
-## 2.1try/except语句
+### 2.1 try/except语句
 
 **语法**
 
@@ -159,7 +159,7 @@ except 异常类型：
 
 
 
-## 2.2try/except...else语句
+### 2.2 try/except...else语句
 
 **语法**
 
@@ -220,7 +220,7 @@ Error: 没有找到文件或读取文件失败
 
 
 
-## 2.3try-finally 语句
+### 2.3 try-finally 语句
 
 **try-finally 语句无论是否发生异常都将执行最后的代码。**
 
@@ -279,7 +279,7 @@ Error: 没有找到文件或读取文件失败
 
 
 
-## 2.4万能异常 Exception
+### 2.4 万能异常 Exception
 
 **exception可以捕获所有异常**
 
@@ -301,7 +301,7 @@ invalid literal for int() with base 10: 'hello'
 
 
 
-## 2.5异常捕获嵌套示例
+### 2.5 异常捕获嵌套示例
 
 ```python
 a = int(input("请输入除数>>>"))
@@ -319,7 +319,7 @@ except Exception:
 
 
 
-## 2.6raise抛出异常
+### 2.6 raise抛出异常
 
 **语法**
 
@@ -339,7 +339,7 @@ raise [异常类型[(异常原因)]]
 
 **上面三种用法最终都是要引发一个异常实例（即使指定的是异常类，实际上也是引发该类的默认实例），raise 语句每次只能引发一个异常实例。**
 
-### 2.6.1 raise
+#### 2.6.1 raise
 
 ```python
 def main():
@@ -364,7 +364,7 @@ main()
 
 
 
-### 2.6.2 raise 异常类名称
+#### 2.6.2 raise 异常类名称
 
 ```python
 def main():
@@ -389,7 +389,7 @@ main()
 
 
 
-### 2.6.3 raise异常类名称(描述信息)
+#### 2.6.3 raise异常类名称(描述信息)
 
 ```python
 def main():
@@ -415,7 +415,7 @@ main()
 
 
 
-## 2.7自定义异常
+### 2.7 自定义异常
 
 **可以通过创建一个新的异常类来拥有自己的异常。异常类继承自 Exception 类，可以直接继承，或者间接继承，例如:**
 
@@ -439,7 +439,7 @@ except MyError as e:
 
 
 
-## 2.8assert断言
+### 2.8 assert断言
 
 **Python assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常。**
 

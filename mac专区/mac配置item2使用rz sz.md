@@ -1,6 +1,6 @@
 # mac配置item2使用rz sz
 
-# 1.安装lrzsz
+## 1.安装lrzsz
 
 > 已提前安装好brew
 
@@ -10,7 +10,7 @@ brew install lrzsz
 
 
 
-# 2.手动编辑 `iterm2-send-zmodem.sh` 和 `iterm2-recv-zmodem.sh`
+## 2.手动编辑 `iterm2-send-zmodem.sh` 和 `iterm2-recv-zmodem.sh`
 
 **<span style={{color: 'red'}}>别尼玛从github下载了，作者都特么把[github仓库](https://github.com/aikuyun/iterm2-zmodem)删除了</span>**
 
@@ -90,7 +90,7 @@ fi
 
 
 
-# 3.配置iTerm2
+## 3.配置iTerm2
 
 第一步、点击 `Preferences`
 

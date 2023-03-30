@@ -4,7 +4,7 @@
 
 # github下载加速
 
-# 方法一：利用[码云](https://gitea.pptfz.cn/)实现github下载加速
+## 方法一：利用[码云](https://gitea.pptfz.cn/)实现github下载加速
 
 先来看一下直接从github下载的速度，3kB/s，这。。。
 
@@ -40,7 +40,7 @@ git remote add origin
 
 
 
-# 方法二：使用加速地址
+## 方法二：使用加速地址
 
 安装谷歌浏览器插件 `GitHub加速`，[项目github地址](https://github.com/fhefh2015/Fast-GitHub)
 

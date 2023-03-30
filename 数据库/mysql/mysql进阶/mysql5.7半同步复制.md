@@ -4,7 +4,7 @@
 
 # mysql5.7半同步复制
 
-# 1.复制架构衍生史
+## 1.复制架构衍生史
 
 **在谈这个特性之前，我们先来看看MySQL的复制架构衍生史。**
 
@@ -26,7 +26,7 @@
 
 
 
-# 2.半同步复制技术
+## 2.半同步复制技术
 
 **我们今天谈论第二种架构。我们知道，普通的replication，即MySQL的异步复制，依靠MySQL二进制日志也即binary log进行数据复制。比如两台机器，一台主机（master），另外一台是从机（slave）。**
 
@@ -62,13 +62,13 @@
 
 
 
-# 3.MySQL 5.6半同步复制配置
+## 3.MySQL 5.6半同步复制配置
 
 <h2 style={{color: 'red'}}>半同步复制的前提是已经做好了普通的主从复制</h2>
 
 <h3 style={{color: 'hotpink'}}>Master配置</h3>
 
-## 3.1 master安装半同步模块并启动
+### 3.1 master安装半同步模块并启动
 
 **此模块就在/usr/local/mysql/lib/plugin/semisync_master.so**
 
@@ -108,7 +108,7 @@ rpl_semi_sync_master_timeout = 2000;
 
 <h3 style={{color: 'green'}}>slave配置</h3>
 
-## 3.2 slave安装半同步模块并启动
+### 3.2 slave安装半同步模块并启动
 
 ```python
 1.安装半同步模块
@@ -153,7 +153,7 @@ mysql> show global status like 'rpl%';
 
 
 
-## 3.3 验证半同步超时
+### 3.3 验证半同步超时
 
 **slave上关闭半同步并重启IO线程**
 
@@ -221,11 +221,11 @@ mysql> show global status like '%semi%';
 
 
 
-# 4.MySQL 5.7半同步复制的改进
+## 4.MySQL 5.7半同步复制的改进
 
 **现在我们已经知道，在半同步环境下，主库是在事务提交之后等待Slave ACK，所以才会有数据不一致问题。所以这个Slave ACK在什么时间去等待，也是一个很关键的问题了。因此MySQL针对半同步复制的问题，在5.7.2引入了Loss-less Semi-Synchronous，在调用binlog sync之后，engine层commit之前等待Slave ACK。这样只有在确认Slave收到事务events后，事务才会提交。在commit之前等待Slave ACK，同时可以堆积事务，利于group commit，有利于提升性能。**
 
-## 4.1 master安装半同步模块并启动
+### 4.1 master安装半同步模块并启动
 
 **master配置**
 
@@ -279,7 +279,7 @@ rpl_semi_sync_master_timeout = 1000;
 
 
 
-## 4.2 slave安装半同步模块并启动
+### 4.2 slave安装半同步模块并启动
 
 ```python
 1.安装半同步模块
@@ -310,7 +310,7 @@ mysql> show global status like 'rpl%';
 
 
 
-## 4.3 验证半同步超时
+### 4.3 验证半同步超时
 
 **slave上关闭半同步并重启IO线程**
 
@@ -370,32 +370,32 @@ mysql> show global status like '%semi%';
 
 **可以看到都自动关闭了**
 
-## 4.4 支持无损复制(Loss-less Semi-Synchronous)
+### 4.4 支持无损复制(Loss-less Semi-Synchronous)
 
 **在Loss-less Semi-Synchronous模式下，master在调用binlog sync之后，engine层commit之前等待Slave ACK（需要收到至少一个Slave节点回复的ACK后）。这样只有在确认Slave收到事务events后，master事务才会提交，然后把结果返回给客户端。此时此事务才对其他事务可见。在这种模式下解决了after_commit模式带来的幻读和数据丢失问题，因为主库没有提交事务。但也会有个问题，假设主库在存储引擎提交之前挂了，那么很明显这个事务是不成功的，但由于对应的Binlog已经做了Sync操作，从库已经收到了这些Binlog，并且执行成功，相当于在从库上多了数据，也算是有问题的，但多了数据，问题一般不算严重。这个问题可以这样理解，作为MySQL，在没办法解决分布式数据一致性问题的情况下，它能保证的是不丢数据，多了数据总比丢数据要好。**
 
 **无损复制其实就是对semi sync增加了rpl_semi_sync_master_wait_point参数，来控制半同步模式下主库在返回给会话事务成功之前提交事务的方式。rpl_semi_sync_master_wait_point该参数有两个值：AFTER_COMMIT和AFTER_SYNC**
 
-### 4.4.1 第一个值：AFTER_COMMIT（5.6默认值）
+#### 4.4.1 第一个值：AFTER_COMMIT（5.6默认值）
 
 **master将每个事务写入binlog（sync_binlog=1），传递到slave刷新到磁盘(sync_relay=1)，同时主库提交事务。master等待slave反馈收到relay log，只有收到ACK后master才将commit OK结果反馈给客户端。**
 
 ![iShot2020-10-14 13.50.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.50.06.png)
 
-### 4.4.2 第二个值：AFTER_SYNC（5.7默认值，但5.6中无此模式）
+#### 4.4.2 第二个值：AFTER_SYNC（5.7默认值，但5.6中无此模式）
 
 **master将每个事务写入binlog , 传递到slave刷新到磁盘(relay log)。master等待slave反馈接收到relay log的ack之后，再提交事务并且返回commit OK结果给客户端。 即使主库crash，所有在主库上已经提交的事务都能保证已经同步到slave的relay log中。**
 
 ![iShot2020-10-14 13.50.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.50.31.png)
 
-## 4.5 半同步复制与无损复制的对比
+### 4.5 半同步复制与无损复制的对比
 
-### 4.5.1 ACK的时间点不同
+#### 4.5.1 ACK的时间点不同
 
 - **半同步复制在InnoDB层的Commit Log后等待ACK，主从切换会有数据丢失风险。**
 - **无损复制在MySQL Server层的Write binlog后等待ACK，主从切换会有数据变多风险。**
 
-### 4.5.2 主从数据一致性
+#### 4.5.2 主从数据一致性
 
 - **半同步复制意味着在Master节点上，这个刚刚提交的事物对数据库的修改，对其他事物是可见的。因此，如果在等待Slave ACK的时候crash了，那么会对其他事务出现幻读，数据丢失。**
 - **无损复制在write binlog完成后，就传输binlog，但还没有去写commit log，意味着当前这个事物对数据库的修改，其他事物也是不可见的。因此，不会出现幻读，数据丢失风险。**

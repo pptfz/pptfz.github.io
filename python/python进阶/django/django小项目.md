@@ -4,7 +4,7 @@
 
 # django小项目(基于django1.11.9)
 
-# 一、利用form表单简单的登陆认证
+## 一、利用form表单简单的登陆认证
 
 **整个项目的目录及文件**
 
@@ -16,7 +16,7 @@
 
 
 
-# 1.urls文件配置
+### 1.urls文件配置
 
 ```python
 from django.conf.urls import url
@@ -37,7 +37,7 @@ urlpatterns = [
 ]
 ```
 
-# 2.views文件配置
+### 2.views文件配置
 
 ```python
 #导入相关模块
@@ -66,7 +66,7 @@ def login(request):
             return redirect('/login/')
 ```
 
-# 3.settings文件配置
+### 3.settings文件配置
 
 **为了验证POST请求效果，修改settings文件如下**
 
@@ -87,9 +87,9 @@ MIDDLEWARE = [
 
 
 
-# 4.html文件
+### 4.html文件
 
-## 4.1login.html文件
+#### 4.1 login.html文件
 
 **简单的form表单登陆界面，login.html文件存放于templates目录下**
 
@@ -117,7 +117,7 @@ MIDDLEWARE = [
 
 
 
-## 4.2index.html文件
+#### 4.2 index.html文件
 
 **登陆成功后返回的界面，index.html文件存放于templates目录下**
 
@@ -253,7 +253,7 @@ MIDDLEWARE = [
 </html>
 ```
 
-## 4.3静态文件的相关配置
+#### 4.3 静态文件的相关配置
 
 **由于index.html文件中引入了bootstrap，因此需要进行相关的配置**
 
@@ -288,7 +288,7 @@ os.path.join(BASE_DIR,'static_file')这一项中的static_file是django项目同
 
 
 
-# 5.访问效果
+### 5.访问效果
 
 **输入正确的用户名返回index.html，登陆失败还是则重定向到登陆界面**
 
@@ -298,11 +298,11 @@ os.path.join(BASE_DIR,'static_file')这一项中的static_file是django项目同
 
 
 
-# 二、项目一的提升版，与后台进行数据交互
+## 二、项目一的提升版，与后台进行数据交互
 
 **项目一中实现的书籍编辑界面只是一个静态页面，现在将添加书籍、编辑、删除按钮实现与后台交互功能**
 
-# 1.urls文件配置
+### 1.urls文件配置
 
 ```python
 from django.conf.urls import url
@@ -327,7 +327,7 @@ urlpatterns = [
 
 
 
-# 2.views文件配置
+### 2.views文件配置
 
 **展示页面和添加书籍的配置**
 
@@ -457,7 +457,7 @@ views视图
 
 
 
-# 3.settings文件配置
+### 3.settings文件配置
 
 ```python
 #关于静态文件的配置项
@@ -506,14 +506,14 @@ DATABASES = {
 
 
 
-# 4.Django项目同名目录下的``__init__.py``文件
+### 4.Django项目同名目录下的``__init__.py``文件
 
 ```python
 import pymysql
 pymysql.install_as_MySQLdb()
 ```
 
-# 5.models文件配置
+### 5.models文件配置
 
 ```python
 from django.db import models
@@ -568,7 +568,7 @@ mysql> select * from app01_book;
 
 
 
-# 6.html文件配置
+### 6.html文件配置
 
 **这里先说明一下静态文件的引入，我们自定义了返回book_list.html，在这个文件中需要引入jquery和bootstrap**
 
@@ -789,7 +789,7 @@ book_add.html
 
 
 
-# 三、项目二的进阶版本，项目二中用到的是单表增删改查，现在改为多表进行增删改查
+## 三、项目二的进阶版本，项目二中用到的是单表增删改查，现在改为多表进行增删改查
 
 **表字段及表之间的关系**
 
@@ -799,7 +799,7 @@ book_add.html
 
 
 
-# 1.urls文件配置
+### 1.urls文件配置
 
 ```python
 from django.conf.urls import url
@@ -822,7 +822,7 @@ urlpatterns = [
 ]
 ```
 
-# 2.views文件配置
+### 2.views文件配置
 
 **展示页面和添加书籍**
 
@@ -927,7 +927,7 @@ def book_add(request):
 
 
 
-# 3.settings文件配置
+### 3.settings文件配置
 
 ```python
 #关于静态文件的配置项
@@ -974,14 +974,14 @@ DATABASES = {
 }
 ```
 
-# 4.Django项目同名目录下的``__init__.py``文件
+### 4.Django项目同名目录下的``__init__.py``文件
 
 ```python
 import pymysql
 pymysql.install_as_MySQLdb()
 ```
 
-# 5.models文件配置
+### 5.models文件配置
 
 ```python
 from django.db import models
@@ -1019,7 +1019,7 @@ class Book(models.Model):
 
 
 
-# 6.html文件配置
+### 6.html文件配置
 
 展示页面中，出版社和作者的信息不在book表中，但是出版社可以利用书籍表与出版社表的一对多关系从书籍表获取的对象中获取到出版社的信息(book.publishs.name 出版社表与书籍表之间的关联字段是publishs，因此可以从获取到的书籍表对象再获取到出版社的信息，但是仅限于一对多关系，多对多关系不可以这样取值)
 

@@ -1,4 +1,4 @@
-# brew安装
+## brew安装
 
 [brew官网](https://brew.sh/index_zh-cn)
 
@@ -22,13 +22,13 @@
 
 
 
-# brew替换国内源
+## brew替换国内源
 
 [中科大homebrew配置说明文档](https://mirrors.ustc.edu.cn/help/brew.git.html)
 
 
 
-## 替换 `brew.git`
+### 替换 `brew.git`
 
 ```shell
 cd "$(brew --repo)"
@@ -37,7 +37,7 @@ git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
 
 
 
-## 替换 `homebrew-core.git`
+### 替换 `homebrew-core.git`
 
 ```shell
 cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
@@ -46,7 +46,7 @@ git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
 
 
 
-## 替换 `homebrew-bottles`
+### 替换 `homebrew-bottles`
 
 ```shell
 echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.bash_profile
@@ -55,7 +55,7 @@ source ~/.bash_profile
 
 
 
-## 应用生效
+### 应用生效
 
 ```shell
 brew update
@@ -65,9 +65,9 @@ brew update
 
 
 
-# 重置brew
+## 重置brew
 
-## 重置 `brew.git`
+### 重置 `brew.git`
 
 ```shell
 cd "$(brew --repo)"
@@ -76,7 +76,7 @@ git remote set-url origin https://github.com/Homebrew/brew.git
 
 
 
-## 重置 `homebrew-core.git`
+### 重置 `homebrew-core.git`
 
 ```shell
 cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"

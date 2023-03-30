@@ -6,15 +6,15 @@
 
 
 
-# 1.gitbook搭建
+## 1.gitbook搭建
 
-## 1.1安装node.js
+### 1.1 安装node.js
 
 [官网](https://nodejs.org/en/)下载mac版本的node.js
 
 
 
-## 1.2检测node.js是否安装成功
+### 1.2 检测node.js是否安装成功
 
 ```python
 npm -v
@@ -23,7 +23,7 @@ npm -v
 
 
 
-## 1.3安装gitboot和命令行工具(-g 代表全局安装)
+### 1.3 安装gitboot和命令行工具(-g 代表全局安装)
 
 ```python
 //安装
@@ -45,9 +45,9 @@ sudo npm uninstall gitbook-cli -g
 
 
 
-# 2.gitbook的使用
+## 2.gitbook的使用
 
-## 2.1创建gitbook目录
+### 2.1 创建gitbook目录
 
 ```python
 //创建gitbook目录
@@ -64,7 +64,7 @@ SUMMARY.md		#gitbook目录结构
 
 
 
-## 2.2配置gitbook生成书籍
+### 2.2 配置gitbook生成书籍
 
 ```python
 1.编辑SUMMARY.md，写入以下内容(这里仅做示例)
@@ -110,7 +110,7 @@ Error: ENOENT: no such file or directory, stat '/gitbook/_book/gitbook/gitbook-p
 
 
 
-# 3.修改gitbook代码框字体大小
+## 3.修改gitbook代码框字体大小
 
 ```python
 prismnode_modules/themes/themes/prism-base16-ateliersulphurpool.light.css
@@ -122,7 +122,7 @@ line-height: 1.6;
 
 
 
-# 4.设置gitbook开机自启
+## 4.设置gitbook开机自启
 
 ```python
 

@@ -6,7 +6,7 @@
 
 
 
-# 1.安装oh-my-zsh
+## 1.安装oh-my-zsh
 
 ```shell
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -32,9 +32,9 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 
 
-# 2.安装插件
+## 2.安装插件
 
-## 2.1 语法高亮插件 `zsh-syntax-highlighting`
+### 2.1 语法高亮插件 `zsh-syntax-highlighting`
 
 [zsh-syntax-highlighting github地址](https://github.com/zsh-users/zsh-syntax-highlighting/)
 

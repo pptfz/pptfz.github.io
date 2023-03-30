@@ -4,21 +4,21 @@
 
 # python虚拟环境 
 
-# 为什么要创建python虚拟环境
+## 为什么要创建python虚拟环境
 
 > **python版本众多，部分版本功能差异较大，centOS7.5 默认python版本2.7.5，centOS6.9 默认python版本2.6.6，在使用过程中经常遇到第三方库依赖的python版本和系统python版本不一致的情况，同时又因系统底层需要调用当前版本python，所以不能随意变更当前系统python版本，如此情境下就会有python多版本共存的情况，因此python多环境管理工具应用而生**
 
 
 
-# 一、pyenv
+## 一、pyenv
 
 [pyenv github地址](https://github.com/pyenv/pyenv)
 
-## 1.1 pyenv简介
+### 1.1 pyenv简介
 
 > **pyenv是一个简单的python版本管理工具，以前叫做pythonbrew，这个工具可以方便切换全局python版本，安装多个不同的python版本，设置独立的某个文件夹或者工程目录特异的python版本，同时创建python虚拟环境**
 
-## 1.2 pyenv原理
+### 1.2 pyenv原理
 
 **pyenv作为python的版本管理工具，通过改变shell的环境变量来切换不同的python版本，以达到多版本共存的目的**
 
@@ -36,7 +36,7 @@
 
 **3) 确定版本文件的位置和python版本后，pyenv会根据版本号在 `~/.pyenv/versions/` 目录中查找对应的python版本，执行命令 `pyenv versions` 可查看系统目前安装的python版本**
 
-## 1.3 部署pyenv
+### 1.3 部署pyenv
 
 ```python
 # 1.克隆pyenv至root家目录
@@ -69,7 +69,7 @@ EOF
 
 
 
-## 1.4 通过pyenv管理多版本python
+### 1.4 通过pyenv管理多版本python
 
 **pyenv命令语法**
 
@@ -120,19 +120,19 @@ pyenv global system
 
 
 
-# 二、virtualenv
+## 二、virtualenv
 
-## 2.1 virtualenv简介
+### 2.1 virtualenv简介
 
 > **python的第三方包很多，在一个python环境下开发时间越久，安装依赖越多，就越容易出现依赖包冲突问题，为了解决这个问题，virtualenv被开发出来，它可以搭建虚拟且独立的python环境，这样就可以使每个项目环境与其他项目独立开来，保持环境的干净，避免包冲突问题，另外，在开发python应用程序的时候，所有第三方的包都会被pip安装到系统python版本的site-packages目录下，如果要开发多个应用程序，那么这些程序会共用一个python，这意味着所有的包都安装在系统的python目录下，这不仅影响正常开发工作，还有可能因为随意变更系统python版本信息而造成系统不稳定，这种情况下，每个应用可能需要各自拥有一套独立的python运行环境，virtualenv就是用来为一个应用创建一套隔离的python运行环境的，virtualenv是底层基于python开发的python环境隔离工具，其通过虚拟目录的方式来实现多环境的并存**
 
-## 2.2 virtualenv原理
+### 2.2 virtualenv原理
 
 > **在系统中创建工作目录，该目录类似安装系统的python目录，保留完整的python环境，解释器，标准库和第三方库等，当需要时，切换环境变量激活即可使用**
 
 
 
-## 2.3 安装virtualenv
+### 2.3 安装virtualenv
 
 ```python
 # 1.安装python-pip和python-devel程序包
@@ -144,11 +144,11 @@ pip install virtualenv
 
 
 
-## 2.4 通过virtualenv管理多python版本
+### 2.4 通过virtualenv管理多python版本
 
 > **virtualenv不是通过多版本管理的方式来实现系统同时兼容多python环境的，而是通过其在工作目录中虚拟完整的python环境来实现python多环境并存**
 
-### 2.4.1 virtualenv命令用法说明
+#### 2.4.1 virtualenv命令用法说明
 
 **virtualenv命令语法**
 
@@ -175,7 +175,7 @@ pip install virtualenv
 
 
 
-### 2.4.2 virtualenv创建python虚拟环境示例
+#### 2.4.2 virtualenv创建python虚拟环境示例
 
 **⚠️这里提前已经安装好python3.6**
 
@@ -206,9 +206,9 @@ wheel      0.34.2
 
 
 
-# 三、virtualenvwrapper
+## 三、virtualenvwrapper
 
-## 3.1 virtualenvwrapper简介
+### 3.1 virtualenvwrapper简介
 
 > **鉴于virtualenv不便于对虚拟环境集中管理，所以推荐直接使用virtualenvwrapper，virtualenvwrapper提供了一系列命令使得和虚拟环境工作变得便利，它把你所有的虚拟环境都放在一个地方**
 
@@ -226,9 +226,9 @@ wheel      0.34.2
 
 
 
-## 3.2 virtualenvwrapper配置过程
+### 3.2 virtualenvwrapper配置过程
 
-### 3.2.1 安装virtualenvwrapper(确保virtualenv已安装)
+#### 3.2.1 安装virtualenvwrapper(确保virtualenv已安装)
 
 ```python
 pip install virtualenvwrapper
@@ -236,7 +236,7 @@ pip install virtualenvwrapper
 
 
 
-### 3.2.2 编辑环境变量
+#### 3.2.2 编辑环境变量
 
 `virtualenvwrapper.sh` 需要find查找一下  `find / -name "virtualenvwrapper.sh"`
 
@@ -261,7 +261,7 @@ source /usr/bin/virtualenvwrapper.sh
 
 
 
-### 3.2.3 创建虚拟环境	``mkvirtualenv``
+#### 3.2.3 创建虚拟环境	``mkvirtualenv``
 
 ```python
 # 1.因为在3.2.2中指定了WORKON_HOME=/opt/virtualenvwrapper，所以创建的python虚拟环境都会在这个目录下
@@ -282,7 +282,7 @@ postactivate     postrmvirtualenv  premkvirtualenv
 postdeactivate   preactivate       prermvirtualenv
 ```
 
-### 3.2.4 切换虚拟环境
+#### 3.2.4 切换虚拟环境
 
 ```python
 # 1.先创建两个虚拟环境，并指定python版本
@@ -299,7 +299,7 @@ Python 2.7.5
 Python 3.6.9
 ```
 
-### 3.2.5 其他操作
+#### 3.2.5 其他操作
 
 ```python
 # 1.查看当前的虚拟环境目录，即通过mkvirtualenv命令创建的venv虚拟环境

@@ -4,7 +4,7 @@
 
 # nginx+django+uwsgi部署项目
 
-# 一、WSGI、uWSGI、uwsgi概念简述
+## 一、WSGI、uWSGI、uwsgi概念简述
 
 <h3>WSGI</h3>
 
@@ -34,7 +34,7 @@
 
 
 
-# 二、处理过程
+## 二、处理过程
 
 <h2>nginx+django+uWSGI处理过程</h2>
 
@@ -57,9 +57,9 @@
 
 
 
-# 三、部署过程
+## 三、部署过程
 
-## 3.1环境及角色说明
+### 3.1 环境及角色说明
 
 **系统环境**
 
@@ -90,9 +90,9 @@
 
 
 
-## 3.2部署过程
+### 3.2  部署过程
 
-### 3.2.1安装nginx1.16
+#### 3.2.1 安装nginx1.16
 
 ```python
 1.下载nginx
@@ -124,7 +124,7 @@ root      6920  0.0  0.1 112708   988 pts/0    S+   15:21   0:00 grep --color=au
 
 
 
-### 3.2.2安装mysql5.7.22
+#### 3.2.2 安装mysql5.7.22
 
 ```python
 ⚠️⚠️⚠️
@@ -222,7 +222,7 @@ mysql> flush privileges;
 Query OK, 0 rows affected (0.01 sec)
 ```
 
-### 3.2.3安装python3.6
+#### 3.2.3 安装python3.6
 
 ```python
 1.下载python
@@ -255,7 +255,7 @@ EOF
 
 
 
-### 3.2.4部署python虚拟环境virtualenv、virtualenvwrappe、uwsgi及django项目
+#### 3.2.4 部署python虚拟环境virtualenv、virtualenvwrappe、uwsgi及django项目
 
 > **鉴于virtualenv不便于对虚拟环境集中管理,所以推荐直接使用virtualenvwrapper,virtualenvwrapper提供了一系列命令使得和虚拟环境工作变得便利,它把你所有的虚拟环境都放在一个地方**
 
@@ -425,7 +425,7 @@ EOF
 
 
 
-### 3.2.5安装supervisor管理uWSGI
+#### 3.2.5 安装supervisor管理uWSGI
 
 ```python
 1.安装supervisor
