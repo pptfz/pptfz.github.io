@@ -1,6 +1,6 @@
 # containerd使用
 
-# 1.查看帮助
+## 1.查看帮助
 
 输入 `ctr` 命令即可获得所有相关的操作命令使用方式
 
@@ -60,9 +60,9 @@ GLOBAL OPTIONS:
 
 
 
-# 2.镜像操作
+## 2.镜像操作
 
-## 2.1 拉取镜像 `ctr image pull`
+### 2.1 拉取镜像 `ctr image pull`
 
 containerd拉取镜像可以使用 `ctr image pull` 来完成，但是需要加上 `docker.io` Host 地址
 
@@ -97,7 +97,7 @@ ctr image pull docker.io/library/nginx:alpine
 
 
 
-## 2.2 列出本地镜像 `ctr image ls`
+### 2.2 列出本地镜像 `ctr image ls`
 
 ```shell
 $ ctr image ls
@@ -120,7 +120,7 @@ docker.io/library/nginx:alpine
 
 
 
-## 2.3 检测本地镜像 `ctr image check`
+### 2.3 检测本地镜像 `ctr image check`
 
 主要查看其中的 `STATUS`，`complete` 表示镜像是完整可用的状态。
 
@@ -133,7 +133,7 @@ docker.io/library/nginx:alpine application/vnd.docker.distribution.manifest.list
 
 
 
-## 2.4 给镜像重新打标签 `ctr image tag`
+### 2.4 给镜像重新打标签 `ctr image tag`
 
 ```shell
 # 打标签
@@ -149,7 +149,7 @@ docker.io/library/nginx:alpine
 
 
 
-## 2.5 删除镜像 `ctr image rm`
+### 2.5 删除镜像 `ctr image rm`
 
 :::tip
 
@@ -176,7 +176,7 @@ docker.io/library/nginx:alpine
 
 
 
-## 2.6 将镜像挂载到主机目录 `ctr image mount`
+### 2.6 将镜像挂载到主机目录 `ctr image mount`
 
 ```shell
 # 挂载
@@ -212,7 +212,7 @@ $ tree -L 1 /mnt
 
 
 
-## 2.7 将镜像从主机目录上卸载 `ctr image unmount`
+### 2.7 将镜像从主机目录上卸载 `ctr image unmount`
 
 ```shell
 ctr image unmount /mnt
@@ -220,7 +220,7 @@ ctr image unmount /mnt
 
 
 
-## 2.8 导出镜像 `ctr image export`
+### 2.8 导出镜像 `ctr image export`
 
 ```shell
 ctr image export --all-platforms nginx.tar.gz docker.io/library/nginx:alpine
@@ -245,7 +245,7 @@ ctr i pull --all-platforms docker.io/library/nginx:alpine
 
 
 
-## 2.9 导入镜像 `ctr image import`
+### 2.9 导入镜像 `ctr image import`
 
 ```shell
 # 查看镜像
@@ -266,9 +266,9 @@ docker.io/library/nginx:alpine
 
 
 
-# 3.容器操作
+## 3.容器操作
 
-## 3.1 查看容器操作帮助 `ctr container` 
+### 3.1 查看容器操作帮助 `ctr container` 
 
 ```shell
 $ ctr container
@@ -293,7 +293,7 @@ OPTIONS:
 
 
 
-## 3.2 创建容器 `ctr container create`
+### 3.2 创建容器 `ctr container create`
 
 ```shell
 ctr container create docker.io/library/nginx:alpine nginx
@@ -301,7 +301,7 @@ ctr container create docker.io/library/nginx:alpine nginx
 
 
 
-## 3.3 列出容器 `ctr container ls`
+### 3.3 列出容器 `ctr container ls`
 
 ```shell
 $ ctr container ls
@@ -315,7 +315,7 @@ nginx
 
 
 
-## 3.4 查看容器详细配置 `ctr container info`
+### 3.4 查看容器详细配置 `ctr container info`
 
 ```shell
 $ ctr container info nginx
@@ -348,7 +348,7 @@ $ ctr container info nginx
 
 
 
-## 3.5 删除容器 `ctr container rm`
+### 3.5 删除容器 `ctr container rm`
 
 除了使用 `rm` 子命令之外也可以使用 `delete` 或者 `del` 删除容器
 
@@ -358,7 +358,7 @@ ctr container rm nginx
 
 
 
-# 4.任务
+## 4.任务
 
 上面我们通过 `container create` 命令创建的容器，并没有处于运行状态，只是一个静态的容器。一个 container 对象只是包含了运行一个容器所需的资源及相关配置数据，表示 `namespaces`、`rootfs` 和容器的配置都已经初始化成功了，只是用户进程还没有启动。
 
@@ -366,7 +366,7 @@ ctr container rm nginx
 
 
 
-## 4.1 查看任务操作帮助 `ctr task`
+### 4.1 查看任务操作帮助 `ctr task`
 
 ```shell
 $ ctr task
@@ -395,7 +395,7 @@ OPTIONS:
 
 
 
-## 4.2 启动容器 `ctr task start`
+### 4.2 启动容器 `ctr task start`
 
 ```shell
 $ ctr task start -d nginx
@@ -406,7 +406,7 @@ $ ctr task start -d nginx
 
 
 
-### 4.2.1 启动容器的一个报错
+#### 4.2.1 启动容器的一个报错
 
 启动容器报错
 
@@ -436,7 +436,7 @@ runc: symbol lookup error: runc: undefined symbol: seccomp_api_get
 
 
 
-## 4.3 查看启动的容器 `ctr task ls`
+### 4.3 查看启动的容器 `ctr task ls`
 
 ```shell
 $ ctr task ls
@@ -446,7 +446,7 @@ nginx    6684    RUNNING
 
 
 
-## 4.4 进入容器 `ctr task exec`
+### 4.4 进入容器 `ctr task exec`
 
 :::tip
 
@@ -460,7 +460,7 @@ ctr task exec --exec-id 0 -t nginx /bin/sh
 
 
 
-## 4.5 暂停容器 `ctr task pause`
+### 4.5 暂停容器 `ctr task pause`
 
 ```shell
 # 暂停容器
@@ -474,7 +474,7 @@ nginx    6684    PAUSED
 
 
 
-## 4.5 恢复容器 `ctr task resume`
+### 4.5 恢复容器 `ctr task resume`
 
 ```shell
 # 恢复容器
@@ -488,7 +488,7 @@ nginx    6684    RUNNING
 
 
 
-## 4.6 停止容器 `ctr task kill`
+### 4.6 停止容器 `ctr task kill`
 
 :::tip
 
@@ -508,7 +508,7 @@ nginx    6684    STOPPED
 
 
 
-## 4.7 删除容器 `ctr task rm`
+### 4.7 删除容器 `ctr task rm`
 
 ```shell
 ctr task rm nginx
@@ -516,7 +516,7 @@ ctr task rm nginx
 
 
 
-## 4.8 获取容器的 cgroup 相关信息 `ctr task metrics`
+### 4.8 获取容器的 cgroup 相关信息 `ctr task metrics`
 
 ```shell
 $ ctr task ls
@@ -538,7 +538,7 @@ pids.limit               0
 
 
 
-## 4.9 查看容器中所有进程在宿主机中的 PID `ctr task ps`
+### 4.9 查看容器中所有进程在宿主机中的 PID `ctr task ps`
 
 其中第一个 PID `6961` 就是我们容器中的1号进程
 
@@ -551,9 +551,9 @@ PID     INFO
 
 
 
-# 5.命名空间
+## 5.命名空间
 
-## 5.1 查看命名空间 `ctr ns ls`
+### 5.1 查看命名空间 `ctr ns ls`
 
 ```shell
 $ ctr ns ls
@@ -563,7 +563,7 @@ default
 
 
 
-## 5.2 创建命名空间 `ctr ns create`
+### 5.2 创建命名空间 `ctr ns create`
 
 ```shell
 # 创建命名空间test
@@ -578,7 +578,7 @@ test
 
 
 
-## 5.3 删除命名空间 `ctr ns rm`
+### 5.3 删除命名空间 `ctr ns rm`
 
 ```shell
 # 删除命名空间
@@ -593,7 +593,7 @@ default
 
 
 
-## 5.4 指定命名空间 `ctr -n`
+### 5.4 指定命名空间 `ctr -n`
 
 ```shell
 # 默认命名空间default下的镜像

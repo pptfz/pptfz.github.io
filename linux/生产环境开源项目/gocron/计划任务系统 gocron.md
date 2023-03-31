@@ -6,7 +6,7 @@
 
 [gocron github地址](https://github.com/ouqiang/gocron)
 
-# 1.项目简介
+## 1.项目简介
 
 使用Go语言开发的轻量级定时任务集中调度和管理系统，用于替代Linux-crontab [查看文档](https://github.com/ouqiang/gocron/wiki)
 
@@ -14,7 +14,7 @@
 
 
 
-## 功能特性
+### 功能特性
 
 - Web界面管理定时任务
 
@@ -44,13 +44,13 @@
 
 
 
-## gocron架构示意图
+### gocron架构示意图
 
 > gocron分为调度器和任务节点
 
 ![iShot2020-10-26 17.04.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-26%2017.04.13.png)
 
-## gocron 命令
+### gocron 命令
 
 - gocron
   - -v 查看版本
@@ -75,7 +75,7 @@
 
 
 
-# 2.部署安装
+## 2.部署安装
 
 从[relese](https://github.com/ouqiang/gocron/releases)下载安装包
 
@@ -83,7 +83,7 @@
 
 
 
-## 2.1 下载包
+### 2.1 下载包
 
 **下载调度器二进制包**
 
@@ -101,9 +101,9 @@ wget https://github.com/ouqiang/gocron/releases/download/v1.5.3/gocron-node-v1.5
 
 
 
-## 2.2 启动gocron
+### 2.2 启动gocron
 
-### 2.2.1 启动gocron调度器 
+#### 2.2.1 启动gocron调度器 
 
 > **gocron调度器监听 5920 端口**
 
@@ -114,7 +114,7 @@ tar xf gocron-v1.5.3-linux-amd64.tar.gz && cd gocron-linux-amd64
 
 
 
-### 2.2.2 启动gocron node
+#### 2.2.2 启动gocron node
 
 :::tip
 
@@ -131,7 +131,7 @@ tar xf gocron-node-v1.5.3-linux-amd64.tar.gz && cd gocron-node-linux-amd64
 
 
 
-## 2.3 创建数据库
+### 2.3 创建数据库
 
 gocron需要连接数据库
 
@@ -142,7 +142,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 
 
-## 2.4 访问gocron
+### 2.4 访问gocron
 
 浏览器访问 `IP:5920`
 
@@ -164,9 +164,9 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 
 
-# 3.使用示例
+## 3.使用示例
 
-## 3.1 新增节点
+### 3.1 新增节点
 
 ![iShot2020-10-26 18.43.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-26%2018.43.08.png)
 
@@ -216,7 +216,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 
 
-## 3.2 配置邮件通知
+### 3.2 配置邮件通知
 
 `系统管理` --> `通知配置`  编辑邮件服务器配置和接受的用户
 
@@ -258,7 +258,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 
 
-# 4.使用supervisor管理gocron
+## 4.使用supervisor管理gocron
 
 
 

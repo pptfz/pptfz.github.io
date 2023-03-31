@@ -10,19 +10,19 @@
 
 
 
-# 1.标准安装
+## 1.标准安装
 
 
 
-# 2.docker安装
+## 2.docker安装
 
 
 
-# 3.dokcer-compose安装
+## 3.dokcer-compose安装
 
 [官方安装文档](https://docs.sonarqube.org/latest/setup/install-server/)
 
-## 3.1 设置系统参数
+### 3.1 设置系统参数
 
 由于 SonarQube 使用嵌入式 Elasticsearch，请确保您的 Docker 主机配置符合[Elasticsearch 生产模式要求](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode)和[文件描述符配置](https://www.elastic.co/guide/en/elasticsearch/reference/current/file-descriptors.html)。
 
@@ -65,7 +65,7 @@ ERROR: Elasticsearch did not exit normally - check the logs at /opt/sonarqube/lo
 
 
 
-## 3.2 编辑 docker-compose yml文件
+### 3.2 编辑 docker-compose yml文件
 
 > 这里选择安装7.9LTS版
 
@@ -108,7 +108,7 @@ EOF
 
 
 
-## 3.3 启动
+### 3.3 启动
 
 ```shell
 docker-compose up -d
@@ -131,7 +131,7 @@ CONTAINER ID   IMAGE                       COMMAND                  CREATED     
 
 
 
-# SonarQube汉化
+## SonarQube汉化
 
 [SonarQube汉化插件github地址](https://github.com/xuhuisheng/sonar-l10n-zh)
 
@@ -145,6 +145,6 @@ CONTAINER ID   IMAGE                       COMMAND                  CREATED     
 
 ![iShot2021-09-07 17.30.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-07%2017.30.54.png)
 
-# SonarQube插件安装
+## SonarQube插件安装
 
 SonarQube插件如果在应用市场中没有，则需要单独下载插件(jar包)放置于 `$SONARQUBE_HOME/extensions/plugins` 目录下，然后重启服务即可

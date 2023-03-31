@@ -27,9 +27,9 @@ systemctl restart docker
 
 # CentOS7安装docker
 
-# 1.安装docker最新版
+## 1.安装docker最新版
 
-## 1.1 下载yum源
+### 1.1 下载yum源
 
 ```python
 # 阿里云yum源
@@ -38,7 +38,7 @@ yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/d
 
 
 
-## 1.2 安装docker最新版
+### 1.2 安装docker最新版
 
 ```python
 yum -y install docker-ce
@@ -46,7 +46,7 @@ yum -y install docker-ce
 
 
 
-## 1.3 启动docker
+### 1.3 启动docker
 
 ```python
 systemctl start docker && systemctl enable docker  
@@ -54,7 +54,7 @@ systemctl start docker && systemctl enable docker
 
 
 
-## 1.4 查看docker版本
+### 1.4 查看docker版本
 
 ```python
 $ docker version
@@ -80,7 +80,7 @@ Server: Docker Engine - Community
 
 
 
-## 1.5 配置docker镜像加速
+### 1.5 配置docker镜像加速
 
 ```python
 # 配置阿里云镜像加速地址
@@ -96,7 +96,7 @@ systemctl restart docker
 
 
 
-## 1.6 创建并运行第一个容器
+### 1.6 创建并运行第一个容器
 
 ```python
 $ docker run -d -p 80:80 nginx
@@ -114,9 +114,9 @@ Status: Downloaded newer image for nginx:latest
 
 
 
-# 2.安装docker指定版本
+## 2.安装docker指定版本
 
-## 2.1 下载yum源
+### 2.1 下载yum源
 
 ```python
 # 阿里云yum源
@@ -125,7 +125,7 @@ yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/d
 
 
 
-## 2.2 查看可用版本
+### 2.2 查看可用版本
 
 ```python
 $ yum list docker-ce --showduplicates | sort -r
@@ -170,7 +170,7 @@ docker-ce.x86_64            17.03.0.ce-1.el7.centos             docker-ce-stable
 
 
 
-## 2.3 安装docker指定版本
+### 2.3 安装docker指定版本
 
 ```python
 yum -y install docker-ce-18.03.1.ce docker-ce-cli-18.01.1.ce
@@ -178,7 +178,7 @@ yum -y install docker-ce-18.03.1.ce docker-ce-cli-18.01.1.ce
 
 
 
-## 2.4 查看版本
+### 2.4 查看版本
 
 ```python
 $ docker -v
@@ -187,7 +187,7 @@ Docker version 18.03.1-ce, build 9ee9f40
 
 
 
-## 2.5 配置docker镜像加速
+### 2.5 配置docker镜像加速
 
 ```python
 # 配置阿里云镜像加速地址
@@ -203,7 +203,7 @@ systemctl restart docker
 
 
 
-# 3.二进制安装docker
+## 3.二进制安装docker
 
 **系统环境**
 
@@ -213,7 +213,7 @@ systemctl restart docker
 
 [docker二进制包下载地址](https://download.docker.com/linux/static/stable/x86_64/)
 
-## 3.1 下载docker二进制包
+### 3.1 下载docker二进制包
 
 ```python
 export DOCKER_VERSION=18.09.9
@@ -222,7 +222,7 @@ wget https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERS
 
 
 
-## 3.2 解压缩包
+### 3.2 解压缩包
 
 ```python
 tar xf docker-DOCKER_VERSION.tgz -C /usr/local/
@@ -230,7 +230,7 @@ tar xf docker-DOCKER_VERSION.tgz -C /usr/local/
 
 
 
-## 3.3 导出环境变量
+### 3.3 导出环境变量
 
 ⚠️如果后续想要使用systemd管理docker，最好把docker二进制包中的所有文件拷贝到``/usr/bin``，否则会管理失败
 
@@ -240,7 +240,7 @@ cp /usr/local/docker/* /usr/bin
 
 
 
-## 3.4 使用systemd管理docker
+### 3.4 使用systemd管理docker
 
 [Control Docker with systemd 官方文档关于使用systemd管理docker的说明](https://docs.docker.com/config/daemon/systemd/)
 
@@ -347,7 +347,7 @@ sudo ln -s '/usr/lib/systemd/system/clamd@scan.service' '/etc/systemd/system/mul
 
 
 
-## 3.5 重新加载服务并启动docker
+### 3.5 重新加载服务并启动docker
 
 ```python
 systemctl daemon-reload
@@ -356,7 +356,7 @@ systemctl start docker && systemctl enable docker
 
 
 
-## 3.6 验证docker版本
+### 3.6 验证docker版本
 
 ```python
 $ docker version

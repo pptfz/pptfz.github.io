@@ -4,7 +4,7 @@
 
 # docker跨主机通信之overlay
 
-# 1.overlay说明
+## 1.overlay说明
 
 **overlay优点**
 
@@ -34,9 +34,9 @@
 
 
 
-# 2.overlay跨主机通信示例
+## 2.overlay跨主机通信示例
 
-## 2.1实验环境
+### 2.1 实验环境
 
 | 主机名       | IP            |
 | ------------ | ------------- |
@@ -45,9 +45,9 @@
 
 
 
-##2.2docker01操作
+### 2.2 docker01操作
 
-### 2.2.1启动consul容器
+#### 2.2.1 启动consul容器
 
 ```python
 [root@docker01 ~]# docker run -d -p 8500:8500 -h consul --name consul --restart=always progrium/consul -server -bootstrap
@@ -55,7 +55,7 @@
 
 
 
-### 2.2.2查看容器，容器映射了好多端口
+#### 2.2.2 查看容器，容器映射了好多端口
 
 ```python
 [root@docker01 ~]# docker ps -a
@@ -65,7 +65,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 
 
-### 2.2.3容器启动后可以访问一个web界面
+#### 2.2.3 容器启动后可以访问一个web界面
 
 **10.0.0.60:8500**
 
@@ -73,7 +73,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 
 
-### 2.2.4修改docker配置文件/etc/docker/daemon.json
+#### 2.2.4 修改docker配置文件 `/etc/docker/daemon.json`
 
 ```python
 1.修改配置文件/etc/docker/daemon.json，加入以下三行
@@ -98,9 +98,9 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 
 
-## 2.3docker02操作
+### 2.3 docker02操作
 
-### 2.3.1启动consul容器
+#### 2.3.1 启动consul容器
 
 ```python
 [root@docker02 ~]# docker run -d -p 8500:8500 -h consul --name consul --restart=always progrium/consul -server -bootstrap
@@ -108,7 +108,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 
 
-### 2.3.2查看容器，容器映射了好多端口
+#### 2.3.2 查看容器，容器映射了好多端口
 
 ```python
 [root@docker02 ~]# docker ps -a
@@ -118,7 +118,7 @@ a793cf0b4aed        progrium/consul     "/bin/start -server …"   37 seconds ag
 
 
 
-### 2.3.3容器启动后可以访问一个web界面
+#### 2.3.3 容器启动后可以访问一个web界面
 
 **10.0.0.61:8500**
 
@@ -128,7 +128,7 @@ a793cf0b4aed        progrium/consul     "/bin/start -server …"   37 seconds ag
 
 
 
-### 2.3.4修改docker配置文件/etc/docker/daemon.json
+#### 2.3.4 修改docker配置文件 `/etc/docker/daemon.json`
 
 ```python
 1.修改配置文件/etc/docker/daemon.json，加入以下三行
@@ -153,7 +153,7 @@ a793cf0b4aed        progrium/consul     "/bin/start -server …"   37 seconds ag
 
 
 
-### 2.3.5最终效果
+#### 2.3.5 最终效果
 
 **访问docker1 consul的web界面	KEY/VALUE-->docker-->nodes	正确情况为出现两个docker节点**
 
@@ -167,9 +167,9 @@ a793cf0b4aed        progrium/consul     "/bin/start -server …"   37 seconds ag
 
 
 
-# 2.4通信测试
+### 2.4 通信测试
 
-### 2.4.1docker01创建overlay网络，会自动同步到docker02，因为docker01和docker02都在consul集群中
+#### 2.4.1 docker01创建overlay网络，会自动同步到docker02，因为docker01和docker02都在consul集群中
 
 ```python
 1.docker01创建overlay网络
@@ -197,7 +197,7 @@ be782cbc19a4        none                null                local
 
 
 
-### 2.4.2docker01启动容器overlay1
+#### 2.4.2 docker01启动容器overlay1
 
 ```python
 1.启动一个容器，指定网络为之前创建的overlay1
@@ -221,7 +221,7 @@ be782cbc19a4        none                null                local
 
 
 
-### 2.4.3docker02启动容器overlay2
+#### 2.4.3 docker02启动容器overlay2
 
 ```python
 1.启动一个容器，指定网络为之前创建的overlay1
@@ -245,7 +245,7 @@ be782cbc19a4        none                null                local
 
 
 
-### 2.4.4测试容器互通及连接外网
+#### 2.4.4 测试容器互通及连接外网
 
 ```python
 docker01测试
@@ -317,9 +317,9 @@ round-trip min/avg/max = 4.792/4.927/5.063 ms
 
 
 
-# 3.overlay网络类型的容器网卡问题
+## 3.overlay网络类型的容器网卡问题
 
-## 3.1启动一个容器后，可以看到网络类型为overlay的容器有两块网卡eth0、eth1
+### 3.1 启动一个容器后，可以看到网络类型为overlay的容器有两块网卡eth0、eth1
 
 ```python
 1.查看容器IP，发现有两块网卡
@@ -362,7 +362,7 @@ docker_gwbridge: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 
 
-# 4.overlay网络类型网络命名空间
+## 4.overlay网络类型网络命名空间
 
 **namespace实现网络环境隔离，网络命令空间有自己的IP地址**
 

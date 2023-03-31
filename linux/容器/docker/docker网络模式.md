@@ -8,7 +8,7 @@
 
 
 
-# 1.docker网络模式
+## 1.docker网络模式
 
 **docker网络模式，共4种**
 
@@ -21,9 +21,9 @@
 
 
 
-# 2.查看docker网络模式
+## 2.查看docker网络模式
 
-## 2.1查看docker网络
+### 2.1 查看docker网络
 
 **查看docker网络，默认有3种**
 
@@ -37,7 +37,7 @@ f144b44069ab        none                null                local
 
 
 
-## 2.2第一种	bridge，桥接，默认模式
+### 2.2 第一种	bridge，桥接，默认模式
 
 ```python
 //启动一个容器test1
@@ -66,7 +66,7 @@ f144b44069ab        none                null                local
 
 
 
-## 2.3第二种	host，与宿主机共享网络
+### 2.3 第二种	host，与宿主机共享网络
 
 ```python
 1.查看宿主机网络，eth0 IP为10.0.0.20
@@ -94,7 +94,7 @@ f144b44069ab        none                null                local
 
 
 
-## 2.4第三种	none，无网络模式
+### 2.4 第三种	none，无网络模式
 
 ```python
 1.启动一个容器test3，网络模式指定为none
@@ -119,7 +119,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 
 
-## 2.5第四种	container，共享容器网络	container:要共享的容器ID或名称
+### 2.5 第四种	container，共享容器网络	container:要共享的容器ID或名称
 
 ```python
 1.先启动一个容器test5，容器IP为172.17.0.4，可以上网

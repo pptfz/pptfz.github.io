@@ -1,6 +1,6 @@
 # nexus重启报错
 
-# 1.背景说明
+## 1.背景说明
 
 > 公司生产nexus是二进制包方式运行的，并且生产mvn私服和npm私服都是基于nexus的，由于需要做nexus整体迁移，所以在迁移前压缩了一下nexus数据目录 `sonatype-work` ，但是因为磁盘空间不足压缩失败了(整体数据大小为近1T)，然后就删除了压缩的tar包恢复了部分磁盘空间，但是后续一个前端项目打包的时候出现了问题，即执行 `yarn install` 的时候卡住不动了，实际上这个时候nexus虽然进程还在但是实际上已经不能正确提供响应了
 >
@@ -10,7 +10,7 @@
 
 
 
-# 2.报错信息
+## 2.报错信息
 
 查看 `sonatype-work/nexus3/log/nexus.log` 看到报错日志如下
 
@@ -104,7 +104,7 @@ java.lang.InterruptedException: null
 
 
 
-# 3.解决方法
+## 3.解决方法
 
 删除 `sonatype-work/nexus3/db/component` 和 `sonatype-work/nexus3/db/config` 这2个目录下大小为0的以wal结尾的文件重新启动就可以了，具体原因未知
 

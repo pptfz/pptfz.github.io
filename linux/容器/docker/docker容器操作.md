@@ -4,9 +4,9 @@
 
 # docker容器操作
 
-# 1.docker运行容器
+## 1.docker运行容器
 
-## 1.1docker后台运行容器
+### 1.1 docker后台运行容器
 
 ```python
 //docker运行一个容器
@@ -30,7 +30,7 @@ nginx    docker镜像名称
 
 
 
-## 1.2docker交互式运行容器
+### 1.2 docker交互式运行容器
 
 ```python
 //docker交互式运行容器
@@ -47,7 +47,7 @@ root@07c25f8aa98b:/#
 
 
 
-# 2.docker停止容器
+## 2.docker停止容器
 
 > 命令：docker   stop   容器ID或容器名称
 
@@ -69,9 +69,9 @@ e5008e3abc3c        nginx               "nginx -g 'daemon of…"   About a minut
 
 
 
-# 3.docker进入容器
+## 3.docker进入容器
 
-## 3.1docker进入容器方法
+### 3.1 docker进入容器方法
 
 **目的**
 
@@ -85,7 +85,7 @@ e5008e3abc3c        nginx               "nginx -g 'daemon of…"   About a minut
 
 
 
-## 3.2示例
+### 3.2 示例
 
 **exec进入容器**
 
@@ -113,9 +113,9 @@ CONTAINER ID                                                       IMAGE        
 
 
 
-# 4.docker退出容器
+## 4.docker退出容器
 
-## 4.1docker退出容器，容器不运行
+### 4.1 docker退出容器，容器不运行
 
 **方法**
 
@@ -141,7 +141,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 
 
-## 4.2临时退出容器,容器依然运行
+### 4.2 临时退出容器,容器依然运行
 
 **方法**
 
@@ -173,7 +173,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 
 
-# 5.docker夯住容器
+## 5.docker夯住容器
 
 **<span style={{color: 'red'}}>docker容器内的第一个进程必须一直处于前台运行的状态，必须夯住，否则这个容器就处于退出状态</span>**
 
@@ -234,9 +234,9 @@ tail
 
 
 
-# 6.docker删除容器
+## 6.docker删除容器
 
-## 6.1docker温柔删除容器
+### 6.1 docker温柔删除容器
 
 **命令**
 
@@ -264,7 +264,7 @@ e5008e3abc3c        nginx               "nginx -g 'daemon of…"   10 minutes ag
 
 
 
-## 6.2docker强制删除容器
+### 6.2 docker强制删除容器
 
 **<span style={{color: 'red'}}>最好不要强制删除容器！！！</span>**
 

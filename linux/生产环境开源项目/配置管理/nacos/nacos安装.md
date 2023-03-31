@@ -12,9 +12,9 @@
 
 
 
-# 1.单机模式
+## 1.单机模式
 
-## 1.1 下载编译后压缩包
+### 1.1 下载编译后压缩包
 
 ```shell
 # 下载包
@@ -26,7 +26,7 @@ tar xf nacos-server-1.4.2.tar.gz -C /usr/local
 
 
 
-## 1.2 启动服务
+### 1.2 启动服务
 
 ```shell
 sh bin/startup.sh -m standalone
@@ -36,7 +36,7 @@ sh bin/startup.sh -m standalone
 
 
 
-# 2.集群部署
+## 2.集群部署
 
 **集群部署架构图**
 
@@ -50,7 +50,7 @@ sh bin/startup.sh -m standalone
 
 ![iShot2021-05-25 20.00.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-25%2020.00.37.png)
 
-## 2.0 实验环境
+### 2.1 实验环境
 
 
 
@@ -62,7 +62,7 @@ sh bin/startup.sh -m standalone
 
 
 
-## 2.1 环境准备
+### 2.2 环境准备
 
 请确保是在环境中安装使用:
 
@@ -73,7 +73,7 @@ sh bin/startup.sh -m standalone
 
 
 
-### 2.1.1 安装jdk1.8+
+#### 2.2.1 安装jdk1.8+
 
 [jdk官网下载地址](https://www.oracle.com/java/technologies/javase-downloads.html)
 
@@ -94,7 +94,7 @@ export JAVA_HOME PATH CLASSPATH
 
 
 
-### 2.1.2 安装maven3.2.x+
+#### 2.2.2 安装maven3.2.x+
 
 [maven官网下载地址](https://maven.apache.org/download.cgi)
 
@@ -163,9 +163,9 @@ OS name: "linux", version: "3.10.0-1160.el7.x86_64", arch: "amd64", family: "uni
 
 
 
-## 2.2 下载安装包
+### 2.3 下载安装包
 
-## 2.2.1 从github上下载源码方式
+#### 2.3.1 从github上下载源码方式
 
 
 
@@ -189,7 +189,7 @@ mvn -Prelease-nacos clean install -U
 
 
 
-### 2.2.2 下载编译后压缩包
+#### 2.3.2 下载编译后压缩包
 
 ```shell
 # 下载包
@@ -201,7 +201,7 @@ tar xf nacos-server-1.4.2.tar.gz -C /usr/local
 
 
 
-## 2.3 配置集群配置文件
+### 2.4 配置集群配置文件
 
 在nacos的解压目录 `conf` 下，编辑配置文件 `cluster.conf` ，请每行配置成 `ip:port` （请配置3个或3个以上节点）
 
@@ -224,9 +224,9 @@ EOF
 
 
 
-## 2.4 确定数据源
+### 2.5 确定数据源
 
-### 2.4.1 使用内置数据源
+#### 2.5.1 使用内置数据源
 
 :::tip
 
@@ -234,7 +234,7 @@ EOF
 
 :::
 
-### 2.4.2 使用外置数据源
+#### 2.5.2 使用外置数据源
 
 这里提前安装好了mysql5.6，官方要求数据库版本 5.6.5+
 
@@ -256,7 +256,7 @@ mysql -uroot -D nacos_config < nacos-mysql.sql
 
 
 
-### 2.4.3 配置 `application.properties`
+#### 2.5.3 配置 `application.properties`
 
 需要修改的项
 
@@ -278,7 +278,7 @@ db.password.0=nacos
 
 
 
-## 2.5 启动服务
+### 2.6 启动服务
 
 **集群模式**
 
@@ -300,7 +300,7 @@ sh bin/startup.sh
 
 
 
-## 2.6 访问管理后台
+### 2.7 访问管理后台
 
 浏览器访问 `IP:端口/nacos`
 

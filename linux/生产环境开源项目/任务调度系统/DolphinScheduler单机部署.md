@@ -4,7 +4,7 @@
 
 # DolphinScheduler 单机部署
 
-# 1.DolphinScheduler简介
+## 1.DolphinScheduler简介
 
 **DolphinScheduler说明**
 
@@ -51,9 +51,9 @@
 
 ![iShot2020-09-05 16.00.22 21.09.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2016.00.22%2021.09.14.png)
 
-# 2.DolphinScheduler标准安装
+## 2.DolphinScheduler标准安装
 
-## 2.1 官方推荐系统配置
+### 2.1 官方推荐系统配置
 
 **Linux 操作系统版本要求**
 
@@ -98,7 +98,7 @@ DolphinScheduler正常运行提供如下的网络端口配置：
 
 
 
-## 2.2 系统环境
+### 2.2 系统环境
 
 **操作系统及配置**
 
@@ -108,21 +108,21 @@ DolphinScheduler正常运行提供如下的网络端口配置：
 
 
 
-## 2.3 安装过程
+### 2.3 安装过程
 
 [DolphinScheduler最新版1.3.2官方文档(截止2020.9.5)](https://dolphinscheduler.apache.org/zh-cn/docs/1.3.2/user_doc/standalone-deployment.html)
 
 
 
-### 2.3.1 基础软件安装
+#### 2.3.1 基础软件安装
 
-#### 2.3.1.1 数据库(pg或者mysql)
+##### 2.3.1.1 数据库(pg或者mysql)
 
 - PostgreSQL (8.2.15+) or MySQL (5.7系列) :  **必装** 两者任选其一即可
 
 
 
-#### 2.3.1.2 JDK8
+##### 2.3.1.2 JDK8
 
 - JDK (1.8+) : **必装**，请安装好后在`/etc/profile`下配置 `JAVA_HOME` 及 `PATH` 变量
 
@@ -153,7 +153,7 @@ ln -s /usr/local/jdk1.8.0_251/bin/java /usr/bin
 
 
 
-#### 2.3.1.3 ZooKeeper
+##### 2.3.1.3 ZooKeeper
 
 - ZooKeeper (3.4.6+) ：**必装**
 
@@ -235,7 +235,7 @@ clientPort=2181
 
 
 
-#### 2.3.1.4 Hadoop
+##### 2.3.1.4 Hadoop
 
 - Hadoop (2.6+) or MinIO ：**选装**， 如果需要用到资源上传功能，针对单机可以选择本地文件目录作为上传文件夹(此操作不需要部署Hadoop)；当然也可以选择上传到Hadoop or MinIO集群上
 
@@ -243,7 +243,7 @@ clientPort=2181
 
 
 
-### 2.3.2 下载 DolphinScheduler 二进制tar.gz包
+#### 2.3.2 下载 DolphinScheduler 二进制tar.gz包
 
 [官方下载地址](https://dolphinscheduler.apache.org/zh-cn/docs/release/download.html)
 
@@ -270,7 +270,7 @@ tar xf apache-dolphinscheduler-incubating-1.3.2-dolphinscheduler-bin.tar.gz && m
 
 
 
-### 2.3.3 创建部署用户并赋予目录操作权限
+#### 2.3.3 创建部署用户并赋予目录操作权限
 
 **创建部署用户，并且一定要配置sudo免密。以创建 `dolphinscheduler` 用户为例**
 
@@ -299,7 +299,7 @@ chown -R dolphinscheduler:dolphinscheduler dolphinscheduler-bin
 
 
 
-### 2.3.4 ssh免密配置
+#### 2.3.4 ssh免密配置
 
 **切换到部署用户并配置ssh本机免密登录**
 
@@ -317,7 +317,7 @@ chmod 600 ~/.ssh/authorized_keys
 
 
 
-### 2.3.5 数据库初始化
+#### 2.3.5 数据库初始化
 
 **以下操作为创建数据库 `dolphinscheduler`，授权用户 `dol ` 对数据库 `dolphinscheduler`有所有权限，密码是 `dol`**
 
@@ -395,7 +395,7 @@ sh script/create-dolphinscheduler.sh
 
 
 
-### 2.3.6 修改运行参数
+#### 2.3.6 修改运行参数
 
 **修改 `conf/env/dolphinscheduler_env.sh` 环境变量(以相关用到的软件都安装在`/opt/soft`下为例)，请根据自己的实际情况进行修改**
 
@@ -523,7 +523,7 @@ apiServers="localhost"
 
 
 
-### 2.3.7 一键部署
+#### 2.3.7 一键部署
 
 **切换到部署用户 `dolphinscheduler  `，执行一键部署脚本**
 
@@ -567,7 +567,7 @@ logs/
 
 
 
-### 2.3.8 访问
+#### 2.3.8 访问
 
 浏览器访问 `IP:12345/dolphinscheduler`
 
@@ -587,7 +587,7 @@ logs/
 
 
 
-### 2.3.9 启停服务
+#### 2.3.9 启停服务
 
 - 一键停止集群所有服务
 
@@ -652,13 +652,13 @@ sh bin/dolphinscheduler-daemon.sh stop alert-server
 
 
 
-# 3.DolphinScheduler docker安装
+## 3.DolphinScheduler docker安装
 
 [dolphinscheduler源码 清华下载地址](https://mirrors.tuna.tsinghua.edu.cn/apache/incubator/dolphinscheduler)
 
 
 
-## 3.1 下载源码 zip 包
+### 3.1 下载源码 zip 包
 
 ```sh
 # 创建源码存放目录
@@ -675,7 +675,7 @@ mv apache-dolphinscheduler-incubating-1.3.5-src-release  dolphinscheduler-src
 
 
 
-## 3.2 安装并启动服务
+### 3.2 安装并启动服务
 
 [docker-compose 国内下载源](http://get.daocloud.io/)
 
@@ -915,7 +915,7 @@ volumes:
 
 
 
-## 3.3 登陆系统
+### 3.3 登陆系统
 
 浏览器访问 `IP:12345/dolphinscheduler`
 

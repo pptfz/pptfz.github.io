@@ -16,9 +16,9 @@
 
 
 
-# 一、普通registry
+## 1.普通registry
 
-## 1.1docker01启动私有仓库容器
+### 1.1 docker01启动私有仓库容器
 
 ```python
 [root@docker01 ~]# docker run -d -p 5000:5000 --restart=always --name registry -v \
@@ -34,7 +34,7 @@
 
 
 
-## 1.2docker02给镜像打标签
+### 1.2 docker02给镜像打标签
 
 ```python
 1.初始镜像
@@ -56,7 +56,7 @@ centos                  6.9                 adf829198a7f        4 months ago    
 
 
 
-## 1.3docker02推送镜像到私有仓库docker01
+### 1.3 docker02推送镜像到私有仓库docker01
 
 ```python
 1.默认推送是采用https协议，因此第一次推送会报错
@@ -82,7 +82,7 @@ aaa5621d7c01: Pushed
 
 
 
-## 1.4docker 普通registry缺点
+### 1.4 docker 普通registry缺点
 
 **<span style={{color: 'red'}}>没有认证，任何人都可以推送镜像到私有仓库，不安全！！！</span>**
 
@@ -105,9 +105,9 @@ centos/        centos6.9_ssh/ nginx/
 
 
 
-# 二、带basic认证的registry
+## 2.带basic认证的registry
 
-## 2.1docker01初始环境准备
+### 2.1 docker01初始环境准备
 
 ```python
 1.安装httpd-tools
@@ -120,7 +120,7 @@ centos/        centos6.9_ssh/ nginx/
 
 
 
-## 2.2docker01启动容器
+### 2.2 docker01启动容器
 
 ```python
 [root@docker01 ~]# docker run -d -p 5000:5000 --name registry --restart=always -v /opt/registry-var/auth/:/auth/ -v \
@@ -131,7 +131,7 @@ centos/        centos6.9_ssh/ nginx/
 
 
 
-## 2.3docker02直接拉取镜像
+### 2.3 docker02直接拉取镜像
 
 ```python
 1.直接拉取镜像会报错，因为没有认证
@@ -142,7 +142,7 @@ Error response from daemon: Get http://10.0.0.10:5000/v2/nginx/manifests/latest:
 
 
 
-## 2.4登陆私有仓库，然后拉取镜像
+### 2.4 登陆私有仓库，然后拉取镜像
 
 ```python
 1.登陆私有仓库

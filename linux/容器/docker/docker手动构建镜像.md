@@ -4,7 +4,7 @@
 
 # docker手动构建镜像
 
-# 1.手动创建docker镜像步骤
+## 1.手动创建docker镜像步骤
 
 **第一步、手动启动一个容器，在容器中安装自定义服务**
 
@@ -14,9 +14,9 @@
 
 
 
-# 2.ssh服务镜像制作示例
+## 2.ssh服务镜像制作示例
 
-## 2.1启动一个镜像
+### 2.1 启动一个镜像
 
 ```python
 1.启动一个centos6.9
@@ -33,7 +33,7 @@
 
 
 
-## 2.2镜像中安装ssh服务并启动
+### 2.2 镜像中安装ssh服务并启动
 
 ```python
 1.安装ssh服务
@@ -59,7 +59,7 @@ tcp        0      0 :::22                       :::*                        LIST
 
 
 
-## 2.3设置容器root密码
+### 2.3 设置容器root密码
 
 ```python
 [root@ab815c87fb9c /]# echo 1|passwd --stdin root
@@ -69,13 +69,13 @@ passwd: all authentication tokens updated successfully.
 
 
 
-## 2.4终端访问刚创建的镜像 222端口
+### 2.4 终端访问刚创建的镜像 222端口
 
 ![iShot2020-10-15 14.32.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.32.02.png)
 
 
 
-## 2.5提交镜像
+### 2.5 提交镜像
 
 ```python
 1.临时退出镜像
@@ -98,7 +98,7 @@ centos6.9_ssh       v1.1                0fcaf66caf5a        About a minute ago  
 
 
 
-## 2.6测试镜像
+### 2.6 测试镜像
 
 **<span style={{color: 'red'}}>注意：启动的容器提供服务的同时必须夯住</span>**
 

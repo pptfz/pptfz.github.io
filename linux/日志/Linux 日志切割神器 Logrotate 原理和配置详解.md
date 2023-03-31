@@ -24,9 +24,9 @@ logrotate 程序是一个日志文件管理工具。用于分割日志文件，�
 
 
 
-## 一、logrotate介绍
+## 1.logrotate介绍
 
-## 1.1 logrotate配置文件
+### 1.1 logrotate配置文件
 
 Linux系统默认安装 `logrotate` 工具，它默认的配置文件在：
 
@@ -106,7 +106,7 @@ logrotate [OPTION...] <configfile>
 
 可在 `/var/lib/logrotate/logrotate.status` 查看各log文件的具体执行情况
 
-## 二、切割介绍
+## 2.切割介绍
 
 ### 2.1 切割说明
 
@@ -480,7 +480,7 @@ kill -USR1 `cat /letv/logs/nginx/nginx.pid`
 
 ###  
 
-## 三、logrotate默认自动切割生效时间
+## 3.logrotate默认自动切割生效时间
 
 ### 3.1 logrotate切割时间说明
 
@@ -776,7 +776,7 @@ find . -type f -name "*.bak" -mtime +7 | xargs rm -f
 
 
 
-## 四、尝试解决 logrotate 无法自动轮询日志的办法
+## 4.尝试解决 logrotate 无法自动轮询日志的办法
 
 现象说明：
 

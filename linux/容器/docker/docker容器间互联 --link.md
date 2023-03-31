@@ -4,7 +4,7 @@
 
 # docker容器间互联	--link(单方向)
 
-### 1.先启动一个容器
+## 1.先启动一个容器
 
 ```python
 1.启动一个nginx容器
@@ -19,7 +19,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 
 
-### 2.再次启动一个容器，添加--link参数
+## 2.再次启动一个容器，添加--link参数
 
 ```python
 1.再次启动一个busybox容器，--link后面为  要连接的容器名称:连接的容器的别名
@@ -49,7 +49,7 @@ ff02::2	ip6-allrouters
 
 
 
-### 3.再次启动一个容器
+## 3.再次启动一个容器
 
 ```python
 1.再次启动一个容器，--link后边为 要连接的容器:容器别名

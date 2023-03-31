@@ -2,7 +2,7 @@
 
 
 
-# docker-compose安装
+# docker-compose
 
 ## 1.docker-compose简介
 
@@ -69,9 +69,9 @@ Docker Compose version v2.10.2
 
 
 
-# docker-compose工具
+## 3.docker-compose工具
 
-## 1.composerize
+### 3.1 composerize
 
 [composerize github地址](https://github.com/magicmark/composerize)
 
@@ -79,13 +79,13 @@ Docker Compose version v2.10.2
 
 
 
-### 1.1 简介
+#### 3.1.1 简介
 
 composerize是将 `docker run` 命令转换为 `Docker Compose` 文件格式的工具
 
 
 
-### 1.2 安装
+#### 3.1.2 安装
 
 可以使用 `npm` 或 `yarn` 进行安装
 
@@ -105,7 +105,7 @@ yarn global add composerize
 
 
 
-### 1.3 使用
+#### 3.1.3 使用
 
 ```shell
 $ composerize docker run -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro --restart always --log-opt max-size=1g nginx

@@ -22,7 +22,7 @@ containerd官方架构图
 
 
 
-# 1.下载安装包
+## 1.下载安装包
 
 由于 containerd 需要调用 runc，所以我们也需要先安装 runc，不过 containerd 提供了一个包含相关依赖的压缩包 `cri-containerd-cni-${VERSION}.${OS}-${ARCH}.tar.gz` ，直接下载这个包即可
 
@@ -33,7 +33,7 @@ wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VE
 
 
 
-# 2.解压包
+## 2.解压包
 
 tar包解压缩后是3个目录 `etc` 、 `opt` 、 `usr`
 
@@ -45,7 +45,7 @@ tar xf cri-containerd-cni-${CONTAINERD_VERSION}-linux-amd64.tar.gz -C /
 
 
 
-# 3.创建containerd配置文件
+## 3.创建containerd配置文件
 
 containerd 的默认配置文件为 `/etc/containerd/config.toml`，我们可以通过 `containerd config default > /etc/containerd/config.toml` 命令生成一个默认的配置
 
@@ -55,7 +55,7 @@ mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.t
 
 
 
-# 4.修改containerd配置文件
+## 4.修改containerd配置文件
 
 对于使用 `systemd` 作为 init system 的 Linux 的发行版，使用 `systemd` 作为容器的 `cgroup driver` 可以确保节点在资源紧张的情况更加稳定，所以推荐将 `containerd` 的 `cgroup driver` 配置为 `systemd`
 
@@ -71,7 +71,7 @@ mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.t
 
 
 
-# 5.配置containerd仓库加速
+## 5.配置containerd仓库加速
 
 需要在 cri 配置块下面的 `registry` 配置块下面进行配置 `registry.mirrors`，在 `[plugins."io.containerd.grpc.v1.cri".registry.mirrors]` 下边新增4行内容
 
@@ -106,7 +106,7 @@ mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.t
 
 
 
-# 6.containerd存储配置说明
+## 6.containerd存储配置说明
 
 `/etc/containerd/config.toml` 配置中还有两个关于存储的配置路径
 
@@ -121,7 +121,7 @@ state = "/run/containerd"
 
 
 
-# 7.启动containerd
+## 7.启动containerd
 
 由于上面我们下载的 containerd 压缩包中包含一个 `etc/systemd/system/containerd.service` 的文件，这样我们就可以通过 systemd 来配置 containerd 作为守护进程运行了，内容如下所示
 
@@ -190,7 +190,7 @@ systemctl daemon-reload && systemctl enable containerd && systemctl start contai
 
 
 
-# 8.验证
+## 8.验证
 
 ```shell
 $ ctr version
@@ -207,7 +207,7 @@ Server:
 
 
 
-# 9.卸载containerd
+## 9.卸载containerd
 
 从 [github](https://github.com/containerd/containerd) 下载的  `cri-containerd-cni-1.5.9-linux-amd64.tar.gz` 压缩包解压缩后是 `etc`、 `opt`、 `usr` 3个目录，这3个目录内容如下
 

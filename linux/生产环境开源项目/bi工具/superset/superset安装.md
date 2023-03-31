@@ -18,9 +18,9 @@ superset简介
 
 
 
-# 一、pip安装
+## 1.pip安装
 
-## 1.1 安装依赖包
+### 1.1 安装依赖包
 
 ```sh
 yum -y install gcc gcc-c++ libffi-devel python-devel python-pip python-wheel openssl-devel cyrus-sasl-devel openldap-devel
@@ -137,4 +137,3 @@ pip install  pyPhoenix phoenixdb
 '<' not supported between instances of 'str' and 'NoneType'
 ```
 
-

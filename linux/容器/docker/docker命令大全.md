@@ -4,9 +4,9 @@
 
 # docker命令大全
 
-# 一、容器生命周期管理
+## 1.容器生命周期管理
 
-## 1.1 run
+### 1.1 run
 
 **docker run ：**创建一个新的容器并运行一个命令
 
@@ -80,7 +80,7 @@ root@b8573233d675:/#
 
 
 
-## 1.2 start/stop/restart
+### 1.2 start/stop/restart
 
 **docker start** :启动一个或多个已经被停止的容器
 
@@ -120,7 +120,7 @@ $ docker restart myrunoob
 
 
 
-## 1.3 kill
+### 1.3 kill
 
 **docker kill** :杀掉一个运行中的容器。
 
@@ -145,7 +145,7 @@ mynginx
 
 
 
-## 1.4 rm
+### 1.4 rm
 
 **docker rm ：**删除一个或多个容器。
 
@@ -195,7 +195,7 @@ $ docker rm `docker ps -a -q`
 
 
 
-## 1.5 pause/unpause
+### 1.5 pause/unpause
 
 **docker pause** :暂停容器中所有的进程。
 
@@ -226,7 +226,7 @@ $ docker unpause db01
 
 
 
-## 1.6 create
+### 1.6 create
 
 **docker create ：**创建一个新的容器但不启动它
 
@@ -251,7 +251,7 @@ $ docker create  --name mynginx  nginx:latest
 
 
 
-## 1.7 exec
+### 1.7 exec
 
 **docker exec ：**在运行的容器中执行命令
 
@@ -310,9 +310,9 @@ $ docker exec -it 9df70f9a0714 /bin/bash
 
 
 
-# 二、容器操作
+## 2.容器操作
 
-## 2.1 ps
+### 2.1 ps
 
 **docker ps** :列出容器
 
@@ -391,7 +391,7 @@ b8573233d675
 
 
 
-## 2.2 inspect
+### 2.2 inspect
 
 **docker inspect :** 获取容器/镜像的元数据。
 
@@ -446,7 +446,7 @@ $ docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{en
 
 
 
-## 2.3 top
+### 2.3 top
 
 **docker top :**查看容器中运行的进程信息，支持 ps 命令参数。
 
@@ -476,7 +476,7 @@ $ for i in  `docker ps |grep Up|awk '{print $1}'`;do echo \ && docker top $i; do
 
 
 
-## 2.4 attach
+### 2.4 attach
 
 **docker attach :**连接到正在运行中的容器。
 
@@ -503,7 +503,7 @@ $ docker attach --sig-proxy=false mynginx
 
 
 
-## 2.5 events
+### 2.5 events
 
 **docker events :** 从服务器获取实时事件
 
@@ -545,7 +545,7 @@ $ docker events -f "image"="mysql:5.6" --since="1467302400"
 
 
 
-## 2.6 logs
+### 2.6 logs
 
 **docker logs :** 获取容器的日志
 
@@ -583,7 +583,7 @@ $ docker logs --since="2016-07-01" --tail=10 mynginx
 
 
 
-## 2.7 wait
+### 2.7 wait
 
 **docker wait :** 阻塞运行直到容器停止，然后打印出它的退出代码。
 
@@ -601,7 +601,7 @@ $ docker wait CONTAINER
 
 
 
-## 2.8 export
+### 2.8 export
 
 **docker export :**将文件系统作为一个tar归档文件导出到STDOUT。
 
@@ -634,7 +634,7 @@ boot  etc  lib   media  opt  root  sbin  sys  usr
 
 
 
-## 2.9 port
+### 2.9 port
 
 **docker port :**列出指定的容器的端口映射，或者查找将PRIVATE_PORT NAT到面向公众的端口。
 
@@ -655,9 +655,9 @@ $ docker port mymysql
 
 
 
-# 三、容器rootfs命令
+## 3.容器rootfs命令
 
-## 3.1 commit
+### 3.1 commit
 
 **docker commit :**从容器创建一个新的镜像。
 
@@ -692,7 +692,7 @@ REPOSITORY          TAG                 IMAGE ID            CREATED             
 mymysql             v1                  37af1236adef        15 seconds ago      329 MB
 ```
 
-## 3.2 cp
+### 3.2 cp
 
 **docker cp :**用于容器与主机之间的数据拷贝。
 
@@ -733,7 +733,7 @@ $ docker cp  96f7f14e99ab:/www /tmp/
 
 
 
-## 3.3 diff
+### 3.3 diff
 
 **docker diff :** 检查容器里文件结构的更改。
 
@@ -764,9 +764,9 @@ C /tmp
 
 
 
-# 四、镜像仓库
+## 4.镜像仓库
 
-## 4.1 login
+### 4.1 login
 
 **docker login :** 登陆到一个Docker镜像仓库，如果未指定镜像仓库地址，默认为官方仓库 Docker Hub
 
@@ -802,7 +802,7 @@ $ docker logout
 
 
 
-## 4.2 pull
+### 4.2 pull
 
 **docker pull :** 从镜像仓库中拉取或者更新指定镜像
 
@@ -838,7 +838,7 @@ $ docker pull -a java
 
 
 
-## 4.3 push
+### 4.3 push
 
 **docker push :** 将本地的镜像上传到镜像仓库,要先登陆到镜像仓库
 
@@ -862,7 +862,7 @@ $ docker push myapache:v1
 
 
 
-## 4.4 search
+### 4.4 search
 
 docker **search：**从Docker Hub查找更多
 
@@ -909,9 +909,9 @@ nimmis/java-centos    This is docker images of CentOS 7...   13                 
 
 
 
-# 五、本地镜像管理
+## 5.本地镜像管理
 
-## 5.1 images
+### 5.1 images
 
 **docker images :** 列出本地镜像。
 
@@ -959,7 +959,7 @@ ubuntu              15.10               4e3b13c8a266        3 months ago        
 
 
 
-## 5.2 rmi
+### 5.2 rmi
 
 **docker rmi :** 删除本地一个或多少镜像。
 
@@ -990,7 +990,7 @@ Deleted: sha256:85feb446e89a28d58ee7d80ea5ce367eebb7cec70f0ec18aa4faa874cbd97c73
 
 
 
-## 5.3 tag
+### 5.3 tag
 
 **docker tag :** 标记本地镜像，将其归入某一仓库。
 
@@ -1013,7 +1013,7 @@ runoob/ubuntu       v3                  4e3b13c8a266        3 months ago        
 
 
 
-## 5.4 build
+### 5.4 build
 
 **docker build** 命令用于使用 Dockerfile 创建镜像。
 
@@ -1077,7 +1077,7 @@ Error response from daemon: Unknown instruction: RUNCMD
 
 
 
-## 5.5 history
+### 5.5 history
 
 **docker history :** 查看指定镜像的创建历史。
 
@@ -1112,7 +1112,7 @@ IMAGE             CREATED           CREATED BY                                  
 
 
 
-## 5.6 save
+### 5.6 save
 
 **docker save :** 将指定镜像保存成 tar 归档文件。
 
@@ -1140,7 +1140,7 @@ runoob@runoob:~$ ll my_ubuntu_v3.tar
 
 
 
-## 5.7 load
+### 5.7 load
 
 **docker load :** 导入使用 docker save 命令导出的镜像。
 
@@ -1193,7 +1193,7 @@ fedora              latest              58394af37342        7 weeks ago         
 
 
 
-## 5.8 import
+### 5.8 import
 
 **docker import :** 从归档文件中创建镜像。
 
@@ -1225,9 +1225,9 @@ runoob/ubuntu       v4                  63ce4a6d6bc3        20 seconds ago      
 
 
 
-# 六、info|version
+## 6.info|version
 
-## 6.1 info
+### 6.1 info
 
 docker info : 显示 Docker 系统信息，包括镜像和容器数。。
 
@@ -1262,7 +1262,7 @@ ID: M5N4:K6WN:PUNC:73ZN:AONJ:AUHL:KSYH:2JPI:CH3K:O4MK:6OCX:5OYW
 
 
 
-## 6.2 version
+### 6.2 version
 
 ocker version :显示 Docker 版本信息。
 

@@ -1,6 +1,6 @@
 # 利用libreswan+V2Ray实现科学上网
 
-# 实验背景
+## 实验背景
 
 在云主机中(阿里云、腾讯云等)，大陆地区的机器是无法科学上网的，并且好多优秀的网站、工具等无法访问或者下载速度很慢，例如下载github上的一些资源，我们可以购买VPS(例如[Vultr](https://www.itblogcn.com/vultr))或者香港等地区的主机，再配合一些软件就可以实现科学上网了
 
@@ -16,7 +16,7 @@
 
 
 
-# 实验环境
+## 实验环境
 
 | 区域 | 公网IP         | 内网IP段      | 内网IP     | 系统      | 内核版本                    |
 | ---- | -------------- | ------------- | ---------- | --------- | --------------------------- |
@@ -25,9 +25,9 @@
 
  
 
-# 1.安装配置libreswan
+## 1.安装配置libreswan
 
-## 1.0 编辑环境变量文件
+### 1.0 编辑环境变量文件
 
 北京、香港区服务器操做
 
@@ -48,7 +48,7 @@ source /opt/wall_env
 
 
 
-## 1.1 安装依赖包
+### 1.1 安装依赖包
 
 北京、香港区服务器操做
 
@@ -58,7 +58,7 @@ yum -y install audit-libs-devel bison curl-devel fipscheck-devel flex gcc ldns-d
 
 
 
-## 1.2 安装libreswan
+### 1.2 安装libreswan
 
 北京、香港区服务器操做
 
@@ -68,7 +68,7 @@ yum -y install libreswan
 
 
 
-## 1.3 配置内核参数
+### 1.3 配置内核参数
 
 北京、香港区服务器操做
 
@@ -85,7 +85,7 @@ sysctl -p
 
 
 
-## 1.4 启动ipsec
+### 1.4 启动ipsec
 
 ```shell
 systemctl start ipsec && systemctl enable ipsec
@@ -122,7 +122,7 @@ Mar 29 10:38:39 hk pluto[6483]: no secrets filename matched "/etc/ipsec.d/*.secr
 
 
 
-## 1.5 防火墙配置
+### 1.5 防火墙配置
 
 香港区服务器操作
 
@@ -130,7 +130,7 @@ Mar 29 10:38:39 hk pluto[6483]: no secrets filename matched "/etc/ipsec.d/*.secr
 
 
 
-## 1.6 验证端口连通性
+### 1.6 验证端口连通性
 
 北京区服务器操作
 
@@ -149,7 +149,7 @@ Nmap done: 1 IP address (1 host up) scanned in 3.17 seconds
 
 
 
-## 1.7 配置预共享密钥
+### 1.7 配置预共享密钥
 
 北京、香港区服务器操做
 
@@ -173,11 +173,11 @@ EOF
 
 
 
-## 1.8 配置ipsec连接
+### 1.8 配置ipsec连接
 
 `/etc/ipsec.conf` 配置文件中有 `include /etc/ipsec.d/*.conf` ，因此我们在 `/etc/ipsec.d` 目录下新建 `*.conf` 文件，同时 `/etc/ipsec.conf` 文件中有详细的示例说明
 
-### 1.8.1 配置香港区服务器
+#### 1.8.1 配置香港区服务器
 
 Libreswan 不使用术语 `source` 或 `destination`。相反，它用术语  `left` 和 `right`来代指终端（主机）。虽然大多数管理员用 `left` 表示本地主机，`right` 表示远程主机，但是这样可以在大多数情况下在两个终端上使用相同的配置。
 由于我们的服务器使用的是vpc网络，采用静态nat的形式，在配置 `left` 和 `right` 时，本端的ip需要使用内网ip或 `%defaultroute`。`left` 和 `right` 是两端的ip地址，而 `leftid` 和 `rightid` 为代号id。
@@ -210,7 +210,7 @@ EOF
 
 
 
-### 1.8.2 配置北京区服务器
+#### 1.8.2 配置北京区服务器
 
 Libreswan 不使用术语 `source` 或 `destination`。相反，它用术语  `left` 和 `right`来代指终端（主机）。虽然大多数管理员用 `left` 表示本地主机，`right` 表示远程主机，但是这样可以在大多数情况下在两个终端上使用相同的配置。
 由于我们的服务器使用的是vpc网络，采用静态nat的形式，在配置 `left` 和 `right` 时，本端的ip需要使用内网ip或 `%defaultroute`。`left` 和 `right` 是两端的ip地址，而 `leftid` 和 `rightid` 为代号id。
@@ -243,7 +243,7 @@ EOF
 
 
 
-### 1.8.3 开启ipsec日志
+#### 1.8.3 开启ipsec日志
 
 北京、香港区服务器操做
 
@@ -255,7 +255,7 @@ sed -i 's/#logfile=/logfile=/' /etc/ipsec.conf
 
 
 
-### 1.8.4 重启ipsec
+#### 1.8.4 重启ipsec
 
 北京、香港区服务器操做
 
@@ -265,9 +265,9 @@ systemctl restart ipsec
 
 
 
-### 1.8.5 验证
+#### 1.8.5 验证
 
-#### 1.8.5.1 两端互ping
+##### 1.8.5.1 两端互ping
 
 北京区服务器ping香港区服务器
 
@@ -299,7 +299,7 @@ rtt min/avg/max/mdev = 46.586/46.618/46.650/0.032 ms
 
 
 
-#### 1.8.5.2 查看ipsec状态
+##### 1.8.5.2 查看ipsec状态
 
 提示如下即为成功
 
@@ -331,7 +331,7 @@ Mar 23 21:00:37 hk systemd[1]: Started Internet Key Exchange (IKE) Protocol Daem
 
 
 
-#### 1.8.5.3 查看日志
+##### 1.8.5.3 查看日志
 
 查看日志 `/var/log/pluto.log` ，有包的发送以及返回即为正确
 
@@ -350,7 +350,7 @@ Mar 23 21:00:38.020561: "bj-vm-hk/1x1"[1] 42.193.112.127 #2: STATE_QUICK_R2: IPs
 
 
 
-#### 1.8.5.4 查看连接情况
+##### 1.8.5.4 查看连接情况
 
 可以执行命令 `ipsec auto --status` 查看连接情况
 

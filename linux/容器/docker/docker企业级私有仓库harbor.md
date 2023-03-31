@@ -4,7 +4,7 @@
 
 # docker企业级私有仓库harbor
 
-# 1.harbor介绍
+## 1.harbor介绍
 
 **Habor是由VMWare公司开源的容器镜像仓库。事实上，Habor是在Docker Registry上进行了相应的企业级扩展，从而获得了更加广泛的应用，这些新的企业级特性包括：管理用户界面，基于角色的访问控制 ，AD/LDAP集成以及审计日志等，足以满足基本企业需求。**
 
@@ -14,7 +14,7 @@
 
 
 
-# 2.harbor主要功能
+## 2.harbor主要功能
 
 - **基于角色访问控制（RBAC）**
   - **在企业中，通常有不同的开发团队负责不同的项目，镜像像代码一样，每个人角色不同需求也不同，因此就需要访问权限控制，根据角色分配相应的权限。** 
@@ -42,7 +42,7 @@
 
 
 
-# 3.harbor组件
+## 3.harbor组件
 
 ![iShot2020-10-14 16.02.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2016.02.33.png)
 
@@ -61,7 +61,7 @@
 
 
 
-# 4.harbor部署环境要求
+## 4.harbor部署环境要求
 
 **2核4G+40G硬盘**
 
@@ -103,7 +103,7 @@
 
 
 
-# 5.安装docker compose
+## 5.安装docker compose
 
 **harbor需要docker compose1.18+版本**
 
@@ -123,7 +123,7 @@ docker-compose version 1.24.1, build 4667896b
 
 
 
-# 6.安装harbor
+## 6.安装harbor
 
 **Harbor安装有3种方式：**
 
@@ -177,7 +177,7 @@ cd9e038ab419        goharbor/harbor-registryctl:v1.8.1                  "/harbor
 
 
 
-# 7.访问harbor
+## 7.访问harbor
 
 > **用户名	admin**
 >
@@ -203,7 +203,7 @@ cd9e038ab419        goharbor/harbor-registryctl:v1.8.1                  "/harbor
 
 
 
-# 8.https访问harbor
+## 8.https访问harbor
 
 **如果需要https访问harbor，需要做以下操作**
 
@@ -224,7 +224,7 @@ https:
 
 
 
-# 9.harbor使用
+## 9.harbor使用
 
 将镜像推送到harbor，需要注意的是，推送的格式如下
 

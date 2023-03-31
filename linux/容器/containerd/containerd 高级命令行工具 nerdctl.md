@@ -4,15 +4,15 @@
 
 
 
-# 1.nerdctl简介
+## 1.nerdctl简介
 
 安装containerd后是使用 `ctr` 操作管理 containerd 镜像容器，但是大家都习惯了使用 docker cli，`ctr` 使用起来可能还是不太顺手，为了能够让大家更好的转到 containerd 上面来，社区提供了一个新的命令行工具：[nerdctl](https://github.com/containerd/nerdctl)。nerdctl 是一个与 docker cli 风格兼容的 containerd 客户端工具，而且直接兼容 docker compose 的语法的，这就大大提高了直接将 containerd 作为本地开发、测试或者单机容器部署使用的效率。
 
 
 
-# 2.nerdctl安装
+## 2.nerdctl安装
 
-## 2.1 未安装containerd
+### 2.1 未安装containerd
 
 :::tip
 
@@ -20,7 +20,7 @@
 
 :::
 
-### 2.1.1 下载包
+#### 2.1.1 下载包
 
 ```shell
 export NERDCTL_VERSION=0.16.1
@@ -29,7 +29,7 @@ wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}
 
 
 
-### 2.1.2 查看包内容
+#### 2.1.2 查看包内容
 
 ```shell
 # 查看包内容，解压缩后是bin  lib  libexec  share 4个目录
@@ -106,7 +106,7 @@ share/doc/nerdctl-full/SHA256SUMS
 
 
 
-### 2.1.3 解压缩包
+#### 2.1.3 解压缩包
 
 :::tip
 
@@ -128,7 +128,7 @@ tar xf nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz -C /usr/local
 
 
 
-### 2.1.4 查看目录结构
+#### 2.1.4 查看目录结构
 
 ```shell
 $ tree
@@ -207,7 +207,7 @@ $ tree
 
 
 
-### 2.1.5 启动containerd与buildkit
+#### 2.1.5 启动containerd与buildkit
 
 ```shell
 systemctl enable containerd buildkit && systemctl start containerd buildkit
@@ -215,7 +215,7 @@ systemctl enable containerd buildkit && systemctl start containerd buildkit
 
 
 
-### 2.1.6 验证
+#### 2.1.6 验证
 
 ```shell
 $ ctr version
@@ -248,9 +248,9 @@ buildkitd github.com/moby/buildkit v0.9.3 8d2625494a6a3d413e3d875a2ff7dd9b1ed1b1
 
 
 
-### 2.1.7 卸载containerd、nerdctl、buildkit
+#### 2.1.7 卸载containerd、nerdctl、buildkit
 
-#### 2.1.7.1 停止containerd与buildkit服务
+##### 2.1.7.1 停止containerd与buildkit服务
 
 ```shell
 systemctl disable containerd buildkit && systemctl stop containerd buildkit && systemctl status containerd buildkit
@@ -258,7 +258,7 @@ systemctl disable containerd buildkit && systemctl stop containerd buildkit && s
 
 
 
-#### 2.1.7.2 卸载containerd、nerdctl、buildkit
+##### 2.1.7.2 卸载containerd、nerdctl、buildkit
 
 **卸载containerd、nerdctl、buildkit删除相关目录文件即可**
 
@@ -271,7 +271,7 @@ rm -rf /usr/local/bin/{buildctl,buildkitd,containerd,containerd-fuse-overlayfs-g
 
 
 
-## 2.2 已安装containerd
+### 2.2 已安装containerd
 
 :::tip
 
@@ -279,7 +279,7 @@ rm -rf /usr/local/bin/{buildctl,buildkitd,containerd,containerd-fuse-overlayfs-g
 
 :::
 
-### 2.2.1 下载包
+#### 2.2.1 下载包
 
 ```shell
 export NERDCTL_VERSION=0.16.1
@@ -288,7 +288,7 @@ wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}
 
 
 
-### 2.2.2 查看包内容
+#### 2.2.2 查看包内容
 
 ```shell
 # 查看包内容，解压缩后是2个sh文件和nerdctl二进制命令
@@ -300,7 +300,7 @@ containerd-rootless.sh
 
 
 
-### 2.2.3 解压缩包
+#### 2.2.3 解压缩包
 
 ```shell
 tar xf nerdctl-${NERDCTL_VERSION}-linux-amd64.tar.gz
@@ -308,7 +308,7 @@ tar xf nerdctl-${NERDCTL_VERSION}-linux-amd64.tar.gz
 
 
 
-### 2.2.4 导出 `nerdctl` 命令
+#### 2.2.4 导出 `nerdctl` 命令
 
 ```shell
 mv nerdctl /usr/local/bin
@@ -316,7 +316,7 @@ mv nerdctl /usr/local/bin
 
 
 
-### 2.2.5 验证
+#### 2.2.5 验证
 
 ```shell
 $ nerdctl version
@@ -332,11 +332,11 @@ Server:
 
 
 
-# 3.nerdctl使用
+## 3.nerdctl使用
 
 nerdctl与docker命令几乎一致
 
-## 3.1 构建镜像 `nerdctl build`
+### 3.1 构建镜像 `nerdctl build`
 
 编辑dockerfile
 

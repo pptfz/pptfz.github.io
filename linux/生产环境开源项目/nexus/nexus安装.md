@@ -14,7 +14,7 @@
 
 
 
-# 1.系统环境
+## 1.系统环境
 
 | 系统                                 | 配置  | 硬盘 | java版本                 |
 | ------------------------------------ | ----- | ---- | ------------------------ |
@@ -22,11 +22,11 @@
 
 
 
-# 2.安装
+## 2.安装
 
-## 2.1 二进制包安装
+### 2.1 二进制包安装
 
-### 2.1.1 下载二进制包
+#### 2.1.1 下载二进制包
 
 ```shell
 wget https://download.sonatype.com/nexus/3/nexus-3.37.3-02-unix.tar.gz
@@ -34,7 +34,7 @@ wget https://download.sonatype.com/nexus/3/nexus-3.37.3-02-unix.tar.gz
 
 
 
-### 2.1.2 解压缩包
+#### 2.1.2 解压缩包
 
 ```shell
 # 解压缩后是 nexus-3.37.3-02 sonatype-work 2个目录
@@ -43,7 +43,7 @@ tar xf nexus-3.37.3-02-unix.tar.gz
 
 
 
-### 2.1.3 配置nexus
+#### 2.1.3 配置nexus
 
 ```shell
 etc/nexus-default.properties	# 配置nexus监听端口与地址，默认为8081和0.0.0.0
@@ -52,7 +52,7 @@ bin/nexus.rc	# 配置nexus运行用户
 
 
 
-### 2.1.4 启动nexus
+#### 2.1.4 启动nexus
 
 :::tip
 
@@ -85,7 +85,7 @@ This account is currently not available.
 
   
 
-### 2.1.5 登陆nexus
+#### 2.1.5 登陆nexus
 
 `admin` 用户初始密码在 `sonatype-work/nexus3/admin.password!`
 
@@ -93,7 +93,37 @@ This account is currently not available.
 
 ![iShot2022-01-09 16.58.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-09%2016.58.02.png)
 
-### 使用systemd管理nexus
+
+
+### 2.2 docker安装
+
+#### 2.2.1 创建目录
+
+```shell
+export NEXUS_DIR_PATH="/some/dir/nexus-data"
+[ -d ${NEXUS_DIR_PATH} ] ||  mkdir ${NEXUS_DIR_PATH} && chown -R 200 ${NEXUS_DIR_PATH}
+```
+
+
+
+#### 2.2.2 启动容器
+
+```shell
+docker run -d \
+ -p 8081:8081 \
+ --name nexus \
+ -h nexus \
+ --restart=always \
+ -v ${NEXUS_DIR_PATH}:/nexus-data sonatype/nexus3
+```
+
+
+
+
+
+
+
+## 使用systemd管理nexus
 
 编辑配置文件 `/etc/systemd/system/nexus.service`
 
@@ -129,7 +159,7 @@ systemctl enable nexus.service && systemctl start nexus.service
 
 
 
-### 使用supervisor管理nexus
+## 使用supervisor管理nexus
 
 ```ini
 export NEXUS_BIN_PATH="/opt/nexus-3.37.3-02/bin/nexus"
@@ -146,28 +176,6 @@ EOF
 
 
 
-
-## 2.2 docker安装
-
-创建目录
-
-```shell
-export NEXUS_DIR_PATH="/some/dir/nexus-data"
-[ -d ${NEXUS_DIR_PATH} ] ||  mkdir ${NEXUS_DIR_PATH} && chown -R 200 ${NEXUS_DIR_PATH}
-```
-
-
-
-启动容器
-
-```shell
-docker run -d \
- -p 8081:8081 \
- --name nexus \
- -h nexus \
- --restart=always \
- -v ${NEXUS_DIR_PATH}:/nexus-data sonatype/nexus3
-```
 
 
 

@@ -4,7 +4,7 @@
 
 # docker跨主机通信之macvlan
 
-# 1.macvlan说明
+## 1.macvlan说明
 
 **macvlan可以虚拟多个mac地址，相当于虚拟多个网卡**
 
@@ -22,9 +22,9 @@
 
 
 
-# 2.macvlan跨主机通信示例
+## 2.macvlan跨主机通信示例
 
-## 2.1实验环境
+### 2.1 实验环境
 
 | 主机名       | IP            |
 | ------------ | ------------- |
@@ -33,7 +33,7 @@
 
 
 
-## 2.2docker01和docker02都创建macvlan网络
+### 2.2 docker01和docker02都创建macvlan网络
 
 ```python
 //在docker01和docker02上相同操作
@@ -50,7 +50,7 @@ macvlan_1		    //网络名称，可任意
 
 
 
-## 2.3查看创建的网络
+### 2.3 查看创建的网络
 
 ```python
 //可以看到创建的名称为macvlan_1的网络
@@ -64,7 +64,7 @@ b0ddd6fd07ed        macvlan_1           macvlan             local
 
 
 
-## 2.4创建使用macvlan网络的容器
+### 2.4 创建使用macvlan网络的容器
 
 ```python
 1.docker01启动一个容器，IP指定为10.0.0.3
@@ -122,4 +122,3 @@ rtt min/avg/max/mdev = 0.345/0.457/0.542/0.086 ms
 ip link set eth0 promisc on
 ```
 
-

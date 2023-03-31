@@ -12,9 +12,9 @@
 
 
 
-# 一、docker网络相关信息
+## 1.docker网络相关信息
 
-## 1.1docker网卡、网关信息
+### 1.1 docker网卡、网关信息
 
 ```python
 //宿主机查看docker默认网卡信息，安装完docker并启动后，会有docker0网卡，默认IP地址172.17.0.1
@@ -38,7 +38,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 
 
-## 1.2启动一个busybox容器
+### 1.2 启动一个busybox容器
 
 ```python
 1.宿主机docker1运行busybox容器
@@ -83,7 +83,7 @@ listening on eth0, link-type EN10MB (Ethernet), capture size 262144 bytes
 
 
 
-## 1.3docker容器用到的内核转发和iptables规则
+### 1.3 docker容器用到的内核转发和iptables规则
 
 ```python
 1.内核转发
@@ -103,7 +103,7 @@ MASQUERADE  all  --  172.17.0.0/16        0.0.0.0/0
 
 
 
-# 二、docker端口映射（允许外网访问容器）
+## 2.docker端口映射（允许外网访问容器）
 
 **docker指定端口映射，docker会自动添加一条iptables规则来实现端口映射**
 
@@ -121,7 +121,7 @@ MASQUERADE  all  --  172.17.0.0/16        0.0.0.0/0
 
 
 
-## 2.1方式一	-p   宿主机端口:容器端口
+### 2.1 方式一	-p   宿主机端口:容器端口
 
 **1.启动一个nginx容器并作端口映射**	
 
@@ -150,7 +150,7 @@ DNAT      tcp  -- 0.0.0.0/0           0.0.0.0/0      tcp dpt:8080 to:172.17.0.4:
 
 
 
-## 2.2方式二	-p   宿主机IP:宿主机端口:容器端口
+### 2.2 方式二	-p   宿主机IP:宿主机端口:容器端口
 
 **1.宿主机eth0网卡添加一个辅助IP**
 
@@ -210,7 +210,7 @@ DNAT       tcp  --  0.0.0.0/0            10.0.0.66            tcp dpt:80 to:172.
 
 
 
-## 2.3方式三	-p   宿主机IP::容器端口(宿主机端口随机)		宿主机端口不写，默认随机启动一个端口
+### 2.3 方式三	-p   宿主机IP::容器端口(宿主机端口随机)		宿主机端口不写，默认随机启动一个端口
 
 **1.启动一个容器**
 
@@ -231,7 +231,7 @@ fbf5d8973f90        nginx:latest        "nginx -g 'daemon of…"   11 seconds ag
 
 
 
-## 2.4方式四	-p   宿主机端口:容器端口:udp
+### 2.4 方式四	-p   宿主机端口:容器端口:udp
 
 **映射默认采用tcp方式，此方式为指定udp方式**
 
@@ -239,13 +239,13 @@ fbf5d8973f90        nginx:latest        "nginx -g 'daemon of…"   11 seconds ag
 
 
 
-## 2.5方式五	-p   81:80 -p 443:443  可以指定多个-p
+### 2.5 方式五	-p   81:80 -p 443:443  可以指定多个-p
 
 **容器中运行了多个服务，此时需要映射多个端口**
 
 
 
-# 三、docker端口随机映射
+## 3.docker端口随机映射
 
 **-P			与-p   宿主机IP::容器端口(宿主机端口随机)方式相同**
 

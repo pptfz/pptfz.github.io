@@ -4,7 +4,7 @@
 
 # docker数据卷
 
-# 1.docker挂载卷的方式
+## 1.docker挂载卷的方式
 
 **方式一：宿主机创建一个卷，然后挂载到容器某一个路径下，适合做持久化**
 
@@ -18,9 +18,9 @@
 
 
 
-# 2.docker创建数据卷示例
+## 2.docker创建数据卷示例
 
-## 2.1创建一个名为docker-volume数据卷
+### 2.1 创建一个名为 `docker-volume` 数据卷
 
 ```python
 [root@docker1 ~]# docker volume create docker-volume
@@ -29,7 +29,7 @@ docker-volume
 
 
 
-## 2.2查看创建的数据卷
+### 2.2 查看创建的数据卷
 
 ```python
 [root@docker1 ~]# docker volume ls
@@ -39,9 +39,9 @@ local               docker-volume
 
 
 
-## 2.3查看数据卷具体信息，存放的位置等
+### 2.3 查看数据卷具体信息，存放的位置等
 
-**默认存放于/var/lib/docker/volumes/docker-volume/_data**
+**默认存放于 `/var/lib/docker/volumes/docker-volume/_data`**
 
 ```python
 [root@docker1 ~]# docker volume inspect docker-volume 
@@ -60,7 +60,7 @@ local               docker-volume
 
 
 
-## 2.4启动一个nginx容器，并将刚才创建的数据卷挂载到容器的/usr/share/nginx/html
+### 2.4 启动一个nginx容器，并将刚才创建的数据卷挂载到容器的 `/usr/share/nginx/html`
 
 ```python
 [root@docker1 ~]# docker run -d -p 80:80 -v docker-volume:/usr/share/nginx/html nginx:latest 
@@ -74,7 +74,7 @@ local               docker-volume
 
 
 
-## 2.5浏览器访问刚启动的容器
+### 2.5 浏览器访问刚启动的容器
 
 ![iShot2020-10-15 14.30.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.30.31.png)
 
@@ -82,7 +82,7 @@ local               docker-volume
 
 
 
-## 2.6将nginx容器的默认显示界面重写
+### 2.6  将nginx容器的默认显示界面重写
 
 ```python
 [root@docker1 ~]# echo hehe > /var/lib/docker/volumes/docker-volume/_data/index.html 
@@ -90,6 +90,6 @@ local               docker-volume
 
 
 
-## 2.7再次访问容器，可以看到，内容已经变化
+### 2.7 再次访问容器，可以看到，内容已经变化
 
 ![iShot2020-10-15 14.30.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.30.53.png)

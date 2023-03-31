@@ -4,9 +4,9 @@
 
 # dockerfile自动构建docker镜像
 
-# 1.dockerfile
+## 1.dockerfile
 
-## 1.1 dockerfile说明
+### 1.1 dockerfile说明
 
 **dockerfile定义**
 
@@ -32,7 +32,7 @@
 
 
 
-## 1.2 dockerfile常用指令
+### 1.2 dockerfile常用指令
 
 | 指令           | 含义                                                         |
 | -------------- | ------------------------------------------------------------ |
@@ -50,7 +50,7 @@
 
 
 
-### 1.2.1 dockerfile常用指令	FROM
+#### 1.2.1 dockerfile常用指令	FROM
 
 > 用来指定基础镜像
 
@@ -71,7 +71,7 @@ FROM scratch
 
 
 
-### 1.2.2 dockerfile常用指令	RUN
+#### 1.2.2 dockerfile常用指令	RUN
 
 > 指定镜像中运行的命令
 
@@ -102,7 +102,7 @@ RUN nginx -t && nginx -s reload
 
 
 
-### 1.2.3 dockerfile常用指令	ADD
+#### 1.2.3 dockerfile常用指令	ADD
 
 > 将本机或远程文件拷贝到镜像中，如果是压缩文件则会自动解压
 
@@ -116,7 +116,7 @@ ADD http://www.baidu.com/baidu.tar.gz /opt
 
 **<span style={{color: 'red'}}>⚠️需要注意的是对于从远程 URL 获取资源的情况，由于 ADD 指令不支持认证，如果从远程获取资源需要认证，则只能使用`RUN wget` 或 `RUN curl` 替代了</span>**
 
-### 1.2.4 dockerfile常用指令	COPY
+#### 1.2.4 dockerfile常用指令	COPY
 
 > 将本机文件拷贝到镜像中
 
@@ -130,7 +130,7 @@ COPY test.file /opt
 
 
 
-### 1.2.5 dockerfile常用指令	WORKDIR
+#### 1.2.5 dockerfile常用指令	WORKDIR
 
 > 指定容器中RUN、CMD等命令的工作目录
 
@@ -142,7 +142,7 @@ RUN echo 'test' > file
 
 
 
-### 1.2.6 dockerfile常用指令	VOLUME
+#### 1.2.6 dockerfile常用指令	VOLUME
 
 > `VOLUME` 指令用于暴露任何数据库存储文件，配置文件，或容器创建的文件和目录。强烈建议使用 `VOLUME` 来管理镜像中的可变部分和用户可以改变的部分。
 
@@ -153,7 +153,7 @@ VOLUME /data/mysql/conf
 
 
 
-### 1.2.7 dockerfile常用指令	EXPOSE
+#### 1.2.7 dockerfile常用指令	EXPOSE
 
 > 指定镜像对外开放的端口
 
@@ -164,7 +164,7 @@ EXPOSE 80
 
 
 
-### 1.2.8 dockerfile常用指令	ENV
+#### 1.2.8 dockerfile常用指令	ENV
 
 > 指定环境变量，通过ENV定义的环境变量，可以被后面的所有指令中使用
 
@@ -175,7 +175,7 @@ ENV mysql_data_path /data/mysql/data
 
 
 
-### 1.2.9 dockerfile常用指令	CMD
+#### 1.2.9 dockerfile常用指令	CMD
 
 > 容器启动以后，`默认`的执行命令
 >
@@ -265,7 +265,7 @@ docker运行指定了命令
 
 
 
-### 1.2.10 dockerfile常用指令	ENTRYPOINT
+#### 1.2.10 dockerfile常用指令	ENTRYPOINT
 
 > **容器启动后执行的命令（无法被替换，启动容器的时候指定的命令，会被当成参数）**
 
@@ -352,7 +352,7 @@ $ docker run entrypoint-shell:v1 enfrypoint
 
 
 
-# 2.dockerfile构建镜像步骤
+## 2.dockerfile构建镜像步骤
 
 **第一步、编写dockerfile**
 
@@ -364,11 +364,11 @@ $ docker run entrypoint-shell:v1 enfrypoint
 
 
 
-# 3.dockerfile简单示例
+## 3.dockerfile简单示例
 
-## 3.1示例一：基础dockerfile---ssh服务镜像
+### 3.1 示例一：基础dockerfile---ssh服务镜像
 
-### 3.1.1 新建目录，专门存放dockerfile
+#### 3.1.1 新建目录，专门存放dockerfile
 
 ```python
 mkdir /dockerfile/centos6.9_ssh
@@ -376,7 +376,7 @@ mkdir /dockerfile/centos6.9_ssh
 
 
 
-### 3.1.2  编辑Dockerfile 
+#### 3.1.2  编辑Dockerfile 
 
 ```dockerfile
 $ cat > Dockerfile <<EOF
@@ -397,7 +397,7 @@ CMD   ["/usr/sbin/sshd","-D"]            容器启动时运行的命令
 
 
 
-### 3.1.3 构建镜像
+#### 3.1.3 构建镜像
 
 ```dockerfile
 # 基于dockerfile开始构建镜像
@@ -414,7 +414,7 @@ build      构建镜像
 
 
 
-### 3.1.4 测试镜像
+#### 3.1.4 测试镜像
 
 ```python
 # 启动一个容器测试镜像
@@ -429,7 +429,7 @@ a57c6406e001        centos6.9_ssh:v2.1        "/usr/sbin/sshd -D"    29 seconds 
 
 
 
-### 3.1.5 ssh连接测试
+#### 3.1.5 ssh连接测试
 
 ![iShot2020-10-15 14.42.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.42.53.png)
 
@@ -437,9 +437,9 @@ a57c6406e001        centos6.9_ssh:v2.1        "/usr/sbin/sshd -D"    29 seconds 
 
 
 
-## 3.2 示例二：基础Dockerfile--多服务
+### 3.2 示例二：基础Dockerfile--多服务
 
-### 3.2.1 新建目录，专门存放Dockerfile
+#### 3.2.1 新建目录，专门存放Dockerfile
 
 ```python
 mkdir -p /dockerfile/centos6.9_ssh_http
@@ -447,7 +447,7 @@ mkdir -p /dockerfile/centos6.9_ssh_http
 
 
 
-## 3.2.2 编辑Dockerfile
+#### 3.2.2 编辑Dockerfile
 
 ```dockerfile
 $ cd /dockerfile/centos6.9_ssh_http
@@ -471,7 +471,7 @@ CMD   ["/bin/bash","init.sh"]                 容器启动时运行的命令
 
 
 
-### 3.2.3 编辑脚本
+#### 3.2.3 编辑脚本
 
 ```python
 cat >init.sh <<EOF 
@@ -484,7 +484,7 @@ EOF
 
 
 
-### 3.2.4 构建镜像
+#### 3.2.4 构建镜像
 
 ```python
 # 基于Dockerfile构建镜像
@@ -501,7 +501,7 @@ centos6.9_ssh_http   v2.1                1f4662cc114d        7 minutes ago      
 
 
 
-### 3.2.5 启动容器
+#### 3.2.5 启动容器
 
 ```python
 # 启动容器
@@ -516,7 +516,7 @@ fa48d4052ff8        centos6.9_ssh_http:v2.1   "/bin/bash /init.sh"   4 seconds a
 
 
 
-### 3.2.6 测试镜像
+#### 3.2.6 测试镜像
 
 **ssh镜像测试**
 
