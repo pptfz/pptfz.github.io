@@ -1,6 +1,6 @@
 # kibana报错
 
-# 报错1：`Unable to navigate to space \"default\", redirecting to Space Selector. Error: Saved object [space/default] not found`
+## 报错1：`Unable to navigate to space \"default\", redirecting to Space Selector. Error: Saved object [space/default] not found`
 
 
 

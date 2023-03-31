@@ -4,7 +4,7 @@
 
 # supervisor安装
 
-# 1.Supervisor简介
+## 1.Supervisor简介
 
 [Supervisor github地址](https://github.com/Supervisor/Supervisor)
 
@@ -12,9 +12,9 @@
 
 
 
-## 1.1 官网对于Supervisor的介绍
+### 1.1 官网对于Supervisor的介绍
 
-### 1.1.1 总览
+#### 1.1.1 总览
 
 Supervisor是一个客户端/服务器系统，允许其用户控制类似UNIX的操作系统上的许多进程。它受到以下方面的启发
 
@@ -60,7 +60,7 @@ Supervisor是一个客户端/服务器系统，允许其用户控制类似UNIX�
 
 
 
-### 1.1.2 特征
+#### 1.1.2 特征
 
 **简单**
 
@@ -124,7 +124,7 @@ Supervisor具有一个简单的事件通知协议，该协议可以使用任何�
 
 
 
-### 1.1.3 Supervisor组件
+#### 1.1.3 Supervisor组件
 
 **supervisord**
 
@@ -172,9 +172,9 @@ Supervisor的命令行客户端名为 **supervisorctl**。它提供了类似于s
 
 
 
-# 2.安装supervisor
+## 2.安装supervisor
 
-## 2.1 系统python环境
+### 2.1 系统python环境
 
 ```shell
 $ python -V
@@ -183,7 +183,7 @@ Python 2.7.5
 
 
 
-## 2.2 安装suprvisor
+### 2.2 安装suprvisor
 
 **配置国内pip源**
 
@@ -222,9 +222,9 @@ pip install supervisor==3.3.5
 
 
 
-# 3.配置supervisor
+## 3.配置supervisor
 
-## 3.1 运行 `echo_supervisord_conf` 命令生成默认配置文件
+### 3.1 运行 `echo_supervisord_conf` 命令生成默认配置文件
 
 **运行`echo_supervisord_conf`命令，会在当前终端的标准输出中打印一个样本Supervisor配置文件**
 
@@ -431,7 +431,7 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 
 
 
-## 3.2 supervisor查找配置文件的顺序
+### 3.2 supervisor查找配置文件的顺序
 
 **supervisor配置文件通常被命名为`supervisor.conf`，supervisor和supervisorctl都使用这个配置文件，如果在没有`-c`选项的情况下启动了任一应用程序（该选项用于显式告知应用程序配置文件名），则该应用程序将在以下位置按指定顺序查找名为`supervisord.conf`的文件。它将使用找到的第一个文件。**
 
@@ -446,7 +446,7 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 
 
 
-## 3.3 手动编辑supervisor配置文件
+### 3.3 手动编辑supervisor配置文件
 
 **创建配置文件和日志文件目录**
 
@@ -534,7 +534,7 @@ password=test
 
 
 
-## 3.4 设置supervisor日志滚动
+### 3.4 设置supervisor日志滚动
 
 ```shell
 cat >/etc/logrotate.d/supervisor <<EOF
@@ -549,7 +549,7 @@ EOF
 
 
 
-## 3.5 设置Tmpfiles防止sock文件被清理
+### 3.5 设置Tmpfiles防止sock文件被清理
 
 ```shell
 cat >> /usr/lib/tmpfiles.d/tmp.conf<<EOF
@@ -560,7 +560,7 @@ EOF
 
 
 
-## 3.6 使用systemd管理supervisor
+### 3.6 使用systemd管理supervisor
 
 [对各操作系统提供supervisor脚本的github地址](https://github.com/Supervisor/initscripts)
 
@@ -623,9 +623,9 @@ systemctl start supervisord && systemctl enable supervisord
 
 
 
-# 4.supervisor相关命令
+## 4.supervisor相关命令
 
-## 4.1 supervisord命令选项
+### 4.1 supervisord命令选项
 
 **`supervisord`命令**
 
@@ -653,7 +653,7 @@ systemctl start supervisord && systemctl enable supervisord
 
 
 
-## 4.2 supervisorctl命令选项及动作
+### 4.2 supervisorctl命令选项及动作
 
 **supervisorctl命令选项**
 
@@ -677,7 +677,7 @@ systemctl start supervisord && systemctl enable supervisord
 
 
 
-# 5.supervisor信号
+## 5.supervisor信号
 
 **supervisor程序可能会被发送信号，使其在运行时执行某些操作。**
 
@@ -719,7 +719,7 @@ systemctl start supervisord && systemctl enable supervisord
 
 
 
-# 6.supervisor一键安装脚本
+## 6.supervisor一键安装脚本
 
 
 

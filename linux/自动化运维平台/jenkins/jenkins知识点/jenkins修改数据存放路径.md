@@ -6,8 +6,6 @@ jenkins数据存放路径默认是 `/root/.jenkins`
 
 
 
-
-
 ## war包安装
 
 如果是用tomcat做容器的话，则在./bin/catalina.sh文件添加以下语句即可：
@@ -42,15 +40,6 @@ docker安装jenkins的目录为 `/var/jenkins_home`，这里要看你指定的�
 ```shell
 docker run -p 8080:8080 -p 50000:50000 -v /your/home:/var/jenkins_home jenkins
 ```
-
-
-
-
-
-
-
-
-
 
 
 

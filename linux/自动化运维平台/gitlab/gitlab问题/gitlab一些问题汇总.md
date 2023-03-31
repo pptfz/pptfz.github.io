@@ -4,7 +4,7 @@
 
 # gitlab一些问题汇总
 
-# 1.关于gitlab7.12.0初始密码的问题
+## 1.关于gitlab7.12.0初始密码的问题
 
 **背景：公司用的gitlab版本是7.12.0，自己在虚拟机中安装的时候发现找不到初始密码，各种百度总结出以下两点**
 
@@ -19,7 +19,7 @@ root
 
 
 
-# 2.gitlab官网注册时遇到的问题
+## 2.gitlab官网注册时遇到的问题
 
 **注册gitlab时提示如下**
 
@@ -39,7 +39,7 @@ root
 
 
 
-# 3.yum安装gitlab最新版
+## 3.yum安装gitlab最新版
 
 ```python
 curl -s https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
@@ -49,7 +49,7 @@ yum -y install gitlab-ce
 
 
 
-# 4.修改gitlab默认80端口
+## 4.修改gitlab默认80端口
 
 ⚠️**修改完gitlab默认的80端口后只需重启，不能重载配置文件，否则会还原**
 

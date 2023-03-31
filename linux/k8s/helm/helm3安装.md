@@ -10,7 +10,7 @@
 
 
 
-# 一、helm3简介
+## 1.helm3简介
 
 helm3相较于helm2的变化
 
@@ -36,7 +36,7 @@ helm3相较于helm2的变化
 
 
 
-# 一、下载helm3
+## 2.下载helm3
 
 [helm github下载地址](https://github.com/helm/helm/releases)
 

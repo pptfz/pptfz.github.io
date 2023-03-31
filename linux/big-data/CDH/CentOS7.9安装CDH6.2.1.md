@@ -22,7 +22,7 @@
 
 
 
-# 一、CDH简介
+## 1.CDH简介
 
 Cloudera Manager，简称CM
 
@@ -51,9 +51,9 @@ CM架构
 
 
 
-# 二、环境准备
+## 2.环境准备
 
-## 2.0 安装纯净系统后执行的脚本
+### 2.0 安装纯净系统后执行的脚本
 
 ```shell
 #!/usr/bin/env bash
@@ -115,7 +115,7 @@ reboot
 
 
 
-## 2.1 实验环境
+### 2.1 实验环境
 
 | **角色**   | **IP地址**    | **主机名**       | **CDH版本** | **硬件配置** | 节点角色                                      | **系统**      | **内核**                   |
 | ---------- | ------------- | ---------------- | ----------- | ------------ | --------------------------------------------- | ------------- | -------------------------- |
@@ -125,7 +125,7 @@ reboot
 
 
 
-## 2.2 配置ssh免密
+### 2.2 配置ssh免密
 
 :::tip
 
@@ -135,7 +135,7 @@ reboot
 
 :::
 
-### 2.2.1 编辑环境变量文件
+#### 2.2.1 编辑环境变量文件
 
 **环境变量文件中IP、主机名、子网网段可自行修改**
 
@@ -150,7 +150,7 @@ EOF
 
 
 
-### 2.2.2 生成密钥对
+#### 2.2.2 生成密钥对
 
 ```shell
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &>/dev/null
@@ -158,7 +158,7 @@ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &>/dev/null
 
 
 
-### 2.2.3 编辑expect自动化交互脚本
+#### 2.2.3 编辑expect自动化交互脚本
 
 - **这里机器用户名是`root`，密码是国际标准通用密码`1`，ssh端口`22`**
 
@@ -187,7 +187,7 @@ EOF
 
 
 
-### 2.2.4 编辑shell脚本循环执行expect脚本
+#### 2.2.4 编辑shell脚本循环执行expect脚本
 
 ```shell
 # 编辑脚本
@@ -209,7 +209,7 @@ source ssh.sh
 
 
 
-## 2.3 每个节点配置hosts信息
+### 2.3 每个节点配置hosts信息
 
 ```shell
 source /opt/cdh6.2.1/script/env.sh 
@@ -226,7 +226,7 @@ done
 
 
 
-## 2.4 禁用防火墙和selinux
+### 2.4 禁用防火墙和selinux
 
 **这一步已在2.0安装纯净系统后执行的脚本中执行过了**
 
@@ -243,9 +243,9 @@ sed -i '7s/enforcing/disabled/' /etc/selinux/config
 
 
 
-## 2.5 安装JDK8	
+### 2.5 安装JDK8	
 
-### 2.5.1 安装说明
+#### 2.5.1 安装说明
 
 :::tip
 
@@ -265,7 +265,7 @@ sed -i '7s/enforcing/disabled/' /etc/selinux/config
 
 
 
-### 2.5.2 编写jdk安装脚本
+#### 2.5.2 编写jdk安装脚本
 
 ```shell
 cat >/opt/cdh6.2.1/script/jdk8_install.sh <<'ABC'
@@ -292,7 +292,7 @@ ABC
 
 
 
-### 2.5.3 chd slave节点创建相关目录
+#### 2.5.3 chd slave节点创建相关目录
 
 ```shell
 source /opt/cdh6.2.1/script/env.sh
@@ -306,7 +306,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.5.4 拷贝jdk安装包和jdk安装脚本到其余节点
+#### 2.5.4 拷贝jdk安装包和jdk安装脚本到其余节点
 
 ```shell
 source /opt/cdh6.2.1/script/env.sh
@@ -321,7 +321,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.5.5 执行jdk安装脚本
+#### 2.5.5 执行jdk安装脚本
 
 ```shell
 source /opt/cdh6.2.1/script/env.sh
@@ -337,7 +337,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-## 2.6 配置时间同步
+### 2.6 配置时间同步
 
 **时间同步可选 ntp 和 chrony，这里选择 chrony**
 
@@ -355,7 +355,7 @@ for node_ip in ${NODE_IPS[@]}
 
 这里有问未解决！！！
 
-### 2.6.1 各节点安装chrony
+#### 2.6.1 各节点安装chrony
 
 ```shell
 source /opt/cdh6.2.1/script/env.sh
@@ -368,7 +368,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.6.2 cdh master节点修改服务器地址为阿里云
+#### 2.6.2 cdh master节点修改服务器地址为阿里云
 
 ```shell
 source /opt/cdh6.2.1/script/env.sh
@@ -377,7 +377,7 @@ sed -i.bak '3,6d' /etc/chrony.conf && sed -i -e '3cserver ntp1.aliyun.com iburst
 
 
 
-### 2.6.3 node节点修改同步服务器为master节点
+#### 2.6.3 node节点修改同步服务器为master节点
 
 ```shell
 # 这里选择另外两个节点执行
@@ -392,7 +392,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.6.4 启动chronyd服务并设置开机自启
+#### 2.6.4 启动chronyd服务并设置开机自启
 
 ```shell
 source /opt/cdh6.2.1/script/env.sh
@@ -405,7 +405,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.6.5 检查端口，chronyd监听udp323端口
+#### 2.6.5 检查端口，chronyd监听udp323端口
 
 ```shell
 source /opt/cdh6.2.1/script/env.sh
@@ -420,7 +420,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.6.6 检查同步
+#### 2.6.6 检查同步
 
 ```shell
 source /opt/cdh6.2.1/script/env.sh
@@ -433,7 +433,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-## 2.7 安装mysql
+### 2.7 安装mysql
 
 :::tip
 
@@ -447,7 +447,7 @@ sed -i 's#/usr/local#你的mysql安装目录#g' /etc/init.d/mysql /你的mysql�
 
 
 
-### 2.7.1 下载二进制包
+#### 2.7.1 下载二进制包
 
 [mysql官方下载地址](https://downloads.mysql.com/archives/community/)
 
@@ -459,7 +459,7 @@ wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.30-linux-glibc
 
 
 
-### 2.7.2 解压缩mysql二进制包到/usr/local
+#### 2.7.2 解压缩mysql二进制包到/usr/local
 
 ```shell
 tar xf mysql-5.7.30-linux-glibc2.12-x86_64.tar.gz -C /usr/local
@@ -467,7 +467,7 @@ tar xf mysql-5.7.30-linux-glibc2.12-x86_64.tar.gz -C /usr/local
 
 
 
-### 2.7.3 修改名称、做软连接
+#### 2.7.3 修改名称、做软连接
 
 ```shell
 mv /usr/local/mysql-5.7.30-linux-glibc2.12-x86_64 /usr/local/mysql-5.7.30 && 
@@ -476,7 +476,7 @@ ln -s /usr/local/mysql-5.7.30 /usr/local/mysql
 
 
 
-### 2.7.4 创建mysql用户
+#### 2.7.4 创建mysql用户
 
 ```python
 useradd -M -s /bin/nologin mysql 
@@ -484,7 +484,7 @@ useradd -M -s /bin/nologin mysql
 
 
 
-### 2.7.5 编辑主配置文件，myql-5.7.30二进制包默认没有mysql配置文件
+#### 2.7.5 编辑主配置文件，myql-5.7.30二进制包默认没有mysql配置文件
 
 :::tip
 
@@ -512,7 +512,7 @@ EOF
 
 
 
-### 2.7.6 创建socker文件目录、目录文件授权
+#### 2.7.6 创建socker文件目录、目录文件授权
 
 :::tip
 
@@ -528,7 +528,7 @@ chown mysql.mysql /etc/my.cnf
 
 
 
-### 2.7.7 拷贝启动脚本
+#### 2.7.7 拷贝启动脚本
 
 ```python
 cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
@@ -536,7 +536,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 
 
-### 2.7.8 初始化mysql
+#### 2.7.8 初始化mysql
 
 :::tip
 
@@ -563,7 +563,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 
 
-### 2.7.9 添加mysql命令环境变量
+#### 2.7.9 添加mysql命令环境变量
 
 ```python
 # 导出mysql命令环境变量
@@ -575,7 +575,7 @@ source /etc/profile
 
 
 
-### 2.7.10 配置systemd管理mysql
+#### 2.7.10 配置systemd管理mysql
 
 ```python
 cat >> /etc/systemd/system/mysqld.service <<'EOF'
@@ -599,7 +599,7 @@ EOF
 
 
 
-### 2.7.11 启动mysql、检查启动
+#### 2.7.11 启动mysql、检查启动
 
 ```python
 # 重新加载systemd系统服务

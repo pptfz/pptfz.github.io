@@ -6,9 +6,9 @@
 
 
 
-# 标准安装
+## 标准安装
 
-## 1.安装phpldapadmin
+### 1.安装phpldapadmin
 
 > **安装phpldapadmin会同时安装php5.4以及httpd2.4**
 
@@ -27,9 +27,9 @@ phpldapadmin-1.2.5-1.el7.noarch
 
 
 
-## 2.配置phpldapadmin
+### 2.配置phpldapadmin
 
-### 2.1 编辑 `/etc/httpd/conf.d/phpldapadmin.conf` 允许从远程访问
+#### 2.1 编辑 `/etc/httpd/conf.d/phpldapadmin.conf` 允许从远程访问
 
 ```shell
 # 备份文件
@@ -49,7 +49,7 @@ EOF
 
 
 
-### 2.2 编辑 `/etc/httpd/conf/httpd.conf` 
+#### 2.2 编辑 `/etc/httpd/conf/httpd.conf` 
 
 ```shell
 # 注释102行到105行
@@ -67,7 +67,7 @@ EOF
 
 
 
-### 2.3 编辑 `/etc/phpldapadmin/config.php`
+#### 2.3 编辑 `/etc/phpldapadmin/config.php`
 
 > **配置使用dn登陆**
 
@@ -80,7 +80,7 @@ EOF
 
 
 
-### 2.4 重启httpd
+#### 2.4 重启httpd
 
 ```shell
 systemctl restart httpd
@@ -88,7 +88,7 @@ systemctl restart httpd
 
 
 
-## 3.访问phpldapadmin
+### 3.访问phpldapadmin
 
 浏览器访问 `IP/phpldapadmin`
 
@@ -110,7 +110,7 @@ systemctl restart httpd
 
 
 
-## 4.解决 phpldapadmin管理页面提示 `This base cannot be created with PLA` 问题
+### 4.解决 phpldapadmin管理页面提示 `This base cannot be created with PLA` 问题
 
 phpldapadmin登陆成功后会报错 `This base cannot be created with PLA`
 
@@ -151,7 +151,7 @@ adding new entry "dc=pptfz,dc=com"
 
 
 
-## 5.关闭匿名访问
+### 5.关闭匿名访问
 
 ldap默认是允许匿名访问的
 
@@ -193,7 +193,7 @@ systemctl restart slapd
 
 
 
-## 5.解决模版不能使用问题
+### 6.解决模版不能使用问题
 
 有些模版提示不能使用
 
@@ -201,7 +201,7 @@ systemctl restart slapd
 
 
 
-### 5.1 导入基本schema
+#### 6.1 导入基本schema
 
 导入 `cosine.ldif`
 
@@ -242,7 +242,7 @@ adding new entry "cn=inetorgperson,cn=schema,cn=config"
 
 
 
-### 5.2 编辑 `/etc/phpldapadmin/config.php`
+#### 6.2 编辑 `/etc/phpldapadmin/config.php`
 
 ```shell
 # 备份文件
@@ -276,7 +276,7 @@ systemctl restart slapd httpd
 
 
 
-# docker安装
+## docker安装
 
 [phpldapadmin github地址](https://github.com/osixia/docker-phpLDAPadmin)
 

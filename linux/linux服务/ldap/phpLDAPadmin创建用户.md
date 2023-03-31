@@ -2,7 +2,7 @@
 
 
 
-# 1.点击 `创建新条目`
+## 1.点击 `创建新条目`
 
 ![iShot2021-09-20 22.13.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20%2022.13.05.png)
 
@@ -14,7 +14,7 @@
 
 
 
-# 2.创建组和用户
+## 2.创建组和用户
 
 创建一个组 `Generic: Posix Group`，下方的用户都是之前已经创建的用户，可以选择相应的用户
 

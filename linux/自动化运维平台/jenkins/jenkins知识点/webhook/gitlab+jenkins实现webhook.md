@@ -2,7 +2,7 @@
 
 
 
-# 1.jenkins安装插件 `Gitlab Hook Plugin`
+## 1.jenkins安装插件 `Gitlab Hook Plugin`
 
 ![iShot2021-10-19 14.46.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19%2014.46.23.png)
 
@@ -10,7 +10,7 @@
 
 
 
-# 2.获取jenkins项目回调url地址
+## 2.获取jenkins项目回调url地址
 
 在jenkins项目中构建触发器下勾选 `Build when a change is pushed to GitLab. GitLab webhook URL` ，然后复制后边的url地址，这个地址后续是需要填写在gitlab webhook配置中的，并且在下边可以选择相应触发事件
 
@@ -20,7 +20,7 @@
 
 
 
-# 3.gitlab项目配置webhook
+## 3.gitlab项目配置webhook
 
 项目 `Settings` -> `Webhooks` 
 

@@ -24,9 +24,9 @@
 
 
 
-# 1.安装OpenVPN
+## 1.安装OpenVPN
 
-## 1.1 克隆项目
+### 1.1 克隆项目
 
 ```sh
 git clone https://github.com.cnpmjs.org/Nyr/openvpn-install.git
@@ -34,7 +34,7 @@ git clone https://github.com.cnpmjs.org/Nyr/openvpn-install.git
 
 
 
-## 1.2 执行安装脚本
+### 1.2 执行安装脚本
 
 ```shell
 cd openvpn-install && sh openvpn-install.sh
@@ -64,7 +64,7 @@ Option:
 
 
 
-### 第一步、输入本机私网IP地址
+#### 第一步、输入本机私网IP地址
 
 ```shell
 Welcome to this OpenVPN road warrior installer!
@@ -78,7 +78,7 @@ IPv4 address [1]: 1
 
 
 
-### 第二步、输入本机公网IP
+#### 第二步、输入本机公网IP
 
 ```shell
 This server is behind NAT. What is the public IPv4 address or hostname?
@@ -87,7 +87,7 @@ Public IPv4 address / hostname [8.8.8.8]: 8.8.8.8
 
 
 
-### 第三步、选择OpenVPN协议，推荐使用UDP
+#### 第三步、选择OpenVPN协议，推荐使用UDP
 
 ```shell
 Which protocol should OpenVPN use?
@@ -98,7 +98,7 @@ Protocol [1]: 1
 
 
 
-### 第四步、输入OpenVPN监听的端口
+#### 第四步、输入OpenVPN监听的端口
 
 ```shell
 What port should OpenVPN listen to?
@@ -107,7 +107,7 @@ Port [1194]:
 
 
 
-### 第五步、为客户端选择一个DNS服务器
+#### 第五步、为客户端选择一个DNS服务器
 
 ```shell
 Select a DNS server for the clients:
@@ -122,7 +122,7 @@ DNS server [1]: 1
 
 
 
-### 第六步、为第一个客户端输入一个名称
+#### 第六步、为第一个客户端输入一个名称
 
 ```shell
 Enter a name for the first client:
@@ -131,7 +131,7 @@ Name [client]:
 
 
 
-### 第七步、按任意键开始安装
+#### 第七步、按任意键开始安装
 
 ```shell
 OpenVPN installation is ready to begin.
@@ -325,9 +325,9 @@ New clients can be added by running this script again.
 
 :::
 
-## 1.3 查看OpenVPN相关信息
+### 1.3 查看OpenVPN相关信息
 
-### 1.3.1 查看OpenVPN进程
+#### 1.3.1 查看OpenVPN进程
 
 **默认是以 `nobody` 用户运行，在 `/etc/openvpn/server/server.conf ` 中可以自定义**
 
@@ -338,7 +338,7 @@ nobody   2726623  0.0  0.2  77168  4040 ?        Ss   10:24   0:00 /usr/sbin/ope
 
 
 
-### 1.3.2 OpenVPN默认监听 `udp 1194` 端口
+#### 1.3.2 OpenVPN默认监听 `udp 1194` 端口
 
 ```shell
 $ netstat -nupl|grep 1194
@@ -349,7 +349,7 @@ udp        0      0 10.9.95.147:1194        0.0.0.0:*                           
 
 
 
-### 1.3.3 查看版本
+#### 1.3.3 查看版本
 
 ```shell
 $ openvpn --version
@@ -362,9 +362,9 @@ Compile time defines: enable_async_push=no enable_comp_stub=no enable_crypto=yes
 
 
 
-# 2.配置OnenVPN使用账号密码认证
+## 2.配置OnenVPN使用账号密码认证
 
-## 2.1 编辑脚本
+### 2.1 编辑脚本
 
 > **这个是现在公司线上用到的文件，目前没有找到出处，不知道为什么，总之就是利用一个存放用户名密码的自定义文件 `/etc/openvpn/psw-file` 来作为认证文件**
 
@@ -425,9 +425,9 @@ chmod +x /etc/openvpn/checkpsw.sh
 
 
 
-## 2.2 修改openvpn配置文件 `/etc/openvpn/server/server.conf`
+### 2.2 修改openvpn配置文件 `/etc/openvpn/server/server.conf`
 
-### 2.2.1 追加以下内容
+#### 2.2.1 追加以下内容
 
 **其中 auth-user-pass-verify 对应的文件一定要与上一步创建的脚本名相同**
 
@@ -476,7 +476,7 @@ explicit-exit-notify
 
 
 
-### 2.2.2 修改 server.conf
+#### 2.2.2 修改 server.conf
 
 **删除开头的 local 一行**
 
@@ -486,7 +486,7 @@ sed -i.bak '1d' /etc/openvpn/server/server.conf
 
 
 
-## 2.3 重启服务
+### 2.3 重启服务
 
 ```shell
 systemctl enable openvpn@server.service
@@ -495,7 +495,7 @@ systemctl restart openvpn-server@server
 
 
 
-## 2.4 添加账号
+### 2.4 添加账号
 
 **后续的账号都在这个文件 `/etc/openvpn/psw-file` 中添加，用户名和密码以空格隔开，每行一个**
 
@@ -511,7 +511,7 @@ chown nobody.nobody /etc/openvpn/psw-file && chmod 600 /etc/openvpn/psw-file
 
 
 
-## 2.5 修改客户端文件
+### 2.5 修改客户端文件
 
 **执行完一键安装脚本后会提示客户端文件位置**
 
@@ -530,9 +530,9 @@ sed -i '14aauth-user-pass' /root/pptfz.ovpn
 
 
 
-# 3.客户端安装配置
+## 3.客户端安装配置
 
-## 3.1 mac连接示例
+### 3.1 mac连接示例
 
 这里以mac为例，我下载的是 `Tunnelblick` [Tunnelblick github地址](https://github.com/Tunnelblick/Tunnelblick)
 
@@ -621,7 +621,7 @@ rtt min/avg/max/mdev = 85.362/87.876/90.390/2.514 ms
 
 
 
-## 3.2 windows连接示例
+### 3.2 windows连接示例
 
 [下载windows版安装包](https://openvpn.net/downloads/openvpn-connect-v3-windows.msi)
 
@@ -647,7 +647,7 @@ windows安装就是一路下一步
 
 
 
-# 4.云主机安全组配置说明
+## 4.云主机安全组配置说明
 
 **使用示例**
 
@@ -673,7 +673,7 @@ windows安装就是一路下一步
 
 
 
-# 5.脚本内容
+## 5.脚本内容
 
 
 

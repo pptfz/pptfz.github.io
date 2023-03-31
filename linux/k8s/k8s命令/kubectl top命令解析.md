@@ -4,7 +4,7 @@
 
 # kubectl top命令解析
 
-# 一. 前言
+## 1.前言
 
 kubectl top 可以很方便地查看node、pod 的实时资源使用情况：如CPU、内存。这篇文章会介绍其数据链路和实现原理，同时借 kubectl top 阐述 k8s 中的监控体系，窥一斑而知全豹。最后会解释常见的一些问题：
 
@@ -19,7 +19,7 @@ kubectl top 可以很方便地查看node、pod 的实时资源使用情况：如
 - k8s 1.8
 - k8s 1.13
 
-# 二. 使用
+## 2.使用
 
 kubectl top 是基础命令，但是需要部署配套的组件才能获取到监控值
 
@@ -50,9 +50,9 @@ kubectl top pod: 查看 pod 的使用情况
 
 
 
-# 三. 实现原理
+## 3.实现原理
 
-## 3.1 数据链路
+### 3.1 数据链路
 
 kubectl top 、 k8s dashboard 以及 HPA 等调度组件使用的数据是一样，数据链路如下：
 
@@ -72,7 +72,7 @@ kubectl top 、 k8s dashboard 以及 HPA 等调度组件使用的数据是一样
 
 ![iShot2020-04-0822.44.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.44.03.png)
 
-## 3.2 metric api
+### 3.2 metric api
 
 可以发现，heapster 使用的是 proxy 转发，而 metric-server 和普通 pod都是使用 api/xx 的资源接口，heapster采用的这种 proxy 方式是有问题的：
 
@@ -82,7 +82,7 @@ kubectl top 、 k8s dashboard 以及 HPA 等调度组件使用的数据是一样
 
 于是官方从 1.8 版本开始逐步废弃 heapster，并提出了上边 Metric api 的概念，而 metrics-server 就是这种概念下官方的一种实现，用于从 kubelet获取指标，替换掉之前的 heapster
 
-## 3.3 kube-aggregator
+### 3.3 kube-aggregator
 
 有了 metrics-server 组件，采集到了需要的数据，也暴露了接口，但走到这一步和 heapster 其实没有区别，最关键的一步就是如何将打到 apiserver的 `/apis/metrics.k8s.io `请求转发给 metrics-server 组件？解决方案就是：**kube-aggregator**。
 
@@ -98,7 +98,7 @@ kube-aggregator 是 apiserver 中的实现，有些 k8s 版本默认没开启，
 
 ![iShot2020-04-0822.45.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0822.45.46.png)
 
-## 3.4 监控体系
+### 3.4 监控体系
 
 在提出 metric api 的概念时，官方也提出了新的监控体系，监控资源被分为了2种：
 
@@ -115,7 +115,7 @@ kube-aggregator 是 apiserver 中的实现，有些 k8s 版本默认没开启，
 
 目前 Kubernetes 中自定义指标一般由 Prometheus 来提供，再利用 k8s-prometheus-adpater 聚合到 apiserver，实现和核心指标同样的效果。
 
-## 3.5 kubelet
+### 3.5 kubelet
 
 前面提到，无论是 heapster 还是 metric-server，都只是数据的中转和聚合，两者都是调用的 kubelet 的 api 接口获取的数据，而 kubelet 代码中实际采集指标的是 cadvisor 模块，你可以在 node 节点访问 10255 端口（1.11版本过后是10250端口）获取监控数据：
 
@@ -138,7 +138,7 @@ Kubelet 虽然提供了 metric 接口，但实际监控逻辑由内置的 cAdvis
 
 到这里为止，k8s 范围内的监控体系就结束了。
 
-## 3.6 cadvisor
+### 3.6 cadvisor
 
 cadvisor 由谷歌开源，使用 Go 开发，cadvisor 不仅可以搜集一台机器上所有运行的容器信息，包括 CPU 使用情况、内存使用情况、网络吞吐量及文件系统使用情况，还提供基础查询界面和 http 接口，方便其他组件进行数据抓取。在K8S 中集成在 Kubelet 里作为默认启动项，k8s 官方标配。
 
@@ -154,7 +154,7 @@ cadvisor的指标解读：cgroup-v1(https://www.kernel.org/doc/Documentation/cgr
 
 cadvisor 获取指标时实际调用的是 runc/libcontainer 库，而 libcontainer 是对 cgroup 文件 的封装，即 cadvsior 也只是个转发者，它的数据来自于cgroup 文件。
 
-## 3.7 cgroup
+### 3.7 cgroup
 
 cgroup 文件中的值是监控数据的最终来源，如
 
@@ -182,9 +182,9 @@ memory.stat 中的信息是最全的：
 
 原理到这里结束，这里解释下最开始的 kubectl top 的几个问题：
 
-# 四. 问题
+## 4.问题
 
-## 4.1 kubectl top 为什么会报错
+### 4.1 kubectl top 为什么会报错
 
 一般情况下 top 报错有以下几种，可以 kubectl top pod -v=10看到具体的调用日志:
 
@@ -192,7 +192,7 @@ memory.stat 中的信息是最全的：
 - 要看的 pod 刚刚建出来，还没来得及采集指标，报 not found 错误，默认 1 分钟
 - 以上两种都不是，可以检查下 kubelet 的 10255 端口是否开放，默认情况下会使用这个只读端口获取指标，也可以在 heapster 或 metric-server 的配置中增加证书，换成 10250 认证端口
 
-## 4.2 kubectl top pod 内存怎么计算，包含 pause容器吗
+### 4.2 kubectl top pod 内存怎么计算，包含 pause容器吗
 
 每次启动 pod，都会有一个 pause 容器，既然是容器就一定有资源消耗（一般在 2-3M 的内存），cgroup 文件中，业务容器和 pause 容器都在同一个 pod的文件夹下。
 
@@ -213,7 +213,7 @@ cadvisor 中的 container_memory_usage_bytes 对应 cgroup 中的 memory.usage_i
 
 同理，node 的内存使用量也是 container_memory_working_set_bytes。
 
-## 4.3 kubectl top node 怎么计算，和节点上直接 top 有什么区别
+### 4.3 kubectl top node 怎么计算，和节点上直接 top 有什么区别
 
 kubectl top node 得到的 cpu 和内存值，并不是节点上所有 pod 的总和，不要直接相加。top node 是机器上 cgroup 根目录下的汇总统计
 
@@ -229,14 +229,14 @@ rss + cache = (in)active_anon + (in)active_file
 
 
 
-## 4.4 kubectl top pod 和 exec 进入 pod 后看到的 top 不一样
+### 4.4 kubectl top pod 和 exec 进入 pod 后看到的 top 不一样
 
 top 命令的差异和上边一致，无法直接对比，同时，就算你对 pod 做了 limit 限制，pod 内的 top 看到的内存和 cpu 总量仍然是机器总量，并不是pod 可分配量
 
 - 进程的RSS为进程使用的所有物理内存（file_rss＋anon_rss），即Anonymous pages＋Mapped apges（包含共享内存）
 - cgroup RSS为（anonymous and swap cache memory），不包含共享内存。两者都不包含file cache
 
-## 4.5 kubectl top pod 和 docker stats得到的值为什么不同？
+### 4.5 kubectl top pod 和 docker stats得到的值为什么不同？
 
 docker stats dockerID 可以看到容器当前的使用量：
 
@@ -250,7 +250,7 @@ docker stats dockerID 可以看到容器当前的使用量：
 docker stats = container_memory_usage_bytes - container_memory_cache
 ```
 
-## 五. 后记
+## 5.后记
 
 一般情况下，我们并不需要时刻关心 node 或 pod 的使用量，因为有集群自动扩缩容(cluster-autoscaler)和 pod 水平扩缩容（HPA）来应对这两种资源变化，资源指标的意义更适合使用 prometheus 来持久化 cadvisor 的数据，用于回溯历史或者发送报警。
 
@@ -260,7 +260,9 @@ docker stats = container_memory_usage_bytes - container_memory_cache
 - 1.13 之前需要 heapster，1.13 以后需要 metric-server，这部分 kubectl top help 的输出 有误，里面只提到了heapster
 - k8s dashboard 中的监控图默认使用的是 heapster，切换为 metric-server后数据会异常，需要多部署一个metric-server-scraper 的 pod 来做接口转换，具体参考 pr：https://github.com/kubernetes/dashboard/pull/3504
 
-# 六. 参考资料
+
+
+## 6.参考资料
 
 - https://github.com/kubernetes-sigs/metrics-server/issues/193
 - https://github.com/kubernetes/kubernetes/pull/83247

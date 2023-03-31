@@ -1,6 +1,6 @@
 # kvm安装
 
-# 1.安装软件包
+## 1.安装软件包
 
 ```shell
 yum -y install libvirt* virt-* qemu-kvm* 
@@ -16,7 +16,7 @@ yum -y install libvirt* virt-* qemu-kvm*
 
 
 
-# 2.启动服务并设置开机自启
+## 2.启动服务并设置开机自启
 
 ```shell
 systemctl start libvirtd && systemctl enable libvirtd
@@ -24,7 +24,7 @@ systemctl start libvirtd && systemctl enable libvirtd
 
 
 
-# 3.安装图形化管理工具 `virt-manager`
+## 3.安装图形化管理工具 `virt-manager`
 
 ```shell
 yum -y install virt-manager

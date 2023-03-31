@@ -4,7 +4,7 @@
 
 # gitea安装
 
-# 一、gitea简介
+## 1.gitea简介
 
 **Gitea是用[Go](https://golang.org/)编写的由社区管理的轻量级代码托管解决方案，类似gitlab，但是比gitlab占用资源小太多了，gitlab起码2G+内存，而gitea挤需要90M就能跑起来！！！**
 
@@ -32,11 +32,11 @@ Gitea其实是Gogs的孪生兄弟，因为这是从Gogs源码的基础上开发�
 
 
 
-# 二、gitea安装
+## 2.gitea安装
 
 gitea安装方式有很多种，详情看[官网](https://docs.gitea.io/zh-cn/)，这里选择docker安装，docker安装中的数据库有3种，``sqlite3``、``mysql``、``pg``
 
-## 2.1 下载gitea镜像
+### 2.1 下载gitea镜像
 
 可以通过[dockerhub](https://hub.docker.com/r/gitea/gitea/tags)下载对应的gitea镜像
 
@@ -46,7 +46,7 @@ docker pull gitea/gitea:1.11.1
 
 
 
-## 2.2 下载dcoker-compose
+### 2.2 下载dcoker-compose
 
 [docker-compose 国内地址](http://get.daocloud.io/#install-compose)
 
@@ -58,9 +58,9 @@ curl -L https://get.daocloud.io/docker/compose/releases/download/1.12.0/docker-c
 
 
 
-## 2.3 编辑gitea docker-compose文件
+### 2.3 编辑gitea docker-compose文件
 
-### 2.3.1 创建目录
+#### 2.3.1 创建目录
 
 ```sh
 mkdir /usr/local/gitea && cd /usr/local/gitea
@@ -68,7 +68,7 @@ mkdir /usr/local/gitea && cd /usr/local/gitea
 
 
 
-### 2.3.2  编辑gitea docker-compose文件
+#### 2.3.2  编辑gitea docker-compose文件
 
 ```yaml
 cat >docker-compose.yaml <<EOF
@@ -118,7 +118,7 @@ EOF
 
 
 
-### 2.3.3 启动
+#### 2.3.3 启动
 
 ```sh
 docker-compose up -d
@@ -126,7 +126,7 @@ docker-compose up -d
 
 
 
-### 2.3.4 查看启动的容器
+#### 2.3.4 查看启动的容器
 
 ```python
 $ docker ps -a
@@ -137,7 +137,7 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 
 
-## 2.4 gitea数据库设置
+### 2.4 gitea数据库设置
 
 浏览器访问	IP:3000
 
@@ -169,7 +169,7 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 
 
-## 2.5 配置文件修改项
+### 2.5 配置文件修改项
 
 关于服务的一些修改，配置文件是``gitea/gitea/conf/app.ini``
 

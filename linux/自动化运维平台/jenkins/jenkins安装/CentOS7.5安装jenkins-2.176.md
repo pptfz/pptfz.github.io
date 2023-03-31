@@ -10,7 +10,7 @@
 
 
 
-# 1.安装jdk8 
+## 1.安装jdk8 
 
 > **jenkins运行依赖jdk**
 
@@ -45,7 +45,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.211-b12, mixed mode)
 
 
 
-# 2.安装jenkins，这里安装长期支持版
+## 2.安装jenkins，这里安装长期支持版
 
 ```python
 #安装LTS(长期支持版)
@@ -72,7 +72,7 @@ https://pkg.jenkins.io/redhat-stable/
 
 
 
-# 3.修改jenkins配置文件，让jenkins以root用户运行
+## 3.修改jenkins配置文件，让jenkins以root用户运行
 
 ```python
 [root@jenkins ~]# sed -i.bak '29cJENKINS_USER="root"' /etc/sysconfig/jenkins
@@ -80,7 +80,7 @@ https://pkg.jenkins.io/redhat-stable/
 
 
 
-# 4.启动jenkins
+## 4.启动jenkins
 
 ```python
 #启动jenins并加入开机自启
@@ -89,7 +89,7 @@ https://pkg.jenkins.io/redhat-stable/
 
 
 
-# **5.浏览器访问jenkins**
+## **5.浏览器访问jenkins**
 
 **jenkins刚启动比较慢，等待启动完成**
 
@@ -129,7 +129,7 @@ https://pkg.jenkins.io/redhat-stable/
 
 
 
-# 6.设置jenkins默认语言为中文
+## 6.设置jenkins默认语言为中文
 
 **选择jenkins管理**
 

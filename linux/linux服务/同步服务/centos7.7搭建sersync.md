@@ -14,7 +14,7 @@ sersync已于2015年8月停止更新，作者推荐使用[lsyncd](https://axkibe
 
 
 
-# 一、sersync简介
+## 1.sersync简介
 
 **sersync主要用于服务器同步，web镜像等功能。基于boost1.41.0,inotify api,rsync command.开发。目前使用的比较多的同步解决方案是inotify-tools+rsync ，另外一个是google开源项目Openduckbill（依赖于inotify- tools），这两个都是基于脚本语言编写的。相比较上面两个项目，本项目优点是：**
 
@@ -40,7 +40,7 @@ sersync已于2015年8月停止更新，作者推荐使用[lsyncd](https://axkibe
 
 
 
-# 二、sersync搭建过程
+## 2.sersync搭建过程
 
 - **sersync流程**
   - **安装sersync的服务器角色为客户端，实时检测在sersync中配置的共享目录文件变化，采用客户端主动推送的方式将发生变化的文件传输到服务端**
@@ -57,9 +57,9 @@ sersync已于2015年8月停止更新，作者推荐使用[lsyncd](https://axkibe
 
 
 
-## 服务端操作
+### 服务端操作
 
-### 1.安装rsync
+#### 1.安装rsync
 
 ```python
 yum -y install rsync
@@ -67,7 +67,7 @@ yum -y install rsync
 
 
 
-### 2.编辑rsync配置文件
+#### 2.编辑rsync配置文件
 
 ```python
 #备份原有文件
@@ -121,7 +121,7 @@ path = /backup				# 定义接收备份数据目录
 
 
 
-### 3.建立rsync用户及共享目录
+#### 3.建立rsync用户及共享目录
 
 ```python
 #创建rsync用户
@@ -133,7 +133,7 @@ mkdir /backup && chown rsync.rsync /backup
 
 
 
-### 4.创建用户密码文件
+#### 4.创建用户密码文件
 
 :::tip
 
@@ -151,18 +151,17 @@ chmod 600 /etc/rsync.password
 
 
 
-## 5.启动rsync并加入开机自启
+#### 5.启动rsync并加入开机自启
 
 ```python
 systemctl start rsyncd && systemctl enable rsyncd
-
 ```
 
 
 
-## 客户端操作
+### 客户端操作
 
-### 1.安装inotify-tools
+#### 1.安装inotify-tools
 
 ```python
 yum -y install inotify-tools
@@ -170,7 +169,7 @@ yum -y install inotify-tools
 
 
 
-### 2.下载sersync
+#### 2.下载sersync
 
 ```python
 #下载sersync
@@ -183,7 +182,7 @@ mv GNU-Linux-x86/ /usr/local/sersync
 
 
 
-### 3.配置sersync
+#### 3.配置sersync
 
 :::caution
 
@@ -242,7 +241,7 @@ confxml.xml  sersync2
 
 
 
-### 4.创建用户认证密码文件及共享目录
+#### 4.创建用户认证密码文件及共享目录
 
 :::tip
 
@@ -267,7 +266,7 @@ mkdir /backup && chown rsync.rsync /backup
 
 
 
-### 5.启动sersync
+#### 5.启动sersync
 
 ```python
 #启动sersync
@@ -312,7 +311,7 @@ root   2213  0.0  0.1  92324   704 ?  Ssl  15:05   0:00 /usr/local/sersync/sersy
 
 
 
-### 6.验证同步
+#### 6.验证同步
 
 ```python
 #文件、目录同步验证
@@ -340,7 +339,7 @@ test sersync
 
 
 
-### 7.同步过程总结
+#### 7.同步过程总结
 
 **sersync同步过程中需要注意的点**
 

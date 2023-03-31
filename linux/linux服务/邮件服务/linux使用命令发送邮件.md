@@ -2,7 +2,7 @@
 
 # linux使用命令发送邮件
 
-## 1.编辑 `/etc/mail.rc` ，加入以下内容
+## 1.编辑配置文件 `/etc/mail.rc` 
 
 ```shell
 set from=123456@qq.com

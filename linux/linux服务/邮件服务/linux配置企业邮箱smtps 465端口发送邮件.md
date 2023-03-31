@@ -2,7 +2,7 @@
 
 [参考链接](https://blog.csdn.net/u010452388/article/details/100052020?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-0.pc_relevant_paycolumn_v2&spm=1001.2101.3001.4242.1&utm_relevant_index=3)
 
-# 1.生成证书
+## 1.生成证书
 
 ```shell
 mkdir -p /etc/mail/.certs
@@ -25,7 +25,7 @@ Notice: Trust flag u is set automatically if the private key is present.
 
 
 
-# 2.编辑 `/etc/mail.rc `
+## 2.编辑 `/etc/mail.rc `
 
 ```shell
 cp /etc/mail.rc{,.bak}
@@ -52,7 +52,7 @@ EOF
 
 
 
-# 3.验证
+## 3.验证
 
 ```shell
 echo message | mail -s " title" xxx@163.com

@@ -440,7 +440,7 @@ kubectl autoscale rs frontend --max=10 --min=3 --cpu-percent=50
 
 
 
-## ReplicaSet 的替代方案
+## ReplicaSet的替代方案
 
 ### Deployment（推荐）
 

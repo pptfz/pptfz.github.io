@@ -10,13 +10,13 @@
 
 :::
 
-# 1.Facts变量作用
+## 1.Facts变量作用
 
 Facts变量作用：用来采集被控端主机信息，例如cpu、内存、硬盘等
 
 
 
-# 2.使用setup模块来获取被控机相关信息
+## 2.使用setup模块来获取被控机相关信息
 
 可以使用setup模块来获取被控机相关信息
 
@@ -712,7 +712,7 @@ devops02 | SUCCESS => {
 
 
 
-# 3.使用debug模块来获取被控机相关变量信息
+## 3.使用debug模块来获取被控机相关变量信息
 
 **示例1：获取被控机ip地址**
 
@@ -789,9 +789,9 @@ devops03                   : ok=2    changed=0    unreachable=0    failed=0    s
 
 
 
-# 4.Facts变量使用示例
+## 4.Facts变量使用示例
 
-## 4.1 示例1 拷贝文件，不同主机信息不同
+### 4.1 示例1 拷贝文件，不同主机信息不同
 
 典型的例子就是zabbix agent文件 `zabbix_agentd.conf` 中有 `Hostname` 参数，默认为 `Zabbix server`
 

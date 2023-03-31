@@ -2,7 +2,7 @@
 
 [HPA官方文档](https://kubernetes.io/zh-cn/docs/tasks/run-application/horizontal-pod-autoscale/)
 
-# Pod 水平自动扩缩
+## Pod 水平自动扩缩
 
 在 Kubernetes 中，**HorizontalPodAutoscaler** 自动更新工作负载资源 （例如 [Deployment](https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/deployment/) 或者 [StatefulSet](https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/statefulset/)）， 目的是自动扩缩工作负载以满足需求。
 
@@ -20,7 +20,7 @@ HorizontalPodAutoscaler 被实现为 Kubernetes API 资源和[控制器](https:/
 
 
 
-## HorizontalPodAutoscaler 是如何工作的
+### HorizontalPodAutoscaler 是如何工作的
 
 HorizontalPodAutoscaler 控制 Deployment 及其 ReplicaSet 的规模示意图
 

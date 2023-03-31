@@ -26,7 +26,7 @@ default-token-jlz9f   kubernetes.io/service-account-token   3      45h
 
 
 
-# 1.创建cluster
+## 1.创建cluster
 
 ```shell
 kubectl config set-cluster kubernetes --certificate-authority=/etc/kubernetes/pki/ca.crt --server=10.0.0.130:6443 --kubeconfig=/root/dashbord-admin.conf
@@ -34,7 +34,7 @@ kubectl config set-cluster kubernetes --certificate-authority=/etc/kubernetes/pk
 
 
 
-# 2.获取token
+## 2.获取token
 
 ```shell
 DASH_TOCKEN=$(kubectl get secret -n kube-system `kubectl get secret -n kube-system |grep dashboard |awk '{print $1}'` -o jsonpath={.data.token}|base64 -d)
@@ -42,7 +42,7 @@ DASH_TOCKEN=$(kubectl get secret -n kube-system `kubectl get secret -n kube-syst
 
 
 
-# 3.创建credentials
+## 3.创建credentials
 
 ```shell
 kubectl config set-credentials dashboard-admin --token=$DASH_TOCKEN --kubeconfig=/root/dashbord-admin.conf
@@ -50,7 +50,7 @@ kubectl config set-credentials dashboard-admin --token=$DASH_TOCKEN --kubeconfig
 
 
 
-# 4.创建context
+## 4.创建context
 
 ```shell
 kubectl config set-context dashboard-admin@kubernetes --cluster=kubernetes --user=dashboard-admin --kubeconfig=/root/dashbord-admin.conf
@@ -58,7 +58,7 @@ kubectl config set-context dashboard-admin@kubernetes --cluster=kubernetes --use
 
 
 
-# 5.切换context的current-context是dashboard-admin@kubernetes
+## 5.切换context的current-context是dashboard-admin@kubernetes
 
 ```shell
 kubectl config use-context dashboard-admin@kubernetes --kubeconfig=/root/dashbord-admin.conf

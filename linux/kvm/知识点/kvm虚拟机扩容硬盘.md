@@ -1,6 +1,6 @@
 # kvm虚拟机扩容硬盘
 
-# 1.宿主机查看kvm虚拟机磁盘文件大小
+## 1.宿主机查看kvm虚拟机磁盘文件大小
 
 此时文件大小为50G
 
@@ -18,7 +18,7 @@ Format specific information:
 
 
 
-# 2.宿主机扩容kvm磁盘文件大小
+## 2.宿主机扩容kvm磁盘文件大小
 
 :::caution注意
 
@@ -49,7 +49,7 @@ Format specific information:
 
 
 
-# 3.查看虚拟机硬盘大小
+## 3.查看虚拟机硬盘大小
 
 可以看到当前硬盘 `/dev/sda` 大小为500G
 
@@ -65,9 +65,9 @@ Format specific information:
 
 
 
-# 4.开始扩容硬盘
+## 4.开始扩容硬盘
 
-## 4.1 新建一个分区
+### 4.1 新建一个分区
 
 ![iShot2021-11-24 21.30.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.30.29.png)
 
@@ -75,7 +75,7 @@ Format specific information:
 
 
 
-## 4.2 修改分区格式
+### 4.2 修改分区格式
 
 修改分区格式为8e，即lvm格式
 
@@ -87,7 +87,7 @@ Format specific information:
 
 
 
-## 4.3 再次查看虚拟机硬盘
+### 4.3 再次查看虚拟机硬盘
 
 可以看到新建的分区 `/dev/sda3` ，并且硬盘Id为8e
 
@@ -99,15 +99,15 @@ Format specific information:
 
 
 
-## 4.4 查看新增的分区
+### 4.4 查看新增的分区
 
 ![iShot2021-11-24 21.41.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-24%2021.41.06.png)
 
 
 
-## 4.5 使用lvm开始扩容
+### 4.5 使用lvm开始扩容
 
-### 4.5.1 创建pv
+#### 4.5.1 创建pv
 
 ```shell
 $ pvcreate /dev/sda3
@@ -116,7 +116,7 @@ $ pvcreate /dev/sda3
 
 
 
-### 4.5.2 将创建的pv加入vg
+#### 4.5.2 将创建的pv加入vg
 
 执行命令 `vgdisplay ` 查看vg信息
 
@@ -185,7 +185,7 @@ $ vgdisplay
 
 
 
-### 4.5.3 扩容lv
+#### 4.5.3 扩容lv
 
 执行命令 `lvdisplay ` 查看lv信息
 
@@ -238,7 +238,7 @@ $ lvextend -L +450G /dev/centos/root
 
 
 
-### 4.5.4 扩容硬盘
+#### 4.5.4 扩容硬盘
 
 :::tip说明
 

@@ -8,9 +8,9 @@
 
 
 
-# 一、编译安装的nginx增加新模块
+## 1.编译安装的nginx增加新模块
 
-## 1.1 查看nginx编译安装参数
+### 1.1 查看nginx编译安装参数
 
 ```shell
 $ nginx -V
@@ -23,7 +23,7 @@ configure arguments: --prefix=/etc/nginx --user=nginx --group=nginx --sbin-path=
 
 
 
-## 1.2 下载第三方模块
+### 1.2 下载第三方模块
 
 [echo-nginx-module github地址](https://github.com/openresty/echo-nginx-module)
 
@@ -47,7 +47,7 @@ tar xf v0.61.tar.gz -C /usr/local
 
 
 
-## 1.3 重新编译nginx
+### 1.3 重新编译nginx
 
 :::caution
 
@@ -81,7 +81,7 @@ configure arguments: --prefix=/etc/nginx --user=nginx --group=nginx --sbin-path=
 
 
 
-## 1.4 nginx二进制文件操作
+### 1.4 nginx二进制文件操作
 
 **备份原有文件**
 
@@ -99,7 +99,7 @@ cp nginx-1.16.1/objs/nginx /usr/sbin
 
 
 
-## 1.5 编译nginx配置文件以测试模块安装是否成功
+### 1.5 编译nginx配置文件以测试模块安装是否成功
 
 ```nginx
 server {
@@ -141,13 +141,13 @@ uri: /test
 
 
 
-# 二、rpm包安装的nginx增加新模块
+## 2.rpm包安装的nginx增加新模块
 
 **nginx是使用rpm包安装的，如果想要安装第三方模块的解决方法**
 
 
 
-## 2.1 查看nginx安装的模块
+### 2.1 查看nginx安装的模块
 
 ```shell
 $ nginx -V
@@ -175,7 +175,7 @@ configure arguments: --prefix=/etc/nginx --sbin-path=/usr/sbin/nginx --modules-p
 
 
 
-## 2.2 下载一个相同版本的nginx源码包
+### 2.2 下载一个相同版本的nginx源码包
 
 [nginx官方源码下载地址](https://nginx.org/download/)
 
@@ -185,7 +185,7 @@ wget https://nginx.org/download/nginx-1.16.1.tar.gz
 
 
 
-## 2.3 重新编译nginx
+### 2.3 重新编译nginx
 
 **解压缩源码包并进入目录**
 
@@ -212,7 +212,7 @@ make
 
 
 
-## 2.4 nginx二进制文件操作
+### 2.4 nginx二进制文件操作
 
 **备份原有文件**
 
@@ -230,7 +230,7 @@ cp nginx-1.16.1/objs/nginx /usr/sbin
 
 
 
-## 2.5 编译nginx配置文件以测试模块安装是否成功
+### 2.5 编译nginx配置文件以测试模块安装是否成功
 
 ```nginx
 server {

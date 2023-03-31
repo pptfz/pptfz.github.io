@@ -1,6 +1,6 @@
 # openvpn对接ldap
 
-# 1.安装 openvpn ldap认证插件
+## 1.安装 openvpn ldap认证插件
 
 ```shell
 yum -y install openvpn-auth-ldap
@@ -8,7 +8,7 @@ yum -y install openvpn-auth-ldap
 
 
 
-# 2.修改 openvpn ldap认证文件 
+## 2.修改 openvpn ldap认证文件 
 
 修改 `/etc/openvpn/auth/ldap.conf` 
 
@@ -93,7 +93,7 @@ yum -y install openvpn-auth-ldap
 
 
 
-# 3.修改 openvpn 配置文件
+## 3.修改 openvpn 配置文件
 
 修改 `/etc/openvpn/server/server.conf `新增如下两行
 
@@ -107,7 +107,7 @@ client-cert-not-required
 
 
 
-# 4.修改openvpn客户端文件
+## 4.修改openvpn客户端文件
 
 修改 `client.ovpn` （此文件为安装openvpn时指定的以 `ovpn` 结尾的文件）
 

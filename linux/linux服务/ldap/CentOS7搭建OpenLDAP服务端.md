@@ -24,11 +24,11 @@
 
 
 
-# 标准安装
+## 标准安装
 
-## 1.安装openldap
+### 1.安装openldap
 
-### 1.1 安装包
+#### 1.1 安装包
 
 ```sh
 yum -y install openldap compat-openldap openldap-clients openldap-servers openldap-servers-sql openldap-devel migrationtools
@@ -36,7 +36,7 @@ yum -y install openldap compat-openldap openldap-clients openldap-servers openld
 
 
 
-### 1.2 查看版本
+#### 1.2 查看版本
 
 ```sh
 $ slapd -VV
@@ -46,9 +46,9 @@ $ slapd -VV
 
 
 
-## 2.配置openldap
+### 2.配置openldap
 
-### 2.1 设置管理员密码
+#### 2.1 设置管理员密码
 
 会生成一堆加密后的字符，记录好，之后配置文件里会需要的
 
@@ -59,9 +59,9 @@ $ slappasswd -s 123456
 
 
 
-### 2.2 修改相关配置文件
+#### 2.2 修改相关配置文件
 
-#### 2.2.1 修改 `/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif`
+##### 2.2.1 修改 `/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif`
 
 ```sh
 vim /etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif
@@ -80,7 +80,7 @@ vim /etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif
 
 
 
-#### 2.2.2 修改 `/etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif` 
+##### 2.2.2 修改 `/etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif` 
 
 ```sh
 vim /etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif
@@ -96,7 +96,7 @@ vim /etc/openldap/slapd.d/cn=config/olcDatabase={1}monitor.ldif
 
 
 
-#### 2.2.3 验证配置文件
+##### 2.2.3 验证配置文件
 
 忽略报错
 
@@ -109,9 +109,9 @@ config file testing succeeded
 
 
 
-## 3.启动openldap
+### 3.启动openldap
 
-### 3.1 启动openldap并设置开机自启
+#### 3.1 启动openldap并设置开机自启
 
 ```sh
 systemctl enable slapd && systemctl start slapd
@@ -119,7 +119,7 @@ systemctl enable slapd && systemctl start slapd
 
 
 
-### 3.2 查看运行状态
+#### 3.2 查看运行状态
 
 ```shell
 $ systemctl status slapd
@@ -153,7 +153,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 
 
 
-### 3.3 查看端口
+#### 3.3 查看端口
 
 > **openldap默认监听tcp/389端口**
 
@@ -165,7 +165,7 @@ tcp6       0      0 :::389                  :::*                    LISTEN      
 
 
 
-## 4.配置openldap数据库
+### 4.配置openldap数据库
 
 **拷贝文件，修改权限**
 
@@ -193,7 +193,7 @@ total 348
 
 
 
-## 5.导入基本Schema
+### 5.导入基本Schema
 
 导入 `cosine.ldif`
 
@@ -234,7 +234,7 @@ adding new entry "cn=inetorgperson,cn=schema,cn=config"
 
 
 
-## 6.修改 `migrate_common.ph` 文件
+### 6.修改 `migrate_common.ph` 文件
 
 > **`/usr/share/migrationtools/migrate_common.ph` 文件主要是用于生成ldif文件使用**
 
@@ -262,7 +262,7 @@ systemctl restart slapd
 
 
 
-# docker安装
+## docker安装
 
 openldap docker 安装有 [bitnami](https://hub.docker.com/r/bitnami/openldap) 和 [osixia](https://github.com/osixia/docker-openldap)，这里选择 osixia 提供的镜像
 
@@ -270,7 +270,7 @@ openldap docker 安装有 [bitnami](https://hub.docker.com/r/bitnami/openldap) �
 
 
 
-## 启动容器
+### 启动容器
 
 :::tip
 
@@ -348,7 +348,7 @@ result: 0 Success
 
 
 
-## 使用docker备份ldap
+### 使用docker备份ldap
 
 [docker备份openldap github地址](https://github.com/osixia/docker-openldap-backup)
 

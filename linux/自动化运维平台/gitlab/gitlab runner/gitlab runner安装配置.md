@@ -10,7 +10,7 @@
 
 
 
-# 1.gitlab runner简介
+## 1.gitlab runner简介
 
 **简介**
 
@@ -66,13 +66,13 @@ GitLab Runner 具有以下功能
 
 
 
-# 2.安装gitlab runner
+## 2.安装gitlab runner
 
 gitlab runner支持多种安装方式，具体可以查看官方文档，这里我们选择使用helm chat模版在k8s中安装
 
 [k8s安装runner官方文档](https://docs.gitlab.com/runner/install/kubernetes.html)
 
-## 2.1 添加仓库
+### 2.1 添加仓库
 
 ```shell
 helm repo add gitlab https://charts.gitlab.io
@@ -80,7 +80,7 @@ helm repo add gitlab https://charts.gitlab.io
 
 
 
-## 2.2 查看chat
+### 2.2 查看chat
 
 在下载前可以通过如下命令获取 `Helm Chart` 和 `GitLab Runner` 之间的版本映射
 
@@ -123,7 +123,7 @@ gitlab/gitlab-runner	0.27.0       	13.10.0    	GitLab Runner
 
 
 
-## 2.3 下载chat
+### 2.3 下载chat
 
 ```shell
 helm pull gitlab/gitlab-runner --version=0.37.2
@@ -131,7 +131,7 @@ helm pull gitlab/gitlab-runner --version=0.37.2
 
 
 
-## 2.3 解压缩包
+### 2.4 解压缩包
 
 ```shell
 tar xf gitlab-runner-0.37.2.tgz
@@ -174,7 +174,7 @@ gitlab-runner
 
 
 
-# 3.配置gitlab runner
+## 3.配置gitlab runner
 
 [官方文档](https://docs.gitlab.com/runner/install/kubernetes.html)中指定了2个必须配置项
 
@@ -204,7 +204,7 @@ gitlab-runner
 
 接下来修改chat模版中的 `values.yaml` 文件，这里做如下修改
 
-## 3.1 配置 `gitlabUrl`
+### 3.1 配置 `gitlabUrl`
 
 ```yaml
 gitlabUrl: http://你的gitlabIP或域名/
@@ -212,7 +212,7 @@ gitlabUrl: http://你的gitlabIP或域名/
 
 
 
-## 3.2 配置 `runnerRegistrationToken`
+### 3.2 配置 `runnerRegistrationToken`
 
 ```yaml
 runnerRegistrationToken: "xxx"
@@ -220,7 +220,7 @@ runnerRegistrationToken: "xxx"
 
 
 
-## 3.3 配置 `unregisterRunner`
+### 3.3 配置 `unregisterRunner`
 
 [官方文档关于一些参数的说明](https://docs.gitlab.com/charts/charts/gitlab/gitlab-runner/#installation-command-line-options)，`unregisterRunners` 为 `true` 的意思为，当更新runner版本或者修改配置文件时，注销掉所有的注册runner
 
@@ -230,7 +230,7 @@ unregisterRunners: true
 
 
 
-## 3.4 配置 `checkInterval`
+### 3.4 配置 `checkInterval`
 
 [官方文档对于checkInterval的说明](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#how-check_interval-works)
 
@@ -244,7 +244,7 @@ checkInterval: 3
 
 
 
-## 3.5 配置rbac
+### 3.5 配置rbac
 
 ```yaml
 create: true
@@ -289,7 +289,7 @@ rules:
 
 
 
-## 3.6 配置 helpers
+### 3.6 配置 helpers
 
 [helper image官方文档说明](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#helper-image)
 

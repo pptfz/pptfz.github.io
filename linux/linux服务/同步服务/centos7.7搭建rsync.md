@@ -4,7 +4,7 @@
 
 # centos7.7搭建rsync
 
-# rsync基本概述
+## rsync基本概述
 
 **rsync是一款开源的备份工具，可以在不同主机之间进行同步，可实现全量备份与增量备份，保持链接和权限，且采用优化的同步算法，传输前执行压缩，因此非常适合用于架构集中式备份或异地备份等应用。**
 
@@ -120,9 +120,9 @@
 
 **实验过程**
 
-# rsync服务端操作  
+## rsync服务端操作  
 
-## 1.安装rsync
+### 1.安装rsync
 
 ```python
 yum -y install rsync
@@ -130,7 +130,7 @@ yum -y install rsync
 
 
 
-## 2.编辑rsync配置文件
+### 2.编辑rsync配置文件
 
 ```python
 #备份原有文件
@@ -184,7 +184,7 @@ path = /backup				# 定义接收备份数据目录
 
 
 
-## 3.建立rsync用户及相关目录
+### 3.建立rsync用户及相关目录
 
 ```python
 #创建rsync用户
@@ -197,7 +197,7 @@ mkdir /backup && chown rsync.rsync /backup
 
 
 
-## 4.创建用户密码文件
+### 4.创建用户密码文件
 
 :::tip
 
@@ -216,18 +216,17 @@ chmod 600 /etc/rsync.password
 
 
 
-## 5.启动rsync并加入开机自启
+### 5.启动rsync并加入开机自启
 
 ```python
 systemctl start rsyncd && systemctl enable rsyncd
-
 ```
 
 
 
-# rsync客户端操作
+## rsync客户端操作
 
-## 安装rsync、启动
+### 安装rsync、启动
 
 ```python
 yum -y install rsync
@@ -239,7 +238,7 @@ systemctl start rsyncd && systemctl enable rsyncd
 
 
 
-## 测试一、客户端推送及拉取不需要输入密码
+### 测试一、客户端推送及拉取不需要输入密码
 
 :::tip
 
@@ -293,7 +292,7 @@ total size is 0  speedup is 0.00
 
 
 
-## 测试二、实现数据无差异同步		--delete选项     此选项非常危险，生产环境不要使用！！！
+### 测试二、实现数据无差异同步		--delete选项     此选项非常危险，生产环境不要使用！！！
 
 :::danger
 

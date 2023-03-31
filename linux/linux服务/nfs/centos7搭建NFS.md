@@ -4,7 +4,7 @@
 
 # centos7搭建NFS
 
-# 1.NFS基本概述
+## 1.NFS基本概述
 
 - **基本概念**
   
@@ -36,7 +36,7 @@
 
 
 
-# 2.NFS实现原理
+## 2.NFS实现原理
 
 ![iShot2020-04-0412.57.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-04-0412.57.42.png)
 
@@ -70,7 +70,7 @@
   
   
 
-# 3.NFS服务搭建过程
+## 3.NFS服务搭建过程
 
 **实验环境**
 
@@ -81,9 +81,9 @@
 
 
 
-## 3.1 nfs服务端操作
+### 3.1 nfs服务端操作
 
-### 3.1.1 安装nfs-utils
+#### 3.1.1 安装nfs-utils
 
 ```shell
 yum -y install nfs-utils
@@ -91,7 +91,7 @@ yum -y install nfs-utils
 
 
 
-### 3.1.2 编辑nfs配置文件 `/etc/exports`，文件默认没有内容
+#### 3.1.2 编辑nfs配置文件 `/etc/exports`，文件默认没有内容
 
 **nfs配置文件格式**
 
@@ -140,7 +140,7 @@ EOF
 
 
 
-### 3.1.3 创建共享目录并修改目录所有者为 `nfsnobody`
+#### 3.1.3 创建共享目录并修改目录所有者为 `nfsnobody`
 
 ```shell
 [ -d /data ] || mkdir /data
@@ -149,7 +149,7 @@ chown -R nfsnobody.nfsnobody /data
 
 
 
-### 3.1.4 启动nfs并设置开机自启
+#### 3.1.4 启动nfs并设置开机自启
 
 ```shell
 systemctl start rpcbind nfs-server && systemctl enable rpcbind nfs-server
@@ -157,7 +157,7 @@ systemctl start rpcbind nfs-server && systemctl enable rpcbind nfs-server
 
 
 
-### 3.1.5 验证配置是否生效
+#### 3.1.5 验证配置是否生效
 
 ```shell
 $ exportfs
@@ -166,7 +166,7 @@ $ exportfs
 
 
 
-### 3.1.6 检查nfs共享记录
+#### 3.1.6 检查nfs共享记录
 
 **nfs启动后会在 `/var/lib/nfs/etab` 文件中记录共享内容**
 
@@ -177,9 +177,9 @@ $ cat /var/lib/nfs/etab
 
 
 
-## 3.2 nfs客户端操作
+### 3.2 nfs客户端操作
 
-### 3.2.1 安装nfs-utils
+#### 3.2.1 安装nfs-utils
 
 ```shell
 yum -y install nfs-utils
@@ -187,7 +187,7 @@ yum -y install nfs-utils
 
 
 
-### 3.2.2 启动rpcbind并设置开机自启
+#### 3.2.2 启动rpcbind并设置开机自启
 
 ```shell
 systemctl start rpcbind && systemctl enable rpcbind
@@ -195,7 +195,7 @@ systemctl start rpcbind && systemctl enable rpcbind
 
 
 
-### 3.2.3 创建挂载点并修改挂载点所有者为 `nfsnobody`
+#### 3.2.3 创建挂载点并修改挂载点所有者为 `nfsnobody`
 
 ```shell
 [ -d /data ] || mkdir /data
@@ -204,7 +204,7 @@ chown -R nfsnobody.nfsnobody /data
 
 
 
-### 3.2.4 查询nfs服务端共享信息
+#### 3.2.4 查询nfs服务端共享信息
 
 ```shell
 $ showmount -e 10.0.0.10
@@ -222,7 +222,7 @@ Export list for 10.0.0.10:
 
 
 
-### 3.2.5 客户端挂载nfs
+#### 3.2.5 客户端挂载nfs
 
 > mount  -t  文件系统  服务器IP:共享目录  客户端本机挂载点
 
@@ -240,7 +240,7 @@ mount -t nfs -o nosuid,noexec,nodev 10.0.0.10:/data  /mnt
 
 
 
-### 3.2.6 查看挂载信息
+#### 3.2.6 查看挂载信息
 
 ```shell
 $ df -h
@@ -249,7 +249,7 @@ $ df -h
 
 
 
-### 3.2.7 设置开机自动挂载
+#### 3.2.7 设置开机自动挂载
 
 ```python
 cat >> /etc/fstab << EOF
@@ -259,7 +259,7 @@ EOF
 
 
 
-### 3.2.8 如果不需要使用nfs共享，可以卸载
+#### 3.2.8 如果不需要使用nfs共享，可以卸载
 
 ```python
 umount  /data

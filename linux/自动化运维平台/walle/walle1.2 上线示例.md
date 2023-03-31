@@ -4,9 +4,9 @@
 
 # walle1.2 上线示例
 
-# 一、瓦力上线流程示意图
+## 1.瓦力上线流程示意图
 
-## 1.1 个人总结版
+### 1.1 个人总结版
 
 **瓦力上线流程示意图**
 
@@ -33,7 +33,7 @@
 
 
 
-## 1.2 官方说明版
+### 1.2 官方说明版
 
 **瓦力原理示意图**
 
@@ -51,9 +51,9 @@
 
 
 
-# 二、瓦力上线项目配置项说明
+## 2.瓦力上线项目配置项说明
 
-## 2.1 项目配置说明
+### 2.1 项目配置说明
 
 ![iShot2020-07-2011.44.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2012.48.29.png)
 
@@ -61,7 +61,7 @@
 
 
 
-### 2.1.1 项目配置
+#### 2.1.1 项目配置
 
 ![iShot2020-07-2012.48.29](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2012.49.22.png)
 
@@ -75,7 +75,7 @@
 
 
 
-### 2.1.2 宿主机配置(瓦力机器本身)
+#### 2.1.2 宿主机配置(瓦力机器本身)
 
 ![iShot2020-07-2012.48.58](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2012.48.58.png)
 
@@ -84,7 +84,7 @@
 
 
 
-### 2.1.3 目标机器配置
+#### 2.1.3 目标机器配置
 
 ![iShot2020-07-2012.49.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2011.44.44.png)
 
@@ -96,7 +96,7 @@
 
 
 
-### 2.1.3 高级任务(目标机器操作)
+#### 2.1.3 高级任务(目标机器操作)
 
 ![iShot2020-07-2012.50.08](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2012.50.08.png)
 
@@ -110,9 +110,9 @@
 
 
 
-# 三、项目配置示例
+## 3.项目配置示例
 
-## 3.1 前提条件
+### 3.1 前提条件
 
 **生产环境程序运行环境及用户说明**
 
@@ -141,7 +141,7 @@
 
 
 
-## 3.2 配置示例
+### 3.2 配置示例
 
 **生产环境中有java、php、python项目，其中还是以java项目居多，本示例中以更新nginx首页面模拟项目**
 
@@ -157,9 +157,9 @@
 
 
 
-### 3.2.1 用户、目录权限配置
+#### 3.2.1 用户、目录权限配置
 
-#### 3.2.1.1 瓦力、目标web机共同配置
+##### 3.2.1.1 瓦力、目标web机共同配置
 
 **瓦力机器、目标web机器禁止root远程登陆，配置`sudo`用户是`www`，并且`www`用户登陆方式是密钥登陆**
 
@@ -183,7 +183,7 @@ su - www && ssh-keygen -t rsa -f /root/.ssh/id_dsa -P "" -q
 
 
 
-#### 3.2.1.2 瓦力机器单独配置
+##### 3.2.1.2 瓦力机器单独配置
 
 **创建代码检出仓库并设置目录所有者为`www`**
 
@@ -207,7 +207,7 @@ mkdir -p /data/walle/WebServer && chown www.www /data/walle/WebServer
 
 :::
 
-#### 3.2.1.3 目标web机器单独配置
+##### 3.2.1.3 目标web机器单独配置
 
 **已经rpm包安装好nginx1.16.1，并且nginx以www用户运行**
 
@@ -255,7 +255,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-#### 3.2.1.4 gitlab配置
+##### 3.2.1.4 gitlab配置
 
 <h4>如果是初次使用gitlab的话，还需要把gitlab机器的root用户的密钥添加到gitlab的ssh-key列表中</h4>
 
@@ -361,9 +361,9 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-### 3.2.2 瓦力web页面项目具体配置及上线daemo演示
+#### 3.2.2 瓦力web页面项目具体配置及上线daemo演示
 
-#### 3.2.2.1 这里仅仅做一个简单的更新nginx服务的index.html文件模拟上线过程
+##### 3.2.2.1 这里仅仅做一个简单的更新nginx服务的index.html文件模拟上线过程
 
 **配置项目**
 
@@ -371,13 +371,13 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-#### 3.2.2.2 配置完成后检测
+##### 3.2.2.2 配置完成后检测
 
 ![iShot2020-07-2019.29.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.29.40.png)
 
 
 
-#### 3.2.2.3 创建上线单
+##### 3.2.2.3 创建上线单
 
 ![iShot2020-07-2019.30.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.30.18.png)
 
@@ -387,13 +387,13 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-#### 3.2.2.4 填写上线单信息
+##### 3.2.2.4 填写上线单信息
 
 ![iShot2020-07-2019.34.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.35.02.png)
 
 
 
-#### 3.2.2.5 上线前提交测试代码，这一步应该是开发本机操作
+##### 3.2.2.5 上线前提交测试代码，这一步应该是开发本机操作
 
 **编辑测试代码，提交到WebServer仓库**
 
@@ -412,7 +412,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-#### 3.2.2.6 开始上线
+##### 3.2.2.6 开始上线
 
 ![iShot2020-07-2019.35.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.42.13.png)
 
@@ -424,7 +424,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-#### 3.2.2.7 浏览器访问  `目标web机器IP`  地址即可
+##### 3.2.2.7 浏览器访问  `目标web机器IP`  地址即可
 
 ![iShot2020-07-2019.42.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.34.40.png)
 
@@ -432,7 +432,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-### 3.2.3 web机器项目目录说明
+#### 3.2.3 web机器项目目录说明
 
 我们在nginx配置文件中指定了root根目录是`/data/nginx/website`，但是不需要创建`website`子目录，因为瓦力会自动设置软连接，只需要创建父目录即可，nginx的root根目录会自动软连接至`/data/release/项目名/时间目录`
 
@@ -454,7 +454,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-### 3.2.4 项目回滚操作
+#### 3.2.4 项目回滚操作
 
 **有的时候升级完成后可能会出现一些问题，并不是bug上的问题，例如开发忘记打开某一个功能按钮(之前生产环境中出现过这种情况，虽然不是bug问题，但是服务功能上有影响)，这个时候可能需要做回滚操作**
 
@@ -468,7 +468,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-#### 3.2.4.1 进行第二次上线 模拟问题
+##### 3.2.4.1 进行第二次上线 模拟问题
 
 **之前已经有过第一次上线了，现在进行第二次上线，编辑代码并提交至WebServer仓库**
 
@@ -515,7 +515,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 
 
-#### 3.2.4.2 发现问题，开始回滚
+##### 3.2.4.2 发现问题，开始回滚
 
 **找到上一次升级的上线单，可以根据上线单标题和上线cimmit号(推荐)，点击回滚**
 

@@ -4,7 +4,7 @@
 
 # gitlab配置文件修改记录
 
-### gitlab修改时区
+## gitlab修改时区
 
 修改gitlab配置文件 `gitlab.rb`
 
@@ -18,7 +18,7 @@
 
 
 
-### gitlab修改默认80端口
+## gitlab修改默认80端口
 
 **修改 `/var/opt/gitlab/nginx/conf/gitlab-http.conf` 文件中 `listen` 处**
 

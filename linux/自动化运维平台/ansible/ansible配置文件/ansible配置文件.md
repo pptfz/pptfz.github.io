@@ -4,7 +4,7 @@
 
 # ansible配置文件
 
-## 一、ansible配置文件优先级
+## 1.ansible配置文件优先级
 
 ### 1.1 ansible默认配置文件说明
 

@@ -80,9 +80,9 @@ ansible playbook 官方示例，多task
 
 
 
-# 1.playbook基础
+## 1.playbook基础
 
-## 1.1 主机与用户
+### 1.1 主机与用户
 
 > hosts 行的内容是一个或多个组或主机的 patterns,以逗号为分隔符
 >
@@ -173,7 +173,7 @@ ansible playbook 官方示例，多task
 
 
 
-## 1.2 Tasks列表
+### 1.2 Tasks列表
 
 基本tasks示例
 
@@ -223,7 +223,7 @@ tasks:
 
 
 
-## 1.3 Handlers
+### 1.3 Handlers
 
 :::tip
 
@@ -318,11 +318,11 @@ tasks:
 
 
 
-## 1.4 Ansible-Pull(拉取配置而非推送配置)
+### 1.4 Ansible-Pull(拉取配置而非推送配置)
 
 [ansible pull 官方文档(ansible2.9)](https://docs.ansible.com/ansible/2.9/cli/ansible-pull.html)
 
-### 1.4.1 Ansible-Pull简介
+#### 1.4.1 Ansible-Pull简介
 
 我们可不可以将 ansible 的体系架构颠倒过来，让托管节点从一个 central location 做 check in 获取配置信息，而不是推送配置信息到所有的托管节点？这样是可以的。
 
@@ -332,7 +332,7 @@ Ansible-pull 是一个小脚本，它从 git 上 checkout 一个关于配置指�
 
 
 
-### 1.4.2 ansible pull模式
+#### 1.4.2 ansible pull模式
 
 ansible模式使用的是push模式，即只需要在ansible主控端编排playbook，然后push到远程主机即可，pull模式则正好和push相反，pull模式适用于以下场景
 
@@ -351,7 +351,7 @@ ansible基于pull模式的工作流程
 
 
 
-#### 1.4.2.1 ansible pull 模式测试
+##### 1.4.2.1 ansible pull 模式测试
 
 **ansible主控制机编辑yaml文件并上传至git，⚠️<span style={{color: 'red'}}>yml文件中的 `- hosts` 参数必须为 `127.0.0.1` </span>**
 
@@ -445,7 +445,7 @@ $ ll /opt/test
 
 
 
-## 1.5 Linting playbooks
+### 1.5 Linting playbooks
 
 > 在执playbook之前，可以使用命令 `ansible-lint` 对其进行详细检查
 

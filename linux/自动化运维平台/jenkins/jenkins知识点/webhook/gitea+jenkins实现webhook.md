@@ -1,6 +1,6 @@
 # gitea+jenkins实现webhook
 
-# 1.jenkins安装插件 `Generic Webhook Trigger`
+## 1.jenkins安装插件 `Generic Webhook Trigger`
 
 
 
@@ -8,7 +8,7 @@
 
 
 
-# 2.jenkins项目配置
+## 2.jenkins项目配置
 
 在jenkins项目中构建触发器下勾选 `Generic Webhook Trigger`，然后在 `Token` 处填写一个任意名称的token名
 
@@ -18,7 +18,7 @@
 
 
 
-# 3.gitea项目配置
+## 3.gitea项目配置
 
 在项目中点击 `设置`
 

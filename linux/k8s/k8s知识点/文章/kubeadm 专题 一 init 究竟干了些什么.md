@@ -16,7 +16,7 @@ kubeadm 属于第二层，用于管理集群。
 
 
 
-# kubeadm init 的流程（phase）介绍
+## kubeadm init 的流程（phase）介绍
 
 > phase 阶段
 
@@ -62,7 +62,7 @@ addon                        安装所需的插件以通过一致性测试
 
 
 
-# kubeadm 命令行参数
+## kubeadm 命令行参数
 
 命令用法
 
@@ -124,7 +124,7 @@ kubeadm init [flags]
 
 
 
-# init 工作流
+## init 工作流
 
 kubeadm init通过执行以下步骤来引导Kubernetes控制平面节点：
 
@@ -179,9 +179,9 @@ control plane 的pod 启动后，init 开始继续执行后面的流程。
 
 通过 API server 安装 DNS 服务器 （CoreDNS） 和 kube-proxy 组件。在 Kubernetes 版本 1.11 和更高版本中，CoreDNS 是默认 DNS 服务器。要安装 kube-dns 而不是 CoreDNS，必须在 kubeadm 配置文件的ClusterConfiguration 字段中配置 DNS 附加组件(通过 kubeadm config 文件）。请注意，虽然已部署 DNS 服务器，但安装 CNI 前该POD 不会被调度到节点（可以理解为不回被实际部署，或不会生效）。
 
-# kubeadm init phase 的用法
+## kubeadm init phase 的用法
 
-## 查看 kubeadm init phase 列表
+### 查看 kubeadm init phase 列表
 
 ```shell
 $ kubeadm init phase
@@ -206,7 +206,7 @@ Available Commands:
 
 
 
-## 可以查看某个具体的phase下的子phase 列表
+### 可以查看某个具体的phase下的子phase 列表
 
 ```shell
 $ kubeadm init phase control-plane --help
@@ -225,7 +225,7 @@ Available Commands: #下面的就是子phase
 
 
 
-## 查看 control-plane phase 下 controller-manager 子 phase 的用法详情
+### 查看 control-plane phase 下 controller-manager 子 phase 的用法详情
 
 ```shell
 $ kubeadm init phase control-plane controller-manager --help
@@ -246,7 +246,7 @@ Flags:
 
 
 
-## 执行某个 phase 或者跳过某个 phase
+### 执行某个 phase 或者跳过某个 phase
 
 ```shell
 sudo kubeadm init phase control-plane all --config=configfile.yaml
@@ -257,7 +257,7 @@ sudo kubeadm init --skip-phases=control-plane,etcd --config=configfile.yaml
 
 
 
-# kubeadm config 文件
+## kubeadm config 文件
 
 > 注意，这个 config 文件特性在1.15 中依然是 beta，在将来可能改变
 
@@ -377,7 +377,7 @@ kind: JoinConfiguration
 
 
 
-## 使用自定义镜像仓库
+### 使用自定义镜像仓库
 
 对于google 提供的镜像，在众所周知的原因下，无法访问。所以需要使用国内镜像或者自建的镜像仓库。 kubeadm 提供了参数，同事也支持修改 kubeadm config 文件来指定定制化的仓库
 
@@ -397,7 +397,7 @@ kubeadm config images pull --config init-full-config.yaml
 
 
 
-## kubeadm 配置 cri runtime
+### kubeadm 配置 cri runtime
 
 kubelet 默认使用 `docker` 作为runtime 并使用内建的 `dockershim` 进行交互。
  其他的runtime包括:
@@ -429,7 +429,7 @@ systemctl daemon-reload
 
 
 
-# kubeadm 自动化
+## kubeadm 自动化
 
 与其像[kubeadm 基础教程](https://links.jianshu.com/go?to=https%3A%2F%2Fkubernetes.io%2Fdocs%2Fsetup%2Fproduction-environment%2Ftools%2Fkubeadm%2Fcreate-cluster-kubeadm%2F)中那样，将从 kubeadm init 获得的令牌复制到每个节点，不如并行化令牌分发，以便更轻松地实现自动化。要实现此自动化，您必须知道控制平面节点在启动后将具有的 IP 地址。
 

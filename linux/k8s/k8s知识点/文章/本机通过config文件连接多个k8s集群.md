@@ -1,12 +1,12 @@
 # 本机通过config文件连接多个k8s集群
 
-# 背景说明
+## 背景说明
 
 > **我们有多个k8s集群，并且想要通过config文件来连接多个k8s集群，方法就是将2个集群的 `config` 文件合并到一个 `config` 文件中，通过使用 `kubectl config use-context context_name` 来访问集群。简而言之就是通过设置 `context` 来让 `kubectl` 访问不同的k8s集群。**
 
 
 
-# config文件信息
+## config文件信息
 
 现在有2个 `config` 文件，一个是mac本机k8s集群文件 `config-mac`，另外一个是公司内网测试集群文件 `config-company`， 通过 `config` 信息，可以看到两个集群的 `cluster name` 、`context name` 以及用户信息。
 
@@ -62,7 +62,7 @@ users:
 
 
 
-# 合并config文件
+## 合并config文件
 
 
 
@@ -75,9 +75,9 @@ KUBECONFIG=config-mac:config-company kubectl config view --flatten > $HOME/.kube
 
 
 
-# 使用说明
+## 使用说明
 
-## 查看 `cluster name` 以及 `context name`
+### 查看 `cluster name` 以及 `context name`
 
 ```yaml
 $ kubectl config view
@@ -116,7 +116,7 @@ users:
 
 
 
-## 查看当前使用的集群
+### 查看当前使用的集群
 
 ```shell
 $ kubectl config current-context
@@ -125,7 +125,7 @@ docker-desktop
 
 
 
-## 修改当前使用的集群
+### 修改当前使用的集群
 
 `kubernetes-admin@kubernetes` 是通过命令 `kubectl config view` 查询结果中与 `context` 同级的 `name` 中的集群名字
 

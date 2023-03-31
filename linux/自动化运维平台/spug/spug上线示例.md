@@ -4,7 +4,7 @@
 
 # spug上线示例
 
-## 一、spug上线说明
+## 1.spug上线说明
 
 [spug官方文档 上线配置说明](https://www.spug.dev/docs/deploy-config/)
 
@@ -42,7 +42,7 @@ spug上线方式，常规发布是沿用了瓦力的上线逻辑
 
 
 
-## 二、spug上线实践示例
+## 2.spug上线实践示例
 
 <h3>实验环境说明</h3>
 

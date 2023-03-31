@@ -2,9 +2,9 @@
 
 
 
-# 一、ssh禁止root远程登陆
+## 一、ssh禁止root远程登陆
 
-## 1.编辑文件``/etc/ssh/sshd_config``
+### 1.编辑文件``/etc/ssh/sshd_config``
 
 ```python
 # 禁止root远程登陆
@@ -20,7 +20,7 @@ PubkeyAuthentication yes
 
 
 
-## 2.sudo免密配置等root权限用户
+### 2.sudo免密配置等root权限用户
 
 **``visudo``或者编辑文件``/etc/sudoers``**
 
@@ -35,7 +35,7 @@ lcc     ALL=NOPASSWD :ALL
 
 
 
-## 3.配置ssh密钥
+### 3.配置ssh密钥
 
 ```python
 # 切换到lcc用户
@@ -81,7 +81,7 @@ chmod 644 authorized_keys
 
 :::
 
-## 4.配置完后验证
+### 4.配置完后验证
 
 ```python
 # root无法远程登陆
@@ -97,9 +97,9 @@ lcc@10.0.0.13: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).
 
 
 
-# 二、ssh免交互配置
+## 二、ssh免交互配置
 
-## ssh-keygen免交互生成密钥
+### ssh-keygen免交互生成密钥
 
 ```python
 # 免交互生成密钥
@@ -124,7 +124,7 @@ ssh-keygen -t rsa -f /root/.ssh/id_dsa -P "" -q
 
 :::
 
-## ssh-copy免交互推送密钥
+### ssh-copy免交互推送密钥
 
 ```python
 sshpass -p1 ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@IP
@@ -132,7 +132,7 @@ sshpass -p1 ssh-copy-id -i ~/.ssh/id_rsa.pub -o StrictHostKeyChecking=no root@IP
 
 
 
-## 批量分发密钥脚本
+### 批量分发密钥脚本
 
 ```python
 #!/bin/bash
@@ -155,7 +155,7 @@ done
 
 
 
-# 三、ssh自动断开远程服务器问题
+## 三、ssh自动断开远程服务器问题
 
 **编辑ssh服务配置文件`/etc/ssh/sshd_config`修改以下两项**
 

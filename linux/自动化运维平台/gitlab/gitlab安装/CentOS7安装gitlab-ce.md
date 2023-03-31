@@ -14,9 +14,9 @@
 
 
 
-# 一、rpm包安装
+## 1.rpm包安装
 
-## 1.1 安装依赖包
+### 1.1 安装依赖包
 
 [不使用postfix使用其他方式发送邮件参考官方文档](https://docs.gitlab.com/omnibus/settings/smtp.html)
 
@@ -30,7 +30,7 @@ systemctl start postfix && systemctl enable postfix
 
 
 
-## 1.2 下载安装包
+### 1.2 下载安装包
 
 [gitlab官方rpm包下载地址](https://packages.gitlab.com/gitlab/gitlab-ce)
 
@@ -42,7 +42,7 @@ wget --content-disposition https://packages.gitlab.com/gitlab/gitlab-ce/packages
 
 
 
-## 1.3 安装
+### 1.3 安装
 
 ```shell
 yum -y localinstall gitlab-ce-13.12.3-ce.0.el7.x86_64.rpm 
@@ -50,7 +50,7 @@ yum -y localinstall gitlab-ce-13.12.3-ce.0.el7.x86_64.rpm
 
 
 
-## 1.4 修改配置文件
+### 1.4 修改配置文件
 
 > **修改 `/etc/gitlab/gitlab.rb` 中 `xternal_url` 一行，修改为自己的域名或IP**
 
@@ -63,7 +63,7 @@ sed -i.bak "/^external_url/c external_url 'http://$IP'" /etc/gitlab/gitlab.rb
 
 
 
-## 1.5 启动gitlab
+### 1.5 启动gitlab
 
 ```shell
 # 启动gitlab
@@ -119,9 +119,9 @@ tcp6       0      0 ::1:9168                :::*                    LISTEN      
 
 
 
-# 二、yum安装
+## 2.yum安装
 
-## 2.1 添加官方yum源
+### 2.1 添加官方yum源
 
 :::tip
 
@@ -135,7 +135,7 @@ curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rp
 
 
 
-## 2.2 安装
+### 2.2 安装
 
 > **需要修改为自己的url，安装完成后会自动启动gitlab-ce**
 
@@ -183,7 +183,7 @@ tcp6       0      0 ::1:9168                :::*                    LISTEN      
 
 
 
-## 2.3 关闭https自动重定向
+### 2.3 关闭https自动重定向
 
 > 使用gitlab-ce官方提供的脚本安装后，gitlab-ce会默认开启 `http->https` 重定向，如果使用nginx做代理则关闭https自动重定向
 
@@ -203,11 +203,11 @@ gitlab-ctl reconfigure
 
 
 
-# 三、docker安装
+## 3.docker安装
 
 [gitlab docker安装官方文档](https://docs.gitlab.com/omnibus/docker/)
 
-## 3.1 编辑docker-compose.yml文件
+### 3.1 编辑docker-compose.yml文件
 
 默认 `https` 和 `ssh` 端口
 
@@ -266,7 +266,7 @@ EOF
 
 
 
-## 3.2 启动
+### 3.2 启动
 
 ```shell
 docker-compose up -d
@@ -286,7 +286,7 @@ a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 
 
 
 
-# 四、访问gitlab
+## 4.访问gitlab
 
 **gitlab默认端口为80，第一次访问需要设置root密码，最少8位**
 
@@ -320,9 +320,9 @@ gitlab默认开启注册
 
 
 
-# 五、gitlab相关文件、命令、服务
+## 5.gitlab相关文件、命令、服务
 
-## 5.1 gitlab相关文件
+### 5.1 gitlab相关文件
 
 
 
@@ -341,7 +341,7 @@ gitlab默认开启注册
 
 
 
-## 5.2 gitlab相关命令
+### 5.2 gitlab相关命令
 
 
 
@@ -380,7 +380,7 @@ gitlab默认开启注册
 
 
 
-## 5.3 gitlab相关服务
+### 5.3 gitlab相关服务
 
 **运行命令 `gitlab-ctl status` 查看gitlab所有服务**
 

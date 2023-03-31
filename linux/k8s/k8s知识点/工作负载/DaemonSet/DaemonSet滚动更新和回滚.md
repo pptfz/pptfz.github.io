@@ -1,7 +1,5 @@
 # DaemonSet滚动更新和回滚
 
-# DaemonSet滚动更新
-
 [DaemonSet滚动更新官方文档](https://kubernetes.io/zh-cn/docs/tasks/manage-daemon/update-daemon-set/)
 
 
@@ -271,7 +269,7 @@ kubectl delete ds fluentd-elasticsearch -n kube-system
 
 
 
-# DaemonSet回滚
+## DaemonSet回滚
 
 ### 步骤 1：找到想要 DaemonSet 回滚到的历史修订版本（revision）
 

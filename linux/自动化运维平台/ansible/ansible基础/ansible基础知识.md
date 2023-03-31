@@ -4,13 +4,13 @@
 
 # Ansible基础知识
 
-# 1.Ansible基本概述
+## 1.Ansible基本概述
 
 > **Ansible是一个配置管理系统configuration management system你只需要可以使用ssh访问你的服务器或设备就行**
 
 
 
-## 1.1 Ansible能做什么
+### 1.1 Ansible能做什么
 
 **ansible可以帮助我们完成一些批量任务，或者完成一些需要经常重复的工作。**
 
@@ -24,7 +24,7 @@
 
 
 
-## 1.2 Ansible软件特点
+### 1.2 Ansible软件特点
 
 - **ansible不需要单独安装客户端，SSH相当于ansible客户端。**
 
@@ -36,7 +36,7 @@
 
 
 
-## 1.3 Ansible基础架构
+### 1.3 Ansible基础架构
 
 - **连接插件(connectior plugins) 用于连接主机 用来连接被管理端**
 
@@ -56,7 +56,7 @@
 
 ![iShot2020-10-14 15.54.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2015.54.35.png)
 
-# 2. Ansible安装配置
+## 2. Ansible安装配置
 
 :::tip
 
@@ -64,7 +64,7 @@
 
 :::
 
-## 2.1 安装ansible(需要配置epel源)
+### 2.1 安装ansible(需要配置epel源)
 
 ```python
 yum -y install ansible
@@ -81,7 +81,7 @@ ansible 2.9.21
 
 
 
-## 2.2 配置ansible
+### 2.2 配置ansible
 
 **编辑主机清单文件**
 
@@ -101,7 +101,7 @@ EOF
 
 
 
-## 2.3 验证ansible与受控机是否通信
+### 2.3 验证ansible与受控机是否通信
 
 ```python
 # ansible是通过ssh端口探测通信
@@ -124,7 +124,7 @@ $ ansible all -m ping
 
 
 
-## 2.4 ansible语法格式
+### 2.4 ansible语法格式
 
 > **命令  主机模块名  指定模块参数  模块名称  指定利用模块执行的动作选项  批量执行操作动作**
 
@@ -145,9 +145,9 @@ command				command模块，完成基础命令
 
 
 
-# 3.Ansible系列命令
+## 3.Ansible系列命令
 
-## 3.1 ansiblie系列命令1：`ansible`
+### 3.1 ansiblie系列命令1：`ansible`
 
 **使用场景：**
 
@@ -167,7 +167,7 @@ command				command模块，完成基础命令
 
 
 
-## 3.2 ansiblie系列命令2：`ansible-galaxy`
+### 3.2 ansiblie系列命令2：`ansible-galaxy`
 
 **命令作用：**
 
@@ -209,7 +209,7 @@ ansible-galaxy init [options] role_name
 
 
 
-## 3.3 ansiblie系列命令3：`ansible-doc`
+### 3.3 ansiblie系列命令3：`ansible-doc`
 
 **命令作用：**
 
@@ -233,7 +233,7 @@ ansible-doc ping
 
 
 
-## 3.4ansiblie系列命令4：`ansible-playbook`
+### 3.4 ansiblie系列命令4：`ansible-playbook`
 
 **命令作用：**
 
@@ -254,7 +254,7 @@ ansible-playbook http_install.yaml
 
 
 
-## 3.5ansiblie系列命令5：`ansible-vault`
+### 3.5 ansiblie系列命令5：`ansible-vault`
 
 **命令作用：**
 
@@ -330,9 +330,9 @@ $ cat a.yaml
 
 
 
-# 4.Ansible正则
+## 4.Ansible正则
 
-## 4.1 ALL全量匹配	`all或*`
+### 4.1 ALL全量匹配	`all或*`
 
 **匹配所有主机，`all` 与 `*` 号功能相同，但是\*号需要用 `""` 引起来**
 
@@ -380,7 +380,7 @@ $ ansible "*" -m ping
 
 
 
-## 4.2 逻辑或匹配	`:`
+### 4.2 逻辑或匹配	`:`
 
 **同时对多台主机或多个组同时执行，相互之间用 `:` 分割，例如 `jenking:gitlab`**
 
@@ -406,7 +406,7 @@ gitlab | SUCCESS => {
 
 
 
-## 4.3 逻辑非匹配	`!`
+### 4.3 逻辑非匹配	`!`
 
 **逻辑非用 `!` 表示，主要针对多重条件的匹配规则**
 
@@ -417,7 +417,7 @@ ansible a:!b -m ping
 
 
 
-## 4.4 逻辑与匹配	`&`
+### 4.4 逻辑与匹配	`&`
 
 **逻辑与用 `&` 表示**
 
@@ -428,7 +428,7 @@ ansible a:&b -m ping
 
 
 
-## 4.5 模糊匹配	`*`
+### 4.5 模糊匹配	`*`
 
 **`*` 通配符在ansible中表示0个或多个任意字符**
 
@@ -439,7 +439,7 @@ ansible www*.com -m ping
 
 
 
-## 4.6 正则匹配	`~`
+### 4.6 正则匹配	`~`
 
 **`~` 在ansible中表示正则匹配**
 
@@ -474,7 +474,7 @@ www.a.com | SUCCESS => {
 
 
 
-# 5.Ansible清单管理
+## 5.Ansible清单管理
 
 **inventory文件通常用于定义要管理主机的认证信息， 例如ssh登录用户名、密码以及key相关信息。**
 
@@ -617,7 +617,7 @@ ansible websers --list-hosts
 
 
 
-## Ansible内置变量
+### Ansible内置变量
 
 | **参数**                     | **用途**                     | 示例                                          |
 | ---------------------------- | ---------------------------- | --------------------------------------------- |
@@ -636,13 +636,13 @@ ansible websers --list-hosts
 
 
 
-# 6.Ansible Playbook
+## 6.Ansible Playbook
 
 - **playbook是由一个或多个模块组成的，使用多个不同的模块，完成一件事情**
 
 - **playbook通过yaml语法识别描述的状态文件。扩展名是yaml或yml**
 
-## 6.1 YAML三要素
+### 6.1 YAML三要素
 
 **缩进**
 
@@ -666,7 +666,7 @@ ansible websers --list-hosts
 
 
 
-## 6.2 ansible playbook安装Apache示例
+### 6.2 ansible playbook安装Apache示例
 
 - `notify` 表示当配置文件发生改变时，触发 `handlers` 中name与notify名称相同的操作
 - `handlers` 表示当有notify触发时执行

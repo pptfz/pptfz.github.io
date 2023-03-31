@@ -120,18 +120,18 @@ sys	0m28.254s
 
 
 
-### 系统环境
+## 系统环境
 
-```python
+```shell
 ucloud 1c2g centos7.7
 
-#使用dd命令测试磁盘读写速度为78.6MB/s
+# 使用dd命令测试磁盘读写速度为78.6MB/s
 dd if=/dev/zero of=/opt/bigfile bs=1M count=1024
 1024+0 records in
 1024+0 records out
 1073741824 bytes (1.1 GB) copied, 13.668 s, 78.6 MB/s
 
-#使用hdparm测试磁盘读写速度为74.60MB/s
+# 使用hdparm测试磁盘读写速度为74.60MB/s
 hdparm -t --direct /dev/vda1
 
 /dev/vda1:
@@ -140,7 +140,7 @@ hdparm -t --direct /dev/vda1
 
 
 
-### 50万个文件删除所用时间
+## 50万个文件删除所用时间
 
 > rm删除：**文件太多，无法删除**
 >

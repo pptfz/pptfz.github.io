@@ -10,7 +10,7 @@
 
 
 
-# 一、Ambari简介
+## 1.Ambari简介
 
 [Ambari官网](http://ambari.apache.org/)
 
@@ -58,9 +58,9 @@ Ambari 自身也是一个分布式架构的软件，主要由两部分组成：`
 
 
 
-# 二、环境准备
+## 2.环境准备
 
-## 2.0 安装纯净系统后执行的脚本
+### 2.0 安装纯净系统后执行的脚本
 
 ```shell
 #!/usr/bin/env bash
@@ -122,7 +122,7 @@ reboot
 
 
 
-## 2.1 实验环境
+### 2.1 实验环境
 
 | **角色**   | **IP地址**     | **主机名**                   | **ambari版本** | **硬件配置** | **系统**      | **内核**                   |
 | ---------- | -------------- | ---------------------------- | -------------- | ------------ | ------------- | -------------------------- |
@@ -132,7 +132,7 @@ reboot
 
 
 
-## 2.2 配置ssh免密
+### 2.2 配置ssh免密
 
 :::tip
 
@@ -140,7 +140,7 @@ reboot
 
 :::
 
-### 2.2.1 编辑环境变量文件
+#### 2.2.1 编辑环境变量文件
 
 **环境变量文件中IP、主机名、子网网段可自行修改**
 
@@ -155,7 +155,7 @@ EOF
 
 
 
-### 2.2.2 生成密钥对
+#### 2.2.2 生成密钥对
 
 ```shell
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &>/dev/null
@@ -163,7 +163,7 @@ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &>/dev/null
 
 
 
-### 2.2.3 编辑expect自动化交互脚本
+#### 2.2.3 编辑expect自动化交互脚本
 
 :::tip
 
@@ -196,7 +196,7 @@ EOF
 
 
 
-### 2.2.4 编辑shell脚本循环执行expect脚本
+#### 2.2.4 编辑shell脚本循环执行expect脚本
 
 ```shell
 # 编辑脚本
@@ -218,7 +218,7 @@ source ssh.sh
 
 
 
-## 2.3 每个节点配置hosts信息
+### 2.3 每个节点配置hosts信息
 
 ```shell
 source /opt/ambari/script/env.sh 
@@ -235,7 +235,7 @@ done
 
 
 
-## 2.4 禁用防火墙和selinux
+### 2.4 禁用防火墙和selinux
 
 **这一步已在2.0安装纯净系统后执行的脚本中执行过了**
 
@@ -252,9 +252,9 @@ sed -i '7s/enforcing/disabled/' /etc/selinux/config
 
 
 
-## 2.5 安装JDK8	
+### 2.5 安装JDK8	
 
-### 2.5.1 安装说明
+#### 2.5.1 安装说明
 
 :::tip
 
@@ -274,7 +274,7 @@ mkdir -p /opt/ambari/pkg
 
 
 
-### 2.5.2 编写jdk安装脚本
+#### 2.5.2 编写jdk安装脚本
 
 ```shell
 cat >/opt/ambari/script/jdk8_install.sh <<'ABC'
@@ -301,7 +301,7 @@ ABC
 
 
 
-### 2.5.3 拷贝jdk安装包和jdk安装脚本到其余节点
+#### 2.5.3 拷贝jdk安装包和jdk安装脚本到其余节点
 
 ```shell
 source /opt/ambari/script/env.sh
@@ -316,7 +316,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.5.4 所有节点执行jdk安装脚本
+#### 2.5.4 所有节点执行jdk安装脚本
 
 ```shell
 source /opt/ambari/script/env.sh
@@ -332,7 +332,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-## 2.6 配置时间同步
+### 2.6 配置时间同步
 
 **时间同步可选 ntp 和 chrony，这里选择 chrony**
 
@@ -348,7 +348,7 @@ for node_ip in ${NODE_IPS[@]}
 
 :::
 
-### 2.6.1 各节点安装chrony
+#### 2.6.1 各节点安装chrony
 
 ```shell
 source /opt/ambari/script/env.sh
@@ -361,7 +361,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.6.2 cdh master节点修改服务器地址为阿里云
+#### 2.6.2 cdh master节点修改服务器地址为阿里云
 
 ```shell
 sed -i.bak '3,6d' /etc/chrony.conf && sed -i -e '3cserver ntp1.aliyun.com iburst' -e "/^#allow/callow ${NODE_SUBNET}" /etc/chrony.conf
@@ -369,7 +369,7 @@ sed -i.bak '3,6d' /etc/chrony.conf && sed -i -e '3cserver ntp1.aliyun.com iburst
 
 
 
-### 2.6.3 alave节点修改同步服务器为master节点
+#### 2.6.3 alave节点修改同步服务器为master节点
 
 ```shell
 # 这里选择另外两个节点执行
@@ -383,7 +383,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.6.4 启动chronyd服务并设置开机自启
+#### 2.6.4 启动chronyd服务并设置开机自启
 
 ```shell
 for node_ip in ${NODE_IPS[@]}
@@ -395,7 +395,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.6.5 检查端口，chronyd监听udp323端口
+#### 2.6.5 检查端口，chronyd监听udp323端口
 
 ```shell
 for node_ip in ${NODE_IPS[@]}
@@ -407,7 +407,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-### 2.6.6 检查同步
+#### 2.6.6 检查同步
 
 ```shell
 for node_ip in ${NODE_IPS[@]}
@@ -419,7 +419,7 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-## 2.7 安装HTTP服务器
+### 2.7 安装apache
 
 [httpd官网](http://httpd.apache.org/)
 
@@ -440,7 +440,7 @@ systemctl enable httpd && systemctl start httpd
 
 
 
-## 2.8 安装mysql
+### 2.8 安装mysql
 
 :::tip
 
@@ -452,7 +452,7 @@ sed -i 's#/usr/local#你的mysql安装目录#g' /etc/init.d/mysql /你的mysql�
 
 :::
 
-### 2.8.1 下载二进制包
+#### 2.8.1 下载二进制包
 
 [mysql官方下载地址](https://downloads.mysql.com/archives/community/)
 
@@ -468,7 +468,7 @@ wget https://downloads.mysql.com/archives/get/p/23/file/mysql-5.7.30-linux-glibc
 
 
 
-### 2.8.2 解压缩mysql二进制包到/usr/local
+#### 2.8.2 解压缩mysql二进制包到/usr/local
 
 ```shell
 tar xf mysql-5.7.30-linux-glibc2.12-x86_64.tar.gz -C /usr/local
@@ -476,7 +476,7 @@ tar xf mysql-5.7.30-linux-glibc2.12-x86_64.tar.gz -C /usr/local
 
 
 
-### 2.8.3 修改名称、做软连接
+#### 2.8.3 修改名称、做软连接
 
 ```shell
 mv /usr/local/mysql-5.7.30-linux-glibc2.12-x86_64 /usr/local/mysql-5.7.30 && 
@@ -485,7 +485,7 @@ ln -s /usr/local/mysql-5.7.30 /usr/local/mysql
 
 
 
-### 2.8.4 创建mysql用户
+#### 2.8.4 创建mysql用户
 
 ```python
 useradd -M -s /bin/nologin mysql 
@@ -493,7 +493,7 @@ useradd -M -s /bin/nologin mysql
 
 
 
-### 2.8.5 编辑主配置文件，myql-5.7.30二进制包默认没有mysql配置文件
+#### 2.8.5 编辑主配置文件，myql-5.7.30二进制包默认没有mysql配置文件
 
 :::tip
 
@@ -521,7 +521,7 @@ EOF
 
 
 
-### 2.8.6 创建socker文件目录、目录文件授权
+#### 2.8.6 创建socker文件目录、目录文件授权
 
 :::caution
 
@@ -537,7 +537,7 @@ chown mysql.mysql /etc/my.cnf
 
 
 
-### 2.8.7 拷贝启动脚本
+#### 2.8.7 拷贝启动脚本
 
 ```python
 cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
@@ -545,7 +545,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 
 
-### 2.8.8 初始化mysql
+#### 2.8.8 初始化mysql
 
 :::tip
 
@@ -572,7 +572,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 
 
-### 2.8.9 添加mysql命令环境变量
+#### 2.8.9 添加mysql命令环境变量
 
 ```python
 # 导出mysql命令环境变量
@@ -584,7 +584,7 @@ source /etc/profile
 
 
 
-### 2.8.10 配置systemd管理mysql
+#### 2.8.10 配置systemd管理mysql
 
 ```python
 cat >> /etc/systemd/system/mysqld.service <<'EOF'
@@ -608,7 +608,7 @@ EOF
 
 
 
-### 2.8.11 启动mysql、检查启动
+#### 2.8.11 启动mysql、检查启动
 
 ```python
 # 重新加载systemd系统服务
@@ -624,7 +624,7 @@ tcp6       0      0 :::3306                 :::*                    LISTEN      
 
 
 
-### 2.8.12 创建ambari数据库及授权
+#### 2.8.12 创建ambari数据库及授权
 
 ```shell
 mysql -uroot -e "create database ambari character set utf8mb4"
@@ -635,9 +635,9 @@ mysql -uroot -e "flush privileges"
 
 
 
-# 三、安装ambari
+## 3.安装ambari
 
-## 3.1 制作ambari本地源
+### 3.1 制作ambari本地源
 
 **各包大小**
 
@@ -676,7 +676,7 @@ tar xf HDP-2.6.5.0-centos7-rpm.tar.gz -C /var/www/html/ambari
 
 
 
-## 3.2 安装制作本地yum源工具
+### 3.2 安装制作本地yum源工具
 
 ```shell
 yum -y install yum-utils createrepo
@@ -684,7 +684,7 @@ yum -y install yum-utils createrepo
 
 
 
-## 3.3 创建ambari、HDP、HDP-UTILS的repo仓库
+### 3.3 创建ambari、HDP、HDP-UTILS的repo仓库
 
 :::caution
 
@@ -692,7 +692,7 @@ yum -y install yum-utils createrepo
 
 :::
 
-### 3.3.1 创建ambari的repo仓库
+#### 3.3.1 创建ambari的repo仓库
 
 ```shell
 source /opt/ambari/script/env.sh
@@ -709,7 +709,7 @@ EOF
 
 
 
-### 3.3.2 创建HDP、HDP-UTILS的repo仓库
+#### 3.3.2 创建HDP、HDP-UTILS的repo仓库
 
 ```shell
 cat > /etc/yum.repos.d/hdp.repo <<EOF
@@ -733,7 +733,7 @@ EOF
 
 
 
-### 3.3.3 生成本地缓存
+#### 3.3.3 生成本地缓存
 
 ```shell
 yum clean all && yum makecache
@@ -741,7 +741,7 @@ yum clean all && yum makecache
 
 
 
-### 3.3.4 通过本地源安装ambari
+#### 3.3.4 通过本地源安装ambari
 
 :::tip
 
@@ -755,9 +755,9 @@ yum -y install ambari-server
 
 
 
-# 四、配置ambari
+## 4.配置ambari
 
-## 4.1 下载mysql驱动
+### 4.1 下载mysql驱动
 
 [mysql驱动官方下载地址](https://downloads.mysql.com/archives/c-j/)
 
@@ -800,7 +800,7 @@ mv mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar /usr/share/java/m
 
 
 
-## 4.2 启动配置程序
+### 4.2 启动配置程序
 
 ```shell
 ambari-server setup
@@ -808,7 +808,7 @@ ambari-server setup
 
 
 
-### 4.2.1 提示是否自定义设置	输入：y
+#### 4.2.1 提示是否自定义设置	输入：y
 
 ```shell
 Customize user account for ambari-server daemon [y/n] (n)?
@@ -816,7 +816,7 @@ Customize user account for ambari-server daemon [y/n] (n)?
 
 
 
-### 4.2.2 设置ambari-server 账号	输入：ambari
+#### 4.2.2 设置ambari-server 账号	输入：ambari
 
 ```shell
 Enter user account for ambari-server daemon (root):
@@ -824,7 +824,7 @@ Enter user account for ambari-server daemon (root):
 
 
 
-### 4.2.3 设置JDK	输入：3
+#### 4.2.3 设置JDK	输入：3
 
 ```shell
 Checking JDK...
@@ -837,7 +837,7 @@ Enter choice (1):
 
 
 
-### 4.2.4 设置JDK家目录	输入：/usr/local/jdk1.8.0_251
+#### 4.2.4 设置JDK家目录	输入：/usr/local/jdk1.8.0_251
 
 **jdk的家目录路径是 /usr/local/jdk1.8.0_251**
 
@@ -851,7 +851,7 @@ Path to JAVA_HOME:
 
 
 
-### 4.2.5 是否允许Ambari服务器下载和安装GPL许可的LZO包	输入：y
+#### 4.2.5 是否允许Ambari服务器下载和安装GPL许可的LZO包	输入：y
 
 ```shell
 Enable Ambari Server to download and install GPL Licensed LZO packages [y/n] (n)?
@@ -859,7 +859,7 @@ Enable Ambari Server to download and install GPL Licensed LZO packages [y/n] (n)
 
 
 
-### 4.2.6 数据库配置	输入：y
+#### 4.2.6 数据库配置	输入：y
 
 ```shell
 Enter advanced database configuration [y/n] (n)? 
@@ -867,7 +867,7 @@ Enter advanced database configuration [y/n] (n)?
 
 
 
-### 4.2.7 选择数据库类型	输入：3
+#### 4.2.7 选择数据库类型	输入：3
 
 **输入3选择mysql**
 
@@ -888,7 +888,7 @@ Enter choice (1):
 
 
 
-### 4.2.8 数据库信息填写
+#### 4.2.8 数据库信息填写
 
 ```shell
 Enter choice (1): 3
@@ -903,7 +903,7 @@ Configuring ambari database...
 
 
 
-### 4.2.9 继续配置远程数据库连接属性	输入：y
+#### 4.2.9 继续配置远程数据库连接属性	输入：y
 
 :::caution
 
@@ -930,7 +930,7 @@ Ambari Server 'setup' completed successfully.
 
 
 
-### 4.2.10 导入数据库
+#### 4.2.10 导入数据库
 
 ```shell
 mysql -uroot -D ambari -e "source /var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql"
@@ -940,7 +940,7 @@ mysql -uroot -D ambari -e "source /var/lib/ambari-server/resources/Ambari-DDL-My
 
 
 
-## 4.3 启动ambari
+### 4.3 启动ambari
 
 ```shell
 ambari-server start
@@ -968,7 +968,7 @@ Ambari Server 'start' completed successfully.
 
 
 
-## 4.4 登陆ambari
+### 4.4 登陆ambari
 
 **浏览器访问 `http://IP:8080`**
 
@@ -984,9 +984,9 @@ Ambari Server 'start' completed successfully.
 
 
 
-# 五、使用Ambari界面安装大数据组件
+## 5.使用Ambari界面安装大数据组件
 
-## 5.1 启动安装向导
+### 5.1 启动安装向导
 
 **选择 `Launch Install Wizard`**
 
@@ -998,7 +998,7 @@ Ambari Server 'start' completed successfully.
 
 
 
-## 5.2 选择集群版本、配置集群本地源
+### 5.2 选择集群版本、配置集群本地源
 
 这里选择 HDP-2.6.5.0 版本
 
@@ -1042,9 +1042,9 @@ http://10.0.0.136/ambari/HDP-UTILS/centos7/1.1.0.22
 
 
 
-## 5.3 配置安装选项
+### 5.3 配置安装选项
 
-### 5.3.1 修改配置文件
+#### 5.3.1 修改配置文件
 
 需要修改配置文件中https为http，否则后续会有类似如下报错
 
@@ -1098,7 +1098,7 @@ ambari-agent restart
 
 
 
-### 5.3.2 配置集群节点信息
+#### 5.3.2 配置集群节点信息
 
 **输入集群节点FQDN式主机名、ambari-server的私钥、ambari-server的用户名和ssh端口**
 
@@ -1154,7 +1154,7 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 :::
 
-### 5.3.3 ambari安装到 `Confirm Hosts`遇到的报错
+#### 5.3.3 ambari安装到 `Confirm Hosts`遇到的报错
 
 #### 5.3.3.1 报错1	找不到 ambari server
 
@@ -1239,7 +1239,7 @@ ambari-agent restart
 
 
 
-## 5.4 选择需要安装的组件
+### 5.4 选择需要安装的组件
 
 **根据实际情况选择要安装的组件**
 
@@ -1247,7 +1247,7 @@ ambari-agent restart
 
 
 
-## 5.5 分配管理端服务
+### 5.5 分配管理端服务
 
 **根据实际情况选择各组件安装的节点**
 
@@ -1257,9 +1257,9 @@ ambari-agent restart
 
 
 
-## 5.6 定制服务
+### 5.6 定制服务
 
-### 5.6.1 HDFS
+#### 5.6.1 HDFS
 
 ![iShot2020-09-15 16.00.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.00.36.png)
 
@@ -1273,7 +1273,7 @@ ambari-agent restart
 
 
 
-### 5.6.2 YARN
+#### 5.6.2 YARN
 
 ![iShot2020-09-15 16.05.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.05.09.png)
 
@@ -1287,7 +1287,7 @@ ambari-agent restart
 
 
 
-### 5.6.3 HIVE
+#### 5.6.3 HIVE
 
 ![iShot2020-09-15 16.27.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.27.42.png)
 
@@ -1335,7 +1335,7 @@ mysql -uroot -e "flush privileges"
 
 
 
-### 5.6.4 Ambari Metrics
+#### 5.6.4 Ambari Metrics
 
 **需要设置grafana管理员用户的密码**
 
@@ -1347,7 +1347,7 @@ mysql -uroot -e "flush privileges"
 
 
 
-### 5.6.5 Atlas
+#### 5.6.5 Atlas
 
 :::caution
 
@@ -1361,7 +1361,7 @@ mysql -uroot -e "flush privileges"
 
 
 
-### 5.6.6 SmartSense
+#### 5.6.6 SmartSense
 
 **需要输入密码，默认admin即可**
 
@@ -1373,7 +1373,7 @@ mysql -uroot -e "flush privileges"
 
 
 
-## 5.7 确认集群信息并部署
+### 5.7 确认集群信息并部署
 
 ![iShot2020-09-15 17.14.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2017.14.28.png)
 
@@ -1393,7 +1393,7 @@ mysql -uroot -e "flush privileges"
 
 
 
-## 5.8 完成安装
+### 5.8 完成安装
 
 ![iShot2020-09-15 18.45.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2018.45.58.png)
 

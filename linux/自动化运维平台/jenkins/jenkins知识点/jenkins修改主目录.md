@@ -1,6 +1,6 @@
 # jenkins修改主目录
 
-# 1.rpm包安装
+## 1.rpm包安装
 
 rpm包安装的jenkins默认主目录是 `/var/lib/jenkins`
 
@@ -37,4 +37,4 @@ $ rpm -ql jenkinsls
 
 
 
-# 2.war包安装
+## 2.war包安装

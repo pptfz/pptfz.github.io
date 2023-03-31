@@ -137,7 +137,7 @@ chmod 600 /etc/rsync.password
 
 
 
-## 5.启动rsync并加入开机自启
+### 5.启动rsync并加入开机自启
 
 ```python
 systemctl start rsyncd && systemctl enable rsyncd

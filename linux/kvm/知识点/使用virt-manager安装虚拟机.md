@@ -1,6 +1,6 @@
 # 使用 virt-manager 安装虚拟机
 
-# 1.安装图形化管理工具 `virt-manager`
+## 1.安装图形化管理工具 `virt-manager`
 
 ```shell
 yum -y install virt-manager
@@ -39,9 +39,9 @@ yum -y install virt-manager
 
 
 
-# 2.安装虚拟机
+## 2.安装虚拟机
 
-## 2.1 配置 `storage pool`
+### 2.1 配置 `storage pool`
 
 :::tip说明
 
@@ -81,19 +81,19 @@ yum -y install virt-manager
 
 
 
-## 2.2 点击电脑图标然后选择 `Local install media (ISO image or CDROM)`
+### 2.2 点击电脑图标然后选择 `Local install media (ISO image or CDROM)`
 
 ![iShot2021-11-27 22.21.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27%2022.21.57.png)
 
 
 
-## 2.3 选择 `Use ISO image`
+### 2.3 选择 `Use ISO image`
 
 ![iShot2021-11-27 22.25.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27%2022.25.38.png)
 
 
 
-## 2.4 选择本地镜像
+### 2.4 选择本地镜像
 
 ![iShot2021-11-28 19.25.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-28%2019.25.14.png)
 
@@ -103,25 +103,25 @@ yum -y install virt-manager
 
 
 
-## 2.5 设置虚拟机的cpu和内存
+### 2.5 设置虚拟机的cpu和内存
 
 ![iShot2021-11-27 22.38.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27%2022.38.30.png)
 
 
 
-## 2.6 设置虚拟机的硬盘大小
+### 2.6 设置虚拟机的硬盘大小
 
 ![iShot2021-11-27 22.41.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27%2022.41.27.png)
 
 
 
-## 2.7 设置虚拟机名称
+### 2.7 设置虚拟机名称
 
 ![iShot2021-11-27 22.43.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27%2022.43.58.png)
 
 
 
-## 2.8 开始安装
+### 2.8 开始安装
 
 ![iShot2021-11-27 22.46.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27%2022.46.27.png)
 

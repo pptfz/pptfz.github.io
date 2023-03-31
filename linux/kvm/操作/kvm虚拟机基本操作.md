@@ -2,11 +2,11 @@
 
 
 
-# 1.创建、删除、修改名称
+## 1.创建、删除、修改名称
 
-## 1.1 创建虚拟机
+### 1.1 创建虚拟机
 
-### 1.1.1 命令行安装
+#### 1.1.1 命令行安装
 
 ```shell
 virt-install \
@@ -51,11 +51,11 @@ the console to complete the installation process.
 
 
 
-### 1.1.2 图形化安装
+#### 1.1.2 图形化安装
 
 
 
-## 1.2 删除虚拟机
+### 1.2 删除虚拟机
 
 :::caution注意
 
@@ -83,9 +83,9 @@ virsh domrename linux-new linux-new-xxx
 
 
 
-# 2.查看、启动、停止、重启
+## 2.查看、启动、停止、重启
 
-## 2.1 查看
+### 2.1 查看
 
 ```shell
 virsh list --all
@@ -93,7 +93,7 @@ virsh list --all
 
 
 
-## 2.2 启动
+### 2.2 启动
 
 `virsh start 虚拟机名称`
 
@@ -103,9 +103,9 @@ virsh start linux-templet-mini-clone
 
 
 
-## 2.3 停止
+### 2.3 停止
 
-### 2.3.1 正常停止
+#### 2.3.1 正常停止
 
 `virsh shutdown 虚拟机名称`
 
@@ -115,7 +115,7 @@ virsh shutdown linux-templet-mini-clone
 
 
 
-### 2.3.2 强制停止(相当于拔电源)
+#### 2.3.2 强制停止(相当于拔电源)
 
 `virsh destroy 虚拟机名称`
 
@@ -125,7 +125,7 @@ virsh destroy linux-templet-mini-clone
 
 
 
-## 2.4 重启
+### 2.4 重启
 
 `virsh reboot 虚拟机名称`
 
@@ -137,9 +137,9 @@ virsh reboot linux-templet-mini-clone
 
 
 
-# 3.备份、恢复
+## 3.备份、恢复
 
-## 3.1 备份
+### 3.1 备份
 
 :::tip
 
@@ -159,7 +159,7 @@ cp /data/KVM_imgs/linux-templet-mini-clone.qcow2 /opt/bak
 
 
 
-## 3.2 恢复
+### 3.2 恢复
 
 :::tip
 
@@ -175,9 +175,9 @@ virsh define linux-templet-mini-clone.xml
 
 
 
-# 4.克隆
+## 4.克隆
 
-## 4.1 完整克隆
+### 4.1 完整克隆
 
 :::tip
 
@@ -209,9 +209,9 @@ Clone 'linux-templet-mini-clone' created successfully.
 
 
 
-## 4.2 链接克隆
+### 4.2 链接克隆
 
-### 4.2.1 需要修改配置文件
+#### 4.2.1 需要修改配置文件
 
 创建链接克隆磁盘文件
 
@@ -292,7 +292,7 @@ $ virsh list --all |grep linux-new
 
 
 
-### 4.2.2 不需要修改配置文件
+#### 4.2.2 不需要修改配置文件
 
 创建链接克隆磁盘文件
 
@@ -324,7 +324,7 @@ virt-install \
 
 
 
-# 5.挂起、恢复挂起
+## 5.挂起、恢复挂起
 
 查看虚拟机
 
@@ -368,7 +368,7 @@ virsh resume linux-new
 
 
 
-# 6.查看虚拟机vnc端口号
+## 6.查看虚拟机vnc端口号
 
 `virsh vncdisplay 虚拟机名称`
 
@@ -379,9 +379,9 @@ $ virsh vncdisplay --domain linux-new-xxx
 
 
 
-# 7.磁盘格式转换
+## 7.磁盘格式转换
 
-## 7.1 kvm虚拟机磁盘格式
+### 7.1 kvm虚拟机磁盘格式
 
 | 磁盘格式 | 说明                                           |
 | -------- | ---------------------------------------------- |
@@ -390,9 +390,9 @@ $ virsh vncdisplay --domain linux-new-xxx
 
 
 
-## 7.2 虚拟磁盘操作
+### 7.2 虚拟磁盘操作
 
-### 7.2.1 查看虚拟磁盘信息
+#### 7.2.1 查看虚拟磁盘信息
 
  `qemu-img info 磁盘名`
 
@@ -411,7 +411,7 @@ Format specific information:
 
 
 
-### 7.2.2 创建虚拟磁盘
+#### 7.2.2 创建虚拟磁盘
 
 创建 `raw/branch` 格式虚拟磁盘
 
@@ -457,7 +457,7 @@ $ du -sh /opt/test.qcow2
 
 
 
-### 7.2.3 调整虚拟磁盘容量
+#### 7.2.3 调整虚拟磁盘容量
 
 ```shell
 # 查看虚拟磁盘大小
@@ -481,7 +481,7 @@ disk size: 0
 
 
 
-### 7.2.4 转换磁盘格式
+#### 7.2.4 转换磁盘格式
 
 `qemu-img convert -f 源磁盘类型 -O 目标磁盘类型 源文件 目标文件`
 
@@ -521,7 +521,7 @@ disk size: 0
 
 
 
-# 8.快照
+## 8.快照
 
 :::tip
 
@@ -531,7 +531,7 @@ disk size: 0
 
 :::
 
-## 8.1 查看快照
+### 8.1 查看快照
 
 `virsh snapshot-list 虚拟机名称` 查看快照
 
@@ -543,13 +543,13 @@ $ virsh snapshot-list linux-new-xxx
 
 
 
-## 8.2 创建快照
+### 8.2 创建快照
 
 `virsh snapshot-create 虚拟机名称` 
 
 
 
-### 8.2.1 指定快照名称
+#### 8.2.1 指定快照名称
 
 ```shell
 $ virsh snapshot-create-as --domain linux-new-xxx hehe
@@ -558,7 +558,7 @@ Domain snapshot hehe created
 
 
 
-### 8.2.2 不指定快照名称
+#### 8.2.2 不指定快照名称
 
 :::tip说明
 
@@ -573,7 +573,7 @@ Domain snapshot 1646575935 created
 
 
 
-## 8.3 删除快照
+### 8.3 删除快照
 
 ```shell
 # 删除当前快照，默认会删除最近一次快照
@@ -587,7 +587,7 @@ Domain snapshot 1646575935 deleted
 
 
 
-## 8.4 恢复快照
+### 8.4 恢复快照
 
 ```shell
 virsh snapshot-revert linux-new-xxx --snapshotname hehe

@@ -2,7 +2,7 @@
 
 
 
-## 一、jenkins报错 `Unable to create the home directory. This is most likely a permission problem`
+## 1.jenkins报错 `Unable to create the home directory. This is most likely a permission problem`
 
 浏览器中访问 jenkins 报错如下
 
@@ -28,7 +28,7 @@
 
 
 
-## 二、jenkins报错 `Jenkins detected that you appear to be running more than one instance of Jenkins that share the same home directory`
+## 2.jenkins报错 `Jenkins detected that you appear to be running more than one instance of Jenkins that share the same home directory`
 
 ```
 Error

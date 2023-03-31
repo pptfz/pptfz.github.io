@@ -6,9 +6,9 @@
 
 [参考链接](http://www.zhangblog.com/2020/05/09/openvpn01/)
 
-# 1.前期环境准备
+## 1.前期环境准备
 
-## 1.1 实验环境
+### 1.1 实验环境
 
 > OpenVPN软件版本 2.4.9
 
@@ -19,9 +19,9 @@
 
 
 
-## 1.2 OpenVPN机器配置必要修改
+### 1.2 OpenVPN机器配置必要修改
 
-### 1.2.1 开启路由转发
+#### 1.2.1 开启路由转发
 
 ```shell
 # 不存在则配置路由转发
@@ -33,7 +33,7 @@ sysctl -p
 
 
 
-### 1.2.2 iptables配置
+#### 1.2.2 iptables配置
 
 设置iptables规则
 
@@ -79,7 +79,7 @@ iptables -t nat -D POSTROUTING 1
 
 
 
-### 1.2.3 系统时间与硬件时间同步
+#### 1.2.3 系统时间与硬件时间同步
 
 ```shell
 # 配置时间同步
@@ -102,9 +102,9 @@ hwclock --systohc
 
 
 
-# 2.安装过程
+## 2.安装过程
 
-## 2.1 安装依赖包
+### 2.1 安装依赖包
 
 ```shell
 yum -y install lz4-devel lzo-devel pam-devel openssl-devel systemd-devel sqlite-devel autoconf automake libtool libtool-ltdl
@@ -112,7 +112,7 @@ yum -y install lz4-devel lzo-devel pam-devel openssl-devel systemd-devel sqlite-
 
 
 
-## 2.2 编译安装openvpn
+### 2.2 编译安装openvpn
 
 [openvpn github地址](https://github.com/OpenVPN/openvpn)
 
@@ -120,7 +120,7 @@ yum -y install lz4-devel lzo-devel pam-devel openssl-devel systemd-devel sqlite-
 
 [openvpn官网源码包下载地址](https://openvpn.net/community-downloads/)
 
-### 2.2.1 下载源码包
+#### 2.2.1 下载源码包
 
 ```shell
 wget https://github.com/OpenVPN/openvpn/archive/v2.4.9.tar.gz
@@ -128,7 +128,7 @@ wget https://github.com/OpenVPN/openvpn/archive/v2.4.9.tar.gz
 
 
 
-### 2.2.2 解压缩并进入源码目录
+#### 2.2.2 解压缩并进入源码目录
 
 ```shell
 tar xf v2.4.9.tar.gz && cd openvpn-2.4.9
@@ -136,7 +136,7 @@ tar xf v2.4.9.tar.gz && cd openvpn-2.4.9
 
 
 
-### 2.2.3 开始编译安装
+#### 2.2.3 开始编译安装
 
 > `nproc` 命令可以直接获取系统核心数
 
@@ -152,7 +152,7 @@ make -j${nproc} && make install
 
 
 
-### 2.2.4 做一下openvpn命令的软连接
+#### 2.2.4 做一下openvpn命令的软连接
 
 ```shell
 ln -s /usr/local/openvpn/sbin/openvpn /usr/local/sbin/openvpn
@@ -160,7 +160,7 @@ ln -s /usr/local/openvpn/sbin/openvpn /usr/local/sbin/openvpn
 
 
 
-### 2.2.5 查看openvpn版本
+#### 2.2.5 查看openvpn版本
 
 ```shell
 $ openvpn --version
@@ -173,7 +173,7 @@ Compile time defines: enable_async_push=no enable_comp_stub=no enable_crypto=yes
 
 
 
-### 2.2.6 修改启动配置文件
+#### 2.2.6 修改启动配置文件
 
 :::tip
 
@@ -201,7 +201,7 @@ sed -i.bak '/^ExecStart/cExecStart=\/usr\/local\/openvpn\/sbin\/openvpn --config
 
 
 
-### 2.2.7 拷贝openvpn systemd文件
+#### 2.2.7 拷贝openvpn systemd文件
 
 ```shell
 cp -a /usr/local/openvpn/lib/systemd/system/openvpn-server@.service /usr/lib/systemd/system/openvpn.service
@@ -209,11 +209,11 @@ cp -a /usr/local/openvpn/lib/systemd/system/openvpn-server@.service /usr/lib/sys
 
 
 
-## 2.3 生成证书
+### 2.3 生成证书
 
 [easy-rsa github地址](https://github.com/OpenVPN/easy-rsa)
 
-### 2.3.1 下载 `easy-rsa` 工具
+#### 2.3.1 下载 `easy-rsa` 工具
 
 下载包
 
@@ -231,7 +231,7 @@ tar xf EasyRSA-3.0.8.tgz && cd EasyRSA-3.0.8/
 
 
 
-### 2.3.2 生成全局配置文件 `vars`
+#### 2.3.2 生成全局配置文件 `vars`
 
 根据 `EasyRSA-3.0.8/vars.example` 文件生成全局配置文件 `vars`
 
@@ -288,7 +288,7 @@ EOF
 
 
 
-### 2.3.3 生成服务端证书和CA证书
+#### 2.3.3 生成服务端证书和CA证书
 
 :::tip
 
@@ -296,7 +296,7 @@ EOF
 
 :::
 
-#### 2.3.3.1 初始化
+##### 2.3.3.1 初始化
 
 :::tip
 
@@ -330,7 +330,7 @@ drwx------ 2 root root 4096 May 27 17:03 reqs
 
 
 
-#### 2.3.3.2 创建CA根证书
+##### 2.3.3.2 创建CA根证书
 
 :::tip
 
@@ -367,7 +367,7 @@ Your new CA certificate file for publishing is at:
 
 
 
-#### 2.3.3.3 生成服务端证书
+##### 2.3.3.3 生成服务端证书
 
 :::tip
 
@@ -399,7 +399,7 @@ Data Base Updated
 
 
 
-#### 2.3.3.4 创建 `Diffie-Hellman`
+##### 2.3.3.4 创建 `Diffie-Hellman`
 
 :::tip
 
@@ -420,9 +420,9 @@ DH parameters of size 2048 created at /etc/openvpn/easy-rsa/pki/dh.pem
 
 
 
-### 2.3.4 生成客户端证书
+#### 2.3.4 生成客户端证书
 
-#### 2.3.4.1 生成客户端证书
+##### 2.3.4.1 生成客户端证书
 
 :::tip
 
@@ -460,7 +460,7 @@ Data Base Updated
 
 
 
-#### 2.3.4.2 为了提高安全性，生成ta.key
+##### 2.3.4.2 为了提高安全性，生成ta.key
 
 :::tip
 
@@ -474,7 +474,7 @@ openvpn --genkey --secret ta.key
 
 
 
-### 2.3.5 整理服务端证书
+#### 2.3.5 整理服务端证书
 
 ```shell
 mkdir -p /etc/openvpn/server
@@ -487,7 +487,7 @@ cp ta.key /etc/openvpn/server
 
 
 
-## 2.4 创建服务端配置文件
+### 2.4 创建服务端配置文件
 
 `server.conf` 示例文件在 openvon源码目录下的 `openvpn-2.4.9/sample/sample-config-files/server.conf` 
 
@@ -670,7 +670,7 @@ EOF
 
 
 
-## 2.5 创建客户端配置文件
+### 2.5 创建客户端配置文件
 
 编辑 `/etc/openvpn/client/client.ovpn`
 
@@ -752,7 +752,7 @@ verb 3
 
 
 
-## 2.6 启动openvpn
+### 2.6 启动openvpn
 
 ```shell
 systemctl enable openvpn && systemctl start openvpn
@@ -760,7 +760,7 @@ systemctl enable openvpn && systemctl start openvpn
 
 
 
-## 2.7 下载配置文件
+### 2.7 下载配置文件
 
 有3个文件是固定的，其中 `ca.crt`、`ta.key` 是服务端根证书，`client.ovpn(文件名可任意修改)` 是客户端文件，这3个文件是固定的
 
@@ -790,7 +790,7 @@ key xxx.key                                   # 客户端密钥
 
 
 
-## 2.8 连接测试
+### 2.8 连接测试
 
 
 
@@ -836,9 +836,9 @@ rtt min/avg/max/mdev = 47.014/53.081/59.148/6.067 ms
 
 
 
-## 2.9 开通、删除vpn步骤
+### 2.9 开通、删除vpn步骤
 
-### 2.9.1 开通vpn账户
+#### 2.9.1 开通vpn账户
 
 > 这里以给小明开通vpn为例
 
@@ -859,7 +859,7 @@ find / -name "xiaoming*"
 
 
 
-### 2.9.2 删除vpn账户
+#### 2.9.2 删除vpn账户
 
 执行这个步骤需要输入ca根证书密码
 
@@ -885,7 +885,7 @@ systemctl restart openvpn
 
 
 
-### 2.10 扩展：openvpn配置用户获取固定IP地址
+#### 2.10 扩展：openvpn配置用户获取固定IP地址
 
 编辑openvpn配置文件 `server.conf` ，增加 `ifconfig-pool-persist` 参数
 

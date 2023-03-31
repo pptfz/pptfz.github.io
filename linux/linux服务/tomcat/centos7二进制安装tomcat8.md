@@ -12,7 +12,7 @@
 
 
 
-# 1.下载安装包
+## 1.下载安装包
 
 ```shell
 wget https://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.56/bin/apache-tomcat-8.5.56.tar.gz
@@ -20,7 +20,7 @@ wget https://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.56/bin/apa
 
 
 
-# 2.解压缩包
+## 2.解压缩包
 
 ```shell
 tar xf apache-tomcat-8.5.56.tar.gz -C /usr/local/
@@ -28,7 +28,7 @@ tar xf apache-tomcat-8.5.56.tar.gz -C /usr/local/
 
 
 
-# 3.做软连接
+## 3.做软连接
 
 ```shell
 ln -s /usr/local/apache-tomcat-8.5.56/ /usr/local/tomcat-8.5.56
@@ -36,7 +36,7 @@ ln -s /usr/local/apache-tomcat-8.5.56/ /usr/local/tomcat-8.5.56
 
 
 
-# 4.安装jdk
+## 4.安装jdk
 
 [oracle jdk官方下载地址](https://www.oracle.com/java/technologies/javase-downloads.html)
 
@@ -82,9 +82,9 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.251-b08, mixed mode)
 
 
 
-# 5.使用systemd管理tomcat
+## 5.使用systemd管理tomcat
 
-## 5.1 为Tomcat添加启动参数
+### 5.1 为Tomcat添加启动参数
 
 **catalina.sh在执行的时候会调用同级路径下的setenv.sh来设置额外的环境变量，因此在/usr/local/tomcat-8.5.56/bin路径下创建setenv.sh文件，内容如下**
 
@@ -105,7 +105,7 @@ EOF
 
 
 
-## 5.2 编写tomcat.service文件
+### 5.2 编写tomcat.service文件
 
 **在/usr/lib/systemd/system路径下添加tomcat.service文件，内容如下：**
 
@@ -133,7 +133,7 @@ EOF
 
 
 
-## 5.3 修改tomcat bin目录下的catalina.sh
+### 5.3 修改tomcat bin目录下的catalina.sh
 
 **在catalina.sh文件中第2行开始添加如下内容，导出JAVA_HOME和JRE_HOME环境变量**
 
@@ -143,7 +143,7 @@ sed -i.bak '2cexport JAVA_HOME=/usr/local/jdk1.8.0_251\nexport JRE_HOME=/usr/loc
 
 
 
-# 6.启动tomcat
+## 6.启动tomcat
 
 ```shell
 systemctl daemon-reload

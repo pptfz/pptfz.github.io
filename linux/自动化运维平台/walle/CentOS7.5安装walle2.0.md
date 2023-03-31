@@ -4,7 +4,7 @@
 
 # CentOS7.5安装walle2.0
 
-# 标准安装
+## 标准安装
 
 **walle2.0是基于python开发的，需要python2.7+，mysql5.6.5以上版本**
 
@@ -20,9 +20,9 @@
 
 
 
-# 一、系统环境
+### 1.系统环境
 
-## 1.1Linux系统版本
+#### 1.1  Linux系统版本
 
 ```python
 [root@walle ~]# cat /etc/redhat-release 
@@ -31,7 +31,7 @@ CentOS Linux release 7.5.1804 (Core)
 
 
 
-## 1.2python版本
+#### 1.2 python版本
 
 ```python
 [root@walle ~]# python --version
@@ -40,9 +40,9 @@ Python 2.7.5
 
 
 
-# 二、安装步骤
+### 2. 安装步骤
 
-## 2.1更换阿里云yum源及添加epel源
+#### 2.1 更换阿里云yum源及添加epel源
 
 ```python
 #备份原有base源
@@ -60,7 +60,7 @@ Python 2.7.5
 
 
 
-## 2.2安装依赖包
+#### 2.2 安装依赖包
 
 ```python
 [root@walle ~]# yum -y install python2-pip python-virtualenv
@@ -68,7 +68,7 @@ Python 2.7.5
 
 
 
-## 2.3安装mysql-5.7.22
+#### 2.3 安装mysql-5.7.22
 
 [gitbook链接-安装msql-5.7.22](https://gitbook.pptfz.top/db/mysql/mysql%E5%9F%BA%E7%A1%80/4.CentOS7.5%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E8%A3%85MySQL-5.7.22.html)
 
@@ -76,7 +76,7 @@ Python 2.7.5
 
 
 
-## 2.4安装nginx1.14并配置
+#### 2.4 安装nginx1.14并配置
 
 ```python
 #添加nginx官方yum源
@@ -152,7 +152,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 
 
 
-## 2.5克隆瓦力
+#### 2.5 克隆瓦力
 
 ```python
 #克隆瓦力项目
@@ -164,7 +164,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 
 
 
-## 2.6编辑hosts文件
+#### 2.6 编辑hosts文件
 
 ```python
 #域名要与nginx配置文件中一样
@@ -173,7 +173,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 
 
 
-## 2.7安装python2.7+pip
+#### 2.7 安装python2.7+pip
 
 ```python
 [root@walle ~]# cd /walle-web
@@ -191,7 +191,7 @@ virtualenv --no-site-packages -p /usr/local/bin/python2.7 venv
 
 
 
-## 2.8编辑python配置文件/walle-web/walle/config/settings_prod.py
+#### 2.8 编辑python配置文件 `/walle-web/walle/config/settings_prod.py`
 
 ```python
 #编辑配置文件
@@ -223,7 +223,7 @@ virtualenv --no-site-packages -p /usr/local/bin/python2.7 venv
 
 
 
-## 2.9创建walle数据库并进行数据迁移
+#### 2.9 创建walle数据库并进行数据迁移
 
 ```python
 #创建walle数据库
@@ -243,7 +243,7 @@ virtualenv --no-site-packages -p /usr/local/bin/python2.7 venv
 
 
 
-## 2.10启动瓦力并加入开机自启
+#### 2.10 启动瓦力并加入开机自启
 
 ```python
 [root@walle walle-web]# sh admin.sh start
@@ -253,7 +253,7 @@ virtualenv --no-site-packages -p /usr/local/bin/python2.7 venv
 
 
 
-## 2.11绑定hosts文件
+#### 2.11 绑定hosts文件
 
 ```python
 //windows
@@ -266,7 +266,7 @@ C:\Windows\System32\drivers\etc
 
 
 
-## 2.12登陆瓦力
+#### 2.12 登陆瓦力
 
 ```python
 初始登陆账号
@@ -309,11 +309,11 @@ sh admin.sh migration # Migration，数据迁移
 
 
 
-# docker安装
+## docker安装
 
-# 一、安装docker
+### 1.安装docker
 
-## 1.1下载官方yum源
+#### 1.1 下载官方yum源
 
 ```python
 #添加yum源
@@ -326,7 +326,7 @@ https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo
 
 
 
-## 1.2.修改docker官方yum源地址为清华源
+#### 1.2 修改docker官方yum源地址为清华源
 
 ```python
 [root@docker01 ~]# sed -i 's#download.docker.com#mirrors.tuna.tsinghua.edu.cn/docker-ce#g' \
@@ -335,7 +335,7 @@ https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo
 
 
 
-## 1.3安装docker     docker-ce  社区版
+#### 1.3 安装docker     docker-ce  社区版
 
 ```python
 [root@docker01 ~]# yum -y install docker-ce
@@ -343,7 +343,7 @@ https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo
 
 
 
-## 1.4.启动docker
+#### 1.4  启动docker
 
 ```python
 [root@docker01 ~]# systemctl start docker && systemctl enable docker
@@ -351,7 +351,7 @@ https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo
 
 
 
-## 1.5查看docker版本
+#### 1.5 查看docker版本
 
 ```python
 [root@docker01 ~]# docker version
@@ -377,7 +377,7 @@ Server: Docker Engine - Community
 
 
 
-## 1.6配置docker镜像加速
+#### 1.6 配置docker镜像加速
 
 ```python
 #配置docker官方镜像加速地址
@@ -400,9 +400,9 @@ EOF
 
 
 
-# 二、安装docker-compose
+### 2.安装docker-compose
 
-## 2.1下载安装包
+#### 2.1 下载安装包
 
 ```python
 [root@docker01 ~]# curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -410,7 +410,7 @@ EOF
 
 
 
-## 2.2给二进制文件添加可执行权限
+#### 2.2 给二进制文件添加可执行权限
 
 ```python
 [root@docker01 ~]# chmod +x /usr/local/bin/docker-compose
@@ -418,7 +418,7 @@ EOF
 
 
 
-## 2.3完成安装，查看版本
+#### 2.3 完成安装，查看版本
 
 ```python
 [root@docker01 ~]# docker-compose -v
@@ -429,9 +429,9 @@ docker-compose version 1.24.1, build 4667896b
 
 
 
-# 三、编辑walle2.0 docker-compose文件并启动walle2.0容器
+### 3.编辑walle2.0 docker-compose文件并启动walle2.0容器
 
-## 3.1创建存放文件目录
+#### 3.1 创建存放文件目录
 
 ```python
 [root@docker01 ~]# mkdir /usr/local/walle2.0 && cd /usr/local/walle2.0
@@ -439,7 +439,7 @@ docker-compose version 1.24.1, build 4667896b
 
 
 
-## 3.2新建walle.env，连接数据库MYSQL_USER默认使用root,如需使用其他用户，需自建用户更改walle.env文件
+#### 3.2 新建walle.env，连接数据库MYSQL_USER默认使用root,如需使用其他用户，需自建用户更改walle.env文件
 
 ```python
 cat >walle.env <<EOF
@@ -455,7 +455,7 @@ EOF
 
 
 
-## 3.3创建docker-compose文件
+#### 3.3 创建docker-compose文件
 
 ```python
 cat >docker-compose.yml <<EOF
@@ -524,7 +524,7 @@ EOF
 
 
 
-## 3.4启动容器
+#### 3.4 启动容器
 
 ```python
 docker-compose up -d
@@ -536,7 +536,7 @@ docker-compose up -d
 
 
 
-## 3.5初始账号及常用操作
+#### 3.5 初始账号及常用操作
 
 ```python
 //初始账号

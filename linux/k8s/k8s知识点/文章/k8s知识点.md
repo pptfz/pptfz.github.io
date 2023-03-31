@@ -17,7 +17,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-# 一、k8s特性
+## 1.k8s特性
 
 - **服务发现和负载均衡**
   Kubernetes 可以使用 DNS 名称或自己的 IP 地址公开容器，如果到容器的流量很大，Kubernetes 可以负载均衡并分配网络流量，从而使部署稳定。
@@ -39,17 +39,17 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-## 二、k8s概念和术语
+## 2.k8s概念和术语
 
-## 2.1 k8s角色
+### 2.1 k8s角色
 
-### 2.1.1 master
+#### 2.1.1 master
 
 > k8s使用**``共享网路``**将多个物理机或者虚拟机汇集到一个集群中，在各服务器之间进行通信，该集群是是配置k8s的所有组件、功能和工作负载的物理平台
 >
 > 集群中的一台机器(或者高可用部署中的一组服务器)用作master，负责管理整个集群
 
-### 2.1.2 node
+#### 2.1.2 node
 
 > 集群中除master节点外的其余机器用作node，他们是使用本地和外部资源接收和运行工作负载的服务器
 >
@@ -57,9 +57,9 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-## 2.2 k8s资源
+### 2.2 k8s资源
 
-### 2.2.1 pod
+#### 2.2.1 pod
 
 - k8s并不直接运行容器，而是使用一个抽象的资源对象来封装一个或者多个容器，这个抽象即为pod，pod是k8s的最小调度单元
 - 同一pod中的容器共享网络名称空间和存储资源，这些容器可经由本地回环接口lo直接通信，但彼此之间又在mount、user及PID等名称空间上保持隔离
@@ -74,7 +74,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-### 2.2.2 label	资源标签 
+#### 2.2.2 label	资源标签 
 
 - 标签是将资源进行分类的标识符，资源标签其实就是一个健值型数据
 - 标签是用于指定对象(如pod)辨识性的属性，这些属性仅对用户存在特定的意义，对k8s集群来说并不直接表达核心系统语义
@@ -83,7 +83,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-### 2.2.3 selector	标签选择器
+#### 2.2.3 selector	标签选择器
 
 - 标签选择器全称为``label selector``，是一种根据lable来过滤符合条件的资源对象的机制，例如将附有标签``role:backend``的所有pod对象挑选出来归为一组就是标签选择器的一种应用
 
@@ -91,7 +91,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-### 2.2.4 controller	pod控制器
+#### 2.2.4 controller	pod控制器
 
 - 尽管pod是k8s中的最小调度单元，但用户通常并不会直接部署及管理pod对象，而是要借助于控制器对其进行管理
 - 用于工作负载的控制器是一种管理pod生命周期的资源抽象，是k8s上的一类对象而非单个资源对象
@@ -100,7 +100,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-### 2.2.5 service	服务资源
+#### 2.2.5 service	服务资源
 
 - service是建立在一组pod对象之上的资源抽象，它通过标签选择器选择一组pod对象，并为这组pod对象定义一个统一的固定访问入口(通常是一个IP地址)，若k8s集群存在DNS附件，它就会在service创建时为其自动配置一个DNS名称以便客户端进行服务发现
 - 到达service IP的请求将负载均衡至其后的端点-->各个pod对象之上，因此service从本质上来讲是一个四层代理服务
@@ -108,7 +108,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-### 2.2.6 volume	存储卷
+#### 2.2.6 volume	存储卷
 
 - 存储卷是独立于容器文件系统之外的存储空间，常用于扩展容器的存储空间并为它提供持久存储能力
 - k8s集群上的存储卷大体可分为临时卷、本地卷和网路卷
@@ -116,7 +116,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-### 2.2.7  name(名称)和namespace(名称空间)
+#### 2.2.7  name(名称)和namespace(名称空间)
 
 - 名称是k8s集群中资源对象的标识符，它们的作用域通常是名称空间(namespace)，因此名称空间是名称的额外限定机制
 - 在同一个名称空间中，同一类型资源对象的名称必须具有唯一性，名称空间通常用于实现项目的资源隔离，从而形成逻辑分组
@@ -124,22 +124,22 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-### 2.2.8 annotaion	注解
+#### 2.2.8 annotaion	注解
 
 - 注解时另一种附加在对象之上的键值型的数据，但它拥有更大的数据容量
 - 注解常用于将各种非标识型元数据(metadata)附加到对象上，但它不能用于标识和选择对象，通常也不会被k8s直接使用，其主要目的是方便工具或用户的阅读及查找
 
 
 
-### 2.2.9 ingress	
+#### 2.2.9 ingress	
 
 - k8s将pod对象和外部网路环境进行了隔离，pod和service等对象间的通信都使用其内部专用地址进行，如若需要开放某些pod对象提供给外部用户访问，则需要为其请求流量打开一个通往k8s集群内部的通道，除了service之外，ingress也是这类通道的实现方式之一
 
 
 
-# 三、k8s架构
+## 3.k8s架构
 
-## 3.1 k8s架构图
+### 3.1 k8s架构图
 
 
 
@@ -149,7 +149,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-## 3.2 master、node组件
+### 3.2 master、node组件
 
 - **master节点	负责集群管理，接受用户请求，将请求分散到node节点**
 
@@ -173,26 +173,26 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 
 
-## 3.3 核心附件
+### 3.3 核心附件
 
-### 3.3.1 coreDNS
+#### 3.3.1 coreDNS
 
 - 在k8s集群中调度运行提供DNS服务的pod，同一集群中的其他pod可使用此DNS服务解决主机名，k8s1.11版本开始默认使用coreDNS项目为集群提供服务注册和服务发现的动态名称解析服务，之前的版本中用到的是kubeDNS，而skyDNS则是更早版本使用的
 
 
 
-### 3.3.2 dashboard
+#### 3.3.2 dashboard
 
 - k8s集群的全部功能都要基于web的UI，来管理集群中的应用和集群自身
 
-### 3.3.3 heapster
+#### 3.3.3 heapster
 
 - 容器和节点的性能监控与分析系统，它收集并解析多种指标数据，如资源利用率、生命周期等
 - 由于监控项比较少，已由prometheus代替
 
 
 
-### 3.3.4 ingress controller
+#### 3.3.4 ingress controller
 
 - 为服务提供外网入口，7层负载均衡，默认kube-process只能提供4层负载均衡
 

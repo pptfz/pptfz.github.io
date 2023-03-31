@@ -10,9 +10,9 @@
 
 
 
-# 遇到的报错
+## 遇到的报错
 
-## **报错1** 访问报错 `Token encryption requires a random string in keyphrase setting`
+### **报错1** 访问报错 `Token encryption requires a random string in keyphrase setting`
 
 [github issue中有提到这个问题](https://github.com/ltb-project/self-service-password/issues/199)
 
@@ -35,7 +35,7 @@
 
 
 
-## **报错2** `无法修改密码，日志报错用户未发现`
+### **报错2** `无法修改密码，日志报错用户未发现`
 
 ```shell
 [Sat Sep 18 08:06:20.175684 2021] [php7:notice] [pid 18] [client 10.0.17.251:56444] LDAP - User xiaoming not found, referer: http://172.30.100.4:8000/index.php
@@ -60,7 +60,7 @@ $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
 
 
 
-## 报错3 `密码被LDAP服务器拒绝`
+### 报错3 `密码被LDAP服务器拒绝`
 
 ![iShot_2022-07-28_17.34.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-07-28_17.34.09.png)
 
@@ -91,7 +91,7 @@ $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
 
 
 
-# 1.Self Service Password简介
+## 1.Self Service Password简介
 
 **简介**
 
@@ -139,13 +139,13 @@ $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
 
 
 
-# 2.安装
+## 2.安装
 
-## 2.1 标准安装
+### 2.1 标准安装
 
 
 
-## 2.2 dokcer安装
+### 2.2 dokcer安装
 
 [self service password dockerhub地址](https://hub.docker.com/r/ltbproject/self-service-password)
 
@@ -183,7 +183,7 @@ docker run \
 
 
 
-# 3.配置ldap连接
+## 3.配置ldap连接
 
 修改配置文件 `config.inc.php` 
 
@@ -213,7 +213,7 @@ docker restart self-service-password
 
 
 
-# 4.访问
+## 4.访问
 
 浏览器访问 `IP:8000`
 
@@ -221,7 +221,7 @@ docker restart self-service-password
 
 
 
-# 5.配置修改密码策略
+## 5.配置修改密码策略
 
 修改配置文件 `config.inc.php` 
 
@@ -278,7 +278,7 @@ $show_extended_error = true;
 
 
 
-# 6.配置邮件重置密码
+## 6.配置邮件重置密码
 
 **<span style={{color: 'red'}}>⚠️在self service password中使用邮箱重置密码功能的前提是邮箱必须是ldap中用户绑定的邮箱</span>**
 

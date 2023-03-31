@@ -4,7 +4,7 @@
 
 # ambari下载
 
-## 一、令人懵逼的网站
+## 1.令人懵逼的网站
 
 [ambari官网](http://ambari.apache.org/)
 
@@ -38,7 +38,7 @@
 
 
 
-## 二、下载hdp
+## 2.下载hdp
 
 :::tip
 
@@ -107,7 +107,7 @@ wget http://public-repo-1.hortonworks.com/HDP-GPL/centos7/3.x/updates/3.1.4.0/HD
 
 
 
-## 三、下载Ambari
+## 3.下载Ambari
 
 :::tip
 

@@ -4,13 +4,13 @@
 
 本文参考于[码云官方教程](https://gitea.pptfz.cn/help/articles/4193#article-header2)
 
-## 1.1 使用场景
+## 1.使用场景
 
 > 个人博客为gitbook，远程代码仓库用的是gitea，之前的做法是本机推送代码到gitea，然后手动登陆服务器进行gitbook构建，现在想做成自动化，即本机只需要推送代码到gitea，然后自动触发在gitea中配置的jenkins webhook进行gitbook构建
 
 
 
-## 1.2 简介
+## 2.简介
 
 > Gitee Jenkins Plugin 是Gitee基于 [GitLab Plugin](https://github.com/jenkinsci/gitlab-plugin) 开发的 Jenkins 插件。用于配置 Jenkins 触发器，接受Gitee平台发送的 WebHook 触发 Jenkins 进行自动化持续集成或持续部署，并可将构建状态反馈回Gitee平台。
 
@@ -35,9 +35,9 @@
 
 
 
-## 1.3 jenkins插件安装
+## 3.jenkins插件安装
 
-### 1.3.1 在线安装
+### 3.1 在线安装
 
 - 前往 `Manage Jenkins` -> `Manage Plugins` -> `Available`
 - 右侧 Filter 输入： `Gitee`
@@ -48,7 +48,7 @@
 
 
 
-### 1.3.2 手动安装
+### 3.2 手动安装
 
 - 从 [release](https://gitea.pptfz.cn/oschina/Gitee-Jenkins-Plugin/releases) 列表中进入最新发行版，下载对应的 XXX.hpi 文件
 - 前往 `Manage Jenkins` -> `Manage Plugins` -> `Advanced`
@@ -61,7 +61,7 @@
 
 
 
-## 1.4 插件配置
+## 4.插件配置
 
 **第一步、前往 `Jenkins` -> `Manage Jenkins` -> `Configure System` -> `Gitee Configuration` -> `Gitee connections`**
 
@@ -97,9 +97,9 @@
 
 
 
-## 1.5 jenkins配置
+## 5.jenkins配置
 
-### 1.5.1 新建构建任务
+### 5.1 新建构建任务
 
 前往 `Jenkins` -> `New Item` , name 输入 `gitbook`，选择 `Freestyle project` 保存即可创建构建项目。
 
@@ -109,7 +109,7 @@
 
 
 
-### 1.5.2 任务全局配置
+### 5.2 任务全局配置
 
 任务全局配置中需要选择前一步中的Gitee链接。前往某个任务（如`gitbook`）的 `Configure` -> `General`，`Gitee connection` 中选择前面所配置的Gitee链接
 
@@ -119,9 +119,9 @@
 
 
 
-### 1.5.3 源码管理配置
+### 5.3 源码管理配置
 
-#### 1.5.3.1 创建凭据
+#### 5.3.1 创建凭据
 
 在 `Manage Jenkins` -> `Manage Credentials` -> `Credentials` -> 选择 `Jenkins` 
 
@@ -160,7 +160,7 @@
 
 
 
-#### 1.5.3.2 源码管理相关配置
+#### 5.3.2 源码管理相关配置
 
 前往某个任务（如 `gitbook` ）的 `Configure` -> `Source Code Management` 选项卡
 
@@ -183,9 +183,9 @@
 
 
 
-### 1.5.4 触发器配置
+### 5.4 触发器配置
 
-#### 1.5.4.1 在giee中新建webhook
+#### 5.4.1 在giee中新建webhook
 
 [gitea webhook官方文档](https://gitea.pptfz.cn/help/categories/40)
 
@@ -239,7 +239,7 @@ gitea webhook中的url填写jenkins中 `Build Triggers` 下显示的地址
 
 
 
-#### 1.5.4.2 配置触发器构建
+#### 5.4.2 配置触发器构建
 
 前往任务配置的触发器构建： `Configure` -> `Build Triggers` 选项卡
 
@@ -251,7 +251,7 @@ gitea webhook中的url填写jenkins中 `Build Triggers` 下显示的地址
 
 
 
-### 1.5.5 验证
+### 5.5 验证
 
 在 `Build` 选项处，可以自定义webhook触发后执行的动作，这里以执行shell命令为例
 

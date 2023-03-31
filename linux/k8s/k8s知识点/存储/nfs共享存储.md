@@ -4,9 +4,9 @@
 
 
 
-# 1.安装配置nfs
+## 1.安装配置nfs
 
-## 1.1 安装nfs
+### 1.1 安装nfs
 
 ```shell
 yum -y install nfs-utils rpcbind
@@ -14,7 +14,7 @@ yum -y install nfs-utils rpcbind
 
 
 
-## 1.2 创建共享目录
+### 1.2 创建共享目录
 
 ```
 [ -d /data/nfs ] || mkdir -p /data/nfs && chown nfsnobody.nfsnobody /data/nfs
@@ -22,7 +22,7 @@ yum -y install nfs-utils rpcbind
 
 
 
-## 1.3 编辑配置文件
+### 1.3 编辑配置文件
 
 ```shell
 cat > /etc/exports << EOF
@@ -44,7 +44,7 @@ EOF
 
 
 
-## 1.4 启动nfs
+### 1.4 启动nfs
 
 ```shell
 systemctl start rpcbind nfs-server && systemctl enable rpcbind nfs-server
@@ -52,7 +52,7 @@ systemctl start rpcbind nfs-server && systemctl enable rpcbind nfs-server
 
 
 
-## 1.5 查看启动状态
+### 1.5 查看启动状态
 
 ```shell
 $ systemctl status rpcbind nfs-server
@@ -80,7 +80,7 @@ Nov 14 21:31:52 ctyun systemd[1]: Started NFS server and services.
 
 
 
-## 1.6 查看nfs共享记录信息
+### 1.6 查看nfs共享记录信息
 
 **nfs启动后会在 `/var/lib/nfs/etab` 文件中记录共享内容**
 
@@ -91,11 +91,11 @@ $ cat /var/lib/nfs/etab
 
 
 
-# 2.在k8s集群中使用nfs
+## 2.在k8s集群中使用nfs
 
-## 2.1 手动创建pv
+### 2.1 手动创建pv
 
-### 2.1.1 编辑yaml文件
+#### 2.1.1 编辑yaml文件
 
 :::tip说明
 
@@ -136,7 +136,7 @@ EOF
 
 
 
-### 2.1.2 创建pv pvc
+#### 2.1.2 创建pv pvc
 
 ```shell
 $ kubectl apply -f nfs-volume.yaml 
@@ -146,7 +146,7 @@ persistentvolumeclaim/nfs-pvc created
 
 
 
-### 2.1.3 查看pv pvc
+#### 2.1.3 查看pv pvc
 
 查看pv
 
@@ -168,7 +168,7 @@ nfs-pvc   Bound    nfs-pv   1Gi        RWO            manual         29s
 
 
 
-### 2.1.4 创建pod并引用创建的pvc
+#### 2.1.4 创建pod并引用创建的pvc
 
 编辑yaml文件
 
@@ -251,7 +251,7 @@ test-volumes
 
 
 
-## 2.2 通过StorageClass自动创建pv
+### 2.2 通过StorageClass自动创建pv
 
 :::tip说明
 
@@ -261,7 +261,7 @@ test-volumes
 
 
 
-### 2.2.1 安装 [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner) 
+#### 2.2.1 安装 [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner) 
 
 添加helm仓库
 
@@ -353,7 +353,7 @@ replicaset.apps/nfs-subdir-external-provisioner-69f5686876   1         1        
 
 
 
-### 2.2.2 自动创建pv
+#### 2.2.2 自动创建pv
 
 编辑yaml文件
 

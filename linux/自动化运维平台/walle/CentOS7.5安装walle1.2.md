@@ -18,7 +18,7 @@
 
 
 
-# 一、依赖
+## 1.依赖
 
 - **Bash(git、ssh)**
 - **意味着不支持win、mac的zsh**
@@ -30,9 +30,9 @@
 
 
 
-# 二、系统环境
+## 2.系统环境
 
-## 2.1系统版本
+### 2.1  系统版本
 
 ```python
 $ cat /etc/redhat-release 
@@ -41,7 +41,7 @@ CentOS Linux release 7.5.1804 (Core)
 
 
 
-## 2.2php版本
+### 2.2 php版本
 
 ```python
 $ php -v
@@ -55,9 +55,9 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
 
 
 
-# 三、安装步骤
+## 3. 安装步骤
 
-## 3.1更换系统yum源为阿里云yum源及添加epel源
+### 3.1更换系统yum源为阿里云yum源及添加epel源
 
 ```python
 //备份原有base源
@@ -76,7 +76,7 @@ yum makecache
 
 
 
-## 3.2安装php-7.2
+### 3.2 安装php-7.2
 
 ```python
 1.下载php7.2yum源
@@ -94,7 +94,7 @@ systemctl start php-fpm && systemctl enable php-fpm
 
 
 
-## 3.3安装mysql-5.7.22
+### 3.3 安装mysql-5.7.22
 
 [gitbook链接-安装msql-5.7.22](https://gitbook.pptfz.top/db/mysql/mysql%E5%9F%BA%E7%A1%80/4.CentOS7.5%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AE%89%E8%A3%85MySQL-5.7.22.html)
 
@@ -102,7 +102,7 @@ systemctl start php-fpm && systemctl enable php-fpm
 
 
 
-## 3.4安装nginx-1.14并编辑配置文件
+### 3.4 安装nginx-1.14并编辑配置文件
 
 ```python
 //添加nginx官方yum源
@@ -156,7 +156,7 @@ systemctl start nginx && systemctl enable nginx
 
 
 
-## 3.5安装ansible
+### 3.5 安装ansible
 
 ```python
 yum -y install ansible
@@ -164,7 +164,7 @@ yum -y install ansible
 
 
 
-## 3.6代码检出
+### 3.6 代码检出
 
 ```python
 //创建目录
@@ -176,7 +176,7 @@ git clone https://github.com/meolu/walle-web-v1.x.git .
 
 
 
-## 3.7设置mysql
+### 3.7 设置mysql
 
 ```python
 [root@walle walle-web]# pwd
@@ -192,7 +192,7 @@ mysql -uroot -p -e "create database walle"
 
 
 
-## 3.8安装composer，Composer 是 PHP5.3以上 的一个依赖管理工具
+### 3.8 安装composer，Composer 是 PHP5.3以上 的一个依赖管理工具
 
 ```python
 //下载安装脚本composer-setup.php到当前目录
@@ -210,7 +210,7 @@ mv composer.phar /usr/local/bin/composer
 
 
 
-## 3.9安装vendor
+### 3.9 安装vendor
 
 ```python
 omposer install --prefer-dist --no-dev --optimize-autoloader -vvvv
@@ -218,7 +218,7 @@ omposer install --prefer-dist --no-dev --optimize-autoloader -vvvv
 
 
 
-## 3.10初始化项目
+### 3.10 初始化项目
 
 ```python
 ./yii walle/setup
@@ -226,7 +226,7 @@ omposer install --prefer-dist --no-dev --optimize-autoloader -vvvv
 
 
 
-## 3.11绑定hosts文件
+### 3.11 绑定hosts文件
 
 ```python
 //windows
@@ -239,7 +239,7 @@ C:\Windows\System32\drivers\etc
 
 
 
-## 3.12浏览器访问my.walle1.com
+### 3.12 浏览器访问 `my.walle1.com`
 
 **初始化管理员账号密码为：admin/admin**
 
