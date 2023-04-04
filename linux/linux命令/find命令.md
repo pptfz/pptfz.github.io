@@ -4,7 +4,7 @@
 
 # find命令
 
-# 1.命令说明
+## 1.命令说明
 
 > **find**命令用来在指定目录下查找文件。
 >
@@ -12,7 +12,7 @@
 
 
 
-# 2.命令格式
+## 2.命令格式
 
 **find 查找范围 选项 操作** 
 
@@ -22,9 +22,9 @@
 
 
 
-# 3.命令选项
+## 3.命令选项
 
-## 3.1 -name	按照文件名查找
+### 3.1 -name	按照文件名查找
 
 ```python
 [root@exercise1 ~]# pwd
@@ -36,7 +36,7 @@
 
 
 
-## 3.2 -size	按照文件大小查找
+### 3.2 -size	按照文件大小查找
 
 **符号**
 
@@ -117,7 +117,7 @@ total 144K
 
 
 
-## 3.3 -user	按照文件所有者查找
+### 3.3 -user	按照文件所有者查找
 
 ```python
 //查找文件所有者为gun的文件
@@ -146,9 +146,9 @@ find: `/proc/5507/fdinfo/5': No such file or directory
 
 
 
-## 3.4 -perm	按照文件权限查找
+### 3.4 -perm	按照文件权限查找
 
-### 3.4.1 mode	表示精确匹配
+#### 3.4.1 mode	表示精确匹配
 
 ```python
 //查找权限为755的文件或目录
@@ -165,7 +165,7 @@ drwxr-xrw- 2 root root 4096 Aug  9 15:23 dir3
 
 
 
-### 3.4.2 -mode	表示权限每一位至少匹配
+#### 3.4.2 -mode	表示权限每一位至少匹配
 
 ```python
 //示例：find . -perm -111 表示所有者，所属组，其他人都至少有执行权限
@@ -183,7 +183,7 @@ drwxr-xrw- 2 root root 4096 Aug  9  2018 dir3
 
 
 
-### 3.4.3 +mode	表示权限只要有一位匹配即可
+#### 3.4.3 +mode	表示权限只要有一位匹配即可
 
 ```python
 //示例：find . -perm +111 表示所有者，所属组，其他人任意一个有执行权限就可以
@@ -203,7 +203,7 @@ drwxr-xrw- 2 root root 4096 Aug  9  2018 dir3
 
 
 
-## 3.5 -type	按照文件类型查找
+### 3.5 -type	按照文件类型查找
 
 **文件类型**
 
@@ -231,7 +231,7 @@ drwxr-xrw- 2 root root 4096 Aug  9  2018 dir3
 
 
 
-## 3.6 按照时间戳查找
+### 3.6 按照时间戳查找
 
 > +n	表示最近一次修改是在n天之前(常用，用于删除n天前的日志)
 >
@@ -265,7 +265,7 @@ drwxr-xrw- 2 root root 4096 Aug  9  2018 dir3
 
 
 
-## 3.7 -name	按照文件名查找
+### 3.7 -name	按照文件名查找
 
 ```python
 //查找/tmp中以.txt结尾的文件
@@ -284,7 +284,7 @@ drwxr-xrw- 2 root root 4096 Aug  9  2018 dir3
 
 
 
-## 3.8 -regex	基于正则表达式匹配文件
+### 3.8 -regex	基于正则表达式匹配文件
 
 ```python
 [root@exercise1 test]# ls
@@ -297,7 +297,7 @@ drwxr-xrw- 2 root root 4096 Aug  9  2018 dir3
 
 
 
-## 3.9 -maxdepth	向下最大深度限制为n(n代笔数字)
+### 3.9 -maxdepth	向下最大深度限制为n(n代笔数字)
 
 ```python
 //当前目录
@@ -327,7 +327,7 @@ drwxr-xrw- 2 root root 4096 Aug  9  2018 dir3
 
 
 
-## 3.10 -mindepth	搜索出深度距离当前目录至少n个子目录的所有文件
+### 3.10 -mindepth	搜索出深度距离当前目录至少n个子目录的所有文件
 
 ```python
 [root@exercise1 test]# tree .
@@ -368,7 +368,7 @@ drwxr-xrw- 2 root root 4096 Aug  9  2018 dir3
 [root@tencent test]#
 ```
 
-## 3.11 find逻辑运算符
+### 3.11 find逻辑运算符
 
 | **符号**      | **作用** |
 | :------------ | :------- |
@@ -378,9 +378,9 @@ drwxr-xrw- 2 root root 4096 Aug  9  2018 dir3
 
 
 
-# 4.操作
+## 4.操作
 
-## 4.1 -exec	执行命令	{}表示前边匹配的内容	\;是固定格式
+### 4.1 -exec	执行命令	{}表示前边匹配的内容	\;是固定格式
 
 ```python
 查找/tmp以.txt结尾的文件并删除
@@ -394,7 +394,7 @@ drwxr-xrw- 2 root root 4096 Aug  9  2018 dir3
 
 
 
-## 4.2 -ok	功能与-exec相同，执行命令前会提示是否执行
+### 4.2 -ok	功能与-exec相同，执行命令前会提示是否执行
 
 ```python
 查找/tmp以.txt结尾的文件并删除

@@ -12,14 +12,6 @@
 
 
 
-国内源
-
-[brew安装gitee地址](https://gitee.com/cunkai/HomebrewCN)
-
-```shell
-/bin/zsh -c "$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)"
-```
-
 
 
 ## brew替换国内源
@@ -28,60 +20,4 @@
 
 
 
-### 替换 `brew.git`
-
-```shell
-cd "$(brew --repo)"
-git remote set-url origin https://mirrors.ustc.edu.cn/brew.git
-```
-
-
-
-### 替换 `homebrew-core.git`
-
-```shell
-cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-git remote set-url origin https://mirrors.ustc.edu.cn/homebrew-core.git
-```
-
-
-
-### 替换 `homebrew-bottles`
-
-```shell
-echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.bash_profile
-source ~/.bash_profile
-```
-
-
-
-### 应用生效
-
-```shell
-brew update
-```
-
-
-
-
-
-## 重置brew
-
-### 重置 `brew.git`
-
-```shell
-cd "$(brew --repo)"
-git remote set-url origin https://github.com/Homebrew/brew.git
-```
-
-
-
-### 重置 `homebrew-core.git`
-
-```shell
-cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
-git remote set-url origin https://github.com/Homebrew/homebrew-core.git
-```
-
-
-
+[清华大学brew安装配置说明文档](https://mirrors4.tuna.tsinghua.edu.cn/help/homebrew/)

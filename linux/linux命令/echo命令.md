@@ -4,21 +4,21 @@
 
 # echo命令
 
-# 1.命令说明
+## 1.命令说明
 
 > **echo命令**用于在shell中打印shell变量的值，或者直接输出指定的字符串
 
 
 
-# 2.命令格式
+## 2.命令格式
 
 **echo [选项] [参数]**
 
 
 
-# 3.常用选项
+## 3.常用选项
 
-## 3.1 `-n`	不输出换行
+### 3.1 `-n`	不输出换行
 
 ```python
 [root@aliyun ~]# echo -n hehe
@@ -27,7 +27,7 @@ hehe[root@aliyun ~]#
 
 
 
-## 3.2 `-e`	使转移字符生效
+### 3.2 `-e`	使转移字符生效
 
 | 字符 | 含义                                 |
 | ---- | ------------------------------------ |
@@ -44,7 +44,7 @@ hehe[root@aliyun ~]#
 
 
 
-### 3.2.1 `\n`	换行
+#### 3.2.1 `\n`	换行
 
 ```shell
 [root@exercise1 ~]# echo -e 'hehe\nhehe'
@@ -54,7 +54,7 @@ hehe
 
 
 
-### 3.2.2 `\t`	输出制表符
+#### 3.2.2 `\t`	输出制表符
 
 ```shell
 [root@exercise1 ~]# echo -e 'hehe\thehe'
@@ -63,7 +63,7 @@ hehe    hehe
 
 
 
-### 3.2.3 `\c`	不换行
+#### 3.2.3 `\c`	不换行
 
 ```shell
 [root@exercise1 ~]# echo -e 'hehehehe\c'
@@ -72,7 +72,7 @@ hehehehe[root@exercise1 ~]#
 
 
 
-### 3.2.4 `\v`	垂直制表符
+#### 3.2.4 `\v`	垂直制表符
 
 ```shell
 [root@exercise1 ~]# echo -e 'hehe\vhehe'
@@ -82,7 +82,7 @@ hehe
 
 
 
-### 3.2.5 `\e`	
+#### 3.2.5 `\e`	
 
 :::tip
 
@@ -106,15 +106,15 @@ hehe
 
 
 
-# 4.bash里面的颜色
+## 4.bash里面的颜色
 
-## 4.1设置前景颜色
+### 4.1 设置前景颜色
 
 ![iShot_2022-08-30_15.07.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_15.07.30.png)
 
 
 
-## 4.2设置背景颜色
+### 4.2 设置背景颜色
 
 ![iShot_2022-08-30_15.38.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_15.38.59.png)
 
@@ -134,7 +134,7 @@ hehe
 
 
 
-## 4.3其他设置
+### 4.3 其他设置
 
 | 编码   | 颜色/动作                                |
 | ------ | ---------------------------------------- |

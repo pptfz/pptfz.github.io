@@ -4,13 +4,13 @@
 
 # Linux用户登录记录日志和相关查看命令总结
 
-# 1.Linux用户登录信息放在三个文件中
+## 1.Linux用户登录信息放在三个文件中
 
 > utmp、wtmp、btmp文件
 
 
 
-## 1.1/var/run/utmp
+### 1.1 /var/run/utmp
 
 **记录当前正在登录系统的用户信息，默认由who和w记录当前登录用户的信息，uptime记录系统启动时间；**
 
@@ -34,7 +34,7 @@ root     pts/0    12.66.1.11   17:17    3.00s  0.32s  0.32s -bash
 
 
 
-## 1.2/var/log/wtmp
+### 1.2 /var/log/wtmp
 
 **记录当前正在登录和历史登录系统的用户信息，默认由last命令查看；**
 
@@ -56,7 +56,7 @@ root     pts/0        12.66.16.12   Mon Oct 28 15:22 - 20:20  (04:57)
 
 
 
-## 1.3/var/log/btmp
+### 1.3 /var/log/btmp
 
 **记录失败的登录尝试信息，默认由lastb命令查看**
 
@@ -90,13 +90,13 @@ btmp begins Fri Nov  1 03:49:01 2019
 
 
 
-# 2.相关命令
+## 2.相关命令
 
 **下面介绍查看这三个日志文件的命令，分别是lastlog、last、lastb、ac、who、w、users、utmpdump**
 
 **其中last、lastb、who、utmpdump可以通过指定参数而查看三个中的任意一个文件**
 
-## 2.1 lastlog
+### 2.1 lastlog
 
 > 列出所有用户最近登录的信息，或者指定用户的最近登录信息。lastlog引用的是/var/log/lastlog文件中的信息，包括login-name、port、last login time
 
@@ -122,7 +122,7 @@ nobody                                     **Never logged in**
 
 
 
-## 2.2 last
+### 2.2 last
 
 > **列出当前和曾经登入系统的用户信息，它默认读取的是/var/log/wtmp文件的信息。**
 >
@@ -148,7 +148,7 @@ root     pts/1        23.6.55.122   Mon Oct 28 20:19 - 00:54  (04:35)
 
 
 
-## 2.3 lastb
+### 2.3 lastb
 
 > **列出失败尝试的登录信息，和last命令功能完全相同，只不过它默认读取的是/var/log/btmp文件的信息**
 >
@@ -164,7 +164,7 @@ btmp begins Fri Nov  1 03:49:01 2019
 
 
 
-## 2.4 ac
+### 2.4 ac
 
 > **输出所有用户总的连接时间，默认单位是小时。由于ac是基于wtmp统计的，所以修改或者删除wtmp文件都会使ac的结果受影响。(Suse默认没有该命令)**
 
@@ -178,7 +178,7 @@ yum -y install psacct
 
 
 
-## 2.5 who
+### 2.5 who
 
 > **查看当前登入系统的用户信息**
 >
@@ -200,7 +200,7 @@ NAME     LINE         TIME             IDLE          PID COMMENT
 
 
 
-## 2.6 w
+### 2.6 w
 
 > **查看当前登入系统的用户信息及用户当前的进程（而who命令只能看用户不能看进程）**
 >
@@ -220,7 +220,7 @@ root     pts/1    23.66.1.2   21:17    4.00s  0.04s  0.00s w
 
 
 
-## 2.7 users
+### 2.7 users
 
 > **显示当前正在登入系统的用户名**
 >
@@ -237,7 +237,7 @@ root root
 
 
 
-## 2.8 utmpdump
+### 2.8 utmpdump
 
 > utmpdump用于转储二进制日志文件到文本格式的文件以便查看，同时也可以修改二进制文件！！
 >

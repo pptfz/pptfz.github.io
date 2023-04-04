@@ -4,7 +4,7 @@
 
 # vim进阶
 
-# vim进阶一	使用F1键执行文件
+## vim进阶一	使用F1键执行文件
 
 **vim是一个类似于Vi的著名的功能强大、高度可定制的文本编辑器**
 
@@ -16,7 +16,7 @@
 
 
 
-## 1.创建并编辑当前用户的vim配置文件
+### 1.创建并编辑当前用户的vim配置文件
 
 **vim ~/.vimrc**
 
@@ -45,7 +45,7 @@ endfunc
 
 
 
-## 2.编辑脚本，并进行测试
+### 2.编辑脚本，并进行测试
 
 **//编辑测试脚本**
 
@@ -71,7 +71,7 @@ echo "test"
 
 
 
-# vim进阶二	linux脚本自动添加脚本头
+## vim进阶二	linux脚本自动添加脚本头
 
 **编辑当前用户vim配置文件**
 
@@ -133,7 +133,7 @@ autocmd bufnewfile *.sh call HappyShell()
 
 
 
-# vim进阶三	vim编辑python脚本时Tab补全
+## vim进阶三	vim编辑python脚本时Tab补全
 
 **使用Linux写python脚本的时候，初期最痛苦的是什么？当然是各种库的不熟悉，知道了库，里面的方法还要挨个看，挨个记。**
 
@@ -145,7 +145,7 @@ autocmd bufnewfile *.sh call HappyShell()
 
 
 
-## 第一步、安装git
+### 第一步、安装git
 
 ```python
 [root@web01 ~]# yum -y install git
@@ -153,7 +153,7 @@ autocmd bufnewfile *.sh call HappyShell()
 
 
 
-## 第二步、创建当前用户隐藏vim目录，并进入到这个目录
+### 第二步、创建当前用户隐藏vim目录，并进入到这个目录
 
 ```python
 [root@web01 ~]# mkdir ~/.vim ; cd ~/.vim
@@ -161,7 +161,7 @@ autocmd bufnewfile *.sh call HappyShell()
 
 
 
-## 第三步、使用git克隆下插件包（也可提前下载好，copy进来）
+### 第三步、使用git克隆下插件包（也可提前下载好，copy进来）
 
 ```python
 [root@web01 .vim]# git clone https://github.com/rkulla/pydiction.git
@@ -170,7 +170,7 @@ autocmd bufnewfile *.sh call HappyShell()
 
 
 
-## 第四步、编辑vim配置文件，并添加如下内容
+### 第四步、编辑vim配置文件，并添加如下内容
 
 ```python
 [root@web01 .vim]# vim ~/.vimrc
@@ -185,7 +185,7 @@ let g:pydiction_menu_height = 10
 
 
 
-## 第五步、编辑python脚本，进行测试
+### 第五步、编辑python脚本，进行测试
 
  **编辑python脚本，然后输入库名，然后tab补齐即可**
 
