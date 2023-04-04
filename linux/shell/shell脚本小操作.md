@@ -6,7 +6,7 @@
 
 
 
-# 一、获取本机公网IP
+## 1.获取本机公网IP
 
 **场景：**
 
@@ -80,7 +80,7 @@ $ curl myip.dnsomatic.com
 
 
 
-# 二、获取脚本绝对路径
+## 2.获取脚本绝对路径
 
 ```python
 #编辑脚本
@@ -96,7 +96,7 @@ $ sh /usr/src/test.sh
 
 
 
-# 三、获取脚本执行时间
+## 3.获取脚本执行时间
 
 ```python
 #编辑脚本
@@ -117,7 +117,7 @@ The execution time of this script is 3s .050min
 
 
 
-# 四、shell脚本中精准过滤进程
+## 4.shell脚本中精准过滤进程
 
 **示例：过滤crond进程，会把grep命令同样显示出来**
 
@@ -141,7 +141,7 @@ root       771  0.0  0.0 126388  1616 ?        Ss   08:57   0:00 /usr/sbin/crond
 
 
 
-# 五、shell显示ok或者faild
+## 5.shell显示ok或者faild
 
 ```python
 #编辑脚本

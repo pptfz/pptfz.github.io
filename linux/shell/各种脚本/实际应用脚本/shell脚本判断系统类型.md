@@ -4,13 +4,13 @@
 
 # shell脚本判断系统类型
 
-## 一、场景说明
+## 1.场景说明
 
 在生产环境中服务器的系统类型可能会有多种，例如有CentOS、Ubuntu、Debian等等，在做批量操作(如shell脚本、ansible等)的时候就需要对服务器等系统类型做判断，然后执行不同的命令，例如执行安装命令，CentOS系统执行 `yum` 命令，Ubuntu、Debian执行 `apt` 命令
 
 
 
-## 二、判断方法
+## 2.判断方法
 
 这里以常用的Ubuntu和CentOS为例
 
@@ -107,7 +107,7 @@ LSB Version:	core-9.20160110ubuntu0.2-amd64:core-9.20160110ubuntu0.2-noarch:secu
 
 
 
-## 三、最佳判断方法
+## 3.最佳判断方法
 
 在生产我们常用的方法就是根据 `/etc/os-release` 返回的内容进行判断
 

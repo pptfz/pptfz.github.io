@@ -1,6 +1,6 @@
 # shell循环控制语句之while、until
 
-# 一、while
+## 1.while
 
 **语法**
 
@@ -62,7 +62,7 @@ done
 
 
 
-# 二、until
+## 2.until
 
 **语法**
 

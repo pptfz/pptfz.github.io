@@ -4,7 +4,7 @@
 
 # expect自动化交互式程序
 
-# 一、expect简介
+## 1.expect简介
 
 **什么是expect**
 
@@ -46,7 +46,7 @@ Enter file in which to save the key (/root/.ssh/id_rsa):
 
 
 
-# 二、expect简单使用示例
+## 2.expect简单使用示例
 
 **示例：免交互ssh连接服务器**
 
@@ -114,9 +114,9 @@ root@10.0.0.31's password:
 
 
 
-# 三、expect程序自动交互的重要命令
+## 3.expect程序自动交互的重要命令
 
-## 3.1 spawn命令
+### 3.1 spawn命令
 
 **在expect自动交互程序执行的过程中，`spawn`命令是一个开始就需要使用的命令，通过`spawn`执行一个命令或程序，之后所有的expect操作都会在这个执行过的命令或程序进程中进行，包括自动交互功能，因此如果没有`spawn`命令，expect程序将会无法实现自动交互**
 
@@ -144,9 +144,9 @@ spawn ssh root@10.0.0.100 uptime
 
 
 
-## 3.2 expect命令
+### 3.2 expect命令
 
-### 3.2.1 expect命令说明
+#### 3.2.1 expect命令说明
 
 **在expect自动交互程序的执行过程中，当使用`spawn`命令执行一个命令或者程序之后，会提示某些交互式信息，`expect`命令的作用就是获取`spawn`命令执行后的信息，查看是否和其事先自定的相匹配，一旦匹配上指定的内容就执行expect后面的动作，expect命令也有一些选项，相对用的多的是`-re`，表示使用正则表达式的方式来匹配**
 
@@ -173,7 +173,7 @@ expect "*password" (send 1\r)
 
 ### 3.2.2 expect命令实践
 
-#### 3.2.2.1 实践示例1
+##### 3.2.2.1 实践示例1
 
 **执行ssh命令远程获取服务器负载值和eth0网卡，并自动输入`yes`及用户名密码**
 
@@ -232,7 +232,7 @@ root@10.0.0.31's password:
 
 
 
-#### 3.2.2.2 实践示例2
+##### 3.2.2.2 实践示例2
 
 **利用expect相应shell脚本中的多个read读入**
 
@@ -295,7 +295,7 @@ your name is xiaoming,your password is 1,your email is 1@qq.com.
 
 
 
-## 3.3 send命令
+### 3.3 send命令
 
 **`send`命令和`exp_send`命令用法类似，即在expect命令后匹配指定的字符串后，发送指定的字符串给系统，这些命令可以支持一些特殊转义符号，例如`\r(回车)`、`\n(换行)`、`\t(制表符)`**
 
@@ -338,7 +338,7 @@ EOF
 
 
 
-## 3.4 exp_continue命令
+### 3.4 exp_continue命令
 
 **`exp_continue`命令一般处于`expect`命令中，属于一种动作命令，一般用在匹配多次字符串的动作中，从命令的拼写就可以看出命令的作用，即让expect程序继续匹配的意思**
 
@@ -374,7 +374,7 @@ EOF
 
 
 
-## 3.5 send_user命令
+### 3.5 send_user命令
 
 **`send_user`命令可以用来打印expect脚本信息，类似shell里的`echo`命令，并且有`echo -e`的功能，而默认的`send`、`exp_send`命令都是将字符串输出到expect程序中去**
 
@@ -406,7 +406,7 @@ i like play basketbal.
 
 
 
-## 3.6 exit命令
+### 3.6 exit命令
 
 **`exit`命令的功能类似于shell中的exit，即直接退出expect脚本，除了最基本的退出脚本功能外，还可以利用这个命令对脚本做一些关闭前的清理和提示等工作**
 
@@ -440,7 +440,7 @@ goog bye.
 
 
 
-## 3.7 expect常用命令总结
+### 3.7 expect常用命令总结
 
 
 
@@ -457,9 +457,9 @@ goog bye.
 
 
 
-# 四、expect程序变量
+## 4.expect程序变量
 
-## 4.1 普通变量
+### 4.1 普通变量
 
 **定义语法**
 
@@ -509,7 +509,7 @@ password is 123
 
 
 
-## 4.2 特殊参数变量
+### 4.2 特殊参数变量
 
 **在expect里也有与shell脚本里的`$0`、`$1`、`$#`等类似的特殊参数变量，用于接收及控制expect脚本传参**
 
@@ -587,7 +587,7 @@ $ expect special-other.exp access.log 10.0.0.100 /tmp
 
 
 
-# 五、expect程序中的if条件语句
+## 5.expect程序中的if条件语句
 
 **语法**
 
@@ -650,11 +650,11 @@ $ expect if.exp access.log 10.0.0.100 tmp
 
 
 
-# 六、expect中的关键字
+## 6.expect中的关键字
 
 **expect中的特殊关键字用于匹配过程，代表某些特殊的含义或状态，一般只用于`expect`命令中而不能在`expect`命令外面单独使用**
 
-## 6.1 eof关键字
+### 6.1 eof关键字
 
 **`eof(end-of-line)`关键字用于匹配结束符，即在expect脚本中的最后声明**
 
@@ -675,7 +675,7 @@ expect eof
 
 
 
-## 6.2 timeout关键字
+### 6.2 timeout关键字
 
 **`timeout`是expect中的一个控制时间的关键字变量，它是一个全局性的时间控制开关，可以通过为这个变量赋值来规定整个expect操作的时间，注意这个变量是服务于expect全局的，而不是某一条命令，即使命令没有任何错误，到了时间仍然会激活这个变量，此外，到时间后还会激活一个处理及提示信息开关**
 
@@ -727,7 +727,7 @@ root@10.0.0.31's password: request timeout
 
 
 
-# 七、expect综合示例
+## 7.expect综合示例
 
 **批量分发ssh密钥示例**
 

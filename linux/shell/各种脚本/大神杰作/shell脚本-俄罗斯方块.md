@@ -1,4 +1,4 @@
-shell脚本 俄罗斯方块
+shell脚本-俄罗斯方块
 
 ```shell
 #!/bin/bash

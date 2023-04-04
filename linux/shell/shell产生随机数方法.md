@@ -4,7 +4,7 @@
 
 # shell产生随机数方法
 
-# 方法1：通过系统环境变量（$RANDOM）实现
+## 方法1：通过系统环境变量（$RANDOM）实现
 
 **示例**
 
@@ -30,7 +30,7 @@ a0c30ca1ee50e4ad15a103d18b59bd16  -
 
 
 
-# 方法2：通过openssl产生随机数
+## 方法2：通过openssl产生随机数
 
 -base64	使用-base64位编码格式	
 
@@ -64,7 +64,7 @@ nAFsTVLvVBtREw==
 
 
 
-# 方法3：通过date获得随机数
+## 方法3：通过date获得随机数
 
 **示例**
 
@@ -89,7 +89,7 @@ $ date +%N
 
 
 
-# 方法4：通过/dev/urandom配合chksum生成随机数
+## 方法4：通过/dev/urandom配合chksum生成随机数
 
 **/dev/random设备存储着系统当前运行环境的实时数据，它可以看作系统在某个时候的唯一值，因此可以用作随机数元数据，可以通过文件读取的方式读到里面的数据，/dev/urandom这个设备的数据与random里的一样，只是它是非阻塞的随机数发生器，读取操作不会不会产生阻塞**
 
@@ -110,7 +110,7 @@ $ head /dev/urandom | cksum
 
 
 
-# 方法5：通过UUID生成随机数
+## 方法5：通过UUID生成随机数
 
 **UUID码全称是通用唯一标识码（Universally Unique Identifier,UUID）,它是一个软件建库的标准，亦为自由软件基金会（Open Software Foundation,OSF）的组织在分布式计算环境（Distributed Computing Enviroment,DCE）领域的一部分，UUID的目的是让分布式系统中的所有元素都能有唯一的的辨识信息，而不需要通过中央控制端来做辨识信息的指定**
 
@@ -133,7 +133,7 @@ $ cat /proc/sys/kernel/random/uuid
 
 
 
-# 方法6：使用expect附带的mkpasswd生成随机数
+## 方法6：使用expect附带的mkpasswd生成随机数
 
 **mkpasswd依赖于包expect，因此需要先安装expect包**
 

@@ -2,9 +2,7 @@
 
 
 
-# CentOS7安装zabbix5.2
-
-# 二、docker-compose安装
+# docker-compose安装zabbix5.2
 
 [zabbix官方安装文档](https://www.zabbix.com/documentation/current/manual/installation/containers)
 
@@ -12,7 +10,7 @@
 
 
 
-## 2.1 下载代码
+## 1.下载代码
 
 ```sh
 git clone https://github.com.cnpmjs.org/zabbix/zabbix-docker.git
@@ -20,7 +18,7 @@ git clone https://github.com.cnpmjs.org/zabbix/zabbix-docker.git
 
 
 
-## 2.2 检出分支，这里选择最新版5.2
+## 2.检出分支，这里选择最新版5.2
 
 ```sh
 cd zabbix-docker/
@@ -29,7 +27,7 @@ git checkout 5.2
 
 
 
-### 2.2.1 yaml文件说明
+### 2.1 yaml文件说明
 
 一共有12个yaml文件，每个yaml文件官方都有[说明](https://www.zabbix.com/documentation/current/manual/installation/containers)
 
@@ -82,9 +80,9 @@ git checkout 5.2
 
 
 
-## 2.3 启动
+### 2.2 启动
 
-### 2.3.1 修改yaml文件
+#### 2.2.1 修改yaml文件
 
 - **任意选择一个yaml文件，需要做一些修改，zabbix-proxy、zabbix-web选择一个即可，修改后的`docker-compose_v3_alpine_mysql_latest.yaml`如下**
 
@@ -589,7 +587,7 @@ secrets:
 
 
 
-### 2.3.2 拷贝相关目录、文件
+#### 2.2.2 拷贝相关目录、文件
 
 > 下载的官方代码中不是所有文件都是必须的
 
@@ -632,7 +630,7 @@ cp docker-compose_v3_alpine_mysql_latest.yaml /data/docker-project/zabbix/docker
 
 
 
-### 2.3.3 启动
+#### 2.2.3 启动
 
 ```sh
 cd /data/docker-project/zabbix

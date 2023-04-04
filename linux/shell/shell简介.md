@@ -4,7 +4,7 @@
 
 # shell简介
 
-# 一、什么是shell
+## 1.什么是shell
 
 Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。
 
@@ -32,7 +32,7 @@ Ken Thompson 的 sh 是第一种 Unix Shell，Windows Explorer 是一个典型�
 
 
 
-## Shell 脚本
+### Shell 脚本
 
 Shell 脚本（shell script），是一种为 shell 编写的脚本程序。
 
@@ -42,7 +42,7 @@ Shell 脚本（shell script），是一种为 shell 编写的脚本程序。
 
 
 
-## Shell 环境
+### Shell 环境
 
 Shell 编程跟 JavaScript、php 编程一样，只要有一个能编写代码的文本编辑器和一个能解释执行的脚本解释器就可以了。
 
@@ -61,11 +61,11 @@ Linux 的 Shell 种类众多，常见的有：
 
 
 
-# 二、shell分类
+## 2.shell分类
 
-## 2.1 交互分类
+### 2.1 交互分类
 
-### 2.1.1 交互式shell
+#### 2.1.1 交互式shell
 
 交互式：顾名思义就是 shell 与用户存在交互，
 
@@ -75,7 +75,7 @@ Linux 的 Shell 种类众多，常见的有：
 
 
 
-### 2.1.2 非交互式shell
+#### 2.1.2 非交互式shell
 
 非交互式：即 shell 与用户不存在交互，而是以 `shell script` 的方式执行的。
 
@@ -91,16 +91,16 @@ EOF
 
 
 
-## 2.2 登陆分类
+### 2.2 登陆分类
 
-### 2.2.1 登陆式shell
+#### 2.2.1 登陆式shell
 
 - 登录 shell 是指需要用户名、密码登录后进入的 shell，或者通过 `--login` 选项生成的 shell 
 - su - username
 
 
 
-### 2.2.2 非登陆式shell
+#### 2.2.2 非登陆式shell
 
 - 非登录式 shell 是指不需要输入用户名和密码即可打开的 shell，比如输入命令 `bash`或者`sh` 就能进入一个全新的非登录 shell
 
@@ -111,7 +111,7 @@ EOF
 
 
 
-### 2.2.3 区分登陆式shell和非登陆式shell
+#### 2.2.3 区分登陆式shell和非登陆式shell
 
 区分方法一	可以通过查看 `$0` 的值，登录式 shell 返回 `-bash`，而非登录式 shell 返回的是 `bash` 
 
@@ -172,7 +172,7 @@ bash: logout: 不是登录shell: 使用 `exit'
 
 
 
-# 三、shell的配置文件
+## 3.shell的配置文件
 
 登录式shell 读取配置 文件过程：
 **/etc/profile –> /etc/profile.d/*.sh –> ~ /.bash_profile –> ~ /bashrc –> /etc/bashrc**
@@ -182,7 +182,7 @@ bash: logout: 不是登录shell: 使用 `exit'
 
 
 
-## 3.1 bash的配置文件
+### 3.1 bash的配置文件
 
 - 全局配置文件
   - /etc/profile
@@ -206,9 +206,9 @@ bashrc类文件配置作用
 
 
 
-## 3.2 各shell读取配置文件过程
+### 3.2 各shell读取配置文件过程
 
-### 3.2.1 bash
+#### 3.2.1 bash
 
 1、交互式的登录shell （bash –il test.sh）
 载入的信息：
@@ -237,7 +237,7 @@ $BASH_ENV
 
 
 
-### 3.2.2 sh
+#### 3.2.2 sh
 
 1、交互式的登录shell （sh –il test.sh）
 载入的信息：
@@ -265,5 +265,4 @@ nothing
 交互/非交互/登录/非登录，这四种 shell 主要区别在于：是否载入相关配置文件！
 
 这些配置的载入与否，导致了 Linux 很多默认选项的差异。
-
 

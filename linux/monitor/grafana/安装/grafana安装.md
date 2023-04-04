@@ -16,9 +16,9 @@
 
 
 
-# 1.rpm包安装
+## 1.rpm包安装
 
-## 1.1 下载安装包并安装
+### 1.1 下载安装包并安装
 
 ```python
 wget https://dl.grafana.com/oss/release/grafana-7.0.3-1.x86_64.rpm
@@ -27,7 +27,7 @@ yum -y localinstall grafana-7.0.3-1.x86_64.rpm
 
 
 
-## 1.2 启动服务并设置开机自启
+### 1.2 启动服务并设置开机自启
 
 - **grafana默认监听TCP/3000端口**
 
@@ -37,7 +37,7 @@ systemctl enable grafana-server && systemctl start grafana-server
 
 
 
-## 1.3 grafana配置文件路径说明
+### 1.3 grafana配置文件路径说明
 
 [官方文档中对于grafana配置文件路径的说明](https://grafana.com/docs/grafana/latest/installation/rpm/)
 
@@ -54,13 +54,13 @@ systemctl enable grafana-server && systemctl start grafana-server
 
 
 
-# 2.yum安装
+## 2.yum安装
 
 [yum安装官方文档](https://grafana.com/docs/grafana/latest/installation/rpm/#install-from-yum-repository)
 
 
 
-## 2.1 编辑yum源
+### 2.1 编辑yum源
 
 ```shell
 cat > /etc/yum.repos.d/grafana.repo <<EOF
@@ -78,7 +78,7 @@ EOF
 
 
 
-## 2.2 安装
+### 2.2 安装
 
 ```shell
 # 默认安装最新版
@@ -90,7 +90,7 @@ yum -y install grafana-7.5.0
 
 
 
-## 2.3 启动
+### 2.3 启动
 
 ```
 systemctl start grafana-server && systemctl enable grafana-server
@@ -100,9 +100,9 @@ systemctl start grafana-server && systemctl enable grafana-server
 
 
 
-# 3.docker安装
+## 3.docker安装
 
-## 3.1 安装并启动容器
+### 3.1 安装并启动容器
 
 [官方安装文档](https://grafana.com/grafana/download?edition=oss&pg=get&platform=docker&plcmt=selfmanaged-box1-cta1)中安装的grafana并没有做持久化
 
@@ -136,9 +136,9 @@ docker run \
 
 
 
-# 4.二进制安装
+## 4.二进制安装
 
-## 4.1 下载二进制包
+### 4.1 下载二进制包
 
 ```shell
 wget https://dl.grafana.com/oss/release/grafana-8.0.2.linux-amd64.tar.gz
@@ -146,7 +146,7 @@ wget https://dl.grafana.com/oss/release/grafana-8.0.2.linux-amd64.tar.gz
 
 
 
-## 4.2 启动
+### 4.2 启动
 
 ```shell
 # 解压缩二进制包
@@ -159,7 +159,7 @@ cd grafana-8.0.2/
 
 
 
-# 3.登陆grafana
+## 3.登陆grafana
 
 **浏览器访问 `IP:3000`**
 

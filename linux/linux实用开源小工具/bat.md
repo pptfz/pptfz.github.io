@@ -8,7 +8,7 @@
 
 
 
-# 1.简介
+## 1.简介
 
 官方对于 bat 的解释
 
@@ -54,9 +54,9 @@
 
 
 
-# 2.安装
+## 2.安装
 
-## 2.1 下载安装包
+### 2.1 下载安装包
 
 在 [官方releases](https://github.com/sharkdp/bat/releases)  中下载安装包
 
@@ -70,7 +70,7 @@ wget https://github.com/sharkdp/bat/releases/download/v0.18.1/bat-v0.18.1-x86_64
 
 
 
-## 2.2 解压缩、修改文件名称
+### 2.2 解压缩、修改文件名称
 
 ```shell
 tar xf bat-v0.18.1-x86_64-unknown-linux-musl.tar.gz -C /usr/local/
@@ -79,7 +79,7 @@ tar xf bat-v0.18.1-x86_64-unknown-linux-musl.tar.gz -C /usr/local/
 
 
 
-## 2.3 导出命令
+### 2.3 导出命令
 
 ```shell
 ln -s /usr/local/bat-v0.18.1/bat /usr/bin
@@ -87,7 +87,7 @@ ln -s /usr/local/bat-v0.18.1/bat /usr/bin
 
 
 
-## 2.4 查看版本
+### 2.4 查看版本
 
 ```shell
 $ bat --version
@@ -96,9 +96,9 @@ bat 0.18.1
 
 
 
-# 3.使用
+## 3.使用
 
-## 3.1 查看主题
+### 3.1 查看主题
 
 使用 `bat --list-themes` 获取语法高亮显示的所有可用主题的列表
 
@@ -106,7 +106,7 @@ bat 0.18.1
 
 
 
-## 3.2 使用主题
+### 3.2 使用主题
 
 **使用命令 `bat --theme=主题名` 指定主题**
 
