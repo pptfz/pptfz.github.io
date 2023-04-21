@@ -4,13 +4,13 @@
 
 # mysql字符集
 
-# 1.字符集定义
+## 1.字符集定义
 
 <h4>字符集(charset)：是一个系统支持的所有抽象字符的集合。字符是各种文字和符号的总称， 包括各国家文字、标点符号、图形符号、数字等</h4>
 
 
 
-# 2.mysql数据库的字符集
+## 2.mysql数据库的字符集
 
 <h4>1.字符集 charset </h4>
 
@@ -18,7 +18,7 @@
 
 
 
-# 3.mysql中常见的字符集
+## 3.mysql中常见的字符集
 
 <h3>ASCII字符集</h3>
 
@@ -51,7 +51,7 @@
 
 
 
-# 4.mysql常见校对规则
+## 4.mysql常见校对规则
 
 **1.ci：大小写不敏感**
 
@@ -65,7 +65,7 @@ create database DB1 charset utf8 collate=utf8_general_ci
 
 
 
-# 5.查看字符集和校对规则
+## 5.查看字符集和校对规则
 
 **查看字符集(mysql5.7)**
 
@@ -356,7 +356,7 @@ mysql> show collation;
 
 
 
-# 6.字符集设置
+## 6.字符集设置
 
 **mysql有4个级别的字符集**
 
@@ -370,7 +370,7 @@ mysql> show collation;
 
 
 
-## 6.1 服务器级别
+### 6.1 服务器级别
 
 ```mysql
 1.操作系统级别
@@ -403,7 +403,7 @@ character-set-server=utf8
 
 
 
-## 6.2 数据库级别
+### 6.2 数据库级别
 
 ```mysql
 mysql> create database 数据库名 charset utf8 default collate = utf8_general_ci;
@@ -413,7 +413,7 @@ mysql> create database 数据库名 charset utf8 default collate = utf8_general_
 
 
 
-## 6.3 表级别
+### 6.3 表级别
 
 ```mysql
 mysql>  CREATE TABLE `test` (
@@ -425,7 +425,7 @@ PRIMARY KEY (`id`)
 
 
 
-## 6.4 列级别
+### 6.4 列级别
 
 **类型为CHAR、VARCHAR、TEXT的列，可以指定字符集/校验规则**
 
@@ -435,7 +435,7 @@ create table t1(id int,address char(30) character set utf8);
 
 
 
-# 7.生产环境更改数据库(含数据)字符集的方法
+## 7.生产环境更改数据库(含数据)字符集的方法
 
 ```mysql
 mysql> alter database 数据库名 CHARACTER SET utf8 collate utf8_general_ci;
