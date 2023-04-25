@@ -6,8 +6,6 @@
 
 
 
-
-
 ## 1.安装先决条件
 
 **硬件**
@@ -459,4 +457,24 @@ fccf8fc79e15   goharbor/redis-photon:v2.8.0         "redis-server /etc/r…"   7
 1838075510e2   goharbor/harbor-db:v2.8.0            "/docker-entrypoint.…"   7 minutes ago   Up 7 minutes (healthy)                                                                                    harbor-db
 2936c15b6a56   goharbor/harbor-log:v2.8.0           "/bin/sh -c /usr/loc…"   7 minutes ago   Up 7 minutes (healthy)   127.0.0.1:1514->10514/tcp 
 ```
+
+
+
+## 5.其他
+
+### 5.1 配置http访问harbor
+
+:::tip说明
+
+如果不想要配置https访问harbor或者访问入口是nginx/云厂商lb等(一般都是在nginx或lb上配置证书)则不需要执行 `3` 步骤中的内容
+
+同时在docker的配置文件 `/etc/docker/daemon.json ` 中还要指定配置使用http推送镜像
+
+```json
+{
+"insecure-registries" : ["harbor仓库地址", "0.0.0.0"]
+}
+```
+
+:::
 
