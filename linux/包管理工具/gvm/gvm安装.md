@@ -244,3 +244,35 @@ gvm install go
 gvm install go1.17.7
 ```
 
+
+
+从二进制安装
+
+```shell
+gvm install go1.17.7 -B
+```
+
+
+
+删除某一个go版本
+
+```shell
+gvm uninstall go1.19.8
+```
+
+
+
+完全删除gvm和所有已安装的go版本和包
+
+```sh
+gvm implode
+```
+
+
+
+完全删除gvm也可以直接删除目录
+
+```shell
+rm -rf ~/.gvm
+```
+

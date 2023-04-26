@@ -8,6 +8,8 @@
 
 ## 1.安装先决条件
 
+### 1.1 系统环境说明
+
 **硬件**
 
 | 资源 | 最低 | 推荐  |
@@ -35,6 +37,40 @@
 | 443  | HTTPS | Harbor 门户和核心 API 在此端口上接受 HTTPS 请求。您可以在配置文件中更改此端口。 |
 | 4443 | HTTPS | 连接到 Harbor 的 Docker Content Trust 服务。只有在启用 Notary 时才需要。您可以在配置文件中更改此端口。 |
 | 80   | HTTP  | Harbor 门户和核心 API 在此端口上接受 HTTP 请求。您可以在配置文件中更改此端口。 |
+
+
+
+### 1.2 安装docker
+
+```shell
+# 阿里云yum源
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+yum -y install docker-ce
+
+systemctl start docker && systemctl enable docker  
+
+# 配置阿里云镜像加速地址
+cat > /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://gqk8w9va.mirror.aliyuncs.com"]
+}
+EOF
+
+# 配置完成后重启docker
+systemctl restart docker
+```
+
+
+
+### 1.3 安装docker-compose
+
+```shell
+export DOCKER_COMPOSE_VERSION=2.17.3
+curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSIO}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+```
+
+
 
 
 
@@ -74,7 +110,13 @@ wget https://github.com/goharbor/harbor/releases/download/v2.8.0/harbor-online-i
 
 ### 2.3 验证包(可选)
 
-可选择下载相应 `*.asc` 文件以验证包是否为正版
+可下载相应 `*.asc` 文件以验证包是否为正版
+
+```shell
+wget https://github.com/goharbor/harbor/releases/download/v2.8.0/harbor-offline-installer-v2.8.0.tgz.asc
+```
+
+
 
 
 
@@ -93,7 +135,7 @@ tar xf harbor-online-installer-v2.8.0.tgz && cd harbor
 #### 3.1.1 创建证书存放目录
 
 ```shell
-# 当前目录为 /data/cert
+# 当前目录为 /data/harbor/cert
 mkdir cert && cd cert
 ```
 
@@ -139,7 +181,7 @@ openssl genrsa -out harbor.ops.com.key 4096
 
 :::tip说明
 
-调整选项中的值`-subj`以反映您的组织。如果使用 FQDN 连接 Harbor 主机，则必须将其指定为通用名称 ( `CN`) 属性，并在密钥和 CSR 文件名中使用它。
+调整选项中的值 `-subj` 以反映您的组织。如果使用 FQDN 连接 Harbor 主机，则必须将其指定为通用名称 ( `CN`) 属性，并在密钥和 CSR 文件名中使用它。
 
 :::
 
@@ -157,7 +199,7 @@ openssl req -sha512 -new \
 
 :::tip说明
 
-无论您是使用 FQDN 还是 IP 地址连接到您的 Harbor 主机，您都必须创建此文件，以便您可以为您的 Harbor 主机生成符合主题备用名称 (SAN) 和 x509 v3 的证书扩展要求。替换`DNS`条目以反映您的域。
+无论您是使用 FQDN 还是 IP 地址连接到您的 Harbor 主机，您都必须创建此文件，以便您可以为您的 Harbor 主机生成符合主题备用名称 (SAN) 和 x509 v3 的证书扩展要求。替换 `DNS` 条目以反映您的域。
 
 :::
 
@@ -197,19 +239,7 @@ openssl x509 -req -sha512 -days 3650 \
 
 
 
-#### 3.3.1 将服务器证书和密钥复制到 Harbor 主机上的 certificates 文件夹中
-
-```shell
-# 创建目录
-[ -d /data/cert ] || mkdir -p /data/cert
-
-# 拷贝文件
-cp ca.crt harbor.ops.com.crt harbor.ops.com.key /data/cert/
-```
-
-
-
-#### 3.3.2 转换 `.crt` 为 `.cert`
+#### 3.3.1 转换 `.crt` 为 `.cert`
 
 :::tip说明
 
@@ -218,9 +248,6 @@ Docker 守护进程将 `.crt` 文件解释为 CA 证书，`.cert` 将文件解�
 :::
 
 ```shell
-# 切换目录
-cd /data/cert
-
 # 转换证书文件
 openssl x509 -inform PEM -in harbor.ops.com.crt -out harbor.ops.com.cert
 ```
@@ -266,8 +293,6 @@ harbor在线安装包解压后会有一个 `harbor.yml.tmpl` 示例配置文件
 在初始部署和启动 Harbor 之后，可以在 Harbor Web Portal 中执行其他配置。
 
 #### 4.1.1 参数说明
-
-
 
 ##### 4.1.1.1 必要参数
 
@@ -322,8 +347,8 @@ http:
 # 指定https端口及证书 
 https:
   port: 443
-  certificate: /data/cert/harbor.ops.com.crt
-  private_key: /data/cert/harbor.ops.com.key
+  certificate: /data/harbor/cert/harbor.ops.com.crt
+  private_key: /data/harbor/cert/harbor.ops.com.key
  
 # 指定admin密码 
 harbor_admin_password: Harbor12345 
