@@ -113,7 +113,7 @@
 
 然后上传2个镜像
 
-```sh
+```shell
 # 登陆harbor
 docker login harbor.ops.com
 
@@ -158,7 +158,7 @@ docker push harbor.ops.com/devops/centos:latest
 
 ### 2.4 配置自动同步
 
-触发模式选择 `自动` ，然后定义 `0 */2 * * * *` 表示每隔2分钟执行一次同步
+触发模式选择 `自动` ，然后定义 `0 */2 * * * *` 表示每隔2分钟执行一次同步，需要注意的是，harbor中的计划任务多了一个秒，即最开头的0表示秒且无法修改
 
 ![iShot_2023-04-27_15.34.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-04-27_15.34.52.png)
 
@@ -167,3 +167,8 @@ docker push harbor.ops.com/devops/centos:latest
 在 `复制任务` 中就可以看到执行的同步历史记录
 
 ![iShot_2023-04-27_15.30.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-04-27_15.30.36.png)
+
+
+
+
+

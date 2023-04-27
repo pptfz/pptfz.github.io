@@ -552,6 +552,20 @@ EOF
 
 
 
+:::tip修改容器内时区
+
+启动的容器默认使用的是 `UTC` 时间，`./install` 执行成功后会生成 `docker-compose.yml` 文件，可以修改 `docker-compose.yml` ，在各个容器的 `volemes` 下增加如下配置，然后重启就可以让容器内的时区变为 `CST`
+
+```yaml
+- /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime
+```
+
+
+
+:::
+
+
+
 ### 4.3 查看安装
 
 ```shell
