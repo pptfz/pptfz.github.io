@@ -27,6 +27,8 @@ systemctl restart docker
 
 # CentOS7安装docker
 
+[docker官方安装文档](https://docs.docker.com/engine/install/centos/)
+
 ## 1.安装docker最新版
 
 ### 1.1 下载yum源
