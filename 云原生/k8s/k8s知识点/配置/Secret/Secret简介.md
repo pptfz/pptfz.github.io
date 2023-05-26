@@ -217,11 +217,192 @@ type: Opaque
 
 ##### 方式二 [使用配置文件](https://kubernetes.io/zh-cn/docs/tasks/configmap-secret/managing-secret-using-config-file/)
 
+###### 创建Secret
+
+:::tip说明
+
+你可以先用 JSON 或 YAML 格式在一个清单文件中定义 `Secret` 对象，然后创建该对象。 [Secret](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#secret-v1-core) 资源包含 2 个键值对：`data` 和 `stringData`。 `data` 字段用来存储 base64 编码的任意数据。 提供 `stringData` 字段是为了方便，它允许 Secret 使用未编码的字符串。 `data` 和 `stringData` 的键必须由字母、数字、`-`、`_` 或 `.` 组成。
+
+:::
+
+
+
+以下示例使用 `data` 字段在 Secret 中存储两个字符串：
+
+1.将这些字符串转换为 base64
+
+:::tip说明
+
+Secret 数据的 JSON 和 YAML 序列化结果是以 base64 编码的。 换行符在这些字符串中无效，必须省略。 在 Darwin/macOS 上使用 `base64` 工具时，用户不应该使用 `-b` 选项分割长行。 相反地，Linux 用户**应该**在 `base64` 地命令中添加 `-w 0` 选项， 或者在 `-w` 选项不可用的情况下，输入 `base64 | tr -d '\n'`。
+
+:::
+
+```shell
+$ echo -n 'admin' | base64
+YWRtaW4=
+
+$ echo -n '1f2d1e2e67df' | base64
+MWYyZDFlMmU2N2Rm
+```
+
+
+
+2.创建yaml文件
+
+```yaml
+cat > secret.yaml << EOF
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+type: Opaque
+data:
+  username: YWRtaW4=
+  password: MWYyZDFlMmU2N2Rm
+EOF
+```
+
+
+
+3.创建secret
+
+```shell
+kubectl apply -f secret.yaml 
+```
+
+若要验证 Secret 被创建以及想要解码 Secret 数据， 请参阅[使用 kubectl 管理 Secret](https://kubernetes.io/zh-cn/docs/tasks/configmap-secret/managing-secret-using-kubectl/#verify-the-secret)
+
+
+
+---
+
+
+
+**创建secret时提供未编码的数据**
+
+对于某些场景，你可能希望使用 `stringData` 字段。 这个字段可以将一个非 base64 编码的字符串直接放入 Secret 中， 当创建或更新该 Secret 时，此字段将被编码。
+
+上述用例的实际场景可能是这样：当你部署应用时，使用 Secret 存储配置文件， 你希望在部署过程中，填入部分内容到该配置文件。
+
+例如，如果你的应用程序使用以下配置文件:
+
+```yaml
+apiUrl: "https://my.api.com/api/v1"
+username: "<user>"
+password: "<password>"
+```
+
+你可以使用以下定义将其存储在 Secret 中:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+type: Opaque
+stringData:
+  config.yaml: |
+    apiUrl: "https://my.api.com/api/v1"
+    username: <user>
+    password: <password>    
+```
+
+当你检索 Secret 数据时，此命令将返回编码的值，并不是你在 `stringData` 中提供的纯文本值。
+
+
+
+查看创建的secret
+
+```yaml
+$ kubectl get secret mysecret -o yaml
+apiVersion: v1
+data:
+  config.yaml: YXBpVXJsOiAiaHR0cHM6Ly9teS5hcGkuY29tL2FwaS92MSIKdXNlcm5hbWU6IHVzZXIKcGFzc3dvcmQ6IHBhc3N3b3JkICAgIAo=
+kind: Secret
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Secret","metadata":{"annotations":{},"name":"mysecret","namespace":"test"},"stringData":{"config.yaml":"apiUrl: \"https://my.api.com/api/v1\"\nusername: user\npassword: password    \n"},"type":"Opaque"}
+  creationTimestamp: "2023-05-23T03:35:25Z"
+  name: mysecret
+  namespace: test
+  resourceVersion: "2795292"
+  uid: 39e81b35-8580-4f15-ada3-745753b25e0f
+type: Opaque
+```
+
+
+
+解密一下
+
+```shell
+$ echo YXBpVXJsOiAiaHR0cHM6Ly9teS5hcGkuY29tL2FwaS92MSIKdXNlcm5hbWU6IHVzZXIKcGFzc3dvcmQ6IHBhc3N3b3JkICAgIAo= |base64 -d
+apiUrl: "https://my.api.com/api/v1"
+username: user
+password: password    
+```
+
+
+
+**同时指定 `data` 和 `stringData`**
+
+如果你在 `data` 和 `stringData` 中设置了同一个字段，则使用来自 `stringData` 中的值。
+
+例如，如果你定义以下 Secret：
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+type: Opaque
+data:
+  username: YWRtaW4= # base64解密后是 admin
+stringData:
+  username: administrator
+```
+
+
+
+所创建的 `Secret` 对象如下：
+
+```yaml
+apiVersion: v1
+data:
+  username: YWRtaW5pc3RyYXRvcg==
+kind: Secret
+metadata:
+  creationTimestamp: 2018-11-15T20:46:46Z
+  name: mysecret
+  namespace: default
+  resourceVersion: "7579"
+  uid: 91460ecb-e917-11e8-98f2-025000000001
+type: Opaque
+```
+
+`YWRtaW5pc3RyYXRvcg==` 解码成 `administrator`
+
 
 
 
 
 ##### 方式三 [使用 Kustomize 工具](https://kubernetes.io/zh-cn/docs/tasks/configmap-secret/managing-secret-using-kustomize/)
+
+你可以在 `kustomization.yaml` 文件中定义 `secreteGenerator` 字段， 并在定义中引用其它本地文件、`.env` 文件或文字值生成 Secret。 例如：下面的指令为用户名 `admin` 和密码 `1f2d1e2e67df` 创建 Kustomization 文件。
+
+```shell
+secretGenerator:
+- name: database-creds
+  literals:
+  - username=admin
+  - password=1f2d1e2e67df
+```
+
+
+
+
+
+
 
 
 
@@ -236,6 +417,80 @@ Secret 对象的名称必须是合法的 [DNS 子域名](https://kubernetes.io/z
 #### Secret大小限制
 
 每个 Secret 的尺寸最多为 1MiB。施加这一限制是为了避免用户创建非常大的 Secret， 进而导致 API 服务器和 kubelet 内存耗尽。不过创建很多小的 Secret 也可能耗尽内存。 你可以使用[资源配额](https://kubernetes.io/zh-cn/docs/concepts/policy/resource-quotas/)来约束每个名字空间中 Secret（或其他资源）的个数。
+
+
+
+
+
+## Secret的类型
+
+创建 Secret 时，你可以使用 [Secret](https://kubernetes.io/zh-cn/docs/reference/kubernetes-api/config-and-storage-resources/secret-v1/) 资源的 `type` 字段，或者与其等价的 `kubectl` 命令行参数（如果有的话）为其设置类型。 Secret 类型有助于对 Secret 数据进行编程处理。
+
+Kubernetes 提供若干种内置的类型，用于一些常见的使用场景。 针对这些类型，Kubernetes 所执行的合法性检查操作以及对其所实施的限制各不相同。
+
+| 内置类型                              | 用法                                     |
+| ------------------------------------- | ---------------------------------------- |
+| `Opaque`                              | 用户定义的任意数据                       |
+| `kubernetes.io/service-account-token` | 服务账号令牌                             |
+| `kubernetes.io/dockercfg`             | `~/.dockercfg` 文件的序列化形式          |
+| `kubernetes.io/dockerconfigjson`      | `~/.docker/config.json` 文件的序列化形式 |
+| `kubernetes.io/basic-auth`            | 用于基本身份认证的凭据                   |
+| `kubernetes.io/ssh-auth`              | 用于 SSH 身份认证的凭据                  |
+| `kubernetes.io/tls`                   | 用于 TLS 客户端或者服务器端的数据        |
+| `bootstrap.kubernetes.io/token`       | 启动引导令牌数据                         |
+
+通过为 Secret 对象的 `type` 字段设置一个非空的字符串值，你也可以定义并使用自己 Secret 类型（如果 `type` 值为空字符串，则被视为 `Opaque` 类型）。
+
+Kubernetes 并不对类型的名称作任何限制。不过，如果你要使用内置类型之一， 则你必须满足为该类型所定义的所有要求。
+
+如果你要定义一种公开使用的 Secret 类型，请遵守 Secret 类型的约定和结构， 在类型名签名添加域名，并用 `/` 隔开。 例如：`cloud-hosting.example.net/cloud-api-credentials`。
+
+
+
+## 不可更改的Secret
+
+**特性状态：** `Kubernetes v1.21 [stable]`
+
+Kubernetes 允许你将特定的 Secret（和 ConfigMap）标记为 **不可更改（Immutable）**。 禁止更改现有 Secret 的数据有下列好处：
+
+- 防止意外（或非预期的）更新导致应用程序中断
+- （对于大量使用 Secret 的集群而言，至少数万个不同的 Secret 供 Pod 挂载）， 通过将 Secret 标记为不可变，可以极大降低 kube-apiserver 的负载，提升集群性能。 kubelet 不需要监视那些被标记为不可更改的 Secret。
+
+### 将 Secret 标记为不可更改
+
+你可以通过将 Secret 的 `immutable` 字段设置为 `true` 创建不可更改的 Secret。 例如：
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  ...
+data:
+  ...
+immutable: true
+```
+
+你也可以更改现有的 Secret，令其不可更改。
+
+**说明：**
+
+一旦一个 Secret 或 ConfigMap 被标记为不可更改，撤销此操作或者更改 `data` 字段的内容都是 **不** 可能的。 只能删除并重新创建这个 Secret。现有的 Pod 将维持对已删除 Secret 的挂载点 -- 建议重新创建这些 Pod。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

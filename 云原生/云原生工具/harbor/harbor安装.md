@@ -649,10 +649,10 @@ harbor-log
 
 
 
-以下是使用阿里云oss的配置示例
+#### 5.2.1 阿里云oss的配置示例
 
 ```yaml
-storage:
+storage_service:
   oss:
   	# 必需项，指定accesskeyid  
     accesskeyid: 
@@ -663,7 +663,7 @@ storage:
     # 必需项，指定OSS region 名称
     region: 
     
-     # 必需项，OSS bucket 名称
+    # 必需项，OSS bucket 名称
     bucket: 
     
     # 非必需项，指定 endpoints 域名地址，有内网和公网
@@ -690,7 +690,7 @@ storage:
 
 
 
-参数说明
+参数说明，可以参考这个 [文档](https://github.com/docker/docs/blob/main/registry/storage-drivers/oss.md)
 
 | 参数              | 说明                                                         | 是否必须 |
 | ----------------- | ------------------------------------------------------------ | -------- |
@@ -704,4 +704,35 @@ storage:
 | `secure`          | 指定是否通过 ssl 将数据传输到存储桶，默认为 `true`           | 否       |
 | `chunksize`       | 分段上传（由 WriteStream 执行）到 OSS 的默认分段大小，默认值为 10 MB，OSS 的最小部分大小为 5MB | 否       |
 | `rootdirectory`   | 存储所有注册表文件的根目录树，默认是空字符串(即桶的根)       | 否       |
+
+
+
+#### 5.2.2 使用aws s3的配置示例
+
+```yaml
+storage_service:
+  s3:
+    
+```
+
+
+
+参数说明，可以参考这个 [文档](https://github.com/docker/docs/blob/main/registry/storage-drivers/s3.md)
+
+| 参数           | 说明                                                         | 是否必须 |
+| -------------- | ------------------------------------------------------------ | -------- |
+| accesskey      | aws访问密钥，如果使用[IAM 角色](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)，请忽略从 IAM 获取临时凭证 | 否       |
+| secretkey      | aws密钥，如果使用[IAM 角色](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)，请忽略从 IAM 获取临时凭证 | 否       |
+| region         | 存储桶所在区域                                               | ✅        |
+| bucket         | 存储桶名称                                                   | ✅        |
+| regionendpoint | s3兼容存储服务(Minio等)的端点                                | 否       |
+| encrypt        | 指定注册表是否以加密格式存储图像，默认为 `false`             | 否       |
+| keyid          | 用于加密的可选 KMS 密钥 ID（encrypt 必须为 `true`，否则将忽略此参数），默认为 `none` | 否       |
+| secure         | 是否使用 HTTPS 而不是 HTTP，默认为 `true`                    | 否       |
+| skipverify     | 当值设置为 `true` 时跳过 TLS 验证，默认为 `false`            | 否       |
+| v4auth         | 注册表是否使用 AWS 身份验证的版本 4，默认值为`true`          | 否       |
+| chunksize      | S3 API 要求分段上传块至少为 5MB，该值应该是大于 `5 * 1024 * 1024` 的数字 | 否       |
+| rootdirectory  | 这是应用于所有 S3 密钥的前缀，以允许在必要时对存储桶中的数据进行分段 | 否       |
+| storageclass   | 应用于每个注册表文件的 S3 存储类，默认值为 `STANDARD`        | 否       |
+| accelerate     | 注册表是否应使用 S3 Transfer Acceleration，在使用此选项之前，必须在存储桶上启用加速端点，默认为 `false` | 否       |
 

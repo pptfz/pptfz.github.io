@@ -384,11 +384,15 @@ Server: Docker Engine - Community
 
 
 
-**⚠️<span style={{color: 'red'}}>二进制安装的dcoker默认是没有命令补全的，需要从yum安装的机器上拷贝 `/usr/share/bash-completion/completions`下名为docker的文件</span>**
+:::tip说明
+
+二进制安装的dcoker默认是没有命令补全的，需要从yum安装的机器上拷贝 `/usr/share/bash-completion/completions `下名为 `docker` 的文件并且移动到 `/usr/share/bash-completion/completions`
+
+:::
 
 加载文件生效
 
-```sh
-source /usr/share/bash-completion/docker
+```shell
+source /usr/share/bash-completion/completions/docker
 ```
 
