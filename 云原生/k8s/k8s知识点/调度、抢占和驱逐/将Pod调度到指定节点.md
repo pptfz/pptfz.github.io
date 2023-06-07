@@ -515,6 +515,50 @@ EOF
 
 
 
+### nodeName
+
+`nodeName` 是比亲和性或者 `nodeSelector` 更为直接的形式。`nodeName` 是 Pod 规约中的一个字段。如果 `nodeName` 字段不为空，调度器会忽略该 Pod， 而指定节点上的 kubelet 会尝试将 Pod 放到该节点上。 使用 `nodeName` 规则的优先级会高于使用 `nodeSelector` 或亲和性与非亲和性的规则。
+
+使用 `nodeName` 来选择节点的方式有一些局限性：
+
+- 如果所指代的节点不存在，则 Pod 无法运行，而且在某些情况下可能会被自动删除。
+- 如果所指代的节点无法提供用来运行 Pod 所需的资源，Pod 会失败， 而其失败原因中会给出是否因为内存或 CPU 不足而造成无法运行。
+- 在云环境中的节点名称并不总是可预测的，也不总是稳定的。
+
+
+
+:::tip说明
+
+`nodeName` 旨在供自定义调度程序或需要绕过任何已配置调度程序的高级场景使用。 如果已分配的 Node 负载过重，绕过调度程序可能会导致 Pod 失败。 你可以使用[节点亲和性](https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity)或 [`nodeselector` 字段](https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector)将 Pod 分配给特定 Node，而无需绕过调度程序。
+
+:::
+
+
+
+下面是一个使用 `nodeName` 字段的 Pod 规约示例：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  nodeName: kube-01
+```
+
+上面的 Pod 只能运行在节点 `kube-01` 之上。
+
+
+
+
+
+
+
+
+
 
 
 
