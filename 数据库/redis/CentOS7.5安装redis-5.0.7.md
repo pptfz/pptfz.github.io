@@ -40,7 +40,7 @@ make
 ### 2.3 添加环境变量
 
 ```shell
-cat >/etc/profile.d/redis.sh <<'EOF'
+cat > /etc/profile.d/redis.sh << 'EOF'
 export PATH="/usr/local/redis-5.0.7/src:$PATH"
 EOF
 source /etc/profile
