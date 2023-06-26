@@ -30,7 +30,7 @@ wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-${GIT_VERSION}.tar
 :::
 
 ```shell
-yum -y install curl zlib zlib-devel openssl openssl-devel expat libiconv autoconf gcc gcc-c++ asciidoc xmlto util-linux docbook2X libcurl-devel
+yum -y install curl zlib zlib-devel openssl openssl-devel expat autoconf gcc gcc-c++ asciidoc xmlto util-linux docbook2X libcurl-devel
 ```
 
 
