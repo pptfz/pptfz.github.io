@@ -29,7 +29,7 @@ builder  buildkit  containers  image  network  overlay2  plugins  runtimes  swar
 加入以下一行
 
 ```json
-"graph":"/data/docker"
+"graph": "/data/docker"
 ```
 
 
@@ -48,7 +48,7 @@ mkdir -p /data/docker
 $ cat /etc/docker/daemon.json
 {
   "registry-mirrors": ["https://gqk8w9va.mirror.aliyuncs.com"],
-  "graph":"/data/docker"
+  "graph": "/data/docker"
 }
 ```
 

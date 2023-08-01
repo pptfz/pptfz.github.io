@@ -290,7 +290,7 @@ for node_ip in ${NODE_IPS[@]}
 `/etc/containerd/config.toml `  最终内容
 
 ```toml
-cat > /opt/k8s/config.toml << 'EOF'
+cat > /etc/containerd/config.toml << 'EOF'
 disabled_plugins = []
 imports = []
 oom_score = 0
@@ -671,7 +671,7 @@ for node_ip in ${NODE_IPS[@]}
   do
     {
       echo ">>> ${node_ip}"
-      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'yum -y reinstall bash-completion && \
+      ssh -p${SSH_PORT} -i${SSH_KEY_FILE} ${SSH_USER}@${node_ip} 'yum -y install bash-completion && \
 source /usr/share/bash-completion/bash_completion && \
 source <(kubectl completion bash) && \
 echo "source <(kubectl completion bash)" >> ~/.bashrc'
