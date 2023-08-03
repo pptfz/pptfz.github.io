@@ -33,9 +33,18 @@ systemctl restart docker
 
 ### 1.1 下载yum源
 
-```python
-# 阿里云yum源
+阿里云源
+
+```shell
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+
+
+
+官方源
+
+```shell
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
 
@@ -84,15 +93,21 @@ Server: Docker Engine - Community
 
 ### 1.5 配置docker镜像加速
 
-```python
-# 配置阿里云镜像加速地址
+配置阿里云镜像加速地址
+
+```shell
 cat > /etc/docker/daemon.json <<-'EOF'
 {
   "registry-mirrors": ["https://gqk8w9va.mirror.aliyuncs.com"]
 }
 EOF
+```
 
-# 配置完成后重启docker
+
+
+配置完成后重启docker
+
+```shell
 systemctl restart docker
 ```
 
@@ -100,7 +115,7 @@ systemctl restart docker
 
 ### 1.6 创建并运行第一个容器
 
-```python
+```shell
 $ docker run -d -p 80:80 nginx
 Unable to find image 'nginx:latest' locally
 latest: Pulling from library/nginx
@@ -120,9 +135,18 @@ Status: Downloaded newer image for nginx:latest
 
 ### 2.1 下载yum源
 
-```python
-# 阿里云yum源
+阿里云yum源
+
+```shell
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+```
+
+
+
+官方源
+
+```shell
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
 
@@ -191,15 +215,21 @@ Docker version 18.03.1-ce, build 9ee9f40
 
 ### 2.5 配置docker镜像加速
 
-```python
-# 配置阿里云镜像加速地址
+配置阿里云镜像加速地址
+
+```shell
 cat > /etc/docker/daemon.json <<-'EOF'
 {
   "registry-mirrors": ["https://gqk8w9va.mirror.aliyuncs.com"]
 }
 EOF
+```
 
-# 配置完成后重启docker
+
+
+配置完成后重启docker
+
+```shell
 systemctl restart docker
 ```
 
@@ -217,7 +247,7 @@ systemctl restart docker
 
 ### 3.1 下载docker二进制包
 
-```python
+```shell
 export DOCKER_VERSION=18.09.9
 wget https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz
 ```
@@ -226,7 +256,7 @@ wget https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERS
 
 ### 3.2 解压缩包
 
-```python
+```shell
 tar xf docker-DOCKER_VERSION.tgz -C /usr/local/
 ```
 
@@ -234,9 +264,9 @@ tar xf docker-DOCKER_VERSION.tgz -C /usr/local/
 
 ### 3.3 导出环境变量
 
-⚠️如果后续想要使用systemd管理docker，最好把docker二进制包中的所有文件拷贝到``/usr/bin``，否则会管理失败
+如果后续想要使用systemd管理docker，最好把docker二进制包中的所有文件拷贝到 `/usr/bin` ，否则会管理失败
 
-```python
+```shell
 cp /usr/local/docker/* /usr/bin
 ```
 
@@ -248,17 +278,19 @@ cp /usr/local/docker/* /usr/bin
 
 
 
-如果你是使用二进制方式安装的 docker，那么你也许需要整合 docker 到 systemd 中去。为了完成这个任务，你需要安装两个单元文件（service 和 socket）到 /etc/systemd/system 中去
+如果你是使用二进制方式安装的 docker，那么你也许需要整合 docker 到 systemd 中去。为了完成这个任务，你需要安装两个单元文件（service 和 socket）到 `/etc/systemd/system` 中去
 
-> Manually create the systemd unit files
->
-> When installing the binary without a package, you may want to integrate Docker with systemd. For this, install the two unit files (`service` and `socket`) from [the github repository](https://github.com/moby/moby/tree/master/contrib/init/systemd) to `/etc/systemd/system`.
+:::tip说明
 
+Manually create the systemd unit files
 
+When installing the binary without a package, you may want to integrate Docker with systemd. For this, install the two unit files (`service` and `socket`) from [the github repository](https://github.com/moby/moby/tree/master/contrib/init/systemd) to `/etc/systemd/system`.
 
-⚠️需要下载的是``docker.service.rpm``和``docker.socket``这两个文件，需要把``docker.service.rpm``重命名为``docker.service``，然后再移动到``/etc/systemd/system``下
+:::
 
-```python
+需要下载的是 ``docker.service.rpm`` 和 ``docker.socket`` 这两个文件，需要把 ``docker.service.rpm`` 重命名为 ``docker.service`` ，然后再移动到 ``/etc/systemd/system``下
+
+```shell
 wget https://github.com/moby/moby/raw/branch/branch/master/contrib/init/systemd/docker.service.rpm
 wget https://github.com/moby/moby/raw/branch/branch/master/contrib/init/systemd/docker.socket  
 ```
@@ -269,7 +301,7 @@ wget https://github.com/moby/moby/raw/branch/branch/master/contrib/init/systemd/
 
 **docker.service**
 
-```python
+```shell
 cat > /etc/systemd/system/docker.service <<'EOF'
 [Unit]
 Description=Docker Application Container Engine
@@ -311,7 +343,7 @@ EOF
 
 **docker.socket**
 
-```python
+```shell
 cat >/etc/systemd/system/docker.socket<<EOF
 [Unit]
 Description=Docker Socket for the API
@@ -339,19 +371,19 @@ EOF
 Systemd 默认从目录`/etc/systemd/system/`读取配置文件。
 但是，里面存放的大部分文件都是符号链接，指向目录`/usr/lib/systemd/system/`，真正的配置文件存放在那个目录。 `systemctl enable `命令用于在上面两个目录之间，建立符号链接关系。
 
-```sh
-sudo systemctl enable clamd@scan.service
+:::tip说明
 
-# 等同于
+ 执行 `sudo systemctl enable clamd@scan.service` 等同于
 
-sudo ln -s '/usr/lib/systemd/system/clamd@scan.service' '/etc/systemd/system/multi-user.target.wants/clamd@scan.service'
-```
+`sudo ln -s '/usr/lib/systemd/system/clamd@scan.service' '/etc/systemd/system/multi-user.target.wants/clamd@scan.service'`
+
+:::
 
 
 
 ### 3.5 重新加载服务并启动docker
 
-```python
+```shell
 systemctl daemon-reload
 systemctl start docker && systemctl enable docker
 ```
@@ -360,7 +392,7 @@ systemctl start docker && systemctl enable docker
 
 ### 3.6 验证docker版本
 
-```python
+```shell
 $ docker version
 Client: Docker Engine - Community
  Version:           18.09.9
@@ -386,7 +418,7 @@ Server: Docker Engine - Community
 
 :::tip说明
 
-二进制安装的dcoker默认是没有命令补全的，需要从yum安装的机器上拷贝 `/usr/share/bash-completion/completions `下名为 `docker` 的文件并且移动到 `/usr/share/bash-completion/completions`
+二进制安装的dcoker默认是没有命令补全的，需要从yum安装的机器上拷贝 `/usr/share/bash-completion/completions ` 下名为 `docker` 的文件并且移动到 `/usr/share/bash-completion/completions`
 
 :::
 
