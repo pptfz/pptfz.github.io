@@ -282,9 +282,13 @@ cp /usr/local/docker/* /usr/bin
 
 :::tip说明
 
+
+
 Manually create the systemd unit files
 
 When installing the binary without a package, you may want to integrate Docker with systemd. For this, install the two unit files (`service` and `socket`) from [the github repository](https://github.com/moby/moby/tree/master/contrib/init/systemd) to `/etc/systemd/system`.
+
+
 
 :::
 
@@ -373,9 +377,13 @@ Systemd 默认从目录`/etc/systemd/system/`读取配置文件。
 
 :::tip说明
 
+
+
  执行 `sudo systemctl enable clamd@scan.service` 等同于
 
 `sudo ln -s '/usr/lib/systemd/system/clamd@scan.service' '/etc/systemd/system/multi-user.target.wants/clamd@scan.service'`
+
+
 
 :::
 
@@ -418,7 +426,11 @@ Server: Docker Engine - Community
 
 :::tip说明
 
+
+
 二进制安装的dcoker默认是没有命令补全的，需要从yum安装的机器上拷贝 `/usr/share/bash-completion/completions ` 下名为 `docker` 的文件并且移动到 `/usr/share/bash-completion/completions`
+
+
 
 :::
 
