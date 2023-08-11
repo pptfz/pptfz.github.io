@@ -1,4 +1,4 @@
-# Docusaurus 安装
+# docusaurus 安装
 
 [docusaurus官网](https://docusaurus.io/)
 
@@ -237,43 +237,6 @@ const config = {
 
 module.exports = config;
 ```
-
-
-
-
-
-
-
-原先内容
-
-```js
-blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-```
-
-
-
-修改为
-
-```js
-blog: {
-          showReadingTime: true,
-          path: "./blog",
-          routeBasePath: "blog",
-          include: ['*.md', '*.mdx'],
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          //editUrl:
-          //  'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-```
-
-
 
 
 
