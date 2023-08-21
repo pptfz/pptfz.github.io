@@ -32,7 +32,7 @@ ssh-keygen -t rsa -P '' -q -f ~/.ssh/id_rsa
 
 
 
-openssh格式开头如下
+openssh格式的私钥文件开头如下
 
 ```shell
 -----BEGIN OPENSSH PRIVATE KEY-----
@@ -40,7 +40,7 @@ openssh格式开头如下
 
 
 
-rsa格式开头如下
+rsa格式的私钥文件开头如下
 
 ```sh
 -----BEGIN RSA PRIVATE KEY-----
@@ -51,37 +51,7 @@ rsa格式开头如下
 **转换命令**
 
 ```sh
-ssh-keygen -p -N"" -m pem -f 旧私钥
-```
-
-
-
----
-
-
-
-
-
-key格式开头如下
-
-```shell
------BEGIN PRIVATE KEY-----
-```
-
-
-
-转换为pem命令
-
-```shell
-openssl rsa -in xxx.key -out xxx.pem
-```
-
-
-
-pem格式开头如下
-
-```shell
------BEGIN RSA PRIVATE KEY-----
+ssh-keygen -p -m PEM -f ~/.ssh/id_rsa
 ```
 
 
