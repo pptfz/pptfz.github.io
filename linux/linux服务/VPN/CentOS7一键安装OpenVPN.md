@@ -10,15 +10,15 @@
 
 **需求及使用场景**
 
-> **公司的一些资源不想对外开放访问，例如gitlab、jenkins等等，现在想要的效果是部分资源只允许公司公网IP以及特定IP访问，这个时候就需要用到VPN了，但是公司花钱买VPN是不可能的，那么就需要一款免费好用的VPN，OpenVPN免费开源又好用，配置完OpenVPN后再加上云主机的安全组就完美解决问题了。**
+> 公司的一些资源不想对外开放访问，例如gitlab、jenkins等等，现在想要的效果是部分资源只允许公司公网IP以及特定IP访问，这个时候就需要用到VPN了，但是公司**花钱买VPN是不可能的**，那么就需要一款免费好用的VPN，OpenVPN免费开源又好用，配置完OpenVPN后再加上云主机的安全组就完美解决问题了。
 
 
 
 **说明**
 
-| 系统      | openvpn版本 | 内网IP     | openvpn分配客户端网段 |      |
-| --------- | ----------- | ---------- | --------------------- | ---- |
-| CentOS7.9 | 2.4.11      | 10.206.0.9 | 10.8.0.0              |      |
+| 系统      | openvpn版本 | 内网IP     | openvpn分配客户端网段 |
+| --------- | ----------- | ---------- | --------------------- |
+| CentOS7.9 | 2.4.11      | 10.206.0.9 | 10.8.0.0              |
 
 
 
@@ -29,7 +29,7 @@
 ### 1.1 克隆项目
 
 ```sh
-git clone https://github.com.cnpmjs.org/Nyr/openvpn-install.git
+git clone https://github.com/Nyr/openvpn-install.git
 ```
 
 
@@ -42,13 +42,13 @@ cd openvpn-install && sh openvpn-install.sh
 
 
 
-**⚠️安装完成后再次执行脚本会提示如下**
+**安装完成后再次执行脚本会提示如下**
 
 ```shell
 OpenVPN is already installed.
 
 Select an option:
-	 # 添加新的客户端
+   # 添加新的客户端
    1) Add a new client
    
    # 移除已存在的客户端
@@ -319,7 +319,7 @@ The client configuration is available in: /root/pptfz.ovpn
 New clients can be added by running this script again.
 ```
 
-:::tip
+:::tip说明
 
 **客户端文件是 `/root/pptfz.ovpn` ，在最后的输出中有提示，这里的客户端文件名称是自定义的，然后把这个文件下载到本地，后续配置VPN认证的时候需要用到这个客户端文件**
 
@@ -366,11 +366,11 @@ Compile time defines: enable_async_push=no enable_comp_stub=no enable_crypto=yes
 
 ### 2.1 编辑脚本
 
-> **这个是现在公司线上用到的文件，目前没有找到出处，不知道为什么，总之就是利用一个存放用户名密码的自定义文件 `/etc/openvpn/psw-file` 来作为认证文件**
+:::tip说明
+
+**这个是现在公司线上用到的文件，目前没有找到出处，不知道为什么，总之就是利用一个存放用户名密码的自定义文件 `/etc/openvpn/psw-file` 来作为认证文件**
 
 **编辑如下脚本，后续openvpn的配置文件 `/etc/openvpn/server/server.conf` 中会引用这个脚本**
-
-:::tip
 
 **openvpn运行用户对于这个脚本至少有rx权限，否则认证会失败**
 
@@ -429,10 +429,10 @@ chmod +x /etc/openvpn/checkpsw.sh
 
 #### 2.2.1 追加以下内容
 
-**其中 auth-user-pass-verify 对应的文件一定要与上一步创建的脚本名相同**
+**其中 `auth-user-pass-verify` 对应的文件一定要与上一步创建的脚本名相同**
 
 ```shell
-cat >> /etc/openvpn/server/server.conf <<EOF
+cat >> /etc/openvpn/server/server.conf << EOF
 auth-user-pass-verify /etc/openvpn/checkpsw.sh via-env
 verify-client-cert
 username-as-common-name
