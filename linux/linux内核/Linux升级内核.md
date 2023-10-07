@@ -236,7 +236,9 @@ make mrproper
 
 **配置命令**
 
-![iShot_2023-10-07_18.45.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-10-07_18.45.49.png)
+![iShot_2023-10-07_18.50.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-10-07_18.50.31.png)
+
+
 
 更多关于使用Linux内核配置工具的信息，见文档 [Kconfig make config](https://docs.kernel.org/kbuild/kconfig.html)
 
