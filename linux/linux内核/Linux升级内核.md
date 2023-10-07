@@ -236,26 +236,7 @@ make mrproper
 
 **配置命令**
 
-| 命令                       | 说明                                                         |
-| -------------------------- | ------------------------------------------------------------ |
-| make config                | 纯文本界面                                                   |
-| make menuconfig            | 基于文本的彩色菜单、选项列表和对话框                         |
-| make nconfig               | 增强的基于文本的彩色菜单                                     |
-| make xconfig               | 基于Qt的配置工具                                             |
-| make gconfig               | 基于GTK+的配置工具                                           |
-| make oldconfig             | 基于现有的 `./.config` 文件选择所有选项，并询问                    新配置选项 |
-| make olddefconfig          | 类似 `make oldconfig` ，但不询问直接将新选项设置为默认值     |
-| make defconfig             | 根据体系架构，使用 `arch/$arch/defconfig` 或                     `arch/$arch/configs/${PLATFORM}_defconfig` 中的                    默认选项值创建 `./.config` 文件 |
-| make ${PLATFORM}_defconfig | 使用 `arch/$arch/configs/${PLATFORM}_defconfig` 中的默认选项值创建一个 `./.config` 文件。                    用 `make help` 来获取您体系架构中所有可用平台的列表 |
-| make allyesconfig          | 通过尽可能将选项值设置为 `y`，创建一个 `./.config` 文件      |
-| make allmodconfig          | 通过尽可能将选项值设置为 `m`，创建一个 `./.config` 文件      |
-| make allnoconfig           | 通过尽可能将选项值设置为 `n`，创建一个 `./.config` 文件      |
-| make randconfig            | 通过随机设置选项值来创建 `./.config` 文件                    |
-| make localmodconfig        | 基于当前配置和加载的模块（lsmod）创建配置。禁用已加载的模块不需要的任何模块选项<br>要为另一台计算机创建localmodconfig，请将该计算机的lsmod存储到一个文件中，并将其作为lsmod参数传入<br>此外，通过在参数LMC_KEEP中指定模块的路径，可以将模块保留在某些文件夹或kconfig文件中<br>`target$ lsmod > /tmp/mylsmod`<br>`target$ scp /tmp/mylsmod host:/tmp`<br>`host$ make LSMOD=/tmp/mylsmod LMC_KEEP="drivers/usb:drivers/gpu:fs" localmodconfig`<br>上述方法在交叉编译时也适用 |
-| make localyesconfig        | 与localmodconfig类似，只是它会将所有模块选项转换为内置（=y）。你可以同时通过LMC_KEEP保留模块 |
-| make kvm_guest.config      | 为kvm客户机内核支持启用其他选项                              |
-| make xen.config            | 为xen dom0客户机内核支持启用其他选项                         |
-| make tinyconfig            | 配置尽可能小的内核                                           |
+![iShot_2023-10-07_18.45.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-10-07_18.45.49.png)
 
 更多关于使用Linux内核配置工具的信息，见文档 [Kconfig make config](https://docs.kernel.org/kbuild/kconfig.html)
 
@@ -268,8 +249,6 @@ make olddefconfig
 
 
 #### 2.2.6 编译内核
-
-
 
 ```shell
 make -j `nproc` 
@@ -325,5 +304,4 @@ reboot
 $ uname -a
 Linux VM-0-4-centos 6.1.55 #1 SMP PREEMPT_DYNAMIC Sat Oct  7 16:33:51 CST 2023 x86_64 x86_64 x86_64 GNU/Linux
 ```
-
 
