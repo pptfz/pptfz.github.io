@@ -10,14 +10,16 @@
 
 | 角色       | IP            | 主机名         | containerd版本 | 硬件配置 | 系统          | 内核                          | 安装组件                                                     |
 | ---------- | ------------- | -------------- | -------------- | -------- | ------------- | ----------------------------- | ------------------------------------------------------------ |
-| **master** | **10.0.0.12** | **k8s-master** |                | **2c4g** | **CentOS7.9** | **6.5.8-1.el7.elrepo.x86_64** | **kube-apiserver，kube-controller-manager，kube-scheduler，etcd** |
-| **node**   | **10.0.0.10** | **k8s-node**   |                | **2c4g** | **CentOS7.9** | **6.5.8-1.el7.elrepo.x86_64** | **kubelet，kube-proxy，docker，etcd**                        |
+| **master** | **10.0.0.12** | **k8s-master** | **1.7.8**      | **2c4g** | **CentOS7.9** | **6.5.8-1.el7.elrepo.x86_64** | **kube-apiserver，kube-controller-manager，kube-scheduler，kubelet，etcd** |
+| **node**   | **10.0.0.10** | **k8s-node**   | **1.7.8**      | **2c4g** | **CentOS7.9** | **6.5.8-1.el7.elrepo.x86_64** | **kubelet，kube-proxy，containerd，etcd**                    |
 
 
 
 
 
 ## 前提条件
+
+[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B)
 
 - 每台机器2G或更多的内存
 - CPU2核心及以上
@@ -39,6 +41,8 @@
 
 ## 确保每个节点上 MAC 地址和 product_uuid 的唯一性
 
+[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#verify-mac-address)
+
 - 你可以使用命令 `ip link` 或 `ifconfig -a` 来获取网络接口的 MAC 地址
 - 可以使用 `sudo cat /sys/class/dmi/id/product_uuid` 命令对 product_uuid 校验
 
@@ -49,6 +53,8 @@
 
 
 ## 检查所需端口
+
+[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports)
 
 启用这些[必要的端口](https://kubernetes.io/zh-cn/docs/reference/networking/ports-and-protocols/)后才能使 Kubernetes 的各组件相互通信。 可以使用 netcat 之类的工具来检查端口是否启用，例如：
 
@@ -82,6 +88,8 @@ nc 127.0.0.1 6443
 
 
 ## 安装容器运行时
+
+[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-runtime)
 
 为了在 Pod 中运行容器，Kubernetes 使用 [容器运行时（Container Runtime）](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes)。
 
@@ -125,11 +133,11 @@ Docker Engine 没有实现 [CRI](https://kubernetes.io/zh-cn/docs/concepts/archi
 
 
 
-
-
 ### 安装和配置先决条件
 
 #### 转发 IPv4 并让 iptables 看到桥接流量
+
+[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#%E8%BD%AC%E5%8F%91-ipv4-%E5%B9%B6%E8%AE%A9-iptables-%E7%9C%8B%E5%88%B0%E6%A1%A5%E6%8E%A5%E6%B5%81%E9%87%8F)
 
 执行命令
 
@@ -174,7 +182,68 @@ sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables ne
 
 ### cgroup驱动
 
-更多说明查看 [cgroup驱动官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#cgroup-drivers)
+ [官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#cgroup-drivers)
+
+在 Linux 上，[控制组（CGroup）](https://kubernetes.io/zh-cn/docs/reference/glossary/?all=true#term-cgroup)用于限制分配给进程的资源。
+
+[kubelet](https://kubernetes.io/docs/reference/generated/kubelet) 和底层容器运行时都需要对接控制组来强制执行 [为 Pod 和容器管理资源](https://kubernetes.io/zh-cn/docs/concepts/configuration/manage-resources-containers/) 并为诸如 CPU、内存这类资源设置请求和限制。若要对接控制组，kubelet 和容器运行时需要使用一个 **cgroup 驱动**。 关键的一点是 kubelet 和容器运行时需使用相同的 cgroup 驱动并且采用相同的配置。
+
+可用的 cgroup 驱动有两个：
+
+- [`cgroupfs`](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#cgroupfs-cgroup-driver)
+- [`systemd`](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver)
+
+### cgroupfs 驱动
+
+`cgroupfs` 驱动是 [kubelet 中默认的 cgroup 驱动](https://kubernetes.io/zh-cn/docs/reference/config-api/kubelet-config.v1beta1)。 当使用 `cgroupfs` 驱动时， kubelet 和容器运行时将直接对接 cgroup 文件系统来配置 cgroup。
+
+当 [systemd](https://www.freedesktop.org/wiki/Software/systemd/) 是初始化系统时， **不** 推荐使用 `cgroupfs` 驱动，因为 systemd 期望系统上只有一个 cgroup 管理器。 此外，如果你使用 [cgroup v2](https://kubernetes.io/zh-cn/docs/concepts/architecture/cgroups)， 则应用 `systemd` cgroup 驱动取代 `cgroupfs`。
+
+### systemd cgroup 驱动
+
+当某个 Linux 系统发行版使用 [systemd](https://www.freedesktop.org/wiki/Software/systemd/) 作为其初始化系统时，初始化进程会生成并使用一个 root 控制组（`cgroup`），并充当 cgroup 管理器。
+
+systemd 与 cgroup 集成紧密，并将为每个 systemd 单元分配一个 cgroup。 因此，如果你 `systemd` 用作初始化系统，同时使用 `cgroupfs` 驱动，则系统中会存在两个不同的 cgroup 管理器。
+
+同时存在两个 cgroup 管理器将造成系统中针对可用的资源和使用中的资源出现两个视图。某些情况下， 将 kubelet 和容器运行时配置为使用 `cgroupfs`、但为剩余的进程使用 `systemd` 的那些节点将在资源压力增大时变得不稳定。
+
+当 systemd 是选定的初始化系统时，缓解这个不稳定问题的方法是针对 kubelet 和容器运行时将 `systemd` 用作 cgroup 驱动。
+
+要将 `systemd` 设置为 cgroup 驱动，需编辑 [`KubeletConfiguration`](https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/kubelet-config-file/) 的 `cgroupDriver` 选项，并将其设置为 `systemd`。例如：
+
+```yaml
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+...
+cgroupDriver: systemd
+```
+
+:::tip说明
+
+从 v1.22 开始，在使用 kubeadm 创建集群时，如果用户没有在 `KubeletConfiguration` 下设置 `cgroupDriver` 字段，kubeadm 默认使用 `systemd`。
+
+:::
+
+在 Kubernetes v1.28 中，启用 `KubeletCgroupDriverFromCRI` [特性门控](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/feature-gates/)结合支持 `RuntimeConfig` CRI RPC 的容器运行时，kubelet 会自动从运行时检测适当的 Cgroup 驱动程序，并忽略 kubelet 配置中的 `cgroupDriver` 设置。
+
+如果你将 `systemd` 配置为 kubelet 的 cgroup 驱动，你也必须将 `systemd` 配置为容器运行时的 cgroup 驱动。参阅容器运行时文档，了解指示说明。例如：
+
+- [containerd](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#containerd-systemd)
+- [CRI-O](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#cri-o)
+
+
+
+:::caution注意
+
+注意：更改已加入集群的节点的 cgroup 驱动是一项敏感的操作。 如果 kubelet 已经使用某 cgroup 驱动的语义创建了 Pod，更改运行时以使用别的 cgroup 驱动，当为现有 Pod 重新创建 PodSandbox 时会产生错误。 重启 kubelet 也可能无法解决此类问题。
+
+如果你有切实可行的自动化方案，使用其他已更新配置的节点来替换该节点， 或者使用自动化方案来重新安装。
+
+:::
+
+
+
+
 
 
 
@@ -1204,4 +1273,6 @@ NAME       STATUS   ROLES           AGE   VERSION
 k8s-master Ready    control-plane   78m   v1.28.3
 k8s-node   Ready    <none>          63m   v1.28.3
 ```
+
+
 
