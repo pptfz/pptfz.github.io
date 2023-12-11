@@ -255,12 +255,39 @@ cgroupDriver: systemd
 
 [containerd官方安装文档](https://github.com/containerd/containerd/blob/main/docs/getting-started.md)
 
+
+
+:::caution注意
+
+从v1.6版本开始，捆绑包 `cri-containerd-*.tar.gz` 已经被弃用，并且会在v2.0版本删除，这里有 [官方说明](https://github.com/containerd/containerd/blob/main/RELEASES.md#deprecated-features) 
+
+:::
+
+
+
 下载安装包
 
 ```shell
 export CONTAINERD_VERSION=1.7.8
 wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
 ```
+
+
+
+压缩包内容如下
+
+```shell
+$ tar tf containerd-1.7.8-linux-amd64.tar.gz 
+bin/
+bin/containerd-shim-runc-v1
+bin/containerd-stress
+bin/containerd-shim-runc-v2
+bin/containerd
+bin/containerd-shim
+bin/ctr
+```
+
+
 
 
 
@@ -272,21 +299,6 @@ tar Cxzvf /usr/local containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
 
 
 
-解压缩后的 `bin` 目录内容如下
-
-```shell
-$ tree bin
-bin
-├── containerd
-├── containerd-shim
-├── containerd-shim-runc-v1
-├── containerd-shim-runc-v2
-├── containerd-stress
-└── ctr
-
-0 directories, 6 files
-```
-
 
 
 使用systemd管理containerd
@@ -295,6 +307,54 @@ bin
 
 ```shell
 curl https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -o /usr/lib/systemd/system/containerd.service
+```
+
+
+
+`containerd.service` 文件内容如下
+
+```shell
+# Copyright The containerd Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+[Unit]
+Description=containerd container runtime
+Documentation=https://containerd.io
+After=network.target local-fs.target
+
+[Service]
+ExecStartPre=-/sbin/modprobe overlay
+ExecStart=/usr/local/bin/containerd
+
+Type=notify
+Delegate=yes
+KillMode=process
+Restart=always
+RestartSec=5
+
+# Having non-zero Limit*s causes performance problems due to accounting overhead
+# in the kernel. We recommend using cgroups to do container-local accounting.
+LimitNPROC=infinity
+LimitCORE=infinity
+
+# Comment TasksMax if your systemd version does not supports it.
+# Only systemd 226 and above support this version.
+TasksMax=infinity
+OOMScoreAdjust=-999
+
+[Install]
+WantedBy=multi-user.target
 ```
 
 
@@ -355,11 +415,44 @@ wget https://github.com/containernetworking/plugins/releases/download/v${CNI_VER
 
 
 
+安装包内容如下
+
+```sh
+$ tar tf cni-plugins-linux-amd64-v1.3.0.tgz 
+./
+./loopback
+./bandwidth
+./ptp
+./vlan
+./host-device
+./tuning
+./vrf
+./sbr
+./tap
+./dhcp
+./static
+./firewall
+./macvlan
+./dummy
+./bridge
+./ipvlan
+./portmap
+./host-local
+```
+
+
+
 解压缩
 
 ```shell
 mkdir -p /opt/cni/bin
 tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v${CNI_VERSION}.tgz
+```
+
+
+
+```sh
+tar Cxzvf /usr/local/bin cni-plugins-linux-amd64-v${CNI_VERSION}.tgz
 ```
 
 
@@ -823,7 +916,7 @@ yum list kubeadm --showduplicates
 
 ```shell
 export K8S_VERSION=1.28.3
-yum install -y kubelet-${K8S_VERSION} kubeadm-${K8S_VERSION} kubectl-${K8S_VERSION} --disableexcludes=kubernetes
+yum -y install kubelet-${K8S_VERSION} kubeadm-${K8S_VERSION} kubectl-${K8S_VERSION} --disableexcludes=kubernetes
 systemctl enable --now kubelet
 ```
 
@@ -842,8 +935,6 @@ systemctl enable --now kubelet
 
 ```shell
 yum -y install bash-completion 
-#source /usr/share/bash-completion/bash_completion 
-#source <(kubectl completion bash) 
 echo "source <(kubectl completion bash)" >> ~/.bashrc && source ~/.bashrc
 ```
 
@@ -1011,7 +1102,7 @@ kind: KubeProxyConfiguration
 
 也可以通过 `kubeadm init` 命令行方式
 
-::tip说明
+:::tip 说明
 
 初始化前也可以执行 `kubeadm config images pull`  把需要的镜像先拉取下来
 
@@ -1021,6 +1112,8 @@ kubeadm config images pull --image-repository registry.aliyuncs.com/google_conta
 
 :::
 
+命令行方式
+
 ```sh
 kubeadm init \
 --apiserver-advertise-address=10.0.0.12 \
@@ -1028,6 +1121,14 @@ kubeadm init \
 --kubernetes-version v1.28.3 \
 --service-cidr=10.96.0.0/16 \
 --pod-network-cidr=10.244.0.0/16
+```
+
+
+
+指定配置文件方式
+
+```sh
+kubeadm init --config kubeadm.yaml 
 ```
 
 
