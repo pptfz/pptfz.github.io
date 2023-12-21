@@ -48,6 +48,36 @@ yum -y install https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
 - [kernel-lt](https://elrepo.org/tiki/kernel-lt)：长期维护版
 - [kernel-ml](https://elrepo.org/tiki/kernel-ml)：最新稳定版
 
+
+
+可以通过 `yum --disablerepo=* --enablerepo=elrepo-kernel list available` 查看yum源中可用的rpm包版本
+
+```sh
+$ yum --disablerepo=* --enablerepo=elrepo-kernel list available
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * elrepo-kernel: hkg.mirror.rackspace.com
+elrepo-kernel                                                                                                                                          | 3.0 kB  00:00:00     
+elrepo-kernel/primary_db                                                                                                                               | 2.1 MB  00:00:01     
+Available Packages
+kernel-lt.x86_64                                                                       5.4.264-1.el7.elrepo                                                      elrepo-kernel
+kernel-lt-devel.x86_64                                                                 5.4.264-1.el7.elrepo                                                      elrepo-kernel
+kernel-lt-doc.noarch                                                                   5.4.264-1.el7.elrepo                                                      elrepo-kernel
+kernel-lt-headers.x86_64                                                               5.4.264-1.el7.elrepo                                                      elrepo-kernel
+kernel-lt-tools.x86_64                                                                 5.4.264-1.el7.elrepo                                                      elrepo-kernel
+kernel-lt-tools-libs.x86_64                                                            5.4.264-1.el7.elrepo                                                      elrepo-kernel
+kernel-lt-tools-libs-devel.x86_64                                                      5.4.264-1.el7.elrepo                                                      elrepo-kernel
+kernel-ml.x86_64                                                                       6.6.7-1.el7.elrepo                                                        elrepo-kernel
+kernel-ml-devel.x86_64                                                                 6.6.7-1.el7.elrepo                                                        elrepo-kernel
+kernel-ml-doc.noarch                                                                   6.6.7-1.el7.elrepo                                                        elrepo-kernel
+kernel-ml-headers.x86_64                                                               6.6.7-1.el7.elrepo                                                        elrepo-kernel
+kernel-ml-tools.x86_64                                                                 6.6.7-1.el7.elrepo                                                        elrepo-kernel
+kernel-ml-tools-libs.x86_64                                                            6.6.7-1.el7.elrepo                                                        elrepo-kernel
+kernel-ml-tools-libs-devel.x86_64                                                      6.6.7-1.el7.elrepo                                                        elrepo-kernel
+perf.x86_64                                                                            5.4.264-1.el7.elrepo                                                      elrepo-kernel
+python-perf.x86_64                                                                     5.4.264-1.el7.elrepo                                                      elrepo-kernel
+```
+
 :::
 
 这里安装最新长期维护版
