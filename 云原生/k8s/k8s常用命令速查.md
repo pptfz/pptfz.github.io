@@ -1,6 +1,6 @@
 # k8s常用命令速查
 
-### 强制删除pod
+## 强制删除pod
 
 ```sh
 kubectl delete pod <pod-name> --grace-period=0 --force
@@ -8,11 +8,11 @@ kubectl delete pod <pod-name> --grace-period=0 --force
 
 
 
-### 污点
+## 污点
 
 [污点官方文档](https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/taint-and-toleration/)
 
-查看所有节点的污点
+### 查看所有节点的污点
 
 ```sh
 kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
@@ -20,7 +20,7 @@ kubectl get nodes -o custom-columns=NAME:.metadata.name,TAINTS:.spec.taints
 
 
 
-查看某个节点的污点
+### 查看某个节点的污点
 
 ```sh
 kubectl describe node <node-name> | grep Taints
@@ -28,7 +28,7 @@ kubectl describe node <node-name> | grep Taints
 
 
 
-给某个节点添加污点
+### 给某个节点添加污点
 
 :::tip命令
 
@@ -48,9 +48,9 @@ kubectl taint nodes node-1 key1=value1:NoSchedule
 
 
 
-取消某个节点的污点
+### 取消某个节点的污点
 
-:::命令
+:::tip命令
 
 ```sh
 kubectl taint nodes <node-name> key:-
@@ -64,5 +64,109 @@ kubectl taint nodes <node-name> key:-
 
 ```sh
 kubectl taint nodes node-1 key1:-
+```
+
+
+
+## 标签
+
+[标签官方文档](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/labels/)
+
+
+
+### 查看所有节点标签
+
+```sh
+kubectl get nodes --show-labels
+```
+
+
+
+
+
+### 查看某个节点的标签
+
+:::tip命令
+
+```sh
+kubectl get nodes <node-name> --show-labels
+```
+
+:::
+
+
+
+示例
+
+```sh
+$ kubectl get nodes ops-ingress-worker3 --show-labels
+NAME                  STATUS   ROLES    AGE   VERSION   LABELS
+ops-ingress-worker3   Ready    <none>   57d   v1.27.3   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,ingress-ready=true,kubernetes.io/arch=amd64,kubernetes.io/hostname=ops-ingress-worker3,kubernetes.io/os=linux
+```
+
+
+
+### 给某个节点添加标签
+
+:::tip命令
+
+```sh
+kubectl label nodes <your-node-name> key=value
+```
+
+:::
+
+
+
+示例
+
+给 `ops-ingress-worker3` 节点添加一个键为 `disktype` 值为 `ssd` 的标签
+
+```sh
+kubectl label nodes ops-ingress-worker3 disktype=ssd
+```
+
+
+
+查看
+
+```sh
+$ kubectl get nodes ops-ingress-worker3 --show-labels
+NAME                  STATUS   ROLES    AGE   VERSION   LABELS
+ops-ingress-worker3   Ready    <none>   57d   v1.27.3   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,disktype=ssd,ingress-ready=true,kubernetes.io/arch=amd64,kubernetes.io/hostname=ops-ingress-worker3,kubernetes.io/os=linux
+```
+
+
+
+### 取消某个节点的标签
+
+:::tip命令
+
+**取消标签只需要指定键，不需要指定值**
+
+```sh
+kubectl label nodes <your-node-name> key-
+```
+
+:::
+
+
+
+示例
+
+取消 `ops-ingress-worker3` 节点添键为 `disktype` 的标签
+
+```shell
+kubectl label nodes ops-ingress-worker3 disktype-
+```
+
+
+
+查看
+
+```sh
+$ kubectl get nodes ops-ingress-worker3 --show-labels
+NAME                  STATUS   ROLES    AGE   VERSION   LABELS
+ops-ingress-worker3   Ready    <none>   57d   v1.27.3   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,ingress-ready=true,kubernetes.io/arch=amd64,kubernetes.io/hostname=ops-ingress-worker3,kubernetes.io/os=linux
 ```
 
