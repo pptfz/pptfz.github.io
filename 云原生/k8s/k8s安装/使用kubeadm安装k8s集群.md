@@ -444,13 +444,6 @@ $ tar tf cni-plugins-linux-amd64-v1.3.0.tgz
 
 解压缩
 
-```shell
-mkdir -p /opt/cni/bin
-tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v${CNI_VERSION}.tgz
-```
-
-
-
 ```sh
 tar Cxzvf /usr/local/bin cni-plugins-linux-amd64-v${CNI_VERSION}.tgz
 ```
@@ -1133,6 +1126,96 @@ kubeadm init --config kubeadm.yaml
 
 
 
+```yaml
+apiVersion: kubeadm.k8s.io/v1beta3
+bootstrapTokens:
+- groups:
+  - system:bootstrappers:kubeadm:default-node-token
+  token: abcdef.0123456789abcdef
+  ttl: 24h0m0s
+  usages:
+  - signing
+  - authentication
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: 10.0.0.10  # 指定master节点内网IP
+  bindPort: 6443
+nodeRegistration:
+  criSocket: /run/containerd/containerd.sock  # 使用 containerd 的 Unix socket 地址
+  imagePullPolicy: IfNotPresent
+  name: k8s-master01 # master节点主机名
+  taints:  # 给master添加污点，master节点不能调度应用
+  - effect: "NoSchedule"
+    key: "node-role.kubernetes.io/master"
+
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+mode: iptables  # kube-proxy 模式
+
+---
+apiServer:
+  timeoutForControlPlane: 4m0s
+apiVersion: kubeadm.k8s.io/v1beta3
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+controllerManager: {}
+dns: {}
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+imageRepository: registry.aliyuncs.com/google_containers
+kind: ClusterConfiguration
+kubernetesVersion: 1.28.2
+networking:
+  dnsDomain: cluster.local
+  serviceSubnet: 10.96.0.0/12
+  podSubnet: 10.244.0.0/16  # 指定 pod 子网
+scheduler: {}
+
+---
+apiVersion: kubelet.config.k8s.io/v1beta1
+authentication:
+  anonymous:
+    enabled: false
+  webhook:
+    cacheTTL: 0s
+    enabled: true
+  x509:
+    clientCAFile: /etc/kubernetes/pki/ca.crt
+authorization:
+  mode: Webhook
+  webhook:
+    cacheAuthorizedTTL: 0s
+    cacheUnauthorizedTTL: 0s
+clusterDNS:
+- 10.96.0.10
+clusterDomain: cluster.local
+cpuManagerReconcilePeriod: 0s
+evictionPressureTransitionPeriod: 0s
+fileCheckFrequency: 0s
+healthzBindAddress: 127.0.0.1
+healthzPort: 10248
+httpCheckFrequency: 0s
+imageMinimumGCAge: 0s
+kind: KubeletConfiguration
+cgroupDriver: systemd  # 配置 cgroup driver
+logging: {}
+memorySwap: {}
+nodeStatusReportFrequency: 0s
+nodeStatusUpdateFrequency: 0s
+rotateCertificates: true
+runtimeRequestTimeout: 0s
+shutdownGracePeriod: 0s
+shutdownGracePeriodCriticalPods: 0s
+staticPodPath: /etc/kubernetes/manifests
+streamingConnectionIdleTimeout: 0s
+syncFrequency: 0s
+volumeStatsAggPeriod: 0s
+```
+
+
+
 `init` 执行成功后会有如下输出
 
 ```sh
@@ -1324,6 +1407,8 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
 
 
+#### flannel
+
 下载插件
 
 ```sh
@@ -1376,4 +1461,82 @@ k8s-node   Ready    <none>          63m   v1.28.3
 ```
 
 
+
+
+
+#### calico
+
+[calico github](https://github.com/projectcalico/calico)
+
+[calico官网](https://docs.tigera.io/)
+
+
+
+安装calico tigera-operator和自定义资源
+
+```sh
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+```
+
+
+
+安装calico
+
+:::caution注意
+
+`custom-resources.yaml` 文件中的pod网段默认是 `192.168.0.0/16` ，如果集群的pod网段不是 `192.168.0.0/16` 则需要修改
+
+:::
+
+```sh
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+```
+
+
+
+
+
+查看所有pod状态
+
+```sh
+$ kubectl get pod -A
+NAMESPACE          NAME                                       READY   STATUS    RESTARTS   AGE
+calico-apiserver   calico-apiserver-867b8496d6-g5bln          1/1     Running   0          2m8s
+calico-apiserver   calico-apiserver-867b8496d6-knbdj          1/1     Running   0          2m8s
+calico-system      calico-kube-controllers-79f555774b-t4szx   1/1     Running   0          3m25s
+calico-system      calico-node-6bqs7                          1/1     Running   0          17m
+calico-system      calico-node-6zr9b                          1/1     Running   0          17m
+calico-system      calico-node-gf4m9                          1/1     Running   0          17m
+calico-system      calico-node-pcsvl                          1/1     Running   0          17m
+calico-system      calico-typha-b4884f588-g8z88               1/1     Running   0          17m
+calico-system      calico-typha-b4884f588-s59sv               1/1     Running   0          17m
+calico-system      csi-node-driver-b548q                      2/2     Running   0          17m
+calico-system      csi-node-driver-fjmvl                      2/2     Running   0          17m
+calico-system      csi-node-driver-n8sk8                      2/2     Running   0          17m
+calico-system      csi-node-driver-qzvxr                      2/2     Running   0          17m
+kube-system        coredns-66f779496c-62d8l                   1/1     Running   0          46m
+kube-system        coredns-66f779496c-8ks6d                   1/1     Running   0          46m
+kube-system        etcd-k8s-master01                          1/1     Running   0          47m
+kube-system        kube-apiserver-k8s-master01                1/1     Running   0          47m
+kube-system        kube-controller-manager-k8s-master01       1/1     Running   0          47m
+kube-system        kube-proxy-hnkz2                           1/1     Running   0          46m
+kube-system        kube-proxy-ncx7z                           1/1     Running   0          46m
+kube-system        kube-proxy-qmf5p                           1/1     Running   0          46m
+kube-system        kube-proxy-wpzbh                           1/1     Running   0          46m
+kube-system        kube-scheduler-k8s-master01                1/1     Running   0          47m
+tigera-operator    tigera-operator-55585899bf-c65gw           1/1     Running   0          17m
+```
+
+
+
+安装完网络插件后，当所有pod都为 `running` 状态后，集群所有节点状态才为 `Ready`
+
+```sh
+$ kubectl get no
+NAME           STATUS   ROLES           AGE   VERSION
+k8s-master01   Ready    control-plane   47m   v1.28.2
+k8s-node01     Ready    <none>          47m   v1.28.2
+k8s-node02     Ready    <none>          46m   v1.28.2
+k8s-node03     Ready    <none>          46m   v1.28.2
+```
 
