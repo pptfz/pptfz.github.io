@@ -158,6 +158,8 @@ ingress-nginx-controller-5865555b87-r6465   1/1     Running   0          8m58s
 
 [MetalLB官方文档](https://metallb.universe.tf/)
 
+[MetalLB github](https://github.com/metallb/metallb)
+
 
 
 添加helm仓库
@@ -226,6 +228,12 @@ ingress-nginx-controller-admission   ClusterIP      10.98.175.165   <none>      
 
 为了解决以上问题，安装完metallb后，还需要创建以下资源
 
+:::tip说明
+
+`addresses` 字段指定的ip地址段要与node节点的网络在同一个地址段
+
+:::
+
 ```yaml
 cat > metallb-IPAddressPool.yaml << EOF
 ---
@@ -252,7 +260,7 @@ EOF
 
 
 
-应用以上yaml文件
+应用以上yaml文件以创建 `IPAddressPool` 和 `L2Advertisement` 资源对象
 
 ```sh
 kubectl apply -f metallb-IPAddressPool.yaml 
@@ -263,7 +271,7 @@ kubectl apply -f metallb-IPAddressPool.yaml
 查看创建的 `IPAddressPool`
 
 ```sh
-$ kubectl get IPAddressPool -n metallb
+$ kubectl get IPAddressPool -n metallb-system
 NAME      AGE
 default   45s
 ```
@@ -277,5 +285,127 @@ $ kubectl get svc -n ingress-nginx
 NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
 ingress-nginx-controller             LoadBalancer   10.110.240.95   203.0.113.10   80:31285/TCP,443:30307/TCP   29m
 ingress-nginx-controller-admission   ClusterIP      10.98.175.165   <none>         443/TCP                      29m
+```
+
+
+
+编辑示例文件
+
+```yaml
+cat > use-ingress-example.yaml << EOF
+kind: Pod
+apiVersion: v1
+metadata:
+  name: foo-app
+  labels:
+    app: foo
+spec:
+  containers:
+  - command:
+    - /agnhost
+    - netexec
+    - --http-port
+    - "8080"
+    image: uhub.service.ucloud.cn/996.icu/agnhost:2.39  
+    name: foo-app
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: foo-service
+spec:
+  selector:
+    app: foo
+  ports:
+  # Default port used by the image
+  - port: 8080
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: bar-app
+  labels:
+    app: bar
+spec:
+  containers:
+  - command:
+    - /agnhost
+    - netexec
+    - --http-port
+    - "8080"
+    image: uhub.service.ucloud.cn/996.icu/agnhost:2.39
+    name: bar-app
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: bar-service
+spec:
+  selector:
+    app: bar
+  ports:
+  # Default port used by the image
+  - port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx-prod
+  rules:
+  - host: test.ops.com
+    http:
+      paths:
+      #- pathType: Prefix
+      - pathType: ImplementationSpecific
+        path: /foo(/|$)(.*)
+        backend:
+          service:
+            name: foo-service
+            port:
+              number: 8080
+      #- pathType: Prefix
+      - pathType: ImplementationSpecific
+        path: /bar(/|$)(.*)
+        backend:
+          service:
+            name: bar-service
+            port:
+              number: 8080
+---
+EOF
+```
+
+
+
+创建
+
+```sh
+kubectl apply -f use-ingress-example.yaml 
+```
+
+
+
+查看 ingress
+
+```sh
+$ kubectl get ing
+NAME              CLASS        HOSTS          ADDRESS      PORTS   AGE
+example-ingress   nginx-prod   test.ops.com   203.0.113.10   80      69m
+```
+
+
+
+本机做host后访问
+
+```sh
+$ curl test.ops.com/bar/hostname
+bar-app
+
+$ curl test.ops.com/foo/hostname
+foo-app
 ```
 
