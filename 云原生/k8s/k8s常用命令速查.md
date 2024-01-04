@@ -8,6 +8,16 @@ kubectl delete pod <pod-name> --grace-period=0 --force
 
 
 
+## 存储类
+
+设置默认存储类
+
+```sh
+kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
+
+
+
 ## 污点
 
 [污点官方文档](https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/taint-and-toleration/)
