@@ -18,6 +18,30 @@ kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":
 
 
 
+## 查看node节点上调度的pod
+
+```sh
+kubectl get pods --field-selector spec.nodeName=<Node_Name>
+```
+
+
+
+## 查看未达到期望副本数的资源
+
+```sh
+kubectl get deployments --all-namespaces -o custom-columns="NAMESPACE:.metadata.namespace,DEPLOYMENT:.metadata.name,DESIRED:.spec.replicas,CURRENT:.status.replicas" --sort-by=.metadata.namespace | awk 'NR>1 && $3 != $4'
+```
+
+
+
+## 手动设置资源的副本数
+
+```shell
+kubectl scale deployment <deployment-name> --replicas=<desired-replica-count> -n <namespace>
+```
+
+
+
 ## 污点
 
 [污点官方文档](https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/taint-and-toleration/)
