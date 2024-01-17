@@ -49,15 +49,23 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs>
-  <TabItem value="apple" label="Apple" default>
-    This is an apple 🍎
+  <TabItem value="bash" label="bash" default>
+
+```sh
+kubecm completion bash > /etc/bash_completion.d/kubecm
+```
+
   </TabItem>
-  <TabItem value="orange" label="Orange">
-    This is an orange 🍊
+  <TabItem value="zsh" label="zsh">
+
+```sh
+kubecm completion zsh > "${fpath[1]}/_kubecm"
+```
+
+
+
   </TabItem>
-  <TabItem value="banana" label="Banana">
-    This is a banana 🍌
-  </TabItem>
+
 </Tabs>
 
 
