@@ -32,7 +32,7 @@ echo xxx | base64 --decode | openssl x509 -noout -enddate
 
 示例
 
-输出的时间是UTC时间，换成
+输出的时间是UTC时间，换成北京时间需要+8
 
 ```sh
 echo xxx | base64 --decode | openssl x509 -noout -enddate
