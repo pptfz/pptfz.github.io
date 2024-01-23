@@ -18,6 +18,30 @@ kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":
 
 
 
+## 查看证书过期时间
+
+:::tip命令
+
+通过查看 `kubeconfig` 文件中 `client-certificate-data` 字段的值可以获取证书过期时间
+
+```shell
+echo xxx | base64 --decode | openssl x509 -noout -enddate
+```
+
+:::
+
+示例
+
+输出的时间是UTC时间，换成
+
+```sh
+echo xxx | base64 --decode | openssl x509 -noout -enddate
+Warning: Reading certificate from stdin since no -in or -new option is given
+notAfter=Nov  1 02:23:23 2024 GMT
+```
+
+
+
 ## 查看node节点上调度的pod
 
 ```sh

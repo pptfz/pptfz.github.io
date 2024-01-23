@@ -63,12 +63,8 @@ kubecm completion zsh > "${fpath[1]}/_kubecm"
 ```
 
 
-
   </TabItem>
-
 </Tabs>
-
-
 
 
 
