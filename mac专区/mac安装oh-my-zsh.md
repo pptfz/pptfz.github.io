@@ -1,12 +1,14 @@
-# mac安装oh-my-zsh
+# mac安装ohmyzsh
 
 [参考链接](https://lilyssh.blog.csdn.net/article/details/118178091?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7Edefault-1.no_search_link&utm_relevant_index=1)
 
 [oh-my-zsh官网](https://ohmyz.sh/)
 
+[ohmyzsh github](https://github.com/ohmyzsh/ohmyzsh)
 
 
-## 1.安装oh-my-zsh
+
+## 1.安装ohmyzsh
 
 ```shell
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -82,4 +84,41 @@ plugins=(
 ```shell
 source ~/.zshrc
 ```
+
+
+
+## 3.更新ohmyzsh
+
+### 3.1 修改仓库地址
+
+在 `.oh-my-zsh` 目录中，默认的远程仓库是github，如果想要加速可以修改为国内加速源
+
+```
+git config -l | grep remote.origin.url
+remote.origin.url=https://github.com/ohmyzsh/ohmyzsh.git
+```
+
+
+
+修改为 [清华源](https://mirrors4.tuna.tsinghua.edu.cn/help/ohmyzsh.git/)
+
+```shell
+git -C $ZSH remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/ohmyzsh.git
+```
+
+### 3.2 更新
+
+默认情况下会每2周检查一次更新，其他更新方式可以参考 [github](https://github.com/ohmyzsh/ohmyzsh?tab=readme-ov-file#getting-updates)
+
+手动执行命令更新
+
+```sh
+omz update
+```
+
+
+
+
+
+
 
