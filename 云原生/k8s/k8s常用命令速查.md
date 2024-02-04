@@ -53,7 +53,7 @@ kubectl get pods --field-selector spec.nodeName=<Node_Name>
 ## 查看未达到期望副本数的资源
 
 ```sh
-kubectl get deployments --all-namespaces -o custom-columns="NAMESPACE:.metadata.namespace,DEPLOYMENT:.metadata.name,DESIRED:.spec.replicas,CURRENT:.status.replicas" --sort-by=.metadata.namespace | awk 'NR>1 && $3 != $4'
+kubectl get deploy --all-namespaces -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name,READY:.status.readyReplicas,DESIRED:.spec.replicas --no-headers=true | awk '$3 != $4 '
 ```
 
 
