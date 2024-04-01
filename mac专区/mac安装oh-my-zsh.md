@@ -93,8 +93,8 @@ source ~/.zshrc
 
 在 `.oh-my-zsh` 目录中，默认的远程仓库是github，如果想要加速可以修改为国内加速源
 
-```
-git config -l | grep remote.origin.url
+```shell
+$ cd ~/.oh-my-zsh/ && git config -l | grep remote.origin.url
 remote.origin.url=https://github.com/ohmyzsh/ohmyzsh.git
 ```
 
@@ -105,6 +105,17 @@ remote.origin.url=https://github.com/ohmyzsh/ohmyzsh.git
 ```shell
 git -C $ZSH remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/ohmyzsh.git
 ```
+
+
+
+修改完后查看
+
+```shell
+$ git config -l | grep remote.origin.url
+remote.origin.url=https://mirrors.tuna.tsinghua.edu.cn/git/ohmyzsh.git
+```
+
+
 
 ### 3.2 更新
 
