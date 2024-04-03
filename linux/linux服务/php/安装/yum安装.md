@@ -46,6 +46,8 @@ systemctl start php-fpm && systemctl enable php-fpm
 
 ### 1.添加第三方yum源
 
+通过这种方式安装的php的目录在`/etc/opt`  配置文件是 `/etc/opt/remi/php73/php-fpm.d/www.conf`
+
 **安装epel源并添加第三方yum源**
 
 ```shell
