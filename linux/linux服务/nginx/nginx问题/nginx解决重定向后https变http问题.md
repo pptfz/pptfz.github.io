@@ -46,7 +46,7 @@ server {
 
 pod中nginx配置如下
 
-```sh
+```nginx
 server {
   listen 80;
   server_name domain;
@@ -97,15 +97,19 @@ server {
 
 ## 解决方法
 
-解决nginx重新向后https变http问题的方法就是设置一个 `X-Forwarded-Proto` 请求头
+解决nginx重新向后https变http问题的方法就是设置一个 `X-Forwarded-Proto` 请求头和 `proxy_redirect`
 
 在 Nginx 中，`$scheme` 变量是一个内置变量，用于表示请求的协议部分，即 `http` 或 `https`。这个变量的值由 Nginx 根据请求的实际协议自动设置。如果请求使用的是 HTTPS 协议，则 `$scheme` 的值为 `https`，否则为 `http`。在使用 `proxy_set_header X-Forwarded-Proto $scheme;` 这样的指令时，Nginx 将自动替换 `$scheme` 变量的值为请求的实际协议，然后将 `X-Forwarded-Proto` 头的值设置为这个协议。这样后端服务器就能够根据请求的协议来做出相应的处理。
 
+`proxy_redirect` 具体说明可以查看 [官方文档](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect) ，`proxy_redirect` 仅涉及更改3x x状态码中的 `Location` 响应头
+
 ```nginx
 # $scheme会根据请求的协议自动变更
+proxy_redirect          http:// https://; 
 proxy_set_header        X-Forwarded-Proto $scheme; 
 
 # 手动指定协议
+proxy_redirect          http:// https://; 
 proxy_set_header        X-Forwarded-Proto https;
 ```
 
