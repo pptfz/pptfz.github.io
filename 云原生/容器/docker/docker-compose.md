@@ -45,7 +45,7 @@ curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_V
 
 ```shell
 export DOCKER_COMPOSE_VERSION=2.10.2
-curl -L https://get.daocloud.io/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSIO}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+curl -L https://get.daocloud.io/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 ```
 
 
