@@ -33,8 +33,8 @@
 [docker compose github地址](https://github.com/docker/compose)
 
 ```shell
-export DOCKER_COMPOSE_VERSION=2.10.2
-curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSIO}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+export DOCKER_COMPOSE_VERSION=2.27.0
+curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
 
 
