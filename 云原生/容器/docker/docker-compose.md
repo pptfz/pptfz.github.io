@@ -39,19 +39,6 @@ curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_V
 
 
 
-#### 2.1.2 国内源下载
-
-可以使用 [daocloud](https://get.daocloud.io/) 加速下载
-
-```shell
-export DOCKER_COMPOSE_VERSION=2.10.2
-curl -L https://get.daocloud.io/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-```
-
-
-
-
-
 ### 2.2 给二进制文件添加可执行权限
 
 ```shell
