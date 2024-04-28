@@ -4,11 +4,11 @@
 
 
 
-其中，查询所需的 `AccessKeyId` 通过变量 `ALIBABA_CLOUD_ACCESS_KEY_ID` 传递，`AccessKeySecret` 通过变量 `ALIBABA_CLOUD_ACCESS_KEY_SECRET` 
+其中，查询所需的 `AccessKeyId` 通过变量 `ALIBABA_CLOUD_ACCESS_KEY_ID` 获取，`AccessKeySecret` 通过变量 `ALIBABA_CLOUD_ACCESS_KEY_SECRET` 获取
 
 ```go
 AccessKeyId: tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_ID")),
-		AccessKeySecret: tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET")),
+AccessKeySecret: tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET")),
 ```
 
 

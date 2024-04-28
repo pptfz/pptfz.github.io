@@ -51,7 +51,7 @@ chmod +x /usr/local/bin/docker-compose
 
 ```shell
 $ docker-compose -v
-Docker Compose version v2.10.2
+Docker Compose version v2.27.0
 ```
 
 
