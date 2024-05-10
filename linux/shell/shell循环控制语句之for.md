@@ -69,5 +69,5 @@ echo -e"online ip is: \n`cat /root/ping.txt`"
 waite	等待并发全部执行完成才往后执行
 
 for循环高并发
-在要执行的命令外加上  {命令}&  即在do跟done之间的命令加{}&
+在要执行的命令外加上  `{命令}&`  即在do跟done之间的命令加 `{}&`
 

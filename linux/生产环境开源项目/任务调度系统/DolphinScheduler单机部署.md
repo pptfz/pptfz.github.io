@@ -292,7 +292,7 @@ chown -R dolphinscheduler:dolphinscheduler dolphinscheduler-bin
 
 > **注意：** 
 >
-> - **因为任务执行服务是以 sudo -u {linux-user} 切换不同linux用户的方式来实现多租户运行作业，所以部署用户需要有 sudo 权限，而且是免密的。初学习者不理解的话，完全可以暂时忽略这一点** 
+> - **因为任务执行服务是以 `sudo -u {linux-user}` 切换不同linux用户的方式来实现多租户运行作业，所以部署用户需要有 sudo 权限，而且是免密的。初学习者不理解的话，完全可以暂时忽略这一点** 
 > -  **如果发现 `/etc/sudoers` 文件中有`"Default requiretty"`这行，也请注释掉** 
 >
 > - **如果用到资源上传的话，还需要给该部署用户分配操作本地文件系统或者HDFS或者MinIO的权限**
@@ -583,7 +583,7 @@ logs/
 
 ![iShot2020-09-05 18.33.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-05%2018.33.01.png)
 
-**<span style={{color: 'red'}}> 到此，dolphinscheduler单机版部署完成！</span>**
+到此，dolphinscheduler单机版部署完成！
 
 
 

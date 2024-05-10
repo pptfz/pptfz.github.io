@@ -66,7 +66,7 @@ Etcd使用的是raft一致性算法来实现的，是一款分布式的一致性
 
 K8s中所有元数据的增删改查都是由kube-apiserver来执行的。ETCD中key值通过观察可以简单得出下面几个规律：
 
-k8s主要把自己的数据注册在/registry/前缀下面（在ETCD-v3版本后没有了目录的概念，只能一切皆前缀了）。通过观察k8s中deployment、namespace、pod等在ETCD中的表示，可以知道这部分资源的key的格式为/registry/{k8s对象}/{命名空间}/{具体实例名}。
+k8s主要把自己的数据注册在/registry/前缀下面（在ETCD-v3版本后没有了目录的概念，只能一切皆前缀了）。通过观察k8s中deployment、namespace、pod等在ETCD中的表示，可以知道这部分资源的key的格式为 `/registry/{k8s对象}/{命名空间}/{具体实例名}` 。
 
 ![iShot_2022-08-30_11.20.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_11.20.25.png)
 

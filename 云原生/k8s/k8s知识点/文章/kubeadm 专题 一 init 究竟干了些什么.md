@@ -413,7 +413,7 @@ kubelet 默认使用 `docker` 作为runtime 并使用内建的 `dockershim` 进�
 
 1.在每个节点安装runtime 对应的 shim，如何安装在runtime 说明文档中有介绍
 
-2.配置 kubelet 使用远程 CRI runtime （实际是使用linux sockets），记得修改 RUNTIME_ENDPOINT 为你自己对应的值，比如  /var/run/{your_runtime}.sock:
+2.配置 kubelet 使用远程 CRI runtime （实际是使用linux sockets），记得修改 RUNTIME_ENDPOINT 为你自己对应的值，比如  `/var/run/{your_runtime}.sock:`
  比如，如下是cri的配置文件。
 
 ```shell
