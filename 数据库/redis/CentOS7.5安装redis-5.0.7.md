@@ -87,7 +87,7 @@ EOF
 
 ## 4.使用systemd管理redis
 
-:::tip说明
+:::tip 说明
 
 这边并没有使用 `ExecStop=/bin/kill -s QUIT $MAINPID` 这样的命令来停止redis, 因为使用这个语句在运行`systemctl stop redis`后, redis并未执行关闭动作, 而是直接退出. 这时候用 `systemctl status redis` 查看状态是failed. 只有用`ExecStop=/install_path/bin/redis-cli -p 16379 shutdown` 才能正确停止redis
 

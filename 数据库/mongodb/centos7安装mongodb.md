@@ -139,7 +139,7 @@ echo 'export PATH=/usr/local/mongodb-4.2.8/bin:$PATH' >/etc/profile.d/mongodb.sh
 ### 2.6 创建相关目录
 
 ```shell
-#创建数据、日志、pid、配置文件目录
+# 创建数据、日志、pid、配置文件目录
 mkdir -p /data/db/mongodb/{data,log,pid,conf}
 ```
 
@@ -163,24 +163,24 @@ logappend = true
 pidfilepath = /data/db/mongodb/pid/mongod.pid
 dbpath = /data/db/mongodb/data
 
-#存储引擎，有mmapv1、wiretiger、mongorocks
+# 存储引擎，有mmapv1、wiretiger、mongorocks
 storageEngine = wiredTiger
 
-#使用追加的方式写日志
+# 使用追加的方式写日志
 directoryperdb = true
 #replSet = replset
 #rest = true
 oplogSize = 61440
 
-#是否以守护进程方式运行，如果用supervisor管理就设置为false
+# 是否以守护进程方式运行，如果用supervisor管理就设置为false
 fork = false
 
-#是否启用验证
+# 是否启用验证
 auth = false
 #shardsvr = true
 port = 27010
 
-#每次写入会记录一条操作日志（通过journal可以重新构造出写入的数据）。即使宕机，启动时wiredtiger会先将数据恢复到最近一次的checkpoint点，然后重放后续的journal日志来恢复。
+# 每次写入会记录一条操作日志（通过journal可以重新构造出写入的数据）。即使宕机，启动时wiredtiger会先将数据恢复到最近一次的checkpoint点，然后重放后续的journal日志来恢复。
 journal = true
 
 #maxConns = 30000

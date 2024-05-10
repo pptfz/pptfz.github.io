@@ -80,7 +80,7 @@ curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_V
 
 
 
-:::tip说明
+:::tip 说明
 
 harbor有2种安装方式
 
@@ -179,7 +179,7 @@ openssl genrsa -out harbor.ops.com.key 4096
 
 #### 3.2.2 生成证书签名请求 (CSR)
 
-:::tip说明
+:::tip 说明
 
 调整选项中的值 `-subj` 以反映您的组织。如果使用 FQDN 连接 Harbor 主机，则必须将其指定为通用名称 ( `CN`) 属性，并在密钥和 CSR 文件名中使用它。
 
@@ -197,7 +197,7 @@ openssl req -sha512 -new \
 
 #### 3.2.3 生成 x509 v3 扩展文件
 
-:::tip说明
+:::tip 说明
 
 无论您是使用 FQDN 还是 IP 地址连接到您的 Harbor 主机，您都必须创建此文件，以便您可以为您的 Harbor 主机生成符合主题备用名称 (SAN) 和 x509 v3 的证书扩展要求。替换 `DNS` 条目以反映您的域。
 
@@ -241,7 +241,7 @@ openssl x509 -req -sha512 -days 3650 \
 
 #### 3.3.1 转换 `.crt` 为 `.cert`
 
-:::tip说明
+:::tip 说明
 
 Docker 守护进程将 `.crt` 文件解释为 CA 证书，`.cert` 将文件解释为客户端证书。
 
@@ -256,7 +256,7 @@ openssl x509 -inform PEM -in harbor.ops.com.crt -out harbor.ops.com.cert
 
 #### 3.3.3 将服务器证书、密钥和 CA 文件复制到 Harbor 主机上的 Docker 证书文件夹中
 
-:::tip说明
+:::tip 说明
 
 如果您将默认的nginx端口443映射到其他端口，请创建 `/etc/docker/certs.d/yourdomain.com:por`t或 `/etc/docker/certs.d/harbor_IP:port` 文件夹。
 
@@ -299,34 +299,32 @@ harbor在线安装包解压后会有一个 `harbor.yml.tmpl` 示例配置文件
 - `hostname` : 指定要部署 Harbor 的目标主机的 IP 地址或完全限定域名 (FQDN)。这是您访问 Harbor Portal 和注册服务的地址。例如，`192.168.1.10`或`reg.yourdomain.com`。注册表服务必须可供外部客户端访问，因此不要将`localhost`、`127.0.0.1`或指定`0.0.0.0`为主机名。
 - `http` : 不要在生产环境中使用http，只有在没有连接到外部互联网的测试或开发环境才可以使用http。
   - `port` : 用于 Harbor 门户和 Docker 命令的 HTTP 端口号。默认值为 80。
-
 - `https`  : 使用 HTTPS 访问 Harbor Portal 和令牌/通知服务。
-
   - `port` : 用于 Harbor 门户和 Docker 命令的 HTTPS 端口号。默认值为 443。
 
   - `certificate` : SSL 证书的路径。
   - `private_key` : SSL 密钥的路径。
-
 - `internal_tls` : 使用 HTTPS 在 Harbor 组件之间进行通信
 
   - `enabled` : 将此标志设置为`true`表示已启用内部 tls
   - `dir` : 包含内部证书和密钥的目录的路径
-
 - `harbor_admin_password` : 设置Harbor系统管理员的初始密码。此密码仅在 Harbor 首次启动时使用。在随后的登录中，此设置将被忽略，管理员密码将在 Harbor 门户中设置。默认的用户名和密码是`admin`和`Harbor12345`。
 - `database` : 使用本地 PostgreSQL 数据库。您可以选择配置外部数据库，在这种情况下您可以停用此选项。
   - `password` : 设置本地数据库的root密码。
-  - `max_idle_conns` : 空闲连接池中的最大连接数。如果它 <=0，则不保留空闲连接。
-  - `max_open_conns` : 到数据库的最大打开连接数。如果 <= 0，则打开的连接数没有限制。
-  - `conn_max_lifetime` : 可以重用连接的最长时间。如果它 <= 0，则连接不会由于连接的年龄而关闭。
-  - `conn_max_idle_time` : 连接空闲的最长时间。如果它 <= 0，则连接不会由于连接的空闲时间而关闭。
+  - `max_idle_conns` : 空闲连接池中的最大连接数。如果它 `<=0`，则不保留空闲连接。
+  - `max_open_conns` : 到数据库的最大打开连接数。如果 `<= 0`，则打开的连接数没有限制。
+  - `conn_max_lifetime` : 可以重用连接的最长时间。如果它 `<= 0`，则连接不会由于连接的年龄而关闭。
+  - `conn_max_idle_time` : 连接空闲的最长时间。如果它 `<= 0`，则连接不会由于连接的空闲时间而关闭。
 - `data_volume` : 目标主机上存储 Harbor 数据的位置。即使删除 和/或 重新创建 Harbor 的容器，此数据也保持不变。您可以选择配置外部存储，在这种情况下停用此选项并启用`storage_service`。默认值为`/data`。
-
 - `trivy` : 配置 Trivy 扫描仪。
   - `ignore_unfixed` : 将标志设置为`true`仅显示已修复的漏洞。默认值为`false`
   - `security_check` : 要检测的安全问题的逗号分隔列表。可能的值为`vuln`,`config`和`secret`。默认为`vuln`.
   - `skip_update` : 您可能希望在测试或 CI/CD 环境中启用此标志以避免 GitHub 速率限制问题。如果启用该标志，您必须`trivy-offline.tar.gz`手动下载存档，提取和`trivy.db`文件`metadata.json`并将它们安装在`/home/scanner/.cache/trivy/db/trivy.db`容器中的路径中。默认值为`false`
   - `insecure` : 将标志设置为`true`跳过验证注册表证书。默认值为`false`
   - `github_token` : 设置 GitHub 访问令牌以下载 Trivy DB。Trivy DB 由 Trivy 从 GitHub 发布页面下载。来自 GitHub 的匿名下载受每小时 60 次请求的限制。通常这样的速率限制足以用于生产操作。如果出于任何原因这还不够，您可以通过指定 GitHub 访问令牌将速率限制提高到每小时 5000 个请求。有关 GitHub 速率限制的更多详细信息，请参阅 https://developer.github.com/v3/#rate-limiting 。您可以按照 https://help.github.com/en/github 中的说明创建 GitHub 令牌/authenticating-to-github/creating-a-personal-access-token-for-the-command-line
+
+
+
 - `jobservice` 
   - `max_job_workers` : 作业服务中复制工作者的最大数量。对于每个图像复制作业，工作人员将存储库的所有标签同步到远程目标。增加这个数字允许系统中有更多的并发复制作业。但是，由于每个worker都会消耗一定的网络/CPU/IO资源，所以根据宿主机的硬件资源来设置该属性的值。默认值为 10。
 - `notification` 
@@ -353,6 +351,8 @@ harbor在线安装包解压后会有一个 `harbor.yml.tmpl` 示例配置文件
 
 
 
+
+
 ##### 4.1.1.2 可选参数
 
 - `external_url` : 启用此选项以使用外部代理。启用后，不再使用主机名。
@@ -369,8 +369,8 @@ harbor在线安装包解压后会有一个 `harbor.yml.tmpl` 示例配置文件
     - `username`: 数据库用户名。
     - `password`：数据库密码。
     - `ssl_mode`：启用 SSL 模式。
-    - `max_idle_conns`：空闲连接池中的最大连接数。如果 <=0，则不保留空闲连接。默认值为 2。
-    - `max_open_conns`: 数据库的最大打开连接数。如果 <= 0，则打开的连接数没有限制。默认值为 0。
+    - `max_idle_conns`：空闲连接池中的最大连接数。如果 `<=0`，则不保留空闲连接。默认值为 2。
+    - `max_open_conns`: 数据库的最大打开连接数。如果 `<= 0`，则打开的连接数没有限制。默认值为 0。
   - `notary_signer` : 为 Notary 签名者数据库配置外部数据库
     - `host`：公证签名者数据库的主机名
     - `port`：数据库端口。
@@ -552,7 +552,7 @@ EOF
 
 
 
-:::tip修改容器内时区
+:::tip 修改容器内时区
 
 启动的容器默认使用的是 `UTC` 时间，`./install` 执行成功后会生成 `docker-compose.yml` 文件，可以修改 `docker-compose.yml` ，在各个容器的 `volemes` 下增加如下配置，然后重启就可以让容器内的时区变为 `CST`
 
@@ -627,7 +627,7 @@ harbor-log
 
 ### 5.1 配置http访问harbor
 
-:::tip说明
+:::tip 说明
 
 如果不想要配置https访问harbor或者访问入口是nginx/云厂商lb等(一般都是在nginx或lb上配置证书)则不需要执行 `3` 步骤中的内容
 

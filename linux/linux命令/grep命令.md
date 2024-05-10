@@ -124,7 +124,7 @@
 
 
 
-#### -w	把表达式作为词来查找，相当于正则中的"\\<...\\>"(...表示你自定义的规则)
+#### -w	把表达式作为词来查找，相当于正则中的`<...>`(...表示你自定义的规则)
 
 ![iShot2020-10-15 19.44.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2019.44.34.png)
 
@@ -228,13 +228,13 @@ echo '1222233333222444455556666669999'|egrep -o '(.)\1*'
 
 > **截取string右边的内容**
 >
-> **lookahead   (?=string)**
+> `lookahead   (?=string)`
 >
 > 
 >
 > **截取string左边的内容**
 >
-> **lookbehind  (?<=string)**
+> `lookbehind  (?<=string)`
 
 **零宽断言截取字符串**
 

@@ -194,7 +194,7 @@ API_KEY=Admin API Key
 
 编辑 `config.json` 文件
 
-:::tip说明
+:::tip 说明
 
 需要将 `start_urls` 和 `sitemap_urls` 中的 `xxx.com` 替换为自己的域名
 

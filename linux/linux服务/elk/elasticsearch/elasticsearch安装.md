@@ -61,7 +61,7 @@ su es -c './bin/elasticsearch'
 
 
 
-::caution
+:::caution
 
 **使用root用户启动会报错 `java.lang.RuntimeException: can not run elasticsearch as root`**
 

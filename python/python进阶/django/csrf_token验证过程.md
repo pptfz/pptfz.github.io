@@ -28,7 +28,7 @@ csrf_token
 
 **1.浏览器请求服务端的index.html**
 
-**2.服务端index.html中有{% csrf_token %}，这个代码会把csrf_token渲染成一个input标签**
+**2.服务端index.html中有 `{% csrf_token %}` ，这个代码会把csrf_token渲染成一个input标签**
 
 **3.服务端会把2中渲染的input标签的内容加入到响应数据中，cookie会加入到响应头中，格式如下**
 

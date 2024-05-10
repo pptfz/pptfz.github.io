@@ -302,11 +302,11 @@ yum -y install libxml2-devel net-snmp-devel libevent-devel curl-devel
 关于编译选项的说明：
 
 - 如果使用 --enable-agent 选项，则编译命令行实用程序 zabbix_get 和 zabbix_sender。
-- 虚拟机监控需要--with-libcurl 和--with-libxml2 配置选项；SMTP 身份验证和`web.page.*`Zabbix 代理[项](https://www.zabbix.com/documentation/current/manual/config/items/itemtypes/zabbix_agent)也需要 --with-libcurl 。请注意，使用 --with-libcurl 配置选项[需要](https://www.zabbix.com/documentation/current/manual/installation/requirements)cURL 7.20.0 或更高版本。
+- 虚拟机监控需要 `--with-libcurl` 和 `--with-libxml2` 配置选项；SMTP 身份验证和`web.page.*`Zabbix 代理[项](https://www.zabbix.com/documentation/current/manual/config/items/itemtypes/zabbix_agent)也需要 --with-libcurl 。请注意，使用 --with-libcurl 配置选项[需要](https://www.zabbix.com/documentation/current/manual/installation/requirements)cURL 7.20.0 或更高版本。
 - Zabbix 总是使用 PCRE 库进行编译（从 3.4.0 版本开始）；安装它不是可选的。--with-libpcre=[DIR] 只允许指向特定的基本安装目录，而不是搜索 libpcre 文件的许多常见位置。
 - 您可以使用 --enable-static 标志来静态链接库。如果您计划在不同的服务器之间分发已编译的二进制文件，则必须使用此标志使这些二进制文件无需所需的库即可工作。请注意， --enable-static 在[Solaris 中](http://blogs.sun.com/rie/entry/static_linking_where_did_it)不起作用。
 - 构建服务器时不建议使用 --enable-static 选项。为了静态构建服务器，您必须拥有所需的每个外部库的静态版本。在配置脚本中没有严格检查。
-- 在 MySQL 配置文件中添加可选路径 --with-mysql=/<path_to_the_file>/mysql_config 以在需要使用不在默认位置的 MySQL 客户端库时选择所需的 MySQL 客户端库。当在同一系统上安装了多个版本的 MySQL 或与 MySQL 一起安装了 MariaDB 时，它很有用。
+- 在 MySQL 配置文件中添加可选路径 `--with-mysql=/<path_to_the_file>/mysql_config ` 以在需要使用不在默认位置的 MySQL 客户端库时选择所需的 MySQL 客户端库。当在同一系统上安装了多个版本的 MySQL 或与 MySQL 一起安装了 MariaDB 时，它很有用。
 - 使用 --with-oracle 标志指定 OCI API 的位置。
 
 

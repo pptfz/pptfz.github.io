@@ -14,7 +14,7 @@
 
 
 
-:::tip说明
+:::tip 说明
 
 docusaurus2.x版本需要16.14+版本的nodejs
 
@@ -242,7 +242,7 @@ module.exports = config;
 
 ## 3.运行
 
-:::tip说明
+:::tip 说明
 
 执行 `npm run start` 命令，可以通过 `--port 端口` 参数指定运行端口
 

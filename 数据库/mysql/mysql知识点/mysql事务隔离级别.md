@@ -17,6 +17,8 @@
 
 ## mysql 4种事务隔离级别
 
+
+
 | 级别     | symbol           | 对应值 | 含义                                                   | 存在问题                                                     |
 | -------- | ---------------- | ------ | ------------------------------------------------------ | ------------------------------------------------------------ |
 | 读未提交 | READ-UNCOMMITTED | 0      | 一个事务可以读到另一个事务未提交的数据                 | 存在脏读、不可重复读、幻读的问题                             |
@@ -614,44 +616,60 @@ mysql> select @@autocommit;
 
 
 
-
-
 ### 幻读
 
 #### 定义
 
 [官网对**幻读**定义的地址](https://dev.mysql.com/doc/refman/5.7/en/glossary.html#glos_phantom)
 
-> **phantom
-> A row that appears in the result set of a query, but not in the result set of an earlier query. For example, if a query is run twice within a transaction, and in the meantime, another transaction commits after inserting a new row or updating a row so that it matches the WHERE clause of the query.**
+> phantom
+> A row that appears in the result set of a query, but not in the result set of an earlier query. For example, if a query is run twice within a transaction, and in the meantime, another transaction commits after inserting a new row or updating a row so that it matches the WHERE clause of the query.
+
+
 
 翻译过来就是
 
-> **在一次查询的结果集里出现了某一行数据，但是该数据并未出现在更早的查询结果集里。例如，在一次事务里进行了两次查询，同时另一个事务插入某一行或更新某一行数据后(该数据符合查询语句里where后的条件)，并提交了！**
+> 在一次查询的结果集里出现了某一行数据，但是该数据并未出现在更早的查询结果集里。例如，在一次事务里进行了两次查询，同时另一个事务插入某一行或更新某一行数据后(该数据符合查询语句里where后的条件)，并提交了！
+
+
 
 大白话说明一下
 
-> **所谓幻读，指的是当某个事务在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻读**
+> 所谓幻读，指的是当某个事务在读取某个范围内的记录时，另外一个事务又在该范围内插入了新的记录，当之前的事务再次读取该范围的记录时，会产生幻读
 >
-> **就是事务1查询id<10的记录时，返回了2条记录，接着事务2插入了一条id为3的记录，并提交。接着事务1查询id<10的记录时，返回了3条记录，说好的可重复读呢？结果却多了一条数据。**
+> 就是事务1查询 `id<10` 的记录时，返回了2条记录，接着事务2插入了一条id为3的记录，并提交。接着事务1查询 `id<10` 的记录时，返回了3条记录，说好的可重复读呢？结果却多了一条数据。
 
 
 
 幻读(Phantom Read)原因
 
-> **原因：事务A根据相同条件第二次查询，虽然查询不到事务B提交的新增数据，但是会影响事务A之后的一些操作，比如：事务A进行了一次select * from t1表查询，查询出id为1的数据，同时事务B进行了一次insert into t1 values(2,'xx')，也就是此时表中有了id为2的数据，但是在事务A中再次进行查询的时候，根本就查不到id为2的数据，但是当事务A进行insert into t1 values(2,'xx')，也想插入id为2的数据的时候，发现报错了，但是事务A怎么查也查不到有id为2的数据，这就让事务A的使用者出现了幻觉，what happend！。如果不想出现幻读问题，那么自己在查询语句中手动加锁 for update，如果查询的是id为2的数据，即便是现在没有id为2的数据，其他事务也无法对id为2的索引位置进行数据的处理。**
-
-
+> 原因：事务A根据相同条件第二次查询，虽然查询不到事务B提交的新增数据，但是会影响事务A之后的一些操作，比如：事务A进行了一次`select * from t1` 表查询，查询出id为1的数据，同时事务B进行了一次 `insert into t1 values(2,'xx')` ，也就是此时表中有了id为2的数据，但是在事务A中再次进行查询的时候，根本就查不到id为2的数据，但是当事务A进行 `insert into t1 values(2,'xx')` ，也想插入id为2的数据的时候，发现报错了，但是事务A怎么查也查不到有id为2的数据，这就让事务A的使用者出现了幻觉，what happend！。如果不想出现幻读问题，那么自己在查询语句中手动加锁 for update，如果查询的是id为2的数据，即便是现在没有id为2的数据，其他事务也无法对id为2的索引位置进行数据的处理。
 
 [官网对解决幻读方法的地址](https://dev.mysql.com/doc/refman/5.7/en/innodb-locking.html#innodb-record-locks)
 
 原文内容如下
 
-> **By default, InnoDB operates in REPEATABLE READ transaction isolation level. In this case, InnoDB uses next-key locks for searches and index scans, which prevents phantom rows (see Section 14.7.4, “Phantom Rows”).**
+> By default, InnoDB operates in REPEATABLE READ transaction isolation level. In this case, InnoDB uses next-key locks for searches and index scans, which prevents phantom rows (see Section 14.7.4, “Phantom Rows”).
 
 翻译过来就是
 
-> **InnoDB默认用了REPEATABLE READ。在这种情况下，使用next-key locks解决幻读问题！**
+> InnoDB默认用了REPEATABLE READ。在这种情况下，使用next-key locks解决幻读问题！
+
+
+
+
+
+> 
+
+> 
+
+> 
+
+
+
+> 
+
+
 
 
 
