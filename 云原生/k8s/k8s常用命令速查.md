@@ -20,7 +20,7 @@ kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":
 
 ## 查看证书过期时间
 
-:::tip命令
+:::tip 命令
 
 通过查看 `kubeconfig` 文件中 `client-certificate-data` 字段的值可以获取证书过期时间
 
@@ -88,7 +88,7 @@ kubectl describe node <node-name> | grep Taints
 
 ### 给某个节点添加污点
 
-:::tip命令
+:::tip 命令
 
 ```sh
 kubectl taint nodes <node-name> key=value:effect
@@ -108,7 +108,7 @@ kubectl taint nodes node-1 key1=value1:NoSchedule
 
 ### 取消某个节点的污点
 
-:::tip命令
+:::tip 命令
 
 ```sh
 kubectl taint nodes <node-name> key:-
@@ -144,7 +144,7 @@ kubectl get nodes --show-labels
 
 ### 查看某个节点的标签
 
-:::tip命令
+:::tip 命令
 
 ```sh
 kubectl get nodes <node-name> --show-labels
@@ -166,7 +166,7 @@ ops-ingress-worker3   Ready    <none>   57d   v1.27.3   beta.kubernetes.io/arch=
 
 ### 给某个节点添加标签
 
-:::tip命令
+:::tip 命令
 
 ```sh
 kubectl label nodes <your-node-name> key=value
@@ -198,7 +198,7 @@ ops-ingress-worker3   Ready    <none>   57d   v1.27.3   beta.kubernetes.io/arch=
 
 ### 取消某个节点的标签
 
-:::tip命令
+:::tip 命令
 
 **取消标签只需要指定键，不需要指定值**
 
