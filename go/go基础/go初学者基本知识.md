@@ -112,7 +112,7 @@ go: creating new go.mod: module go-project
 
 
 
-执行完 ``go mod init go-project` 命令后会生成 `go.mod` ，`go.mod` 文件内容如下
+执行完 `go mod init go-project` 命令后会生成 `go.mod` ，`go.mod` 文件内容如下
 
 ```shell
 $ cat go.mod
