@@ -176,7 +176,7 @@ go: found github.com/sirupsen/logrus in github.com/sirupsen/logrus v1.9.3
 
 
 
-运行 `go mod tidy` 后会自动生成 `go.sum` 文件，`go.sum` 文件内容如下
+运行  `go mod tidy` 后会自动生成  `go.sum`文件，`go.sum` 文件内容如下
 
 ```shell
 $ cat go.sum
