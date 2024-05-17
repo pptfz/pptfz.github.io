@@ -140,8 +140,6 @@ kubectl get nodes --show-labels
 
 
 
-
-
 ### 查看某个节点的标签
 
 :::tip 命令
@@ -226,5 +224,67 @@ kubectl label nodes ops-ingress-worker3 disktype-
 $ kubectl get nodes ops-ingress-worker3 --show-labels
 NAME                  STATUS   ROLES    AGE   VERSION   LABELS
 ops-ingress-worker3   Ready    <none>   57d   v1.27.3   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,ingress-ready=true,kubernetes.io/arch=amd64,kubernetes.io/hostname=ops-ingress-worker3,kubernetes.io/os=linux
+```
+
+
+
+## 调度
+
+### 设置节点为不可调度
+
+```shell
+kubectl cordon $NODENAME
+```
+
+
+
+### 恢复节点为可调度
+
+```shell
+kubectl uncordon $NODENAME
+```
+
+
+
+### 清空节点
+
+[清空节点官方文档](https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/safely-drain-node/)
+
+:::tip 说明
+
+如果存在 DaemonSet 管理的 Pod，你将需要为 `kubectl` 设置 `--ignore-daemonsets` 以成功地清空节点。 `kubectl drain` 子命令自身实际上不清空节点上的 DaemonSet Pod 集合： DaemonSet 控制器（作为控制平面的一部分）会立即用新的等效 Pod 替换缺少的 Pod。 DaemonSet 控制器还会创建忽略不可调度污点的 Pod，这种污点允许在你正在清空的节点上启动新的 Pod。
+
+:::
+
+
+
+:::caution 注意
+
+如果有一些 Pod 使用了 `emptyDir` 卷或本地存储，这些 Pod 默认情况下不会被删除。要强制删除这些 Pod，可以使用 `--delete-emptydir-data` 参数
+
+```shell
+$ kubectl drain --ignore-daemonsets 10.246.140.15
+node/10.246.140.15 already cordoned
+error: unable to drain node "10.246.140.15", aborting command...
+
+There are pending nodes to be drained:
+ 10.246.140.15
+error: cannot delete Pods with local storage (use --delete-emptydir-data to override): istio-system/istio-ingressgateway-6867ddc5fd-ldvfq, redis/drc-ecc-redis-0-0, redis/drc-ecc-redis-1-1, redis/drc-ecc-redis-2-0, redis/drc-local-test-1-1, redis/drc-local-test-2-1, redis/drc-local-test-7-0-1, redis/drc-test1-zone-stage-ten-2-0, redis/drc-uuap-redis-0-0
+```
+
+:::
+
+```shell
+kubectl drain --ignore-daemonsets $NODENAME
+```
+
+
+
+执行成功后最后提示如下
+
+```sh
+pod/xxx evicted
+pod/xxx evicted
+node/10.246.140.15 evicted
 ```
 
