@@ -80,6 +80,12 @@
 
 
 
+### Manico
+
+[Manico](https://manico.im/) 是一个可以在mac上快速启动以及切换app的工具
+
+
+
 ## 图片压缩
 
 ### uPic / ImageOptim
