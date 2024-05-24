@@ -1,4 +1,4 @@
-# 使用kubeadm安装k8s集群
+# 使用kubeadm在Rocky linux上安装k8s集群
 
 [kubeadm安装官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
 
@@ -8,12 +8,12 @@
 
 
 
-| 角色   | IP        | 主机名     | containerd版本 | 硬件配置 | 系统      | 内核                      | 安装组件                                                     |
-| ------ | --------- | ---------- | -------------- | -------- | --------- | ------------------------- | ------------------------------------------------------------ |
-| master | 10.0.0.10 | k8s-master | 1.7.8          | 2c4g     | CentOS7.9 | 6.5.8-1.el7.elrepo.x86_64 | kube-apiserver，kube-controller-manager，kube-scheduler，kubelet，etcd |
-| node   | 10.0.0.10 | k8s-node   | 1.7.8          | 2c4g     | CentOS7.9 | 6.5.8-1.el7.elrepo.x86_64 | kubelet，kube-proxy，containerd，etcd                        |
-
-
+| 角色   | IP         | 主机名     | containerd版本 | 硬件配置 | 系统                                | 内核                         | 安装组件                                                     |
+| ------ | ---------- | ---------- | -------------- | -------- | ----------------------------------- | ---------------------------- | ------------------------------------------------------------ |
+| master | 10.0.0.10  | k8s-master | 1.7.17         | 2c4g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kube-apiserver，kube-controller-manager，kube-scheduler，kubelet，etcd |
+| Node01 | 10.0.0.100 | K8s-node01 | 1.7.17         | 4c8g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
+| node02 | 10.0.0.101 | k8s-node02 | 1.7.17         | 4c8g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
+| node03 | 10.0.0.102 | k8s-node03 | 1.7.17         | 2c4g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
 
 
 
@@ -21,17 +21,18 @@
 
 [官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#%E5%87%86%E5%A4%87%E5%BC%80%E5%A7%8B)
 
-- 每台机器2G或更多的内存
-- CPU2核心及以上
-- 集群中所有机器网络互通
-- 节点之中不可以有重复的 `主机名` 、`MAC地址` 或 `product_uuid`
+- 一台兼容的 Linux 主机。Kubernetes 项目为基于 Debian 和 Red Hat 的 Linux 发行版以及一些不提供包管理器的发行版提供通用的指令。
+- 每台机器 2 GB 或更多的 RAM（如果少于这个数字将会影响你应用的运行内存）。
+- CPU 2 核心及以上。
+- 集群中的所有机器的网络彼此均能相互连接（公网和内网都可以）。
+- 节点之中不可以有重复的主机名、MAC 地址或 product_uuid。请参见[这里](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#verify-mac-address)了解更多详细信息。
 - 开启机器上的某些端口。请参见[这里](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports)了解更多详细信息。
 - 交换分区的配置。kubelet 的默认行为是在节点上检测到交换内存时无法启动。 kubelet 自 v1.22 起已开始支持交换分区。自 v1.28 起，仅针对 cgroup v2 支持交换分区； kubelet 的 NodeSwap 特性门控处于 Beta 阶段，但默认被禁用。
-  - 如果 kubelet 未被正确配置使用交换分区，则你**必须**禁用交换分区。 例如，`sudo swapoff -a` 将暂时禁用交换分区。要使此更改在重启后保持不变，请确保在如 `/etc/fstab` 、`systemd.swap` 等配置文件中禁用交换分区，具体取决于你的系统如何配置。
+  - 如果 kubelet 未被正确配置使用交换分区，则你**必须**禁用交换分区。 例如，`sudo swapoff -a` 将暂时禁用交换分区。要使此更改在重启后保持不变，请确保在如 `/etc/fstab`、`systemd.swap` 等配置文件中禁用交换分区，具体取决于你的系统如何配置。
 
 
 
-:::info 说明
+:::tip 说明
 
 `kubeadm` 的安装是通过使用动态链接的二进制文件完成的，安装时假设你的目标系统提供 `glibc`。 这个假设在许多 Linux 发行版（包括 Debian、Ubuntu、Fedora、CentOS 等）上是合理的， 但对于不包含默认 `glibc` 的自定义和轻量级发行版（如 Alpine Linux），情况并非总是如此。 预期的情况是，发行版要么包含 `glibc`， 要么提供了一个[兼容层](https://wiki.alpinelinux.org/wiki/Running_glibc_programs)以提供所需的符号。
 
@@ -50,16 +51,22 @@
 
 
 
+## 检查网络适配器
+
+[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-network-adapters)
+
+如果你有一个以上的网络适配器，同时你的 Kubernetes 组件通过默认路由不可达，我们建议你预先添加 IP 路由规则， 这样 Kubernetes 集群就可以通过对应的适配器完成连接。
+
 
 
 ## 检查所需端口
 
 [官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#check-required-ports)
 
-启用这些[必要的端口](https://kubernetes.io/zh-cn/docs/reference/networking/ports-and-protocols/)后才能使 Kubernetes 的各组件相互通信。 可以使用 netcat 之类的工具来检查端口是否启用，例如：
+启用这些[必要的端口](https://kubernetes.io/zh-cn/docs/reference/networking/ports-and-protocols/)后才能使 Kubernetes 的各组件相互通信。 可以使用 [netcat](https://netcat.sourceforge.net/) 之类的工具来检查端口是否开放，例如：
 
 ```shell
-nc 127.0.0.1 6443
+nc 127.0.0.1 6443 -v
 ```
 
 你使用的 Pod 网络插件 (详见后续章节) 也可能需要开启某些特定端口。 由于各个 Pod 网络插件的功能都有所不同，请参阅他们各自文档中对端口的要求。
@@ -70,9 +77,9 @@ nc 127.0.0.1 6443
 
 | 协议 | 方向 | 端口范围  | 目的                    | 使用者               |
 | ---- | ---- | --------- | ----------------------- | -------------------- |
-| TCP  | 入站 | 6443      | Kubernetes API server   | 所有                 |
-| TCP  | 入站 | 2379-2380 | etcd server client API  | kube-apiserver, etcd |
-| TCP  | 入站 | 10250     | Kubelet API             | 自身, master节点     |
+| TCP  | 入站 | 6443      | Kubernetes API 服务器   | 所有                 |
+| TCP  | 入站 | 2379-2380 | etcd 服务器客户端 API   | kube-apiserver、etcd |
+| TCP  | 入站 | 10250     | kubelet API             | 自身、控制面         |
 | TCP  | 入站 | 10259     | kube-scheduler          | 自身                 |
 | TCP  | 入站 | 10257     | kube-controller-manager | 自身                 |
 
@@ -82,8 +89,11 @@ nc 127.0.0.1 6443
 
 | 协议 | 方向 | 端口范围    | 目的               | 使用者           |
 | ---- | ---- | ----------- | ------------------ | ---------------- |
-| TCP  | 入站 | 10250       | Kubelet API        | 自身, master节点 |
+| TCP  | 入站 | 10250       | kubelet API        | 自身、控制面     |
+| TCP  | 入站 | 10256       | kube-proxy         | 自身、负载均衡器 |
 | TCP  | 入站 | 30000-32767 | NodePort Services† | 所有             |
+
+
 
 
 
@@ -101,15 +111,11 @@ nc 127.0.0.1 6443
 
 参阅[容器运行时](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/) 以了解更多信息。
 
-
-
 :::tip 说明
 
 Docker Engine 没有实现 [CRI](https://kubernetes.io/zh-cn/docs/concepts/architecture/cri/)， 而这是容器运行时在 Kubernetes 中工作所需要的。 为此，必须安装一个额外的服务 [cri-dockerd](https://github.com/Mirantis/cri-dockerd)。 cri-dockerd 是一个基于传统的内置 Docker 引擎支持的项目， 它在 1.24 版本从 kubelet 中[移除](https://kubernetes.io/zh-cn/dockershim)。
 
 :::
-
-
 
 下面的表格包括被支持的操作系统的已知端点。
 
@@ -135,26 +141,14 @@ Docker Engine 没有实现 [CRI](https://kubernetes.io/zh-cn/docs/concepts/archi
 
 ### 安装和配置先决条件
 
-#### 转发 IPv4 并让 iptables 看到桥接流量
+[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#install-and-configure-prerequisites)
 
-[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#%E8%BD%AC%E5%8F%91-ipv4-%E5%B9%B6%E8%AE%A9-iptables-%E7%9C%8B%E5%88%B0%E6%A1%A5%E6%8E%A5%E6%B5%81%E9%87%8F)
+#### 启用 IPv4 数据包转发
 
-执行命令
-
-```shell
-cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
-overlay
-br_netfilter
-EOF
-
-sudo modprobe overlay
-sudo modprobe br_netfilter
-
+```bash
 # 设置所需的 sysctl 参数，参数在重新启动后保持不变
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
-net.bridge.bridge-nf-call-iptables  = 1
-net.bridge.bridge-nf-call-ip6tables = 1
-net.ipv4.ip_forward                 = 1
+net.ipv4.ip_forward = 1
 EOF
 
 # 应用 sysctl 参数而不重新启动
@@ -163,26 +157,17 @@ sudo sysctl --system
 
 
 
-通过运行以下指令确认 `br_netfilter` 和 `overlay` 模块被加载
+使用以下命令验证 `net.ipv4.ip_forward` 是否设置为 1：
 
-```shell
-lsmod | grep br_netfilter
-lsmod | grep overlay
+```bash
+sysctl net.ipv4.ip_forward
 ```
 
 
 
-通过运行以下指令确认 `net.bridge.bridge-nf-call-iptables`、`net.bridge.bridge-nf-call-ip6tables` 和 `net.ipv4.ip_forward` 系统变量在你的 `sysctl` 配置中被设置为 1：
+### cgroup 驱动
 
-```shell
-sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
-```
-
-
-
-### cgroup驱动
-
- [官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#cgroup-drivers)
+[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#cgroup-drivers)
 
 在 Linux 上，[控制组（CGroup）](https://kubernetes.io/zh-cn/docs/reference/glossary/?all=true#term-cgroup)用于限制分配给进程的资源。
 
@@ -193,13 +178,13 @@ sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables ne
 - [`cgroupfs`](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#cgroupfs-cgroup-driver)
 - [`systemd`](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/#systemd-cgroup-driver)
 
-### cgroupfs 驱动
+#### cgroupfs 驱动
 
 `cgroupfs` 驱动是 [kubelet 中默认的 cgroup 驱动](https://kubernetes.io/zh-cn/docs/reference/config-api/kubelet-config.v1beta1)。 当使用 `cgroupfs` 驱动时， kubelet 和容器运行时将直接对接 cgroup 文件系统来配置 cgroup。
 
 当 [systemd](https://www.freedesktop.org/wiki/Software/systemd/) 是初始化系统时， **不** 推荐使用 `cgroupfs` 驱动，因为 systemd 期望系统上只有一个 cgroup 管理器。 此外，如果你使用 [cgroup v2](https://kubernetes.io/zh-cn/docs/concepts/architecture/cgroups)， 则应用 `systemd` cgroup 驱动取代 `cgroupfs`。
 
-### systemd cgroup 驱动
+#### systemd cgroup 驱动
 
 当某个 Linux 系统发行版使用 [systemd](https://www.freedesktop.org/wiki/Software/systemd/) 作为其初始化系统时，初始化进程会生成并使用一个 root 控制组（`cgroup`），并充当 cgroup 管理器。
 
@@ -218,11 +203,15 @@ kind: KubeletConfiguration
 cgroupDriver: systemd
 ```
 
+
+
 :::tip 说明
 
 从 v1.22 开始，在使用 kubeadm 创建集群时，如果用户没有在 `KubeletConfiguration` 下设置 `cgroupDriver` 字段，kubeadm 默认使用 `systemd`。
 
 :::
+
+
 
 在 Kubernetes v1.28 中，启用 `KubeletCgroupDriverFromCRI` [特性门控](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/feature-gates/)结合支持 `RuntimeConfig` CRI RPC 的容器运行时，kubelet 会自动从运行时检测适当的 Cgroup 驱动程序，并忽略 kubelet 配置中的 `cgroupDriver` 设置。
 
@@ -235,15 +224,11 @@ cgroupDriver: systemd
 
 :::caution 注意
 
-注意：更改已加入集群的节点的 cgroup 驱动是一项敏感的操作。 如果 kubelet 已经使用某 cgroup 驱动的语义创建了 Pod，更改运行时以使用别的 cgroup 驱动，当为现有 Pod 重新创建 PodSandbox 时会产生错误。 重启 kubelet 也可能无法解决此类问题。
+更改已加入集群的节点的 cgroup 驱动是一项敏感的操作。 如果 kubelet 已经使用某 cgroup 驱动的语义创建了 Pod，更改运行时以使用别的 cgroup 驱动，当为现有 Pod 重新创建 PodSandbox 时会产生错误。 重启 kubelet 也可能无法解决此类问题。
 
 如果你有切实可行的自动化方案，使用其他已更新配置的节点来替换该节点， 或者使用自动化方案来重新安装。
 
 :::
-
-
-
-
 
 
 
@@ -267,37 +252,34 @@ cgroupDriver: systemd
 
 下载安装包
 
-```shell
-export CONTAINERD_VERSION=1.7.8
-wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
+```bash
+export CONTAINERD_VERSION=1.7.17
+export ARCHITECTURE=arm64
+wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
 
 
 
 压缩包内容如下
 
-```shell
-$ tar tf containerd-1.7.8-linux-amd64.tar.gz 
+```bash
+$ tar tf containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz 
 bin/
-bin/containerd-shim-runc-v1
-bin/containerd-stress
-bin/containerd-shim-runc-v2
-bin/containerd
 bin/containerd-shim
+bin/containerd-stress
 bin/ctr
+bin/containerd-shim-runc-v2
+bin/containerd-shim-runc-v1
+bin/containerd
 ```
-
-
 
 
 
 解压缩
 
-```shell
-tar Cxzvf /usr/local containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
+```bash
+tar Cxzvf /usr/local containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
-
-
 
 
 
@@ -313,7 +295,7 @@ curl https://raw.githubusercontent.com/containerd/containerd/main/containerd.ser
 
 `containerd.service` 文件内容如下
 
-```shell
+```bash
 # Copyright The containerd Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -374,29 +356,30 @@ systemctl enable --now containerd
 
 下载安装包
 
-```shell
-export RUNC_VERSION=1.1.9
-wget https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.amd64
+```bash
+export RUNC_VERSION=1.1.12
+export ARCHITECTURE=arm64
+wget https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.${ARCHITECTURE}
 ```
 
 
 
 安装
 
-```shell
-install -m 755 runc.amd64 /usr/local/sbin/runc
+```bash
+install -m 755 runc.${ARCHITECTURE} /usr/local/sbin/runc
 ```
 
 
 
 验证
 
-```shell
+```bash
 $ runc -v
-runc version 1.1.9
-commit: v1.1.9-0-gccaecfcb
+runc version 1.1.12
+commit: v1.1.12-0-g51d5e946
 spec: 1.0.2-dev
-go: go1.20.3
+go: go1.20.13
 libseccomp: 2.5.4
 ```
 
@@ -408,44 +391,47 @@ libseccomp: 2.5.4
 
 下载安装包
 
-```shell
-export CNI_VERSION=1.3.0
-wget https://github.com/containernetworking/plugins/releases/download/v${CNI_VERSION}/cni-plugins-linux-amd64-v${CNI_VERSION}.tgz
+```bash
+export CNI_VERSION=1.5.0
+export ARCHITECTURE=arm64
+wget https://github.com/containernetworking/plugins/releases/download/v${CNI_VERSION}/cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 ```
 
 
 
 安装包内容如下
 
-```sh
-$ tar tf cni-plugins-linux-amd64-v1.3.0.tgz 
+```bash
+$ tar tf cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 ./
+./dhcp
 ./loopback
+./README.md
 ./bandwidth
-./ptp
+./ipvlan
 ./vlan
+./static
 ./host-device
+./LICENSE
+./bridge
+./dummy
 ./tuning
 ./vrf
-./sbr
 ./tap
-./dhcp
-./static
-./firewall
-./macvlan
-./dummy
-./bridge
-./ipvlan
 ./portmap
+./firewall
+./ptp
 ./host-local
+./macvlan
+./sbr
 ```
 
 
 
 解压缩
 
-```sh
-tar Cxzvf /usr/local/bin cni-plugins-linux-amd64-v${CNI_VERSION}.tgz
+```bash
+tar Cxzvf /usr/local/bin cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 ```
 
 
@@ -496,7 +482,7 @@ systemd 与 cgroup 集成紧密，并将为每个 systemd 单元分配一个 cgr
 
 用如下命令修改
 
-```shell
+```bash
 sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
 ```
 
@@ -506,16 +492,16 @@ sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/confi
 
 :::tip 说明
 
-在 `/etc/containerd/config.toml` 配置文件中，pause镜像的默认地址是 `registry.k8s.io/pause:3.8`，由于某些特殊原因，需要修改这个镜像的地址，可以使用ucloud提供的加速地址
+在 `/etc/containerd/config.toml` 配置文件中，pause镜像的默认地址是 `registry.k8s.io/pause:3.9`，由于某些特殊原因，需要修改这个镜像的地址，可以使用ucloud提供的加速地址
 
-`uhub.service.ucloud.cn/996.icu/pause:3.8`
+`uhub.service.ucloud.cn/996.icu/pause:3.9` 或者阿里云提供的加速地址 `registry.aliyuncs.com/k8sxio/pause:3.9`
 
 :::
 
 ```shell
 [plugins."io.containerd.grpc.v1.cri"]
   ......
-  sandbox_image = "registry.k8s.io/pause:3.8"
+  sandbox_image = "registry.k8s.io/pause:3.9"
 ```
 
 
@@ -523,28 +509,29 @@ sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/confi
 用如下命令修改
 
 ```shell
-sed -i 's#registry.k8s.io#uhub.service.ucloud.cn/996.icu#' /etc/containerd/config.toml
+sed -i 's#registry.k8s.io#registry.aliyuncs.com/k8sxio#' /etc/containerd/config.toml
 ```
-
-
 
 
 
 #### 配置containerd镜像仓库加速
 
-```toml
-[plugins."io.containerd.grpc.v1.cri"]
-  ...
-  # sandbox_image = "k8s.gcr.io/pause:3.8"
-  sandbox_image = "registry.aliyuncs.com/k8sxio/pause:3.8"
-  ...
-  [plugins."io.containerd.grpc.v1.cri".registry]
-    [plugins."io.containerd.grpc.v1.cri".registry.mirrors]
-      [plugins."io.containerd.grpc.v1.cri".registry.mirrors."docker.io"]
-        endpoint = ["https://bqr1dr1n.mirror.aliyuncs.com"]
-      [plugins."io.containerd.grpc.v1.cri".registry.mirrors."k8s.gcr.io"]
-        endpoint = ["https://registry.aliyuncs.com/k8sxio"]
+[阿里云官方文档](https://help.aliyun.com/zh/acr/user-guide/accelerate-the-pulls-of-docker-official-images?spm=5176.28426678.J_HeJR_wZokYt378dwP-lLl.261.21795181n1ykLy&scm=20140722.S_help@@%E6%96%87%E6%A1%A3@@60750.S_BB1@bl+BB2@bl+RQW@ag0+os0.ID_60750-RL_containerd%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E5%8A%A0%E9%80%9F-LOC_search~UND~helpdoc~UND~item-OR_ser-V_3-P0_0)
+
+
+
+```bash
+mkdir -p /etc/containerd/certs.d/docker.io
+
+cat >> /etc/containerd/certs.d/docker.io/hosts.toml << 'EOF'
+server = "https://registry-1.docker.io"
+
+[host."$(https://bqr1dr1n.mirror.aliyuncs.com)"]
+  capabilities = ["pull", "resolve", "push"]
+EOF
 ```
+
+
 
 
 
@@ -556,35 +543,7 @@ systemctl restart containerd
 
 
 
-查看运行状态
-
-```shell
-$ systemctl status containerd
-● containerd.service - containerd container runtime
-   Loaded: loaded (/usr/lib/systemd/system/containerd.service; enabled; vendor preset: disabled)
-   Active: active (running) since Thu 2023-10-26 19:41:04 CST; 6min ago
-     Docs: https://containerd.io
-  Process: 27269 ExecStartPre=/sbin/modprobe overlay (code=exited, status=0/SUCCESS)
- Main PID: 27273 (containerd)
-    Tasks: 9
-   Memory: 29.1M
-   CGroup: /system.slice/containerd.service
-           └─27273 /usr/local/bin/containerd
-
-Oct 26 19:41:05 k8s containerd[27273]: time="2023-10-26T19:41:04.974636799+08:00" level=info msg="Start subscribing containerd event"
-Oct 26 19:41:05 k8s containerd[27273]: time="2023-10-26T19:41:04.974851585+08:00" level=info msg="Start recovering state"
-Oct 26 19:41:05 k8s containerd[27273]: time="2023-10-26T19:41:04.975620149+08:00" level=info msg="Start event monitor"
-Oct 26 19:41:05 k8s containerd[27273]: time="2023-10-26T19:41:04.975638830+08:00" level=info msg="Start snapshots syncer"
-Oct 26 19:41:05 k8s containerd[27273]: time="2023-10-26T19:41:04.975648925+08:00" level=info msg="Start cni network conf syncer for default"
-Oct 26 19:41:05 k8s containerd[27273]: time="2023-10-26T19:41:04.975655890+08:00" level=info msg="Start streaming server"
-Oct 26 19:41:05 k8s containerd[27273]: time="2023-10-26T19:41:04.977412869+08:00" level=info msg="skipping tracing processor initialization (no tracing plugin)"...kip plugin"
-Oct 26 19:41:05 k8s containerd[27273]: time="2023-10-26T19:41:04.978883545+08:00" level=info msg=serving... address=/run/containerd/containerd.sock.ttrpc
-Oct 26 19:41:05 k8s containerd[27273]: time="2023-10-26T19:41:04.978946259+08:00" level=info msg=serving... address=/run/containerd/containerd.sock
-Oct 26 19:41:05 k8s containerd[27273]: time="2023-10-26T19:41:04.983535827+08:00" level=info msg="containerd successfully booted in 0.090335s"
-Hint: Some lines were ellipsized, use -l to show in full.
-```
-
-
+### 安装其他工具
 
 #### 安装cri-tools（可选）
 
@@ -594,36 +553,32 @@ Hint: Some lines were ellipsized, use -l to show in full.
 
 下载安装包
 
-```shell
-export CRICTL_VERSION=1.28.0
-https://github.com/kubernetes-sigs/cri-tools/releases/download/v${CRICTL_VERSION}/crictl-v${CRICTL_VERSION}-linux-amd64.tar.gz
+```bash
+export CRICTL_VERSION=1.30.0
+export ARCHITECTURE=arm64
+wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${CRICTL_VERSION}/crictl-v${CRICTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
 
 
 
 解压缩
 
-```shell
-tar Cxzvf /usr/local/bin crictl-v${CRICTL_VERSION}-linux-amd64.tar.gz
+```bash
+tar Cxzvf /usr/local/bin crictl-v${CRICTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
 
 
 
-执行命令报错
+执行命令有警告
 
-```sh
+```bash
 $ crictl images
-WARN[0000] image connect using default endpoints: [unix:///var/run/dockershim.sock unix:///run/containerd/containerd.sock unix:///run/crio/crio.sock unix:///var/run/cri-dockerd.sock]. As the default settings are now deprecated, you should set the endpoint instead. 
-ERRO[0000] validate service connection: validate CRI v1 image API for endpoint "unix:///var/run/dockershim.sock": rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial unix /var/run/dockershim.sock: connect: no such file or directory" 
+WARN[0000] image connect using default endpoints: [unix:///run/containerd/containerd.sock unix:///run/crio/crio.sock unix:///var/run/cri-dockerd.sock]. As the default settings are now deprecated, you should set the endpoint instead. 
 ```
 
 
 
 解决方法
-
-[解决方法链接](https://www.cyberithub.com/solved-error-while-dialing-dial-unix-var-run-dockershim-sock/)
-
-
 
 因为使用的是containerd，因此需要将容器运行时修改为containerd，修改完成后就可以成功执行命令了
 
@@ -637,8 +592,8 @@ crictl config --set runtime-endpoint=unix:///run/containerd/containerd.sock --se
 
 ```yaml
 $ cat /etc/crictl.yaml 
-runtime-endpoint: unix:///run/containerd/containerd.sock
-image-endpoint: unix:///run/containerd/containerd.sock
+runtime-endpoint: "unix:///run/containerd/containerd.sock"
+image-endpoint: "unix:///run/containerd/containerd.sock"
 timeout: 0
 debug: false
 pull-image-on-create: false
@@ -660,8 +615,6 @@ source ~/.bashrc
 
 [nerdctl github地址](https://github.com/containerd/nerdctl)
 
-
-
 :::tip 说明
 
 `nerdctl` 是一个适用于containerd的dcoker兼容CLI
@@ -676,14 +629,15 @@ source ~/.bashrc
 
 :::tip 说明
 
-如果没有安装 containerd，则可以下载 `nerdctl-full-\<VERSION>-linux-amd64.tar.gz` 包进行安装，并且 `nerdctl-full` 这个包是与containerd版本一一对应的，即containerd发布一个版本后，`nerdctl-full` 也随即发布一个版本，虽然2者版本号不一致，但是是互相对应的
+如果没有安装 containerd，则可以下载 `nerdctl-full-\<VERSION>-linux-<ARCHITECTURE>.tar.gz` 包进行安装，并且 `nerdctl-full` 这个包是与containerd版本一一对应的，即containerd发布一个版本后，`nerdctl-full` 也随即发布一个版本，虽然2者版本号不一致，但是是互相对应的
 
 :::
 
-```shell
-# 这里安装的containerd版本为1.7.8
-export NERDCTL_VERSION=1.6.2
-wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-amd64.tar.gz
+```bash
+# 这里安装的containerd版本为1.7.17
+export NERDCTL_VERSION=1.7.6
+export ARCHITECTURE=arm64
+wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
 
 
@@ -694,8 +648,8 @@ wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}
 
 压缩包内容为 `nerdctl` 命令以及 `containerd-rootless-setuptool.sh` 和 `containerd-rootless.sh` ，均有执行权限
 
-```shell
-$ tar tf nerdctl-${NERDCTL_VERSION}-linux-amd64.tar.gz 
+```bash
+$ tar tf nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz 
 nerdctl
 containerd-rootless-setuptool.sh
 containerd-rootless.sh
@@ -704,7 +658,7 @@ containerd-rootless.sh
 :::
 
 ```shell
-tar xf nerdctl-${NERDCTL_VERSION}-linux-amd64.tar.gz 
+tar xf nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz 
 ```
 
 
@@ -726,7 +680,7 @@ source ~/.bashrc
 
 
 
-##### 安装其他组件
+##### 安装nerdctl其他组件
 
 ###### [CNI plugins CNI 插件 ](https://github.com/containernetworking/plugins) 
 
@@ -742,10 +696,8 @@ source ~/.bashrc
 
 BuildKit 守护程序需要运行，参考 [有关设置 BuildKit 的文档](https://github.com/containerd/nerdctl/blob/main/docs/build.md) ，否则运行 `nerdctl build` 会报错如下
 
-```shell
+```bash
 $ nerdctl build
-build    (Build an image from a Dockerfile. Needs buildkitd to be running.)  builder  (Manage builds)
-[root@k8s ~]# nerdctl build -t hehe.com/devops/nginx .
 ERRO[0000] `buildctl` needs to be installed and `buildkitd` needs to be running, see https://github.com/moby/buildkit  error="failed to ping to host unix:///run/buildkit-default/buildkitd.sock: exec: \"buildctl\": executable file not found in $PATH\nfailed to ping to host unix:///run/buildkit/buildkitd.sock: exec: \"buildctl\": executable file not found in $PATH"
 FATA[0000] no buildkit host is available, tried 2 candidates: failed to ping to host unix:///run/buildkit-default/buildkitd.sock: exec: "buildctl": executable file not found in $PATH
 failed to ping to host unix:///run/buildkit/buildkitd.sock: exec: "buildctl": executable file not found in $PATH 
@@ -756,8 +708,9 @@ failed to ping to host unix:///run/buildkit/buildkitd.sock: exec: "buildctl": ex
 下载安装包
 
 ```shell
-export BUILDKIT_VERSION=0.12.3
-wget https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-amd64.tar.gz
+export BUILDKIT_VERSION=0.13.2
+export ARCHITECTURE=arm64
+wget https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz
 ```
 
 
@@ -768,11 +721,14 @@ wget https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/bui
 
 压缩包内容如下
 
-```shell
-$ tar tf buildkit-v0.12.3.linux-amd64.tar.gz 
+```bash
+$ tar tf buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz
 bin/
 bin/buildctl
-bin/buildkit-qemu-aarch64
+bin/buildkit-cni-bridge
+bin/buildkit-cni-firewall
+bin/buildkit-cni-host-local
+bin/buildkit-cni-loopback
 bin/buildkit-qemu-arm
 bin/buildkit-qemu-i386
 bin/buildkit-qemu-mips64
@@ -780,14 +736,15 @@ bin/buildkit-qemu-mips64el
 bin/buildkit-qemu-ppc64le
 bin/buildkit-qemu-riscv64
 bin/buildkit-qemu-s390x
+bin/buildkit-qemu-x86_64
 bin/buildkit-runc
 bin/buildkitd
 ```
 
 :::
 
-```shell
-tar xf buildkit-v${BUILDKIT_VERSION}.linux-amd64.tar.gz
+```bash
+tar xf buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz
 ```
 
 
@@ -834,8 +791,6 @@ slirp4netns 需要是 v0.4.0 或更高版本。推荐v1.1.7或更高版本。
 
 
 
-
-
 #### docker和containerd常用命令对比
 
 | 命令                 | docker           | crictl            | nerdctl           | ctr                      |
@@ -866,16 +821,18 @@ slirp4netns 需要是 v0.4.0 或更高版本。推荐v1.1.7或更高版本。
 
 ### 配置yum源
 
+[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl)
+
 官方yum源
 
-```shell
+```bash
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/
 enabled=1
 gpgcheck=1
-gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
 exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
 EOF
 ```
@@ -884,18 +841,18 @@ EOF
 
 阿里云yum源
 
-```shell
-cat > /etc/yum.repos.d/kubernetes.repo << EOF
+```bash
+cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=http://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+baseurl=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.30/rpm/
 enabled=1
-gpgcheck=0
-repo_gpgcheck=0
-gpgkey=http://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
-        http://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.30/rpm/repodata/repomd.xml.key
 EOF
 ```
+
+
 
 
 
@@ -911,7 +868,7 @@ yum list kubeadm --showduplicates
 
 指定安装版本
 
-```shell
+```bash
 export K8S_VERSION=1.28.3
 yum -y install kubelet-${K8S_VERSION} kubeadm-${K8S_VERSION} kubectl-${K8S_VERSION} --disableexcludes=kubernetes
 systemctl enable --now kubelet
@@ -921,7 +878,7 @@ systemctl enable --now kubelet
 
 安装最新版
 
-```shell
+```bash
 yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl enable --now kubelet
 ```
@@ -938,6 +895,10 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc && source ~/.bashrc
 
 
 ## 使用kubeadm创建集群
+
+[官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
+
+
 
 ### 初始化master节点
 
@@ -1151,7 +1112,7 @@ etcd:
     dataDir: /var/lib/etcd
 imageRepository: registry.aliyuncs.com/google_containers
 kind: ClusterConfiguration
-kubernetesVersion: 1.28.2
+kubernetesVersion: 1.30.1
 networking:
   dnsDomain: cluster.local
   serviceSubnet: 10.96.0.0/12
@@ -1230,9 +1191,64 @@ kubeadm init \
 
 
 
-`init` 执行成功后会有如下输出
+完整输出如下
 
-```sh
+```bash
+[init] Using Kubernetes version: v1.30.1
+[preflight] Running pre-flight checks
+[preflight] Pulling images required for setting up a Kubernetes cluster
+[preflight] This might take a minute or two, depending on the speed of your internet connection
+[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[certs] Using certificateDir folder "/etc/kubernetes/pki"
+[certs] Generating "ca" certificate and key
+[certs] Generating "apiserver" certificate and key
+[certs] apiserver serving cert is signed for DNS names [k8s-master01 kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10.0.0.10]
+[certs] Generating "apiserver-kubelet-client" certificate and key
+[certs] Generating "front-proxy-ca" certificate and key
+[certs] Generating "front-proxy-client" certificate and key
+[certs] Generating "etcd/ca" certificate and key
+[certs] Generating "etcd/server" certificate and key
+[certs] etcd/server serving cert is signed for DNS names [k8s-master01 localhost] and IPs [10.0.0.10 127.0.0.1 ::1]
+[certs] Generating "etcd/peer" certificate and key
+[certs] etcd/peer serving cert is signed for DNS names [k8s-master01 localhost] and IPs [10.0.0.10 127.0.0.1 ::1]
+[certs] Generating "etcd/healthcheck-client" certificate and key
+[certs] Generating "apiserver-etcd-client" certificate and key
+[certs] Generating "sa" key and public key
+[kubeconfig] Using kubeconfig folder "/etc/kubernetes"
+[kubeconfig] Writing "admin.conf" kubeconfig file
+[kubeconfig] Writing "super-admin.conf" kubeconfig file
+[kubeconfig] Writing "kubelet.conf" kubeconfig file
+[kubeconfig] Writing "controller-manager.conf" kubeconfig file
+[kubeconfig] Writing "scheduler.conf" kubeconfig file
+[etcd] Creating static Pod manifest for local etcd in "/etc/kubernetes/manifests"
+[control-plane] Using manifest folder "/etc/kubernetes/manifests"
+[control-plane] Creating static Pod manifest for "kube-apiserver"
+[control-plane] Creating static Pod manifest for "kube-controller-manager"
+[control-plane] Creating static Pod manifest for "kube-scheduler"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Starting the kubelet
+[wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests"
+[kubelet-check] Waiting for a healthy kubelet. This can take up to 4m0s
+[kubelet-check] The kubelet is healthy after 502.42734ms
+[api-check] Waiting for a healthy API server. This can take up to 4m0s
+[api-check] The API server is healthy after 4.003326169s
+[upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upload-certs] Skipping phase. Please see --upload-certs
+[mark-control-plane] Marking the node k8s-master01 as control-plane by adding the labels: [node-role.kubernetes.io/control-plane node.kubernetes.io/exclude-from-external-load-balancers]
+[mark-control-plane] Marking the node k8s-master01 as control-plane by adding the taints [node-role.kubernetes.io/master:NoSchedule]
+[bootstrap-token] Using token: abcdef.0123456789abcdef
+[bootstrap-token] Configuring bootstrap tokens, cluster-info ConfigMap, RBAC Roles
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
+[bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstrap-token] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstrap-token] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstrap-token] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[kubelet-finalize] Updating "/etc/kubernetes/kubelet.conf" to point to a rotatable kubelet client certificate and key
+[addons] Applied essential addon: CoreDNS
+[addons] Applied essential addon: kube-proxy
+
 Your Kubernetes control-plane has initialized successfully!
 
 To start using your cluster, you need to run the following as a regular user:
@@ -1251,13 +1267,15 @@ Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
 
 Then you can join any number of worker nodes by running the following on each as root:
 
-kubeadm join 10.0.0.12:6443 --token a2jb7m.q7sve4dy7qdj9du3 \
-	--discovery-token-ca-cert-hash sha256:70bd8cbebb1209e556866de47a97a627dfb8fac3a7821702bcb48ebeffffb78c 
+kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
+	--discovery-token-ca-cert-hash sha256:8a7e980fb917404682f8cbf5e09d2d822c7a0e541cddeadba28907bffbbd5aaa 
 ```
 
 
 
-`kubeadm init` 选项
+#### `kubeadm init` 选项
+
+[官方文档](https://kubernetes.io/zh-cn/docs/reference/setup-tools/kubeadm/kubeadm-init/)
 
 | 选项                                 | 说明                                                         |
 | ------------------------------------ | ------------------------------------------------------------ |
@@ -1337,18 +1355,42 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 
 
-### 添加node节点
+### 添加node节点到集群
 
-通过运行 `kubeadm init` 最后输出的命令
+[kubeadm join 官方文档](https://kubernetes.io/zh-cn/docs/reference/setup-tools/kubeadm/kubeadm-join/)
 
-```shell
-kubeadm join 10.0.0.12:6443 --token a2jb7m.q7sve4dy7qdj9du3 \
-	--discovery-token-ca-cert-hash sha256:70bd8cbebb1209e556866de47a97a627dfb8fac3a7821702bcb48ebeffffb78c
+```bash
+kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
+	--discovery-token-ca-cert-hash sha256:8a7e980fb917404682f8cbf5e09d2d822c7a0e541cddeadba28907bffbbd5aaa
 ```
 
 
 
-查看token
+在node节点执行 `kubeadm join` 输出如下
+
+```bash
+$ kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
+> --discovery-token-ca-cert-hash sha256:8a7e980fb917404682f8cbf5e09d2d822c7a0e541cddeadba28907bffbbd5aaa
+[preflight] Running pre-flight checks
+[preflight] Reading configuration from the cluster...
+[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
+[kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
+[kubelet-start] Starting the kubelet
+[kubelet-check] Waiting for a healthy kubelet. This can take up to 4m0s
+[kubelet-check] The kubelet is healthy after 502.113877ms
+[kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap
+
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+
+Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
+```
+
+
+
+#### 查看token
 
 :::tip 说明
 
@@ -1363,22 +1405,21 @@ kubeadm token create
 ```shell
 $ kubeadm token list
 TOKEN                     TTL         EXPIRES                USAGES                   DESCRIPTION                                                EXTRA GROUPS
-a2jb7m.q7sve4dy7qdj9du3   23h         2023-11-02T06:36:56Z   authentication,signing   The default bootstrap token generated by 'kubeadm init'.   system:bootstrappers:kubeadm:default-node-token
+abcdef.0123456789abcdef   23h         2024-05-25T09:32:35Z   authentication,signing   <none>                                                     system:bootstrappers:kubeadm:default-node-token
 ```
 
 
 
-查看sha256
+#### 查看sha256
 
 ```shell
-$ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | \
->    openssl dgst -sha256 -hex | sed 's/^.* //'
-70bd8cbebb1209e556866de47a97a627dfb8fac3a7821702bcb48ebeffffb78c
+$ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+8a7e980fb917404682f8cbf5e09d2d822c7a0e541cddeadba28907bffbbd5aaa
 ```
 
 
 
-同时查看token和sha256
+#### 同时查看token和sha256
 
 :::caution 注意
 
@@ -1386,16 +1427,16 @@ $ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outf
 
 :::
 
-```shell
+```bash
 $ kubeadm token create --print-join-command
-kubeadm join 10.0.0.12:6443 --token knn1yv.a0qmgazqdo3mpgb2 --discovery-token-ca-cert-hash sha256:70bd8cbebb1209e556866de47a97a627dfb8fac3a7821702bcb48ebeffffb78c 
+kubeadm join 10.0.0.10:6443 --token knn1yv.a0qmgazqdo3mpgb2 --discovery-token-ca-cert-hash sha256:70bd8cbebb1209e556866de47a97a627dfb8fac3a7821702bcb48ebeffffb78c 
 ```
 
 
 
 如果想要在master节点上进行调度pod，例如单机 Kubernetes 集群，应该运行如下命令
 
-```sh
+```bash
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 ```
 
@@ -1411,6 +1452,23 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
 **你必须部署一个基于 Pod 网络插件的 [容器网络接口](https://kubernetes.io/zh-cn/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) (CNI)，以便你的 Pod 可以相互通信。 在安装网络之前，集群 DNS (CoreDNS) 将不会启动。**
 
+```bash
+$ kubectl get po -A
+NAMESPACE     NAME                                   READY   STATUS    RESTARTS   AGE
+kube-system   coredns-7b5944fdcf-dxw2r               0/1     Pending   0          10m
+kube-system   coredns-7b5944fdcf-pdlqb               0/1     Pending   0          10m
+kube-system   etcd-k8s-master01                      1/1     Running   1          10m
+kube-system   kube-apiserver-k8s-master01            1/1     Running   1          10m
+kube-system   kube-controller-manager-k8s-master01   1/1     Running   1          10m
+kube-system   kube-proxy-9bzcn                       1/1     Running   0          7m32s
+kube-system   kube-proxy-f98fd                       1/1     Running   0          10m
+kube-system   kube-proxy-kpbt7                       1/1     Running   0          7m36s
+kube-system   kube-proxy-r2bf7                       1/1     Running   0          7m31s
+kube-system   kube-scheduler-k8s-master01            1/1     Running   1          10m
+```
+
+
+
 - 注意你的 Pod 网络不得与任何主机网络重叠： 如果有重叠，你很可能会遇到问题。 （如果你发现网络插件的首选 Pod 网络与某些主机网络之间存在冲突， 则应考虑使用一个合适的 CIDR 块来代替， 然后在执行 `kubeadm init` 时使用 `--pod-network-cidr` 参数并在你的网络插件的 YAML 中替换它）。
 
 - 默认情况下，`kubeadm` 将集群设置为使用和强制使用 [RBAC](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/rbac/)（基于角色的访问控制）。 确保你的 Pod 网络插件支持 RBAC，以及用于部署它的清单也是如此。
@@ -1425,59 +1483,6 @@ kubectl taint nodes --all node-role.kubernetes.io/control-plane-
 
 [flannnel github](https://github.com/flannel-io/flannel)
 
-下载插件
-
-```sh
-export VERSION=0.23.0
-wget https://github.com/flannel-io/flannel/releases/download/v${VERSION}/kube-flannel.yml
-```
-
-
-
-安装
-
-:::tip 说明
-
-如果集群pod网络不是 `10.244.0.0/16` ，则需要修改 `kube-flannel.yml` 中 `Networ` 字段
-
-:::
-
-```shell
-kubectl apply -f kube-flannel.yml 
-```
-
-
-
-查看所有pod状态
-
-```shell
-$ kubectl get pod -A
-NAMESPACE      NAME                          READY   STATUS    RESTARTS   AGE
-kube-flannel   kube-flannel-ds-45wk7         1/1     Running   0          3m36s
-kube-flannel   kube-flannel-ds-nl52c         1/1     Running   0          3m36s
-kube-system    coredns-66f779496c-bpsx7      1/1     Running   0          78m
-kube-system    coredns-66f779496c-mdpkb      1/1     Running   0          78m
-kube-system    etcd-k8s                      1/1     Running   0          78m
-kube-system    kube-apiserver-k8s            1/1     Running   0          78m
-kube-system    kube-controller-manager-k8s   1/1     Running   0          78m
-kube-system    kube-proxy-6kw6b              1/1     Running   0          78m
-kube-system    kube-proxy-t2s76              1/1     Running   0          63m
-kube-system    kube-scheduler-k8s            1/1     Running   0          78m
-```
-
-
-
-安装完网络插件后，当所有pod都为 `running` 状态后，集群所有节点状态才为 `Ready`
-
-```shell
-$ kubectl get no
-NAME       STATUS   ROLES           AGE   VERSION
-k8s-master Ready    control-plane   78m   v1.28.3
-k8s-node   Ready    <none>          63m   v1.28.3
-```
-
-
-
 
 
 #### calico
@@ -1488,15 +1493,25 @@ k8s-node   Ready    <none>          63m   v1.28.3
 
 
 
-安装calico tigera-operator和自定义资源
+##### 安装calico tigera-operator和自定义资源
+
+:::caution 注意
+
+在部署资源的时候，使用 `kubectl apply` 可能会报错如下，解决方法就是使用 `kubectl create`，可以查看这个 [issues](https://github.com/projectcalico/calico/issues/7826)
+
+```bash
+The CustomResourceDefinition "installations.operator.tigera.io" is invalid: metadata.annotations: Too long: must have at most 262144 bytes
+```
+
+:::
 
 ```sh
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/tigera-operator.yaml
 ```
 
 
 
-安装calico
+##### 安装calico
 
 :::caution 注意
 
@@ -1505,54 +1520,54 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0
 :::
 
 ```sh
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/manifests/custom-resources.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/custom-resources.yaml
 ```
 
 
 
-
+### 完成安装
 
 查看所有pod状态
 
-```sh
+```bash
 $ kubectl get pod -A
 NAMESPACE          NAME                                       READY   STATUS    RESTARTS   AGE
-calico-apiserver   calico-apiserver-867b8496d6-g5bln          1/1     Running   0          2m8s
-calico-apiserver   calico-apiserver-867b8496d6-knbdj          1/1     Running   0          2m8s
-calico-system      calico-kube-controllers-79f555774b-t4szx   1/1     Running   0          3m25s
-calico-system      calico-node-6bqs7                          1/1     Running   0          17m
-calico-system      calico-node-6zr9b                          1/1     Running   0          17m
-calico-system      calico-node-gf4m9                          1/1     Running   0          17m
-calico-system      calico-node-pcsvl                          1/1     Running   0          17m
-calico-system      calico-typha-b4884f588-g8z88               1/1     Running   0          17m
-calico-system      calico-typha-b4884f588-s59sv               1/1     Running   0          17m
-calico-system      csi-node-driver-b548q                      2/2     Running   0          17m
-calico-system      csi-node-driver-fjmvl                      2/2     Running   0          17m
-calico-system      csi-node-driver-n8sk8                      2/2     Running   0          17m
-calico-system      csi-node-driver-qzvxr                      2/2     Running   0          17m
-kube-system        coredns-66f779496c-62d8l                   1/1     Running   0          46m
-kube-system        coredns-66f779496c-8ks6d                   1/1     Running   0          46m
-kube-system        etcd-k8s-master01                          1/1     Running   0          47m
-kube-system        kube-apiserver-k8s-master01                1/1     Running   0          47m
-kube-system        kube-controller-manager-k8s-master01       1/1     Running   0          47m
-kube-system        kube-proxy-hnkz2                           1/1     Running   0          46m
-kube-system        kube-proxy-ncx7z                           1/1     Running   0          46m
-kube-system        kube-proxy-qmf5p                           1/1     Running   0          46m
-kube-system        kube-proxy-wpzbh                           1/1     Running   0          46m
-kube-system        kube-scheduler-k8s-master01                1/1     Running   0          47m
-tigera-operator    tigera-operator-55585899bf-c65gw           1/1     Running   0          17m
+calico-apiserver   calico-apiserver-7647545445-2t5s8          1/1     Running   0          104s
+calico-apiserver   calico-apiserver-7647545445-j7bq7          1/1     Running   0          104s
+calico-system      calico-kube-controllers-594f57d65d-2n56s   1/1     Running   0          9m21s
+calico-system      calico-node-2xcgw                          1/1     Running   0          9m21s
+calico-system      calico-node-46kn6                          1/1     Running   0          9m21s
+calico-system      calico-node-fmk4z                          1/1     Running   0          9m21s
+calico-system      calico-node-mhmhj                          1/1     Running   0          9m21s
+calico-system      calico-typha-74f979894f-57bkn              1/1     Running   0          9m19s
+calico-system      calico-typha-74f979894f-5llqq              1/1     Running   0          9m21s
+calico-system      csi-node-driver-jt88w                      2/2     Running   0          9m21s
+calico-system      csi-node-driver-m9zqr                      2/2     Running   0          9m21s
+calico-system      csi-node-driver-qhd55                      2/2     Running   0          9m21s
+calico-system      csi-node-driver-s5w4r                      2/2     Running   0          9m21s
+kube-system        coredns-7b5944fdcf-dxw2r                   1/1     Running   0          29m
+kube-system        coredns-7b5944fdcf-pdlqb                   1/1     Running   0          29m
+kube-system        etcd-k8s-master01                          1/1     Running   1          29m
+kube-system        kube-apiserver-k8s-master01                1/1     Running   1          29m
+kube-system        kube-controller-manager-k8s-master01       1/1     Running   1          29m
+kube-system        kube-proxy-9bzcn                           1/1     Running   0          26m
+kube-system        kube-proxy-f98fd                           1/1     Running   0          29m
+kube-system        kube-proxy-kpbt7                           1/1     Running   0          26m
+kube-system        kube-proxy-r2bf7                           1/1     Running   0          26m
+kube-system        kube-scheduler-k8s-master01                1/1     Running   1          29m
+tigera-operator    tigera-operator-76ff79f7fd-spclf           1/1     Running   0          12m
 ```
 
 
 
 安装完网络插件后，当所有pod都为 `running` 状态后，集群所有节点状态才为 `Ready`
 
-```sh
+```bash
 $ kubectl get no
 NAME           STATUS   ROLES           AGE   VERSION
-k8s-master01   Ready    control-plane   47m   v1.28.2
-k8s-node01     Ready    <none>          47m   v1.28.2
-k8s-node02     Ready    <none>          46m   v1.28.2
-k8s-node03     Ready    <none>          46m   v1.28.2
+k8s-master01   Ready    control-plane   30m   v1.30.1
+k8s-node01     Ready    <none>          27m   v1.30.1
+k8s-node02     Ready    <none>          27m   v1.30.1
+k8s-node03     Ready    <none>          27m   v1.30.1
 ```
 
