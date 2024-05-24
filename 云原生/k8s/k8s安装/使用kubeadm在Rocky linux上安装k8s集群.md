@@ -516,29 +516,84 @@ sed -i 's#registry.k8s.io#registry.aliyuncs.com/k8sxio#' /etc/containerd/config.
 
 #### 配置containerd镜像仓库加速
 
+[containerd官方文档](https://github.com/containerd/containerd/blob/main/docs/hosts.md)
+
 [阿里云官方文档](https://help.aliyun.com/zh/acr/user-guide/accelerate-the-pulls-of-docker-official-images?spm=5176.28426678.J_HeJR_wZokYt378dwP-lLl.261.21795181n1ykLy&scm=20140722.S_help@@%E6%96%87%E6%A1%A3@@60750.S_BB1@bl+BB2@bl+RQW@ag0+os0.ID_60750-RL_containerd%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E5%8A%A0%E9%80%9F-LOC_search~UND~helpdoc~UND~item-OR_ser-V_3-P0_0)
 
+##### 修改配置文件
 
+修改 `/etc/containerd/config.toml` ，修改 `config_path` ，新增 `/etc/containerd/certs.d`
+
+```yaml
+[plugins."io.containerd.grpc.v1.cri".registry]
+      config_path = "/etc/containerd/certs.d"
+```
+
+
+
+##### 重启containerd
+
+```shell
+systemctl restart containerd
+```
+
+
+
+##### 创建目录
 
 ```bash
 mkdir -p /etc/containerd/certs.d/docker.io
+```
 
-cat >> /etc/containerd/certs.d/docker.io/hosts.toml << 'EOF'
+
+
+##### 创建 `hosts.toml` 文件并写入以下内容
+
+```bash
+cat > /etc/containerd/certs.d/docker.io/hosts.toml << 'EOF'
 server = "https://registry-1.docker.io"
 
-[host."$(https://bqr1dr1n.mirror.aliyuncs.com)"]
+[host."https://bqr1dr1n.mirror.aliyuncs.com"]
   capabilities = ["pull", "resolve", "push"]
 EOF
 ```
 
 
 
+##### 验证镜像下载加速
 
+:::tip 说明
 
-重启containerd
+使用 `ctr` 命令验证下载加速需要手动指定  `--hosts-dir` 
 
-```shell
-systemctl restart containerd
+使用 `--debug=true` 可以查看具体信息，其中 `DEBU[0000] resolving                                     host=bqr1dr1n.mirror.aliyuncs.com` 信息就表明下载加速走的是配置的地址
+
+:::
+
+```bash
+$ ctr -n k8s.io --debug=true i pull --hosts-dir=/etc/containerd/certs.d docker.io/library/centos:centos7.9.2009
+DEBU[0000] fetching                                      image="docker.io/library/centos:centos7.9.2009"
+DEBU[0000] loading host directory                        dir=/etc/containerd/certs.d/docker.io
+DEBU[0000] resolving                                     host=bqr1dr1n.mirror.aliyuncs.com
+DEBU[0000] do request                                    host=bqr1dr1n.mirror.aliyuncs.com request.header.accept="application/vnd.docker.distribution.manifest.v2+json, application/vnd.docker.distribution.manifest.list.v2+json, application/vnd.oci.image.manifest.v1+json, application/vnd.oci.image.index.v1+json, */*" request.header.user-agent=containerd/v1.7.17 request.method=HEAD url="https://bqr1dr1n.mirror.aliyuncs.com/v2/library/centos/manifests/centos7.9.2009?ns=docker.io"
+DEBU[0015] fetch response received                       host=bqr1dr1n.mirror.aliyuncs.com response.header.content-length=1199 response.header.content-type=application/vnd.docker.distribution.manifest.list.v2+json response.header.date="Fri, 24 May 2024 12:37:17 GMT" response.header.docker-content-digest="sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987" response.header.docker-distribution-api-version=registry/2.0 response.header.etag="\"sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987\"" response.status="200 OK" url="https://bqr1dr1n.mirror.aliyuncs.com/v2/library/centos/manifests/centos7.9.2009?ns=docker.io"
+DEBU[0015] resolved                                      desc.digest="sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987" host=bqr1dr1n.mirror.aliyuncs.com
+DEBU[0015] loading host directory                        dir=/etc/containerd/certs.d/docker.io
+DEBU[0015] fetch                                         digest="sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987" mediatype=application/vnd.docker.distribution.manifest.list.v2+json size=1199
+DEBU[0015] do request                                    digest="sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987" mediatype=application/vnd.docker.distribution.manifest.list.v2+json request.header.accept="application/vnd.docker.distribution.manifest.list.v2+json, */*" request.header.user-agent=containerd/v1.7.17 request.method=GET size=1199 url="https://bqr1dr1n.mirror.aliyuncs.com/v2/library/centos/manifests/sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987?ns=docker.io"
+DEBU[0016] fetch response received                       digest="sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987" mediatype=application/vnd.docker.distribution.manifest.list.v2+json response.header.content-length=1199 response.header.content-type=application/vnd.docker.distribution.manifest.list.v2+json response.header.date="Fri, 24 May 2024 12:37:18 GMT" response.header.docker-content-digest="sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987" response.header.docker-distribution-api-version=registry/2.0 response.header.etag="\"sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987\"" response.status="200 OK" size=1199 url="https://bqr1dr1n.mirror.aliyuncs.com/v2/library/centos/manifests/sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987?ns=docker.io"
+DEBU[0016] fetch                                         digest="sha256:864a7acea4a5e8fa7a4d83720fbcbadbe38b183f46f3600e04a3f8c1d961ed87" mediatype=application/vnd.docker.distribution.manifest.v2+json size=530
+DEBU[0016] do request                                    digest="sha256:864a7acea4a5e8fa7a4d83720fbcbadbe38b183f46f3600e04a3f8c1d961ed87" mediatype=application/vnd.docker.distribution.manifest.v2+json request.header.accept="application/vnd.docker.distribution.manifest.v2+json, */*" request.header.user-agent=containerd/v1.7.17 request.method=GET size=530 url="https://bqr1dr1n.mirror.aliyuncs.com/v2/library/centos/manifests/sha256:864a7acea4a5e8fa7a4d83720fbcbadbe38b183f46f3600e04a3f8c1d961ed87?ns=docker.io"
+DEBU[0016] fetch response received                       digest="sha256:864a7acea4a5e8fa7a4d83720fbcbadbe38b183f46f3600e04a3f8c1d961ed87" mediatype=application/vnd.docker.distribution.manifest.v2+json response.header.content-length=530 response.header.content-type=application/vnd.docker.distribution.manifest.v2+json response.header.date="Fri, 24 May 2024 12:37:18 GMT" response.header.docker-content-digest="sha256:864a7acea4a5e8fa7a4d83720fbcbadbe38b183f46f3600e04a3f8c1d961ed87" response.header.docker-distribution-api-version=registry/2.0 response.header.etag="\"sha256:864a7acea4a5e8fa7a4d83720fbcbadbe38b183f46f3600e04a3f8c1d961ed87\"" response.status="200 OK" size=530 url="https://bqr1dr1n.mirror.aliyuncs.com/v2/library/centos/manifests/sha256:864a7acea4a5e8fa7a4d83720fbcbadbe38b183f46f3600e04a3f8c1d961ed87?ns=docker.io"
+DEBU[0016] fetch                                         digest="sha256:6717b8ec66cd6add0272c6391165585613c31314a43ff77d9751b53010e531ec" mediatype=application/vnd.docker.image.rootfs.diff.tar.gzip size=108374945
+DEBU[0016] fetch                                         digest="sha256:dfc30428e1631ce2adb2a7978c667f88dc033a3c2991943f5e2307d857ed0370" mediatype=application/vnd.docker.container.image.v1+json size=2770
+DEBU[0016] do request                                    digest="sha256:dfc30428e1631ce2adb2a7978c667f88dc033a3c2991943f5e2307d857ed0370" mediatype=application/vnd.docker.container.image.v1+json request.header.accept="application/vnd.docker.container.image.v1+json, */*" request.header.user-agent=containerd/v1.7.17 request.method=GET size=2770 url="https://bqr1dr1n.mirror.aliyuncs.com/v2/library/centos/blobs/sha256:dfc30428e1631ce2adb2a7978c667f88dc033a3c2991943f5e2307d857ed0370?ns=docker.io"
+DEBU[0016] do request                                    digest="sha256:6717b8ec66cd6add0272c6391165585613c31314a43ff77d9751b53010e531ec" mediatype=application/vnd.docker.image.rootfs.diff.tar.gzip request.header.accept="application/vnd.docker.image.rootfs.diff.tar.gzip, */*" request.header.user-agent=containerd/v1.7.17 request.method=GET size=108374945 url="https://bqr1dr1n.mirror.aliyuncs.com/v2/library/centos/blobs/sha256:6717b8ec66cd6add0272c6391165585613c31314a43ff77d9751b53010e531ec?ns=docker.io"
+DEBU[0018] fetch response received                       digest="sha256:dfc30428e1631ce2adb2a7978c667f88dc033a3c2991943f5e2307d857ed0370" mediatype=application/vnd.docker.container.image.v1+json response.header.accept-ranges=bytes response.header.connection=keep-alive response.header.content-length=2770 response.header.content-type=application/octet-stream response.header.date="Fri, 24 May 2024 12:37:20 GMT" response.header.etag="\"858C8D660CF7A6AD53DD55B2FF6A70CC-1\"" response.header.last-modified="Thu, 16 Sep 2021 04:27:31 GMT" response.header.server=AliyunOSS response.header.x-oss-hash-crc64ecma=17094106414512831035 response.header.x-oss-object-type=Multipart response.header.x-oss-request-id=66508A00EAC5D23836F0034C response.header.x-oss-server-time=132 response.header.x-oss-storage-class=Standard response.status="200 OK" size=2770 url="https://bqr1dr1n.mirror.aliyuncs.com/v2/library/centos/blobs/sha256:dfc30428e1631ce2adb2a7978c667f88dc033a3c2991943f5e2307d857ed0370?ns=docker.io"
+DEBU[0018] fetch response received                       digest="sha256:6717b8ec66cd6add0272c6391165585613c31314a43ff77d9751b53010e531ec" mediatype=application/vnd.docker.image.rootfs.diff.tar.gzip response.header.accept-ranges=bytes response.header.connection=keep-alive response.header.content-length=108374945 response.header.content-type=application/octet-stream response.header.date="Fri, 24 May 2024 12:37:20 GMT" response.header.etag="\"76ADAA83857B8D1557F847298BECEEA8-10\"" response.header.last-modified="Sun, 15 Nov 2020 06:09:39 GMT" response.header.server=AliyunOSS response.header.x-oss-hash-crc64ecma=10643295449866978854 response.header.x-oss-object-type=Multipart response.header.x-oss-request-id=66508A006F20953038FEEC41 response.header.x-oss-server-time=175 response.header.x-oss-storage-class=Standard response.status="200 OK" size=108374945 url="https://bqr1dr1n.mirror.aliyuncs.com/v2/library/centos/blobs/sha256:6717b8ec66cd6add0272c6391165585613c31314a43ff77d9751b53010e531ec?ns=docker.io"
+DEBU[0317] unpacking                                     image="docker.io/library/centos:centos7.9.2009"
+unpacking linux/arm64/v8 sha256:9d4bcbbb213dfd745b58be38b13b996ebb5ac315fe75711bd618426a630e0987...
+done: 1.495863023s	
 ```
 
 
