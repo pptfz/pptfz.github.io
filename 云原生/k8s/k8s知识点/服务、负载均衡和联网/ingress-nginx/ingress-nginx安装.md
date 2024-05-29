@@ -113,7 +113,11 @@ tar xf ingress-nginx-4.8.4.tgz && cd ingress-nginx
 
 修改 `values.yaml`
 
-> 由于某些特殊原因，无法访问  `registry.k8s.io`  ，我们可以使用 ucloud 提供的镜像加速解决
+:::tip 说明
+
+由于某些特殊原因，无法访问  `registry.k8s.io`  ，我们可以使用 ucloud 提供的镜像加速解决
+
+:::
 
 修改 `values.yaml` 中所有  `registry.k8s.io`
 
@@ -129,7 +133,7 @@ helm upgrade --install ingress-nginx -n ingress-nginx --create-namespace .
 
 查看pod运行状态
 
-:::tip说明
+:::tip 说明
 
 如果设置了 `defaultBackend` ，则会运行一个名为 `ingress-nginx-defaultbackend` 的deployment
 
@@ -164,7 +168,7 @@ ingress-nginx-controller-5865555b87-r6465   1/1     Running   0          8m58s
 
 添加helm仓库
 
-```sh
+```bash
 helm repo add metallb https://metallb.github.io/metallb
 helm repo update 
 ```
@@ -173,7 +177,7 @@ helm repo update
 
 下载安装包
 
-```sh
+```bash
 helm pull metallb/metallb
 ```
 
@@ -181,7 +185,7 @@ helm pull metallb/metallb
 
 解压缩
 
-```sh
+```bash
 tar xf metallb-0.13.12.tgz && cd metallb
 ```
 
@@ -189,15 +193,17 @@ tar xf metallb-0.13.12.tgz && cd metallb
 
 修改 `values.yaml`
 
-> 由于某些特殊原因，无法访问  `gcr.io`  ，我们可以使用 ucloud 提供的镜像加速解决
+:::tip 说明
+
+由于某些特殊原因，无法访问  `gcr.io`  ，我们可以使用 ucloud 提供的镜像加速解决
 
 修改 `values.yaml` 中所有  `gcr.io`
 
-
+:::
 
 安装
 
-```sh
+```bash
 helm upgrade --install metallb -n metallb-system --create-namespace .
 ```
 
@@ -205,7 +211,7 @@ helm upgrade --install metallb -n metallb-system --create-namespace .
 
 查看pod运行状态
 
-```sh
+```bash
 $ kubectl get pod
 NAME                                  READY   STATUS    RESTARTS   AGE
 metallb-controller-5f9bb77dcd-mdr7l   1/1     Running   0          6m14s
@@ -217,7 +223,7 @@ metallb-speaker-9bfxd                 4/4     Running   0          6m3s
 
 查看 `ingress-nginx` 命名空间下的 svc，可以看到名为 `ingress-nginx-controller` 的svc类型是 `LoadBalancer` ，因为不是云环境，因此 `EXTERNAL-IP` 状态是 `<pending>`
 
-```shell
+```bash
 $ kubectl get svc -n ingress-nginx
 NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
 ingress-nginx-controller             LoadBalancer   10.110.240.95   <pending>     80:31285/TCP,443:30307/TCP   13m
@@ -228,7 +234,7 @@ ingress-nginx-controller-admission   ClusterIP      10.98.175.165   <none>      
 
 为了解决以上问题，安装完metallb后，还需要创建以下资源
 
-:::tip说明
+:::tip 说明
 
 `addresses` 字段指定的ip地址段要与node节点的网络在同一个地址段
 
@@ -262,7 +268,7 @@ EOF
 
 应用以上yaml文件以创建 `IPAddressPool` 和 `L2Advertisement` 资源对象
 
-```sh
+```bash
 kubectl apply -f metallb-IPAddressPool.yaml 
 ```
 
@@ -270,7 +276,7 @@ kubectl apply -f metallb-IPAddressPool.yaml
 
 查看创建的 `IPAddressPool`
 
-```sh
+```bash
 $ kubectl get IPAddressPool -n metallb-system
 NAME      AGE
 default   45s
@@ -280,7 +286,7 @@ default   45s
 
 创建完  `IPAddressPool` 在查看 `ingress-nginx` 命名空间下的 svc ，可以看到，之前名为 `ingress-nginx-controller` 的svc状态已经不是  `<pending>` 了，此时已经获取到了我们创建的 `IPAddressPool` 中指定的ip地址池中的ip
 
-```sh
+```bash
 $ kubectl get svc -n ingress-nginx
 NAME                                 TYPE           CLUSTER-IP      EXTERNAL-IP    PORT(S)                      AGE
 ingress-nginx-controller             LoadBalancer   10.110.240.95   203.0.113.10   80:31285/TCP,443:30307/TCP   29m
@@ -383,7 +389,7 @@ EOF
 
 创建
 
-```sh
+```bash
 kubectl apply -f use-ingress-example.yaml 
 ```
 
@@ -391,7 +397,7 @@ kubectl apply -f use-ingress-example.yaml
 
 查看 ingress
 
-```sh
+```bash
 $ kubectl get ing
 NAME              CLASS        HOSTS          ADDRESS      PORTS   AGE
 example-ingress   nginx-prod   test.ops.com   203.0.113.10   80      69m
@@ -401,7 +407,7 @@ example-ingress   nginx-prod   test.ops.com   203.0.113.10   80      69m
 
 本机做host后访问
 
-```sh
+```bash
 $ curl test.ops.com/bar/hostname
 bar-app
 
