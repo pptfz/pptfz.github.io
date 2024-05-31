@@ -57,3 +57,20 @@ git push github master
 
 
 #### 同时推送
+
+编辑 `.git/config` 写入以下内容
+
+```bash
+[remote "all"]
+        url = git@gitee.com:pptfz/docusaurus.git
+        url = git@github.com:pptfz/docusaurus.git
+```
+
+
+
+使用以下命令同时推送到多个远程仓库
+
+```bash
+git push all master
+```
+
