@@ -68,6 +68,36 @@ git push github master
 
 
 
+
+
+编辑完成后 `.git/config` 内容如下
+
+```shell
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[user]
+	name = pptfz
+	email = pptfzo@hehe.com
+[remote "gitee"]
+	url = git@gitee.com:pptfz/docusaurus.git
+	fetch = +refs/heads/*:refs/remotes/gitee/*
+[remote "github"]
+	url = git@github.com:pptfz/docusaurus.git
+	fetch = +refs/heads/*:refs/remotes/github/*
+[remote "all"]
+        url = git@gitee.com:pptfz/docusaurus.git
+        url = git@github.com:pptfz/docusaurus.git
+```
+
+
+
+
+
 使用以下命令同时推送到多个远程仓库
 
 ```bash
