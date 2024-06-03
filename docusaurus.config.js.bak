@@ -12,16 +12,15 @@ const config = {
 
   
   // Set the production url of your site here
-  url: 'https://pptfz.github.io',
+  url: 'https://blog.pptfz.cn/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'pptfz', // Usually your GitHub org/user name.
-  projectName: 'pptfz.github.io', // Usually your repo name.
-  trailingSlash: false,
+  organizationName: 'facebook', // Usually your GitHub org/user name.
+  projectName: 'docusaurus', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -97,8 +96,8 @@ const config = {
             position: 'left',
             label: '笔记',
           },
-          //{to: '/blog', label: 'Blog', position: 'left'},
-          //{to: '/linux', label: 'Linux', position: 'left'},
+          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/linux', label: 'Linux', position: 'left'},
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
@@ -138,10 +137,10 @@ const config = {
           {
             title: 'More',
             items: [
-              // {
-              //   label: 'Blog',
-              //   to: '/blog',
-              // },
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
               {
                 label: 'GitHub',
                 href: 'https://github.com/facebook/docusaurus',
