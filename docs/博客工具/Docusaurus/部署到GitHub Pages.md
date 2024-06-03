@@ -30,6 +30,7 @@ export default {
   baseUrl: '/',
   projectName: 'endiliey.github.io',
   organizationName: 'endiliey',
+  deploymentBranch: 'gh-pages',
   trailingSlash: false,
   // ...
 };
