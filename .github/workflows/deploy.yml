@@ -35,6 +35,13 @@ jobs:
         with:
           path: build
 
+      - name: Send notification on success
+        if: success()
+        run: |
+          curl -X POST -H 'Content-Type: application/json' \
+          -d '{"msgtype": "text", "text": {"content": "Deployment to GitHub Pages succeeded!"}}' \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=a3403705-45ca-4753-8acd-36e12ad1e6dc
+
   deploy:
     name: Deploy to GitHub Pages
     needs: build
@@ -54,3 +61,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+    

@@ -19,7 +19,39 @@
 
 
 
+## 配置 GitHub Pages
+
+### 创建分支
+
+这里我们定义代码源分支是 `master` ，发布分支是 `gh-pages`
+
+:::tip 说明
+
+使用 GitHub Actions 触发部署的过程中，涉及到2种分支，即 `源分支` 和 `部署分支` 
+
+-  `源分支` : `源分支` 就是网站代码源所在的分支
+- `部署分支` : `部署分支` 就是经过 GitHub Actions 构建后生成的静态文件分支
+
+:::
+
+
+
+### 配置GitHub Pages
+
+在 `Settings` -> `Pages`  进行如下配置
+
+- `Build and deployment` 下的 `Source` 选择 `Deploy from a branch`
+- `Branch` 指定的是部署分支，即代码构建后生成的静态页面的分支，`/root` 是代码发布源的的入口文件目录
+
+![iShot_2024-06-03_20.55.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_20.55.40.png)
+
+
+
+
+
 ## 配置docusaurus
+
+### 编辑配置文件 `docusaurus.config.js`
 
 编辑 `docusaurus.config.js` 添加如下参数
 
@@ -48,7 +80,7 @@ export default {
 
 
 
-这些字段还具有具有更高优先级的环境变量对应项：`ORGANIZATION_NAME`、 `PROJECT_NAME`和 `DEPLOYMENT_BRANCH`。一些命令行环境变量如下
+这些字段还具有更高优先级的环境变量对应项：`ORGANIZATION_NAME`、 `PROJECT_NAME`和 `DEPLOYMENT_BRANCH`。一些命令行环境变量如下
 
 | 参数             | 说明                                                         |
 | ---------------- | ------------------------------------------------------------ |
@@ -68,13 +100,164 @@ export default {
 
 :::
 
+### 创建 `.nojekyl` 空文件
 
+在 `static` 目录下创建 `.nojekyl` 空文件
+
+```shell
+touch static/.nojekyl
+```
+
+
+
+## 部署
+
+### 手动部署
 
 使用如下命令把网站部署到GitHub Pages上
 
+:::tip 说明
+
+如果在 `docusaurus.config.js` 没有配置 `deploymentBranch: 'gh-pages'` 一项，则需要使用 `DEPLOYMENT_BRANCH` 变量手动指定分支名称
+
+```bash
+DEPLOYMENT_BRANCH=gh-pages USE_SSH=true yarn deploy
 ```
-DEPLOYMENT_BRANCH=master USE_SSH=true yarn deploy
+
+:::
+
+```shell
+USE_SSH=true yarn deploy
 ```
 
 
+
+### 自动部署
+
+在代码根目录下创建 `.github/workflows` 目录，并创建 `deploy.yml` 和 `test-deploy.yml` 2个文件
+
+
+
+:::tip 说明
+
+[官方文档](https://docusaurus.io/docs/deployment#triggering-deployment-with-github-actions) 默认的配置文件中使用的是yarn，如果使用的是npm，则需要进行如下修改
+
+```shell
+cache: yarn -> cache: npm
+yarn install --frozen-lockfile -> npm ci
+yarn build -> npm run build
+```
+
+:::
+
+
+
+`deploy.yml` 文件内容
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+    # Review gh actions docs if you want to further define triggers, paths, etc
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+
+jobs:
+  build:
+    name: Build Docusaurus
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      # 使用yarn配置如下
+      # - name: Install dependencies
+      #   run: yarn install --frozen-lockfile
+      # - name: Build website
+      #   run: yarn build
+
+      # 使用npm配置如下
+      - name: Install dependencies
+        run: npm ci
+      - name: Build website
+        run: npm run build
+
+      - name: Upload Build Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
+
+
+
+`test-deploy.yml` 文件内容如下
+
+```yaml
+name: Test deployment
+
+on:
+  pull_request:
+    branches:
+      - master
+    # Review gh actions docs if you want to further define triggers, paths, etc
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+
+jobs:
+  test-deploy:
+    name: Test deployment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+      # 使用yarn配置如下
+      # - name: Install dependencies
+      #   run: yarn install --frozen-lockfile
+      # - name: Test build website
+      #   run: yarn build
+      
+      # 使用npm配置如下
+      - name: Install dependencies
+        run: npm ci
+      - name: Test build website
+        run: npm run build
+```
+
+
+
+配置完成后提交代码到指定分支就会自动触发 [GitHub Actions](https://docs.github.com/zh/actions) 从而更新网站内容
+
+![iShot_2024-06-03_20.29.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_20.29.24.png)
+
+![iShot_2024-06-03_20.29.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_20.29.57.png)
 
