@@ -47,7 +47,7 @@ export default {
 
 
 
-这些字段还具有具有更高优先级的环境变量对应项：`ORGANIZATION_NAME`、 `PROJECT_NAME`和 `DEPLOYMENT_BRANCH`。一些环境变量如下
+这些字段还具有具有更高优先级的环境变量对应项：`ORGANIZATION_NAME`、 `PROJECT_NAME`和 `DEPLOYMENT_BRANCH`。一些命令行环境变量如下
 
 | 参数             | 说明                                                         |
 | ---------------- | ------------------------------------------------------------ |
