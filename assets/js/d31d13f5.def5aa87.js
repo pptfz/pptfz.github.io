@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocusaurus=self.webpackChunkdocusaurus||[]).push([[5524],{68254:(s,u,c)=>{c.r(u),c.d(u,{default:()=>r});c(96540);var e=c(79201),d=c(74848);const r=()=>(0,d.jsx)(e.A,{children:(0,d.jsx)("div",{children:"linux"})})}}]);
