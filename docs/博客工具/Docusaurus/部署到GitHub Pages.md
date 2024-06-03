@@ -261,3 +261,74 @@ jobs:
 
 ![iShot_2024-06-03_20.29.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_20.29.57.png)
 
+
+
+## 配置通知
+
+如果我们想要配置构建成功后的通知，只需要在 `.github/workflows/deploy.yml` 文件中增加一个反馈通知即可
+
+
+
+### 创建 `repository secrets`
+
+:::tip 说明 
+
+如果想要配置机器人通知，则需要在 `.github/workflows/deploy.yml` 文件中配置机器人的地址，但是GItHub Pages要求代码仓库必须是公开的，因此直接把机器人地址写在文件中不安全，为了解决这个问题可以在用github提供的 `repository secrets` 功能
+
+ :::
+
+通过如下步骤创建 `repository secrets`
+
+`Settings` -> `Secrets and variables` -> `Actions` -> `Repository secrets` -> `New repository secrets`
+
+
+
+![iShot_2024-06-03_21.27.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_21.27.40.png)
+
+
+
+在这里我们可以创建一个 `secret` ，以企业微信机器人为例，健是 `WECHAT_WEBHOOK_KEY`  ， 值是企业微信机器人的 `Webhook key`
+
+![iShot_2024-06-03_21.26.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_21.26.40.png)
+
+
+
+### 编辑 `.github/workflows/deploy.yml` 文件
+
+新增如下内容
+
+```yml
+      - name: Send notification on success
+        if: success()
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
+        run: |
+          TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
+          curl -X POST -H 'Content-Type: application/json' \
+          -d '{
+                 "msgtype": "markdown",
+                 "markdown": {
+                   "content": "**发布结果通知**\n\n申请标题： ${COMMIT_MSG}n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： 成功\n\n发布时间： '"${TIMESTAMP}"'\n\n来自 GitHub Actions"
+                 }
+              }' \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+
+      - name: Send failure notification
+        if: failure()
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
+          COMMIT_MSG: ${{ env.COMMIT_MSG }}
+        run: |
+          TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
+          curl -X POST -H 'Content-Type: application/json' \
+          -d '{
+                "msgtype": "markdown",
+                "markdown": {
+                  "content": "**发布结果通知**\n\n申请标题： '"${COMMIT_MSG}"'\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n发布环境： prod\n\n发布主机： 腾讯云\n\n执行人员： Webhook\n\n发布结果： 失败\n\n发布时间： '"${TIMESTAMP}"'\n\n来自 Spug运维平台"
+                }
+              }' \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+```
+
+
+

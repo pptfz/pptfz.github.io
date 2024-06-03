@@ -34,13 +34,37 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: build
-
+      
       - name: Send notification on success
         if: success()
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
         run: |
+          TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
           curl -X POST -H 'Content-Type: application/json' \
-          -d '{"msgtype": "text", "text": {"content": "Deployment to GitHub Pages succeeded!"}}' \
-          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=a3403705-45ca-4753-8acd-36e12ad1e6dc
+          -d '{
+                 "msgtype": "markdown",
+                 "markdown": {
+                   "content": "**发布结果通知**\n\n申请标题： ${COMMIT_MSG}n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： 成功\n\n发布时间： '"${TIMESTAMP}"'\n\n来自 GitHub Actions"
+                 }
+              }' \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+
+      - name: Send failure notification
+        if: failure()
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
+          COMMIT_MSG: ${{ env.COMMIT_MSG }}
+        run: |
+          TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
+          curl -X POST -H 'Content-Type: application/json' \
+          -d '{
+                "msgtype": "markdown",
+                "markdown": {
+                  "content": "**发布结果通知**\n\n申请标题： '"${COMMIT_MSG}"'\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n发布环境： prod\n\n发布主机： 腾讯云\n\n执行人员： Webhook\n\n发布结果： 失败\n\n发布时间： '"${TIMESTAMP}"'\n\n来自 Spug运维平台"
+                }
+              }' \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
 
   deploy:
     name: Deploy to GitHub Pages
