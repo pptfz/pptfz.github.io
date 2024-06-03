@@ -69,7 +69,11 @@ export default {
 
 
 
+使用如下命令把网站部署到GitHub Pages上
 
+```
+DEPLOYMENT_BRANCH=master USE_SSH=true yarn deploy
+```
 
 
 
