@@ -39,7 +39,7 @@ jobs:
         if: success()
         env:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
-          COMMIT_MSG: ${{ env.COMMIT_MSG }}
+          COMMIT_MSG: ${{ steps.extract_commit_message.outputs.COMMIT_MSG }}
         run: |
           TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
           curl -X POST -H 'Content-Type: application/json' \
