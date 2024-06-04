@@ -49,6 +49,18 @@
 
 
 
+在 `Build and deployment` 下的 `Source` 选择 `Deploy from a branch` 后，提交代码触发构建有如下报错
+
+![iShot_2024-06-04_19.49.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-04_19.49.49.png)
+
+![iShot_2024-06-04_19.48.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-04_19.48.17.png)
+
+
+
+解决方法是将 `Deploy from a branch` 修改为 `GitHub Actions`
+
+
+
 ## 配置docusaurus
 
 ### 编辑配置文件 `docusaurus.config.js`
