@@ -298,17 +298,22 @@ jobs:
 新增如下内容
 
 ```yml
+      - name: Extract commit message
+        id: extract_commit_message
+        run: echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
+
       - name: Send notification on success
         if: success()
         env:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
+          COMMIT_MSG: ${{ env.COMMIT_MSG }}
         run: |
-          TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
           curl -X POST -H 'Content-Type: application/json' \
           -d '{
                  "msgtype": "markdown",
                  "markdown": {
-                   "content": "**发布结果通知**\n\n申请标题： ${COMMIT_MSG}n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： 成功\n\n发布时间： '"${TIMESTAMP}"'\n\n来自 GitHub Actions"
+                  "content": "**发布结果通知**\n\n申请标题： '"${COMMIT_MSG}"'\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： <font color=\"info\">成功</font>\n\n发布时间： '"${TIMESTAMP}"'\n\n> 来自 GitHub Actions"
                  }
               }' \
           https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
@@ -319,16 +324,115 @@ jobs:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
           COMMIT_MSG: ${{ env.COMMIT_MSG }}
         run: |
-          TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
           curl -X POST -H 'Content-Type: application/json' \
           -d '{
                 "msgtype": "markdown",
                 "markdown": {
-                  "content": "**发布结果通知**\n\n申请标题： '"${COMMIT_MSG}"'\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n发布环境： prod\n\n发布主机： 腾讯云\n\n执行人员： Webhook\n\n发布结果： 失败\n\n发布时间： '"${TIMESTAMP}"'\n\n来自 Spug运维平台"
+                  "content": "**发布结果通知**\n\n申请标题： '"${COMMIT_MSG}"'\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： <font color=\"red\">失败</font>\n\n发布时间： '"${TIMESTAMP}"'\n\n> 来自 GitHub Actions"
                 }
               }' \
           https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
 ```
 
 
+
+
+
+`deploy.yml` 文件内容如下
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+    # Review gh actions docs if you want to further define triggers, paths, etc
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+
+jobs:
+  build:
+    name: Build Docusaurus
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      # - name: Install dependencies
+      #   run: yarn install --frozen-lockfile
+      # - name: Build website
+      #   run: yarn build
+
+      - name: Install dependencies
+        run: npm ci
+      - name: Build website
+        run: npm run build
+
+      - name: Upload Build Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+          
+      - name: Extract commit message
+        id: extract_commit_message
+        run: echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
+
+      - name: Send notification on success
+        if: success()
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
+          COMMIT_MSG: ${{ env.COMMIT_MSG }}
+        run: |
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          curl -X POST -H 'Content-Type: application/json' \
+          -d '{
+                 "msgtype": "markdown",
+                 "markdown": {
+                  "content": "**发布结果通知**\n\n申请标题： '"${COMMIT_MSG}"'\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： <font color=\"info\">成功</font>\n\n发布时间： '"${TIMESTAMP}"'\n\n> 来自 GitHub Actions"
+                 }
+              }' \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+
+      - name: Send failure notification
+        if: failure()
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
+          COMMIT_MSG: ${{ env.COMMIT_MSG }}
+        run: |
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          curl -X POST -H 'Content-Type: application/json' \
+          -d '{
+                "msgtype": "markdown",
+                "markdown": {
+                  "content": "**发布结果通知**\n\n申请标题： '"${COMMIT_MSG}"'\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： <font color=\"red\">失败</font>\n\n发布时间： '"${TIMESTAMP}"'\n\n> 来自 GitHub Actions"
+                }
+              }' \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
 
