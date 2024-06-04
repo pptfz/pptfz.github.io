@@ -34,12 +34,16 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: build
-      
+          
+      - name: Extract commit message
+        id: extract_commit_message
+        run: echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
+
       - name: Send notification on success
         if: success()
         env:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
-          COMMIT_MSG: ${{ steps.extract_commit_message.outputs.COMMIT_MSG }}
+          COMMIT_MSG: ${{ env.COMMIT_MSG }}
         run: |
           TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
           curl -X POST -H 'Content-Type: application/json' \
