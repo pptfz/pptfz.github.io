@@ -46,7 +46,7 @@ jobs:
           -d '{
                  "msgtype": "markdown",
                  "markdown": {
-                  "content": "**发布结果通知**\n\n申请标题： '"${{ env.COMMIT_MSG }}"'\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： 成功\n\n发布时间： '"${TIMESTAMP}"'\n\n> 来自 GitHub Actions"
+                  "content": "**发布结果通知**\n\n申请标题： '"${COMMIT_MSG}"'\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： <font color=\"info\">成功</font>\n\n发布时间： '"${TIMESTAMP}"'\n\n> 来自 GitHub Actions"
                  }
               }' \
           https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
