@@ -68,7 +68,7 @@ Docker Compose version v2.27.0
 
 #### 3.1.1 简介
 
-composerize是将 `docker run` 命令转换为 `Docker Compose` 文件格式的工具
+`composerize` 是将 `docker run` 命令转换为 `Docker Compose` 文件格式的工具
 
 
 
@@ -120,10 +120,5 @@ services:
 还可以在 [composerize官网](https://www.composerize.com/) 自动生成compose文件
 
 ![iShot_2022-09-11_14.14.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-11_14.14.26.png)
-
-
-
-
-
 
 

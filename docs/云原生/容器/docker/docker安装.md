@@ -280,7 +280,7 @@ cp /usr/local/docker/* /usr/bin
 
 如果你是使用二进制方式安装的 docker，那么你也许需要整合 docker 到 systemd 中去。为了完成这个任务，你需要安装两个单元文件（service 和 socket）到 `/etc/systemd/system` 中去
 
-:::tip说明
+:::tip 说明
 
 
 
@@ -375,7 +375,7 @@ EOF
 Systemd 默认从目录`/etc/systemd/system/`读取配置文件。
 但是，里面存放的大部分文件都是符号链接，指向目录`/usr/lib/systemd/system/`，真正的配置文件存放在那个目录。 `systemctl enable `命令用于在上面两个目录之间，建立符号链接关系。
 
-:::tip说明
+:::tip 说明
 
 
 
@@ -424,7 +424,7 @@ Server: Docker Engine - Community
 
 
 
-:::tip说明
+:::tip 说明
 
 
 
