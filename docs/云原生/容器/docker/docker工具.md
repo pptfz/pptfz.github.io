@@ -6,7 +6,7 @@
 
 
 
-:::tip
+:::tip 说明
 
 `runlike` 是一个开源的查看docker完整启动参数的工具
 
@@ -55,7 +55,7 @@ sudo docker run -d \
 
 
 
-不加 `-p` 参数显示不换行
+不加 `-p` 参数输出不换行
 
 ```shell
 $ runlike kuboard
@@ -64,7 +64,7 @@ docker run --name=kuboard --hostname=1a3896d496d4 --env=KUBOARD_ENDPOINT=http://
 
 
 
-加 `-p` 参数显示换行
+加 `-p` 参数输出换行
 
 ```shell
 $ runlike -p kuboard
