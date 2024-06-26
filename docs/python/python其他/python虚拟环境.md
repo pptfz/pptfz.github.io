@@ -401,11 +401,15 @@ wheel      0.34.2
 
 
 
-## 三、virtualenvwrapper
+## 3.virtualenvwrapper
 
 ### 3.1 virtualenvwrapper简介
 
-> **鉴于virtualenv不便于对虚拟环境集中管理，所以推荐直接使用virtualenvwrapper，virtualenvwrapper提供了一系列命令使得和虚拟环境工作变得便利，它把你所有的虚拟环境都放在一个地方**
+:::tip 说明
+
+鉴于 `virtualenv` 不便于对虚拟环境集中管理，所以推荐直接使用 [virtualenvwrapper](https://pypi.org/project/virtualenvwrapper/)，`virtualenvwrapper` 提供了一系列命令使得和虚拟环境工作变得便利，它把你所有的虚拟环境都放在一个地方
+
+:::
 
 
 
@@ -423,7 +427,13 @@ wheel      0.34.2
 
 ### 3.2 virtualenvwrapper配置过程
 
-#### 3.2.1 安装virtualenvwrapper(确保virtualenv已安装)
+#### 3.2.1 安装virtualenvwrapper
+
+:::tip 说明
+
+在安装 `virtualenvwrapper` 之前，需要确保 `virtualenv` 已安装
+
+:::
 
 ```python
 pip install virtualenvwrapper
