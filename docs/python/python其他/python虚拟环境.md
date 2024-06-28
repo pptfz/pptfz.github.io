@@ -354,14 +354,25 @@ virtualenv 20.26.3 from /usr/local/lib/python3.9/site-packages/virtualenv/__init
 
 
 
-#### 2.4.2 virtualenv创建python虚拟环境示例
+#### 2.4.2 virtualenv创建python虚拟环境
 
-**这里提前已经安装好python3.6**
+:::tip 说明
+
+virtualenv创建python虚拟环境需要提前安装好python3
+
+:::
+
+
 
 创建python虚拟工作目录，这里指定使用python3
 
 ```shell
-virtualenv -p /usr/local/python36/bin/python3  /opt/venv1
+$ virtualenv -p /usr/local/python3.12.3/bin/python3.12 /opt/venv1
+created virtual environment CPython3.12.3.final.0-64 in 150ms
+  creator CPython3Posix(dest=/opt/venv1, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, via=copy, app_data_dir=/root/.local/share/virtualenv)
+    added seed packages: pip==24.1
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
 ```
 
 
@@ -370,10 +381,9 @@ virtualenv -p /usr/local/python36/bin/python3  /opt/venv1
 
 ```shell
 $ source /opt/venv1/bin/activate
-(venv1) [root@test1 ~]# python
-Python 3.6.9 (default， Feb 18 2020， 19:47:30) 
-[GCC 4.8.5 20150623 (Red Hat 4.8.5-39)] on linux
-Type "help"， "copyright"， "credits" or "license" for more information.
+(venv1) [root@localhost.localdomain ~]# python
+Python 3.12.3 (main, Jun 27 2024, 11:17:01) [GCC 11.4.1 20231218 (Red Hat 11.4.1-3)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
 >>> 
 ```
 
@@ -382,12 +392,11 @@ Type "help"， "copyright"， "credits" or "license" for more information.
 查看当前python环境安装的包
 
 ```shell
-(venv1) [root@test1 ~]# pip3 list
-Package    Version
----------- -------
-pip        20.0.2 
-setuptools 45.2.0 
-wheel      0.34.2 
+$ pip3 list
+Package Version
+------- -------
+pip     24.1
+(venv1) [root@localhost.localdomain ~]# 
 ```
 
 
@@ -395,8 +404,8 @@ wheel      0.34.2
 退出虚拟环境
 
 ```shell
-(venv1) [root@test ~]# deactivate 
-[root@test ~]# 
+(venv1) [root@localhost.localdomain ~]# deactivate 
+[root@localhost.localdomain ~]# 
 ```
 
 
@@ -404,6 +413,8 @@ wheel      0.34.2
 ## 3.virtualenvwrapper
 
 ### 3.1 virtualenvwrapper简介
+
+[virtualenvwrapper github](https://github.com/python-virtualenvwrapper/virtualenvwrapper)
 
 :::tip 说明
 
@@ -415,13 +426,17 @@ wheel      0.34.2
 
 **virtualenvwrapper整体工作过程**
 
-> **1.安装virtualenvwrapper**
->
-> **2.在 `~/.bashrc` 文件中指定virtualenvwrapper存放虚拟环境总目录，指定virtualenvwrapper.sh存放位置(find查找)**
->
-> **3. `mkvirtualenv` 命令创建python虚拟环境，`-p` 选项指定不同python版本命令路径**
->
-> **4.  `workon` 命令切换不同python虚拟环境**
+:::tip 说明
+
+1.安装 `virtualenvwrapper`
+
+2.在 `~/.bashrc` 文件中指定 `virtualenvwrapper` 存放虚拟环境总目录，指定`virtualenvwrapper.sh` 存放位置(find或which查找)
+
+3.`mkvirtualenv` 命令创建python虚拟环境，`-p` 选项指定不同python版本命令路径
+
+4.`workon` 命令切换不同python虚拟环境
+
+:::
 
 
 
@@ -429,95 +444,256 @@ wheel      0.34.2
 
 #### 3.2.1 安装virtualenvwrapper
 
-:::tip 说明
+:::caution 注意
 
 在安装 `virtualenvwrapper` 之前，需要确保 `virtualenv` 已安装
 
+在安装 `virtualenvwrapper` 的时候，需要使用所安装的python路径下的pip
+
 :::
 
-```python
-pip install virtualenvwrapper
+例如我这里把python3安装在了 `/usr/local/python36`
+
+```shell
+/usr/local/python36/bin/pip3 install virtualenvwrapper
 ```
 
 
 
 #### 3.2.2 编辑环境变量
 
-`virtualenvwrapper.sh` 需要find查找一下  `find / -name "virtualenvwrapper.sh"`
+:::tip 说明
 
-一般在  `/usr/bin` 下或者 `/usr/local/bin`
+需要查找一下 `virtualenvwrapper.sh` 所在位置，一般在 `/usr/bin` 下或者 `/usr/local/bin`
 
-```python
-# 1.向~/.bashrc中写入以下内容
-echo "export WORKON_HOME=/opt/virtualenvwrapper" >> ~/.bashrc
-echo "source /usr/bin/virtualenvwrapper.sh" >> ~/.bashrc
+```shell
+find / -name "virtualenvwrapper.sh"
+```
 
-# 2.使配置生效
-source ~/.bashrc
+或者
+
+```shell
+which virtualenvwrapper.sh
+```
+
+:::
 
 
-# 参数说明
-# virtualenvwrapper存放虚拟环境目录，这里自定义在/opt/virtualenvwrapper
-export WORKON_HOME=/opt/virtualenvwrapper
 
-# virtrualenvwrapper会安装到python的bin目录下，所以该路径是python安装目录下bin/virtualenvwrapper.sh，本文python安装在了/usr/local/
-source /usr/bin/virtualenvwrapper.sh
+向 `~/.bashrc` 中写入以下内容
+
+```shell
+echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.bashrc
+echo "source $(which virtualenvwrapper.sh)" >> ~/.bashrc
 ```
 
 
 
-#### 3.2.3 创建虚拟环境	``mkvirtualenv``
+参数说明
 
-```python
-# 1.因为在3.2.2中指定了WORKON_HOME=/opt/virtualenvwrapper，所以创建的python虚拟环境都会在这个目录下
-$ mkvirtualenv -p /usr/local/python36/bin/python3 venv1
-created virtual environment in 200ms CPython3Posix(dest=/opt/virtualenvwrapper/venv1， clear=False， global=False) with seeder FromAppData pip=latest setuptools=latest wheel=latest app_data_dir=/root/.local/share/virtualenv/seed-v1 via=copy
-virtualenvwrapper.user_scripts creating /opt/virtualenvwrapper/venv1/bin/predeactivate
-virtualenvwrapper.user_scripts creating /opt/virtualenvwrapper/venv1/bin/postdeactivate
-virtualenvwrapper.user_scripts creating /opt/virtualenvwrapper/venv1/bin/preactivate
-virtualenvwrapper.user_scripts creating /opt/virtualenvwrapper/venv1/bin/postactivate
-virtualenvwrapper.user_scripts creating /opt/virtualenvwrapper/venv1/bin/get_env_details
-(venv1) [root@test1 ~]# 
+| 参数                                         | 说明                                                         |
+| -------------------------------------------- | ------------------------------------------------------------ |
+| `export WORKON_HOME=$HOME/.virtualenvs`      | `virtualenvwrapper` 存放虚拟环境目录，这里自定义在 `$HOME/.virtualenvs` |
+| `source /usr/local/bin/virtualenvwrapper.sh` | `virtrualenvwrapper` 会安装到python的bin目录下，所以该路径是python安装目录下 `bin/virtualenvwrapper.sh` ，本文python安装在了 `/usr/local/python36` |
 
-# 2.查看创建的虚拟环境，venv1就是刚刚创建的虚拟环境
-$ ls /opt/virtualenvwrapper/
-get_env_details  postmkproject     predeactivate    venv1
-initialize       postmkvirtualenv  premkproject     
-postactivate     postrmvirtualenv  premkvirtualenv
-postdeactivate   preactivate       prermvirtualenv
+
+
+使配置生效
+
+```shell
+$ source .bashrc 
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/premkproject
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/postmkproject
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/initialize
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/premkvirtualenv
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/postmkvirtualenv
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/prermvirtualenv
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/postrmvirtualenv
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/predeactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/postdeactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/preactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/postactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/get_env_details
 ```
+
+
+
+
+
+#### 3.2.3 创建虚拟环境
+
+:::tip 说明
+
+通过 `mkvirtualenv` 命令创建虚拟环境，不加 `-p` 参数是默认使用系统环境的python，`-p` 参数用于指定不同版本的python命令路径
+
+因为指定了 `WORKON_HOME=$HOME/.virtualenvs` 所以创建的python虚拟环境都会在这个目录下
+
+:::
+
+
+
+```shell
+$ mkvirtualenv venv1
+created virtual environment CPython3.9.18.final.0-64 in 266ms
+  creator CPython3Posix(dest=/root/.virtualenvs/venv1, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/root/.local/share/virtualenv)
+    added seed packages: pip==24.1, setuptools==70.1.0, wheel==0.43.0
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/venv1/bin/predeactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/venv1/bin/postdeactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/venv1/bin/preactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/venv1/bin/postactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/venv1/bin/get_env_details
+(venv1) [root@localhost.localdomain ~]# 
+```
+
+
+
+查看创建的虚拟环境，venv1就是刚刚创建的虚拟环境
+
+```shell
+$ ls -a .virtualenvs/
+.   get_env_details  postactivate    postmkproject     postrmvirtualenv  predeactivate  premkvirtualenv  venv1
+..  initialize       postdeactivate  postmkvirtualenv  preactivate       premkproject   prermvirtualenv
+```
+
+
+
+
 
 #### 3.2.4 切换虚拟环境
 
-```python
-# 1.先创建两个虚拟环境，并指定python版本
-[root@test1 ~]# mkvirtualenv -p /usr/bin/python py2		
-[root@test1 ~]# mkvirtualenv -p /usr/local/python36/bin/python3 py3
+:::tip 说明
 
-# 2.切换虚拟环境
-[root@test1 ~]# workon py2			
-(py2) [root@test1 ~]# python -V
-Python 2.7.5
+如果系统中存在多个版本的python，则在使用 `mkvirtualenv` 命令创建虚拟环境的时候，可以使用 `-p` 参数指定不同的python版本
 
-[root@test1 ~]# workon py3
-(py3) [root@test1 ~]# python -V
-Python 3.6.9
+:::
+
+
+
+系统中安装了python3.12.3和python3.11.9，安装目录分别为 `/usr/local/python3.12.3` 、`/usr/local/python3.11.9`
+
+
+
+创建第一个虚拟环境，指定python版本为3.11.9
+
+```shell
+$ mkvirtualenv -p /usr/local/python3.11.9/bin/python3.11 py3.11
+created virtual environment CPython3.11.9.final.0-64 in 208ms
+  creator CPython3Posix(dest=/root/.virtualenvs/py3.11, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/root/.local/share/virtualenv)
+    added seed packages: pip==24.1, setuptools==70.1.0, wheel==0.43.0
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/py3.11/bin/predeactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/py3.11/bin/postdeactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/py3.11/bin/preactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/py3.11/bin/postactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/py3.11/bin/get_env_details
+(py3.11) [root@localhost.localdomain ~]# 
 ```
+
+
+
+创建第二个虚拟环境，指定python版本为3.12.3
+
+```shell
+$ mkvirtualenv -p /usr/local/python3.12.3/bin/python3.12 py3.12
+created virtual environment CPython3.12.3.final.0-64 in 107ms
+  creator CPython3Posix(dest=/root/.virtualenvs/py3.12, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, via=copy, app_data_dir=/root/.local/share/virtualenv)
+    added seed packages: pip==24.1
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/py3.12/bin/predeactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/py3.12/bin/postdeactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/py3.12/bin/preactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/py3.12/bin/postactivate
+virtualenvwrapper.user_scripts creating /root/.virtualenvs/py3.12/bin/get_env_details
+(py3.12) [root@localhost.localdomain ~]# 
+```
+
+
+
+切换虚拟环境
+
+:::tip 说明
+
+执行 `workon` 命令切换虚拟环境
+
+:::
+
+切换到python3.11
+
+```python
+$ workon py3.11
+(py3.11) [root@localhost.localdomain ~]# python
+Python 3.11.9 (main, Jun 27 2024, 19:39:48) [GCC 11.4.1 20231218 (Red Hat 11.4.1-3)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+```
+
+
+
+切换到python3.12
+
+```python
+$ workon py3.12
+(py3.12) [root@localhost.localdomain ~]# python
+Python 3.12.3 (main, Jun 27 2024, 19:34:57) [GCC 11.4.1 20231218 (Red Hat 11.4.1-3)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+```
+
+
+
+
+
+
 
 #### 3.2.5 其他操作
 
-```python
-# 1.查看当前的虚拟环境目录，即通过mkvirtualenv命令创建的venv虚拟环境
-[root@test1 ~]# workon 		
-py2
-py3
+##### 查看当前创建的虚拟环境
 
-# 2.退出虚拟环境
-(py3) [root@test1 ~]# deactivate 
-[root@test1 ~]#
-
-# 3.删除虚拟环境
-[root@test1 ~]# rmvirtualenv py2
-Removing py2...
 ```
+$ workon 
+py3.11
+py3.12
+venv1
+```
+
+
+
+##### 退出虚拟环境
+
+:::tip 说明
+
+执行命令 `deactivate` 退出虚拟环境
+
+:::
+
+```shell
+$ deactivate 
+[root@localhost.localdomain ~]# python
+Python 3.9.18 (main, Jan 24 2024, 00:00:00) 
+[GCC 11.4.1 20231218 (Red Hat 11.4.1-3)] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+```
+
+
+
+##### 删除虚拟环境
+
+:::tip 说明
+
+执行命令 `rmvirtualenv` 可以删除虚拟环境
+
+:::
+
+```shell
+$ rmvirtualenv env1
+Removing env1...
+Did not find environment /root/.virtualenvs/env1 to remove.
+```
+
+
 
