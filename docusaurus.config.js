@@ -4,6 +4,8 @@
 //const lightCodeTheme = require('prism-react-renderer/themes/github');
 //const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+import {themes as prismThemes} from 'prism-react-renderer';
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: '我的站点',
@@ -153,7 +155,8 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} 泡泡吐肥皂o`,
       },
       prism: {
-        //theme: lightCodeTheme,
+        additionalLanguages: ['Bash','nginx','Git'],
+        theme: prismThemes.dracula,
         //darkTheme: darkCodeTheme,
       },
     announcementBar: {

@@ -341,15 +341,15 @@ virtualenv 20.26.3 from /usr/local/lib/python3.9/site-packages/virtualenv/__init
 | `-h，--help`                         | 显示帮助信息                                                 |
 | `-v，--verbose`                      | 显示详细信息                                                 |
 | `-q，--quiet`                        | 不显示详细信息                                               |
-| `-p PYTHON_EXE，--python=PYTHON_EXE` | 指定所用的python解析器的版本，比如 --python=python2.5就是使用python2.5版本的解析器创建新的隔离环境，默认使用的是当前系统安装的python解析器(/usr/bin/python) |
+| `-p PYTHON_EXE，--python=PYTHON_EXE` | 指定所用的python解析器的版本，比如 `--python=python2.5`就是使用python2.5版本的解析器创建新的隔离环境，默认使用的是当前系统安装的python解析器(`/usr/bin/python`) |
 | `--clear`                            | 清空非root用户的安装，并从头开始创建隔离环境                 |
-| `--no-site-packages`                 | 令隔离环境不能访问系统全局的site-packages目录                |
-| `--system-site-packages`             | 令隔离环境可以访问系统全局的site-packages目录                |
-| `--unzip-setuptools`                 | 安装时解压setuptools或distribute                             |
+| `--no-site-packages`                 | 令隔离环境不能访问系统全局的 `site-packages` 目录            |
+| `--system-site-packages`             | 令隔离环境可以访问系统全局的 `site-packages` 目录            |
+| `--unzip-setuptools`                 | 安装时解压 `setuptools` 或 `distribute`                      |
 | `--relocatable`                      | 重定位某个已存在的隔离环境，使用该选项将修正脚本，并令所有 .pth文件使用相应路径 |
-| `--distribute`                       | 使用distribute代替setuptools，也可以设置环境变量 VIRTUALENV_DISTRIBUTE达到同样效果 |
-| `--extra-search-dir=SEARCH_DIRS`     | 用于查找setuptools/distribute/pip发布包的目录，可以添加任意数量的 -extra-search-dir路径 |
-| `--never-dowload`                    | 禁止从网上下载任何数据，此时，如果在本地搜索发布包失败，virtualenv就会报错 |
+| `--distribute`                       | 使用 `distribute` 代替 `setuptools` ，也可以设置环境变量  `VIRTUALENV_DISTRIBUTE` 达到同样效果 |
+| `--extra-search-dir=SEARCH_DIRS`     | 用于查找 `setuptools/distribute/pip` 发布包的目录，可以添加任意数量的 `-extra-search-dir` 路径 |
+| `--never-dowload`                    | 禁止从网上下载任何数据，此时，如果在本地搜索发布包失败，`virtualenv` 就会报错 |
 | `--prompt==PROMPT`                   | 定义隔离环境的命令行前缀                                     |
 
 
@@ -364,7 +364,7 @@ virtualenv创建python虚拟环境需要提前安装好python3
 
 
 
-创建python虚拟工作目录，这里指定使用python3
+创建python虚拟工作目录，这里指定使用python3.12.3
 
 ```shell
 $ virtualenv -p /usr/local/python3.12.3/bin/python3.12 /opt/venv1
@@ -415,6 +415,8 @@ pip     24.1
 ### 3.1 virtualenvwrapper简介
 
 [virtualenvwrapper github](https://github.com/python-virtualenvwrapper/virtualenvwrapper)
+
+[virtualenvwrapper官方文档](https://virtualenvwrapper.readthedocs.io/en/latest/)
 
 :::tip 说明
 
