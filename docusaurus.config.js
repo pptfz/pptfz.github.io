@@ -8,8 +8,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '我的站点',
-  tagline: '厚礼谢特！',
+  title: '我得发！',
+  tagline: '厚礼蟹！',
   favicon: 'img/favicon.ico',
 
   
