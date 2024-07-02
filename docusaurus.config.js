@@ -168,9 +168,10 @@ const config = {
       isCloseable: false,
     },
     algolia: {
-        apiKey: "a28b62a7d46b62665e366441ffe91034",
-        appId: "SICNXLSDBZ",
-        indexName: "pptfz",
+        apiKey: "c6a8a8dadfe45989253d3d675a6107fe",
+        appId: "1RH59US6FR",
+        indexName: "pptfzio",
+        contextualSearch: true,
     },
 
     tableOfContents: {
