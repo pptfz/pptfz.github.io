@@ -651,16 +651,22 @@ Now using node v18.16.0 (npm v9.5.1)
 
 查看默认源
 
+:::tip 说明
+
+默认源是 `https://registry.npmjs.org`
+
+:::
+
 ```shell
 npm config -g get registry
 ```
 
 
 
-设置淘宝源
+设置 [阿里源](https://npmmirror.com/)
 
 ```shell
-npm config -g set registry https://registry.npm.taobao.org
+npm config set registry https://registry.npmmirror.com
 ```
 
 

@@ -262,6 +262,23 @@ npm run start -- --host 0.0.0.0
 
 
 
+:::caution 注意
+
+如果在启动时遇到如下报错，则需要进入到安装时指定的web目录中运行 `npm i`
+
+```shell
+$ npm run start
+
+> my-website@0.0.0 start
+> docusaurus start
+
+sh: line 1: docusaurus: command not found
+```
+
+:::
+
+
+
 docusaurus默认监听 `127.0.0.1:3000`
 
 ```shell

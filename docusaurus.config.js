@@ -156,14 +156,18 @@ const config = {
       },
       prism: {
         additionalLanguages: ['Bash','nginx','Git'],
-        theme: prismThemes.dracula,
-        //darkTheme: darkCodeTheme,
+        theme: prismThemes.dracula, // 亮色模式下的样式
+        darkTheme: prismThemes.dracula, // 暗色模式下的样式
       },
     announcementBar: {
       id: "support_zh",
-      content:
-        '一名运维，两台电脑，三餐不定，只为设备工作四平八稳，拼得五脏俱损，六神无主，仍然七点起床，八点出发，晚上九点不返，十分辛苦！<br> 十年运维，九转功成，八面张罗，忙得七窍流血，换得六神不宁，五体欠安，仍然四处奔波，三更不眠，只为两个铜板，一生拼搏！',
-      backgroundColor: "pink",
+      content: `
+        <span class="rainbow-text">
+          一名运维，两台电脑，三餐不定，只为设备工作四平八稳，拼得五脏俱损，六神无主，仍然七点起床，八点出发，晚上九点不返，十分辛苦！😂
+          十年运维，九转功成，八面张罗，忙得七窍流血，换得六神不宁，五体欠安，仍然四处奔波，三更不眠，只为两个铜板，一生拼搏！
+        </span>  
+      `,
+      backgroundColor: "rgba(255, 105, 180, 0.3)",
       textColor: "@091E42",
       isCloseable: false,
     },
