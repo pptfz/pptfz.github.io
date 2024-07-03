@@ -24,7 +24,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 
 脚本内容如下，其中有一行配置 `NVM_SOURCE_URL="https://github.com/${NVM_GITHUB_REPO}.git"` ，这里的地址是 `github.com`，由于某些特殊原因，我们需要将这个地址修改为加速地址
 
-:::tip说明
+:::tip 说明
 
 变量 `NVM_GITHUB_REPO` 对应的值是 `nvm-sh/nvm`
 
@@ -572,7 +572,7 @@ $ nvm -v nvm
 
 ## 3.使用
 
-:::tip说明
+:::tip 说明
 
 使用 `nvm install version` 安装的第一个node版本将成为默认版本
 
