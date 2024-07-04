@@ -175,9 +175,9 @@ const config = {
       },
       
     algolia: {
-        apiKey: "c6a8a8dadfe45989253d3d675a6107fe",
-        appId: "1RH59US6FR",
-        indexName: "pptfzio",
+        apiKey: process.env.ALGOLIA_API_KEY,
+        appId: process.env.ALGOLIA_APP_ID,
+        indexName: process.env.ALGOLIA_INDEX_NAME,
         contextualSearch: true,
     },
 
