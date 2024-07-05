@@ -105,11 +105,31 @@ const config = {
             label: '大烩菜',
           },
           {
+            label: 'mac专区',
+            items: [
+              { label: 'mac专区', to: '/docs/mac专区' },
+            ]
+          },
+          {
+            label: 'Linux',
+            items: [
+              { label: 'Linux服务', to: '/docs/Linux服务' },
+              { label: 'Linux命令', to: '/docs/Linux命令' },
+            ]
+          },
+          {
             label: '云原生',
             items: [
               { label: 'k8s', to: '/docs/k8s' }, // 这里的k8s是文件id，不是目录
               { label: '容器', to: '/docs/容器'},
               { label: '云原生工具', to: '/docs/云原生工具'},
+            ]
+          }, 
+          {
+            label: '编程',
+            items: [
+              { label: 'go', to: '/docs/go' }, 
+              { label: 'python', to: '/docs/python'},
             ]
           }, 
 
