@@ -6,6 +6,9 @@
 
 import {themes as prismThemes} from 'prism-react-renderer';
 
+// 能够读取.env文件中定义的algolia相关变量
+require('dotenv').config();
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: '我得发！',
@@ -88,7 +91,8 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: '我的站点',
+        // style: 'dark', 导航栏样式
+        title: '喜欢🎤💃rap🏀',
         logo: {
           alt: 'My Site Logo',
           src: 'img/logo.svg',
@@ -98,10 +102,24 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: '笔记',
+            label: '大烩菜',
           },
-          //{to: '/blog', label: 'Blog', position: 'left'},
-          //{to: '/linux', label: 'Linux', position: 'left'},
+          {
+            label: '云原生',
+            items: [
+              { label: 'k8s', to: '/docs/k8s' }, // 这里的k8s是文件id，不是目录
+              { label: '容器', to: '/docs/容器'},
+              { label: '云原生工具', to: '/docs/云原生工具'},
+            ]
+          }, 
+
+          
+          // {
+          //   type: 'docSidebar',
+          //   sidebarId: 'k8s',
+          //   position: 'left',
+          //   label: 'k8s',
+          // },
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
@@ -116,7 +134,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: '笔记',
+                label: '大烩菜',
                 to: '/docs',
               },
             ],
@@ -187,7 +205,8 @@ const config = {
     },
     scripts: [
     {
-      src: 'https://cdn.jsdelivr.net/npm/@docsearch/js@3',
+      // src: 'https://cdn.jsdelivr.net/npm/@docsearch/js@3',
+      src: 'https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js',
       async: true,
       defer: true
     },
