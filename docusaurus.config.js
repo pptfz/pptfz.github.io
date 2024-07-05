@@ -131,6 +131,14 @@ const config = {
               { label: 'go', to: '/docs/go' }, 
               { label: 'python', to: '/docs/python'},
             ]
+          },
+          {
+            label: '监控',
+            items: [
+              { label: 'prometheus', to: '/docs/prometheus' },
+              { label: 'zabbix', to: '/docs/zabbix' },
+              { label: 'grafana', to: '/docs/grafana' },
+            ]
           }, 
 
           
