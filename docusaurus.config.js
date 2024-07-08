@@ -140,7 +140,14 @@ const config = {
               { label: 'grafana', to: '/docs/grafana' },
             ]
           }, 
-
+          {
+            label: '数据库',
+            items: [
+              { label: 'mongodb', to: '/docs/mongodb' },
+              { label: 'mysql', to: '/docs/mysql' },
+              { label: 'redis', to: '/docs/redis' },
+            ]
+          }, 
           
           // {
           //   type: 'docSidebar',
