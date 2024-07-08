@@ -120,7 +120,7 @@ const config = {
           {
             label: '云原生',
             items: [
-              { label: 'k8s', to: '/docs/k8s' }, // 这里的k8s是文件id，不是目录
+              { label: 'k8s', to: '/docs/k8s' }, // 这里的/docs/k8s是文件id，不是目录
               { label: '容器', to: '/docs/容器'},
               { label: '云原生工具', to: '/docs/云原生工具'},
             ]
