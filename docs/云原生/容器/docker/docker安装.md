@@ -367,13 +367,13 @@ EOF
 
 
 
-[linux 中 /etc/systemd/system和/usr/lib/systemd/system 的区别](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
+[linux中 `/etc/systemd/system` 和 `/usr/lib/systemd/system` 的区别](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
 
 
 
 每一个 Unit（服务等） 都有一个配置文件，告诉 Systemd 怎么启动这个 Unit 。
-Systemd 默认从目录`/etc/systemd/system/`读取配置文件。
-但是，里面存放的大部分文件都是符号链接，指向目录`/usr/lib/systemd/system/`，真正的配置文件存放在那个目录。 `systemctl enable `命令用于在上面两个目录之间，建立符号链接关系。
+Systemd 默认从目录 `/etc/systemd/system/` 读取配置文件。
+但是，里面存放的大部分文件都是符号链接，指向目录 `/usr/lib/systemd/system/` ，真正的配置文件存放在那个目录。 `systemctl enable `命令用于在上面两个目录之间，建立符号链接关系。
 
 :::tip 说明
 
@@ -428,7 +428,7 @@ Server: Docker Engine - Community
 
 
 
-二进制安装的dcoker默认是没有命令补全的，需要从yum安装的机器上拷贝 `/usr/share/bash-completion/completions ` 下名为 `docker` 的文件并且移动到 `/usr/share/bash-completion/completions`
+二进制安装的dcoker默认是没有命令补全的，需要从yum安装的机器上拷贝 `/usr/share/bash-completion/completions` 下名为 `docker` 的文件并且移动到 `/usr/share/bash-completion/completions`
 
 
 
