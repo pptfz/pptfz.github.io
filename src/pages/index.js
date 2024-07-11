@@ -18,7 +18,8 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs">
-            十年舔狗一场空 包厢500是老公 ~
+            {/* 十年舔狗一场空 包厢500是老公 ~ */}
+            凯迪拉克不拉客，只拉技师和模特 ～
           </Link>
         </div>
       </div>

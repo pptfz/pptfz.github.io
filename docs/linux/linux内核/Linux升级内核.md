@@ -43,7 +43,7 @@ yum -y install https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
 
 ### 1.2 安装最新版
 
-:::tip说明
+:::tip 说明
 
 - [kernel-lt](https://elrepo.org/tiki/kernel-lt)：长期维护版
 - [kernel-ml](https://elrepo.org/tiki/kernel-ml)：最新稳定版
@@ -124,7 +124,7 @@ reboot
 
 
 
-:::tip说明
+:::tip 说明
 
 6.x的内核需要gcc5.1+版本，更多要求可以参考[官方文档](https://docs.kernel.org/process/changes.html#changes)
 
@@ -169,7 +169,7 @@ yum -y install gmp-devel mpfr-devel libmpc-devel gcc-c++
 
 #### 2.1.4 创建构建目录
 
-:::tip说明
+:::tip 说明
 
 在源代码目录外创建一个用于构建GCC的目录。这有助于保持源代码和构建文件分开
 
@@ -184,7 +184,7 @@ cd build-gcc
 
 #### 2.1.4 配置gcc
 
-:::tip说明
+:::tip 说明
 
 更多配置项可以参考[官方文档](https://gcc.gnu.org/install/configure.html)
 
