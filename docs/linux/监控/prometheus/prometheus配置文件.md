@@ -355,7 +355,7 @@ rule_files:                                 # 定义要加载的规则文件列�
 
 这个配置的作用是让 Prometheus 监控自己，这对于了解 Prometheus 自身的性能、资源使用情况和内部状态非常有用。通过这个配置，你可以查询 Prometheus 自己的指标，如抓取持续时间、目标数量、存储性能等。
 
-这是最基本的 scrape 配置之一，通常在所有 Prometheus 设置中都会包含，以确保可以监控 Prometheus 自身的健康状况
+这是最基本的 scrape 配置之一，通常在所有 Prometheus 设置中都会包含，以确保可以监控 Prometheus 自身的健康状况。
 
 :::
 
@@ -505,7 +505,7 @@ scrape_configs:                          # 开始 scrape_configs 部分，定义
 
 - 使用 `/probe` 路径和 `http_2xx` 模块，这表明它在使用 blackbox exporter 进行 HTTP 探测。
 
-- 将原始服务地址保存为目标参数，然后将地址替换为 "blackbox"，这是典型的 blackbox exporter 配置。
+- 将原始服务地址保存为目标参数，然后将地址替换为 `blackbox` ，这是典型的 blackbox exporter 配置。
 
 - 保留并映射各种 Kubernetes 元数据作为 Prometheus 标签，包括：
   - 所有 Kubernetes 服务标签
