@@ -208,7 +208,7 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} 泡泡吐肥皂o`,
       },
       prism: {
-        additionalLanguages: ['Bash','nginx','Git','Ini'],
+        additionalLanguages: ['Bash','nginx','Git','Ini','JSON'],
         theme: prismThemes.dracula, // 亮色模式下的样式
         darkTheme: prismThemes.dracula, // 暗色模式下的样式
       },

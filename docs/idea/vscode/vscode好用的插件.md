@@ -24,7 +24,7 @@
 
 ## 特效
 
-[Power Mode](https://marketplace.visualstudio.com/items?itemName=hoovercj.vscode-power-mode)
+### [Power Mode](https://marketplace.visualstudio.com/items?itemName=hoovercj.vscode-power-mode)
 
 
 
