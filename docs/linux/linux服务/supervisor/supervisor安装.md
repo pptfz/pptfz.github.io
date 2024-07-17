@@ -4,15 +4,15 @@
 
 # supervisor安装
 
-## 1.Supervisor简介
+## 1.supervisor简介
 
-[Supervisor github地址](https://github.com/Supervisor/Supervisor)
+[supervisor github地址](https://github.com/Supervisor/Supervisor)
 
-[Supervisor官网](https://Supervisord.org/)
+[supervisor官网](http://supervisord.org/)
 
 
 
-### 1.1 官网对于Supervisor的介绍
+### 1.1 官网对于supervisor的介绍
 
 #### 1.1.1 总览
 
@@ -22,9 +22,9 @@ Supervisor是一个客户端/服务器系统，允许其用户控制类似UNIX�
 
 **方便**
 
-:::info 方便
+:::tip 说明
 
-需要为每个单个流程实例编写`rc.d`脚本通常很不方便。 `rc.d`脚本是进程初始化/自动启动/管理的一个很好的最低公分母形式，但是编写和维护它们可能很麻烦。此外，`rc.d`脚本无法自动重新启动崩溃的进程，并且许多程序在崩溃时无法正确地自行重启。Supervisord将进程作为其子进程启动，并且可以配置为在崩溃时自动重新启动它们。也可以将其自动配置为自行调用启动进程。
+需要为每个单个流程实例编写 `rc.d` 脚本通常很不方便。 `rc.d` 脚本是进程初始化/自动启动/管理的一个很好的最低公分母形式，但是编写和维护它们可能很麻烦。此外，`rc.d` 脚本无法自动重新启动崩溃的进程，并且许多程序在崩溃时无法正确地自行重启。Supervisord将进程作为其子进程启动，并且可以配置为在崩溃时自动重新启动它们。也可以将其自动配置为自行调用启动进程。
 
 :::
 
@@ -32,7 +32,7 @@ Supervisor是一个客户端/服务器系统，允许其用户控制类似UNIX�
 
 **准确性**
 
-:::info 准确性
+:::tip 说明
 
 在UNIX上，通常很难获得准确的启动/关闭状态信息。Pidfile经常说谎。Supervisord将流程作为子流程启动，因此它始终知道其子级的真实上/下状态，并且可以方便地查询该数据。
 
@@ -42,7 +42,7 @@ Supervisor是一个客户端/服务器系统，允许其用户控制类似UNIX�
 
 **授权**
 
-:::info 授权
+:::tip 说明
 
 需要控制流程状态的用户通常只需要这样做。他们不希望或不需要完全的Shell访问运行这些进程的计算机。侦听"低" TCP端口的进程通常需要以root用户身份启动和重新启动（UNIX功能不全）。通常情况下，允许"正常"人员停止或重新启动这样的过程是完全可以的，但是为他们提供shell访问通常是不切实际的，并且为他们提供root访问或sudo访问通常是不可能的。（正确）也很难向他们解释为什么存在此问题。如果超级用户以root用户身份启动，则可以允许"普通"用户控制此类过程，而无需向他们解释问题的复杂性。Supervisorctl允许以非常有限的形式访问计算机
 
@@ -52,7 +52,7 @@ Supervisor是一个客户端/服务器系统，允许其用户控制类似UNIX�
 
 **进程组**
 
-:::info 进程组
+:::tip 说明
 
 流程通常需要成组地启动和停止，有时甚至需要按照"优先级顺序"进行。通常很难向人们解释如何执行此操作。Supervisor允许您为进程分配优先级，并允许用户通过Supervisorctl客户端发出命令，如"全部启动"和"全部重新启动"，这将按预先分配的优先级顺序启动它们。此外，可以将进程分为"进程组"，并且可以将一组逻辑相关的进程作为一个单元停止和启动。
 
@@ -64,7 +64,7 @@ Supervisor是一个客户端/服务器系统，允许其用户控制类似UNIX�
 
 **简单**
 
-:::info 简单
+:::tip 说明
 
 通过简单易懂的INI样式配置文件配置Supervisor。它提供了许多按进程选择的选项，使您的生活更加轻松，例如重新启动失败的进程和自动日志轮换。
 
@@ -74,7 +74,7 @@ Supervisor是一个客户端/服务器系统，允许其用户控制类似UNIX�
 
 **集中**
 
-:::info 集中
+:::tip 说明
 
 Supervisor为您提供了一个开始，停止和监视过程的地方。可以单独或成组控制过程。您可以配置Supervisor以提供本地或远程命令行和Web界面。
 
@@ -84,9 +84,9 @@ Supervisor为您提供了一个开始，停止和监视过程的地方。可以�
 
 **高效的**
 
-:::info 高效
+:::tip 说明
 
-Supervisor通过fork / exec启动其子进程，并且子进程不守护。进程终止时，操作系统会立即向Supervisor发送信号，这与某些依赖麻烦的PID文件和定期轮询以重新启动失败的进程的解决方案不同。
+Supervisor通过 `fork/exec` 启动其子进程，并且子进程不守护。进程终止时，操作系统会立即向Supervisor发送信号，这与某些依赖麻烦的PID文件和定期轮询以重新启动失败的进程的解决方案不同。
 
 :::
 
@@ -96,7 +96,7 @@ Supervisor通过fork / exec启动其子进程，并且子进程不守护。进�
 
 **可扩展的**
 
-:::info 可扩展
+:::tip 说明
 
 Supervisor具有一个简单的事件通知协议，该协议可以使用任何语言编写的程序对其进行监视，并且具有用于控制的XML-RPC接口。它还使用扩展点构建，Python开发人员可以利用这些扩展点。
 
@@ -106,7 +106,7 @@ Supervisor具有一个简单的事件通知协议，该协议可以使用任何�
 
 **兼容**
 
-:::info 兼容
+:::tip 说明
 
 除Windows外，Supervisor几乎适用于所有其他方面。它已在Linux，Mac OS X，Solaris和FreeBSD上经过测试和支持。它完全用Python编写，因此安装不需要C编译器。
 
@@ -116,7 +116,7 @@ Supervisor具有一个简单的事件通知协议，该协议可以使用任何�
 
 **久经考验**
 
-:::info 久经考验
+:::tip 说明
 
 尽管Supervisor如今非常活跃，但它不是新软件。Supervisor已经存在了很多年，并且已经在许多服务器上使用。
 
@@ -130,9 +130,9 @@ Supervisor具有一个简单的事件通知协议，该协议可以使用任何�
 
 :::tip 说明
 
-服务器Supervisor的名称为**supervisor**。它负责自行调用启动子程序，响应来自客户端的命令，重新启动崩溃或退出的子进程，记录其子进程`stdout`和`stderr` 输出以及生成和处理与子进程生存期中的点相对应的"事件"。
+服务器Supervisor的名称为**supervisor**。它负责自行调用启动子程序，响应来自客户端的命令，重新启动崩溃或退出的子进程，记录其子进程`stdout` 和 `stderr` 输出以及生成和处理与子进程生存期中的点相对应的"事件"。
 
-服务器进程使用配置文件。它通常位于`/etc/supervisord.conf中`。此配置文件是" Windows-INI"样式的配置文件。通过适当的文件系统权限来确保此文件的安全很重要，因为它可能包含未加密的用户名和密码。
+服务器进程使用配置文件。它通常位于 `/etc/supervisord.conf中`。此配置文件是"Windows-INI"样式的配置文件。通过适当的文件系统权限来确保此文件的安全很重要，因为它可能包含未加密的用户名和密码。
 
 :::
 
@@ -144,7 +144,7 @@ Supervisor具有一个简单的事件通知协议，该协议可以使用任何�
 
 Supervisor的命令行客户端名为 **supervisorctl**。它提供了类似于shell的界面，可与**supervisor**提供的功能结合使用。从 **supervisorctl**，用户可以连接到不同的 **supervisord**进程（一次一个），对，停止控制的子流程获得地位和启动的子进程，并获得运行的进程的列表**supervisord**。
 
-命令行客户端通过UNIX域套接字或Internet（TCP）套接字与服务器对话。服务器可以断言客户端的用户应该在允许客户端执行命令之前出示身份验证凭据。客户端进程通常使用与服务器相同的配置文件，但是任何带有`[supervisorctl]`节的配置文件都可以使用。
+命令行客户端通过UNIX域套接字或Internet（TCP）套接字与服务器对话。服务器可以断言客户端的用户应该在允许客户端执行命令之前出示身份验证凭据。客户端进程通常使用与服务器相同的配置文件，但是任何带有 `[supervisorctl]` 节的配置文件都可以使用。
 
 :::
 
@@ -154,7 +154,7 @@ Supervisor的命令行客户端名为 **supervisorctl**。它提供了类似于s
 
 :::tip 说明
 
-与功能媲美A（稀疏）的Web用户界面 **supervisorctl**可以通过浏览器，如果你开始访问 **supervisord**对互联网插座。激活配置文件的`[inet_http_server]`部分后，请访问服务器URL（例如`http://localhost:9001/`）以通过Web界面查看和控制进程状态。
+与功能媲美A（稀疏）的Web用户界面 **supervisorctl**可以通过浏览器，如果你开始访问 **supervisord** 对互联网插座。激活配置文件的`[inet_http_server]`部分后，请访问服务器URL（例如`http://localhost:9001/`）以通过Web界面查看和控制进程状态。
 
 :::
 
@@ -178,43 +178,39 @@ Supervisor的命令行客户端名为 **supervisorctl**。它提供了类似于s
 
 ```shell
 $ python -V
-Python 2.7.5
+Python 3.9.18
 ```
 
 
 
 ### 2.2 安装suprvisor
 
-**配置国内pip源**
+#### 2.2.1 配置国内pip源
 
 ```shell
 mkdir ~/.pip
-cat > .pip/pip.conf <<'EOF'
+cat > .pip/pip.conf << 'EOF'
 [global]
-index-url = https://pypi.tuna.tsinghua.edu.cn/simple/
+index-url = https://mirrors.aliyun.com/pypi/simple/
+
+[install]
+trusted-host=mirrors.aliyun.com
 EOF
 ```
 
 
 
-**安装最新版**
+#### 2.2.2 安装
+
+安装最新版
 
 ```shell
-# 方法一
 pip install supervisor
-
-# 方法二
-yum -y install python-setuptools
-easy_install supervisor
-
-# 查看版本
-$ supervisord -v
-4.2.0
 ```
 
 
 
-**安装指定版本**
+安装指定版本
 
 ```shell
 pip install supervisor==3.3.5
@@ -222,13 +218,28 @@ pip install supervisor==3.3.5
 
 
 
-## 3.配置supervisor
-
-### 3.1 运行 `echo_supervisord_conf` 命令生成默认配置文件
-
-**运行`echo_supervisord_conf`命令，会在当前终端的标准输出中打印一个样本Supervisor配置文件**
+查看版本
 
 ```shell
+$ supervisord -v
+4.2.5
+```
+
+
+
+## 3.配置supervisor
+
+### 3.1 生成默认配置文件
+
+:::tip 说明
+
+运行 `echo_supervisord_conf` 命令，会在当前终端的标准输出中打印一个样本supervisor配置文件
+
+:::
+
+
+
+```ini
 $ echo_supervisord_conf
 ; Sample supervisor config file.
 ;
@@ -407,8 +418,8 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 **去掉注释后的内容如下**
 
 ```shell
-$ echo_supervisord_conf  > hehe
-$ egrep -v '^$|^;' hehe
+$ echo_supervisord_conf  > supervisor.conf
+$ egrep -v '^$|^;' supervisor.conf
 [unix_http_server]
 file=/tmp/supervisor.sock   ; the path to the socket file
 [supervisord]
@@ -433,7 +444,7 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 
 ### 3.2 supervisor查找配置文件的顺序
 
-**supervisor配置文件通常被命名为`supervisor.conf`，supervisor和supervisorctl都使用这个配置文件，如果在没有`-c`选项的情况下启动了任一应用程序（该选项用于显式告知应用程序配置文件名），则该应用程序将在以下位置按指定顺序查找名为`supervisord.conf`的文件。它将使用找到的第一个文件。**
+**supervisor配置文件通常被命名为 `supervisor.conf` ，supervisor和supervisorctl都使用这个配置文件，如果在没有`-c`选项的情况下启动了任一应用程序（该选项用于显式告知应用程序配置文件名），则该应用程序将在以下位置按指定顺序查找名为`supervisord.conf`的文件。它将使用找到的第一个文件。**
 
 1. `../etc/supervisord.conf` (相对于可执行文件)
 2. `../supervisord.conf` (相对于可执行文件)
@@ -448,7 +459,7 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 
 ### 3.3 手动编辑supervisor配置文件
 
-**创建配置文件和日志文件目录**
+创建配置文件和日志文件目录
 
 ```shell
 mkdir -p /etc/supervisor/config.d
@@ -457,7 +468,13 @@ mkdir /var/log/supervisor
 
 
 
-**创建supervisor运行用户supervisor**
+创建supervisor运行用户supervisor
+
+:::tip 说明
+
+如果不创建专门的用户也可以使用root用户启动supervisor
+
+:::
 
 ```shell
 useradd supervisor -s /sbin/nologin -M
@@ -465,15 +482,13 @@ useradd supervisor -s /sbin/nologin -M
 
 
 
-**手动编辑supervisor配置文件**
+手动编辑supervisor配置文件
 
-:::tip 说明
-
-**需要注意的点**
+:::caution 注意
 
 supervisor默认以root身份运行，如果想要指定用户，需要在标签 `[supervisord]`下添加 `user=xxx`
 
-如果没有以-c选项指定配置文件，则supervisor会按照以下顺序查找配置文件 ，否则会报错 `Error: No config file found at default paths (/usr/etc/supervisord.conf, /usr/supervisord.conf, supervisord.conf, etc/supervisord.conf, /etc/supervisord.conf, /etc/supervisor/supervisord.conf); use the -c option to specify a config file at a different path`
+如果没有以 `-c` 选项指定配置文件，则supervisor会按照以下顺序查找配置文件 ，否则会报错 `Error: No config file found at default paths (/usr/etc/supervisord.conf, /usr/supervisord.conf, supervisord.conf, etc/supervisord.conf, /etc/supervisord.conf, /etc/supervisor/supervisord.conf); use the -c option to specify a config file at a different path`
 - 1 `../etc/supervisord.conf（相对于可执行文件）`
 - 2 `../supervisord.conf（相对于可执行文件）`
 - 3 `$CWD/supervisord.conf`
@@ -485,10 +500,10 @@ supervisor默认以root身份运行，如果想要指定用户，需要在标签
 
 :::
 
-```shell
-cat > /etc/supervisor/supervisord.conf <<'EOF'
+```ini
+cat > /etc/supervisor/supervisord.conf << 'EOF'
 [unix_http_server]
-file=/tmp/supervisor.sock   ; 
+file = /tmp/supervisor.sock   
 chmod = 0770
 chown = supervisor:supervisor   ; /tmp/supervisor.sock所有者为supervisor
  
@@ -499,10 +514,10 @@ logfile_backups=10           ; # of main logfile backups; 0 means none, default 
 loglevel=info                ; log level; default info; others: debug,warn,trace
 pidfile=/tmp/supervisord.pid ; supervisord pidfile; default supervisord.pid
  
-;[inet_http_server]
-;port=10.0.0.10:9001
-;username=test
-;password=test
+[inet_http_server]
+port=10.0.0.10:9001
+username=test
+password=test
  
 [rpcinterface:supervisor]
 supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
@@ -517,7 +532,7 @@ EOF
 
 
 
-**当有如下配置时，supervisor还提供了一个web界面**
+当有如下配置时，supervisor还提供了一个web界面
 
 ```shell
 [inet_http_server]
@@ -528,7 +543,7 @@ password=test
 
 
 
-浏览器访问 `IP:9001` ，用户名和密码都是test
+浏览器访问 `IP:9001` ，用户名和密码在 `inet_http_server` 下配置，这里为 `test`
 
 ![iShot2020-06-3011.46.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-3011.46.06.png)
 
@@ -537,12 +552,12 @@ password=test
 ### 3.4 设置supervisor日志滚动
 
 ```shell
-cat >/etc/logrotate.d/supervisor <<EOF
+cat > /etc/logrotate.d/supervisor <<EOF
 /var/log/supervisor/*.log {
-       missingok
-       weekly
-       notifempty
-       nocompress
+       missingok # 如果日志文件丢失，不报错继续执行
+       weekly # 每周轮转一次日志
+       notifempty # 如果日志文件为空，不进行轮转
+       nocompress # 不压缩轮转后的日志文件
 }
 EOF
 ```
@@ -552,7 +567,7 @@ EOF
 ### 3.5 设置Tmpfiles防止sock文件被清理
 
 ```shell
-cat >> /usr/lib/tmpfiles.d/tmp.conf<<EOF
+cat >> /usr/lib/tmpfiles.d/tmp.conf <<EOF
 x /tmp/supervisor.sock
 x /tmp/supervisord.pid
 EOF
@@ -566,33 +581,58 @@ EOF
 
 
 
-**克隆项目**
+克隆项目
 
 ```shell
 $ git clone https://github.com/Supervisor/initscripts.git
 $ cd initscripts
-$ ls
-centos-systemd-etcs  gentoo-matagus       redhat-init-equeffelec  redhat-sysconfig-equeffelec  ubuntu
-debian-norrgard      opensuse-garymonson  redhat-init-jkoppe      redhat-sysconfig-jkoppe
-fedora-bmbouter      README.md            redhat-init-mingalevme  slackware
-
-# 将centos-systemd-etcs中的内容拷贝到/usr/lib/systemd/system/supervisord.service
-cat centos-systemd-etcs >/usr/lib/systemd/system/supervisord.service
+$ ll
+total 64
+-rw-r--r-- 1 root root  367 Jul 16 17:44 centos-systemd-etcs
+-rw-r--r-- 1 root root 4501 Jul 16 17:44 debian-norrgard
+-rw-r--r-- 1 root root 1453 Jul 16 17:44 fedora-bmbouter
+-rw-r--r-- 1 root root 1544 Jul 16 17:44 gentoo-matagus
+-rwxr-xr-x 1 root root 1746 Jul 16 17:44 opensuse-garymonson
+-rw-r--r-- 1 root root  788 Jul 16 17:44 README.md
+-rwxr-xr-x 1 root root 3165 Jul 16 17:44 redhat-init-equeffelec
+-rwxr-xr-x 1 root root 3497 Jul 16 17:44 redhat-init-jkoppe
+-rwxr-xr-x 1 root root 4112 Jul 16 17:44 redhat-init-mingalevme
+-rw-r--r-- 1 root root  723 Jul 16 17:44 redhat-sysconfig-equeffelec
+-rw-r--r-- 1 root root  462 Jul 16 17:44 redhat-sysconfig-jkoppe
+-rw-r--r-- 1 root root 2068 Jul 16 17:44 slackware
+-rw-r--r-- 1 root root 4788 Jul 16 17:44 ubuntu
 ```
 
 
 
-**`centos-systemd-etcs`文件内容**
-
-:::caution 注意
-
-**要注意 `supervisord` 和 `supervisorctl` 这两个命令的绝对路径**
-
-:::
+`centos-systemd-etcs` 文件中的内容如下，这里需要修改 `supervisord` 和 `supervisorctl` 命令的绝对路径
 
 ```shell
-# centos-systemd-etcs文件内容
-cat > /usr/lib/systemd/system/supervisord.service <<'EOF'
+$ cat centos-systemd-etcs 
+# supervisord service for systemd (CentOS 7.0+)
+# by ET-CS (https://github.com/ET-CS)
+[Unit]
+Description=Supervisor daemon
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/supervisord
+ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
+ExecReload=/usr/bin/supervisorctl $OPTIONS reload
+KillMode=process
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
+```
+
+
+
+将默认的 `/usr/bin/supervisord` 和 `/usr/bin/supervisorctl` 执行 `which` 命令自动获取并写入到 `/usr/lib/systemd/system/supervisord.service`
+
+```shell
+cat > /usr/lib/systemd/system/supervisord.service << EOF
 # supervisord service for systemd (CentOS 7.0+)
 # by ET-CS (https://github.com/ET-CS)
 [Unit]
@@ -602,7 +642,7 @@ Description=Supervisor daemon
 Type=forking
 ExecStart=`which supervisord`
 ExecStop=`which supervisorctl` $OPTIONS shutdown
-ExecReload=`which /usr/bin/supervisorctl` $OPTIONS reload
+ExecReload=`which supervisorctl` $OPTIONS reload
 KillMode=process
 Restart=on-failure
 RestartSec=42s
@@ -614,7 +654,7 @@ EOF
 
 
 
-**启动supervisord并加入开机自启**
+启动supervisord并加入开机自启
 
 ```shell
 systemctl daemon-reload
@@ -623,11 +663,36 @@ systemctl start supervisord && systemctl enable supervisord
 
 
 
+查看启动
+
+```shell
+$ systemctl status supervisord.service
+● supervisord.service - Supervisor daemon
+     Loaded: loaded (/usr/lib/systemd/system/supervisord.service; disabled; preset: disabled)
+     Active: active (running) since Tue 2024-07-16 19:37:42 CST; 3s ago
+    Process: 8498 ExecStart=/usr/local/bin/supervisord (code=exited, status=0/SUCCESS)
+   Main PID: 8500 (supervisord)
+      Tasks: 1 (limit: 5883)
+     Memory: 15.7M
+        CPU: 53ms
+     CGroup: /system.slice/supervisord.service
+             └─8500 /usr/bin/python3 /usr/local/bin/supervisord
+
+Jul 16 19:37:42 localhost.localdomain systemd[1]: Starting Supervisor daemon...
+Jul 16 19:37:42 localhost.localdomain supervisord[8498]: /usr/local/lib/python3.9/site-packages/supervisor/options.py:474: UserWarning: Supervisord is running as root and it>
+Jul 16 19:37:42 localhost.localdomain supervisord[8498]:   self.warnings.warn(
+Jul 16 19:37:42 localhost.localdomain systemd[1]: Started Supervisor daemon.
+```
+
+
+
+
+
 ## 4.supervisor相关命令
 
 ### 4.1 supervisord命令选项
 
-**`supervisord`命令**
+**`supervisord` 命令**
 
 | **选项**                             | **说明**                                                     |
 | ------------------------------------ | ------------------------------------------------------------ |
@@ -655,7 +720,7 @@ systemctl start supervisord && systemctl enable supervisord
 
 ### 4.2 supervisorctl命令选项及动作
 
-**supervisorctl命令选项**
+**supervisorctl 命令选项**
 
 | **选项**              | **说明**                                                     |
 | --------------------- | ------------------------------------------------------------ |
@@ -679,41 +744,34 @@ systemctl start supervisord && systemctl enable supervisord
 
 ## 5.supervisor信号
 
-**supervisor程序可能会被发送信号，使其在运行时执行某些操作。**
+supervisor程序可能会被发送信号，使其在运行时执行某些操作。
+
+你可以将这些信号中的任何一个发送到单个supervisord进程id，可以在配置文件的 `[supervisord]` 部分的 `pidfile` 参数表示的文件中找到此进程ID （默认情况下为`$CWD/supervisord.pid`）
 
 
 
-**你可以将这些信号中的任何一个发送到单个supervisord进程id，可以在配置文件的`[supervisord]`部分的`pidfile`参数表示的文件中找到此进程ID （默认情况下为`$CWD/supervisord.pid`）**
+- **SIGTERM**
+  - **supervisord** 及其所有子进程都将关闭。这可能需要几秒钟。
 
 
 
-**SIGTERM**
-
-- **supervisord**的所有子进程都将关闭。这可能需要几秒钟。
-
-
-
-**SIGINT**
-
-- **supervisord**的所有子进程都将关闭。这可能需要几秒钟。
+- **SIGINT**
+  - **supervisord** 及其所有子进程都将关闭。这可能需要几秒钟。
 
 
 
-**SIGQUIT**
-
-- **supervisord**的所有子进程都将关闭。这可能需要几秒钟。
-
-
-
-**SIGHUP**
-
-- **supervisord**将停止所有进程，从它找到的第一个配置文件重新加载配置，然后启动所有进程。
+- **SIGQUIT**
+  - **supervisord** 的所有子进程都将关闭。这可能需要几秒钟。
 
 
 
-**SIGUSR2**
+- **SIGHUP**
+  - **supervisord** 将停止所有进程，从它找到的第一个配置文件重新加载配置，然后启动所有进程。
 
-- **supervisord**将关闭并重新打开主活动日志和所有子日志文件。
+
+
+- **SIGUSR2**
+  - **supervisord** 将关闭并重新打开主活动日志和所有子日志文件。
 
 
 
@@ -736,11 +794,11 @@ yum -y install python3-pip && pip3 install supervisor
 [ -d /etc/supervisor ] || mkdir /etc/supervisor
 
 # 创建supervisor配置文件
-cat > /etc/supervisor/supervisord.conf <<EOF
+cat > /etc/supervisor/supervisord.conf << EOF
 [unix_http_server]
-file=/tmp/supervisor.sock   ; /tmp/supervisor.sock所有者为supervisor
-chmod = 0770
-chown = root:root
+file=/tmp/supervisor.sock   
+chmod=0770
+chown=supervisor:supervisor   ; /tmp/supervisor.sock所有者为supervisor
 
 
 [supervisord]
@@ -786,7 +844,7 @@ fi
 
 
 # 将supervisor加入systemd
-cat >/usr/lib/systemd/system/supervisord.service <<EOF
+cat >/usr/lib/systemd/system/supervisord.service << EOF
 # supervisord service for systemd (CentOS 7.0+)
 # by ET-CS (https://github.com/ET-CS)
 [Unit]

@@ -105,6 +105,11 @@ const config = {
             label: '大烩菜',
           },
           {
+            to: 'docs/八卦/女卫生间里的故事',
+            position: 'right',
+            label: '女卫生间里的故事',
+          },
+          {
             label: 'mac专区',
             items: [
               { label: 'mac专区', to: '/docs/mac专区' },
