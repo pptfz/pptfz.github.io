@@ -8,6 +8,38 @@ kubectl delete pod <pod-name> --grace-period=0 --force
 
 
 
+## 查看pod包含的容器
+
+:::tip 说明
+
+一般情况下，一个pod可能包含多个容器
+
+:::
+
+通过自定义列
+
+```shell
+$ export POD_NAME='xxx'
+$ kubectl get pod ${POD_NAME} -o 'custom-columns=NAME:.metadata.name,CONTAINERS:.spec.containers[*].name'
+NAME                                            CONTAINERS
+prometheus-prometheus-server-75c956b9cc-w8l4p   prometheus-prometheus-server-configmap-reload,prometheus-prometheus-server
+```
+
+
+
+通过 `jq` 命令
+
+```shell
+$ export POD_NAME='xxx'
+$ kubectl get pod ${POD_NAME} -o json | jq '.spec.containers[].name'
+"prometheus-prometheus-server-configmap-reload"
+"prometheus-prometheus-server"
+```
+
+
+
+
+
 ## 存储类
 
 设置默认存储类

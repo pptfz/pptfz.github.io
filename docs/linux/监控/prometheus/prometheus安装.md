@@ -34,9 +34,11 @@
 
 ## 安装
 
+### helm
+
 这里选择使用 [helm](https://github.com/helm/helm) 安装
 
-### 添加helm仓库
+#### 添加helm仓库
 
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -44,7 +46,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 
 
 
-### 下载包
+#### 下载包
 
 ```bash
 helm pull  prometheus-community/prometheus
@@ -52,7 +54,7 @@ helm pull  prometheus-community/prometheus
 
 
 
-### 解压缩
+#### 解压缩
 
 ```bash
 tar xf prometheus-25.21.0.tgz
@@ -60,7 +62,7 @@ tar xf prometheus-25.21.0.tgz
 
 
 
-### 安装
+#### 安装
 
 :::tip 说明 
 
@@ -116,7 +118,7 @@ https://prometheus.io/
 
 
 
-### 查看pod状态
+#### 查看pod状态
 
 ```sh
 $ kubectl get pods|grep prometheus
@@ -131,9 +133,87 @@ prometheus-server-69786c785-vbzbb                    2/2     Running   0        
 
 
 
-### 访问
+#### 访问
 
 默认界面如下
 
 ![iShot_2024-05-30_17.23.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-05-30_17.23.40.png)
+
+
+
+### 二进制安装
+
+#### 下载安装包
+
+```shell
+https://github.com/prometheus/prometheus/releases/download/v2.53.1/prometheus-2.53.1.linux-arm64.tar.gz
+```
+
+
+
+#### 解压缩
+
+```shell
+tar xf prometheus-2.53.1.linux-arm64.tar.gz
+```
+
+
+
+查看目录内容
+
+```shell
+$ ll
+total 255632
+drwxr-xr-x 2 1001 127        38 Jul 10 18:31 console_libraries
+drwxr-xr-x 2 1001 127       173 Jul 10 18:31 consoles
+-rw-r--r-- 1 1001 127     11357 Jul 10 18:31 LICENSE
+-rw-r--r-- 1 1001 127      3773 Jul 10 18:31 NOTICE
+-rwxr-xr-x 1 1001 127 134834183 Jul 10 18:20 prometheus
+-rw-r--r-- 1 1001 127       934 Jul 10 18:31 prometheus.yml
+-rwxr-xr-x 1 1001 127 126906727 Jul 10 18:20 promtool
+```
+
+
+
+#### 启动
+
+:::tip 说明
+
+默认情况下，prometheus时序数据库(TSDB)数据的存储路径是 `./data`，可以通过 `--storage.tsdb.path` 参数指定
+
+可通过 `--config.file` 参数指定配置文件
+
+:::
+
+
+
+:::caution 注意
+
+启动prometheus的时候需要加上 `--web.enable-lifecycle` 参数才可以执行热加载prometheus配置文件
+
+否则会报错如下
+
+```shell
+$ curl -X POST http://127.0.0.1:9090/-/reload
+Lifecycle API is not enabled.
+```
+
+:::
+
+```shell
+./prometheus --config.file=prometheus.yml --web.enable-lifecycle
+```
+
+
+
+查看启动，prometheus默认监听9090端口
+
+```shell
+$ netstat -ntpl | grep prometheus
+tcp6       0      0 :::9090                 :::*                    LISTEN      1479/./prometheus   
+```
+
+
+
+
 

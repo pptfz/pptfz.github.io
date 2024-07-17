@@ -11,9 +11,9 @@ files = /etc/supervisor/config.d/*.ini
 
 **编辑gitbook服务配置文件 `/etc/supervisor/config.d/gitbook.ini`**
 
-:::caution
+:::caution 注意
 
-⚠️<span style={{color: 'red'}}>gitbook不能单独启动，必须指定gitbook工作目录，添加参数 `directory=/path` 指定</span>
+<span style={{color: 'red'}}>gitbook不能单独启动，必须指定gitbook工作目录，添加参数 `directory=/path` 指定</span>
 
 :::
 
