@@ -509,7 +509,7 @@ sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/confi
 用如下命令修改
 
 ```shell
-sed -i 's#registry.k8s.io#registry.aliyuncs.com/k8sxio#' /etc/containerd/config.toml
+sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/containerd/config.toml
 ```
 
 
@@ -528,6 +528,16 @@ sed -i 's#registry.k8s.io#registry.aliyuncs.com/k8sxio#' /etc/containerd/config.
 [plugins."io.containerd.grpc.v1.cri".registry]
       config_path = "/etc/containerd/certs.d"
 ```
+
+
+
+使用如下命令修改
+
+```shell
+sed -i.bak 's#config_path = ""#config_path = "/etc/containerd/certs.d"#' /etc/containerd/config.toml
+```
+
+
 
 
 
@@ -1142,7 +1152,7 @@ localAPIEndpoint:
   advertiseAddress: 10.0.0.10  # 指定master节点内网IP
   bindPort: 6443
 nodeRegistration:
-  criSocket: /run/containerd/containerd.sock  # 使用 containerd 的 Unix socket 地址
+  criSocket: unix:///run/containerd/containerd.sock  # 使用 containerd 的 Unix socket 地址
   imagePullPolicy: IfNotPresent
   name: k8s-master01 # master节点主机名
   taints:  # 给master添加污点，master节点不能调度应用
@@ -1152,7 +1162,7 @@ nodeRegistration:
 ---
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
 kind: KubeProxyConfiguration
-mode: iptables  # kube-proxy 模式
+mode: ipvs  # kube-proxy 模式
 
 ---
 apiServer:
