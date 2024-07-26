@@ -45,7 +45,8 @@ $ kubectl get pod ${POD_NAME} -o json | jq '.spec.containers[].name'
 设置默认存储类
 
 ```sh
-kubectl patch storageclass <storage-class-name> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+export SC_NAME=openebs-hostpath
+kubectl patch storageclass ${SC_NAME} -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
 
 

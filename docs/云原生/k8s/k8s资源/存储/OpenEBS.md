@@ -81,7 +81,7 @@ helm upgrade --install openebs -n storageclass --create-namespace .
 
 ### 2.4 查看安装
 
-:::tip说明
+:::tip 说明
 
 1. `openebs-localpv-provisioner`：这是 OpenEBS 的本地持久化卷 Provisioner 组件，它使用 Kubernetes 的 HostPath Volume 插件来提供本地持久化存储功能。当使用者在 Kubernetes 集群中创建一个 PVC（PersistentVolumeClaim）时，这个组件会为其创建一个 HostPath PV（PersistentVolume），从而提供持久化存储。这个组件通常适用于测试和开发环境。
 2. `openebs-ndm`：这是 OpenEBS 的 Node Disk Manager（NDM）组件之一，它在每个 Kubernetes 节点上运行，用于发现、管理和分配节点上的块设备。这个组件会监视节点上的块设备，并将其标记为可用或不可用状态。当 OpenEBS 创建 Volume 时，`openebs-ndm` 会查找可用的块设备并将其分配给 Volume。
@@ -103,7 +103,7 @@ openebs-ndm-operator-579c488d69-6ggjv              1/1     Running   0          
 
 默认会创建 `openebs-device` 和 `openebs-hostpath` 2个storageclass
 
-:::tip说明
+:::tip 说明
 
 OpenEBS 安装完成后默认提供了两个 StorageClass，分别是 `openebs-device` 和 `openebs-hostpath`，它们之间的区别如下：
 
