@@ -156,6 +156,18 @@ ingress-nginx-controller-5865555b87-r6465   1/1     Running   0          8m58s
 
 
 
+:::caution 注意
+
+在安装的时候可以指定 `ingressclass` 名称，集群中可以有多个 `ingress-nginx-controller`
+
+```shell
+$ kubectl get ingressclass
+NAME    CONTROLLER             PARAMETERS   AGE
+nginx   k8s.io/ingress-nginx   <none>       2d19h
+```
+
+:::
+
 
 
 #### 安装MetalLB
@@ -234,7 +246,7 @@ ingress-nginx-controller-admission   ClusterIP      10.98.175.165   <none>      
 
 为了解决以上问题，安装完metallb后，还需要创建以下资源
 
-:::tip 说明
+:::caution 注意
 
 `addresses` 字段指定的ip地址段要与node节点的网络在同一个地址段
 
