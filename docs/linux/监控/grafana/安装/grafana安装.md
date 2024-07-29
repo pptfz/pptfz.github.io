@@ -29,7 +29,11 @@ yum -y localinstall grafana-7.0.3-1.x86_64.rpm
 
 ### 1.2 启动服务并设置开机自启
 
-- **grafana默认监听TCP/3000端口**
+:::tip 说明
+
+grafana默认监听TCP/3000端口
+
+:::
 
 ```python
 systemctl enable grafana-server && systemctl start grafana-server
@@ -41,16 +45,16 @@ systemctl enable grafana-server && systemctl start grafana-server
 
 [官方文档中对于grafana配置文件路径的说明](https://grafana.com/docs/grafana/latest/installation/rpm/)
 
-| **文件**                 | **路径**                                   |
-| ------------------------ | ------------------------------------------ |
-| **安装目录**             | **`/usr/share/grafana/`**                  |
-| **grafana-cli 路径**     | **`/usr/share/grafana/bin/grafana-cli`**   |
-| **全局配置文件**         | **`/etc/grafana/grafana.ini`**             |
-| **默认配置文件**         | **`/usr/share/grafana/conf/defaults.ini`** |
-| **plugins 安装目录**     | **`/var/lib/grafana/plugins/`**            |
-| **默认数据存储文件路径** | **`/var/lib/grafana/grafana.db`**          |
-| **日志文件存储路径**     | **`/var/log/grafana/`**                    |
-| **邮件默认发送模板路径** | **`/usr/share/grafana/public/emails/`**    |
+| **文件**             | **路径**                               |
+| -------------------- | -------------------------------------- |
+| 安装目录             | `/usr/share/grafana/`                  |
+| grafana-cli 路径     | `/usr/share/grafana/bin/grafana-cli`   |
+| 全局配置文件         | `/etc/grafana/grafana.ini`             |
+| 默认配置文件         | `/usr/share/grafana/conf/defaults.ini` |
+| plugins 安装目录     | `/var/lib/grafana/plugins/`            |
+| 默认数据存储文件路径 | `/var/lib/grafana/grafana.db`          |
+| 日志文件存储路径     | `/var/log/grafana/`                    |
+| 邮件默认发送模板路径 | `/usr/share/grafana/public/emails/`    |
 
 
 
@@ -116,7 +120,7 @@ docker run -d --name=grafana -p 3000:3000 grafana/grafana
 
 [docker安装grafana持久化官方文档](https://grafana.com/docs/grafana/latest/administration/configure-docker/)
 
-:::tip
+:::tip 说明
 
 **以挂载宿主机目录的形式启动grafana的时候必须指定用户为root，否则后续会报权限错误；而以volume形式挂载则没有问题**
 
@@ -159,7 +163,87 @@ cd grafana-8.0.2/
 
 
 
-## 3.登陆grafana
+## 5.helm安装
+
+### 5.1 添加仓库
+
+```shell
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+```
+
+
+
+### 5.2 下载包
+
+```shell
+helm pull grafana/grafana
+tar xf grafana-8.3.6.tgz
+```
+
+
+
+### 5.3 编辑 `values.yaml`
+
+`values.yaml` 中可以定义启动参数、资源配置、svc、ingress等，自行修改即可
+
+:::caution 注意
+
+关于admin用户名和密码的配置处，可以以明文的方式指定，也可以指定外部secret
+
+在指定外部secret的时候需要注意的是，如果通过手动编辑yaml文件的方式，在生成base64编码的时候，需要注意生成的base64编码不能包含换行符
+
+在linux系统中，可以使用 `-w0` 参数生成没有换行符的base64编码
+
+```shell
+echo 'admin' | base64 -w0
+```
+
+
+
+也可以使用 `echo -n` 在输出字符串时不再末尾添加换行符
+
+```shell
+echo -n 'admin' | base64
+```
+
+
+
+也可以通过命令行来生成secret
+
+```shell
+kubectl create secret generic admin-secret \
+  --from-literal=admin-user=YWRtaW4= \
+  --from-literal=admin-password=YWRtaW4= \
+  -n monitor
+```
+
+:::
+
+```yaml
+# Administrator credentials when not using an existing secret (see below)
+adminUser: admin
+# adminPassword: strongpassword
+
+# Use an existing secret for the admin user.
+admin:
+  ## Name of the secret. Can be templated.
+  existingSecret: "admin-secret"
+  userKey: admin-user
+  passwordKey: admin-password
+```
+
+
+
+### 5.4 安装
+
+```shell
+helm upgrade --install grafana -n monitor --create-namespace . 
+```
+
+
+
+## 6.登陆grafana
 
 **浏览器访问 `IP:3000`**
 
