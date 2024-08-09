@@ -37,17 +37,17 @@ the console to complete the installation process.
 
 参数说明
 
-| 参数         | 说明                                                         |
-| ------------ | ------------------------------------------------------------ |
-| --virt-type  | 虚拟机类型，可选有 `kvm` 、`qemu` 、`xen`                    |
-| --os-variant | 发型版本，例如 `CentOS` 、 `Ubuntu`，可执行 `osinfo-query os` 查看支持的版本 |
-| --name       | 虚拟机名称                                                   |
-| --memory     | 虚拟机内存，单位 MB                                          |
-| --vcpus      | 虚拟机cpu                                                    |
-| --disk       | 虚拟机磁盘文件信息，包括大小(单位GB)、路径、格式             |
-| --cdrom      | 镜像文件                                                     |
-| --network    | 虚拟机网络类型                                               |
-| --graphics   | 指定图形界面，可选有vnc、spice                               |
+| 参数           | 说明                                                         |
+| -------------- | ------------------------------------------------------------ |
+| `--virt-type`  | 虚拟机类型，可选有 `kvm` 、`qemu` 、`xen`                    |
+| `--os-variant` | 发型版本，例如 `CentOS` 、 `Ubuntu`，可执行 `osinfo-query os` 查看支持的版本 |
+| `--name`       | 虚拟机名称                                                   |
+| `--memory`     | 虚拟机内存，单位 MB                                          |
+| `--vcpus`      | 虚拟机cpu                                                    |
+| `--disk`       | 虚拟机磁盘文件信息，包括大小(单位GB)、路径、格式             |
+| `--cdrom`      | 镜像文件                                                     |
+| `--network`    | 虚拟机网络类型                                               |
+| `--graphics`   | 指定图形界面，可选有vnc、spice                               |
 
 
 
@@ -57,9 +57,9 @@ the console to complete the installation process.
 
 ### 1.2 删除虚拟机
 
-:::caution注意
+:::caution 注意
 
-**删除虚拟机之前虚拟机必须为关闭状态**
+删除虚拟机之前虚拟机必须为关闭状态
 
 :::
 
@@ -141,9 +141,9 @@ virsh reboot linux-templet-mini-clone
 
 ### 3.1 备份
 
-:::tip
+:::tip 说明
 
-**备份虚拟机主要就是备份虚拟机磁盘文件和配置文件**
+备份虚拟机主要就是备份虚拟机磁盘文件和配置文件
 
 :::
 
@@ -161,9 +161,9 @@ cp /data/KVM_imgs/linux-templet-mini-clone.qcow2 /opt/bak
 
 ### 3.2 恢复
 
-:::tip
+:::tip 说明
 
-**恢复虚拟机，磁盘文件和配置文件必须在相同目录**
+恢复虚拟机，磁盘文件和配置文件必须在相同目录
 
 :::
 
@@ -179,9 +179,9 @@ virsh define linux-templet-mini-clone.xml
 
 ### 4.1 完整克隆
 
-:::tip
+:::caution 注意
 
-**克隆虚拟机之前虚拟机必须为关闭状态**
+克隆虚拟机之前虚拟机必须为关闭状态
 
 :::
 
@@ -345,9 +345,9 @@ virsh suspend linux-new
 
 再次查看，可以看到虚拟机状态变为了 `paused`
 
-:::tip
+:::caution 注意
 
-**挂起状态的虚拟机并不是处于关机状态，同时不能做任何操作**
+挂起状态的虚拟机并不是处于关机状态，同时不能做任何操作
 
 :::
 
@@ -385,8 +385,8 @@ $ virsh vncdisplay --domain linux-new-xxx
 
 | 磁盘格式 | 说明                                           |
 | -------- | ---------------------------------------------- |
-| raw/branch      | 裸格式，不支持快照，性能好，磁盘存储是连续性的 |
-| qcow2    | 支持快照，性能比raw/branch差一点，磁盘存储是不连续的  |
+| `raw/branch`  | 裸格式，不支持快照，性能好，磁盘存储是连续性的 |
+| `qcow2`  | 支持快照，性能比raw/branch差一点，磁盘存储是不连续的  |
 
 
 
@@ -523,11 +523,11 @@ disk size: 0
 
 ## 8.快照
 
-:::tip
+:::tip 说明
 
-**raw/branch格式不支持快照**
+`raw` 、`branch` 格式不支持快照
 
-**快照默认存放路径是 `/var/lib/libvirt/qemu/snapshot`** 
+快照默认存放路径是 `/var/lib/libvirt/qemu/snapshot` 
 
 :::
 
@@ -560,7 +560,7 @@ Domain snapshot hehe created
 
 #### 8.2.2 不指定快照名称
 
-:::tip说明
+:::tip 说明
 
 不指定快照名称默认会以时间戳名称，`1646575935` 是时间戳，用的是格林威治时间，意思是从1970年1月1日到现在经过了多少秒
 

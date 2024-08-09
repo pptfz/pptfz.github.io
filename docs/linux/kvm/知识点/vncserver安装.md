@@ -53,9 +53,9 @@ systemctl daemon-reload
 
 第四步、设置vnc密码
 
-:::tip
+:::caution 注意
 
-**必须在启动vnc前设置密码，否则启动会失败**
+必须在启动vnc前设置密码，否则启动会失败
 
 :::
 
@@ -72,9 +72,9 @@ A view-only password is not used
 
 第四步、启动vncserver
 
-:::tip
+:::tip 说明
 
-**使用命令 `systemctl enable vncserver@:<display>.service` 把想要开启的vnc窗口加入开机自启，其中 `<display>` 为具体的窗口号**
+使用命令 `systemctl enable vncserver@:<display>.service` 把想要开启的vnc窗口加入开机自启，其中 `<display>` 为具体的窗口号
 
 :::
 
@@ -87,13 +87,13 @@ systemctl enable vncserver@:1.service
 
 查看启动
 
-:::tip
+:::tip 说明
 
-**默认的启动脚本路径 `/root/.vnc/xstartup`**
+默认的启动脚本路径 `/root/.vnc/xstartup`
 
-**默认的配置文件路径 `/root/.vnc/config`**
+默认的配置文件路径 `/root/.vnc/config`
 
-**默认的日志文件路径 `/root/.vnc/devops01:1.log` 其中 `devops01` 是主机名**
+默认的日志文件路径 `/root/.vnc/devops01:1.log` 其中 `devops01` 是主机名
 
 :::
 
@@ -208,9 +208,9 @@ $ cat ~/.vnc/config
 
 修改为想要的分辨率，然后重启进程
 
-:::caution注意
+:::caution 注意
 
-**重启vncserver进程不能使用 `system` 命令，重启会不生效并且报错**
+重启vncserver进程不能使用 `system` 命令，重启会不生效并且报错
 
 :::
 

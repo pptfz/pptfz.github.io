@@ -2,11 +2,11 @@
 
 
 
-# CentOS7.5安装redis-5.0.7
+# redis安装
 
 [redis官网](https://redis.io/)
 
-[官网下载地址](https://redis.io/download)
+[redis所有版本下载地址](https://download.redis.io/releases/?_gl=1*xrte9y*_gcl_au*OTIxMzUxNDczLjE3MjMyMDMzNjA.)
 
 
 

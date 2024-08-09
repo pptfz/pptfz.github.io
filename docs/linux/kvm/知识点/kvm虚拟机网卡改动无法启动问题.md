@@ -141,7 +141,7 @@ systemctl restart network
 
 修改为如下内容
 
-:::tip说明
+:::tip 说明
 
 需要修改 `type='virtio'` 的mac地址和pci
 

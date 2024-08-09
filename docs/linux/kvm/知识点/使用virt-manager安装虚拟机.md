@@ -43,11 +43,11 @@ yum -y install virt-manager
 
 ### 2.1 配置 `storage pool`
 
-:::tip说明
+:::tip 说明
 
-**`storage pool` 是宿主机上的一块存储空间，可以是一个目录(文件系统)或者vg**
+`storage pool` 是宿主机上的一块存储空间，可以是一个目录(文件系统)或者vg
 
-**默认虚拟机磁盘文件存储路径为 `/var/lib/libvirt/images` ，是由 `/etc/libvirt/storage/default.xml` 文件中决定的**
+默认虚拟机磁盘文件存储路径为 `/var/lib/libvirt/images` ，是由 `/etc/libvirt/storage/default.xml` 文件中决定的
 
 :::
 

@@ -20,9 +20,9 @@ Format specific information:
 
 ## 2.宿主机扩容kvm磁盘文件大小
 
-:::caution注意
+:::caution 注意
 
-**<span style={{color: 'red'}}>执行扩容命令前一定要先关闭虚拟机</span>**
+执行扩容命令前一定要先关闭虚拟机
 
 :::
 
@@ -240,7 +240,7 @@ $ lvextend -L +450G /dev/centos/root
 
 #### 4.5.4 扩容硬盘
 
-:::tip说明
+:::tip 说明
 
 如果硬盘分区类型是 `ext4` ，则使用 `resize2fs` 命令
 
