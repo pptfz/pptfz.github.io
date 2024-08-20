@@ -192,3 +192,26 @@ let g:pydiction_menu_height = 10
 ![iShot2020-10-15 21.13.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2021.13.23.png)
 
  
+
+vim设置自动配置 `set paste`
+
+:::tip 说明
+
+vim在粘贴的时候，如果遇到粘贴的格式不正确，则需要手动执行命令 `:set paste` ，可以使用以下配置设置自动配置
+
+:::
+
+```shell
+$ cat .vimrc 
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+	  set pastetoggle=<Esc>[201~
+	    set paste
+	      return ""
+      endfunction
+```
+
