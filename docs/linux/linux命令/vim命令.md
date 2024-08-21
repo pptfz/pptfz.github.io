@@ -392,3 +392,166 @@ s
 
 
 
+## 7.vim高级用法
+
+### 7.1 使用 `F1` 键执行文件
+
+:::tip 说明
+
+当编写完shell脚本或者python脚本后，想要运行测试一般的方法是保存退出脚本然后再运行
+
+使用如下配置就可以不退出vim编辑执行脚本
+
+:::
+
+
+
+编辑 `~/.vimrc` 并写入以下内容
+
+```shell
+cat >> ~/.vimrc << EOF
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+"Programming makes the world better
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F1> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+exec "w"
+if &filetype == 'c'
+exec '!g++ % -o %<'
+exec '!time ./%<'
+elseif &filetype == 'cpp'
+exec '!g++ % -o %<'
+exec '!time ./%<'
+elseif &filetype == 'python'
+exec '!time python %'
+elseif &filetype == 'sh'
+:!time bash %
+endif
+endfunc
+EOF
+```
+
+
+
+编辑测试脚本
+
+```shell
+cat >> test.sh << EOF
+# !/usr/bin/env bash
+awk 'BEGIN{print 10+10}
+EOF
+```
+
+
+
+在末行模式下按 `F1` 键，就会执行脚本并输出
+
+![iShot_2024-08-21_11.13.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_11.13.27.png)
+
+
+
+再次按回车，会回到脚本当中，这样就可以不退出脚本，直接执行脚本进行测试了
+
+![iShot_2024-08-21_11.15.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_11.15.34.png)
+
+
+
+### 7.2 Linux脚本自动添加脚本头
+
+:::tip 说明
+
+
+
+:::
+
+编辑 `~/.vimrc` 并写入以下内容
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="centos7" label="centos7" default>
+
+```shell
+function HappyPython()
+call setline(1, "#!/usr/bin/env python")
+call append(1, "#-*- coding:utf8 -*-")
+normal G
+normal o
+endf
+autocmd bufnewfile *.py call HappyPython()
+function HappyShell()
+call setline(1, "#!/usr/bin/env bash")
+call append(1, "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin")
+normal G
+normal o
+endf
+autocmd bufnewfile *.sh call HappyShell()
+```
+
+  </TabItem>
+  <TabItem value="centos6" label="centos6">
+
+```shell
+function HappyPython()
+call setline(1, "#!/usr/bin/env python")
+call append(1, "#-*- coding:utf8 -*-")
+normal G
+normal o
+endf
+autocmd bufnewfile *.py call HappyPython()
+function HappyShell()
+call setline(1, "#!/usr/bin/env bash")
+call append(1, "export PATH=/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin")
+normal G
+normal o
+endf
+autocmd bufnewfile *.sh call HappyShell()
+```
+
+  </TabItem>
+</Tabs>
+
+
+
+编辑 `.py` 文件就会自动添加如下内容
+
+```python
+#!/usr/bin/env python
+#-*- coding:utf8 -*-
+```
+
+
+
+编辑 `.sh` 文件就会自动添加如下内容
+
+```shell
+#!/usr/bin/env bash
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin
+```
+
+
+
+### 7.3 设置自动配置 `set paste`
+
+:::tip 说明
+
+vim在粘贴的时候，如果遇到粘贴的格式不正确，则需要手动执行命令 `:set paste` ，可以使用以下配置设置自动配置
+
+:::
+
+```shell
+cat >> ~/.vimrc << EOF
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+	  set pastetoggle=<Esc>[201~
+	    set paste
+	      return ""
+      endfunction
+EOF
+```
+
