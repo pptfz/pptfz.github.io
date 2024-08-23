@@ -134,21 +134,27 @@ git push -u origin master			#输入远程仓库的用户名和密码即可
 
 #### 3.2.1 远程代码仓库中有以下内容，此时远程仓库和本地仓库中的内容相同
 
-![iShot2020-10-14 14.16.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.16.23.png)
+![iShot_2024-08-22_14.55.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_14.55.27.png)
 
 
 
-![iShot2020-10-14 14.15.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.15.28.png)
+![iShot_2024-08-22_14.56.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_14.56.18.png)
+
+
 
 #### 3.2.2 手动删除远程仓库中的test文件，删除后内容为下
 
-![iShot2020-10-14 14.16.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.16.50.png)
+![iShot_2024-08-22_14.54.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_14.54.30.png)
+
+
 
 #### 3.2.3 手动删除远程仓库文件后，远程仓库和本地仓库中的内容就不同了，此时再次新建文件提交就会有冲突
 
 本地仓库中新建文件 `test111` ，尝试提交，报错
 
-![iShot2020-10-14 14.09.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.09.48.png)
+![iShot_2024-08-22_14.48.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_14.48.44.png)
+
+
 
 #### 解决方法
 
@@ -160,7 +166,9 @@ git pull origin master
 
 输入拉取代码的命令后会提示如下，意思为**请输入一条提交消息来解释为什么需要合并**，这里可以选择不输入
 
-![iShot2020-10-14 14.10.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.10.19.png)
+![iShot_2024-08-22_14.51.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_14.51.50.png)
+
+
 
 ##### 加选项 `--allow-unrelated-histories` (允许合并不相关的历史记录)再次拉取
 
@@ -168,7 +176,9 @@ git pull origin master
 git pull origin master --allow-unrelated-histories
 ```
 
-![iShot2020-10-14 14.14.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.14.55.png)
+![iShot_2024-08-22_14.53.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_14.53.30.png)
+
+
 
 ##### 再次提交代码即可，不会报错
 

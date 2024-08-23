@@ -34,7 +34,7 @@ sersync已于2015年8月停止更新，作者推荐使用[lsyncd](https://axkibe
 
 **同步原理图**
 
-![iShot2020-10-15 16.32.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2016.32.29.png)
+![iShot_2024-08-23_14.30.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_14.30.06.png)
 
 
 

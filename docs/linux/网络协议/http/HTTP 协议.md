@@ -14,7 +14,9 @@
 
 ### 1.1 计算机网络体系结构分层
 
-![iShot2020-10-14 15.22.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2015.22.52.png)
+![iShot_2024-08-22_16.53.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_16.53.45.png)
+
+
 
 ### 1.2 TCP/IP 通信传输流
 

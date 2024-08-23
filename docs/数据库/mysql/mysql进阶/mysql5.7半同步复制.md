@@ -18,7 +18,9 @@
 
 **根据上面提到的这几种复制协议，分别对应MySQL几种复制类型，分别是异步、半同步、全同步。**
 
-![iShot2020-10-14 13.48.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.48.24.png)
+![iShot_2024-08-21_21.57.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.57.49.png)
+
+
 
 - **对于异步复制，主库将事务Binlog事件写入到Binlog文件中，此时主库只会通知一下Dump线程发送这些新的Binlog，然后主库就会继续处理提交操作，而此时不会保证这些Binlog传到任何一个从库节点上。**
 - **对于全同步复制，当主库提交事务之后，所有的从库节点必须收到，APPLY并且提交这些事务，然后主库线程才能继续做后续操作。这里面有一个很明显的缺点就是，主库完成一个事务的时间被拉长，性能降低。**
@@ -50,13 +52,19 @@
 
 **先看一下半同步复制原理图，如下：**
 
-![iShot2020-10-14 13.48.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.48.56.png)
+![iShot_2024-08-21_22.01.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_22.01.49.png)
+
+
 
 **master将每个事务写入binlog（sync_binlog=1），传递到slave刷新到磁盘(sync_relay=1)，同时主库提交事务（commit）。master等待slave反馈收到relay log，只有收到ACK后master才将commit OK结果反馈给客户端。**
 
 **在MySQL 5.5~5.6使用after_commit的模式下，客户端事务在存储引擎层提交后，在得到从库确认的过程中，主库宕机了。此时，即主库在等待Slave ACK的时候，虽然没有返回当前客户端，但事务已经提交，其他客户端会读取到已提交事务。如果Slave端还没有读到该事务的events，同时主库发生了crash，然后切换到备库。那么之前读到的事务就不见了，出现了幻读。如下图所示，图片引自[Loss-less Semi-Synchronous Replication on MySQL 5.7.2](http://my-replication-life.blogspot.com/2013/09/loss-less-semi-synchronous-replication.html)。**
 
-![iShot2020-10-14 13.49.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.49.22.png)
+![iShot_2024-08-21_22.03.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_22.03.25.png)
+
+
+
+
 
 **如果主库永远启动不了，那么实际上在主库已经成功提交的事务，在从库上是找不到的，也就是数据丢失了，这是MySQL不愿意看到的。所以在MySQL 5.7版本中增加了after_sync（无损复制）参数，并将其设置为默认半同步方式，解决了数据丢失的问题**
 
@@ -380,13 +388,17 @@ mysql> show global status like '%semi%';
 
 **master将每个事务写入binlog（sync_binlog=1），传递到slave刷新到磁盘(sync_relay=1)，同时主库提交事务。master等待slave反馈收到relay log，只有收到ACK后master才将commit OK结果反馈给客户端。**
 
-![iShot2020-10-14 13.50.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.50.06.png)
+![iShot_2024-08-21_22.01.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_22.01.49.png)
+
+
 
 #### 4.4.2 第二个值：AFTER_SYNC（5.7默认值，但5.6中无此模式）
 
 **master将每个事务写入binlog , 传递到slave刷新到磁盘(relay log)。master等待slave反馈接收到relay log的ack之后，再提交事务并且返回commit OK结果给客户端。 即使主库crash，所有在主库上已经提交的事务都能保证已经同步到slave的relay log中。**
 
-![iShot2020-10-14 13.50.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.50.31.png)
+![iShot_2024-08-21_22.01.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_22.01.49.png)
+
+
 
 ### 4.5 半同步复制与无损复制的对比
 
@@ -406,11 +418,13 @@ mysql> show global status like '%semi%';
 
 **旧版本的semi sync受限于dump thread ，原因是dump thread承担了两份不同且又十分频繁的任务：传送binlog给slave ，还需要等待slave反馈信息，而且这两个任务是串行的，dump thread必须等待slave返回之后才会传送下一个events事务。dump thread已然成为整个半同步提高性能的瓶颈。在高并发业务场景下，这样的机制会影响数据库整体的TPS 。**
 
-![iShot2020-10-14 13.50.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.50.58.png)
+![iShot_2024-08-22_11.25.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_11.25.20.png)
 
 **为了解决上述问题，在5.7版本的semi sync框架中，独立出一个Ack Receiver线程 ，专门用于接收slave返回的ack请求，这将之前dump线程的发送和接受工作分为了两个线程来处理。这样master上有两个线程独立工作，可以同时发送binlog到slave，和接收slave的ack信息。因此半同步复制得到了极大的性能提升。这也是MySQL 5.7发布时号称的Faster semi-sync replication。**
 
-![iShot2020-10-14 13.51.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.51.25.png)
+![iShot_2024-08-22_11.26.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_11.26.51.png)
+
+
 
 **但是在MySQL 5.7.17之前，这个Ack Receiver线程采用了select机制来监听slave返回的结果，然而select机制监控的文件句柄只能是0-1024，当超过1024时，用户在MySQL的错误日志中或许会收到类似如下的报错，更有甚者会导致MySQL发生宕机。**
 
@@ -424,13 +438,17 @@ mysql> show global status like '%semi%';
 
 **MySQL 5.7新增了rpl_semi_sync_master_wait_slave_count参数，可以用来控制主库接受多少个slave写事务成功反馈，给高可用架构切换提供了灵活性。如图所示，当count值为2时，master需等待两个slave的ack。**
 
-![iShot2020-10-14 13.51.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.51.46.png)
+![iShot_2024-08-22_11.28.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_11.28.53.png)
+
+
+
+
 
 - **性能提升，Binlog互斥锁改进**
 
 **旧版本半同步复制在主提交binlog的写会话和dump thread读binlog的操作都会对binlog添加互斥锁，导致binlog文件的读写是串行化的，存在并发度的问题。**
 
-![iShot2020-10-14 13.52.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.52.08.png)
+![iShot_2024-08-22_11.30.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_11.30.27.png)
 
 
 
@@ -440,7 +458,9 @@ mysql> show global status like '%semi%';
 
 **2.加入了安全边际保证binlog的读安全。**
 
-![iShot2020-10-14 13.52.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2013.52.37.png)
+![iShot_2024-08-22_11.32.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_11.32.10.png)
+
+
 
 **可以看到从replication功能引入后，官方MySQL一直在不停的完善，前进。同时我们可以发现当前原生的MySQL主备复制实现实际上很难在满足数据一致性的前提下做到高可用、高性能。**
 

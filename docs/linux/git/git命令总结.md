@@ -6,17 +6,23 @@
 
 ### 1.1 git工作流程
 
-![iShot2020-10-14 14.11.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.11.28.png)
+![iShot_2024-08-22_15.08.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_15.08.56.png)
+
+
 
 ### 1.2 git四种状态
 
-![iShot2020-10-14 14.12.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.12.17.png)
+![iShot_2024-08-22_15.19.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_15.19.29.png)
+
+
 
 ## 2.git命令总结
 
 ### 2.1 git工作区域及文件颜色
 
-![iShot2020-10-14 14.13.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.13.04.png)
+![iShot_2024-08-22_15.21.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_15.21.00.png)
+
+
 
 <h4>git status 文件三种颜色的变化</h4>
 <span style={{color: 'red'}}>红色</span>
@@ -504,7 +510,7 @@ da5695e HEAD@{2}: commit: echo 2 >> bbb
 
 **git恢复版本说明**
 
-:::tip说明
+:::tip 说明
 
 **git服务程序中有一个叫做HEAD的版本指针，当用户申请还原数据时，其实就是将HEAD指针指向到某个特定的提交版本，但是因为git是分布式版本控制系统，为了避免历史记录冲突，故使用了SHA-1计算出十六进制的哈希字串来区分每个提交版本，另外默认的HEAD版本指针会指向到最近的一次提交版本记录**
 
@@ -514,7 +520,7 @@ da5695e HEAD@{2}: commit: echo 2 >> bbb
 
 **git恢复版本重点**
 
-:::tip说明
+:::tip 说明
 
 **1.查看日志，获取对应的操作HEAD指针**
 

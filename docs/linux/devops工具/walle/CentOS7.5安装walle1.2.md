@@ -245,7 +245,7 @@ C:\Windows\System32\drivers\etc
 
 **初始化开发者账号密码为：demo/demo**
 
-![iShot2020-10-14 15.45.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14 15.45.48.png)
+![iShot_2024-08-22_17.24.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.24.00.png)
 
 
 
@@ -253,7 +253,9 @@ C:\Windows\System32\drivers\etc
 
 **登陆后首界面**
 
-![iShot2020-10-14 15.46.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14 15.46.59.png)
+![iShot_2024-08-22_17.25.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.25.02.png)
+
+
 
 
 

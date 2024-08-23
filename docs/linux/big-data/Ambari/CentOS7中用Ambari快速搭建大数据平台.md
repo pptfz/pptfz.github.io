@@ -972,11 +972,13 @@ Ambari Server 'start' completed successfully.
 
 **浏览器访问 `http://IP:8080`**
 
-![iShot2020-09-15 10.12.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2010.12.43.png)
+![iShot_2024-08-21_20.45.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_20.45.24.png)
+
+
 
 **登陆后首界面**
 
-![iShot2020-09-15 10.13.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2010.13.09.png)
+![iShot_2024-08-21_20.48.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_20.48.15.png)
 
 
 
@@ -990,11 +992,15 @@ Ambari Server 'start' completed successfully.
 
 **选择 `Launch Install Wizard`**
 
-![iShot2020-09-15 10.17.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2010.17.22.png)
+![iShot_2024-08-21_20.49.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_20.49.20.png)
+
+
 
 **输入集群名称**
 
-![iShot2020-09-15 10.20.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2010.20.01.png)
+![iShot_2024-08-21_20.50.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_20.50.18.png)
+
+
 
 
 
@@ -1002,7 +1008,7 @@ Ambari Server 'start' completed successfully.
 
 这里选择 HDP-2.6.5.0 版本
 
-![iShot2020-09-15 10.22.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2010.22.13.png)
+![iShot_2024-08-21_20.52.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_20.52.19.png)
 
 
 
@@ -1010,7 +1016,9 @@ Ambari Server 'start' completed successfully.
 
 **保留 redhat7 一处，删除其他**
 
-![iShot2020-09-15 10.24.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2010.24.07.png)
+![iShot_2024-08-21_21.00.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.00.01.png)
+
+
 
 **设置HDP安装源，修改为本地源**
 
@@ -1038,7 +1046,9 @@ http://10.0.0.136/ambari/HDP-UTILS/centos7/1.1.0.22
 
 **修改完成后点击下一步**
 
-![iShot2020-09-15 10.28.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2010.28.55.png)
+![iShot_2024-08-21_21.02.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.02.07.png)
+
+
 
 
 
@@ -1073,7 +1083,11 @@ sed -i.bak '/^verify/cverify=disable' /etc/python/cert-verification.cfg
 
 :::
 
-![iShot2020-09-17 18.38.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-17%2018.38.49.png)
+![iShot_2024-08-21_21.03.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.03.54.png)
+
+
+
+
 
 
 
@@ -1126,9 +1140,9 @@ ambari-agent01.test.com
 ambari-agent02.test.com
 ```
 
-![iShot2020-09-15 10.45.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2010.45.51.png)
 
 
+![iShot_2024-08-21_21.05.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.05.18.png)
 
 
 
@@ -1142,7 +1156,7 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 **注册成功后显示如下**
 
-![iShot2020-09-15 14.07.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2014.07.53.png)
+![iShot_2024-08-21_21.06.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.06.21.png)
 
 
 
@@ -1158,7 +1172,7 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 #### 5.3.3.1 报错1	找不到 ambari server
 
-![iShot2020-09-14 17.00.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-14%2017.00.15.png)
+![iShot_2024-08-21_21.07.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.07.19.png)
 
 
 
@@ -1166,7 +1180,7 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 **重要日志**
 
-![iShot2020-09-14 17.01.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-14%2017.01.54.png)
+![iShot_2024-08-21_21.08.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.08.35.png)
 
 
 
@@ -1186,7 +1200,7 @@ ambari-agent02.test.com
 
 #### 5.3.3.2 报错2 SSLError
 
-![iShot2020-09-15 11.08.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2011.08.04.png)
+![iShot_2024-08-21_21.12.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.12.59.png)
 
 
 
@@ -1243,7 +1257,7 @@ ambari-agent restart
 
 **根据实际情况选择要安装的组件**
 
-![iShot2020-09-15 14.18.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2014.18.23.png)
+![iShot_2024-08-21_21.15.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.15.41.png)
 
 
 
@@ -1251,7 +1265,7 @@ ambari-agent restart
 
 **根据实际情况选择各组件安装的节点**
 
-![iShot2020-09-15 14.35.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2014.35.15.png)
+![iShot_2024-08-21_21.18.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.18.26.png)
 
 
 
@@ -1261,7 +1275,7 @@ ambari-agent restart
 
 #### 5.6.1 HDFS
 
-![iShot2020-09-15 16.00.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.00.36.png)
+![iShot_2024-08-21_21.19.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.19.56.png)
 
 
 
@@ -1269,27 +1283,25 @@ ambari-agent restart
 
 只保留一个路径
 
-![iShot2020-09-15 16.01.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.01.23.png)
+![iShot_2024-08-21_21.20.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.20.54.png)
 
 
 
 #### 5.6.2 YARN
 
-![iShot2020-09-15 16.05.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.05.09.png)
+![iShot_2024-08-21_21.22.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.22.31.png)
+
+
 
 只保留一个路径
 
-![iShot2020-09-15 16.14.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.14.29.png)
-
-
-
-
+![iShot_2024-08-21_21.24.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.24.18.png)
 
 
 
 #### 5.6.3 HIVE
 
-![iShot2020-09-15 16.27.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.27.42.png)
+![iShot_2024-08-21_21.28.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.28.09.png)
 
 
 
@@ -1331,7 +1343,7 @@ mysql -uroot -e "flush privileges"
 
 **选择 `Existing MySQL / MariaDB Database` ，输入hive数据库密码，修改 `Database URL` 连接地址，测试连接成功即可**
 
-![iShot2020-09-15 16.37.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.37.23.png)
+![iShot_2024-08-21_21.29.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.29.45.png)
 
 
 
@@ -1339,11 +1351,13 @@ mysql -uroot -e "flush privileges"
 
 **需要设置grafana管理员用户的密码**
 
-![iShot2020-09-15 16.41.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.41.09.png)
+![iShot_2024-08-21_21.31.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.31.05.png)
 
 
 
-![iShot2020-09-15 16.43.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.43.35.png)
+![iShot_2024-08-21_21.32.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.32.38.png)
+
+
 
 
 
@@ -1355,7 +1369,7 @@ mysql -uroot -e "flush privileges"
 
 :::
 
-![iShot2020-09-15 17.08.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2017.08.42.png)
+![iShot_2024-08-21_21.33.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.33.49.png)
 
 
 
@@ -1365,29 +1379,29 @@ mysql -uroot -e "flush privileges"
 
 **需要输入密码，默认admin即可**
 
-![iShot2020-09-15 16.48.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2016.48.25.png)
+![iShot_2024-08-21_21.34.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.34.57.png)
 
 
 
-![iShot2020-09-15 17.12.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2017.12.39.png)
+![iShot_2024-08-21_21.35.47](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.35.47.png)
 
 
 
 ### 5.7 确认集群信息并部署
 
-![iShot2020-09-15 17.14.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2017.14.28.png)
+![iShot_2024-08-21_21.36.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.36.41.png)
 
 
 
-
-
-![iShot2020-09-15 17.15.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2017.15.07.png)
+![iShot_2024-08-21_21.37.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.37.51.png)
 
 
 
-![iShot2020-09-15 17.16.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2017.16.19.png)
+![iShot_2024-08-21_21.38.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.38.31.png)
 
-![iShot2020-09-15 18.45.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2018.45.14.png)
+
+
+![iShot_2024-08-21_21.39.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.39.22.png)
 
 
 
@@ -1395,7 +1409,7 @@ mysql -uroot -e "flush privileges"
 
 ### 5.8 完成安装
 
-![iShot2020-09-15 18.45.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2018.45.58.png)
+![iShot_2024-08-21_21.40.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.40.20.png)
 
 
 
@@ -1403,7 +1417,7 @@ mysql -uroot -e "flush privileges"
 
 完成安装
 
-![iShot2020-09-15 18.46.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-15%2018.46.54.png)
+![iShot_2024-08-21_21.41.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.41.18.png)
 
 
 

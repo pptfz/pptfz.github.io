@@ -329,7 +329,9 @@ Query OK, 1 row affected (0.01 sec)
 >
 > 例如，一本书可以有多个作者，一个作者可以写多本书
 
-![iShot2020-10-14 14.06.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.06.28.png)
+![iShot_2024-08-22_14.43.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_14.43.12.png)
+
+
 
 
 

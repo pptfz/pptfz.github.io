@@ -76,7 +76,7 @@ local               docker-volume
 
 ### 2.5 浏览器访问刚启动的容器
 
-![iShot2020-10-15 14.30.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.30.31.png)
+![iShot_2024-08-23_11.00.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.00.12.png)
 
 
 
@@ -92,4 +92,4 @@ local               docker-volume
 
 ### 2.7 再次访问容器，可以看到，内容已经变化
 
-![iShot2020-10-15 14.30.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.30.53.png)
+![iShot_2024-08-23_11.01.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.01.03.png)

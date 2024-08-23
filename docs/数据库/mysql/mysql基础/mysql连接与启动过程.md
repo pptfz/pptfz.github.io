@@ -183,4 +183,5 @@ $ mysqld_safe --defaults-file=/etc/my.cnf --socket=/tmp/b.sock
 
 **最终socket文件在 `/tmp/b.sock` ，因此说明了在命令行中的优先级最大**
 
-![iShot2020-10-14 14.00.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.00.21.png)
+![iShot_2024-08-22_11.36.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_11.36.04.png)
+

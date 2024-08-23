@@ -4,9 +4,9 @@
 
 # k8s知识图谱
 
+![iShot_2024-08-23_11.31.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.31.29.png)
 
 
-![iShot2020-10-15 16.24.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2016.24.55.png)
 
 
 

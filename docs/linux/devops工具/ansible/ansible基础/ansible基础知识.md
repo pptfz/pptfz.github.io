@@ -54,7 +54,9 @@
 
 
 
-![iShot2020-10-14 15.54.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2015.54.35.png)
+![iShot_2024-08-22_18.32.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_18.32.59.png)
+
+
 
 ## 2. Ansible安装配置
 
@@ -163,7 +165,39 @@ command				command模块，完成基础命令
   
   - **`ansible all -m ping`** 
   
-    ![iShot2021-06-28 22.07.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-28%2022.07.31.png)
+    ```sh
+    $ ansible all -m ping
+    k8s-node03 | SUCCESS => {
+        "ansible_facts": {
+            "discovered_interpreter_python": "/usr/bin/python3"
+        },
+        "changed": false,
+        "ping": "pong"
+    }
+    k8s-master01 | SUCCESS => {
+        "ansible_facts": {
+            "discovered_interpreter_python": "/usr/bin/python3"
+        },
+        "changed": false,
+        "ping": "pong"
+    }
+    k8s-node02 | SUCCESS => {
+        "ansible_facts": {
+            "discovered_interpreter_python": "/usr/bin/python3"
+        },
+        "changed": false,
+        "ping": "pong"
+    }
+    k8s-node01 | SUCCESS => {
+        "ansible_facts": {
+            "discovered_interpreter_python": "/usr/bin/python3"
+        },
+        "changed": false,
+        "ping": "pong"
+    }
+    ```
+    
+    
 
 
 

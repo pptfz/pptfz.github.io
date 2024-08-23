@@ -30,7 +30,7 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 并且使用 FinallShell 登陆服务器提示如下
 
-![iShot2020-10-12 09.53.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-12%2009.53.46.png)
+![iShot_2024-08-21_21.53.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.53.25.png)
 
 
 

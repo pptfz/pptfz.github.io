@@ -281,6 +281,8 @@ missing c /etc/pam.d/login
 
 - 确认一下内核的具体版本 `ls -l /boot`
 
+  ![iShot_2024-08-22_16.45.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_16.45.15.png)
+
 - 手动设置 grub 具体步骤如下
 
   ```shell
@@ -296,10 +298,15 @@ missing c /etc/pam.d/login
   如果没有报错的话，即可成功启动，进入到系统内部后需要继续支持。
 
 - `mount -e remount,rw /` 重新挂载分区为读写。
+
 - `service network restart`。 如果提示 eth0 eth1 失败，ifconfig 看不到网卡的话。
+
 - `lsmod |grep net`。 看下 virtio_net 这个驱动有没有，如果没有的话（网卡报错基本都不会有）。
+
 - `insmod /lib/modules/2.6.32-696.3.2.el6.x86_64/kernel/drivers/net/virtio_ net.ko`。
+
 - 重启网络服务，嗨 ~ 网通了。
+
 - 登陆 ssh， 找个同版本系统的 grub.conf，拷贝一份过来， 不然重启之后又进 grub 了。[参考文章](https://yq.aliyun.com/articles/203048)
 
 
@@ -2391,7 +2398,11 @@ elapsed time: 0 seconds (0d 0h 0m 0s)
 
 **理想架构**
 
-![iShot2020-10-14 15.17.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2015.17.59.png)
+
+
+![iShot_2024-08-22_16.51.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_16.51.01.png)
+
+
 
 - 主域名接入 CDN，
 

@@ -4,7 +4,13 @@
 
 # 这样理解Ansible更容易
 
-[原文链接](http://showme.codes/2019-09-19/understand-ansible/)	这篇文章是 `Jenkins 2.x实践指南` 作者[翟志军博客](http://showme.codes/)中的一篇内容，看完之后觉得写的非常好，所以收藏一下
+
+
+[原文链接](https://showme.codes/zh-cn/2019-09-19-understand-ansible/)
+
+
+
+​	这篇文章是 `Jenkins 2.x实践指南` 作者[翟志军博客](http://showme.codes/)中的一篇内容，看完之后觉得写的非常好，所以收藏一下
 
 > 滚滚长江东逝水，浪花淘尽英雄。是非成败转头空。青山依旧在，几度夕阳红。—— 《临江仙》
 
@@ -14,7 +20,7 @@
 
 虽说你的组装技术已经很娴熟了，但是偶尔还发生装错的情况（大概是那天和老板娘吵架了），把一个客人要求的 CPU i5 装成了 CPU i7。结果是你亏本或者赚得少了。
 
-![iShot2020-09-08 18.13.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-08%2018.13.25.png)
+![iShot_2024-08-21_20.29.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_20.29.20.png)
 
 
 
@@ -24,7 +30,7 @@
 
 这样，老板就可以从重复的工作解放出来。然后将多出来的时间花在与人的沟通上，为有不同需求的人设计更合适的电脑配置清单。毕竟游戏发烧友和办公小白领的需求是不一样的。
 
-![iShot2020-09-08 18.16.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-08%2018.16.28.png)
+![iShot_2024-08-21_20.31.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_20.31.49.png)
 
 在运维领域，不少运维人都干着即是老板又是店员的工作。如果在运维领域也能有这样的“机器人”该多好。事实上，Ansible、Puppet、Check 就是这样的机器人。
 
@@ -41,7 +47,11 @@
 
 首先，需要确定一下实现这个运维机器人的目的是什么。我们并不是希望所有的运维工作都交给运维机器人，而是希望运维工作中重复的那部分尽可能的交给机器人，把创造性的工作全部交给人。如下图所示。
 
-![iShot2020-09-08 18.16.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-08%2018.16.51.png)
+![iShot_2024-08-21_20.30.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_20.30.22.png)
+
+
+
+
 
 以终为始是一种非常有效的实现目标的思考模型。根据此思考模型，我们首先必须探讨运维机器人的最终模样。然后，再讨论可能的解决方案。
 
@@ -53,13 +63,17 @@
 
 所以，运维机器人的最终模样是：我们将部署的主机 IP、登录方式、Nginx 的配置放在一个文本文件中，然后运维机器人读取这个文本文件，然后根据配置进行部署。如果部署的是业务系统，我们还需要准备该业务系统的二进制包。如下图所示。
 
-![iShot2020-09-08 18.17.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-08%2018.17.15.png)
+![iShot_2024-08-21_20.33.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_20.33.35.png)
+
+
 
 那么，我们在文本文件中使用何种语言描述我们的配置需求呢？可以分成两种。一种是利于人类学习的自然语言（如英语）。另一种是利于机器读取的结构化数据（如YAML、JSON）。
 
 按当前的技术实现的可能性，不论是运维机器人，还是交给其它程序，都需要将自然语言转到结构化的数据。就像程序员，需要将业务知识翻译成编程语言；像编译器将编程语言翻译成机器真正能识别的二进制代码。
 
-![iShot2020-09-08 18.15.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-09-08%2018.15.48.png)
+![iShot_2024-08-21_20.33.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_20.33.42.png)
+
+
 
 
 

@@ -71,7 +71,7 @@ passwd: all authentication tokens updated successfully.
 
 ### 2.4 终端访问刚创建的镜像 222端口
 
-![iShot2020-10-15 14.32.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.32.02.png)
+![iShot_2024-08-23_11.03.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.03.07.png)
 
 
 

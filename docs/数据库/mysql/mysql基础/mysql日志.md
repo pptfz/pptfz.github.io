@@ -60,9 +60,7 @@ mysql> show variables like 'log_error';
 
 ### 2.3 二进制日志模式
 
-
-
-![iShot2020-10-14 14.04.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.04.42.png)
+[mysql5.7二进制日志模式官方文档](https://dev.mysql.com/doc/refman/5.7/en/binary-log-setting.html)
 
 
 

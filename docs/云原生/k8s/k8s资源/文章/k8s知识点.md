@@ -68,7 +68,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 **pod示意图**
 
-![iShot2020-10-15 16.22.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15 16.22.30.png)
+![iShot_2024-08-23_11.27.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.27.18.png)
 
 
 
@@ -141,9 +141,9 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 ### 3.1 k8s架构图
 
+![iShot_2024-08-23_11.29.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.29.29.png)
 
 
-![iShot2020-10-15 16.23.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2016.23.03.png)
 
 
 

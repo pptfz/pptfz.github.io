@@ -6,7 +6,9 @@
 
 ## 1.SQL语句分类
 
-![iShot2020-10-14 14.02.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2014.02.05.png)
+![iShot_2024-08-22_12.25.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_12.25.48.png)
+
+
 
 **DDL(Data Definition Language)数据定义语言**	
 

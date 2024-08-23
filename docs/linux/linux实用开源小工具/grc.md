@@ -10,7 +10,7 @@
 
 > 加强Linux颜色显示，效果如下
 
-![iShot2020-10-13 10.06.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-13%2010.06.16.png)
+![iShot_2024-08-21_21.55.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.55.22.png)
 
 
 
@@ -77,5 +77,4 @@ source ~/.bashrc
 ```shell
 source ~/.zshrc
 ```
-
 

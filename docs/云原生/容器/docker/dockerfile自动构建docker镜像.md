@@ -34,19 +34,19 @@
 
 ### 1.2 dockerfile常用指令
 
-| 指令           | 含义                                                         |
-| -------------- | ------------------------------------------------------------ |
-| **FROM**       | **指定基础镜像，基于哪个镜像**                               |
-| **MAINTAINER** | **构建者信息(不是必须，只是对构建的镜像做一个说明)**         |
-| **RUN**        | **指定运行命令**                                             |
-| **ADD**        | **将宿主机文件拷贝到容器中，会自动解压；可以拷贝远程主机文件** |
-| **COPY**       | **复制文件**                                                 |
-| **WORKDIR**    | **指定工作目录**                                             |
-| **VOLUME**     | **设卷，挂载宿主机目录**                                     |
-| **EXPOSE**     | **指定对外的端口**                                           |
-| **CMD**        | **容器启动后要运行的命令，容易被替换**                       |
-| **ENV**        | **环境变量**                                                 |
-| **ENTRYPOINT** | **容器启动后执行的命令（无法被替换，启动容器的时候指定的命令，会被当成参数）** |
+| 指令       | 含义                                                         |
+| ---------- | ------------------------------------------------------------ |
+| FROM       | 指定基础镜像，基于哪个镜像                                   |
+| MAINTAINER | 构建者信息(不是必须，只是对构建的镜像做一个说明)             |
+| RUN        | 指定运行命令                                                 |
+| ADD        | 将宿主机文件拷贝到容器中，会自动解压；可以拷贝远程主机文件   |
+| COPY       | 复制文件                                                     |
+| WORKDIR    | 指定工作目录                                                 |
+| VOLUME     | 设卷，挂载宿主机目录                                         |
+| EXPOSE     | 指定对外的端口                                               |
+| CMD        | 容器启动后要运行的命令，容易被替换                           |
+| ENV        | 环境变量                                                     |
+| ENTRYPOINT | 容器启动后执行的命令（无法被替换，启动容器的时候指定的命令，会被当成参数） |
 
 
 
@@ -62,7 +62,7 @@ FROM centos:7.8
 
 
 
-⚠️FROM中有一个特殊的镜像 `scratch` 表明这是一个空白镜像
+FROM中有一个特殊的镜像 `scratch` 表明这是一个空白镜像
 
 ```dockerfile
 FROM scratch
@@ -431,7 +431,7 @@ a57c6406e001        centos6.9_ssh:v2.1        "/usr/sbin/sshd -D"    29 seconds 
 
 #### 3.1.5 ssh连接测试
 
-![iShot2020-10-15 14.42.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.42.53.png)
+![iShot_2024-08-23_11.22.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.22.20.png)
 
 
 
@@ -520,7 +520,7 @@ fa48d4052ff8        centos6.9_ssh_http:v2.1   "/bin/bash /init.sh"   4 seconds a
 
 **ssh镜像测试**
 
-![iShot2020-10-15 14.42.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.42.34.png)
+![iShot_2024-08-23_11.19.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.19.19.png)
 
 
 

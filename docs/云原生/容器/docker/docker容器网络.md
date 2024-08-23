@@ -6,7 +6,7 @@
 
 **docker容器网络示意图**
 
-![iShot2020-10-15 14.40.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.40.32.png)
+![iShot_2024-08-23_11.09.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.09.35.png)
 
 
 
@@ -140,13 +140,13 @@ DNAT      tcp  -- 0.0.0.0/0           0.0.0.0/0      tcp dpt:8080 to:172.17.0.4:
 
 **2.宿主机80端口访问**
 
-![iShot2020-10-15 14.40.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.40.59.png)
+![iShot_2024-08-23_11.12.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.12.33.png)
 
 
 
 **3.宿主机8080端口访问**
 
-![iShot2020-10-15 14.41.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.41.25.png)
+![iShot_2024-08-23_11.13.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.13.22.png)
 
 
 
@@ -227,9 +227,7 @@ fbf5d8973f90        nginx:latest        "nginx -g 'daemon of…"   11 seconds ag
 
 **2.浏览器访问32768端口**
 
-![iShot2020-10-15 14.41.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-15%2014.41.49.png)
-
-
+![iShot_2024-08-23_11.16.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.16.02.png)
 
 ### 2.4 方式四	-p   宿主机端口:容器端口:udp
 

@@ -143,7 +143,11 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 初始界面如下，第一个注册的用户就是管理员，后续可以设置只有管理员能注册账号，可以修改配置文件，也可以在可选设置中设置
 
-![iShot2020-10-14 16.00.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-14%2016.00.59.png)
+![iShot_2024-08-22_22.01.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_22.01.43.png)
+
+
+
+
 
 **数据库设置**
 
