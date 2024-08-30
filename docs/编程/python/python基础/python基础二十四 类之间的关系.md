@@ -400,7 +400,11 @@ class Pig(Animal):
 
 **多重继承就是包含多个间接父类**
 
-![iShot2020-10-16 12.00.49](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 12.00.49.png)
+
+
+![iShot_2024-08-29_14.54.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.54.09.png)
+
+
 
 
 

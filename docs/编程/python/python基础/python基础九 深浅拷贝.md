@@ -40,7 +40,7 @@ print (dic,dic1)
 
 **赋值示意图**
 
-![iShot2020-10-16 11.54.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2011.54.05.png)
+![iShot_2024-08-29_14.19.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.19.45.png)
 
 
 
@@ -78,25 +78,29 @@ print (id(lst),id(new_lst))
 
 print (id(lst[1]),id(new_lst[1]))		//浅拷贝只拷贝第一层内存空间，因此两个列表的第二个嵌套的元素的值内存空间相同
 140633470413384 140633470413384
-
-
 ```
 
 
 
 **浅拷贝单层元素示意图（增加元素）**
 
-![iShot2020-10-16 11.54.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2011.54.45.png)
+![iShot_2024-08-29_14.24.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.24.14.png)
+
+
 
 
 
 **浅拷贝多层元素示意图（修改元素）**
 
-![iShot2020-10-16 11.55.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2011.55.07.png)
+![iShot_2024-08-29_14.27.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.27.07.png)
+
+
 
 **浅拷贝多层元素示意图（第二层增加元素）**
 
-![iShot2020-10-16 11.55.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2011.55.31.png)
+![iShot_2024-08-29_14.29.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.29.15.png)
+
+
 
 #### 1.1.3 浅拷贝总结
 
@@ -153,7 +157,9 @@ print (id(lst[-1]),id(new_lst[-1]))
 
 #### 1.2.4 深拷贝原理图
 
-![iShot2020-10-16 11.55.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2011.55.55.png)
+![iShot_2024-08-29_14.30.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.30.36.png)
+
+
 
 #### 1.2.5 深拷贝总结
 

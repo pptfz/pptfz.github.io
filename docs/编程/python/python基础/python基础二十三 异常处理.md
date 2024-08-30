@@ -52,7 +52,7 @@ ZeroDivisionError: division by zero
 
 
 
-![iShot2020-10-16 11.58.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2011.58.28.png)
+![iShot_2024-08-29_14.47.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.47.17.png)
 
 
 
@@ -153,9 +153,9 @@ except 异常类型：
     try中一旦检测到异常，就执行这里的代码
 ```
 
+![iShot_2024-08-29_14.48.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.48.55.png)
 
 
-![iShot2020-10-16 11.59.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2011.59.09.png)
 
 
 
@@ -172,9 +172,9 @@ else:
     没有发生异常执行的代码        
 ```
 
+![iShot_2024-08-29_14.49.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.49.53.png)
 
 
-![iShot2020-10-16 11.59.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2011.59.32.png)
 
 **try的工作原理是，当开始一个try语句后，python就在当前程序的上下文中作标记，这样当异常出现时就可以回到这里，try子句先执行，接下来会发生什么依赖于执行时是否出现异常。**
 
@@ -236,7 +236,7 @@ raise
 
 
 
-![iShot2020-10-16 11.59.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2011.59.50.png)
+![iShot_2024-08-29_14.51.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.51.08.png)
 
 
 
@@ -489,4 +489,4 @@ assert 1 == 2
 
 
 
-![iShot2020-10-16 12.00.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2012.00.11.png)
+![iShot_2024-08-29_14.52.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.52.55.png)

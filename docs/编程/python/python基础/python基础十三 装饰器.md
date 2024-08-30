@@ -152,7 +152,7 @@ is index
 
 **来个最简单的装饰器执行步骤分析**
 
-![iShot2020-10-16 11.57.21](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-10-16 11.57.21.png)
+![iShot_2024-08-29_14.35.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.35.23.png)
 
 
 

@@ -21,15 +21,25 @@
 
 **串行**
 
-![iShot2020-10-16 12.54.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2012.54.58.png)
+![iShot_2024-08-29_14.58.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.58.37.png)
+
+
+
+
 
 **并发**
 
-![iShot2020-10-16 12.55.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2012.55.27.png)
+![iShot_2024-08-29_14.59.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.59.40.png)
+
+
+
+
 
 **并行**
 
-![iShot2020-10-16 12.55.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2012.55.46.png)
+![iShot_2024-08-29_15.01.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.01.17.png)
+
+
 
 ## 2.多进程
 

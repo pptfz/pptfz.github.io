@@ -281,9 +281,9 @@ print(time.strftime("%Y-%m-%d %X"))
 2017-09-27 08:18:32
 ```
 
+![iShot_2024-08-29_14.44.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.44.21.png)
 
 
-![iShot2020-10-16 11.57.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2011.57.55.png)
 
 ### 9.2 三种时间相互转换
 

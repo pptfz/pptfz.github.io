@@ -23,7 +23,7 @@
 
 下面来看看三次握手的流程图：
 
-![iShot2020-10-16 13.42.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.42.34.png)
+![iShot_2024-08-29_16.45.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_16.45.41.png)
 
 
 
@@ -47,7 +47,9 @@
 
 下面来看看四次挥手的流程图：
 
-![iShot2020-10-16 13.43.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.43.07.png)
+![iShot_2024-08-29_16.47.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_16.47.07.png)
+
+
 
 **中断连接端可以是客户端，也可以是服务器端。**
 
@@ -64,7 +66,9 @@
 **上面是一方主动关闭，另一方被动关闭的情况，实际中还会出现同时发起主动关闭的情况，**
 具体流程如下图：
 
-![iShot2020-10-16 13.43.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.43.28.png)
+![iShot_2024-08-29_16.48.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_16.48.55.png)
+
+
 
 
 
@@ -86,7 +90,7 @@
 
 
 
-![iShot2020-10-16 13.43.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.43.59.png)
+![iShot_2024-08-29_16.51.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_16.51.29.png)
 
 
 
@@ -118,7 +122,7 @@
 
 - 为解决这个问题，TCP 引入了窗口这个概念。确认应答不再是以每个分段，而是以更大的单位进行确认，转发时间将会被大幅地缩短。也就是说，发送端主机，在发送了一个段以后不必要一直等待确认应答，而是继续发送。如下图所示：
 
-![iShot2020-10-16 13.44.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.44.41.png)
+![iShot_2024-08-29_16.53.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_16.53.32.png)
 
 - 窗口大小就是指无需等待确认应答而可以继续发送数据的最大值。上图中窗口大小为4个段。这个机制实现了使用大量的缓冲区，通过对多个段同时进行确认应答的功能。
 
@@ -126,7 +130,9 @@
 
 ### 3.5 滑动窗口控制
 
-![iShot2020-10-16 13.45.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.45.03.png)
+![iShot_2024-08-29_16.56.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_16.56.25.png)
+
+
 
 
 
@@ -144,12 +150,14 @@
 
 - ① 确认应答未能返回的情况。在这种情况下，数据已经到达对端，是不需要再进行重发的，如下图：
 
-  ![iShot2020-10-16 13.47.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.47.37.png)
+  ![iShot_2024-08-29_16.58.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_16.58.45.png)
 
   
 
-- ② 某个报文段丢失的情况。接收主机如果收到一个自己应该接收的序列号以外的数据时，会针对当前为止收到数据返回确认应答。如下图所示，当某一报文段丢失后，发送端会一直收到序号为1001的确认应答，因此，在窗口比较大，又出现报文段丢失的情况下，同一个序列号的确认应答将会被重复不断地返回。而发送端主机如果连续3次收到同一个确认应答，就会将其对应的数据进行重发。这种机制比之前提到的超时管理更加高效，因此也被称为高速重发控制。![iShot2020-10-16 13.48.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.48.02.png)
+- ② 某个报文段丢失的情况。接收主机如果收到一个自己应该接收的序列号以外的数据时，会针对当前为止收到数据返回确认应答。如下图所示，当某一报文段丢失后，发送端会一直收到序号为1001的确认应答，因此，在窗口比较大，又出现报文段丢失的情况下，同一个序列号的确认应答将会被重复不断地返回。而发送端主机如果连续3次收到同一个确认应答，就会将其对应的数据进行重发。这种机制比之前提到的超时管理更加高效，因此也被称为高速重发控制。
 
+  ![iShot_2024-08-29_17.01.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_17.01.15.png)
+  
   
 
 ## 4.TCP编程流程
@@ -165,7 +173,9 @@
 
 ### 4.2 TCP编程流程说明
 
-![iShot2020-10-16 13.48.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.48.31.png)
+![iShot_2024-08-29_17.05.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_17.05.14.png)
+
+
 
 **过程说明**
 
@@ -336,15 +346,15 @@ while True:
 
 **服务端接受本机客户端发送的信息**
 
-![iShot2020-10-16 13.49.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.49.49.png)
-
-
+![iShot_2024-08-29_17.09.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_17.09.04.png)
 
 
 
 **服务端接收其他机器客户端发送的信息**
 
-![iShot2020-10-16 13.50.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.50.13.png)
+![iShot_2024-08-29_17.11.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_17.11.14.png)
+
+
 
 
 

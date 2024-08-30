@@ -32,7 +32,7 @@
 </html>
 ```
 
-![iShot2020-10-16 15.23.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.23.13.png)
+![iShot_2024-08-30_17.21.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_17.21.20.png)
 
 
 
@@ -67,9 +67,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.23.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.23.51.png)
 
 
+![iShot_2024-08-30_17.22.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_17.22.30.png)
 
 
 
@@ -90,7 +90,7 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.24.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.24.24.png)
+![iShot_2024-08-30_17.23.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_17.23.46.png)
 
 
 
@@ -136,7 +136,7 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.24.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.24.53.png)
+![iShot_2024-08-30_17.26.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_17.26.04.png)
 
 
 
@@ -164,7 +164,7 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.25.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.25.29.png)
+![iShot_2024-08-30_18.42.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_18.42.45.png)
 
 
 
@@ -196,7 +196,7 @@ div{
 
 
 
-![iShot2020-10-16 15.25.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.25.54.png)
+![iShot_2024-08-30_18.44.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_18.44.35.png)
 
 
 
@@ -232,7 +232,7 @@ div{
 
 
 
-![iShot2020-10-16 15.26.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.26.20.png)
+![iShot_2024-08-30_19.40.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.40.42.png)
 
 
 
@@ -264,7 +264,7 @@ div{
 
 ```
 
-![iShot2020-10-16 15.26.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.26.40.png)
+![iShot_2024-08-30_19.41.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.41.35.png)
 
 
 
@@ -305,7 +305,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.27.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.27.01.png)
+
+
+![iShot_2024-08-30_19.42.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.42.41.png)
 
 
 
@@ -348,7 +350,7 @@ div{
 
 ```
 
-![iShot2020-10-16 15.27.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.27.25.png)
+![iShot_2024-08-30_19.43.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.43.27.png)
 
 
 
@@ -417,7 +419,7 @@ div{
 
 
 
-![iShot2020-10-16 15.27.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.27.52.png)
+![iShot_2024-08-30_19.45.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.45.24.png)
 
 
 
@@ -451,7 +453,9 @@ div{
 </html>
 ```
 
-![iShot2020-10-16 15.28.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.28.16.png)
+
+
+![iShot_2024-08-30_19.46.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.46.17.png)
 
 
 
@@ -494,7 +498,7 @@ div{
 
 
 
-![iShot2020-10-16 15.28.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.28.35.png)
+![iShot_2024-08-30_19.47.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.47.13.png)
 
 
 
@@ -539,7 +543,7 @@ div{
 
 **透明度为0.3**
 
-![iShot2020-10-16 15.29.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.29.02.png)
+![iShot_2024-08-30_19.48.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.48.01.png)
 
 
 
@@ -574,7 +578,7 @@ div{
 
 
 
-![iShot2020-10-16 15.29.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.29.24.png)
+![iShot_2024-08-30_19.48.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.48.55.png)
 
 
 
@@ -609,7 +613,7 @@ div{
 
 **背景图片，默认会平铺，即设置了样式的高度和宽度，如果图片比设置的小，会继续显示图片的一部分**
 
-![iShot2020-10-16 15.30.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.30.11.png)
+![iShot_2024-08-30_19.49.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.49.50.png)
 
 
 
@@ -619,7 +623,11 @@ div{
 
 **加参数``background-repeat: no-repeat;``设置背景图片不平铺**
 
-![iShot2020-10-16 15.34.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.34.29.png)
+![iShot_2024-08-30_19.52.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.52.43.png)
+
+
+
+
 
 
 
@@ -627,9 +635,7 @@ div{
 
 #### 3.5.2 背景图片的位置
 
-![iShot2020-10-16 15.35.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.35.13.png)
-
-
+![iShot_2024-08-30_19.56.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_19.56.26.png)
 
 
 

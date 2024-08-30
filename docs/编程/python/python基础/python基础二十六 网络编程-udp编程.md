@@ -10,7 +10,9 @@
 
 **socket：套接字，通过网路完成进程间通信的方式(区别于一台计算机之间进程通信)**
 
-![iShot2020-10-16 13.00.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.00.30.png)
+![iShot_2024-08-29_15.40.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.40.15.png)
+
+
 
 
 
@@ -72,7 +74,11 @@ udp一般用于多点通信和实时的数据业务，比如
 
 **NetAssist初始配置，协议选择UDP，IP地址会自动识别本机地址，端口号任意选择一个可使用的，配置完成后点击``连接``按钮**
 
-![iShot2020-10-16 13.00.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.00.52.png)
+
+
+![iShot_2024-08-29_15.42.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.42.18.png)
+
+
 
 ```python
 from socket import *
@@ -90,7 +96,9 @@ s.sendto("你好".encode("gb2312"),("192.168.34.90",8080))
 
 **这里可以看到发送的你好已经在NetAssist中收到**
 
-![iShot2020-10-16 13.01.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.01.14.png)
+![iShot_2024-08-29_15.44.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.44.05.png)
+
+
 
 
 
@@ -120,7 +128,7 @@ windows中运行程序，输入内容后会返回如下结果
 
 **如果信息(IP地址、端口号)没有绑定，每发送一次信息，系统会随机分配一个端口，还要避免同一台计算机上的不同进程端口号相同的问题**
 
-![iShot2020-10-16 13.01.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.01.34.png)
+![iShot_2024-08-29_15.45.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.45.25.png)
 
 
 
@@ -164,9 +172,9 @@ b'hehe'	#接收到的是一个字节码
 8080	#发送方端口
 ```
 
+![iShot_2024-08-29_15.47.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.47.09.png)
 
 
-![iShot2020-10-16 13.01.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.01.57.png)
 
 
 
@@ -251,7 +259,7 @@ udpSocket.close()
 
 **示意图**
 
-![iShot2020-10-16 13.02.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.02.25.png)
+![iShot_2024-08-29_15.48.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.48.15.png)
 
 
 
@@ -322,7 +330,9 @@ s.close()
 
 ### 6.2 TFTP传输过程
 
-![iShot2020-10-16 13.02.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.02.46.png)
+![iShot_2024-08-29_15.53.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.53.21.png)
+
+
 
 
 
@@ -351,13 +361,17 @@ s.close()
 
 ### 6.3 TFTP格式要求
 
-![iShot2020-10-16 13.03.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.03.10.png)
+![iShot_2024-08-29_15.55.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.55.42.png)
+
+
 
 
 
 **TFTP格式要求**
 
-![iShot2020-10-16 13.03.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.03.27.png)
+![iShot_2024-08-29_15.56.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.56.36.png)
+
+
 
 
 
@@ -365,7 +379,9 @@ s.close()
 
 **TFTP构造下载请求数据需要根据TFTP读写请求格式来编写**
 
-![iShot2020-10-16 13.03.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.03.43.png)
+![iShot_2024-08-29_15.57.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.57.32.png)
+
+
 
 
 
@@ -468,7 +484,9 @@ H表示将第二部分的1替换成占2个字节
 
 **struct模块使用说明图**
 
-![iShot2020-10-16 13.04.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.04.10.png)
+![iShot_2024-08-29_15.58.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.58.26.png)
+
+
 
 
 
@@ -478,7 +496,9 @@ H表示将第二部分的1替换成占2个字节
 
 **实现TFTP需要用到一个软件Tftpd32，选择共享的目录用来提供下载，选择本机网卡127.0.0.1**
 
-![iShot2020-10-16 13.04.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.04.31.png)
+![iShot_2024-08-29_15.59.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_15.59.19.png)
+
+
 
 
 
@@ -603,9 +623,9 @@ while True:
 HH表示将4和块编号替换成4个字节，4表示ACK
 ```
 
+![iShot_2024-08-29_16.00.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_16.00.03.png)
 
 
-![iShot2020-10-16 13.04.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2013.04.50.png)
 
 ---
 

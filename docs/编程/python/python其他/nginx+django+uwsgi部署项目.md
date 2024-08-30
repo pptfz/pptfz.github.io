@@ -39,11 +39,15 @@
 <h2>nginx+django+uWSGI处理过程</h2>
 
 
-![iShot2020-10-16 15.21.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.21.07.png)
+![iShot_2024-08-30_17.13.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_17.13.31.png)
 
 
 
-![iShot2020-10-16 15.21.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.21.25.png)
+
+
+
+
+![iShot_2024-08-30_17.15.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_17.15.12.png)
 
 
 
@@ -421,7 +425,11 @@ EOF
 
 配置本机hosts解析后访问django.blog，项目界面如下
 
-![iShot2020-10-16 15.22.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-16%2015.22.09.png)
+![iShot_2024-08-30_17.17.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-30_17.17.29.png)
+
+
+
+
 
 
 
