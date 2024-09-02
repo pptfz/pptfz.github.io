@@ -542,39 +542,43 @@ sed -i '14aauth-user-pass' /root/pptfz.ovpn
 
 选择安装的用户
 
-![iShot2020-11-30 20.20.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-11-30%2020.20.36.png)
+![iShot_2024-09-02_19.29.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.29.11.png)
+
+
 
 
 
 输入本机密码
 
-![iShot2020-11-30 20.21.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-11-30%2020.21.56.png)
+![iShot_2024-09-02_19.30.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.30.24.png)
 
 
 
 输入完成后会提示如下
 
-![iShot2020-11-30 20.22.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-11-30%2020.22.21.png)
-
-
+![iShot_2024-09-02_19.31.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.31.12.png)
 
 
 
 找到相应图标，点击要连接的VPN
 
-![iShot2020-12-01 11.43.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2011.43.18.png)
+![iShot_2024-09-02_19.32.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.32.35.png)
+
+
 
 
 
 输入用户名和密码
 
-![iShot2020-12-01 11.44.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2011.44.37.png)
+![iShot_2024-09-02_19.33.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.33.37.png)
 
 
 
 连接成功
 
-![iShot2020-12-01 14.16.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2014.16.11.png)
+![iShot_2024-09-02_19.34.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.34.20.png)
+
+
 
 
 
@@ -631,7 +635,9 @@ windows安装就是一路下一步
 
 导入客户端文件
 
-![iShot2020-12-01 15.00.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2015.00.29.png)
+![iShot_2024-09-02_19.35.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.35.50.png)
+
+
 
 
 
@@ -641,9 +647,15 @@ windows安装就是一路下一步
 
 
 
+
+
+
+
 连接成功
 
-![iShot2020-12-01 15.12.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2015.12.14.png)
+![iShot_2024-09-02_19.41.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.41.04.png)
+
+
 
 
 

@@ -14,6 +14,8 @@
 
 
 
+
+
 **过程说明**
 
 **1.开发提交本地代码到gitlab(github、gitea等)仓库**
@@ -327,7 +329,9 @@ mkdir -p /data/release && chown www.www /data/release
 
 **⚠️新版的gitlab中的权限可能会不同**
 
-![iShot2020-11-27 14.27.17](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-11-27 14.27.17.png)
+![iShot_2024-09-02_19.25.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.25.09.png)
+
+
 
 
 

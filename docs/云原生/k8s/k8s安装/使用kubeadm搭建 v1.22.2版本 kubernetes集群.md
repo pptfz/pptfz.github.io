@@ -968,7 +968,9 @@ kubeadm join 172.30.100.101:6443 --token abcdef.0123456789abcdef \
 
 `kubeadm init` 命令执行流程如下图所示
 
-![iShot2020-10-20 16.02.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-20%2016.02.59.png)
+![iShot_2024-09-02_16.34.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.34.43.png)
+
+
 
 
 
@@ -1029,7 +1031,9 @@ Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
 
 `kubeadm join` 命令执行流程如下所示
 
-![iShot2020-10-20 16.04.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-20%2016.04.22.png)
+![iShot_2024-09-02_16.36.47](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.36.47.png)
+
+
 
 
 

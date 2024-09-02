@@ -48,7 +48,7 @@
 
 > gocron分为调度器和任务节点
 
-![iShot2020-10-26 17.04.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-26%2017.04.13.png)
+![iShot_2024-09-02_16.46.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.46.18.png)
 
 ### gocron 命令
 
@@ -150,17 +150,21 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 配置数据库、管理员账号
 
-![iShot2020-10-26 18.31.03r](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-26%2018.31.03r.png)
+![iShot_2024-09-02_16.47.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.47.52.png)
 
-登陆
 
-![iShot2020-10-26 18.34.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-26%2018.34.04.png)
+
+
+
+![iShot_2024-09-02_16.50.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.50.45.png)
+
+
 
 
 
 登陆后首界面
 
-![iShot2020-10-26 18.34.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-26%2018.34.49.png)
+![iShot_2024-09-02_16.51.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.51.32.png)
 
 
 
@@ -168,49 +172,65 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 ### 3.1 新增节点
 
-![iShot2020-10-26 18.43.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-26%2018.43.08.png)
+![iShot_2024-09-02_16.52.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.52.15.png)
+
+
+
+
 
 
 
 编辑节点信息，输入主机名(域名或者IP)，node节点默认端口是5921
 
-![iShot2020-10-26 18.43.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-26%2018.43.58.png)
+![iShot_2024-09-02_16.53.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.53.10.png)
+
+
 
 
 
 添加完的节点
 
-![iShot2020-10-26 20.06.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-26%2020.06.28.png)
+![iShot_2024-09-02_16.53.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.53.48.png)
+
+
 
 
 
 点击 `测试连接` 查看机器联通性
 
-![iShot2020-10-27 09.07.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2009.07.04.png)
+![iShot_2024-09-02_16.54.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.54.44.png)
+
+
 
 
 
 点击 `任务管理` --> `新增`
 
-![iShot2020-10-27 09.18.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2009.18.46.png)
+![iShot_2024-09-02_16.59.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.59.31.png)
+
+
 
 
 
 编辑任务
 
-![iShot2020-10-27 09.25.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2009.25.01.png)
+![iShot_2024-09-02_17.00.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.00.38.png)
 
 
 
 可以选择绿色框处的手动执行，也可以选择灰色框中的查看日志
 
-![iShot2020-10-27 09.27.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2009.27.03.png)
+![iShot_2024-09-02_17.01.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.01.33.png)
+
+
 
 
 
 查看日志，执行成功与否会在这里有显示
 
-![iShot2020-10-27 09.27.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2009.27.50.png)
+![iShot_2024-09-02_17.02.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.02.27.png)
+
+
 
 
 
@@ -226,35 +246,39 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 :::
 
-![iShot2020-10-27 09.39.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2009.39.59.png)
+![iShot_2024-09-02_17.03.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.03.35.png)
 
 
 
 :::tip
 
-**这里使用的是163邮箱，要注意开始SMTP服务**
+**这里使用的是163邮箱，要注意开启SMTP服务**
 
 :::
 
-![iShot2020-10-27 11.27.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2011.27.49.png)
+![iShot_2024-09-02_17.05.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.05.02.png)
 
 
 
 在任务中选择任务通知、通知类型和接收通知用户
 
-![iShot2020-10-27 09.44.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2009.44.05.png)
+![iShot_2024-09-02_17.06.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.06.50.png)
+
+
 
 
 
 执行成功的邮件通知
 
-![iShot2020-10-27 11.24.41](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2011.24.41.png)
+![iShot_2024-09-02_17.07.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.07.36.png)
 
 
 
 执行失败的邮件通知
 
-![iShot2020-10-27 11.25.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-10-27%2011.25.43.png)
+![iShot_2024-09-02_17.09.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.09.00.png)
+
+
 
 
 
