@@ -69,4 +69,4 @@ ANSIBLE_LOAD_CALLBACK_PLUGINS=1 ANSIBLE_STDOUT_CALLBACK=actionable ansible all -
 
 例如，在机器数量多的时候，执行 ping 模块，就想要查看无法 ping 通的主机
 
-![iShot2021-03-11 09.22.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-11%2009.22.55.png)
+![iShot_2024-09-04_14.27.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.27.00.png)

@@ -6,9 +6,9 @@
 
 浏览器中访问 jenkins 报错如下
 
-![iShot2021-03-19 08.59.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-19 08.59.55.png)
+![iShot_2024-09-04_14.40.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.40.38.png)
 
-
+
 
 > 生产中我们的jenkins是以war包形式放在tomcat的 `webapps`目录下启动的，tomcat设置的端口为8080
 
@@ -30,7 +30,7 @@
 
 ## 2.jenkins报错 `Jenkins detected that you appear to be running more than one instance of Jenkins that share the same home directory`
 
-```
+```shell
 Error
 Jenkins detected that you appear to be running more than one instance of Jenkins that share the same home directory '/root/.jenkins’. This greatly confuses Jenkins and you will likely experience strange behaviors, so please correct the situation.
 
@@ -38,7 +38,9 @@ This Jenkins:	158454546 contextPath="" at 1541@localhost
 Other Jenkins:	1455232034 contextPath="/jenkins20190612" at 1541@localhost
 ```
 
-![iShot2021-03-19 11.56.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-19 11.56.19.png)
+![iShot_2024-09-04_14.41.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.41.40.png)
+
+
 
 
 

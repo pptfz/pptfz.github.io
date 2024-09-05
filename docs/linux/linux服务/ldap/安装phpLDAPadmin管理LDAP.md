@@ -94,7 +94,11 @@ systemctl restart httpd
 
 访问首页面
 
-![iShot2021-07-01 14.55.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01%2014.55.33.png)
+![iShot2021-07-01_14.55.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_14.55.33.png)
+
+
+
+
 
 
 
@@ -104,7 +108,9 @@ systemctl restart httpd
 
 密码为 `123456`
 
-![iShot2021-07-01 14.56.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01%2014.56.57.png)
+![iShot2021-07-01_14.56.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_14.56.57.png)
+
+
 
 
 
@@ -114,7 +120,9 @@ systemctl restart httpd
 
 phpldapadmin登陆成功后会报错 `This base cannot be created with PLA`
 
-![iShot2021-07-01 14.57.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01%2014.57.52.png)
+![iShot2021-07-01_14.57.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_14.57.52.png)
+
+
 
 
 
@@ -147,7 +155,9 @@ adding new entry "dc=pptfz,dc=com"
 
 执行成功后重新登陆 phpldapadmin，可以看到之前的报错已经没有了
 
-![iShot2021-07-01 15.16.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01%2015.16.16.png)
+![iShot2021-07-01_15.16.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_15.16.16.png)
+
+
 
 
 
@@ -155,7 +165,9 @@ adding new entry "dc=pptfz,dc=com"
 
 ldap默认是允许匿名访问的
 
-![iShot2021-07-01 18.09.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01%2018.09.42.png)
+![iShot2021-07-01_18.09.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_18.09.42.png)
+
+
 
 
 
@@ -185,7 +197,9 @@ systemctl restart slapd
 
 配置完成后匿名登陆按钮就取消了
 
-![iShot2021-07-01 18.16.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01%2018.16.55.png)
+![iShot2021-07-01_18.16.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_18.16.55.png)
+
+
 
 
 
@@ -197,7 +211,9 @@ systemctl restart slapd
 
 有些模版提示不能使用
 
-![iShot2021-07-01 15.23.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01%2015.23.17.png)
+![iShot2021-07-01_15.23.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_15.23.17.png)
+
+
 
 
 
@@ -272,7 +288,9 @@ systemctl restart slapd httpd
 
 模板不能使用提示没了
 
-![iShot2021-07-01 15.39.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01%2015.39.58.png)
+![iShot2021-07-01_15.39.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_15.39.58.png)
+
+
 
 
 

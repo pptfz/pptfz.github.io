@@ -32,7 +32,9 @@ Cloudera Manager，简称CM
 
 CM架构
 
-![iShot2021-05-30 21.38.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-30%2021.38.39.png)
+![iShot2021-05-30_21.38.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-30_21.38.39.png)
+
+
 
 
 

@@ -297,13 +297,11 @@ server {
 
 密码：`spug.dev`
 
-![iShot2021-02-03 10.02.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-03%2010.02.25.png)
+![iShot_2024-09-03_18.32.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-03_18.32.03.png)
 
 
 
-![iShot2021-02-03 10.03.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-03%2010.03.25.png)
-
-
+![iShot_2024-09-03_18.33.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-03_18.33.08.png)
 
 
 
@@ -315,7 +313,9 @@ server {
 
 **问题一：主机console连接空白**
 
-![iShot2021-02-02 15.45.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-02-02%2015.45.57.png)
+![iShot_2024-09-03_18.27.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-03_18.27.38.png)
+
+
 
 
 

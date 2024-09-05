@@ -78,7 +78,7 @@ systemctl enable gitlab-runsvdir.service
 
 **重载配置文件成功提示如下**
 
-![iShot2021-06-20 01.20.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20%2001.20.14.png)
+![iShot2021-06-20_01.20.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20_01.20.14.png)
 
 
 
@@ -290,33 +290,61 @@ a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 
 
 **gitlab默认端口为80，第一次访问需要设置root密码，最少8位**
 
-![iShot2021-06-20 01.22.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20%2001.22.44.png)
+![iShot2021-06-20_01.22.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20_01.22.44.png)
+
+
 
 **初始页面**
 
-![iShot2021-06-20 01.24.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20%2001.24.18.png)
+![iShot2021-06-20_01.24.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20_01.24.18.png)
+
+
+
+
 
 **这里的警告为gitlab默认开启了开放注册，点击 `learn more` 查看关闭方法**
 
-![iShot2021-06-20 01.26.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20%2001.26.03.png)
+![iShot2021-06-20_01.26.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20_01.26.03.png)
+
+
+
+
+
+
 
 点击 `Admin Area`  -> `Settings` -> `General` -> `Sign-up restrictions` 
 
-![iShot2021-06-20 01.32.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20%2001.32.23.png)
+![iShot2021-06-20_01.32.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20_01.32.23.png)
+
+
+
+
 
 取消勾选 `Sign-up enabled` ，保存即可
 
-![iShot2021-06-20 01.35.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20%2001.35.58.png)
+![iShot2021-06-20_01.35.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20_01.35.58.png)
+
+
+
+
 
 
 
 gitlab默认开启注册
 
-![iShot2021-06-20 14.54.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20%2014.54.27.png)
+![iShot2021-06-20_14.54.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20_14.54.27.png)
+
+
+
+
+
+
 
 关闭后
 
-![iShot2021-06-20 14.57.52fa](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20%2014.57.52fa.png)
+![iShot2021-06-20_14.57.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-20_14.57.52.png)
+
+
 
 
 

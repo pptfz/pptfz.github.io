@@ -23,7 +23,9 @@ docker run -d --name showdoc --user=root --privileged=true -p 4999:80 \
 
 showdoc持久化目录直接777...，确定是php开发无疑了，虽然是docker运行的，有隔离环境，但是为什么要777呢？个人表示非常不习惯
 
-![iShot2021-03-17 17.02.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-17%2017.02.34.png)
+![iShot_2024-09-04_14.35.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.35.15.png)
+
+
 
 进入docker容器中，修改 `/var/www/html` 目录，修改目录权限为755，文件权限为644
 
@@ -40,23 +42,25 @@ find . -type f|xargs chmod 644
 
 选择语言
 
-![iShot2021-03-17 17.09.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-17%2017.09.43.png)
+![iShot_2024-09-04_14.36.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.36.13.png)
 
 
 
 管理员默认账户/密码是 `showdoc/123456`
 
-![iShot2021-03-17 17.09.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-17%2017.09.57.png)
+![iShot_2024-09-04_14.37.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.37.38.png)
+
+
 
 访问后提示如下，这是因为showdoc容器中php是以 `application` 用户运行的，而nginx是以`nginx`用户运行的
 
-![iShot2021-03-17 16.25.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-17%2016.25.03.png)
+![iShot_2024-09-04_14.34.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.34.02.png)
 
 
 
 
 
-![iShot2021-03-17 17.17.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-17%2017.17.27.png)
+![iShot_2024-09-04_14.38.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.38.34.png)
 
 
 

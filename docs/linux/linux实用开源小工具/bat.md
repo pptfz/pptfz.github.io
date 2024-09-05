@@ -20,15 +20,23 @@
 
 `bat` 对大部分编程语言和标记语言提供语法高亮：
 
+![iShot2021-06-21_20.07.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21_20.07.50.png)
 
 
-![iShot2021-06-21 20.07.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21%2020.07.50.png)
+
+
+
+
 
 **Git集成**
 
 **`bat` 与 `git` 沟通,显示关于修改的索引 (参见左侧栏) :**
 
-![iShot2021-06-21 20.09.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21%2020.09.12.png)
+![iShot2021-06-21_20.09.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21_20.09.12.png)
+
+
+
+
 
 
 
@@ -102,7 +110,9 @@ bat 0.18.1
 
 使用 `bat --list-themes` 获取语法高亮显示的所有可用主题的列表
 
-![iShot2021-06-21 20.25.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21%2020.25.05.png)
+![iShot2021-06-21_20.25.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21_20.25.05.png)
+
+
 
 
 
@@ -128,7 +138,9 @@ bat test
 cat /etc/profile
 ```
 
-![iShot2021-06-21 20.54.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21%2020.54.02.png)
+![iShot2021-06-21_20.54.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21_20.54.02.png)
+
+
 
 
 
@@ -143,7 +155,9 @@ export BAT_THEME="Monokai Extended Origin"
 bat /etc/profile
 ```
 
-![iShot2021-06-21 20.54.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21%2020.54.40.png)
+![iShot2021-06-21_20.54.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-21_20.54.40.png)
+
+
 
 
 

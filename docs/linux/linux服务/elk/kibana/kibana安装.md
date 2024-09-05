@@ -86,11 +86,9 @@ es        3672  6.2  5.2 1097364 213860 ?      Ssl  00:28   0:14 /usr/local/kiba
 
 第一次访问的欢迎页面会有2个按钮，添加数据源 `Add data` 和 独自探索 `Explore on my own` 
 
-![iShot2021-05-24 00.30.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-24%2000.30.07.png)
+![iShot2021-05-24_00.30.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-24_00.30.07.png)
 
 
 
-
-
-![iShot2021-05-24 00.33.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-24%2000.33.26.png)
+![iShot2021-05-24_00.33.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-24_00.33.26.png)
 
