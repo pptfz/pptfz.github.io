@@ -10,7 +10,7 @@
 
 点击模板中的 `自动发现`
 
-![iShot2021-11-22 21.17.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-22%2021.17.19.png)
+![iShot2021-11-22_21.17.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-22_21.17.19.png)
 
 
 
