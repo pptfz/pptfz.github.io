@@ -139,11 +139,15 @@ CONTAINER ID   IMAGE                       COMMAND                  CREATED     
 
 `Administration` -> `Marketplace` -> `Plugins`  下搜索 `chinese` ，选择 `Chinese Pack LOCALIZATION` 安装，安装显示 `install Pending`后重启服务器即可
 
-![iShot2021-09-06 17.21.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-06%2017.21.45.png)
+![iShot2021-09-06_17.21.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-06_17.21.45.png)
+
+
 
 汉化效果
 
-![iShot2021-09-07 17.30.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-07%2017.30.54.png)
+![iShot2021-09-07_17.30.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-07_17.30.54.png)
+
+
 
 ## SonarQube插件安装
 

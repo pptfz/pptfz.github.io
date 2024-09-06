@@ -736,41 +736,7 @@ Jul 16 19:37:42 localhost.localdomain systemd[1]: Started Supervisor daemon.
 
 **supervisorctl命令动作**
 
-| 动作                                                | 说明                                                         |
-| --------------------------------------------------- | ------------------------------------------------------------ |
-| `help`                                              | 打印可用操作列表                                             |
-| `help <action>`                                     | 打印  `<action>` 的帮助                                      |
-| `add <name> […]`                                    | 激活 `进程/组` 的配置中的任何更新                            |
-| `remove <name> […]`                                 | 从活动配置中删除 `进程/组`                                   |
-| `update`                                            | 重新加载配置并根据需要 `添加/删除` ，并将重新启动受影响的程序 |
-| `update all`                                        | 重新加载配置并根据需要 `添加/删除` ，并将重新启动受影响的程序 |
-| `update <gname> […]`                                | 更新特定的组，并将重新启动受影响的程序                       |
-| `clear <name>`                                      | 清除进程的日志文件                                           |
-| `clear <name> <name>`                               | 清除多个进程的日志文件                                       |
-| `clear all`                                         | 清除所有进程日志文件                                         |
-| `fg <process>`                                      | 以前台方式连接进程按 `Ctrl+C` 退出前台                       |
-| `pid`                                               | 获取 `supervisord` 进程的pid                                 |
-| `pid <name>`                                        | 根据名称获取单个子进程的pid                                  |
-| `pid all`                                           | 获取每个子进程的pid，每行一个                                |
-| `reload`                                            | 重启 `supervisord`                                           |
-| `reread`                                            | 重新加载守护进程的配置文件，不 添加/删除(不重新启动)         |
-| `restart <name>`                                    | 重启进程，注意:重启不会重新读取配置文件                      |
-| `restart <gname>:*`                                 | 重启组内所有进程，注意:重启不会重新读取配置文件              |
-| `restart <name> <name>`                             | 重启多个进程或组，注意:重启不会重新读取配置文件              |
-| `restart all`                                       | 重启所有进程，注意:重启不会重新读取配置文件                  |
-| `signal`                                            | 查看 `signal` 命令的使用方法                                 |
-| `start <name>`                                      | 启动一个程序                                                 |
-| `start <gname>:*`                                   | 启动组中的所有进程                                           |
-| `start <name> <name>`                               | 启动多个进程或组                                             |
-| `start all`                                         | 启动所有进程                                                 |
-| `status`                                            | 获取所有进程状态信息                                         |
-| `status <name>`                                     | 按名称获取单个进程的状态                                     |
-| `status <name> <name>`                              | 获取多个已命名进程的状态                                     |
-| `stop <name>`                                       | 停止进程                                                     |
-| `stop <gname>:*`                                    | 停止组内所有进程                                             |
-| `stop <name> <name>`                                | 停止多个进程或组                                             |
-| `stop all`                                          | 停止所有进程                                                 |
-| `tail [-f] <name> [stdout|stderr] (default stdout)` | 查看进程的最新日志输出                                       |
+![iShot_2024-09-06_15.11.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-06_15.11.24.png)
 
 
 
