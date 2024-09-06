@@ -18,7 +18,9 @@
 
 [问题说明链接](https://ltb-project.org/documentation/self-service-password/latest/config_general#security)
 
-![iShot2021-09-18 15.21.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-18%2015.21.21.png)
+
+
+![iShot2021-09-18_15.21.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-18_15.21.21.png)
 
 
 
@@ -217,7 +219,9 @@ docker restart self-service-password
 
 浏览器访问 `IP:8000`
 
-![iShot2021-09-20 19.29.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20%2019.29.51.png)
+![iShot2021-09-20_19.29.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20_19.29.51.png)
+
+
 
 
 
@@ -274,7 +278,9 @@ $show_extended_error = true;
 
 配置完成后重启容器，刷新页面，刚才配置的密码策略就显示出来了
 
-![iShot2021-09-20 20.30.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20%2020.30.08.png)
+![iShot2021-09-20_20.30.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20_20.30.08.png)
+
+
 
 
 
@@ -343,7 +349,9 @@ $reset_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . "://" . $_SERVER['HTTP_X_FORWA
 
 在邮件选项下输入ldap中绑定的邮箱就可以发出重置邮件了
 
-![iShot2021-09-20 21.11.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20%2021.11.15.png)
+![iShot2021-09-20_21.11.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20_21.11.15.png)
+
+
 
 
 
@@ -351,19 +359,21 @@ $reset_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . "://" . $_SERVER['HTTP_X_FORWA
 
 > 使用电脑客户端链接是纯文本的，但是在浏览器中打开是超链接
 
-![iShot2021-09-20 21.30.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20%2021.30.00.png)
+![iShot2021-09-20_21.30.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20_21.30.00.png)
 
 
 
 在密码重置邮件中点击链接访问就可以修改密码了
 
-![iShot2021-09-20 21.13.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20%2021.13.12.png)
+![iShot2021-09-20_21.13.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20_21.13.12.png)
+
+
 
 
 
 重置密码的邮箱必须是ldap中用户绑定的邮箱，输入其他邮箱会报错邮箱与用户不一致
 
-![iShot2021-09-20 21.17.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20%2021.17.37.png)
+![iShot2021-09-20_21.17.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-20_21.17.37.png)
 
 
 

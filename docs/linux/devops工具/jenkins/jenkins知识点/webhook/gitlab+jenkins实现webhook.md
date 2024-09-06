@@ -4,9 +4,9 @@
 
 ## 1.jenkins安装插件 `Gitlab Hook Plugin`
 
-![iShot2021-10-19 14.46.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19%2014.46.23.png)
 
 
+![iShot2021-10-19_14.46.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19_14.46.23.png)
 
 
 
@@ -26,7 +26,7 @@
 
 在url处填写jenkins项目中的回调url地址
 
-![iShot2021-10-19 16.14.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19%2016.14.06.png)
+![iShot2021-10-19_16.14.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19_16.14.06.png)
 
 
 
@@ -34,13 +34,15 @@
 
 配置完成后保存，然后在 `Test` 下点击 `Push events` 进行测试
 
-![iShot2021-10-19 16.54.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19%2016.54.31.png)
+![iShot2021-10-19_16.54.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19_16.54.31.png)
 
 
 
 测试提示如下即为成功
 
-![iShot2021-10-19 17.01.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19%2017.01.34.png)
+![iShot2021-10-19_17.01.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19_17.01.34.png)
+
+
 
 
 

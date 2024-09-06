@@ -1118,17 +1118,25 @@ kubectl apply -f kube-flannel.yml
 
 `could not add IP address to "cni0": permission denied`
 
-![iShot2021-11-14 17.36.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14%2017.36.23.png)
+![iShot2021-11-14_17.36.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14_17.36.23.png)
 
 
 
-![iShot2021-11-07 23.39.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-07%2023.39.13.png)
+
+
+
+
+![iShot2021-11-07_23.39.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-07_23.39.13.png)
+
+
 
 
 
 执行  `ip a`  命令查看网卡信息，可以看到有一个虚拟网卡 `cni0` ，这个虚拟网卡的IP段是 `10.88.0.0/16` 段的，这个就是应用flannel后创建的虚拟网卡
 
-![iShot2021-11-14 17.37.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14%2017.37.34.png)
+![iShot2021-11-14_17.37.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14_17.37.34.png)
+
+
 
 
 
@@ -1194,7 +1202,9 @@ systemctl restart containerd kubelet
 
 再次查看coredns就没有问题了
 
-![iShot2021-11-14 17.53.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14%2017.53.34.png)
+![iShot2021-11-14_17.53.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14_17.53.34.png)
+
+
 
 
 
@@ -1357,25 +1367,35 @@ kubectl get secret `kubectl get secret -n kubernetes-dashboard | grep admin-toke
 
 谷歌浏览器访问会提示如下
 
-![iShot2021-10-01 15.46.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-01%2015.46.33.png)
+![iShot2021-10-01_15.46.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-01_15.46.33.png)
+
+
 
 
 
 通过火狐浏览器访问
 
-![iShot2021-10-01 15.52.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-01%2015.52.45.png)
+![iShot2021-10-01_15.52.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-01_15.52.45.png)
+
+
 
 
 
 **然后粘贴2.5.6步骤中生成的base64字符串登陆dashboard，在登陆页面选择``令牌``一项**
 
-![iShot2021-10-01 15.54.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-01%2015.54.35.png)
+![iShot2021-10-01_15.54.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-01_15.54.35.png)
+
+
+
+
 
 
 
 **登陆后的首界面**
 
-![iShot2021-11-14 18.19.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14%2018.19.11.png)
+![iShot2021-11-14_18.19.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14_18.19.11.png)
+
+
 
 
 

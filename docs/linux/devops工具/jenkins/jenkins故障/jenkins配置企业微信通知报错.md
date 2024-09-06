@@ -14,7 +14,9 @@
 
 构建通知报错 `通知异常javax.net.ssl.SSLHandshakeException: No appropriate protocol (protocol is disabled or cipher suites are inappropriate)`
 
-![iShot2021-09-10 17.21.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-10 17.21.09.png)
+![iShot2021-09-10_17.21.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-10_17.21.09.png)
+
+
 
 
 
@@ -22,7 +24,9 @@
 
 在 `Manage Jenkins` -> `System Properties` 下查看系统使用的jdk信息，不知为何使用的是openjdk
 
-![iShot2021-09-10 17.22.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-10 17.22.21.png)
+![iShot2021-09-10_17.22.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-10_17.22.21.png)
+
+
 
 
 

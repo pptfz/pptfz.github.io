@@ -14,7 +14,7 @@ Zabbix 5.0对于告警（报警媒介）进行了扩展和优化，可以直接�
 
 `管理` -> `报警媒介类型` -> `创建媒介类型`
 
-![iShot2021-10-09 17.53.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-09%2017.53.35.png)
+![iShot2021-10-09_17.53.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-09_17.53.35.png)
 
 
 
@@ -22,7 +22,9 @@ Zabbix 5.0对于告警（报警媒介）进行了扩展和优化，可以直接�
 
 ### 1.1 编辑报警媒介类型相关信息
 
-![iShot2021-10-09 17.59.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-09%2017.59.51.png)
+![iShot2021-10-09_17.59.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-09_17.59.51.png)
+
+
 
 
 
@@ -225,7 +227,7 @@ Message template `Problem update` 默认内容
 
 
 
-![iShot2021-10-10 20.14.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10%2020.14.49.png)
+![iShot2021-10-10_20.14.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10_20.14.49.png)
 
 
 
@@ -281,9 +283,9 @@ Message template `Problem update` 默认内容
   >**事件ID**:    `{EVENT.ID}`
   ```
 
+![iShot2021-10-10_21.09.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10_21.09.11.png)
 
 
-![iShot2021-10-10 21.09.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10%2021.09.11.png)
 
 
 
@@ -333,7 +335,7 @@ Message template `Problem update` 默认内容
 
   
 
-![iShot2021-10-10 21.23.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10%2021.23.05.png)
+![iShot2021-10-10_21.23.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10_21.23.05.png)
 
 
 
@@ -341,13 +343,17 @@ Message template `Problem update` 默认内容
 
 `配置` -> `动作` -> `创建动作`
 
-![iShot2021-10-10 21.25.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10%2021.25.12.png)
+![iShot2021-10-10_21.25.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10_21.25.12.png)
+
+
 
 
 
 依次编辑 `操作`、`恢复操作`、`更新操作`，需要配置的就是发送的组和发送的报警媒介
 
-![iShot2021-10-10 21.29.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10%2021.29.12.png)
+![iShot2021-10-10_21.29.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10_21.29.12.png)
+
+
 
 
 
@@ -357,19 +363,21 @@ Message template `Problem update` 默认内容
 
 点击左下角的 `User settings`
 
-![iShot2021-10-10 21.32.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10%2021.32.42.png)
+![iShot2021-10-10_21.32.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10_21.32.42.png)
 
 
 
 添加报警媒介收件人
 
-![iShot2021-10-10 21.34.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10%2021.34.30.png)
+![iShot2021-10-10_21.34.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10_21.34.30.png)
 
 
 
 
 
-![iShot2021-10-10 21.35.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10%2021.35.23.png)
+![iShot2021-10-10_21.35.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-10_21.35.23.png)
+
+
 
 
 
