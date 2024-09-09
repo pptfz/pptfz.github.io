@@ -1055,7 +1055,9 @@ HTTP 通信时，除客户端和服务器外，还有一些用于协助通信的
 
 ### 9.1 代理
 
-![iShot2022-03-28 17.50.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28%2017.50.02.png)
+![iShot2022-03-28_17.50.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28_17.50.02.png)
+
+
 
 HTTP 代理服务器是 Web 安全、应用集成以及性能优化的重要组成模块。代理位于客户端和服务器端之间，接收客户端所有的 HTTP 请求，并将这些请求转发给服务器（可能会对请求进行修改之后再进行转发）。对用户来说，这些应用程序就是一个代理，代表用户访问服务器。
  出于安全考虑，通常会将代理作为转发所有 Web 流量的可信任中间节点使用。代理还可以对请求和响应进行过滤，安全上网或绿色上网。
@@ -1078,7 +1080,9 @@ Web 缓存或代理缓存是一种特殊的 HTTP 代理服务器，可以将经�
 
 **HTTP / FTP 网关**
 
-![iShot2022-03-28 17.51.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28%2017.51.52.png)
+![iShot2022-03-28_17.51.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28_17.51.52.png)
+
+
 
 网关是一种特殊的服务器，作为其他服务器的中间实体使用。通常用于将 HTTP 流量转换成其他的协议。网关接收请求时就好像自己是资源的源服务器一样。客户端可能并不知道自己正在跟一个网关进行通信。
 

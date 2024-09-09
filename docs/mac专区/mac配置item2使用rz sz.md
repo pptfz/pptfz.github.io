@@ -94,19 +94,25 @@ fi
 
 第一步、点击 `Preferences`
 
-![iShot2022-01-15 16.50.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-15%2016.50.19.png)
+![iShot2022-01-15_16.50.19](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-15_16.50.19.png)
+
+
 
 
 
 第二步、在 `Profiles` -> `Advanced` -> `Triggers` -> `Edit`
 
-![iShot2022-01-15 16.57.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-15%2016.57.18.png)
+![iShot2022-01-15_16.57.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-15_16.57.18.png)
+
+
 
 
 
 点击 `+` 
 
-![iShot2022-01-15 16.58.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-15%2016.58.55.png)
+![iShot2022-01-15_16.58.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-15_16.58.55.png)
+
+
 
 
 
@@ -119,5 +125,5 @@ fi
 
 
 
-![iShot2022-01-15 17.01.47](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-15%2017.01.47.png)
+![iShot2022-01-15_17.01.47](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-01-15_17.01.47.png)
 

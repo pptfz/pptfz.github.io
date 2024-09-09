@@ -4,7 +4,7 @@
 
 
 
-![iShot2021-12-25 15.23.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25%2015.23.06.png)
+![iShot2021-12-25_15.23.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25_15.23.06.png)
 
 
 
@@ -12,7 +12,9 @@
 
 在jenkins项目中构建触发器下勾选 `Generic Webhook Trigger`，然后在 `Token` 处填写一个任意名称的token名
 
-![iShot2021-12-25 15.28.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25%2015.28.16.png)
+![iShot2021-12-25_15.28.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25_15.28.16.png)
+
+
 
 
 
@@ -22,7 +24,9 @@
 
 在项目中点击 `设置`
 
-![iShot2021-12-25 15.38.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25%2015.38.18.png)
+![iShot2021-12-25_15.38.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25_15.38.18.png)
+
+
 
 
 
@@ -30,7 +34,7 @@
 
 在 `Web钩子` 处点击 `添加 Web 钩子`
 
-![iShot2021-12-25 15.41.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25%2015.41.01.png)
+![iShot2021-12-25_15.41.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25_15.41.01.png)
 
 
 
@@ -46,13 +50,15 @@ http://JENKINS_URL/generic-webhook-trigger/invoke?token=xxx
 
 
 
-![iShot2021-12-25 16.02.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25%2016.02.54.png)
+![iShot2021-12-25_16.02.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25_16.02.54.png)
 
 
 
 添加后的webhook
 
-![iShot2021-12-25 16.04.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25%2016.04.38.png)
+![iShot2021-12-25_16.04.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25_16.04.38.png)
+
+
 
 
 
@@ -60,7 +66,9 @@ http://JENKINS_URL/generic-webhook-trigger/invoke?token=xxx
 
 如果推送有问题我们可以点击 `测试推送` 来查看问题
 
-![iShot2021-12-25 16.16.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25%2016.16.50.png)
+![iShot2021-12-25_16.16.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-25_16.16.50.png)
+
+
 
 
 

@@ -2,7 +2,11 @@
 
 [k8s pod生命周期官方文档](https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions)
 
-![iShot2022-03-13 19.21.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-13%2019.21.50.png)
+
+
+
+
+![iShot2022-03-13_19.21.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-13_19.21.50.png)
 
 
 

@@ -131,7 +131,7 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **数据端口号识别应用**
 
-![iShot2022-03-28 20.22.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28%2020.22.33.png)
+![iShot2022-03-28_20.22.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28_20.22.33.png)
 
 
 
@@ -427,7 +427,9 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 - IPv6 类似 IPv4，也是通过 IP 地址的前几位标识 IP 地址的种类。
 - 在互联网通信中，使用一种全局的单播地址。它是互联网中唯一的一个地址，不需要正式分配 IP 地址。
 
-![iShot2022-03-28 21.07.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28%2021.07.38.png)
+![iShot2022-03-28_21.07.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28_21.07.38.png)
+
+
 
 
 
@@ -506,7 +508,9 @@ TCP/IP 中有两个具有代表性的传输层协议，分别是 TCP 和 UDP。
 
 **夹着 IPv4 网络的两个 IPv6 网络**
 
-![iShot2022-03-28 21.10.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28%2021.10.27.png)
+![iShot2022-03-28_21.10.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-28_21.10.27.png)
+
+
 
 - 如上图的网络环境中，网络 A 与网络 B 之间无法直接进行通信，为了让它们之间正常通信，这时必须得采用 IP 隧道的功能。
 

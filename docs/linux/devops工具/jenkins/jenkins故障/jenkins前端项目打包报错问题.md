@@ -13,11 +13,17 @@ yarn install
 yarn build:prod
 ```
 
-![iShot2021-12-31 19.46.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-31 19.46.01.png)
+
+
+![iShot2021-12-31_19.46.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-31_19.46.01.png)
 
 
 
-报错信息如下，前端说是因为部分依赖包没有安装成功![iShot2021-12-31 19.55.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-31 19.55.17.png)
+
+
+报错信息如下，前端说是因为部分依赖包没有安装成功
+
+![iShot2021-12-31_19.55.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-31_19.55.17.png)
 
 
 
@@ -33,4 +39,5 @@ yarn build:prod
 
 在项目中构建环境下勾选 `Delete workspace before build starts` 这样就会在项目构建前把项目目录删除后再构建
 
-![iShot2021-12-31 20.02.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-31 20.02.31.png)
+![iShot2021-12-31_20.02.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-12-31_20.02.31.png)
+
