@@ -6,7 +6,7 @@
 
 > **jenkins在配置完任务后点击build之后，发现任务列表中自动添加了第二个任务，然后就是第三个、第四个、第五个。。。无限循环**
 
-![iShot_2024-09-04_14.43.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.43.11.png)
+![iShot_2024-09-04_14.43.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-04_14.43.11.png)
 
 
 
@@ -22,7 +22,7 @@
 
 在项目git地址配置中我写的是 `*/test`，而git仓库中有`test`和`origin/test`两个分支
 
-![iShot_2024-09-04_14.45.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.45.38.png)
+![iShot_2024-09-04_14.45.38](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-04_14.45.38.png)
 
 
 
@@ -32,7 +32,7 @@
 
 
 
-![iShot_2024-09-04_14.44.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-04_14.44.27.png)
+![iShot_2024-09-04_14.44.27](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-04_14.44.27.png)
 
 
 

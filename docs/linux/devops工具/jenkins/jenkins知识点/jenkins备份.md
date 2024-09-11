@@ -12,7 +12,7 @@ jenkins备份需要安装插件 `thinBackup`，如果没有配置加速或者下
 
 插件安装完成后会在系统管理中出现如下 `ThinBackup`
 
-![iShot_2024-09-02_19.18.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.18.01.png)
+![iShot_2024-09-02_19.18.01](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.18.01.png)
 
 
 
@@ -32,7 +32,7 @@ jenkins备份需要安装插件 `thinBackup`，如果没有配置加速或者下
 
 jenkins页面中选择 `Manage Jenkins` --> `ThinBackup` --> `Backup Now(手动备份)`
 
-![iShot_2024-09-02_19.19.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.19.07.png)
+![iShot_2024-09-02_19.19.07](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.19.07.png)
 
 
 

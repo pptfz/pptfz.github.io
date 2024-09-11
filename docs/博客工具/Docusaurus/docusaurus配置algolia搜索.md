@@ -20,13 +20,13 @@
 
 注册完并且完成邮件验证后会默认创建一个 `My First Application` 程序
 
-![iShot_2023-08-10_11.17.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-08-10_11.17.21.png)
+![iShot_2023-08-10_11.17.21](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-08-10_11.17.21.png)
 
 
 
 在这个 `My First Application` 程序下创建一个索引
 
-![iShot_2023-08-10_11.21.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-08-10_11.21.28.png)
+![iShot_2023-08-10_11.21.28](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-08-10_11.21.28.png)
 
 
 
@@ -34,7 +34,7 @@
 
 这里创建一个名为 `docusaurus` 的索引
 
-![iShot_2023-08-10_11.23.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-08-10_11.23.23.png)
+![iShot_2023-08-10_11.23.23](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-08-10_11.23.23.png)
 
 
 
@@ -44,7 +44,7 @@
 
 点击左下角的 `Settings` ，在右上角的 `Team and Access` 处点击下边的 `API Keys`
 
-![iShot_2023-08-10_11.26.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-08-10_11.26.01.png)
+![iShot_2023-08-10_11.26.01](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-08-10_11.26.01.png)
 
 
 
@@ -54,7 +54,7 @@
 
 需要获取 `Application ID` 、`Search-Only API Key` 和 `Admin API Key`
 
-![iShot_2023-08-10_11.28.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-08-10_11.28.14.png)
+![iShot_2023-08-10_11.28.14](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-08-10_11.28.14.png)
 
 
 
@@ -104,13 +104,13 @@ themeConfig:
 
 完成配置后刷新浏览器，就会看到在最右上角会出现一个搜索框
 
-![iShot_2023-08-10_12.32.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-08-10_12.32.04.png)
+![iShot_2023-08-10_12.32.04](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-08-10_12.32.04.png)
 
 
 
 打开后效果如下
 
-![iShot_2023-08-10_12.33.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-08-10_12.33.20.png)
+![iShot_2023-08-10_12.33.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-08-10_12.33.20.png)
 
 
 
@@ -285,5 +285,5 @@ Nb hits: 1
 
 在algolia官网中可以看到爬取的记录
 
-![iShot_2023-08-10_12.59.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-08-10_12.59.48.png)
+![iShot_2023-08-10_12.59.48](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-08-10_12.59.48.png)
 

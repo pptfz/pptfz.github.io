@@ -18,7 +18,7 @@
 
 
 
-![iShot_2023-12-11_19.21.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-12-11_19.21.03.png)
+![iShot_2023-12-11_19.21.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-12-11_19.21.03.png)
 
 通过配置，Ingress 可为 Service 提供外部可访问的 URL、对其流量作负载均衡、 终止 SSL/TLS，以及基于名称的虚拟托管等能力。 [Ingress 控制器](https://kubernetes.io/zh-cn/docs/concepts/services-networking/ingress-controllers) 负责完成 Ingress 的工作，具体实现上通常会使用某个负载均衡器， 不过也可以配置边缘路由器或其他前端来帮助处理流量。
 
@@ -52,13 +52,13 @@ ingress-nginx是ingress控制器中的一种，其他类型的ingress控制器�
 
 云环境中会有
 
-![iShot_2023-12-12_14.39.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-12-12_14.39.12.png)
+![iShot_2023-12-12_14.39.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-12-12_14.39.12.png)
 
 
 
 VM环境
 
-![iShot_2023-12-12_14.40.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-12-12_14.40.20.png)
+![iShot_2023-12-12_14.40.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-12-12_14.40.20.png)
 
 
 

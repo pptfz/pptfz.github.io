@@ -24,13 +24,13 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 使用 ZenTermLite 登陆服务器报错如下
 
-![iShot_2022-09-05_19.37.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-05_19.37.18.png)
+![iShot_2022-09-05_19.37.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-09-05_19.37.18.png)
 
 
 
 并且使用 FinallShell 登陆服务器提示如下
 
-![iShot_2024-08-21_21.53.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.53.25.png)
+![iShot_2024-08-21_21.53.25](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.53.25.png)
 
 
 

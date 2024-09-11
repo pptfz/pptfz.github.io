@@ -4,7 +4,7 @@
 
 有一些平台是不需要登陆就可以访问的，例如prometheus，安装完成后直接访问就可以了
 
-![iShot_2024-05-30_17.23.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-05-30_17.23.40.png)
+![iShot_2024-05-30_17.23.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-05-30_17.23.40.png)
 
 
 
@@ -105,4 +105,4 @@ status:
 
 配置完成后访问浏览器就提示需要输入用户名密码了
 
-![iShot_2024-05-30_17.43.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-05-30_17.43.09.png)
+![iShot_2024-05-30_17.43.09](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-05-30_17.43.09.png)

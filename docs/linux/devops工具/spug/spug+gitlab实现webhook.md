@@ -4,7 +4,7 @@
 
 在 `应用管理` 下找到相应项目，然后点击 `Webhook`
 
-![iShot2021-09-09_15.31.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_15.31.39.png)
+![iShot2021-09-09_15.31.39](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_15.31.39.png)
 
 
 
@@ -14,7 +14,7 @@
 
 选择分支或者tag，然后复制 `webhook URL` 和 `Secret Token`
 
-![iShot2021-09-09_15.43.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_15.43.59.png)
+![iShot2021-09-09_15.43.59](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_15.43.59.png)
 
 
 
@@ -26,13 +26,13 @@
 
 
 
-![iShot2021-09-09_15.23.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_15.23.54.png)
+![iShot2021-09-09_15.23.54](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_15.23.54.png)
 
 
 
 分别填写spug项目中的 `webhook url` 和 `sceret token`，设置触发条件
 
-![iShot2021-09-09_15.52.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_15.52.52.png)
+![iShot2021-09-09_15.52.52](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_15.52.52.png)
 
 
 
@@ -40,7 +40,7 @@
 
 点击 `Add webhook` 报错 `Url is blocked: Requests to the local network are not allowed`
 
-![iShot2021-09-09_15.58.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_15.58.06.png)
+![iShot2021-09-09_15.58.06](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_15.58.06.png)
 
 
 
@@ -54,7 +54,7 @@
 
 
 
-![iShot2021-09-09_16.04.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_16.04.59.png)
+![iShot2021-09-09_16.04.59](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_16.04.59.png)
 
 
 
@@ -62,7 +62,7 @@
 
 webhook配置完成后点击下方的 `Test` 按钮，然后点击 `push events`
 
-![iShot2021-09-09_16.09.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_16.09.59.png)
+![iShot2021-09-09_16.09.59](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_16.09.59.png)
 
 
 
@@ -70,7 +70,7 @@ webhook配置完成后点击下方的 `Test` 按钮，然后点击 `push events`
 
 提示如下即表示成功
 
-![iShot2021-09-09_16.11.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_16.11.29.png)
+![iShot2021-09-09_16.11.29](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_16.11.29.png)
 
 
 
@@ -84,7 +84,7 @@ spug中项目配置如下，即本机提交代码至指定git仓库，则spug会
 
 > 目标机器需要生成 /opt/test/release 目录，`/opt/test/test` 目录不需要生成，spug会自动生成，否则会报错
 
-![iShot2021-09-09_16.14.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_16.14.53.png)
+![iShot2021-09-09_16.14.53](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_16.14.53.png)
 
 
 
@@ -92,7 +92,7 @@ spug中项目配置如下，即本机提交代码至指定git仓库，则spug会
 
 在 `构建仓库` 下会看到相应的构建
 
-![iShot2021-09-09_16.34.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_16.34.35.png)
+![iShot2021-09-09_16.34.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_16.34.35.png)
 
 
 
@@ -102,13 +102,13 @@ spug中项目配置如下，即本机提交代码至指定git仓库，则spug会
 
 在 `发布申请` 下会看到之前的构建已经成功发布
 
-![iShot2021-09-09_16.35.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_16.35.56.png)
+![iShot2021-09-09_16.35.56](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_16.35.56.png)
 
 
 
 
 
-![iShot2021-09-09_16.37.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-09-09_16.37.00.png)
+![iShot2021-09-09_16.37.00](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-09_16.37.00.png)
 
 
 

@@ -72,7 +72,7 @@ npx create-docusaurus@latest my-website classic
 
 安装完成后会生成 `my-website` 目录，目录结构如下
 
-![iShot_2022-06-22_17.24.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-06-22_17.24.06.png)
+![iShot_2022-06-22_17.24.06](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-06-22_17.24.06.png)
 
 ```
 $ ll
@@ -290,7 +290,7 @@ npm run start
 
 浏览器输入 `IP:3000` 访问，初始页如下
 
-![iShot_2022-06-22_20.55.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-06-22_20.55.17.png)
+![iShot_2022-06-22_20.55.17](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-06-22_20.55.17.png)
 
 
 

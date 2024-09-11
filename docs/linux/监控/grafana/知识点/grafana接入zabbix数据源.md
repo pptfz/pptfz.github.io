@@ -20,7 +20,7 @@ systemctl restart grafana-server
 
 **第一步、点击左侧设置按钮，然后点击`Plugins`**
 
-![iShot2020-06-1110.15.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.29.43.png)
+![iShot2020-06-1110.15.21](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1110.29.43.png)
 
 
 
@@ -28,15 +28,15 @@ systemctl restart grafana-server
 
 **第二步、在最下边找到zabbix插件，红色警告表明插件是外部插件**
 
-![iShot2020-06-1110.29.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.31.49.png)
+![iShot2020-06-1110.29.43](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1110.31.49.png)
 
 
 
 **第三步、允许zabbix插件**
 
-![iShot2020-06-1110.33.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.33.24.png)
+![iShot2020-06-1110.33.24](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1110.33.24.png)
 
-![iShot2020-06-1110.34.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.34.36.png)
+![iShot2020-06-1110.34.36](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1110.34.36.png)
 
 
 
@@ -44,13 +44,13 @@ systemctl restart grafana-server
 
 **第一步、点击左侧设置按钮，然后选择`Data Sources`**
 
-![iShot2020-06-1110.35.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.35.58.png)
+![iShot2020-06-1110.35.58](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1110.35.58.png)
 
 
 
 **第二步、选择`Add data source`**
 
-![iShot2020-06-1112.14.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.37.26.png)
+![iShot2020-06-1112.14.15](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1110.37.26.png)
 
 
 
@@ -58,7 +58,7 @@ systemctl restart grafana-server
 
 **第三步、选择zabbix**
 
-![iShot2020-06-1110.38.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.38.16.png)
+![iShot2020-06-1110.38.16](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1110.38.16.png)
 
 
 
@@ -74,13 +74,13 @@ zabbix api地址如下，如果localhost无法解析，则需要把localhost改�
 
 `http://localhost/zabbix/api_jsonrpc.php`
 
-![iShot2020-06-1110.45.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.45.02.png)
+![iShot2020-06-1110.45.02](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1110.45.02.png)
 
 
 
 **检测成功会提示如下**
 
-![iShot2020-06-1110.37.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1110.58.20.png)
+![iShot2020-06-1110.37.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1110.58.20.png)
 
 
 
@@ -92,29 +92,29 @@ zabbix api地址如下，如果localhost无法解析，则需要把localhost改�
 
 **点击左侧`+`号，选择`Dashboard`**
 
-![iShot2020-06-1110.58.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.14.15.png)
+![iShot2020-06-1110.58.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.14.15.png)
 
 
 
 **选择右上角`Dashboard settings`**
 
-![iShot2020-06-1112.16.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.16.18.png)
+![iShot2020-06-1112.16.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.16.18.png)
 
 
 
 **对dashboard进行重命名**
 
-![iShot2020-06-1112.19.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.19.24.png)
+![iShot2020-06-1112.19.24](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.19.24.png)
 
 **确认dashboard名称**
 
-![iShot2020-06-1112.20.47](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.20.47.png)
+![iShot2020-06-1112.20.47](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.20.47.png)
 
 
 
 **创建完成后的dashboard**
 
-![iShot2020-06-1112.21.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.21.45.png)
+![iShot2020-06-1112.21.45](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.21.45.png)
 
 
 
@@ -124,23 +124,23 @@ zabbix api地址如下，如果localhost无法解析，则需要把localhost改�
 
 **选择创建好的dashboard，然后点击右上角的`Add panel`，添加一个面板**
 
-![iShot2020-06-1112.25.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.25.20.png)
+![iShot2020-06-1112.25.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.25.20.png)
 
 
 
-![iShot2020-06-1112.26.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.26.11-1849599.png)
+![iShot2020-06-1112.26.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.26.11-1849599.png)
 
 
 
 **示例：创建CPU负载监控图形**
 
-![iShot2020-06-1112.36.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.36.31.png)
+![iShot2020-06-1112.36.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.36.31.png)
 
 
 
 **修改标题**
 
-![iShot2020-06-1112.45.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.42.25.png)
+![iShot2020-06-1112.45.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.42.25.png)
 
 
 
@@ -150,19 +150,19 @@ zabbix api地址如下，如果localhost无法解析，则需要把localhost改�
 
 **右上角点击`Save`**
 
-![iShot2020-06-1112.45.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.45.04.png)
+![iShot2020-06-1112.45.04](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.45.04.png)
 
 
 
 **保存dashboard的时候会要求添加改变的描述信息，即修改了哪些内容**
 
-![iShot2020-06-1112.42.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.45.50.png)
+![iShot2020-06-1112.42.25](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.45.50.png)
 
 
 
 **保存完后点击`Apply`**
 
-![iShot2020-06-1112.50.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.47.26.png)
+![iShot2020-06-1112.50.25](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.47.26.png)
 
 
 
@@ -170,7 +170,7 @@ zabbix api地址如下，如果localhost无法解析，则需要把localhost改�
 
 **最终效果如下，左上角是新建的dashboard，最好以部门名称命名，这样便于区分不同部门的机器，这里是示例创建了CPU负载监控图形，其余监控创建方法一致，面板大小也可以调整**
 
-![iShot2020-06-1112.47.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.48.03.png)
+![iShot2020-06-1112.47.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.48.03.png)
 
 
 
@@ -182,7 +182,7 @@ zabbix api地址如下，如果localhost无法解析，则需要把localhost改�
 
 **如果想要创建其他监控项图形，先选择对应的dashboard，然后在创建面板，最后在面板中选择相应的监控信息即可**
 
-![iShot2020-06-1112.48.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1112.50.25.png)
+![iShot2020-06-1112.48.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1112.50.25.png)
 
 
 
@@ -190,7 +190,7 @@ zabbix api地址如下，如果localhost无法解析，则需要把localhost改�
 
 **在可用内存监控中，默认的单位不太好识别**
 
-![iShot2020-06-1113.18.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1113.18.10.png)
+![iShot2020-06-1113.18.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1113.18.10.png)
 
 
 
@@ -198,11 +198,11 @@ zabbix api地址如下，如果localhost无法解析，则需要把localhost改�
 
 **点击右侧的`Axes(轴)`，选择相对应的轴，比如`Left Y(左Y轴)`，然后在`Unit(单位)`选项卡处选择相应的单位，选择`Data(Metric)`下的`bytes(Metric)`**
 
-![iShot2020-06-1113.30.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1113.21.31.png)
+![iShot2020-06-1113.30.36](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1113.21.31.png)
 
 
 
 **最终效果，这样看起来左侧显示单位就比较明了了**
 
-![iShot2020-06-1113.21.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-1113.30.36.png)
+![iShot2020-06-1113.21.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1113.30.36.png)
 

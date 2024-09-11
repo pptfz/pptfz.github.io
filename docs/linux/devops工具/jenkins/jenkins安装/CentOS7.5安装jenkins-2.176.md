@@ -93,7 +93,7 @@ https://pkg.jenkins.io/redhat-stable/
 
 **jenkins刚启动比较慢，等待启动完成**
 
-![iShot_2024-08-22_17.01.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.01.20.png)
+![iShot_2024-08-22_17.01.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.01.20.png)
 
 
 
@@ -101,7 +101,7 @@ https://pkg.jenkins.io/redhat-stable/
 
 **从/var/lib/jenkins/secrets/initialAdminPassword文件按中获取密码**
 
-![iShot_2024-08-22_17.03.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.03.04.png)
+![iShot_2024-08-22_17.03.04](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.03.04.png)
 
 
 
@@ -111,7 +111,7 @@ https://pkg.jenkins.io/redhat-stable/
 
 **是否安装插件，自行选择**
 
-![iShot_2024-08-22_17.19.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.19.09.png)
+![iShot_2024-08-22_17.19.09](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.19.09.png)
 
 
 
@@ -119,7 +119,7 @@ https://pkg.jenkins.io/redhat-stable/
 
 **选择插件进行安装，必须选择Locale插件，修改jenkins语言**
 
-![iShot_2024-08-22_17.04.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.04.26.png)
+![iShot_2024-08-22_17.04.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.04.26.png)
 
 
 
@@ -127,19 +127,19 @@ https://pkg.jenkins.io/redhat-stable/
 
 **等待安装完成**
 
-![iShot_2024-08-22_17.09.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.09.24.png)
+![iShot_2024-08-22_17.09.24](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.09.24.png)
 
 
 
 **插件安装完成后创建管理员用户，输入密码、用户全名、邮件地址**
 
-![iShot_2024-08-22_17.10.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.10.51.png)
+![iShot_2024-08-22_17.10.51](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.10.51.png)
 
 
 
 **jenkins URL默认为主机IP地址加8080端口**
 
-![iShot_2024-08-22_17.11.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.11.52.png)
+![iShot_2024-08-22_17.11.52](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.11.52.png)
 
 
 
@@ -147,7 +147,7 @@ https://pkg.jenkins.io/redhat-stable/
 
 **jenkins首界面**
 
-![iShot_2024-08-22_17.13.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.13.32.png)
+![iShot_2024-08-22_17.13.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.13.32.png)
 
 
 
@@ -157,13 +157,13 @@ https://pkg.jenkins.io/redhat-stable/
 
 **选择jenkins管理**
 
-![iShot_2024-08-22_17.14.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.14.18.png)
+![iShot_2024-08-22_17.14.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.14.18.png)
 
 
 
 **配置系统**
 
-![iShot_2024-08-22_17.15.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.15.48.png)
+![iShot_2024-08-22_17.15.48](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.15.48.png)
 
 
 
@@ -171,4 +171,4 @@ https://pkg.jenkins.io/redhat-stable/
 
 **默认语言填写zh_CN**
 
-![iShot_2024-08-22_17.16.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.16.39.png)
+![iShot_2024-08-22_17.16.39](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.16.39.png)

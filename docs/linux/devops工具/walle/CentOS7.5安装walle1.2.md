@@ -12,7 +12,7 @@
 
 **瓦力上线流程**
 
-![iShot2020-07-2010.13.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-2010.13.06.png)
+![iShot2020-07-2010.13.06](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-07-2010.13.06.png)
 
 
 
@@ -245,7 +245,7 @@ C:\Windows\System32\drivers\etc
 
 **初始化开发者账号密码为：demo/demo**
 
-![iShot_2024-08-22_17.24.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.24.00.png)
+![iShot_2024-08-22_17.24.00](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.24.00.png)
 
 
 
@@ -253,7 +253,7 @@ C:\Windows\System32\drivers\etc
 
 **登陆后首界面**
 
-![iShot_2024-08-22_17.25.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_17.25.02.png)
+![iShot_2024-08-22_17.25.02](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_17.25.02.png)
 
 
 

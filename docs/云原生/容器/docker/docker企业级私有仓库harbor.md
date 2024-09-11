@@ -44,7 +44,7 @@
 
 ## 3.harbor组件
 
-![iShot_2024-08-22_22.03.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_22.03.32.png)
+![iShot_2024-08-22_22.03.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_22.03.32.png)
 
 
 
@@ -185,7 +185,7 @@ cd9e038ab419        goharbor/harbor-registryctl:v1.8.1                  "/harbor
 
 **宿主机80端口**
 
-![iShot_2024-08-22_22.04.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_22.04.36.png)
+![iShot_2024-08-22_22.04.36](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_22.04.36.png)
 
 
 
@@ -193,7 +193,7 @@ cd9e038ab419        goharbor/harbor-registryctl:v1.8.1                  "/harbor
 
 **登陆后首界面**
 
-![iShot_2024-08-22_22.05.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_22.05.23.png)
+![iShot_2024-08-22_22.05.23](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_22.05.23.png)
 
 
 
@@ -226,7 +226,7 @@ https:
 
 将镜像推送到harbor，需要注意的是，推送的格式如下
 
-![iShot_2024-08-23_10.56.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_10.56.15.png)
+![iShot_2024-08-23_10.56.15](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_10.56.15.png)
 
 因此，需要先给镜像打标签
 

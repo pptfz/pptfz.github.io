@@ -6,7 +6,7 @@
 
 
 
-![iShot2022-03-13_19.21.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2022-03-13_19.21.50.png)
+![iShot2022-03-13_19.21.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-03-13_19.21.50.png)
 
 
 
@@ -40,7 +40,7 @@ Pod 结构图例
 
 *一个包含多个容器的 Pod 中包含一个用来拉取文件的程序和一个 Web 服务器， 均使用持久卷作为容器间共享的存储。*
 
-![iShot_2022-10-19_22.21.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-19_22.21.50.png)
+![iShot_2022-10-19_22.21.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-10-19_22.21.50.png)
 
 
 

@@ -8,19 +8,19 @@
 
 先来看一下直接从github下载的速度，3kB/s，这。。。
 
-![iShot2020-03-0916.49.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0916.49.50.png)
+![iShot2020-03-0916.49.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-03-0916.49.50.png)
 
 接下来使用码云实现下载加速
 
 **第一步、点击码云首页右上角的 `➕` ，选择从 `GitHub/GitLab导入仓库`**
 
-![iShot2020-03-0917.05.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0917.05.14.png)
+![iShot2020-03-0917.05.14](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-03-0917.05.14.png)
 
 **第二步、填写要下载的github链接并导入**
 
 这一步还是非常快的
 
-![iShot2020-03-0917.10.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0917.10.22.png)
+![iShot2020-03-0917.10.22](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-03-0917.10.22.png)
 
 导入成功后直接下载速度就会很快了！
 
@@ -44,10 +44,10 @@ git remote add origin
 
 安装谷歌浏览器插件 `GitHub加速`，[项目github地址](https://github.com/fhefh2015/Fast-GitHub)
 
-![iShot_2023-03-24_16.53.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-03-24_16.53.58.png)
+![iShot_2023-03-24_16.53.58](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-03-24_16.53.58.png)
 
 
 
 安装完成后就可以选择加速地址进行加速下载了
 
-![iShot_2023-03-24_16.55.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-03-24_16.55.56.png)
+![iShot_2023-03-24_16.55.56](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-03-24_16.55.56.png)

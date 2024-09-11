@@ -19,7 +19,7 @@
 
 效果如下
 
-![iShot_2023-07-03_11.35.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-07-03_11.35.46.png)
+![iShot_2023-07-03_11.35.46](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-07-03_11.35.46.png)
 
 
 
@@ -41,7 +41,7 @@ announcementBar: {
 
 效果如下
 
-![iShot_2023-07-03_15.43.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-07-03_15.43.25.png)
+![iShot_2023-07-03_15.43.25](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-07-03_15.43.25.png)
 
 
 

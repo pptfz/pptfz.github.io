@@ -369,13 +369,13 @@ docker run \
 
 然后会在 `/data/openldap/backup`  目录下生成以下备份文件
 
-![iShot_2022-09-10_22.41.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-10_22.41.40.png)
+![iShot_2022-09-10_22.41.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-09-10_22.41.40.png)
 
 
 
 解压缩后
 
-![iShot_2022-09-10_22.42.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-10_22.42.58.png)
+![iShot_2022-09-10_22.42.58](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-09-10_22.42.58.png)
 
 
 

@@ -44,7 +44,7 @@
 - 下方可选列表中勾选 `Gitee`（如列表中不存在 Gitee，则点击 `Check now` 更新插件列表）
 - 点击 `Download now and install after restart`
 
-![iShot2021-06-15_14.35.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_14.35.59.png)
+![iShot2021-06-15_14.35.59](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_14.35.59.png)
 
 
 
@@ -57,7 +57,7 @@
 - `Upload Plugin File` 中选择刚才下载的 XXX.hpi 点击 `Upload`
 - 后续页面中勾选 `Restart Jenkins when installation is complete and no jobs are running`
 
-![iShot2021-06-15_14.43.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_14.43.39.png)
+![iShot2021-06-15_14.43.39](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_14.43.39.png)
 
 
 
@@ -71,7 +71,7 @@
 
 **第二步、在 `Connection name` 中输入 `Gitee` 或者你想要的名字，`Gitee host URL` 中输入Gitee完整 URL地址：`https://gitea.pptfz.cn` （Gitee私有化客户输入部署的域名）**
 
-![iShot2021-06-15_14.58.53](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_14.58.53.png)
+![iShot2021-06-15_14.58.53](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_14.58.53.png)
 
 
 
@@ -89,7 +89,7 @@
 
 
 
-![iShot2021-06-15_15.22.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_15.22.54.png)
+![iShot2021-06-15_15.22.54](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_15.22.54.png)
 
 
 
@@ -97,7 +97,7 @@
 
 **第四步、`Credentials` 选择配置好的 `Gitee APIV5 Token`，点击 `Advanced` ，可配置是否忽略 SSL 错误（视您的Jenkins环境是否支持），并可设置链接测超时时间（视您的网络环境而定），最后点击 `Test Connection` 测试是否成功**
 
-![iShot2021-06-15_15.32.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_15.32.42.png)
+![iShot2021-06-15_15.32.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_15.32.42.png)
 
 
 
@@ -111,7 +111,7 @@
 
 前往 `Jenkins` -> `New Item` , name 输入 `gitbook`，选择 `Freestyle project` 保存即可创建构建项目
 
-![iShot2021-06-15_15.42.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_15.42.48.png)
+![iShot2021-06-15_15.42.48](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_15.42.48.png)
 
 
 
@@ -125,7 +125,7 @@
 
 任务全局配置中需要选择前一步中的Gitee链接。前往某个任务（如`gitbook`）的 `Configure` -> `General`，`Gitee connection` 中选择前面所配置的Gitee链接
 
-![iShot2021-06-15_15.48.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_15.48.59.png)
+![iShot2021-06-15_15.48.59](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_15.48.59.png)
 
 
 
@@ -139,7 +139,7 @@
 
 
 
-![iShot2021-06-15_17.27.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_17.27.10.png)
+![iShot2021-06-15_17.27.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_17.27.10.png)
 
 
 
@@ -147,7 +147,7 @@
 
 选择  `全局凭据(unrestricted)`
 
-![iShot2021-06-15_17.30.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_17.30.15.png)
+![iShot2021-06-15_17.30.15](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_17.30.15.png)
 
 
 
@@ -157,7 +157,7 @@
 
 选择 `Add Credentials`
 
-![iShot2021-06-15_17.32.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_17.32.44.png)
+![iShot2021-06-15_17.32.44](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_17.32.44.png)
 
 
 
@@ -170,7 +170,7 @@
 - 输入 `ID` 、 `Description` 、`Username`
 - 填写 jenkins 服务器的私钥
 
-![iShot2021-06-15_17.40.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_17.40.14.png)
+![iShot2021-06-15_17.40.14](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_17.40.14.png)
 
 
 
@@ -195,7 +195,7 @@
 
 **这里输入 `origin/${giteaSourceBranch}`**
 
-![iShot2021-06-15_18.39.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_18.39.29.png)
+![iShot2021-06-15_18.39.29](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_18.39.29.png)
 
 
 
@@ -213,7 +213,7 @@
 
 在gitea项目中的  `管理` 下选择  `WebHooks` ，新建webhook，URL在jenkins项目下的 `Build Triggers` 中查看
 
-![iShot2021-06-15_19.20.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_19.20.04.png)
+![iShot2021-06-15_19.20.04](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_19.20.04.png)
 
 
 
@@ -227,7 +227,7 @@
 
 :::
 
-![iShot2021-06-16_10.22.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-16_10.22.39.png)
+![iShot2021-06-16_10.22.39](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-16_10.22.39.png)
 
 
 
@@ -239,7 +239,7 @@
 
 gitea webhook中的url填写jenkins中 `Build Triggers` 下显示的地址
 
-![iShot2021-06-15_19.12.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_19.12.37.png)
+![iShot2021-06-15_19.12.37](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_19.12.37.png)
 
 
 
@@ -251,7 +251,7 @@ gitea webhook中的url填写jenkins中 `Build Triggers` 下显示的地址
 
 创建完成后的webhook
 
-![iShot2021-06-15_19.21.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_19.21.07.png)
+![iShot2021-06-15_19.21.07](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_19.21.07.png)
 
 
 
@@ -259,7 +259,7 @@ gitea webhook中的url填写jenkins中 `Build Triggers` 下显示的地址
 
 点击 `测试` 验证
 
-![iShot2021-06-15_19.23.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-15_19.23.07.png)
+![iShot2021-06-15_19.23.07](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-15_19.23.07.png)
 
 
 
@@ -273,7 +273,7 @@ gitea webhook中的url填写jenkins中 `Build Triggers` 下显示的地址
 
 勾选 `Gitee webhook 触发构建` 一行，触发构建策略选择 `推送代码`
 
-![iShot2021-06-16_10.25.25](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-16_10.25.25.png)
+![iShot2021-06-16_10.25.25](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-16_10.25.25.png)
 
 
 
@@ -283,7 +283,7 @@ gitea webhook中的url填写jenkins中 `Build Triggers` 下显示的地址
 
 在 `Build` 选项处，可以自定义webhook触发后执行的动作，这里以执行shell命令为例
 
-![iShot2021-06-16_11.35.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-16_11.35.56.png)
+![iShot2021-06-16_11.35.56](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-16_11.35.56.png)
 
 
 
@@ -295,7 +295,7 @@ gitea webhook中的url填写jenkins中 `Build Triggers` 下显示的地址
 
 本机手动提交代码，jenkins中就会自动触发构建了，构建就会执行上一步设置的webhook触发后执行的动作了
 
-![iShot2021-06-16_11.33.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-16_11.33.50.png)
+![iShot2021-06-16_11.33.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-16_11.33.50.png)
 
 
 

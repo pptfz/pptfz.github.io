@@ -281,7 +281,7 @@ print(time.strftime("%Y-%m-%d %X"))
 2017-09-27 08:18:32
 ```
 
-![iShot_2024-08-29_14.44.21](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_14.44.21.png)
+![iShot_2024-08-29_14.44.21](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_14.44.21.png)
 
 
 

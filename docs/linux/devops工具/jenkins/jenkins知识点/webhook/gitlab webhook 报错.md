@@ -6,7 +6,7 @@
 
 gitlab+jenkins 配置webhook自动触发，在gitlab项目中配置好webhook后点击 `Test Push events` 报错如下
 
-![iShot2021-10-19_14.29.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19_14.29.32.png)
+![iShot2021-10-19_14.29.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-19_14.29.32.png)
 
 
 
@@ -16,7 +16,7 @@ gitlab+jenkins 配置webhook自动触发，在gitlab项目中配置好webhook后
 
 
 
-![iShot2021-10-19_14.49.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19_14.49.14.png)
+![iShot2021-10-19_14.49.14](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-19_14.49.14.png)
 
 
 
@@ -28,7 +28,7 @@ gitlab+jenkins 配置webhook自动触发，在gitlab项目中配置好webhook后
 
 gitlab+jenkins 配置webhook自动触发，在gitlab项目中配置好webhook后点击 `Test Push events` 报错如下
 
-![iShot2021-10-19_15.32.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19_15.32.01.png)
+![iShot2021-10-19_15.32.01](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-19_15.32.01.png)
 
 
 
@@ -36,7 +36,7 @@ gitlab+jenkins 配置webhook自动触发，在gitlab项目中配置好webhook后
 
 需要在jenkins中 `系统管理` -> `系统配置` -> `Gitlab` 
 
-![iShot2021-10-19_16.02.05](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19_16.02.05.png)
+![iShot2021-10-19_16.02.05](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-19_16.02.05.png)
 
 
 

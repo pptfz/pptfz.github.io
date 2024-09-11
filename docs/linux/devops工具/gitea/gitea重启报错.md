@@ -39,7 +39,7 @@ Defaulted container "gitea" out of: gitea, init-directories (init), init-app-ini
 
 原因如下
 
-![iShot_2024-06-13_10.45.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-13_10.45.34.png)
+![iShot_2024-06-13_10.45.34](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-13_10.45.34.png)
 
 
 

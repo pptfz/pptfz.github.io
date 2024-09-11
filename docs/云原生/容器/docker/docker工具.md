@@ -100,5 +100,5 @@ docker run \
 
 使用runlike查看docker容器启动参数与原先容器启动参数对比，可以看到显示的还是比较详细的
 
-![iShot_2022-10-19_21.32.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-19_21.32.10.png)
+![iShot_2022-10-19_21.32.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-10-19_21.32.10.png)
 

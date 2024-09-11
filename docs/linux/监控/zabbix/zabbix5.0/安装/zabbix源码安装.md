@@ -70,7 +70,7 @@ useradd --system -g zabbix -d /usr/lib/zabbix -s /sbin/nologin -c "Zabbix Monito
 
 :::
 
-![iShot2021-06-14_17.19.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_17.19.59.png)
+![iShot2021-06-14_17.19.59](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_17.19.59.png)
 
 
 
@@ -725,7 +725,7 @@ EOF
 
 ### 9.1 默认语言选择中文
 
-![iShot2021-06-14_16.42.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_16.42.23.png)
+![iShot2021-06-14_16.42.23](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_16.42.23.png)
 
 
 
@@ -739,7 +739,7 @@ EOF
 
 如检测失败则需要修改php的相关配置，本文安装的php的配置文件路径为 `/etc/opt/remi/php73`
 
-![iShot2021-06-14_16.44.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_16.44.22.png)
+![iShot2021-06-14_16.44.22](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_16.44.22.png)
 
 
 
@@ -749,7 +749,7 @@ EOF
 
 以下选项只是为警告，不修改也可以
 
-![iShot2021-06-14_16.46.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_16.46.16.png)
+![iShot2021-06-14_16.46.16](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_16.46.16.png)
 
 
 
@@ -776,7 +776,7 @@ sed -i.bak -e '/^post_max_size/cpost_max_size = 16M' \
 
 重新检测，都为ok即可
 
-![iShot2021-06-14_16.59.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_16.59.50.png)
+![iShot2021-06-14_16.59.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_16.59.50.png)
 
 
 
@@ -786,7 +786,7 @@ sed -i.bak -e '/^post_max_size/cpost_max_size = 16M' \
 
 ### 9.3 配置数据库连接
 
-![iShot2021-06-14_16.58.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_16.58.04.png)
+![iShot2021-06-14_16.58.04](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_16.58.04.png)
 
 
 
@@ -794,7 +794,7 @@ sed -i.bak -e '/^post_max_size/cpost_max_size = 16M' \
 
 ### 9.4 配置zabbix服务器详细信息
 
-![iShot2021-06-14_17.01.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_17.01.33.png)
+![iShot2021-06-14_17.01.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_17.01.33.png)
 
 
 
@@ -802,7 +802,7 @@ sed -i.bak -e '/^post_max_size/cpost_max_size = 16M' \
 
 ### 9.5 设置时区
 
-![iShot2021-06-14_17.03.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_17.03.54.png)
+![iShot2021-06-14_17.03.54](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_17.03.54.png)
 
 
 
@@ -810,7 +810,7 @@ sed -i.bak -e '/^post_max_size/cpost_max_size = 16M' \
 
 ### 9.6 确认安装信息
 
-![iShot2021-06-14_17.05.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_17.05.03.png)
+![iShot2021-06-14_17.05.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_17.05.03.png)
 
 
 
@@ -820,7 +820,7 @@ sed -i.bak -e '/^post_max_size/cpost_max_size = 16M' \
 
 如遇如下界面，则需要按照提示下载配置文件 `zabbix.conf.php` 并上传至 `/var/www/html/zabbix/conf`
 
-![iShot2021-06-14_17.05.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_17.05.54.png)
+![iShot2021-06-14_17.05.54](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_17.05.54.png)
 
 
 
@@ -836,7 +836,7 @@ chown zabbix.zabbix zabbix.conf.php
 
 再次检测
 
-![iShot2021-06-14_17.13.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_17.13.30.png)
+![iShot2021-06-14_17.13.30](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_17.13.30.png)
 
 
 
@@ -850,7 +850,7 @@ chown zabbix.zabbix zabbix.conf.php
 
 
 
-![iShot2021-06-14_17.13.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-14_17.13.12.png)
+![iShot2021-06-14_17.13.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-14_17.13.12.png)
 
 
 

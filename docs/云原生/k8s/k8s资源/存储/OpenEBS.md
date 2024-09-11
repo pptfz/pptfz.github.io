@@ -22,7 +22,7 @@ OpenEBS 最初由 [MayaData](https://mayadata.io/) 构建并捐赠给云原生�
 
 OpenEBS 管理每个 Kubernetes 节点上可用的存储，并使用该存储为有状态工作负载提供本地或分布式（也称为复制）持久卷。
 
-![iShot_2023-04-12_17.19.46](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-04-12_17.19.46.png)
+![iShot_2023-04-12_17.19.46](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-12_17.19.46.png)
 
 
 

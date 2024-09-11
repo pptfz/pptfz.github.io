@@ -87,13 +87,13 @@ server {
 
 前端样式丢失
 
-![iShot_2024-04-11_15.41.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-04-11_15.41.31.png)
+![iShot_2024-04-11_15.41.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-04-11_15.41.31.png)
 
 
 
 正常样式
 
-![iShot_2024-04-11_17.49.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-04-11_17.49.11.png)
+![iShot_2024-04-11_17.49.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-04-11_17.49.11.png)
 
 ## 解决方法
 

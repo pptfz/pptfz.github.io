@@ -118,7 +118,7 @@
 
 
 
-![iShot_2023-03-29_16.57.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-03-29_16.57.04.png)
+![iShot_2023-03-29_16.57.04](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-03-29_16.57.04.png)
 
 
 

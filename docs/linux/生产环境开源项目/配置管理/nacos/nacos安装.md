@@ -48,7 +48,7 @@ sh bin/startup.sh -m standalone
 
 [http://nacos.com](http://nacos.com/):port/openAPI 域名 + SLB模式(内网SLB，不可暴露到公网，以免带来安全风险)，可读性好，而且换ip方便，推荐模式
 
-![iShot2021-05-25_20.00.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-25_20.00.37.png)
+![iShot2021-05-25_20.00.37](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-05-25_20.00.37.png)
 
 
 
@@ -116,7 +116,7 @@ export JAVA_HOME PATH CLASSPATH
 
 :::
 
-![iShot2021-05-27_10.35.39](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-27_10.35.39.png)
+![iShot2021-05-27_10.35.39](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-05-27_10.35.39.png)
 
 
 
@@ -193,7 +193,7 @@ mvn -Prelease-nacos clean install -U
 
 编译从未成功过，各种报错，直接放弃！
 
-![iShot2021-05-27_11.25.51](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-27_11.25.51.png)
+![iShot2021-05-27_11.25.51](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-05-27_11.25.51.png)
 
 
 
@@ -316,7 +316,7 @@ sh bin/startup.sh
 
 默认用户名密码都是 `nacos`
 
-![iShot2021-05-26_19.54.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-26_19.54.35.png)
+![iShot2021-05-26_19.54.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-05-26_19.54.35.png)
 
 
 
@@ -324,7 +324,7 @@ sh bin/startup.sh
 
 登陆后首页面
 
-![iShot2021-05-26_19.56.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-05-26_19.56.52.png)
+![iShot2021-05-26_19.56.52](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-05-26_19.56.52.png)
 
 
 

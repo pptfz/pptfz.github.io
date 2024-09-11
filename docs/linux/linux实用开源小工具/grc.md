@@ -10,7 +10,7 @@
 
 > 加强Linux颜色显示，效果如下
 
-![iShot_2024-08-21_21.55.22](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-21_21.55.22.png)
+![iShot_2024-08-21_21.55.22](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.55.22.png)
 
 
 

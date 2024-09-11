@@ -36,7 +36,7 @@ yum -y install virt-manager
 
 
 
-![iShot2021-11-27_21.47.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27_21.47.45.png)
+![iShot2021-11-27_21.47.45](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-11-27_21.47.45.png)
 
 
 
@@ -46,7 +46,7 @@ yum -y install virt-manager
 
 打开后是这样的
 
-![iShot2021-11-27_22.06.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-27_22.06.03.png)
+![iShot2021-11-27_22.06.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-11-27_22.06.03.png)
 
 
 

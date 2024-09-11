@@ -363,7 +363,7 @@ conn.close()
 
 **登陆成功**
 
-![iShot_2024-08-29_17.14.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_17.14.13.png)
+![iShot_2024-08-29_17.14.13](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_17.14.13.png)
 
 
 
@@ -371,7 +371,7 @@ conn.close()
 
 **登陆失败**
 
-![iShot_2024-08-29_17.15.26](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_17.15.26.png)
+![iShot_2024-08-29_17.15.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_17.15.26.png)
 
 
 
@@ -414,7 +414,7 @@ conn.close()
 
 
 
-![iShot_2024-08-29_17.17.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_17.17.08.png)
+![iShot_2024-08-29_17.17.08](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_17.17.08.png)
 
 
 
@@ -442,7 +442,7 @@ conn.close()
 
 **or后边跟了一个永真的条件，因此不管输入什么都能登陆成功**
 
-![iShot_2024-08-29_17.18.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_17.18.06.png)
+![iShot_2024-08-29_17.18.06](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_17.18.06.png)
 
 
 
@@ -498,7 +498,7 @@ conn.close()
 
 **使用4.2.1示例1中的写法登陆，会提示登陆失败**
 
-![iShot_2024-08-29_17.19.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_17.19.10.png)
+![iShot_2024-08-29_17.19.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_17.19.10.png)
 
 
 
@@ -508,7 +508,7 @@ conn.close()
 
 **使用4.2.2示例2中的写法登陆，会提示登陆失败**
 
-![iShot_2024-08-29_17.20.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-29_17.20.10.png)
+![iShot_2024-08-29_17.20.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_17.20.10.png)
 
 
 

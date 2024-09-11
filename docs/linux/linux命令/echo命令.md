@@ -92,7 +92,7 @@ hehe
 
 **`\e` 写法**
 
-![iShot_2024-08-23_19.14.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_19.14.01.png)
+![iShot_2024-08-23_19.14.01](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_19.14.01.png)
 
 
 
@@ -100,7 +100,7 @@ hehe
 
 **`\033` 写法**
 
-![iShot_2024-08-23_19.15.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_19.15.43.png)
+![iShot_2024-08-23_19.15.43](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_19.15.43.png)
 
 
 
@@ -112,19 +112,19 @@ hehe
 
 ### 4.1 设置前景颜色
 
-![iShot_2022-08-30_15.07.30](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_15.07.30.png)
+![iShot_2022-08-30_15.07.30](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-08-30_15.07.30.png)
 
 
 
 ### 4.2 设置背景颜色
 
-![iShot_2022-08-30_15.38.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_15.38.59.png)
+![iShot_2022-08-30_15.38.59](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-08-30_15.38.59.png)
 
 
 
 **windows终端下的效果**
 
-![iShot_2024-08-23_19.17.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_19.17.03.png)
+![iShot_2024-08-23_19.17.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_19.17.03.png)
 
 
 
@@ -132,7 +132,7 @@ hehe
 
 **mac终端下的效果**
 
-![iShot_2024-08-23_19.18.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_19.18.31.png)
+![iShot_2024-08-23_19.18.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_19.18.31.png)
 
 
 

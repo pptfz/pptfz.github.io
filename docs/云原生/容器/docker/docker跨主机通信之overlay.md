@@ -28,7 +28,7 @@
 
 **overlay网络跨主机通信示意图**
 
-![iShot_2024-08-23_11.04.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.04.52.png)
+![iShot_2024-08-23_11.04.52](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.04.52.png)
 
 
 
@@ -69,7 +69,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 
 浏览器访问 `10.0.0.60:8500`
 
-![iShot_2024-08-23_11.06.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.06.07.png)
+![iShot_2024-08-23_11.06.07](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.06.07.png)
 
 
 
@@ -138,7 +138,7 @@ a793cf0b4aed        progrium/consul     "/bin/start -server …"   37 seconds ag
 
 浏览器访问 `10.0.0.61:8500`
 
-![iShot_2024-08-23_11.06.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.06.07.png)
+![iShot_2024-08-23_11.06.07](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.06.07.png)
 
 
 
@@ -187,7 +187,7 @@ $ systemctl daemon-reload && systemctl restart docker
 
 **访问docker1 consul的web界面	`KEY/VALUE` --> `docker` --> `nodes`	正确情况为出现两个docker节点**
 
-![iShot_2024-08-23_11.07.07](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-23_11.07.07.png)
+![iShot_2024-08-23_11.07.07](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.07.07.png)
 
 
 

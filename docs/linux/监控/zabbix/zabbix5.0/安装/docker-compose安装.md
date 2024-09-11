@@ -76,7 +76,7 @@ git checkout 5.2
 
 `docker-compose_v3_alpine_mysql_latest.yaml`文件中的镜像
 
-![iShot2021-03-04 19.41.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-03-04 19.41.11.png)
+![iShot2021-03-04 19.41.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-03-04 19.41.11.png)
 
 
 

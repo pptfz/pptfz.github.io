@@ -42,11 +42,11 @@ MHA在写入器阻塞后的0.5-2秒内提供正常的主设备切换。通常可
 
 **正常工作时架构**
 
-![iShot2020-06-0517.48.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-0517.48.35.png)
+![iShot2020-06-0517.48.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-0517.48.35.png)
 
 **主库down机时架构**
 
-![iShot2020-06-0517.49.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-0517.49.03.png)
+![iShot2020-06-0517.49.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-0517.49.03.png)
 
 
 

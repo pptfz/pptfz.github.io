@@ -4,7 +4,7 @@
 
 k8s1.22.2，安装 [kubespheres](https://github.com/kubesphere/kubesphere) 后，通过官方提供的yaml文件删除，结果发现有一部分的命名空间无法删除，一直处于 `Terminating` 状态，无法通过 
 
-![iShot_2022-06-28_10.48.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-06-28_10.48.35.png)
+![iShot_2022-06-28_10.48.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-06-28_10.48.35.png)
 
 
 
@@ -49,4 +49,4 @@ curl -k -H "Content-Type: application/json" -X PUT --data-binary @tmp.json http:
 
 ## 5.验证
 
-![iShot_2022-06-28_13.01.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-06-28_13.01.58.png)
+![iShot_2022-06-28_13.01.58](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-06-28_13.01.58.png)

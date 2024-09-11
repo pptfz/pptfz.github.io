@@ -130,7 +130,7 @@ func main() {
 
 执行后，输出的excel文件内容如下所示
 
-![iShot_2024-04-25_15.15.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-04-25_15.15.31.png)
+![iShot_2024-04-25_15.15.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-04-25_15.15.31.png)
 
 
 
@@ -296,7 +296,7 @@ func simplifyDeploymentName(name string) string {
 
 执行后，输出的excel文件内容如下所示
 
-![iShot_2024-06-04_12.21.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-04_12.21.44.png)
+![iShot_2024-06-04_12.21.44](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-04_12.21.44.png)
 
 
 
@@ -434,4 +434,4 @@ func main() {
 
 执行后，输出的excel文件内容如下所示
 
-![iShot_2024-04-25_19.27.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-04-25_19.27.04.png)
+![iShot_2024-04-25_19.27.04](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-04-25_19.27.04.png)

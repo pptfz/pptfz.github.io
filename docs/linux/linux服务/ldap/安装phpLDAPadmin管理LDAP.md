@@ -94,7 +94,7 @@ systemctl restart httpd
 
 访问首页面
 
-![iShot2021-07-01_14.55.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_14.55.33.png)
+![iShot2021-07-01_14.55.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-07-01_14.55.33.png)
 
 
 
@@ -108,7 +108,7 @@ systemctl restart httpd
 
 密码为 `123456`
 
-![iShot2021-07-01_14.56.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_14.56.57.png)
+![iShot2021-07-01_14.56.57](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-07-01_14.56.57.png)
 
 
 
@@ -120,7 +120,7 @@ systemctl restart httpd
 
 phpldapadmin登陆成功后会报错 `This base cannot be created with PLA`
 
-![iShot2021-07-01_14.57.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_14.57.52.png)
+![iShot2021-07-01_14.57.52](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-07-01_14.57.52.png)
 
 
 
@@ -155,7 +155,7 @@ adding new entry "dc=pptfz,dc=com"
 
 执行成功后重新登陆 phpldapadmin，可以看到之前的报错已经没有了
 
-![iShot2021-07-01_15.16.16](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_15.16.16.png)
+![iShot2021-07-01_15.16.16](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-07-01_15.16.16.png)
 
 
 
@@ -165,7 +165,7 @@ adding new entry "dc=pptfz,dc=com"
 
 ldap默认是允许匿名访问的
 
-![iShot2021-07-01_18.09.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_18.09.42.png)
+![iShot2021-07-01_18.09.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-07-01_18.09.42.png)
 
 
 
@@ -197,7 +197,7 @@ systemctl restart slapd
 
 配置完成后匿名登陆按钮就取消了
 
-![iShot2021-07-01_18.16.55](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_18.16.55.png)
+![iShot2021-07-01_18.16.55](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-07-01_18.16.55.png)
 
 
 
@@ -211,7 +211,7 @@ systemctl restart slapd
 
 有些模版提示不能使用
 
-![iShot2021-07-01_15.23.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_15.23.17.png)
+![iShot2021-07-01_15.23.17](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-07-01_15.23.17.png)
 
 
 
@@ -288,7 +288,7 @@ systemctl restart slapd httpd
 
 模板不能使用提示没了
 
-![iShot2021-07-01_15.39.58](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-07-01_15.39.58.png)
+![iShot2021-07-01_15.39.58](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-07-01_15.39.58.png)
 
 
 
@@ -323,7 +323,7 @@ docker run \
 
 `IP:端口`
 
-![iShot_2022-09-09_22.16.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-09_22.16.56.png)
+![iShot_2022-09-09_22.16.56](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-09-09_22.16.56.png)
 
 
 
@@ -331,5 +331,5 @@ docker run \
 
 登录后
 
-![iShot_2022-09-09_22.17.54](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-09-09_22.17.54.png)
+![iShot_2022-09-09_22.17.54](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-09-09_22.17.54.png)
 

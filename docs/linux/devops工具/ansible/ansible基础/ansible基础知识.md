@@ -54,7 +54,7 @@
 
 
 
-![iShot_2024-08-22_18.32.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_18.32.59.png)
+![iShot_2024-08-22_18.32.59](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_18.32.59.png)
 
 
 

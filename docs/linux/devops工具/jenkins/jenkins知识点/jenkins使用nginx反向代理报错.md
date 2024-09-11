@@ -8,7 +8,7 @@
 
 jenkins使用nginx做反向代理，jenkins中提示如下
 
-![iShot2021-10-19 15.07.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-19%2015.07.27.png)
+![iShot2021-10-19 15.07.27](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-19%2015.07.27.png)
 
 
 

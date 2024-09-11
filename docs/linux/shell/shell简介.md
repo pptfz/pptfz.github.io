@@ -14,7 +14,7 @@ Ken Thompson 的 sh 是第一种 Unix Shell，Windows Explorer 是一个典型�
 
 
 
-![iShot2020-06-2320.57.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-06-2320.57.42.png)
+![iShot2020-06-2320.57.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-2320.57.42.png)
 
 
 

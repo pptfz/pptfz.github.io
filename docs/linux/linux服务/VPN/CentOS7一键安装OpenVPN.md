@@ -542,7 +542,7 @@ sed -i '14aauth-user-pass' /root/pptfz.ovpn
 
 选择安装的用户
 
-![iShot_2024-09-02_19.29.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.29.11.png)
+![iShot_2024-09-02_19.29.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.29.11.png)
 
 
 
@@ -550,19 +550,19 @@ sed -i '14aauth-user-pass' /root/pptfz.ovpn
 
 输入本机密码
 
-![iShot_2024-09-02_19.30.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.30.24.png)
+![iShot_2024-09-02_19.30.24](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.30.24.png)
 
 
 
 输入完成后会提示如下
 
-![iShot_2024-09-02_19.31.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.31.12.png)
+![iShot_2024-09-02_19.31.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.31.12.png)
 
 
 
 找到相应图标，点击要连接的VPN
 
-![iShot_2024-09-02_19.32.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.32.35.png)
+![iShot_2024-09-02_19.32.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.32.35.png)
 
 
 
@@ -570,13 +570,13 @@ sed -i '14aauth-user-pass' /root/pptfz.ovpn
 
 输入用户名和密码
 
-![iShot_2024-09-02_19.33.37](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.33.37.png)
+![iShot_2024-09-02_19.33.37](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.33.37.png)
 
 
 
 连接成功
 
-![iShot_2024-09-02_19.34.20](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.34.20.png)
+![iShot_2024-09-02_19.34.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.34.20.png)
 
 
 
@@ -635,7 +635,7 @@ windows安装就是一路下一步
 
 导入客户端文件
 
-![iShot_2024-09-02_19.35.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.35.50.png)
+![iShot_2024-09-02_19.35.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.35.50.png)
 
 
 
@@ -643,7 +643,7 @@ windows安装就是一路下一步
 
 输入用户名和密码
 
-![iShot2020-12-01 15.11.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-12-01%2015.11.36.png)
+![iShot2020-12-01 15.11.36](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-12-01%2015.11.36.png)
 
 
 
@@ -653,7 +653,7 @@ windows安装就是一路下一步
 
 连接成功
 
-![iShot_2024-09-02_19.41.04](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.41.04.png)
+![iShot_2024-09-02_19.41.04](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.41.04.png)
 
 
 

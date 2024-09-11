@@ -6,13 +6,13 @@
 
 ### 1.1 git工作流程
 
-![iShot_2024-08-22_15.08.56](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_15.08.56.png)
+![iShot_2024-08-22_15.08.56](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_15.08.56.png)
 
 
 
 ### 1.2 git四种状态
 
-![iShot_2024-08-22_15.19.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_15.19.29.png)
+![iShot_2024-08-22_15.19.29](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_15.19.29.png)
 
 
 
@@ -20,7 +20,7 @@
 
 ### 2.1 git工作区域及文件颜色
 
-![iShot_2024-08-22_15.21.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_15.21.00.png)
+![iShot_2024-08-22_15.21.00](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_15.21.00.png)
 
 
 

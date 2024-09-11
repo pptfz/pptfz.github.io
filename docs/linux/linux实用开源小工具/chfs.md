@@ -83,7 +83,7 @@ Flags:
 
 **参数说明**
 
-![iShot2021-06-22_10.58.59](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-22_10.58.59.png)
+![iShot2021-06-22_10.58.59](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-22_10.58.59.png)
 
 
 
@@ -141,7 +141,7 @@ nohup ./chfs --path="/data/website/down" --port=8088 --rule="::|nima:nima:rwd" &
 
 浏览器访问 `IP:端口`，需要点击 `登陆` 
 
-![iShot2021-06-16_20.01.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-16_20.01.15.png)
+![iShot2021-06-16_20.01.15](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-16_20.01.15.png)
 
 
 
@@ -149,7 +149,7 @@ nohup ./chfs --path="/data/website/down" --port=8088 --rule="::|nima:nima:rwd" &
 
 输入用户名密码
 
-![iShot2021-06-16_20.03.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-16_20.03.18.png)
+![iShot2021-06-16_20.03.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-16_20.03.18.png)
 
 
 
@@ -157,7 +157,7 @@ nohup ./chfs --path="/data/website/down" --port=8088 --rule="::|nima:nima:rwd" &
 
 登陆成功后就可以对权限目录下的文件目录操作了，绿色为 `下载` 、橘色为 `修改` 和 `重命名` 、红色为 `删除`
 
-![iShot2021-06-16_20.06.12](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-16_20.06.12.png)
+![iShot2021-06-16_20.06.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-16_20.06.12.png)
 
 
 
@@ -302,5 +302,5 @@ nohup ./chfs --file=chfs.ini &
 
 **运行chfs后，通过访问 `IP:port/asset/api.html` 查看chfs API文档**
 
-![iShot2021-06-16_21.05.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-06-16_21.05.48.png)
+![iShot2021-06-16_21.05.48](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-16_21.05.48.png)
 

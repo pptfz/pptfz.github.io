@@ -143,7 +143,7 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 初始界面如下，第一个注册的用户就是管理员，后续可以设置只有管理员能注册账号，可以修改配置文件，也可以在可选设置中设置
 
-![iShot_2024-08-22_22.01.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_22.01.43.png)
+![iShot_2024-08-22_22.01.43](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_22.01.43.png)
 
 
 
@@ -151,23 +151,23 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 **数据库设置**
 
-![iShot2020-03-0719.52.28](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0719.52.28.png)
+![iShot2020-03-0719.52.28](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-03-0719.52.28.png)
 
 **一般设置**
 
 可以自定义``仓库根目录``和``日志目录``
 
-![iShot2020-03-0719.59.01](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0719.59.01.png)
+![iShot2020-03-0719.59.01](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-03-0719.59.01.png)
 
 **可选设置**
 
 ⚠️如果这里勾选了禁止用户自主注册就必须设置管理员信息，否则你不允许注册又没设置管理员信息那企不是**🐔🐔斯密达了**？
 
-![iShot2020-03-0719.55.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0719.55.11.png)
+![iShot2020-03-0719.55.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-03-0719.55.11.png)
 
 登陆后首界面
 
-![iShot2020-03-0720.34.47](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0720.34.47.png)
+![iShot2020-03-0720.34.47](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-03-0720.34.47.png)
 
 剩下的操作就不用多说了，创建仓库、组织、用户，上传代码、拉取代码等等
 
@@ -179,7 +179,7 @@ b8f0be18fe78        postgres:9.6         "docker-entrypoint.s…"   27 seconds a
 
 例如，手动关闭页面注册按钮，修改``app.ini``文件中的``SHOW_REGISTRATION_BUTTON``一项
 
-![iShot2020-03-0720.11.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-03-0720.11.18.png)
+![iShot2020-03-0720.11.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-03-0720.11.18.png)
 
 [其他的配置上官网看](https://docs.gitea.io/zh-cn/config-cheat-sheet/)
 

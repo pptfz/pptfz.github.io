@@ -329,7 +329,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 **⚠️新版的gitlab中的权限可能会不同**
 
-![iShot_2024-09-02_19.25.09](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_19.25.09.png)
+![iShot_2024-09-02_19.25.09](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_19.25.09.png)
 
 
 

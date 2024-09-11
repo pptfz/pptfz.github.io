@@ -22,7 +22,7 @@ wget https://go.dev/dl/go1.22.3.darwin-arm64.pkg
 
 mac安装比较简单，点击继续等下一步即可
 
-![iShot_2024-05-15_20.41.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-05-15_20.41.13.png)
+![iShot_2024-05-15_20.41.13](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-05-15_20.41.13.png)
 
 
 

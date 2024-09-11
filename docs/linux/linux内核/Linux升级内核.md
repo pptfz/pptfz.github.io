@@ -13,7 +13,7 @@ $ uname -r
 
 **可根据自己实际需求下载对应版本**
 
-![iShot_2022-08-30_14.48.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-08-30_14.48.11.png)
+![iShot_2022-08-30_14.48.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-08-30_14.48.11.png)
 
 
 
@@ -266,7 +266,7 @@ make mrproper
 
 **配置命令**
 
-![iShot_2023-10-07_18.50.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-10-07_18.50.31.png)
+![iShot_2023-10-07_18.50.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-10-07_18.50.31.png)
 
 
 

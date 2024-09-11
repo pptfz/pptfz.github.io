@@ -6,7 +6,7 @@
 
 ## 1.SQL语句分类
 
-![iShot_2024-08-22_12.25.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_12.25.48.png)
+![iShot_2024-08-22_12.25.48](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_12.25.48.png)
 
 
 

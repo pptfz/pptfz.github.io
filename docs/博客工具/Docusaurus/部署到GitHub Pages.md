@@ -43,7 +43,7 @@
 - `Build and deployment` 下的 `Source` 选择 `Deploy from a branch`
 - `Branch` 指定的是部署分支，即代码构建后生成的静态页面的分支，`/root` 是代码发布源的的入口文件目录
 
-![iShot_2024-06-03_20.55.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_20.55.40.png)
+![iShot_2024-06-03_20.55.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-03_20.55.40.png)
 
 
 
@@ -51,9 +51,9 @@
 
 在 `Build and deployment` 下的 `Source` 选择 `Deploy from a branch` 后，提交代码触发构建有如下报错
 
-![iShot_2024-06-04_19.49.49](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-04_19.49.49.png)
+![iShot_2024-06-04_19.49.49](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-04_19.49.49.png)
 
-![iShot_2024-06-04_19.48.17](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-04_19.48.17.png)
+![iShot_2024-06-04_19.48.17](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-04_19.48.17.png)
 
 
 
@@ -269,9 +269,9 @@ jobs:
 
 配置完成后提交代码到指定分支就会自动触发 [GitHub Actions](https://docs.github.com/zh/actions) 从而更新网站内容
 
-![iShot_2024-06-03_20.29.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_20.29.24.png)
+![iShot_2024-06-03_20.29.24](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-03_20.29.24.png)
 
-![iShot_2024-06-03_20.29.57](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_20.29.57.png)
+![iShot_2024-06-03_20.29.57](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-03_20.29.57.png)
 
 
 
@@ -295,13 +295,13 @@ jobs:
 
 
 
-![iShot_2024-06-03_21.27.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_21.27.40.png)
+![iShot_2024-06-03_21.27.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-03_21.27.40.png)
 
 
 
 在这里我们可以创建一个 `secret` ，以企业微信机器人为例，健是 `WECHAT_WEBHOOK_KEY`  ， 值是企业微信机器人的 `Webhook key`
 
-![iShot_2024-06-03_21.26.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-03_21.26.40.png)
+![iShot_2024-06-03_21.26.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-03_21.26.40.png)
 
 
 

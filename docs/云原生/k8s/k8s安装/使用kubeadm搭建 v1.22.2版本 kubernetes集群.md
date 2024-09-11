@@ -8,7 +8,7 @@
 
 **单master架构图**
 
-![iShot2020-07-0410.58.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-0410.58.42.png)
+![iShot2020-07-0410.58.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-07-0410.58.42.png)
 
 
 
@@ -950,25 +950,25 @@ kubeadm join 172.30.100.101:6443 --token abcdef.0123456789abcdef \
 
 执行初始化报错 kubelet check 超时
 
-![iShot_2022-10-11_18.19.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-11_18.19.14.png)
+![iShot_2022-10-11_18.19.14](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-10-11_18.19.14.png)
 
 
 
 执行命令 `kubeadm reset` 重置后加参数 `-v=7` 查看详细日志，发现并没有明显的排查思路
 
-![iShot_2022-10-11_18.27.29](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-11_18.27.29.png)
+![iShot_2022-10-11_18.27.29](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-10-11_18.27.29.png)
 
 
 
 由于使用的是containerd，因此查看containerd日志，执行命令 `journalctl -xe -u containerd` 发现日志报错 `exit status 127: runc: error while loading shared libraries: libseccomp.so.2: cannot open shared object file: No such file or directory\\n\"\n"` ，提示缺少 `libseccomp.so.2`，执行命令 `yum -y install libseccomp` 安装这个包即可
 
-![iShot_2022-10-11_18.28.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-10-11_18.28.33.png)
+![iShot_2022-10-11_18.28.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-10-11_18.28.33.png)
 
 
 
 `kubeadm init` 命令执行流程如下图所示
 
-![iShot_2024-09-02_16.34.43](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.34.43.png)
+![iShot_2024-09-02_16.34.43](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.34.43.png)
 
 
 
@@ -1031,7 +1031,7 @@ Run 'kubectl get nodes' on the control-plane to see this node join the cluster.
 
 `kubeadm join` 命令执行流程如下所示
 
-![iShot_2024-09-02_16.36.47](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.36.47.png)
+![iShot_2024-09-02_16.36.47](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.36.47.png)
 
 
 
@@ -1118,7 +1118,7 @@ kubectl apply -f kube-flannel.yml
 
 `could not add IP address to "cni0": permission denied`
 
-![iShot2021-11-14_17.36.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14_17.36.23.png)
+![iShot2021-11-14_17.36.23](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-11-14_17.36.23.png)
 
 
 
@@ -1126,7 +1126,7 @@ kubectl apply -f kube-flannel.yml
 
 
 
-![iShot2021-11-07_23.39.13](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-07_23.39.13.png)
+![iShot2021-11-07_23.39.13](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-11-07_23.39.13.png)
 
 
 
@@ -1134,7 +1134,7 @@ kubectl apply -f kube-flannel.yml
 
 执行  `ip a`  命令查看网卡信息，可以看到有一个虚拟网卡 `cni0` ，这个虚拟网卡的IP段是 `10.88.0.0/16` 段的，这个就是应用flannel后创建的虚拟网卡
 
-![iShot2021-11-14_17.37.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14_17.37.34.png)
+![iShot2021-11-14_17.37.34](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-11-14_17.37.34.png)
 
 
 
@@ -1202,7 +1202,7 @@ systemctl restart containerd kubelet
 
 再次查看coredns就没有问题了
 
-![iShot2021-11-14_17.53.34](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14_17.53.34.png)
+![iShot2021-11-14_17.53.34](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-11-14_17.53.34.png)
 
 
 
@@ -1367,7 +1367,7 @@ kubectl get secret `kubectl get secret -n kubernetes-dashboard | grep admin-toke
 
 谷歌浏览器访问会提示如下
 
-![iShot2021-10-01_15.46.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-01_15.46.33.png)
+![iShot2021-10-01_15.46.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-01_15.46.33.png)
 
 
 
@@ -1375,7 +1375,7 @@ kubectl get secret `kubectl get secret -n kubernetes-dashboard | grep admin-toke
 
 通过火狐浏览器访问
 
-![iShot2021-10-01_15.52.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-01_15.52.45.png)
+![iShot2021-10-01_15.52.45](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-01_15.52.45.png)
 
 
 
@@ -1383,7 +1383,7 @@ kubectl get secret `kubectl get secret -n kubernetes-dashboard | grep admin-toke
 
 **然后粘贴2.5.6步骤中生成的base64字符串登陆dashboard，在登陆页面选择``令牌``一项**
 
-![iShot2021-10-01_15.54.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-10-01_15.54.35.png)
+![iShot2021-10-01_15.54.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-01_15.54.35.png)
 
 
 
@@ -1393,7 +1393,7 @@ kubectl get secret `kubectl get secret -n kubernetes-dashboard | grep admin-toke
 
 **登陆后的首界面**
 
-![iShot2021-11-14_18.19.11](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2021-11-14_18.19.11.png)
+![iShot2021-11-14_18.19.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-11-14_18.19.11.png)
 
 
 

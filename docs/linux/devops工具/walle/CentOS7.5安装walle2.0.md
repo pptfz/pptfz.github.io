@@ -14,7 +14,7 @@
 
 **瓦力上线流程**
 
-![iShot2020-07-2010.13.06](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-2010.13.06.png)
+![iShot2020-07-2010.13.06](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-07-2010.13.06.png)
 
 
 
@@ -293,7 +293,7 @@ sh admin.sh migration # Migration，数据迁移
 
 **登陆界面**
 
-![iShot_2024-08-22_18.24.08](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_18.24.08.png)
+![iShot_2024-08-22_18.24.08](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_18.24.08.png)
 
 
 
@@ -303,7 +303,7 @@ sh admin.sh migration # Migration，数据迁移
 
 **登陆后首界面**
 
-![iShot_2024-08-22_18.25.14](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-08-22_18.25.14.png)
+![iShot_2024-08-22_18.25.14](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_18.25.14.png)
 
 
 

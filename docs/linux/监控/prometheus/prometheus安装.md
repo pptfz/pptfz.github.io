@@ -137,7 +137,7 @@ prometheus-server-69786c785-vbzbb                    2/2     Running   0        
 
 默认界面如下
 
-![iShot_2024-05-30_17.23.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-05-30_17.23.40.png)
+![iShot_2024-05-30_17.23.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-05-30_17.23.40.png)
 
 
 

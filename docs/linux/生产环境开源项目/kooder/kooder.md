@@ -28,7 +28,7 @@ Kooder 服务包含两个模块，分别是 gateway 和 indexer（默认配置�
 
 **数据流图**
 
-![iShot_2022-07-03_19.04.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-07-03_19.04.45.png)
+![iShot_2022-07-03_19.04.45](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-07-03_19.04.45.png)
 
 
 
@@ -101,7 +101,7 @@ docker-compose -f docker-compose.yaml up -d
 
 浏览器访问 `ip:8080`，初始界面如下
 
-![iShot_2022-07-03_19.32.23](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-07-03_19.32.23.png)
+![iShot_2022-07-03_19.32.23](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-07-03_19.32.23.png)
 
 
 
@@ -194,7 +194,7 @@ git.password = bb319595dc98bb8fbdcf3fc442c25893
 
 `gitlab.personal_access_token` 中的token在gitlab中新建一个token即可，给到的权限为 `api` 、`read_user` 、`read_api` 、`read_repository`
 
-![iShot_2022-07-03_19.42.03](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-07-03_19.42.03.png)
+![iShot_2022-07-03_19.42.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-07-03_19.42.03.png)
 
 
 
@@ -210,11 +210,11 @@ docker-compose -f docker-compose.yaml restart
 
 仓库搜索效果
 
-![iShot_2022-07-03_22.15.47](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-07-03_22.15.47.png)
+![iShot_2022-07-03_22.15.47](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-07-03_22.15.47.png)
 
 
 
 代码搜索效果
 
-![iShot_2022-07-03_22.18.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2022-07-03_22.18.15.png)
+![iShot_2022-07-03_22.18.15](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-07-03_22.18.15.png)
 

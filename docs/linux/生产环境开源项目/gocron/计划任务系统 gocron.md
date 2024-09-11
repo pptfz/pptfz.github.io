@@ -48,7 +48,7 @@
 
 > gocron分为调度器和任务节点
 
-![iShot_2024-09-02_16.46.18](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.46.18.png)
+![iShot_2024-09-02_16.46.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.46.18.png)
 
 ### gocron 命令
 
@@ -150,13 +150,13 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 配置数据库、管理员账号
 
-![iShot_2024-09-02_16.47.52](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.47.52.png)
+![iShot_2024-09-02_16.47.52](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.47.52.png)
 
 
 
 
 
-![iShot_2024-09-02_16.50.45](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.50.45.png)
+![iShot_2024-09-02_16.50.45](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.50.45.png)
 
 
 
@@ -164,7 +164,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 登陆后首界面
 
-![iShot_2024-09-02_16.51.32](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.51.32.png)
+![iShot_2024-09-02_16.51.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.51.32.png)
 
 
 
@@ -172,7 +172,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 ### 3.1 新增节点
 
-![iShot_2024-09-02_16.52.15](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.52.15.png)
+![iShot_2024-09-02_16.52.15](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.52.15.png)
 
 
 
@@ -182,7 +182,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 编辑节点信息，输入主机名(域名或者IP)，node节点默认端口是5921
 
-![iShot_2024-09-02_16.53.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.53.10.png)
+![iShot_2024-09-02_16.53.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.53.10.png)
 
 
 
@@ -190,7 +190,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 添加完的节点
 
-![iShot_2024-09-02_16.53.48](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.53.48.png)
+![iShot_2024-09-02_16.53.48](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.53.48.png)
 
 
 
@@ -198,7 +198,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 点击 `测试连接` 查看机器联通性
 
-![iShot_2024-09-02_16.54.44](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.54.44.png)
+![iShot_2024-09-02_16.54.44](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.54.44.png)
 
 
 
@@ -206,7 +206,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 点击 `任务管理` --> `新增`
 
-![iShot_2024-09-02_16.59.31](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_16.59.31.png)
+![iShot_2024-09-02_16.59.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_16.59.31.png)
 
 
 
@@ -214,13 +214,13 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 编辑任务
 
-![iShot_2024-09-02_17.00.38](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.00.38.png)
+![iShot_2024-09-02_17.00.38](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.00.38.png)
 
 
 
 可以选择绿色框处的手动执行，也可以选择灰色框中的查看日志
 
-![iShot_2024-09-02_17.01.33](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.01.33.png)
+![iShot_2024-09-02_17.01.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.01.33.png)
 
 
 
@@ -228,7 +228,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 查看日志，执行成功与否会在这里有显示
 
-![iShot_2024-09-02_17.02.27](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.02.27.png)
+![iShot_2024-09-02_17.02.27](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.02.27.png)
 
 
 
@@ -246,7 +246,7 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 :::
 
-![iShot_2024-09-02_17.03.35](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.03.35.png)
+![iShot_2024-09-02_17.03.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.03.35.png)
 
 
 
@@ -256,13 +256,13 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 :::
 
-![iShot_2024-09-02_17.05.02](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.05.02.png)
+![iShot_2024-09-02_17.05.02](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.05.02.png)
 
 
 
 在任务中选择任务通知、通知类型和接收通知用户
 
-![iShot_2024-09-02_17.06.50](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.06.50.png)
+![iShot_2024-09-02_17.06.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.06.50.png)
 
 
 
@@ -270,13 +270,13 @@ grant all on gocron.* to gocron@'127.0.0.1' identified by 'gocron';
 
 执行成功的邮件通知
 
-![iShot_2024-09-02_17.07.36](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.07.36.png)
+![iShot_2024-09-02_17.07.36](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.07.36.png)
 
 
 
 执行失败的邮件通知
 
-![iShot_2024-09-02_17.09.00](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-02_17.09.00.png)
+![iShot_2024-09-02_17.09.00](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.09.00.png)
 
 
 

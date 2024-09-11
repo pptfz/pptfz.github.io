@@ -181,7 +181,7 @@ server {
 
 浏览器访问会发现提示 `WebSocket Disconnected` ，原因在于nginx的隧道需要把client端的upgrade请求发送给zeppelin，所以upgrade和connection的头信息需要显式设置
 
-![iShot_2024-09-03_11.08.40](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-03_11.08.40.png)
+![iShot_2024-09-03_11.08.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-03_11.08.40.png)
 
 
 
@@ -207,4 +207,4 @@ server {
 
 重启nginx后刷新即可
 
-![iShot_2024-09-03_11.06.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-09-03_11.06.42.png)
+![iShot_2024-09-03_11.06.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-03_11.06.42.png)

@@ -44,7 +44,7 @@ sudo cloud-provider-kind
 
 cloud-provider-kind运行成功后，可以看到LoadBalancer类型的svc已经获取到了ip
 
-![iShot_2024-06-12_19.23.10](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2024-06-12_19.23.10.png)
+![iShot_2024-06-12_19.23.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-12_19.23.10.png)
 
 同时会运行一个docker容器用于暴露端口
 

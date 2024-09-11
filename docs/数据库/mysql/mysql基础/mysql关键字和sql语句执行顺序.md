@@ -46,4 +46,4 @@
 
 **执行顺序**
 
-![iShot_2023-03-28_17.31.24](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot_2023-03-28_17.31.24.png)
+![iShot_2023-03-28_17.31.24](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-03-28_17.31.24.png)

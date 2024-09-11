@@ -17,7 +17,7 @@
 
 - zabbix报错如下
 
-![iShot2020-07-2516.33.42](https://gitea.pptfz.cn/pptfz/picgo-images/raw/branch/master/img/iShot2020-07-2516.33.42.png)
+![iShot2020-07-2516.33.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-07-2516.33.42.png)
 
 **排查过程：**
 
