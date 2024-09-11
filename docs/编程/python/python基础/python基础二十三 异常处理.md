@@ -52,7 +52,7 @@ ZeroDivisionError: division by zero
 
 
 
-![iShot_2024-08-29_14.47.17](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_14.47.17.png)
+![iShot_2024-08-29_14.47.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.47.17.png)
 
 
 
@@ -153,7 +153,7 @@ except 异常类型：
     try中一旦检测到异常，就执行这里的代码
 ```
 
-![iShot_2024-08-29_14.48.55](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_14.48.55.png)
+![iShot_2024-08-29_14.48.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.48.55.png)
 
 
 
@@ -172,7 +172,7 @@ else:
     没有发生异常执行的代码        
 ```
 
-![iShot_2024-08-29_14.49.53](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_14.49.53.png)
+![iShot_2024-08-29_14.49.53](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.49.53.png)
 
 
 
@@ -236,7 +236,7 @@ raise
 
 
 
-![iShot_2024-08-29_14.51.08](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_14.51.08.png)
+![iShot_2024-08-29_14.51.08](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.51.08.png)
 
 
 
@@ -489,4 +489,4 @@ assert 1 == 2
 
 
 
-![iShot_2024-08-29_14.52.55](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_14.52.55.png)
+![iShot_2024-08-29_14.52.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.52.55.png)

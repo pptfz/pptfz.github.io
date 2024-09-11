@@ -24,7 +24,7 @@ HorizontalPodAutoscaler 被实现为 Kubernetes API 资源和[控制器](https:/
 
 HorizontalPodAutoscaler 控制 Deployment 及其 ReplicaSet 的规模示意图
 
-![iShot_2022-11-25_14.58.53](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-11-25_14.58.53.png)
+![iShot_2022-11-25_14.58.53](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-11-25_14.58.53.png)
 
 
 

@@ -6,7 +6,7 @@
 
 **错误页面**
 
-![iShot2021-07-30_17.37.45](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-07-30_17.37.45.png)
+![iShot2021-07-30_17.37.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-07-30_17.37.45.png)
 
 
 

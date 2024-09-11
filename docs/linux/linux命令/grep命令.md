@@ -20,7 +20,7 @@
 | `.`        | 匹配除换行外的多个字符            | `l..e`         | 字母 `l` 和 `e` 之间有2个任意字符                            | `like`（匹配），`love`（不匹配，因为 `.` 只匹配一个字符），`lame`（匹配） |
 | `[]`       | 匹配中括号内的任意字符            | `[lL]ove`      | 匹配 `love` 或 `Love`                                        | `love`（匹配），`Love`（匹配），`dove`（不匹配）             |
 | `[^]`      | 匹配不在中括号内的任意字符        | `[^a-km-z]ove` | 匹配包含 `ove` ，但 `ove` 之前的那个字符不在 `a` 至 `k` 或 `m` 至 `z` 之间的字符 | `Love`（匹配），`Move`（匹配），`Jove`（不匹配），`Kove`（不匹配） |
-| `\(\)`     | 分组，主要做反向引用              | `(a)\1`        | `(a)`: 这个部分会捕获字符 `a`，并将其存储在第一个捕获组中。`\1`: 这是一个反向引用，指的是第一个捕获组中的内容。也就是说，`\1` 会匹配捕获组中已经匹配到的内容（在这里就是字符 `a`）因此，`(a)\1` 这个正则表达式会匹配两个连续的 `a`，即 `aa`![iShot_2024-08-23_19.38.09](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_19.38.09.png) | `aa`（匹配），`a`（不匹配），`aaa`（匹配前两个 `a`）         |
+| `\(\)`     | 分组，主要做反向引用              | `(a)\1`        | `(a)`: 这个部分会捕获字符 `a`，并将其存储在第一个捕获组中。`\1`: 这是一个反向引用，指的是第一个捕获组中的内容。也就是说，`\1` 会匹配捕获组中已经匹配到的内容（在这里就是字符 `a`）因此，`(a)\1` 这个正则表达式会匹配两个连续的 `a`，即 `aa`![iShot_2024-08-23_19.38.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_19.38.09.png) | `aa`（匹配），`a`（不匹配），`aaa`（匹配前两个 `a`）         |
 | `&`        | 保存查找串以便在替换中引用        | `s/love/&`     | `&` 代表查找串，将 `love` 替换为 `love`，也就是不对文本进行任何改变 | `I love you` 替换结果为 `I love you`（不变）                 |
 | `\<`       | 词首定位符                        | `<love`        | 匹配以 `love` 开头的单词的行                                 | `love is kind`（匹配），`belove`（不匹配），`Love story`（匹配） |
 | `\>`       | 词尾定位符                        | `love>`        | 匹配以 `love` 结尾的单词的行                                 | `I truly love`（匹配），`lovely`（不匹配），`mylove`（不匹配） |
@@ -48,7 +48,7 @@
 
 #### `[:alnum:]`		[a-zA-Z0-9]匹配所有字母和数字字符
 
-![iShot_2024-08-26_14.35.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_14.35.32.png)
+![iShot_2024-08-26_14.35.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_14.35.32.png)
 
 
 
@@ -56,7 +56,7 @@
 
 #### `[:alpha:]`		匹配任意一个字母（包括大小写）
 
-![iShot_2024-08-26_15.36.17](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_15.36.17.png)
+![iShot_2024-08-26_15.36.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_15.36.17.png)
 
 
 
@@ -64,43 +64,43 @@
 
 #### `[:digit:]`		匹配任意一个数字
 
-![iShot_2024-08-26_15.39.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_15.39.11.png)
+![iShot_2024-08-26_15.39.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_15.39.11.png)
 
 
 
 #### `[:lower:]`		匹配小写字母
 
-![iShot_2024-08-26_15.42.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_15.42.42.png)
+![iShot_2024-08-26_15.42.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_15.42.42.png)
 
 
 
 #### `[:upper:]`		匹配大写字母
 
-![iShot_2024-08-26_15.52.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_15.52.26.png)
+![iShot_2024-08-26_15.52.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_15.52.26.png)
 
 
 
 #### `[:punct:]`		匹配标点符号
 
-![iShot_2024-08-26_16.07.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_16.07.26.png)
+![iShot_2024-08-26_16.07.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_16.07.26.png)
 
 
 
 #### `[:blank:]`		匹配空格与制表符
 
-![iShot_2024-08-26_16.18.29](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_16.18.29.png)
+![iShot_2024-08-26_16.18.29](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_16.18.29.png)
 
 
 
 #### `[:space:]`		匹配一个包括换行符、回车等在内的所有空白字符
 
-![iShot_2024-08-26_16.22.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_16.22.03.png)
+![iShot_2024-08-26_16.22.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_16.22.03.png)
 
 
 
 #### `[:graph:]`		匹配任意可看的见的且可打印的字符
 
-![iShot_2024-08-26_16.29.58](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_16.29.58.png)
+![iShot_2024-08-26_16.29.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_16.29.58.png)
 
 
 
@@ -108,7 +108,7 @@
 
 #### `[:print:]`		匹配任何一个可以打印的字符
 
-![iShot_2024-08-26_16.32.46](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_16.32.46.png)
+![iShot_2024-08-26_16.32.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_16.32.46.png)
 
 
 
@@ -116,7 +116,7 @@
 
 #### `[:xdigit:]`		匹配任意一个16进制数（0-9，a-f，A-F）
 
-![iShot_2024-08-26_16.34.47](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_16.34.47.png)
+![iShot_2024-08-26_16.34.47](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_16.34.47.png)
 
 
 
@@ -175,25 +175,25 @@ ababab
 ab123aaaBBB
 ```
 
-![iShot_2024-08-26_18.30.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_18.30.33.png)
+![iShot_2024-08-26_18.30.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_18.30.33.png)
 
 
 
 #### `-i`	比较字符时忽略大小写区别
 
-![iShot_2024-08-26_18.35.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_18.35.31.png)
+![iShot_2024-08-26_18.35.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_18.35.31.png)
 
 
 
 #### `-l`	过滤的时候只显示文件名
 
-![iShot_2024-08-26_18.37.39](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_18.37.39.png)
+![iShot_2024-08-26_18.37.39](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_18.37.39.png)
 
 
 
 #### `-w`	把表达式作为词来查找，相当于正则中的 `<...>` (...表示你自定义的规则)
 
-![iShot_2024-08-26_18.41.45](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_18.41.45.png)
+![iShot_2024-08-26_18.41.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_18.41.45.png)
 
 
 
@@ -215,25 +215,25 @@ EOF
 
 
 
-![iShot_2024-08-26_18.47.06](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_18.47.06.png)
+![iShot_2024-08-26_18.47.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_18.47.06.png)
 
 
 
 #### `-v`	取反
 
-![iShot_2024-08-26_18.49.06](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_18.49.06.png)
+![iShot_2024-08-26_18.49.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_18.49.06.png)
 
 
 
 #### `-c`	count，统计，统计匹配结果的行数，不是匹配结果的次数，是行数
 
-![iShot_2024-08-26_18.50.34](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_18.50.34.png)
+![iShot_2024-08-26_18.50.34](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_18.50.34.png)
 
 
 
 #### `-m`	只匹配规定的行数，之后的内容就不再匹配了
 
-![iShot_2024-08-26_18.52.28](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_18.52.28.png)
+![iShot_2024-08-26_18.52.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_18.52.28.png)
 
 
 
@@ -245,7 +245,7 @@ EOF
 
 :::
 
-![iShot_2024-08-26_19.04.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_19.04.31.png)
+![iShot_2024-08-26_19.04.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_19.04.31.png)
 
 
 
@@ -257,7 +257,7 @@ grep 默认是显示满足匹配条件的一行，加上这个参数就只显示
 
 :::
 
-![iShot_2024-08-26_19.10.43](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_19.10.43.png)
+![iShot_2024-08-26_19.10.43](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_19.10.43.png)
 
 
 
@@ -301,7 +301,7 @@ grep 默认是显示满足匹配条件的一行，加上这个参数就只显示
 echo '1222233333222444455556666669999'|egrep -o '([0-9])\1+'
 ```
 
-![iShot_2024-08-26_19.16.57](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_19.16.57.png)
+![iShot_2024-08-26_19.16.57](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_19.16.57.png)
 
 
 
@@ -311,7 +311,7 @@ echo '1222233333222444455556666669999'|egrep -o '([0-9])\1+'
 echo '1222233333222444455556666669999'|egrep -o '([0-9])\1+|[0-9]'
 ```
 
-![iShot_2024-08-26_19.17.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_19.17.35.png)
+![iShot_2024-08-26_19.17.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_19.17.35.png)
 
 
 
@@ -325,9 +325,9 @@ echo '1222233333222444455556666669999'|egrep -o '([0-9])\1*'
 echo '1222233333222444455556666669999'|egrep -o '(.)\1*'
 ```
 
-![iShot_2024-08-26_19.18.52](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_19.18.52.png)
+![iShot_2024-08-26_19.18.52](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_19.18.52.png)
 
-![iShot_2024-08-26_19.19.07](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_19.19.07.png)
+![iShot_2024-08-26_19.19.07](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_19.19.07.png)
 
 
 
@@ -397,7 +397,7 @@ $ grep -Po "(?<=:)[0-9]+" test.txt
 10
 ```
 
-![iShot_2024-08-26_19.25.54](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-26_19.25.54.png)
+![iShot_2024-08-26_19.25.54](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-26_19.25.54.png)
 
 
 

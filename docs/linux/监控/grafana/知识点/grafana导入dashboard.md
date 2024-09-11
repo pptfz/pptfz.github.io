@@ -4,7 +4,7 @@
 
 在 `Dashboards` -> `Import dashboard` 可以导入公共dashboard
 
-![iShot_2024-07-12_15.43.46](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-07-12_15.43.46.png)
+![iShot_2024-07-12_15.43.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-07-12_15.43.46.png)
 
 
 

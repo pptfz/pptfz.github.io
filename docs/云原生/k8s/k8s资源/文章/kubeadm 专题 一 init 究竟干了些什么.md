@@ -12,7 +12,7 @@
 
 kubeadm 属于第二层，用于管理集群。
 
-![iShot2020-04-1518.37.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-04-1518.37.50.png)
+![iShot2020-04-1518.37.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2020-04-1518.37.50.png)
 
 
 

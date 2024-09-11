@@ -513,7 +513,7 @@ None
 
 ```
 
-![iShot_2024-08-29_14.32.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_14.32.42.png)
+![iShot_2024-08-29_14.32.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.32.42.png)
 
 
 

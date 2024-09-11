@@ -20,7 +20,7 @@
 
 连接提示认证失败，在jumpserver群中提问，果然没有失望，还是熟悉的味道，没人回答
 
-![iShot_2024-09-04_14.24.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-04_14.24.33.png)
+![iShot_2024-09-04_14.24.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-04_14.24.33.png)
 
 
 

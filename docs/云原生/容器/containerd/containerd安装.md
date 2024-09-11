@@ -8,7 +8,7 @@
 
 containerd官方架构图
 
-![iShot2022-02-02_21.10.06](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-02-02_21.10.06.png)
+![iShot2022-02-02_21.10.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-02-02_21.10.06.png)
 
 
 
@@ -18,7 +18,7 @@ containerd官方架构图
 
 
 
-![iShot2022-02-02_21.06.05](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-02-02_21.06.05.png)
+![iShot2022-02-02_21.06.05](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-02-02_21.06.05.png)
 
 
 
@@ -87,7 +87,7 @@ mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.t
 
 
 
-![iShot2022-02-02_21.37.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-02-02_21.37.10.png)
+![iShot2022-02-02_21.37.10](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-02-02_21.37.10.png)
 
 
 

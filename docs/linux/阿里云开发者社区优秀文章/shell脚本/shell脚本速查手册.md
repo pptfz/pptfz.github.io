@@ -588,13 +588,13 @@ Bash Shell Function Library 是一个短小精炼的 Bash 公共库，他提供�
 
 作、命令执行、文件管理、日志记录、信息提醒、网络检测、字符操作、时间操作、变量 操作等功能，帮助运维工程师快速完成自己的脚本编写工作。
 
-![iShot2022-03-28_17.17.30](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-03-28_17.17.30.png)
+![iShot2022-03-28_17.17.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-03-28_17.17.30.png)
 
 
 
 此外，Bash Shell Function Library 还提供了一个完整的 [在线文档](https://skyplabs.github.io/bsfl/modules.html) ，帮助你了解函数库中 提供的重要函数
 
-![iShot2022-03-28_17.18.22](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-03-28_17.18.22.png)
+![iShot2022-03-28_17.18.22](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-03-28_17.18.22.png)
 
 
 

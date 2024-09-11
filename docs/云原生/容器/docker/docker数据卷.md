@@ -76,7 +76,7 @@ local               docker-volume
 
 ### 2.5 浏览器访问刚启动的容器
 
-![iShot_2024-08-23_11.00.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.00.12.png)
+![iShot_2024-08-23_11.00.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.00.12.png)
 
 
 
@@ -92,4 +92,4 @@ local               docker-volume
 
 ### 2.7 再次访问容器，可以看到，内容已经变化
 
-![iShot_2024-08-23_11.01.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.01.03.png)
+![iShot_2024-08-23_11.01.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.01.03.png)

@@ -119,13 +119,13 @@ git: 'remote-https' is not a git command. See 'git --help'.
 
 在 [StackExchange](https://unix.stackexchange.com/questions/694507/git-clone-from-https-url-fails-says-its-remote-https-is-not-a-git-command-an) 中找到了答案
 
-![iShot_2022-10-11_23.09.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-10-11_23.09.03.png)
+![iShot_2022-10-11_23.09.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-10-11_23.09.03.png)
 
 
 
 在 [github](https://github.com/git/git/blob/b896f729e240d250cf56899e6a0073f6aa469f5d/INSTALL#L141-L149) 中官方有相关说明
 
-![iShot_2022-10-11_23.10.48](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-10-11_23.10.48.png)
+![iShot_2022-10-11_23.10.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-10-11_23.10.48.png)
 
 
 

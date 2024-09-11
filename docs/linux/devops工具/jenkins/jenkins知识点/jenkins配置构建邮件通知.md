@@ -8,7 +8,7 @@
 
 ## 1.安装邮件插件 `Email Extension Plugin`
 
-![iShot2021-09-05_11.52.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_11.52.26.png)
+![iShot2021-09-05_11.52.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_11.52.26.png)
 
 
 
@@ -20,7 +20,7 @@
 
 `Manage Jenkins` -> `Jenkins Location` -> `System Admin e-mail address`
 
-![iShot2021-09-05_12.02.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_12.02.12.png)
+![iShot2021-09-05_12.02.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_12.02.12.png)
 
 
 
@@ -36,7 +36,7 @@
 
 :::
 
-![iShot2021-09-05_16.43.44](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_16.43.44.png)
+![iShot2021-09-05_16.43.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_16.43.44.png)
 
 
 
@@ -56,7 +56,7 @@ Check console output at $BUILD_URL to view the results.
 
 
 
-![iShot2021-09-05_16.15.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_16.15.50.png)
+![iShot2021-09-05_16.15.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_16.15.50.png)
 
 
 
@@ -120,7 +120,7 @@ ${CHANGES_SINCE_LAST_SUCCESS, reverse=true, format="%c", changesFormat="<li>%d [
 
 在 `Default Triggers` 处配置触发机制
 
-![iShot2021-09-05_16.49.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_16.49.10.png)
+![iShot2021-09-05_16.49.10](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_16.49.10.png)
 
 
 
@@ -130,7 +130,7 @@ ${CHANGES_SINCE_LAST_SUCCESS, reverse=true, format="%c", changesFormat="<li>%d [
 
 在项目下 `Post-build Actions` -> `Editable Email Notification`
 
-![iShot2021-09-05_16.21.13](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_16.21.13.png)
+![iShot2021-09-05_16.21.13](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_16.21.13.png)
 
 
 
@@ -140,7 +140,7 @@ ${CHANGES_SINCE_LAST_SUCCESS, reverse=true, format="%c", changesFormat="<li>%d [
 
 相关信息配置
 
-![iShot2021-09-05_16.34.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_16.34.40.png)
+![iShot2021-09-05_16.34.40](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_16.34.40.png)
 
 
 
@@ -152,7 +152,7 @@ ${CHANGES_SINCE_LAST_SUCCESS, reverse=true, format="%c", changesFormat="<li>%d [
 
 `Post-build Actions` -> `Advanced settings`
 
-![iShot2021-09-05_16.56.51](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_16.56.51.png)
+![iShot2021-09-05_16.56.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_16.56.51.png)
 
 
 
@@ -162,7 +162,7 @@ ${CHANGES_SINCE_LAST_SUCCESS, reverse=true, format="%c", changesFormat="<li>%d [
 
 默认只有 `Failuer - Any` ，点击 `Add` 增加 `Success` ，既构建失败和成功后发送邮件通知
 
-![iShot2021-09-05_17.03.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_17.03.11.png)
+![iShot2021-09-05_17.03.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_17.03.11.png)
 
 
 
@@ -172,7 +172,7 @@ ${CHANGES_SINCE_LAST_SUCCESS, reverse=true, format="%c", changesFormat="<li>%d [
 
 选择发送至 `Recipient List` 是全局配置，如果想针对单个项目发送指定的邮箱则需要去掉 `Recipient List` 选项，在下方的 `Recipient List` 中单独进行配置，单独配置适用场景为针对某个项目只给相关开发发送邮件，而全局配置 `Recipient List` 配置运维组邮箱，这样就可以运维接受所有构建邮件，而开发只需要接受自己组的项目的邮件
 
-![iShot2021-09-05_17.32.51](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_17.32.51.png)
+![iShot2021-09-05_17.32.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_17.32.51.png)
 
 
 
@@ -188,7 +188,7 @@ ${CHANGES_SINCE_LAST_SUCCESS, reverse=true, format="%c", changesFormat="<li>%d [
 
 构建项目，可以看到最后会有 `Email was triggered for: Success`
 
-![iShot2021-09-05_17.19.37](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_17.19.37.png)
+![iShot2021-09-05_17.19.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_17.19.37.png)
 
 
 
@@ -196,7 +196,7 @@ ${CHANGES_SINCE_LAST_SUCCESS, reverse=true, format="%c", changesFormat="<li>%d [
 
 收到的邮件
 
-![iShot2021-09-05_17.16.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-09-05_17.16.10.png)
+![iShot2021-09-05_17.16.10](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-05_17.16.10.png)
 
 
 

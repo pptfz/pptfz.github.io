@@ -6,7 +6,7 @@
 
 **docker容器网络示意图**
 
-![iShot_2024-08-23_11.09.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.09.35.png)
+![iShot_2024-08-23_11.09.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.09.35.png)
 
 
 
@@ -140,13 +140,13 @@ DNAT      tcp  -- 0.0.0.0/0           0.0.0.0/0      tcp dpt:8080 to:172.17.0.4:
 
 **2.宿主机80端口访问**
 
-![iShot_2024-08-23_11.12.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.12.33.png)
+![iShot_2024-08-23_11.12.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.12.33.png)
 
 
 
 **3.宿主机8080端口访问**
 
-![iShot_2024-08-23_11.13.22](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.13.22.png)
+![iShot_2024-08-23_11.13.22](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.13.22.png)
 
 
 
@@ -227,7 +227,7 @@ fbf5d8973f90        nginx:latest        "nginx -g 'daemon of…"   11 seconds ag
 
 **2.浏览器访问32768端口**
 
-![iShot_2024-08-23_11.16.02](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.16.02.png)
+![iShot_2024-08-23_11.16.02](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.16.02.png)
 
 ### 2.4 方式四	-p   宿主机端口:容器端口:udp
 

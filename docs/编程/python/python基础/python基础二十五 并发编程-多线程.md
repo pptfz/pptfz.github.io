@@ -22,7 +22,7 @@
 
 
 
-![iShot_2024-08-29_15.10.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_15.10.35.png)
+![iShot_2024-08-29_15.10.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_15.10.35.png)
 
 
 
@@ -532,7 +532,7 @@ for i in range(100):
 
 **示意图**
 
-![iShot_2024-08-29_15.13.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_15.13.33.png)
+![iShot_2024-08-29_15.13.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_15.13.33.png)
 
 
 

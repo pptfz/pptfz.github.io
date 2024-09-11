@@ -38,7 +38,7 @@ mac本机，在根目录下创建了一个目录，准备把这个目录下的�
 
 
 
-![iShot2020-06-1512.18.41](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-06-1512.18.41.png)
+![iShot2020-06-1512.18.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2020-06-1512.18.41.png)
 
 
 

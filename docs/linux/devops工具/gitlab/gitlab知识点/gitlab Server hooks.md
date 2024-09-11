@@ -100,7 +100,7 @@ chown git.git pre-receive && chmod u+x pre-receive
 
 git本地仓库配置的邮箱是126邮箱，在进行提交代码的时候就会报错如下
 
-![iShot2022-04-18_15.58.47](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-04-18_15.58.47.png)
+![iShot2022-04-18_15.58.47](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-04-18_15.58.47.png)
 
 
 
@@ -115,7 +115,7 @@ git commit --amend --author "xxx <xxx@163.com>"
 
 修改完成后再提交就可以了
 
-![iShot2022-04-18_16.33.09](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-04-18_16.33.09.png)
+![iShot2022-04-18_16.33.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-04-18_16.33.09.png)
 
 
 
@@ -123,8 +123,8 @@ git commit --amend --author "xxx <xxx@163.com>"
 
 在有合并操作的时候遇到了如下报错，gitlab中日志也没有有用的信息，但是查看提交信息，显示还是规则外的邮箱，所以这里有地方影响了合并操作
 
-![iShot2022-04-18_17.47.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-04-18_17.47.32.png)
+![iShot2022-04-18_17.47.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-04-18_17.47.32.png)
 
 解决方法就是合并人修改一下commit邮箱就可以了
 
-![iShot2022-04-18_19.31.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-04-18_19.31.18.png)
+![iShot2022-04-18_19.31.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-04-18_19.31.18.png)

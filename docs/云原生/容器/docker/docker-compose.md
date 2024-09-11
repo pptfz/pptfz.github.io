@@ -113,12 +113,12 @@ services:
 
 
 
-![iShot_2022-09-11_14.03.58](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-09-11_14.03.58.png)
+![iShot_2022-09-11_14.03.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-09-11_14.03.58.png)
 
 
 
 还可以在 [composerize官网](https://www.composerize.com/) 自动生成compose文件
 
-![iShot_2022-09-11_14.14.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-09-11_14.14.26.png)
+![iShot_2022-09-11_14.14.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-09-11_14.14.26.png)
 
 

@@ -329,7 +329,7 @@ Query OK, 1 row affected (0.01 sec)
 >
 > 例如，一本书可以有多个作者，一个作者可以写多本书
 
-![iShot_2024-08-22_14.43.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_14.43.12.png)
+![iShot_2024-08-22_14.43.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_14.43.12.png)
 
 
 

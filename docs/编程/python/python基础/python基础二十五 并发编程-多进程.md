@@ -21,7 +21,7 @@
 
 **串行**
 
-![iShot_2024-08-29_14.58.37](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_14.58.37.png)
+![iShot_2024-08-29_14.58.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.58.37.png)
 
 
 
@@ -29,7 +29,7 @@
 
 **并发**
 
-![iShot_2024-08-29_14.59.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_14.59.40.png)
+![iShot_2024-08-29_14.59.40](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.59.40.png)
 
 
 
@@ -37,7 +37,7 @@
 
 **并行**
 
-![iShot_2024-08-29_15.01.17](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-29_15.01.17.png)
+![iShot_2024-08-29_15.01.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_15.01.17.png)
 
 
 

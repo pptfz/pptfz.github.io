@@ -14,7 +14,7 @@ Zabbix 5.0对于告警（报警媒介）进行了扩展和优化，可以直接�
 
 `管理` -> `报警媒介类型` -> `创建媒介类型`
 
-![iShot2021-10-09_17.53.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-09_17.53.35.png)
+![iShot2021-10-09_17.53.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-10-09_17.53.35.png)
 
 
 
@@ -22,7 +22,7 @@ Zabbix 5.0对于告警（报警媒介）进行了扩展和优化，可以直接�
 
 ### 1.1 编辑报警媒介类型相关信息
 
-![iShot2021-10-09_17.59.51](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-09_17.59.51.png)
+![iShot2021-10-09_17.59.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-10-09_17.59.51.png)
 
 
 
@@ -227,7 +227,7 @@ Message template `Problem update` 默认内容
 
 
 
-![iShot2021-10-10_20.14.49](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-10_20.14.49.png)
+![iShot2021-10-10_20.14.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-10-10_20.14.49.png)
 
 
 
@@ -283,7 +283,7 @@ Message template `Problem update` 默认内容
   >**事件ID**:    `{EVENT.ID}`
   ```
 
-![iShot2021-10-10_21.09.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-10_21.09.11.png)
+![iShot2021-10-10_21.09.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-10-10_21.09.11.png)
 
 
 
@@ -335,7 +335,7 @@ Message template `Problem update` 默认内容
 
   
 
-![iShot2021-10-10_21.23.05](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-10_21.23.05.png)
+![iShot2021-10-10_21.23.05](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-10-10_21.23.05.png)
 
 
 
@@ -343,7 +343,7 @@ Message template `Problem update` 默认内容
 
 `配置` -> `动作` -> `创建动作`
 
-![iShot2021-10-10_21.25.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-10_21.25.12.png)
+![iShot2021-10-10_21.25.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-10-10_21.25.12.png)
 
 
 
@@ -351,7 +351,7 @@ Message template `Problem update` 默认内容
 
 依次编辑 `操作`、`恢复操作`、`更新操作`，需要配置的就是发送的组和发送的报警媒介
 
-![iShot2021-10-10_21.29.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-10_21.29.12.png)
+![iShot2021-10-10_21.29.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-10-10_21.29.12.png)
 
 
 
@@ -363,19 +363,19 @@ Message template `Problem update` 默认内容
 
 点击左下角的 `User settings`
 
-![iShot2021-10-10_21.32.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-10_21.32.42.png)
+![iShot2021-10-10_21.32.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-10-10_21.32.42.png)
 
 
 
 添加报警媒介收件人
 
-![iShot2021-10-10_21.34.30](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-10_21.34.30.png)
+![iShot2021-10-10_21.34.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-10-10_21.34.30.png)
 
 
 
 
 
-![iShot2021-10-10_21.35.23](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-10-10_21.35.23.png)
+![iShot2021-10-10_21.35.23](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-10-10_21.35.23.png)
 
 
 

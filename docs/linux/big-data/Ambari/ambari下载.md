@@ -12,7 +12,7 @@
 
 进入上面这个网站， `Products` 下 `Sofware Download` 
 
-![iShot_2024-09-02_17.35.19](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.35.19.png)
+![iShot_2024-09-02_17.35.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.35.19.png)
 
 
 
@@ -22,7 +22,7 @@
 
 [www.cloudera.com](https://www.cloudera.com/)
 
-![iShot_2024-09-02_17.38.19](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.38.19.png)
+![iShot_2024-09-02_17.38.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.38.19.png)
 
 
 
@@ -30,7 +30,7 @@
 
 支持中文的网站才是好网站
 
-![iShot_2024-09-02_17.39.48](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.39.48.png)
+![iShot_2024-09-02_17.39.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.39.48.png)
 
 
 
@@ -40,7 +40,7 @@
 
 点击  `Legacy HDP release ` 选择要下载的版本
 
-![iShot_2024-09-02_17.42.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.42.32.png)
+![iShot_2024-09-02_17.42.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.42.32.png)
 
 
 
@@ -52,7 +52,7 @@
 
 :::
 
-![iShot_2024-09-02_17.43.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.43.50.png)
+![iShot_2024-09-02_17.43.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.43.50.png)
 
 
 
@@ -60,7 +60,7 @@
 
 > 您必须是HDP客户才能访问这些下载。如果您认为自己应该可以使用这些软件，请与支持人员或您的客户服务代表联系。
 
-![iShot_2024-09-02_17.45.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.45.20.png)
+![iShot_2024-09-02_17.45.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.45.20.png)
 
 
 
@@ -70,7 +70,7 @@
 
 选择 3.1.4 版本，然后点击 `Installation`
 
-![iShot_2024-09-02_17.46.17](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.46.17.png)
+![iShot_2024-09-02_17.46.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.46.17.png)
 
 
 
@@ -78,7 +78,7 @@
 
 选择 `Apache Ambari Installation`
 
-![iShot_2024-09-02_17.47.25](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.47.25.png)
+![iShot_2024-09-02_17.47.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.47.25.png)
 
 
 
@@ -86,7 +86,7 @@
 
 先选择 `Obtaining Public Repositories` 然后再选择 `HDP Stack Repositories`
 
-![iShot_2024-09-02_17.48.13](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.48.13.png)
+![iShot_2024-09-02_17.48.13](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.48.13.png)
 
 
 
@@ -94,7 +94,7 @@
 
 
 
-![iShot_2024-09-02_17.49.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.49.26.png)
+![iShot_2024-09-02_17.49.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.49.26.png)
 
 
 
@@ -102,7 +102,7 @@
 
 可以下载 `HDP3.1.4` 和 `HDP-UTILS1.1.0.22`
 
-![iShot_2024-09-02_17.50.37](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.50.37.png)
+![iShot_2024-09-02_17.50.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.50.37.png)
 
 
 
@@ -131,7 +131,7 @@ wget http://public-repo-1.hortonworks.com/HDP-GPL/centos7/3.x/updates/3.1.4.0/HD
 
 :::
 
-![iShot_2024-09-02_17.52.41](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.52.41.png)
+![iShot_2024-09-02_17.52.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.52.41.png)
 
 
 
@@ -139,7 +139,7 @@ wget http://public-repo-1.hortonworks.com/HDP-GPL/centos7/3.x/updates/3.1.4.0/HD
 
 选择 `Installation`
 
-![iShot_2024-09-02_17.53.48](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.53.48.png)
+![iShot_2024-09-02_17.53.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.53.48.png)
 
 
 
@@ -147,7 +147,7 @@ wget http://public-repo-1.hortonworks.com/HDP-GPL/centos7/3.x/updates/3.1.4.0/HD
 
 选择 `Apache Ambari Installation`
 
-![iShot_2024-09-02_17.54.44](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.54.44.png)
+![iShot_2024-09-02_17.54.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.54.44.png)
 
 
 
@@ -155,7 +155,7 @@ wget http://public-repo-1.hortonworks.com/HDP-GPL/centos7/3.x/updates/3.1.4.0/HD
 
 选择 `Obtaining Public Repositories` 下的 `Ambari Repositories`
 
-![iShot_2024-09-02_17.57.16](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.57.16.png)
+![iShot_2024-09-02_17.57.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.57.16.png)
 
 
 
@@ -165,7 +165,7 @@ wget http://public-repo-1.hortonworks.com/HDP-GPL/centos7/3.x/updates/3.1.4.0/HD
 
 这里可根据系统类型选择不同的下载
 
-![iShot_2024-09-02_17.58.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-02_17.58.33.png)
+![iShot_2024-09-02_17.58.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_17.58.33.png)
 
 
 

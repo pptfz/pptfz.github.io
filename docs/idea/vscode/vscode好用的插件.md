@@ -6,7 +6,7 @@
 
 安装完成后效果如下
 
-![iShot_2024-05-28_20.12.02](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-05-28_20.12.02.png)
+![iShot_2024-05-28_20.12.02](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-05-28_20.12.02.png)
 
 
 
@@ -18,7 +18,7 @@
 
 主要是给左侧目录以及文件显示不同的图标
 
-![iShot_2024-05-28_20.13.21](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-05-28_20.13.21.png)
+![iShot_2024-05-28_20.13.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-05-28_20.13.21.png)
 
 
 
@@ -80,7 +80,7 @@
 
 效果如下
 
-![IMG_1763](https://github.com/pptfz/picgo-images/blob/master/img/IMG_1763.gif)
+![IMG_1763](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/IMG_1763.gif)
 
 
 

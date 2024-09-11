@@ -62,7 +62,7 @@ html模版文件1
 
 效果
 
-![iShot_2022-09-03_11.23.15](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-09-03_11.23.15.png)
+![iShot_2022-09-03_11.23.15](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-09-03_11.23.15.png)
 
 
 
@@ -116,7 +116,7 @@ html模版文件2
 
 效果
 
-![iShot_2022-09-03_11.23.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-09-03_11.23.50.png)
+![iShot_2022-09-03_11.23.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-09-03_11.23.50.png)
 
 
 

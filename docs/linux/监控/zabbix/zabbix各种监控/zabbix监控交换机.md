@@ -26,7 +26,7 @@ snmpwalk  -v 2c -c public100 10.0.0.123
 
 SNMP接口处填写交换机的IP，端口默认161
 
-![iShot2021-06-07_12.44.22](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-07_12.44.22.png)
+![iShot2021-06-07_12.44.22](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-07_12.44.22.png)
 
 
 
@@ -34,7 +34,7 @@ SNMP接口处填写交换机的IP，端口默认161
 
 交换机是华为的，所以模版选择 `Template Net Huawei VRP SNMPv2`
 
-![iShot2021-06-07_13.00.45](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-07_13.00.45.png)
+![iShot2021-06-07_13.00.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-07_13.00.45.png)
 
 
 
@@ -46,7 +46,7 @@ SNMP接口处填写交换机的IP，端口默认161
 
 :::
 
-![iShot2021-06-07_12.59.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-07_12.59.42.png)
+![iShot2021-06-07_12.59.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-07_12.59.42.png)
 
 
 
@@ -58,5 +58,5 @@ SNMP接口处填写交换机的IP，端口默认161
 
 效果示意图
 
-![iShot2021-06-07_13.04.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-06-07_13.04.33.png)
+![iShot2021-06-07_13.04.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-07_13.04.33.png)
 

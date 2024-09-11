@@ -6,11 +6,11 @@
 
 
 
-![iShot_2024-06-14_20.25.14](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-14_20.25.14.png)
+![iShot_2024-06-14_20.25.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-06-14_20.25.14.png)
 
 
 
-![iShot_2024-06-14_20.25.09](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-06-14_20.25.09.png)
+![iShot_2024-06-14_20.25.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-06-14_20.25.09.png)
 
 
 

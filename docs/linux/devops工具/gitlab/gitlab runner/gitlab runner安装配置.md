@@ -46,7 +46,7 @@ GitLab Runner 具有以下功能
 
 **runner 执行流程**
 
-![iShot_2022-07-04_10.59.44](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-07-04_10.59.44.png)
+![iShot_2022-07-04_10.59.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-07-04_10.59.44.png)
 
 
 

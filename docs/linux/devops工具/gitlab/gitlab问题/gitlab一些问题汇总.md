@@ -23,7 +23,7 @@ root
 
 **注册gitlab时提示如下**
 
-![iShot_2024-08-22_16.59.27](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_16.59.27.png)
+![iShot_2024-08-22_16.59.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_16.59.27.png)
 
 
 

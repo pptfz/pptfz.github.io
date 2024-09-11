@@ -74,13 +74,13 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 在 `基本信息`  ->  `实例信息` 中点击 `组件信息`
 
-![iShot2021-04-10_13.58.38](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_13.58.38.png)
+![iShot2021-04-10_13.58.38](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_13.58.38.png)
 
 
 
 在 `HDFS` 处点击下拉框，选择 `配置管理`
 
-![iShot2021-04-10_14.01.04](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.01.04.png)
+![iShot2021-04-10_14.01.04](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.01.04.png)
 
 
 
@@ -88,7 +88,7 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 选择 `hdfs-site.xml` ，然后点击 `修改配置`
 
-![iShot2021-04-10_14.03.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.03.35.png)
+![iShot2021-04-10_14.03.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.03.35.png)
 
 
 
@@ -96,7 +96,7 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 选择 `新增配置项`，然后把上述5个值依次添加并保存
 
-![iShot2021-04-10_14.05.19](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.05.19.png)
+![iShot2021-04-10_14.05.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.05.19.png)
 
 
 
@@ -106,7 +106,7 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 ### 1.2 重启 NameNode
 
-![iShot2021-04-10_14.08.17](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.08.17.png)
+![iShot2021-04-10_14.08.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.08.17.png)
 
 
 
@@ -116,7 +116,7 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 角色选择 `NameNode`，重启方式选择 `安全重启模式`，重启NameNode
 
-![iShot2021-04-10_14.09.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.09.40.png)
+![iShot2021-04-10_14.09.40](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.09.40.png)
 
 
 
@@ -138,7 +138,7 @@ dfs.datanode.balance.bandwidthPerSec 52428800
 
 
 
-![iShot2021-04-12_14.55.07](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-12_14.55.07.png)
+![iShot2021-04-12_14.55.07](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-12_14.55.07.png)
 
 
 
@@ -178,7 +178,7 @@ for hdfsfile in `cat /tmp/single_replica`; do su hadoop -c "hadoop fs -setrep 3 
 
 运行完，如下即表示问题修复：
 
-![iShot2021-04-12_15.00.44](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-12_15.00.44.png)
+![iShot2021-04-12_15.00.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-12_15.00.44.png)
 
 
 
@@ -190,7 +190,7 @@ for hdfsfile in `cat /tmp/single_replica`; do su hadoop -c "hadoop fs -setrep 3 
 
 `Threads quota is exceeded` 或者 `dataxceiver error` 说明 `DataNode` 线程不足
 
-![iShot2021-04-12_15.02.22](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-12_15.02.22.png)
+![iShot2021-04-12_15.02.22](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-12_15.02.22.png)
 
 
 
@@ -202,7 +202,7 @@ for hdfsfile in `cat /tmp/single_replica`; do su hadoop -c "hadoop fs -setrep 3 
 dfs.datanode.max.xcievers =16384
 ```
 
-![iShot2021-04-12_15.07.27](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-12_15.07.27.png)
+![iShot2021-04-12_15.07.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-12_15.07.27.png)
 
 
 
@@ -216,7 +216,7 @@ core节点就是DataNode
 
 `Active NameNode` 在hdfs web UI界面查看，生产中我们的 `Active NameNode`是master节点
 
-![iShot_2024-09-04_14.48.17](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-09-04_14.48.17.png)
+![iShot_2024-09-04_14.48.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-04_14.48.17.png)
 
 
 
@@ -232,7 +232,7 @@ vim /usr/local/service/hadoop/etc/hadoop/hdfsexcludedhosts
 
 获取 active 节点状态，执行命令 `hdfs haadmin -getServiceState <serviceId>` 查看或者控制台服务监控查看，其中 `<serviceId>`在hdfs web UI 界面查看(一般为nn1或者nn2，即NameNode1 NameNode2)
 
-![iShot2021-04-08_16.56.16](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-08_16.56.16.png)
+![iShot2021-04-08_16.56.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-08_16.56.16.png)
 
 
 
@@ -294,7 +294,7 @@ Refresh nodes successful for /10.0.100.11:4007
 
 打开 HDFS 原生 web UI，在 `Datanodes` 页面可以看到想要下线的节点状态变为 `Decommission In Progress`， 说明这些节点的数据块正在被复制到其他节点，等待所有数据块被复制完成，这些节点状态就会变为 `Decommissioned`
 
-![iShot2021-04-08_17.05.22](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-08_17.05.22.png)
+![iShot2021-04-08_17.05.22](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-08_17.05.22.png)
 
 
 
@@ -304,7 +304,7 @@ Refresh nodes successful for /10.0.100.11:4007
 
 在最下边可以查看数据复制进度
 
-![iShot2021-04-08_17.25.08](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-08_17.25.08.png)
+![iShot2021-04-08_17.25.08](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-08_17.25.08.png)
 
 
 
@@ -312,7 +312,7 @@ Refresh nodes successful for /10.0.100.11:4007
 
 所有数据块被复制完成后，要下线节点的状态就由 `Decommissioned in Progress` 变成 `Decommissioned`
 
-![iShot2021-04-10_14.19.09](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.19.09.png)
+![iShot2021-04-10_14.19.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.19.09.png)
 
 
 
@@ -328,7 +328,7 @@ Refresh nodes successful for /10.0.100.11:4007
 
 在集群服务HDFS选项中，找到要下线的 `DataNode` 节点，选中，然后点击 `暂停`
 
-![iShot2021-04-10_14.22.53](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.22.53.png)
+![iShot2021-04-10_14.22.53](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.22.53.png)
 
 
 
@@ -336,7 +336,7 @@ Refresh nodes successful for /10.0.100.11:4007
 
 分别选中两个要下线的 `DataNode` 节点，依次暂停
 
-![iShot2021-04-10_14.26.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.26.42.png)
+![iShot2021-04-10_14.26.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.26.42.png)
 
 
 
@@ -344,7 +344,7 @@ Refresh nodes successful for /10.0.100.11:4007
 
 暂停中的 `DataNode`，模式为 `维护模式`
 
-![iShot2021-04-10_14.28.09](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.28.09.png)
+![iShot2021-04-10_14.28.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.28.09.png)
 
 
 
@@ -354,7 +354,7 @@ Refresh nodes successful for /10.0.100.11:4007
 
 两个 `DataNode` 节点暂停后，在HDFS web UI 中就可以看到两个节点的状态变为了`Dead, Decommissioned`
 
-![iShot2021-04-10_14.41.25](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.41.25.png)
+![iShot2021-04-10_14.41.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.41.25.png)
 
 
 
@@ -396,7 +396,7 @@ Refresh nodes successful for /10.0.100.11:4007
 
 执行完成后，在HDFS中要下线的NameNode就没了，之前在emr控制台中暂停的2个NameNode状态如下
 
-![iShot2021-04-10 14.41.25](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10%2014.41.25.png)
+![iShot2021-04-10 14.41.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10%2014.41.25.png)
 
 
 
@@ -443,7 +443,7 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 
 在 `Decommisioned Nodes(退役节点)` 处点击下方的对应的数字
 
-![iShot2021-04-10_14.59.14](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_14.59.14.png)
+![iShot2021-04-10_14.59.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.59.14.png)
 
 
 
@@ -451,7 +451,7 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 
 搜索要下线节点的IP，如果出现要下线的节点IP则说明这个节点目前已经处于退役状态
 
-![iShot2021-04-10_15.01.43](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_15.01.43.png)
+![iShot2021-04-10_15.01.43](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_15.01.43.png)
 
 
 
@@ -463,7 +463,7 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 
 **在集群服务中点击 `YARN`**
 
-![iShot2021-04-10_15.06.33](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_15.06.33.png)
+![iShot2021-04-10_15.06.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_15.06.33.png)
 
 
 
@@ -475,11 +475,11 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 
 角色处选择 `NodeManager`，找到要下线的节点，选择并 `暂停`
 
-![iShot2021-04-10_15.08.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_15.08.20.png)
+![iShot2021-04-10_15.08.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_15.08.20.png)
 
 
 
-![iShot2021-04-10_15.10.03](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_15.10.03.png)
+![iShot2021-04-10_15.10.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_15.10.03.png)
 
 
 
@@ -487,7 +487,7 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 
 暂停完成后，节点维护状态就会变为 `维护模式`
 
-![iShot2021-04-10_15.11.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_15.11.12.png)
+![iShot2021-04-10_15.11.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_15.11.12.png)
 
 
 
@@ -549,7 +549,7 @@ YARN 原生 web UI 将不再存在以上两节点(腾讯云给的文档中说此
 
 在集群列表中选择 `HBASE`
 
-![iShot2021-04-10_15.28.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_15.28.18.png)
+![iShot2021-04-10_15.28.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_15.28.18.png)
 
 
 
@@ -559,7 +559,7 @@ YARN 原生 web UI 将不再存在以上两节点(腾讯云给的文档中说此
 
 角色选择 `RegionServer`
 
-![iShot2021-04-10_15.33.16](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_15.33.16.png)
+![iShot2021-04-10_15.33.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_15.33.16.png)
 
 
 
@@ -567,7 +567,7 @@ YARN 原生 web UI 将不再存在以上两节点(腾讯云给的文档中说此
 
 选择要下线的 `RegionServer` 节点，设置状态为 `暂停`
 
-![iShot2021-04-10_15.35.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_15.35.35.png)
+![iShot2021-04-10_15.35.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_15.35.35.png)
 
 
 
@@ -575,7 +575,7 @@ YARN 原生 web UI 将不再存在以上两节点(腾讯云给的文档中说此
 
 点击暂停后稍等一会，节点的状态就变为了暂停中，维护状态就变为了 `维护模式`
 
-![iShot2021-04-10_15.37.09](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_15.37.09.png)
+![iShot2021-04-10_15.37.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_15.37.09.png)
 
 
 
@@ -585,7 +585,7 @@ YARN 原生 web UI 将不再存在以上两节点(腾讯云给的文档中说此
 
 在HBASE web UI 中可以看到 `RegionServer` 的状态变为了 `Dead`
 
-![iShot2021-04-10_15.44.27](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_15.44.27.png)
+![iShot2021-04-10_15.44.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_15.44.27.png)
 
 
 
@@ -682,7 +682,7 @@ HBASE 原生web UI 查看下线节点 region 为0即代表 `RegionServer` 下线
 
 在控制台 `集群资源` -> `资源管理` 选择 `Core`，找到要下线的节点，点击 `缩容` 即可
 
-![iShot2021-04-12_10.51.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-12_10.51.35.png)
+![iShot2021-04-12_10.51.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-12_10.51.35.png)
 
 
 
@@ -692,13 +692,13 @@ HBASE 原生web UI 查看下线节点 region 为0即代表 `RegionServer` 下线
 
 勾选 `已阅读并同意`，然后点击 `下一步`
 
-![iShot2021-04-10_16.23.40](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_16.23.40.png)
+![iShot2021-04-10_16.23.40](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_16.23.40.png)
 
 
 
 点击 `开始销毁`
 
-![iShot2021-04-10_16.24.46](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-04-10_16.24.46.png)
+![iShot2021-04-10_16.24.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_16.24.46.png)
 
 
 

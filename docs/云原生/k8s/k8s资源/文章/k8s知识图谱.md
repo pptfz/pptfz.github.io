@@ -4,7 +4,7 @@
 
 # k8s知识图谱
 
-![iShot_2024-08-23_11.31.29](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.31.29.png)
+![iShot_2024-08-23_11.31.29](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.31.29.png)
 
 
 

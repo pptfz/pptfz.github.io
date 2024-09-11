@@ -462,19 +462,19 @@ Events:
 
 在初次创建时不加 `--record` 选项
 
-![iShot_2022-11-01_23.12.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-11-01_23.12.32.png)
+![iShot_2022-11-01_23.12.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-11-01_23.12.32.png)
 
 
 
 在更新时加 `--record` 选项，可以看到`--record` 选项在将来版本将移除警告 `Flag --record has been deprecated, --record will be removed in the future` (本文k8s版本1.22)
 
-![iShot_2022-11-01_23.14.14](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-11-01_23.14.14.png)
+![iShot_2022-11-01_23.14.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-11-01_23.14.14.png)
 
 
 
 [1.22版本官方文档](https://v1-22.docs.kubernetes.io/zh/docs/concepts/workloads/controllers/deployment/) 还有这一块的说明
 
-![iShot_2022-11-01_23.09.58](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-11-01_23.09.58.png)
+![iShot_2022-11-01_23.09.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-11-01_23.09.58.png)
 
 :::
 

@@ -104,7 +104,7 @@ drwxr-xr-x  9 root root  4096 Aug  8 12:07 test
 
 设置 `suid` 后文件权限所有者处就变为 `rws` ，多了一个 `s` 权限，并且文件底色变成了红色
 
-![iShot_2024-08-27_18.34.36](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-27_18.34.36.png)
+![iShot_2024-08-27_18.34.36](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-27_18.34.36.png)
 
 
 
@@ -168,7 +168,7 @@ drwxrwxr-x 2 pptfz pptfz    4096 Aug 27 18:42 test-dir
 
 2.为 `/tmp` 目录设置 `sgid` 后，`pptfz` 用户在 `/tmp` 下创建的文件和目录属组就是 `root`
 
-![iShot_2024-08-27_18.56.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-27_18.56.11.png)
+![iShot_2024-08-27_18.56.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-27_18.56.11.png)
 
 
 
@@ -202,7 +202,7 @@ drwxrwsr-x 2 pptfz root     4096 Aug 27 18:54 test-dir
 
 取消 `/tmp` 目录的 `sbit`
 
-![iShot_2024-08-27_19.04.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-27_19.04.50.png)
+![iShot_2024-08-27_19.04.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-27_19.04.50.png)
 
 以 `root` 用户创建文件和目录，可以看到此时文件 `test-file` 和目录 `test-dir` 属主和属组都是 `root`
 
@@ -231,7 +231,7 @@ drwxr-xr-x 2 root root 4096 Aug 27 19:08 /tmp/test-dir/
 
 设置 `sbit` 后，文件权限其他人处变为了 `rwt`
 
-![iShot_2024-08-27_19.13.27](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-27_19.13.27.png)
+![iShot_2024-08-27_19.13.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-27_19.13.27.png)
 
 
 

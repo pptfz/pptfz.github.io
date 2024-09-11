@@ -18,7 +18,7 @@
 
 **根据上面提到的这几种复制协议，分别对应MySQL几种复制类型，分别是异步、半同步、全同步。**
 
-![iShot_2024-08-21_21.57.49](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.57.49.png)
+![iShot_2024-08-21_21.57.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.57.49.png)
 
 
 
@@ -52,7 +52,7 @@
 
 **先看一下半同步复制原理图，如下：**
 
-![iShot_2024-08-21_22.01.49](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_22.01.49.png)
+![iShot_2024-08-21_22.01.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_22.01.49.png)
 
 
 
@@ -60,7 +60,7 @@
 
 **在MySQL 5.5~5.6使用after_commit的模式下，客户端事务在存储引擎层提交后，在得到从库确认的过程中，主库宕机了。此时，即主库在等待Slave ACK的时候，虽然没有返回当前客户端，但事务已经提交，其他客户端会读取到已提交事务。如果Slave端还没有读到该事务的events，同时主库发生了crash，然后切换到备库。那么之前读到的事务就不见了，出现了幻读。如下图所示，图片引自[Loss-less Semi-Synchronous Replication on MySQL 5.7.2](http://my-replication-life.blogspot.com/2013/09/loss-less-semi-synchronous-replication.html)。**
 
-![iShot_2024-08-21_22.03.25](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_22.03.25.png)
+![iShot_2024-08-21_22.03.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_22.03.25.png)
 
 
 
@@ -388,7 +388,7 @@ mysql> show global status like '%semi%';
 
 **master将每个事务写入binlog（sync_binlog=1），传递到slave刷新到磁盘(sync_relay=1)，同时主库提交事务。master等待slave反馈收到relay log，只有收到ACK后master才将commit OK结果反馈给客户端。**
 
-![iShot_2024-08-21_22.01.49](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_22.01.49.png)
+![iShot_2024-08-21_22.01.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_22.01.49.png)
 
 
 
@@ -396,7 +396,7 @@ mysql> show global status like '%semi%';
 
 **master将每个事务写入binlog , 传递到slave刷新到磁盘(relay log)。master等待slave反馈接收到relay log的ack之后，再提交事务并且返回commit OK结果给客户端。 即使主库crash，所有在主库上已经提交的事务都能保证已经同步到slave的relay log中。**
 
-![iShot_2024-08-21_22.01.49](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_22.01.49.png)
+![iShot_2024-08-21_22.01.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_22.01.49.png)
 
 
 
@@ -418,11 +418,11 @@ mysql> show global status like '%semi%';
 
 **旧版本的semi sync受限于dump thread ，原因是dump thread承担了两份不同且又十分频繁的任务：传送binlog给slave ，还需要等待slave反馈信息，而且这两个任务是串行的，dump thread必须等待slave返回之后才会传送下一个events事务。dump thread已然成为整个半同步提高性能的瓶颈。在高并发业务场景下，这样的机制会影响数据库整体的TPS 。**
 
-![iShot_2024-08-22_11.25.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_11.25.20.png)
+![iShot_2024-08-22_11.25.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_11.25.20.png)
 
 **为了解决上述问题，在5.7版本的semi sync框架中，独立出一个Ack Receiver线程 ，专门用于接收slave返回的ack请求，这将之前dump线程的发送和接受工作分为了两个线程来处理。这样master上有两个线程独立工作，可以同时发送binlog到slave，和接收slave的ack信息。因此半同步复制得到了极大的性能提升。这也是MySQL 5.7发布时号称的Faster semi-sync replication。**
 
-![iShot_2024-08-22_11.26.51](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_11.26.51.png)
+![iShot_2024-08-22_11.26.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_11.26.51.png)
 
 
 
@@ -438,7 +438,7 @@ mysql> show global status like '%semi%';
 
 **MySQL 5.7新增了rpl_semi_sync_master_wait_slave_count参数，可以用来控制主库接受多少个slave写事务成功反馈，给高可用架构切换提供了灵活性。如图所示，当count值为2时，master需等待两个slave的ack。**
 
-![iShot_2024-08-22_11.28.53](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_11.28.53.png)
+![iShot_2024-08-22_11.28.53](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_11.28.53.png)
 
 
 
@@ -448,7 +448,7 @@ mysql> show global status like '%semi%';
 
 **旧版本半同步复制在主提交binlog的写会话和dump thread读binlog的操作都会对binlog添加互斥锁，导致binlog文件的读写是串行化的，存在并发度的问题。**
 
-![iShot_2024-08-22_11.30.27](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_11.30.27.png)
+![iShot_2024-08-22_11.30.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_11.30.27.png)
 
 
 
@@ -458,7 +458,7 @@ mysql> show global status like '%semi%';
 
 **2.加入了安全边际保证binlog的读安全。**
 
-![iShot_2024-08-22_11.32.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_11.32.10.png)
+![iShot_2024-08-22_11.32.10](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_11.32.10.png)
 
 
 

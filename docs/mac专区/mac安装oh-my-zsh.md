@@ -16,13 +16,13 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 
 
-![iShot2022-01-17_10.51.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-17_10.51.12.png)
+![iShot2022-01-17_10.51.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-17_10.51.12.png)
 
 
 
 安装完成后界面就会变成如下效果
 
-![iShot2022-01-17_21.35.21](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-17_21.35.21.png)
+![iShot2022-01-17_21.35.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-17_21.35.21.png)
 
 
 
@@ -30,7 +30,7 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 切换目录效果如下
 
-![iShot2022-01-17_21.36.15](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-17_21.36.15.png)
+![iShot2022-01-17_21.36.15](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-17_21.36.15.png)
 
 
 
@@ -44,7 +44,7 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 安装前，无论命令正确与否都是白色
 
-![iShot2022-01-17_21.38.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-17_21.38.32.png)
+![iShot2022-01-17_21.38.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-17_21.38.32.png)
 
 
 
@@ -52,7 +52,7 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 
 安装后，输入的命令正确时是绿色，错误时是红色
 
-![iShot2022-01-17_21.38.39](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-17_21.38.39.png)
+![iShot2022-01-17_21.38.39](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-17_21.38.39.png)
 
 
 

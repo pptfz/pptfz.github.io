@@ -38,7 +38,7 @@
 
 ## 2.NFS实现原理
 
-![iShot2020-04-0412.57.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot2020-04-0412.57.42.png)
+![iShot2020-04-0412.57.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2020-04-0412.57.42.png)
 
 
 

@@ -54,7 +54,7 @@ mysql> select t1.name,t2.age from t1,t2 where t1.id=t2.id and t1.id=1;
 
 **下图展示了 LEFT JOIN、RIGHT JOIN、INNER JOIN、OUTER JOIN 相关的 7 种用法**
 
-![iShot_2024-08-22_12.30.12](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_12.30.12.png)
+![iShot_2024-08-22_12.30.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_12.30.12.png)
 
 
 
@@ -183,7 +183,7 @@ mysql> select person.name,address.city from person natural join address where pe
 
 > **INNER JOIN 关键字在表中存在至少一个匹配时返回行。**
 
-![iShot_2024-08-22_12.32.55](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_12.32.55.png)
+![iShot_2024-08-22_12.32.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_12.32.55.png)
 
 
 
@@ -206,7 +206,7 @@ mysql> select * from person inner join address on person.person_id=address.addre
 
 > **左外连接:从左表返回所有的行(表1),与正确的匹配行(表2)。当没有匹配时，右边的结果为NULL。**
 
-![iShot_2024-08-22_12.33.44](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_12.33.44.png)
+![iShot_2024-08-22_12.33.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_12.33.44.png)
 
 
 
@@ -245,7 +245,7 @@ mysql> select * from address right join person on person.person_id=address.perso
 
 > **右外连接:返回右表(表2)中的所有行，以及左表(表1)中的匹配行。当没有匹配时，左边的结果为NULL。**
 
-![iShot_2024-08-22_12.34.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_12.34.31.png)
+![iShot_2024-08-22_12.34.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_12.34.31.png)
 
 
 

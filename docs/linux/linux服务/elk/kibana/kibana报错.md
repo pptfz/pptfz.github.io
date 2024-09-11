@@ -6,7 +6,7 @@
 
 kibana是通过从 [artifacthub](https://artifacthub.io/)  中下载的chart安装的，运行一段时间后开发反馈说kibana挂了，于是登录机器执行命令 `kubectl get pod` 看到 `READY` 为 `0/1` ，查看日志报错如下
 
-![iShot_2022-06-13_17.05.13](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-06-13_17.05.13.png)
+![iShot_2022-06-13_17.05.13](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-06-13_17.05.13.png)
 
 ```json
 {"type":"log","@timestamp":"2022-06-13T08:40:09Z","tags":["spaces","error"],"pid":1,"message":"Unable to navigate to space \"default\", redirecting to Space Selector. Error: Saved object [space/default] not found"}
@@ -21,13 +21,13 @@ kibana是通过从 [artifacthub](https://artifacthub.io/)  中下载的chart安�
 
 在github这个isseu中可以看到 https://github.com/elastic/kibana/issues/35213
 
-![iShot_2022-06-15_18.54.14](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-06-15_18.54.14.png)
+![iShot_2022-06-15_18.54.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-06-15_18.54.14.png)
 
 
 
 在es的官方论坛中有人提到过解决方法 https://discuss.elastic.co/t/unable-to-navigate-to-space-default-redirecting-to-space-selector-error-saved-object-space-default-not-found/177393/3
 
-![iShot_2022-06-15_18.55.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-06-15_18.55.32.png)
+![iShot_2022-06-15_18.55.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-06-15_18.55.32.png)
 
 
 

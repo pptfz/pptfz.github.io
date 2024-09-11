@@ -62,7 +62,7 @@
 
 - [fig](https://fig.io/) 是一款在终端中提示子命令、选项等具有提示功能的工具
 
-![fig](https://github.com/pptfz/picgo-images/blob/master/img/fig.gif)
+![fig](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/fig.gif)
 
 
 
@@ -92,7 +92,7 @@
 
 - [uPic](https://upic.iluoxiao.com/) / [ImageOptim](https://upic.iluoxiao.com/) 是同一个作者开发的一款支持图片压缩、格式转换的图片压缩工具
 
-![upic](https://github.com/pptfz/picgo-images/blob/master/img/upic.gif)
+![upic](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/upic.gif)
 
 
 

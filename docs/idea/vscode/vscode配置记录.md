@@ -4,7 +4,7 @@
 
 
 
-![iShot_2024-05-29_19.22.06](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-05-29_19.22.06.png)
+![iShot_2024-05-29_19.22.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-05-29_19.22.06.png)
 
 
 

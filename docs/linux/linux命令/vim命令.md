@@ -55,7 +55,7 @@ Vim 是旧的 UNIX 编辑器 [vi](https://en.wikipedia.org/wiki/Vi_(text_editor)
 
 
 
-![iShot_2024-08-20_15.06.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-20_15.06.11.png)
+![iShot_2024-08-20_15.06.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-20_15.06.11.png)
 
 
 
@@ -446,13 +446,13 @@ EOF
 
 在末行模式下按 `F1` 键，就会执行脚本并输出
 
-![iShot_2024-08-21_11.13.27](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_11.13.27.png)
+![iShot_2024-08-21_11.13.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_11.13.27.png)
 
 
 
 再次按回车，会回到脚本当中，这样就可以不退出脚本，直接执行脚本进行测试了
 
-![iShot_2024-08-21_11.15.34](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_11.15.34.png)
+![iShot_2024-08-21_11.15.34](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_11.15.34.png)
 
 
 

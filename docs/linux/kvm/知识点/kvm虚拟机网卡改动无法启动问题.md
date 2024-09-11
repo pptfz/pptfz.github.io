@@ -8,7 +8,7 @@
 
 kvm安装完成后会创建一块名为 `virbr0` IP为 `192.168.122.1` 的虚拟网卡
 
-![iShot2022-01-21_12.41.42](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-21_12.41.42.png)
+![iShot2022-01-21_12.41.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-21_12.41.42.png)
 
 
 
@@ -16,7 +16,7 @@ kvm安装完成后会创建一块名为 `virbr0` IP为 `192.168.122.1` 的虚拟
 
 这块网卡就是虚拟机中的eth0，模式为桥接
 
-![iShot2022-01-21_12.32.34](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-21_12.32.34.png)
+![iShot2022-01-21_12.32.34](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-21_12.32.34.png)
 
 
 
@@ -24,7 +24,7 @@ kvm安装完成后会创建一块名为 `virbr0` IP为 `192.168.122.1` 的虚拟
 
 这块网卡就是虚拟机中的 `eth1` ，模式为 `NAT`
 
-![iShot2022-01-21_12.32.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-21_12.32.10.png)
+![iShot2022-01-21_12.32.10](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-21_12.32.10.png)
 
 
 
@@ -49,7 +49,7 @@ KVM 客户机网络连接有两种方式：
 
 如图所示，网桥的基本原理就是创建一个桥接接口br0，在屋里网卡和虚拟机网络接口之间传递数据
 
-![iShot2022-01-21_14.36.32](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-21_14.36.32.png)
+![iShot2022-01-21_14.36.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-21_14.36.32.png)
 
 
 
@@ -114,7 +114,7 @@ systemctl restart network
 
 `Network Source` 选择 `Specify shared device name` ， `Bridge name` 填写新增加的网卡 `br0` ，`Device model` 选择 `virtio` ，最后点击 `Apply`
 
-![iShot2022-01-21_15.46.37](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-21_15.46.37.png)
+![iShot2022-01-21_15.46.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-21_15.46.37.png)
 
 
 
@@ -122,7 +122,7 @@ systemctl restart network
 
 配置完成后如下图所示
 
-![iShot2022-01-21_15.44.06](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-21_15.44.06.png)
+![iShot2022-01-21_15.44.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-21_15.44.06.png)
 
 
 
@@ -174,7 +174,7 @@ systemctl restart network
 
 修改完宿主机使用br0虚拟桥接网卡后，kvm中的虚拟机是无法启动的，点击启动会报错如下，原因就是没有做2.3步骤中的操作，修改虚拟机的网卡配置使用br0后就可以了
 
-![iShot2022-01-20_12.02.16](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-01-20_12.02.16.png)
+![iShot2022-01-20_12.02.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-20_12.02.16.png)
 
 
 

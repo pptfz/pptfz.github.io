@@ -431,7 +431,7 @@ a57c6406e001        centos6.9_ssh:v2.1        "/usr/sbin/sshd -D"    29 seconds 
 
 #### 3.1.5 ssh连接测试
 
-![iShot_2024-08-23_11.22.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.22.20.png)
+![iShot_2024-08-23_11.22.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.22.20.png)
 
 
 
@@ -520,7 +520,7 @@ fa48d4052ff8        centos6.9_ssh_http:v2.1   "/bin/bash /init.sh"   4 seconds a
 
 **ssh镜像测试**
 
-![iShot_2024-08-23_11.19.19](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_11.19.19.png)
+![iShot_2024-08-23_11.19.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.19.19.png)
 
 
 

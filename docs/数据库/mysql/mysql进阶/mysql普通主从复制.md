@@ -16,13 +16,13 @@
 
 
 
-![iShot2022-03-27_16.48.07](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-03-27_16.48.07.png)
+![iShot2022-03-27_16.48.07](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-03-27_16.48.07.png)
 
 
 
 **官方示意图**
 
-![iShot2022-03-27_16.49.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot2022-03-27_16.49.26.png)
+![iShot2022-03-27_16.49.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-03-27_16.49.26.png)
 
 
 

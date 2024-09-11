@@ -972,13 +972,13 @@ Ambari Server 'start' completed successfully.
 
 **浏览器访问 `http://IP:8080`**
 
-![iShot_2024-08-21_20.45.24](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_20.45.24.png)
+![iShot_2024-08-21_20.45.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_20.45.24.png)
 
 
 
 **登陆后首界面**
 
-![iShot_2024-08-21_20.48.15](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_20.48.15.png)
+![iShot_2024-08-21_20.48.15](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_20.48.15.png)
 
 
 
@@ -992,13 +992,13 @@ Ambari Server 'start' completed successfully.
 
 **选择 `Launch Install Wizard`**
 
-![iShot_2024-08-21_20.49.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_20.49.20.png)
+![iShot_2024-08-21_20.49.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_20.49.20.png)
 
 
 
 **输入集群名称**
 
-![iShot_2024-08-21_20.50.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_20.50.18.png)
+![iShot_2024-08-21_20.50.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_20.50.18.png)
 
 
 
@@ -1008,7 +1008,7 @@ Ambari Server 'start' completed successfully.
 
 这里选择 HDP-2.6.5.0 版本
 
-![iShot_2024-08-21_20.52.19](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_20.52.19.png)
+![iShot_2024-08-21_20.52.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_20.52.19.png)
 
 
 
@@ -1016,7 +1016,7 @@ Ambari Server 'start' completed successfully.
 
 **保留 redhat7 一处，删除其他**
 
-![iShot_2024-08-21_21.00.01](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.00.01.png)
+![iShot_2024-08-21_21.00.01](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.00.01.png)
 
 
 
@@ -1046,7 +1046,7 @@ http://10.0.0.136/ambari/HDP-UTILS/centos7/1.1.0.22
 
 **修改完成后点击下一步**
 
-![iShot_2024-08-21_21.02.07](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.02.07.png)
+![iShot_2024-08-21_21.02.07](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.02.07.png)
 
 
 
@@ -1083,7 +1083,7 @@ sed -i.bak '/^verify/cverify=disable' /etc/python/cert-verification.cfg
 
 :::
 
-![iShot_2024-08-21_21.03.54](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.03.54.png)
+![iShot_2024-08-21_21.03.54](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.03.54.png)
 
 
 
@@ -1142,7 +1142,7 @@ ambari-agent02.test.com
 
 
 
-![iShot_2024-08-21_21.05.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.05.18.png)
+![iShot_2024-08-21_21.05.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.05.18.png)
 
 
 
@@ -1156,7 +1156,7 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 **注册成功后显示如下**
 
-![iShot_2024-08-21_21.06.21](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.06.21.png)
+![iShot_2024-08-21_21.06.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.06.21.png)
 
 
 
@@ -1172,7 +1172,7 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 #### 5.3.3.1 报错1	找不到 ambari server
 
-![iShot_2024-08-21_21.07.19](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.07.19.png)
+![iShot_2024-08-21_21.07.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.07.19.png)
 
 
 
@@ -1180,7 +1180,7 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 **重要日志**
 
-![iShot_2024-08-21_21.08.35](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.08.35.png)
+![iShot_2024-08-21_21.08.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.08.35.png)
 
 
 
@@ -1200,7 +1200,7 @@ ambari-agent02.test.com
 
 #### 5.3.3.2 报错2 SSLError
 
-![iShot_2024-08-21_21.12.59](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.12.59.png)
+![iShot_2024-08-21_21.12.59](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.12.59.png)
 
 
 
@@ -1257,7 +1257,7 @@ ambari-agent restart
 
 **根据实际情况选择要安装的组件**
 
-![iShot_2024-08-21_21.15.41](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.15.41.png)
+![iShot_2024-08-21_21.15.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.15.41.png)
 
 
 
@@ -1265,7 +1265,7 @@ ambari-agent restart
 
 **根据实际情况选择各组件安装的节点**
 
-![iShot_2024-08-21_21.18.26](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.18.26.png)
+![iShot_2024-08-21_21.18.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.18.26.png)
 
 
 
@@ -1275,7 +1275,7 @@ ambari-agent restart
 
 #### 5.6.1 HDFS
 
-![iShot_2024-08-21_21.19.56](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.19.56.png)
+![iShot_2024-08-21_21.19.56](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.19.56.png)
 
 
 
@@ -1283,25 +1283,25 @@ ambari-agent restart
 
 只保留一个路径
 
-![iShot_2024-08-21_21.20.54](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.20.54.png)
+![iShot_2024-08-21_21.20.54](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.20.54.png)
 
 
 
 #### 5.6.2 YARN
 
-![iShot_2024-08-21_21.22.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.22.31.png)
+![iShot_2024-08-21_21.22.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.22.31.png)
 
 
 
 只保留一个路径
 
-![iShot_2024-08-21_21.24.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.24.18.png)
+![iShot_2024-08-21_21.24.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.24.18.png)
 
 
 
 #### 5.6.3 HIVE
 
-![iShot_2024-08-21_21.28.09](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.28.09.png)
+![iShot_2024-08-21_21.28.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.28.09.png)
 
 
 
@@ -1343,7 +1343,7 @@ mysql -uroot -e "flush privileges"
 
 **选择 `Existing MySQL / MariaDB Database` ，输入hive数据库密码，修改 `Database URL` 连接地址，测试连接成功即可**
 
-![iShot_2024-08-21_21.29.45](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.29.45.png)
+![iShot_2024-08-21_21.29.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.29.45.png)
 
 
 
@@ -1351,11 +1351,11 @@ mysql -uroot -e "flush privileges"
 
 **需要设置grafana管理员用户的密码**
 
-![iShot_2024-08-21_21.31.05](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.31.05.png)
+![iShot_2024-08-21_21.31.05](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.31.05.png)
 
 
 
-![iShot_2024-08-21_21.32.38](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.32.38.png)
+![iShot_2024-08-21_21.32.38](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.32.38.png)
 
 
 
@@ -1369,7 +1369,7 @@ mysql -uroot -e "flush privileges"
 
 :::
 
-![iShot_2024-08-21_21.33.49](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.33.49.png)
+![iShot_2024-08-21_21.33.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.33.49.png)
 
 
 
@@ -1379,29 +1379,29 @@ mysql -uroot -e "flush privileges"
 
 **需要输入密码，默认admin即可**
 
-![iShot_2024-08-21_21.34.57](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.34.57.png)
+![iShot_2024-08-21_21.34.57](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.34.57.png)
 
 
 
-![iShot_2024-08-21_21.35.47](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.35.47.png)
+![iShot_2024-08-21_21.35.47](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.35.47.png)
 
 
 
 ### 5.7 确认集群信息并部署
 
-![iShot_2024-08-21_21.36.41](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.36.41.png)
+![iShot_2024-08-21_21.36.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.36.41.png)
 
 
 
-![iShot_2024-08-21_21.37.51](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.37.51.png)
+![iShot_2024-08-21_21.37.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.37.51.png)
 
 
 
-![iShot_2024-08-21_21.38.31](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.38.31.png)
+![iShot_2024-08-21_21.38.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.38.31.png)
 
 
 
-![iShot_2024-08-21_21.39.22](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.39.22.png)
+![iShot_2024-08-21_21.39.22](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.39.22.png)
 
 
 
@@ -1409,7 +1409,7 @@ mysql -uroot -e "flush privileges"
 
 ### 5.8 完成安装
 
-![iShot_2024-08-21_21.40.20](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.40.20.png)
+![iShot_2024-08-21_21.40.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.40.20.png)
 
 
 
@@ -1417,7 +1417,7 @@ mysql -uroot -e "flush privileges"
 
 完成安装
 
-![iShot_2024-08-21_21.41.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-21_21.41.18.png)
+![iShot_2024-08-21_21.41.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-21_21.41.18.png)
 
 
 

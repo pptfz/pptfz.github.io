@@ -79,7 +79,7 @@ Pod 被设计成支持形成内聚服务单元的多个协作过程（形式为�
 
 例如，你可能有一个容器，为共享卷中的文件提供 Web 服务器支持，以及一个单独的 "边车 (sidercar)" 容器负责从远端更新这些文件，如下图所示：
 
-![iShot_2022-10-19_22.21.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2022-10-19_22.21.50.png)
+![iShot_2022-10-19_22.21.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-10-19_22.21.50.png)
 
 
 

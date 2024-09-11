@@ -739,7 +739,7 @@ func (ds *dockerService) StartContainer(_ context.Context, r *runtimeapi.StartCo
 
 ## 6. 总结
 
-![iShot_2024-08-23_14.21.29](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-23_14.21.29.png)
+![iShot_2024-08-23_14.21.29](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_14.21.29.png)
 
 
 

@@ -117,7 +117,7 @@ Connection:		10.0.0.11 via TCP/IP
 
 
 
-![iShot_2023-03-29_15.15.11](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-03-29_15.15.11.png)
+![iShot_2023-03-29_15.15.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-03-29_15.15.11.png)
 
 
 
@@ -183,5 +183,5 @@ $ mysqld_safe --defaults-file=/etc/my.cnf --socket=/tmp/b.sock
 
 **最终socket文件在 `/tmp/b.sock` ，因此说明了在命令行中的优先级最大**
 
-![iShot_2024-08-22_11.36.04](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_11.36.04.png)
+![iShot_2024-08-22_11.36.04](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_11.36.04.png)
 

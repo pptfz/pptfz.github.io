@@ -68,7 +68,7 @@ const sidebars = {
 
 最终的效果就如下
 
-![iShot_2024-07-05_17.28.51](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-07-05_17.28.51.png)
+![iShot_2024-07-05_17.28.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-07-05_17.28.51.png)
 
 
 

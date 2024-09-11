@@ -278,4 +278,4 @@ root     16842  0.3  2.8 198808 28936 pts/0    Sl   18:58   0:00 /usr/bin/Xvnc :
 
 
 
-![iShot2021-12-01_19.05.10](https://github.com/pptfz/picgo-images/blob/master/img/iShot2021-12-01_19.05.10.png)
+![iShot2021-12-01_19.05.10](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-12-01_19.05.10.png)

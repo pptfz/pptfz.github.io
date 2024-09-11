@@ -29,7 +29,7 @@
 
 :::
 
-![iShot_2023-04-27_15.18.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_15.18.18.png)
+![iShot_2023-04-27_15.18.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_15.18.18.png)
 
 
 
@@ -37,7 +37,7 @@
 
 创建完成后的目标仓库
 
-![iShot_2023-04-27_11.06.47](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_11.06.47.png)
+![iShot_2023-04-27_11.06.47](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_11.06.47.png)
 
 
 
@@ -47,13 +47,13 @@
 
 
 
-![iShot_2023-04-27_11.19.16](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_11.19.16.png)
+![iShot_2023-04-27_11.19.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_11.19.16.png)
 
 
 
 创建后的同步规则
 
-![iShot_2023-04-27_14.14.22](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_14.14.22.png)
+![iShot_2023-04-27_14.14.22](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_14.14.22.png)
 
 
 
@@ -85,7 +85,7 @@
 
  选择定时的格式如下，为 `秒 分 时 日 月 周`
 
-![iShot_2023-04-27_11.44.28](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_11.44.28.png)
+![iShot_2023-04-27_11.44.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_11.44.28.png)
 
 
 
@@ -105,7 +105,7 @@
 
 在 `harbor.ops.com` 中手动创建一个项目 `devops`
 
-![iShot_2023-04-27_14.20.01](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_14.20.01.png)
+![iShot_2023-04-27_14.20.01](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_14.20.01.png)
 
 
 
@@ -130,29 +130,29 @@ docker push harbor.ops.com/devops/busybox:latest
 docker push harbor.ops.com/devops/centos:latest
 ```
 
-![iShot_2023-04-27_14.30.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_14.30.18.png)
+![iShot_2023-04-27_14.30.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_14.30.18.png)
 
 
 
 在 `复制管理` 手动点击 `复制`
 
-![iShot_2023-04-27_14.31.53](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_14.31.53.png)
+![iShot_2023-04-27_14.31.53](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_14.31.53.png)
 
 确认复制
 
-![iShot_2023-04-27_14.32.28](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_14.32.28.png)
+![iShot_2023-04-27_14.32.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_14.32.28.png)
 
 
 
 稍等一会刷新进度就可以看到这次的同步了
 
-![iShot_2023-04-27_14.35.05](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_14.35.05.png)
+![iShot_2023-04-27_14.35.05](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_14.35.05.png)
 
 
 
 在 `harbor-bak.ops.com` 中查看，可以看到已经同步过来了
 
-![iShot_2023-04-27_15.10.16](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_15.10.16.png)
+![iShot_2023-04-27_15.10.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_15.10.16.png)
 
 
 
@@ -160,13 +160,13 @@ docker push harbor.ops.com/devops/centos:latest
 
 触发模式选择 `自动` ，然后定义 `0 */2 * * * *` 表示每隔2分钟执行一次同步，需要注意的是，harbor中的计划任务多了一个秒，即最开头的0表示秒且无法修改
 
-![iShot_2023-04-27_15.34.52](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_15.34.52.png)
+![iShot_2023-04-27_15.34.52](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_15.34.52.png)
 
 
 
 在 `复制任务` 中就可以看到执行的同步历史记录
 
-![iShot_2023-04-27_15.30.36](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2023-04-27_15.30.36.png)
+![iShot_2023-04-27_15.30.36](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-04-27_15.30.36.png)
 
 
 

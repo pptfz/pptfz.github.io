@@ -134,17 +134,17 @@ git push -u origin master			#输入远程仓库的用户名和密码即可
 
 #### 3.2.1 远程代码仓库中有以下内容，此时远程仓库和本地仓库中的内容相同
 
-![iShot_2024-08-22_14.55.27](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_14.55.27.png)
+![iShot_2024-08-22_14.55.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_14.55.27.png)
 
 
 
-![iShot_2024-08-22_14.56.18](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_14.56.18.png)
+![iShot_2024-08-22_14.56.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_14.56.18.png)
 
 
 
 #### 3.2.2 手动删除远程仓库中的test文件，删除后内容为下
 
-![iShot_2024-08-22_14.54.30](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_14.54.30.png)
+![iShot_2024-08-22_14.54.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_14.54.30.png)
 
 
 
@@ -152,7 +152,7 @@ git push -u origin master			#输入远程仓库的用户名和密码即可
 
 本地仓库中新建文件 `test111` ，尝试提交，报错
 
-![iShot_2024-08-22_14.48.44](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_14.48.44.png)
+![iShot_2024-08-22_14.48.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_14.48.44.png)
 
 
 
@@ -166,7 +166,7 @@ git pull origin master
 
 输入拉取代码的命令后会提示如下，意思为**请输入一条提交消息来解释为什么需要合并**，这里可以选择不输入
 
-![iShot_2024-08-22_14.51.50](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_14.51.50.png)
+![iShot_2024-08-22_14.51.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_14.51.50.png)
 
 
 
@@ -176,7 +176,7 @@ git pull origin master
 git pull origin master --allow-unrelated-histories
 ```
 
-![iShot_2024-08-22_14.53.30](https://github.com/pptfz/picgo-images/blob/master/img/iShot_2024-08-22_14.53.30.png)
+![iShot_2024-08-22_14.53.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_14.53.30.png)
 
 
 
