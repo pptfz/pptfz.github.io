@@ -4,7 +4,7 @@
 
 **背景**
 
-:::info背景说明
+:::info 背景说明
 
 当前 EMR 的 core 节点需进行升级，对老的 core 节点进行下线操作来替换新的 core 节点 上线。
 
@@ -12,7 +12,7 @@
 
 **目标**
 
-:::info最终目标
+:::info 最终目标
 
 集群在下线 Core 节点后，数据仍保证完整可靠性，同时集群服务仍正常运行
 
@@ -20,7 +20,7 @@
 
 **下线步骤**
 
-:::info下线具体步骤
+:::info 下线具体步骤
 
 1.hadoop fsck / 运行健康检查，确认hdfs健康状态为healthy，如果有单副本情况存在，务必调整为多副本。
 
@@ -38,9 +38,9 @@
 
 ## 第一步、加快副本复制速度
 
-:::caution注意
+:::caution 注意
 
-**<span style={{color: 'red'}}>一定要做加快副本复制速度操作，否则复制会特别慢(第一次操作由于没有做此步骤，导致后续复制速度特别慢，经和腾讯云沟通30T数据(2台机器)在不加速的情况下需要大概2周以上！)</span>**
+一定要做加快副本复制速度操作，否则复制会特别慢(第一次操作由于没有做此步骤，导致后续复制速度特别慢，经和腾讯云沟通30T数据(2台机器)在不加速的情况下需要大概2周以上！)
 
 :::
 
@@ -320,9 +320,9 @@ Refresh nodes successful for /10.0.100.11:4007
 
 ### 2.4 在 emr 控制台停止如上 2 个节点的 DataNode 服务
 
-:::caution注意
+:::caution 注意
 
-**<span style={{color: 'red'}}>一定要等2.3步骤中执行完成，即想要下线的节点状态变为 `Decommission` 才可以继续后续操作</span>**
+一定要等2.3步骤中执行完成，即想要下线的节点状态变为 `Decommission` 才可以继续后续操作
 
 :::
 
@@ -396,7 +396,11 @@ Refresh nodes successful for /10.0.100.11:4007
 
 执行完成后，在HDFS中要下线的NameNode就没了，之前在emr控制台中暂停的2个NameNode状态如下
 
-![iShot2021-04-10 14.41.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10%2014.41.25.png)
+
+
+![iShot2021-04-10_14.41.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-04-10_14.41.25.png)
+
+
 
 
 
@@ -529,17 +533,17 @@ SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
 
 YARN 原生 web UI 将不再存在以上两节点(腾讯云给的文档中说此步骤操作后，YARN 原生 web UI中不存在以上两个节点，但是实际上是存在的，经与腾讯云沟通后对方说存在也不影响)，至此 Nodemanager 下线完毕
 
-:::caution注意
+:::caution 注意
 
-**<span style={{color: 'red'}}>对于 NodeManager 下线，emr-V1.3.1 版本需重启两个 ResourceManager 后，WEB 页面才剔除节点， 但实际影响不大。在执行完步骤 3.6 后，下线节点的 NodeManager 实际已从集群中移除，任务不会再分配到该下线的 NodeManmager 节点</span>**
+对于 NodeManager 下线，emr-V1.3.1 版本需重启两个 ResourceManager 后，WEB 页面才剔除节点， 但实际影响不大。在执行完步骤 3.6 后，下线节点的 NodeManager 实际已从集群中移除，任务不会再分配到该下线的 NodeManmager 节点
 
 :::
 
 ## 第四步、RegionServer 下线操作
 
-:::caution注意
+:::caution 注意
 
-**<span style={{color: 'red'}}>若存在 HBASE，请将 DataNode 下线完成后操作</span>**
+若存在 HBASE，请将 DataNode 下线完成后操作
 
 :::
 

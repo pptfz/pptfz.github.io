@@ -129,11 +129,11 @@ reboot
 
 ### 2.2 配置ssh免密
 
-:::tip
+:::tip 说明
 
-**⚠️如无特殊说明，以下操作均在 cdh-master01 节点**
+如无特殊说明，以下操作均在 cdh-master01 节点
 
-**CDH服务开启与关闭是通过server和agent来完成的，所以这里不需要配置ssh免密登录，但是为了我们分发文件方便，在这里我们也配置ssh免密**
+CDH服务开启与关闭是通过server和agent来完成的，所以这里不需要配置ssh免密登录，但是为了我们分发文件方便，在这里我们也配置ssh免密
 
 :::
 
@@ -164,7 +164,7 @@ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &>/dev/null
 
 - **这里机器用户名是`root`，密码是国际标准通用密码`1`，ssh端口`22`**
 
-- **⚠️执行路径在 `/opt/cdh6.2.1/script`**
+- **执行路径在 `/opt/cdh6.2.1/script`**
 
 ```shell
 cat > ssh.exp <<'EOF'
@@ -249,13 +249,13 @@ sed -i '7s/enforcing/disabled/' /etc/selinux/config
 
 #### 2.5.1 安装说明
 
-:::tip
+:::tip 说明
 
-**⚠️⚠️⚠️集群中每一个节点都需要安装jdk**
+- 集群中每一个节点都需要安装jdk
 
-**⚠️jdk需要登陆到 [oracle](https://www.oracle.com/) 官网才可以下载，这里下载的是版本是 `jdk-8u251`**
+- jdk需要登陆到 [oracle](https://www.oracle.com/) 官网才可以下载，这里下载的是版本是 `jdk-8u251`
 
-**jdk安装包下载至 `/opt/cdh6.2.1/pkg`**
+- jdk安装包下载至 `/opt/cdh6.2.1/pkg`
 
 [jdk官方下载地址](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
@@ -349,9 +349,9 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-:::tip
+:::tip 说明
 
-**⚠️sed中有变量替换，需要使用双引号**
+sed中有变量替换，需要使用双引号
 
 :::
 
@@ -437,9 +437,9 @@ for node_ip in ${NODE_IPS[@]}
 
 ### 2.7 安装mysql
 
-:::tip
+:::tip 说明
 
-**二进制安装的mysql启动脚本 `/etc/init.d/mysql` 和  `安装目录/mysql/bin/mysqld_safe`  这两个文件中都是默认在 `/usr/local/mysql`，如果安装目录不在 `/usr/local/` 下，需要修改这两个文件中的路径，即把 `/usr/local` 替换为mysql安装目录，用以下命令修改**
+二进制安装的mysql启动脚本 `/etc/init.d/mysql` 和  `安装目录/mysql/bin/mysqld_safe`  这两个文件中都是默认在 `/usr/local/mysql`，如果安装目录不在 `/usr/local/` 下，需要修改这两个文件中的路径，即把 `/usr/local` 替换为mysql安装目录，用以下命令修改
 
 ```shell
 sed -i 's#/usr/local#你的mysql安装目录#g' /etc/init.d/mysql /你的mysql安装目录/mysql/bin/mysqld_safe
@@ -480,7 +480,7 @@ ln -s /usr/local/mysql-5.7.30 /usr/local/mysql
 
 #### 2.7.4 创建mysql用户
 
-```python
+```shell
 useradd -M -s /bin/nologin mysql 
 ```
 
@@ -488,13 +488,13 @@ useradd -M -s /bin/nologin mysql
 
 #### 2.7.5 编辑主配置文件，myql-5.7.30二进制包默认没有mysql配置文件
 
-:::tip
+:::tip 说明
 
-**⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会默认从  `/tmp` 下找socket文件**
+如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会默认从  `/tmp` 下找socket文件
 
 :::
 
-```python
+```shell
 # 备份/etc/my.cnf
 mv /etc/my.cnf /etc/my.cnf.old
 
@@ -516,9 +516,9 @@ EOF
 
 #### 2.7.6 创建socker文件目录、目录文件授权
 
-:::tip
+:::tip 说明
 
-**⚠️⚠️⚠️如果mysql配置文件中指定了socket文件目录，则这个目录的权限必须是mysql，否则mysql会启动失败**
+如果mysql配置文件中指定了socket文件目录，则这个目录的权限必须是mysql，否则mysql会启动失败
 
 :::
 
@@ -532,7 +532,7 @@ chown mysql.mysql /etc/my.cnf
 
 #### 2.7.7 拷贝启动脚本
 
-```python
+```shell
 cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 ```
 
@@ -540,13 +540,13 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 #### 2.7.8 初始化mysql
 
-:::tip
+:::tip 说明
 
-**⚠️⚠️⚠️mysql-5.7.22初始化没有提示！！！**
+mysql-5.7.22初始化没有提示！！！
 
 :::
 
-```python
+```shell
 /usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
 ```
 
@@ -554,12 +554,12 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 **参数说明**
 
-| **参数**                  | **说明**              |
-| ------------------------- | --------------------- |
-| **--user**                | **指定mysql用户**     |
-| **--basedir**             | **指定mysql安装目录** |
-| **--datadir**             | **指定mysql数据目录** |
-| **--initialize-insecure** | **不生成随机密码**    |
+| **参数**              | **说明**          |
+| --------------------- | ----------------- |
+| --user                | 指定mysql用户     |
+| --basedir             | 指定mysql安装目录 |
+| --datadir             | 指定mysql数据目录 |
+| --initialize-insecure | 不生成随机密码    |
 
 
 
@@ -567,7 +567,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 #### 2.7.9 添加mysql命令环境变量
 
-```python
+```shell
 # 导出mysql命令环境变量
 echo "export PATH=/usr/local/mysql/bin:$PATH" > /etc/profile.d/mysql.sh
 
@@ -579,7 +579,7 @@ source /etc/profile
 
 #### 2.7.10 配置systemd管理mysql
 
-```python
+```shell
 cat >> /etc/systemd/system/mysqld.service <<'EOF'
 [Unit]
 Description=MySQL Server

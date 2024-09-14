@@ -134,7 +134,7 @@ reboot
 
 ### 2.2 配置ssh免密
 
-:::tip
+:::tip 说明
 
 如无特殊说明，以下操作均在 `ambari-server01` 节点
 
@@ -165,11 +165,11 @@ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa &>/dev/null
 
 #### 2.2.3 编辑expect自动化交互脚本
 
-:::tip
+:::tip 说明
 
-**这里机器用户名是 `root`，密码是国际标准通用密码 `1`，ssh端口 `22`**
+这里机器用户名是 `root`，密码是国际标准通用密码 `1`，ssh端口 `22`
 
-**⚠️执行路径在 `/opt/ambari/script`**
+执行路径在 `/opt/ambari/script`
 
 :::
 
@@ -256,13 +256,13 @@ sed -i '7s/enforcing/disabled/' /etc/selinux/config
 
 #### 2.5.1 安装说明
 
-:::tip
+:::tip 说明
 
-**<span style={{color: 'red'}}>⚠️⚠️⚠️集群中每一个节点都需要安装jdk</span>**
+- 集群中每一个节点都需要安装jdk
 
-**⚠️jdk需要登陆到 [oracle](https://www.oracle.com/) 官网才可以下载，这里下载的是版本是 `jdk-8u251`**
+- jdk需要登陆到 [oracle](https://www.oracle.com/) 官网才可以下载，这里下载的是版本是 `jdk-8u251`
 
-**jdk安装包下载至 `/opt/ambari/pkg`**
+- jdk安装包下载至 `/opt/ambari/pkg`
 
 [jdk官方下载地址](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 
@@ -342,9 +342,9 @@ for node_ip in ${NODE_IPS[@]}
 
 
 
-:::tip
+:::tip 说明
 
-**⚠️sed中有变量替换，需要使用双引号**
+sed中有变量替换，需要使用双引号
 
 :::
 
@@ -442,9 +442,9 @@ systemctl enable httpd && systemctl start httpd
 
 ### 2.8 安装mysql
 
-:::tip
+:::tip 说明
 
-**二进制安装的mysql启动脚本 `/etc/init.d/mysql` 和  `安装目录/mysql/bin/mysqld_safe`  这两个文件中都是默认在 `/usr/local/mysql`，如果安装目录不在 `/usr/local/` 下，需要修改这两个文件中的路径，即把 `/usr/local` 替换为mysql安装目录，使用如下命令**
+二进制安装的mysql启动脚本 `/etc/init.d/mysql` 和  `安装目录/mysql/bin/mysqld_safe`  这两个文件中都是默认在 `/usr/local/mysql`，如果安装目录不在 `/usr/local/` 下，需要修改这两个文件中的路径，即把 `/usr/local` 替换为mysql安装目录，使用如下命令
 
 ```shell
 sed -i 's#/usr/local#你的mysql安装目录#g' /etc/init.d/mysql /你的mysql安装目录/mysql/bin/mysqld_safe
@@ -456,7 +456,7 @@ sed -i 's#/usr/local#你的mysql安装目录#g' /etc/init.d/mysql /你的mysql�
 
 [mysql官方下载地址](https://downloads.mysql.com/archives/community/)
 
-:::tip
+:::tip 说明
 
 **mysql5.7.30 md5值  `611be3b18a30498b705db773293ad341`**
 
@@ -495,9 +495,9 @@ useradd -M -s /bin/nologin mysql
 
 #### 2.8.5 编辑主配置文件，myql-5.7.30二进制包默认没有mysql配置文件
 
-:::tip
+:::tip 说明
 
-**⚠️如果指定了mysql的socket文件位置，则必须添加 `[client]` 标签并同时指定socket文件位置，否则客户端会默认从 `/tmp` 下找socket文件**
+如果指定了mysql的socket文件位置，则必须添加 `[client]` 标签并同时指定socket文件位置，否则客户端会默认从 `/tmp` 下找socket文件
 
 :::
 
@@ -523,9 +523,9 @@ EOF
 
 #### 2.8.6 创建socker文件目录、目录文件授权
 
-:::caution
+:::caution 注意
 
-**⚠️⚠️⚠️如果mysql配置文件中指定了socket文件目录，则这个目录的权限必须是mysql，否则mysql会启动失败**
+如果mysql配置文件中指定了socket文件目录，则这个目录的权限必须是mysql，否则mysql会启动失败
 
 :::
 
@@ -547,13 +547,13 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 #### 2.8.8 初始化mysql
 
-:::tip
+:::tip 说明
 
-**⚠️⚠️⚠️mysql-5.7.22初始化没有提示！！！**
+mysql-5.7.22初始化没有提示！！！
 
 :::
 
-```python
+```shell
 /usr/local/mysql/bin/mysqld --initialize-insecure --user=mysql --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data
 ```
 
@@ -561,12 +561,12 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 **参数说明**
 
-| **参数**                  | **说明**              |
-| ------------------------- | --------------------- |
-| **--user**                | **指定mysql用户**     |
-| **--basedir**             | **指定mysql安装目录** |
-| **--datadir**             | **指定mysql数据目录** |
-| **--initialize-insecure** | **不生成随机密码**    |
+| **参数**              | **说明**          |
+| --------------------- | ----------------- |
+| --user                | 指定mysql用户     |
+| --basedir             | 指定mysql安装目录 |
+| --datadir             | 指定mysql数据目录 |
+| --initialize-insecure | 不生成随机密码    |
 
 
 
@@ -574,7 +574,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 #### 2.8.9 添加mysql命令环境变量
 
-```python
+```shell
 # 导出mysql命令环境变量
 echo "export PATH=/usr/local/mysql/bin:$PATH" > /etc/profile.d/mysql.sh
 
@@ -586,7 +586,7 @@ source /etc/profile
 
 #### 2.8.10 配置systemd管理mysql
 
-```python
+```shell
 cat >> /etc/systemd/system/mysqld.service <<'EOF'
 [Unit]
 Description=MySQL Server
@@ -610,7 +610,7 @@ EOF
 
 #### 2.8.11 启动mysql、检查启动
 
-```python
+```shell
 # 重新加载systemd系统服务
 systemctl daemon-reload
 
@@ -686,9 +686,9 @@ yum -y install yum-utils createrepo
 
 ### 3.3 创建ambari、HDP、HDP-UTILS的repo仓库
 
-:::caution
+:::caution 注意
 
-**⚠️如果下载的版本不同，则需要修改  `baseurl` 和 `gpgcheck` 中的url路径**
+如果下载的版本不同，则需要修改  `baseurl` 和 `gpgcheck` 中的url路径
 
 :::
 
@@ -743,9 +743,9 @@ yum clean all && yum makecache
 
 #### 3.3.4 通过本地源安装ambari
 
-:::tip
+:::tip 说明
 
-**⚠️执行此命令会安装 ambari2.6.2.2 和 pg9.2.24**
+执行此命令会安装 ambari2.6.2.2 和 pg9.2.24
 
 :::
 
@@ -761,9 +761,9 @@ yum -y install ambari-server
 
 [mysql驱动官方下载地址](https://downloads.mysql.com/archives/c-j/)
 
-:::caution
+:::caution 注意
 
-**由于使用的是mysql5.7，因此必须下载mysql5.7驱动，<span style={{color: 'red'}}>且必须放于 `/usr/share/java` 下</span>**
+由于使用的是mysql5.7，因此必须下载mysql5.7驱动且必须放于 `/usr/share/java` 下
 
 否则后续会有如下报错，原因是 ambari 默认的 mysql jdbc 驱动不支持 5.6 以上版本
 
@@ -905,9 +905,9 @@ Configuring ambari database...
 
 #### 4.2.9 继续配置远程数据库连接属性	输入：y
 
-:::caution
+:::caution 注意
 
-**⚠️需要导入 `/var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql`到ambari数据库中**
+需要导入 `/var/lib/ambari-server/resources/Ambari-DDL-MySQL-CREATE.sql` 到ambari数据库中
 
 :::
 
@@ -982,7 +982,7 @@ Ambari Server 'start' completed successfully.
 
 
 
-**<span style={{color: 'red'}}>到此，ambari安装成功！！！</span>**
+到此，ambari安装成功！！！
 
 
 
@@ -1077,9 +1077,9 @@ sed -i.bak '/^verify/cverify=disable' /etc/python/cert-verification.cfg
 
 **2.修改 `/etc/ambari-agent/conf/ambari-agent.ini` 中 `[security]` 标签后加入以下两行内容**
 
-:::caution
+:::caution 注意
 
-**⚠️这一步必须在 `Confirm Hosts` 进行安装后才会有相应的文件，也就是说进入到 `Confirm Hosts` 这一步中注册主机稍等一会才可以进行修改文件操作(目前了解是这样，不知道有没有更好的方法)**
+这一步必须在 `Confirm Hosts` 进行安装后才会有相应的文件，也就是说进入到 `Confirm Hosts` 这一步中注册主机稍等一会才可以进行修改文件操作(目前了解是这样，不知道有没有更好的方法)
 
 :::
 
@@ -1126,9 +1126,9 @@ ambari-agent restart
 10.0.0.138 ambari-agent02.test.com
 ```
 
-:::caution
+:::caution 注意
 
-**⚠️⚠️⚠️<span style={{color: 'red'}}>`Target Hosts` 处一定不要写IP地址，一定要写成FQDN式的主机名</span>**
+`Target Hosts` 处一定不要写IP地址，一定要写成FQDN式的主机名
 
 :::
 
@@ -1162,13 +1162,13 @@ ERROR 2020-09-14 17:07:52,075 main.py:246 - Ambari agent machine hostname (ambar
 
 
 
-:::caution
+:::caution 注意
 
-**⚠️5.3.3为遇到的问及记录**
+5.3.3为遇到的问及记录
 
 :::
 
-#### 5.3.3 ambari安装到 `Confirm Hosts`遇到的报错
+#### 5.3.3 ambari安装到 `Confirm Hosts` 遇到的报错
 
 #### 5.3.3.1 报错1	找不到 ambari server
 
@@ -1218,9 +1218,9 @@ http://10.0.0.136/ambari/HDP-UTILS/centos7/1.1.0.22
 
 **解决方法**
 
-:::caution
+:::caution 注意
 
-**⚠️<span style={{color: 'red'}}>以下操作需要在所有节点修改</span>**
+以下操作需要在所有节点修改
 
 :::
 
@@ -1363,9 +1363,9 @@ mysql -uroot -e "flush privileges"
 
 #### 5.6.5 Atlas
 
-:::caution
+:::caution 注意
 
-**⚠️⚠️⚠️最好不要选择这个Atlas，网上查了半天也不知道标红的这两处该怎么写以及怎么查找**
+最好不要选择这个Atlas，网上查了半天也不知道标红的这两处该怎么写以及怎么查找
 
 :::
 
