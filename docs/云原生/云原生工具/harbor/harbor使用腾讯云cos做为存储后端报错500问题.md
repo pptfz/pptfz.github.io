@@ -75,4 +75,38 @@ cos桶list强一致性问题，具体可以看 [腾讯云GET Bucket文档说明]
 
 ## 解决方法
 
-需要腾讯云cos团队修改后台配置
+1.需要腾讯云cos团队修改后台配置解决强一致性问题
+
+2.需要腾讯云cos团队修改cos桶白名单以使其支持 [path-style](https://cloud.tencent.com/document/product/436/102489) 域名
+
+
+
+## 没有解决的问题
+
+按照腾讯云cos桶 [域名合规问题](https://cloud.tencent.com/document/product/436/102489) 在2024年1月1日以后创建的cos桶是默认不支持使用 `path-style` 域名的，需要使用 `virtual-hosted-style` 域名，即自定义域名，但是当把配置文件中的域名修改为自定义域名后，上传/同步镜像依然报错500，最终的解决方法是腾讯云后台针对harbor使用的cos桶开启使用 `path-style` 域名白名单
+
+
+
+```yaml
+原配置
+storage_service
+    s3: 
+      region: ap-beijing
+      bucket: xxx
+      accesskey: xxx
+      secretkey: xxx
+      regionendpoint: https://cos.ap-beijing.myqcloud.com
+      rootdirectory: / 
+
+
+现配置
+storage_service:
+    s3: 
+      region: ap-beijing
+      bucket: xxx
+      accesskey: xxx
+      secretkey: xxx
+      regionendpoint: https://xxx.com
+      rootdirectory: / 
+```
+

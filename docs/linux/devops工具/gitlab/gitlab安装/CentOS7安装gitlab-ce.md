@@ -37,26 +37,37 @@ systemctl start postfix && systemctl enable postfix
 也可以从 [清华源](https://mirrors4.tuna.tsinghua.edu.cn/gitlab-ce/) 下载
 
 ```shell
-wget --content-disposition https://packages.gitlab.com/gitlab/gitlab-ce/packages/el/7/gitlab-ce-13.12.3-ce.0.el7.x86_64.rpm/download.rpm
+export VERSION=17.4.0
+wget --content-disposition https://packages.gitlab.com/gitlab/gitlab-ce/packages/el/7/gitlab-ce-${VERSION}-ce.0.el7.x86_64.rpm/download.rpm
 ```
 
 
 
 ### 1.3 安装
 
+:::tip 说明
+
+如需卸载可以参考 [官方文档](https://docs.gitlab.com/omnibus/installation/#uninstall-the-linux-package-omnibus)
+
+:::
+
 ```shell
-yum -y localinstall gitlab-ce-13.12.3-ce.0.el7.x86_64.rpm 
+yum -y localinstall gitlab-ce-${VERSION}-ce.0.el7.x86_64.rpm
 ```
 
 
 
 ### 1.4 修改配置文件
 
-> **修改 `/etc/gitlab/gitlab.rb` 中 `xternal_url` 一行，修改为自己的域名或IP**
+:::tip 说明
+
+修改 `/etc/gitlab/gitlab.rb` 中 `xternal_url` 一行，修改为自己的域名或IP
+
+:::
 
 ```shell
-export IP=10.0.0.100
-sed -i.bak "/^external_url/c external_url 'http://$IP'" /etc/gitlab/gitlab.rb
+export DOMAIN=10.0.0.100
+sed -i.bak "/^external_url/c external_url 'http://$DOMAIN'" /etc/gitlab/gitlab.rb
 ```
 
 
@@ -76,15 +87,23 @@ gitlab-ctl reconfigure
 systemctl enable gitlab-runsvdir.service
 ```
 
-**重载配置文件成功提示如下**
+重载配置文件成功提示如下
+
+低版本
 
 ![iShot2021-06-20_01.20.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-20_01.20.14.png)
 
 
 
+高版本
+
+![iShot_2024-09-23_12.08.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-23_12.08.42.png)
 
 
-**gitlab启动的端口**
+
+
+
+gitlab启动的端口
 
 ```shell
 $ netstat -ntpl
@@ -117,34 +136,63 @@ tcp6       0      0 ::1:9168                :::*                    LISTEN      
 
 
 
-
-
 ## 2.yum安装
+
+[yum安装官方文档](https://about.gitlab.com/install/#centos-7)
+
+### 2.1 安装并配置必要的依赖项
+
+安装依赖包
+
+```sh
+yum -y install curl policycoreutils-python openssh-server perl
+```
+
+
+
+安装 Postfix（或 Sendmail）来发送通知邮件。如果您想使用其他解决方案发送电子邮件，请跳过此步骤
+
+```shell
+yum -y install postfix
+systemctl enable postfix
+systemctl start postfix
+```
+
+
+
+
 
 ### 2.1 添加官方yum源
 
-:::tip
-
-**这个源需要科学上网**
-
-:::
-
 ```shell
 curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
+
+
+curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.rpm.sh | sudo bash
 ```
 
 
 
 ### 2.2 安装
 
-> **需要修改为自己的url，安装完成后会自动启动gitlab-ce**
+:::tip 说明
+
+需要修改为自己的url，安装完成后会自动启动gitlab-ce
+
+可以执行命令 `yum --showduplicates list gitlab` 查看可以安装的版本
+
+如需卸载可以参考 [官方文档](https://docs.gitlab.com/omnibus/installation/#uninstall-the-linux-package-omnibus)
+
+:::
+
+
 
 ```shell
 # 默认安装最新版
 sudo EXTERNAL_URL="https://gitlab.example.com" yum -y install gitlab-ce
 
 # 安装指定版本
-sudo EXTERNAL_URL="https://gitlab.example.com" yum -y install -y gitlab-ce-13.12.3
+sudo EXTERNAL_URL="https://gitlab.example.com" yum -y install gitlab-ce-13.12.3
 ```
 
 
@@ -185,7 +233,11 @@ tcp6       0      0 ::1:9168                :::*                    LISTEN      
 
 ### 2.3 关闭https自动重定向
 
-> 使用gitlab-ce官方提供的脚本安装后，gitlab-ce会默认开启 `http->https` 重定向，如果使用nginx做代理则关闭https自动重定向
+:::tip 说明
+
+使用gitlab-ce官方提供的脚本安装后，gitlab-ce会默认开启 `http->https` 重定向，如果使用nginx做代理则需要关闭https自动重定向
+
+:::
 
 编辑 `/etc/gitlab/gitlab.rb` 文件，取消以下行的注释
 
@@ -205,7 +257,36 @@ gitlab-ctl reconfigure
 
 ## 3.docker安装
 
-[gitlab docker安装官方文档](https://docs.gitlab.com/omnibus/docker/)
+### 3.1 使用docker engine安装
+
+[使用docker安装](https://docs.gitlab.com/ee/install/docker/installation.html#install-gitlab-using-docker-engine)
+
+[gitlab社区版docker hub地址](https://hub.docker.com/r/gitlab/gitlab-ce/tags/)
+
+```shell
+export GITLAB_HOME=/data/gitlab
+sudo docker run --detach \
+   --hostname gitlab.example.com \
+   --env GITLAB_OMNIBUS_CONFIG="external_url 'http://gitlab.example.com'" \
+   --publish 443:443 --publish 80:80 --publish 22:22 \
+   --name gitlab \
+   --restart always \
+   --volume $GITLAB_HOME/config:/etc/gitlab \
+   --volume $GITLAB_HOME/logs:/var/log/gitlab \
+   --volume $GITLAB_HOME/data:/var/opt/gitlab \
+   --shm-size 256m \
+   gitlab/gitlab-ce:<version>-ce.0
+```
+
+
+
+
+
+### 3.2 使用docker-compose安装
+
+[使用docker-compose安装](https://docs.gitlab.com/ee/install/docker/installation.html#install-gitlab-using-docker-compose)
+
+
 
 ### 3.1 编辑docker-compose.yml文件
 
@@ -356,14 +437,14 @@ gitlab默认开启注册
 
 **gitlab相关文件路径说明**
 
-| 路径                                        | 说明                 |
-| ------------------------------------------- | -------------------- |
-| /opt/gitlab                                 | gitlab的程序安装目录 |
-| /var/opt/gitlab                             | gitlab目录数据目录   |
-| /var/opt/gitlab/git-data/repositories       | 存放仓库数据         |
-| /etc/gitlab/gitlab.rb                       | 主配置文件           |
-| /var/opt/gitlab/nginx/conf/gitlab-http.conf | nginx配置文件        |
-| /var/opt/gitlab/postgresql/data             | Postgresql数据目录   |
+| 路径                                          | 说明                 |
+| --------------------------------------------- | -------------------- |
+| `/opt/gitlab`                                 | gitlab的程序安装目录 |
+| `/var/opt/gitlab`                             | gitlab目录数据目录   |
+| `/var/opt/gitlab/git-data/repositories`       | 存放仓库数据         |
+| `/etc/gitlab/gitlab.rb`                       | 主配置文件           |
+| `/var/opt/gitlab/nginx/conf/gitlab-http.conf` | nginx配置文件        |
+| `/var/opt/gitlab/postgresql/data`             | Postgresql数据目录   |
 
 
 
@@ -388,21 +469,21 @@ gitlab默认开启注册
 
 **服务控制命令**
 
-| **命令**                          | **说明**                           |
-| --------------------------------- | ---------------------------------- |
-| **gitlab-ctl status**             | **查看目前gitlab所有服务运维状态** |
-| **gitlab-ctl start/stop/restart** | **启动/停止/重启所有 gitlab 组件** |
-| **gitlab-ctl start/stop nginx**   | **单独启动/停止某个服务**          |
-| **gitlab-ctl reconfigure**        | **重载配置文件**                   |
+| **命令**                        | **说明**                       |
+| ------------------------------- | ------------------------------ |
+| `gitlab-ctl status`             | 查看目前gitlab所有服务运维状态 |
+| `gitlab-ctl start/stop/restart` | 启动/停止/重启所有 gitlab 组件 |
+| `gitlab-ctl start/stop nginx`   | 单独启动/停止某个服务          |
+| `gitlab-ctl reconfigure`        | 重载配置文件                   |
 
 
 
 **日志相关命令**
 
-| **命令**                                                     | **说明**               |
-| ------------------------------------------------------------ | ---------------------- |
-| **gitlab-ctl tail**                                          | **实时查看所有日志**   |
-| **gitlab-ctl tail redis/postgresql/gitlab-workhorse/logrotate/nginx/sidekiq/unicorn** | **实时查看各服务日志** |
+| **命令**                                                     | **说明**           |
+| ------------------------------------------------------------ | ------------------ |
+| `gitlab-ctl tail`                                            | 实时查看所有日志   |
+| `gitlab-ctl tail redis/postgresql/gitlab-workhorse/logrotate/nginx/sidekiq/unicorn` | 实时查看各服务日志 |
 
 
 
@@ -437,23 +518,23 @@ run: sidekiq: (pid 3271) 54294s; run: log: (pid 3286) 54291s
 
 [官方文档对于各服务指标的说明](https://docs.gitlab.com/ce/administration/monitoring/)
 
-| **服务名**            | **默认监听端口** | **说明**                                              |
-| --------------------- | ---------------- | ----------------------------------------------------- |
-| **alertmanager**      | **TCP:9093**     | **告警工具**                                          |
-| **gitaly**            | **TCP:9236**     | **提供集群功能**                                      |
-| **gitlab-exporter**   | **---**          | **监控gitlab指标**                                    |
-| **gitlab-workhorse**  | **TCP:9229**     | **gitlab反向代理，处理文件上传、下载，git推拉等操作** |
-| **grafana**           | **TCP:3000**     | **出图工具**                                          |
-| **logrotate**         | **---**          | **日志切割**                                          |
-| **nginx**             | **TCP:80**       | **静态web服务器**                                     |
-| **node-exporter**     | **TCP:9100**     | **Prometheus用来监控服务器指标**                      |
-| **postgres-exporter** | **TCP:9187**     | **导出PostgreSQL指标**                                |
-| **postgresql**        | **UDP:60387**    | **默认数据库**                                        |
-| **prometheus**        | **TCP:9090**     | **监控**                                              |
-| **puma**              | **TCP:8080**     | **默认的web服务器**                                   |
-| **redis**             | **---**          | **缓存服务**                                          |
-| **redis-exporter**    | **TCP:9121**     | **监控redis**                                         |
-| **sidekiq**           | **TCP:8082**     | **依赖redis的消息队列**                               |
+| 服务名            | 默认监听端口 | 说明                                              |
+| ----------------- | ------------ | ------------------------------------------------- |
+| alertmanager      | TCP:9093     | 告警工具                                          |
+| gitaly            | TCP:9236     | 提供集群功能                                      |
+| gitlab-exporter   | ---          | 监控gitlab指标                                    |
+| gitlab-workhorse  | TCP:9229     | gitlab反向代理，处理文件上传、下载，git推拉等操作 |
+| grafana           | TCP:3000     | 出图工具                                          |
+| logrotate         | ---          | 日志切割                                          |
+| nginx             | TCP:80       | 静态web服务器                                     |
+| node-exporter     | TCP:9100     | Prometheus用来监控服务器指标                      |
+| postgres-exporter | TCP:9187     | 导出PostgreSQL指标                                |
+| postgresql        | UDP:60387    | 默认数据库                                        |
+| prometheus        | TCP:9090     | 监控                                              |
+| puma              | TCP:8080     | 默认的web服务器                                   |
+| redis             | ---          | 缓存服务                                          |
+| redis-exporter    | TCP:9121     | 监控redis                                         |
+| sidekiq           | TCP:8082     | 依赖redis的消息队列                               |
 
 
 

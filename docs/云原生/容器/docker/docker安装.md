@@ -10,10 +10,10 @@ yum -y install docker-ce
 
 systemctl start docker && systemctl enable docker  
 
-# 配置阿里云镜像加速地址
+# 配置rainbond镜像加速地址
 cat > /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://gqk8w9va.mirror.aliyuncs.com"]
+  "registry-mirrors": ["https://docker.rainbond.cc"]
 }
 EOF
 
@@ -93,12 +93,12 @@ Server: Docker Engine - Community
 
 ### 1.5 配置docker镜像加速
 
-配置阿里云镜像加速地址
+配置 [rainbond](https://mp.weixin.qq.com/s/pXrxedldKOoD97bMDYy3pQ) 镜像加速地址
 
 ```shell
 cat > /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://gqk8w9va.mirror.aliyuncs.com"]
+  "registry-mirrors": ["https://docker.rainbond.cc"]
 }
 EOF
 ```
