@@ -104,11 +104,11 @@ const config = {
             position: 'left',
             label: '大烩菜',
           },
-          {
-            to: 'docs/你过来啊/你过来啊',
-            position: 'right',
-            label: '你过来啊',
-          },
+          // {
+          //   to: 'docs/你过来啊/你过来啊',
+          //   position: 'right',
+          //   label: '你过来啊',
+          // },
           {
             label: 'mac专区',
             items: [
