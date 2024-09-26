@@ -105,9 +105,9 @@ const config = {
             label: '大烩菜',
           },
           {
-            to: 'docs/八卦/女卫生间里的故事',
+            to: 'docs/你过来啊/你过来啊',
             position: 'right',
-            label: '女卫生间里的故事',
+            label: '你过来啊',
           },
           {
             label: 'mac专区',
