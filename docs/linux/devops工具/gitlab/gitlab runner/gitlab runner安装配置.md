@@ -8,17 +8,19 @@
 
 [gitlab runner 官方文档](https://docs.gitlab.com/runner/)
 
+[gitlab runner安装官方文档](https://docs.gitlab.com/runner/install/)
+
 
 
 ## 1.gitlab runner简介
 
-**简介**
+### 1.1 简介
 
 GitLab Runner 是一个与 GitLab CI/CD 一起使用以在管道中运行作业的应用程序
 
 
 
-**特性**
+### 1.2 特性
 
 GitLab Runner 具有以下功能
 
@@ -40,11 +42,11 @@ GitLab Runner 具有以下功能
 - 启用 Docker 容器的缓存。
 - 易于安装为 GNU/Linux、macOS 和 Windows 的服务。
 - 嵌入式 Prometheus 指标 HTTP 服务器。
-- 裁判工作人员监控 Prometheus 指标和其他特定于工作的数据并将其传递给 GitLab。
+- Referee workers监控 Prometheus 指标和其他特定于工作的数据并将其传递给 GitLab。
 
 
 
-**runner 执行流程**
+### 1.3 runner 执行流程
 
 ![iShot_2022-07-04_10.59.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-07-04_10.59.44.png)
 
@@ -62,7 +64,14 @@ GitLab Runner 具有以下功能
 
 
 
+### 1.4 gitlab runner相关术语
 
+- **GitLab Runner** : 安装在目标计算平台上执行 GitLab CI 作业的应用程序
+- **runner configuration** : 在 `config.toml` 文件中的单个 `[[runner]]` 条目在用户界面（UI）中显示为一个**运行器**（runner）
+
+- **runner manager** : 读取 `config.toml`并同时运行所有 runner 配置的进程
+- **runner** : 在选定的机器上执行作业的进程。根据执行器的类型，这台机器可能是运行器管理器本地的（使用 `shell` 或 `docker` 执行器），也可能是由自动缩放器创建的远程机器（使用 `docker-autoscaler` 或 `kubernetes`）
+- **machine** : 运行程序在其中运行的虚拟机 （VM） 或 Pod。GitLab Runner 会自动生成一个唯一的、持久的机器 ID，这样当多台机器被赋予相同的 runner 配置时，作业可以单独路由，但 runner 配置在 UI 中分组
 
 
 

@@ -265,7 +265,7 @@ gitlab-ctl reconfigure
 
 ```shell
 export GITLAB_HOME=/data/gitlab
-sudo docker run --detach \
+docker run --detach \
    --hostname gitlab.example.com \
    --env GITLAB_OMNIBUS_CONFIG="external_url 'http://gitlab.example.com'" \
    --publish 443:443 --publish 80:80 --publish 22:22 \
@@ -286,9 +286,7 @@ sudo docker run --detach \
 
 [使用docker-compose安装](https://docs.gitlab.com/ee/install/docker/installation.html#install-gitlab-using-docker-compose)
 
-
-
-### 3.1 编辑docker-compose.yml文件
+编辑docker-compose.yml文件
 
 默认 `https` 和 `ssh` 端口
 
@@ -456,12 +454,12 @@ gitlab默认开启注册
 
 **运维管理命令**
 
-| 命令                                                  | 说明     |
-| ----------------------------------------------------- | -------- |
-| cat /opt/gitlab/embedded/service/gitlab-rails/VERSION | 查看版本 |
-|                                                       |          |
-|                                                       |          |
-|                                                       |          |
+| 命令                                                    | 说明     |
+| ------------------------------------------------------- | -------- |
+| `cat /opt/gitlab/embedded/service/gitlab-rails/VERSION` | 查看版本 |
+|                                                         |          |
+|                                                         |          |
+|                                                         |          |
 
 
 
@@ -535,18 +533,5 @@ run: sidekiq: (pid 3271) 54294s; run: log: (pid 3286) 54291s
 | redis             | ---          | 缓存服务                                          |
 | redis-exporter    | TCP:9121     | 监控redis                                         |
 | sidekiq           | TCP:8082     | 依赖redis的消息队列                               |
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
