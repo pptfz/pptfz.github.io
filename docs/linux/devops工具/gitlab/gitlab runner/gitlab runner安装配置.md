@@ -95,38 +95,96 @@ helm repo add gitlab https://charts.gitlab.io
 
 ```shell
 $ helm search repo -l gitlab/gitlab-runner
-NAME                	CHART VERSION	APP VERSION	DESCRIPTION  
-gitlab/gitlab-runner	0.42.0       	15.1.0     	GitLab Runner
-gitlab/gitlab-runner	0.41.0       	15.0.0     	GitLab Runner
-gitlab/gitlab-runner	0.40.1       	14.10.1    	GitLab Runner
-gitlab/gitlab-runner	0.40.0       	14.10.0    	GitLab Runner
-gitlab/gitlab-runner	0.39.1       	14.9.2     	GitLab Runner
-gitlab/gitlab-runner	0.39.0       	14.9.0     	GitLab Runner
-gitlab/gitlab-runner	0.38.2       	14.8.3     	GitLab Runner
-gitlab/gitlab-runner	0.38.1       	14.8.2     	GitLab Runner
-gitlab/gitlab-runner	0.38.0       	14.8.0     	GitLab Runner
-gitlab/gitlab-runner	0.37.3       	14.7.1     	GitLab Runner
-gitlab/gitlab-runner	0.37.2       	14.7.0     	GitLab Runner
-gitlab/gitlab-runner	0.37.1       	bleeding   	GitLab Runner
-gitlab/gitlab-runner	0.37.0       	14.7.0     	GitLab Runner
-gitlab/gitlab-runner	0.36.1       	14.6.1     	GitLab Runner
-gitlab/gitlab-runner	0.36.0       	14.6.0     	GitLab Runner
-gitlab/gitlab-runner	0.35.3       	14.5.2     	GitLab Runner
-gitlab/gitlab-runner	0.35.2       	14.5.2     	GitLab Runner
-gitlab/gitlab-runner	0.35.0       	14.5.0     	GitLab Runner
-gitlab/gitlab-runner	0.34.2       	14.4.2     	GitLab Runner
-gitlab/gitlab-runner	0.34.1       	14.4.1     	GitLab Runner
-gitlab/gitlab-runner	0.34.0       	14.4.0     	GitLab Runner
-gitlab/gitlab-runner	0.33.3       	14.3.4     	GitLab Runner
-gitlab/gitlab-runner	0.33.2       	14.3.3     	GitLab Runner
-gitlab/gitlab-runner	0.33.1       	14.3.2     	GitLab Runner
-gitlab/gitlab-runner	0.33.0       	14.3.0     	GitLab Runner
-gitlab/gitlab-runner	0.32.0       	14.2.0     	GitLab Runner
-gitlab/gitlab-runner	0.31.0       	14.1.0     	GitLab Runner
-gitlab/gitlab-runner	0.30.0       	14.0.0     	GitLab Runner
-gitlab/gitlab-runner	0.29.0       	13.12.0    	GitLab Runner
-gitlab/gitlab-runner	0.28.0       	13.11.0    	GitLab Runner
-gitlab/gitlab-runner	0.27.0       	13.10.0    	GitLab Runner
+NAME                    CHART VERSION   APP VERSION     DESCRIPTION  
+gitlab/gitlab-runner    0.69.0          17.4.0          GitLab Runner
+gitlab/gitlab-runner    0.68.1          17.3.1          GitLab Runner
+gitlab/gitlab-runner    0.68.0          17.3.0          GitLab Runner
+gitlab/gitlab-runner    0.67.1          17.2.1          GitLab Runner
+gitlab/gitlab-runner    0.67.0          17.2.0          GitLab Runner
+gitlab/gitlab-runner    0.66.1          17.1.1          GitLab Runner
+gitlab/gitlab-runner    0.66.0          17.1.0          GitLab Runner
+gitlab/gitlab-runner    0.65.2          17.0.2          GitLab Runner
+gitlab/gitlab-runner    0.65.1          17.0.1          GitLab Runner
+gitlab/gitlab-runner    0.65.0          17.0.0          GitLab Runner
+gitlab/gitlab-runner    0.64.3          16.11.3         GitLab Runner
+gitlab/gitlab-runner    0.64.2          16.11.2         GitLab Runner
+gitlab/gitlab-runner    0.64.1          16.11.1         GitLab Runner
+gitlab/gitlab-runner    0.64.0          16.11.0         GitLab Runner
+gitlab/gitlab-runner    0.63.0          16.10.0         GitLab Runner
+gitlab/gitlab-runner    0.62.1          16.9.1          GitLab Runner
+gitlab/gitlab-runner    0.62.0          16.9.0          GitLab Runner
+gitlab/gitlab-runner    0.61.3          16.8.1          GitLab Runner
+gitlab/gitlab-runner    0.61.2          16.8.0          GitLab Runner
+gitlab/gitlab-runner    0.61.1          16.8.0          GitLab Runner
+gitlab/gitlab-runner    0.61.0          16.8.0          GitLab Runner
+gitlab/gitlab-runner    0.60.1          16.7.1          GitLab Runner
+gitlab/gitlab-runner    0.60.0          16.7.0          GitLab Runner
+gitlab/gitlab-runner    0.59.3          16.6.2          GitLab Runner
+gitlab/gitlab-runner    0.59.2          16.6.1          GitLab Runner
+gitlab/gitlab-runner    0.59.1          16.6.0          GitLab Runner
+gitlab/gitlab-runner    0.59.0          16.6.0          GitLab Runner
+gitlab/gitlab-runner    0.58.2          16.5.0          GitLab Runner
+gitlab/gitlab-runner    0.58.1          16.5.0          GitLab Runner
+gitlab/gitlab-runner    0.58.0          16.5.0          GitLab Runner
+gitlab/gitlab-runner    0.57.2          16.4.2          GitLab Runner
+gitlab/gitlab-runner    0.57.1          16.4.1          GitLab Runner
+gitlab/gitlab-runner    0.57.0          16.4.0          GitLab Runner
+gitlab/gitlab-runner    0.56.3          16.3.3          GitLab Runner
+gitlab/gitlab-runner    0.56.2          16.3.2          GitLab Runner
+gitlab/gitlab-runner    0.56.1          16.3.1          GitLab Runner
+gitlab/gitlab-runner    0.56.0          16.3.0          GitLab Runner
+gitlab/gitlab-runner    0.55.3          16.2.3          GitLab Runner
+gitlab/gitlab-runner    0.55.2          16.2.2          GitLab Runner
+gitlab/gitlab-runner    0.55.1          16.2.1          GitLab Runner
+gitlab/gitlab-runner    0.55.0          16.2.0          GitLab Runner
+gitlab/gitlab-runner    0.54.1          16.1.1          GitLab Runner
+gitlab/gitlab-runner    0.54.0          16.1.0          GitLab Runner
+gitlab/gitlab-runner    0.53.3          16.0.3          GitLab Runner
+gitlab/gitlab-runner    0.53.2          16.0.2          GitLab Runner
+gitlab/gitlab-runner    0.53.1          16.0.1          GitLab Runner
+gitlab/gitlab-runner    0.53.0          16.0.0          GitLab Runner
+gitlab/gitlab-runner    0.52.1          15.11.1         GitLab Runner
+gitlab/gitlab-runner    0.52.0          15.11.0         GitLab Runner
+gitlab/gitlab-runner    0.51.1          15.10.1         GitLab Runner
+gitlab/gitlab-runner    0.51.0          15.10.0         GitLab Runner
+gitlab/gitlab-runner    0.50.1          15.9.1          GitLab Runner
+gitlab/gitlab-runner    0.50.0          15.9.0          GitLab Runner
+gitlab/gitlab-runner    0.49.3          15.8.3          GitLab Runner
+gitlab/gitlab-runner    0.49.2          15.8.2          GitLab Runner
+gitlab/gitlab-runner    0.49.1          15.8.1          GitLab Runner
+gitlab/gitlab-runner    0.49.0          15.8.0          GitLab Runner
+gitlab/gitlab-runner    0.48.3          15.7.4          GitLab Runner
+gitlab/gitlab-runner    0.48.2          15.7.3          GitLab Runner
+gitlab/gitlab-runner    0.48.1          15.7.2          GitLab Runner
+gitlab/gitlab-runner    0.48.0          15.7.0          GitLab Runner
+gitlab/gitlab-runner    0.47.3          15.6.3          GitLab Runner
+gitlab/gitlab-runner    0.47.2          15.6.2          GitLab Runner
+gitlab/gitlab-runner    0.47.1          15.6.1          GitLab Runner
+gitlab/gitlab-runner    0.47.0          15.6.0          GitLab Runner
+gitlab/gitlab-runner    0.46.1          15.5.1          GitLab Runner
+gitlab/gitlab-runner    0.46.0          15.5.0          GitLab Runner
+gitlab/gitlab-runner    0.45.2          15.4.2          GitLab Runner
+gitlab/gitlab-runner    0.45.1          15.4.1          GitLab Runner
+gitlab/gitlab-runner    0.45.0          15.4.0          GitLab Runner
+gitlab/gitlab-runner    0.44.3          15.3.3          GitLab Runner
+gitlab/gitlab-runner    0.44.2          15.3.2          GitLab Runner
+gitlab/gitlab-runner    0.44.1          15.3.1          GitLab Runner
+gitlab/gitlab-runner    0.44.0          15.3.0          GitLab Runner
+gitlab/gitlab-runner    0.43.2          15.2.2          GitLab Runner
+gitlab/gitlab-runner    0.43.1          15.2.1          GitLab Runner
+gitlab/gitlab-runner    0.43.0          15.2.0          GitLab Runner
+gitlab/gitlab-runner    0.42.0          15.1.0          GitLab Runner
+gitlab/gitlab-runner    0.41.1          15.0.1          GitLab Runner
+gitlab/gitlab-runner    0.41.0          15.0.0          GitLab Runner
+gitlab/gitlab-runner    0.40.1          14.10.1         GitLab Runner
+gitlab/gitlab-runner    0.40.0          14.10.0         GitLab Runner
+gitlab/gitlab-runner    0.39.1          14.9.2          GitLab Runner
+gitlab/gitlab-runner    0.39.0          14.9.0          GitLab Runner
+gitlab/gitlab-runner    0.38.2          14.8.3          GitLab Runner
+gitlab/gitlab-runner    0.38.1          14.8.2          GitLab Runner
+gitlab/gitlab-runner    0.38.0          14.8.0          GitLab Runner
+gitlab/gitlab-runner    0.37.3          14.7.1          GitLab Runner
+gitlab/gitlab-runner    0.37.2          14.7.0          GitLab Runner
 ......
 ```
 
@@ -134,8 +192,14 @@ gitlab/gitlab-runner	0.27.0       	13.10.0    	GitLab Runner
 
 ### 2.3 下载chat
 
+:::tip 说明
+
+可以通过 `--version=`  指定要下载的版本，不指定默认下载最新版
+
+:::
+
 ```shell
-helm pull gitlab/gitlab-runner --version=0.37.2
+helm pull gitlab/gitlab-runner
 ```
 
 
@@ -143,7 +207,7 @@ helm pull gitlab/gitlab-runner --version=0.37.2
 ### 2.4 解压缩包
 
 ```shell
-tar xf gitlab-runner-0.37.2.tgz
+tar xf gitlab-runner-0.69.0.tgz
 ```
 
 
@@ -151,69 +215,49 @@ tar xf gitlab-runner-0.37.2.tgz
 目录结构如下
 
 ```shell
-$ tree gitlab-runner
-gitlab-runner
+$ tree gitlab-runner/
+gitlab-runner/
 ├── CHANGELOG.md
-├── Chart.yaml
 ├── CONTRIBUTING.md
+├── Chart.yaml
+├── DEVELOPMENT.md
 ├── LICENSE
 ├── Makefile
 ├── NOTICE
 ├── README.md
 ├── templates
-│   ├── _cache.tpl
-│   ├── configmap.yaml
-│   ├── deployment.yaml
-│   ├── _env_vars.tpl
-│   ├── _helpers.tpl
-│   ├── hpa.yaml
-│   ├── NOTES.txt
-│   ├── role-binding.yaml
-│   ├── role.yaml
-│   ├── secrets.yaml
-│   ├── service-account.yaml
-│   ├── servicemonitor.yaml
-│   ├── service-session-server.yaml
-│   └── service.yaml
-├── values-qk.yaml
+│   ├── NOTES.txt
+│   ├── _env_vars.tpl
+│   ├── _helpers.tpl
+│   ├── configmap.yaml
+│   ├── deployment.yaml
+│   ├── extra-manifests.yaml
+│   ├── hpa.yaml
+│   ├── role-binding.yaml
+│   ├── role.yaml
+│   ├── secrets.yaml
+│   ├── service-account.yaml
+│   ├── service-session-server.yaml
+│   ├── service.yaml
+│   └── servicemonitor.yaml
 └── values.yaml
 
-1 directory, 23 files
+2 directories, 23 files
 ```
 
 
 
 ## 3.配置gitlab runner
 
-[官方文档](https://docs.gitlab.com/runner/install/kubernetes.html)中指定了2个必须配置项
+[使用helm chart配置gitlab runner官方文档](https://docs.gitlab.com/runner/install/kubernetes.html#configuring-gitlab-runner-using-the-helm-chart)
 
-- gitlabUrl 指定用于注册runner的gitlab地址
+### 3.1 必须配置项目
 
-- runnerRegistrationToken 指定用于将runner添加到gitlab的注册令牌(这个可以在gitlab中生成，[也可以将注册令牌存储在secret中](https://docs.gitlab.com/runner/install/kubernetes.html#store-registration-tokens-or-runner-tokens-in-secrets))
+#### 3.1.1 gitlabUrl
 
-  - 配置示例如下
+用于注册 Runner 的 GitLab 服务器完整 URL
 
-    ```yaml
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: gitlab-runner-secret
-    type: Opaque
-    data:
-      runner-registration-token: "NlZrN1pzb3NxUXlmcmVBeFhUWnIK" #base64 encoded registration token
-      runner-token: ""
-    ```
-
-    ```yaml
-    runners:
-      secret: gitlab-runner-secret
-    ```
-
-    
-
-接下来修改chat模版中的 `values.yaml` 文件，这里做如下修改
-
-### 3.1 配置 `gitlabUrl`
+在 `values.yaml` 中修改
 
 ```yaml
 gitlabUrl: http://你的gitlabIP或域名/
@@ -221,17 +265,109 @@ gitlabUrl: http://你的gitlabIP或域名/
 
 
 
-### 3.2 配置 `runnerRegistrationToken`
+#### 3.1.2 `rbac: { create: true }`
+
+为 GitLab Runner 创建 RBAC 规则，以便其创建 Pod 来运行任务，如果你有一个现有的 `serviceAccount` 并希望使用它则应该设置 `rbac: { serviceAccountName: "SERVICE_ACCOUNT_NAME" }`，有关 `serviceAccount` 所需的最低权限的更多信息请参考 [官方文档](https://docs.gitlab.com/runner/executors/kubernetes/index.html#configure-runner-api-permissions)
+
+
+
+在 `values.yaml` 中修改
 
 ```yaml
-runnerRegistrationToken: "xxx"
+rbac:
+  ## Specifies whether a Role and RoleBinding should be created
+  ## If this value is set to `true`, `serviceAccount.create` should also be set to either `true` or `false`
+  ##
+  create: true
 ```
 
 
 
-### 3.3 配置 `unregisterRunner`
+
+
+
+
+#### 3.1.3 `runnerToken` 和 `runnerRegistrationToken`
+
+##### 3.1.3.1 `runnerToken` 
+
+-  [在gitlab ui中创建的runner认证token](https://docs.gitlab.com/ee/ci/runners/runners_scope.html#create-an-instance-runner-with-a-runner-authentication-token)
+- [直接设置token或将其存储在secret中](https://docs.gitlab.com/runner/install/kubernetes.html#store-registration-tokens-or-runner-tokens-in-secrets)
+
+
+
+
+
+`admin` -> `CI/CD` -> `Runners` -> `new instance runner`
+
+![iShot_2024-09-26_18.59.43](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-26_18.59.43.png)
+
+
+
+添加tag以指定可以运行的job，可以参考 [官方文档](https://docs.gitlab.com/17.4/ee/ci/runners/configure_runners.html#control-jobs-that-a-runner-can-run)
+
+![iShot_2024-09-26_19.35.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-26_19.35.30.png)
+
+
+
+创建完runner的页面，复制显示的 `runner authentication token` 并在 `values.yaml` 中指定
+
+![iShot_2024-09-26_19.40.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-26_19.40.48.png)
+
+
+
+在 `values.yaml` 中修改
+
+```yaml
+runnerToken: "glrt-USJJE89hif1-1kwGFHtj"
+```
+
+
+
+
+
+##### 3.1.3.2 `runnerRegistrationToken`（在 [gitlab15.6中荒废](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/102681)）
+
+- 在gitlab实例中检测到的 [注册token](https://docs.gitlab.com/ee/ci/runners/)
+- [直接设置token或将其存储在secret中](https://docs.gitlab.com/runner/install/kubernetes.html#store-registration-tokens-or-runner-tokens-in-secrets)
+
+
+
+
+
+
+
+
+
+```
+gitlab-runner register  --url http://10.80.15.241  --token glrt-USJJE89hif1-1kwGFHtj
+```
+
+
+
+```
+gitlab-runner run
+```
+
+
+
+
+
+```yaml
+
+```
+
+
+
+### 3.2 其他配置项
+
+#### 3.2.1 配置 `unregisterRunner`
+
+:::tip 说明
 
 [官方文档关于一些参数的说明](https://docs.gitlab.com/charts/charts/gitlab/gitlab-runner/#installation-command-line-options)，`unregisterRunners` 为 `true` 的意思为，当更新runner版本或者修改配置文件时，注销掉所有的注册runner
+
+:::
 
 ```yaml
 unregisterRunners: true
@@ -239,24 +375,20 @@ unregisterRunners: true
 
 
 
-### 3.4 配置 `checkInterval`
+#### 3.2.2 配置 `checkInterval`
 
 [官方文档对于checkInterval的说明](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#how-check_interval-works)
 
+:::tip 说明
+
 这个参数简单理解就是Runner间隔多久去GitLab上检查是否有job
 
-⚠️默认是3秒，如果设置为0或者更低还是默认3秒
+默认是3秒，如果设置为0或者更低还是默认3秒
+
+:::
 
 ```yaml
 checkInterval: 3
-```
-
-
-
-### 3.5 配置rbac
-
-```yaml
-create: true
 ```
 
 
@@ -298,20 +430,74 @@ rules:
 
 
 
-### 3.6 配置 helpers
+## 4.安装
 
-[helper image官方文档说明](https://docs.gitlab.com/runner/configuration/advanced-configuration.html#helper-image)
+```shell
+$ helm upgrade --install gitlab-runner --namespace ci --create-namespace .
+Release "gitlab-runner" does not exist. Installing it now.
+NAME: gitlab-runner
+LAST DEPLOYED: Thu Sep 26 20:01:27 2024
+NAMESPACE: ci
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Your GitLab Runner should now be registered against the GitLab instance reachable at: "http://10.80.15.241"
 
-[docker hub helper image地址](https://hub.docker.com/r/gitlab/gitlab-runner-helper/tags)
+Runner namespace "ci" was found in runners.config template.
 
-```yaml
-helpers:
-  image: "gitlab/gitlab-runner-helper:ubuntu-x86_64-v14.10.2-pwsh"
+#############################################################################################
+## WARNING: You enabled `rbac` without specifying if a service account should be created.  ##
+## Please set `serviceAccount.create` to either `true` or `false`.                         ##
+## For backwards compatibility a service account will be created.                          ##
+#############################################################################################
+```
+
+
+
+查看pod
+
+```shell
+$ kubectl get pods                              
+NAME                             READY   STATUS    RESTARTS   AGE
+gitlab-runner-6468db9444-qx42h   1/1     Running   0          3m3s
 ```
 
 
 
 
+
+## 5.注册runner
+
+进入gitlab-runner pod中进行注册runner
+
+```shell
+$ gitlab-runner register  --url http://10.80.15.241  --token glrt-USJJE89hif1-1kwGFHtj
+Runtime platform                                    arch=amd64 os=linux pid=153189 revision=2e25d6cf version=17.5.0~pre.71.g2e25d6cf
+WARNING: Running in user-mode.                     
+WARNING: The user-mode requires you to manually start builds processing: 
+WARNING: $ gitlab-runner run                       
+WARNING: Use sudo for system-mode:                 
+WARNING: $ sudo gitlab-runner...                   
+                                                   
+Enter the GitLab instance URL (for example, https://gitlab.com/):
+[http://10.80.15.241]: 
+WARNING: A runner with this system ID and token has already been registered. 
+Verifying runner... is valid                        runner=USJJE89hi
+Enter a name for the runner. This is stored only in the local config.toml file:
+[gitlab-runner-6468db9444-qx42h]: 
+Enter an executor: virtualbox, docker-windows, docker+machine, instance, custom, ssh, parallels, docker-autoscaler, shell, docker, kubernetes:
+[kubernetes]: 
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+ 
+Configuration (with the authentication token) was saved in "/home/gitlab-runner/.gitlab-runner/config.toml" 
+```
+
+
+
+在 `Admin` -> `CI/CD` -> `Runners` 查看注册的runner
+
+![iShot_2024-09-29_15.53.08](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-29_15.53.08.png)
 
 
 
