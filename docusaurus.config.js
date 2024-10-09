@@ -246,7 +246,8 @@ const config = {
     scripts: [
     {
       // src: 'https://cdn.jsdelivr.net/npm/@docsearch/js@3',
-      src: 'https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js',
+      // src: 'https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js',
+      src: "https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js",
       async: true,
       defer: true
     },
