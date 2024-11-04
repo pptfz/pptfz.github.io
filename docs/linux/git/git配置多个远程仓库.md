@@ -68,8 +68,6 @@ git push github master
 
 
 
-
-
 编辑完成后 `.git/config` 内容如下
 
 ```shell

@@ -1,6 +1,6 @@
 # git拉取代码报错
 
-
+git拉取代码报错如下
 
 ```shell
 $ git clone ssh://git@xxx.com/xxx/xxx.git
