@@ -4,11 +4,11 @@
 
 
 
-其中，查询所需的 `AccessKeyId` 通过变量 `ALIBABA_CLOUD_ACCESS_KEY_ID` 获取，`AccessKeySecret` 通过变量 `ALIBABA_CLOUD_ACCESS_KEY_SECRET` 获取
+其中，查询所需的 `AccessKeyId` 通过变量 `ALIYUN_ACCESS_KEY_ID` 获取，`AccessKeySecret` 通过变量 `ALIYUN_ACCESS_KEY_SECRET` 获取
 
 ```go
-AccessKeyId: tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_ID")),
-AccessKeySecret: tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET")),
+AccessKeyId: tea.String(os.Getenv("ALIYUN_ACCESS_KEY_ID")),
+AccessKeySecret: tea.String(os.Getenv("ALIYUN_ACCESS_KEY_SECRET")),
 ```
 
 
@@ -48,8 +48,8 @@ func main() {
 
 func CreateClient() (*slb20140515.Client, error) {
 	config := &client.Config{
-		AccessKeyId:     tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_ID")),
-		AccessKeySecret: tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET")),
+		AccessKeyId:     tea.String(os.Getenv("ALIYUN_ACCESS_KEY_ID")),
+		AccessKeySecret: tea.String(os.Getenv("ALIYUN_ACCESS_KEY_SECRET")),
 		Endpoint:        tea.String("slb.aliyuncs.com"),
 	}
 	client, err := slb20140515.NewClient(config)
@@ -235,8 +235,8 @@ func main() {
 
 func CreateClient() (*slb20140515.Client, error) {
 	config := &client.Config{
-		AccessKeyId:     tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_ID")),
-		AccessKeySecret: tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET")),
+		AccessKeyId:     tea.String(os.Getenv("ALIYUN_ACCESS_KEY_ID")),
+		AccessKeySecret: tea.String(os.Getenv("ALIYUN_ACCESS_KEY_SECRET")),
 		Endpoint:        tea.String("slb.aliyuncs.com"),
 	}
 	client, err := slb20140515.NewClient(config)
@@ -366,8 +366,8 @@ func main() {
 
 func CreateClient() (*slb20140515.Client, error) {
 	config := &client.Config{
-		AccessKeyId:     tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_ID")),
-		AccessKeySecret: tea.String(os.Getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET")),
+		AccessKeyId:     tea.String(os.Getenv("ALIYUN_ACCESS_KEY_ID")),
+		AccessKeySecret: tea.String(os.Getenv("ALIYUN_ACCESS_KEY_SECRET")),
 		Endpoint:        tea.String("slb.aliyuncs.com"),
 	}
 	client, err := slb20140515.NewClient(config)

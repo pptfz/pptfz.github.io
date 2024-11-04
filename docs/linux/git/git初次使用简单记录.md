@@ -17,13 +17,11 @@ git config --global user.email "邮箱"
 
 ### 第二步、git本地仓库初始化
 
-:::tip说明
+:::tip 说明
 
 安装完git后，需要进入到存放代码的目录下，进行初始化(如果再次创建了一个目录，则需要重新初始化)
 
 :::
-
-
 
 
 
@@ -32,6 +30,8 @@ git config --global user.email "邮箱"
 ```shell
 git init
 ```
+
+
 
 初始化完成后，会在当前路径下生成一个.git目录
 
@@ -46,8 +46,20 @@ ls -a
 
 初始化git仓库完成后，需要将代码目录下的内容提交至本地仓库
 
+:::tip 说明
+
+`.` 和 `*` 表示匹配当前代码路径下所有内容
+
+:::
+
 ```shell
-git add .	#.表示匹配当前代码路径下所有内容	
+git add .	
+```
+
+或
+
+```shell
+git add *
 ```
 
 
@@ -66,6 +78,12 @@ git commit -m "提交的信息内容"
 
 将代码目录下的文件提交至本地仓库后，需要与远程仓库建立连接从而将本地仓库中的内容提交至远程仓库
 
+:::tip 说明
+
+`origin` 只是一个名称标识，这里也可以命名成其他名称
+
+:::
+
 ```shell
 git remote add origin 远程仓库地址
 ```
@@ -77,7 +95,7 @@ git remote add origin 远程仓库地址
 与远程仓库建立连接后，需要将本地仓库中的文件推送至远程仓库
 
 ```sh
-git push -u origin master			#输入远程仓库的用户名和密码即可
+git push -u origin master
 ```
 
 
@@ -91,7 +109,6 @@ git push -u origin master			#输入远程仓库的用户名和密码即可
 初始化git仓库完成后，需要将代码目录下的内容提交至本地仓库
 
 ```shell
-# .表示匹配当前代码路径下所有内容		
 git add .  					
 ```
 
@@ -112,7 +129,7 @@ git commit -m "提交的信息内容"
 与远程仓库建立连接后，需要将本地仓库中的文件推送至远程仓库
 
 ```shell
-git push -u origin master			#输入远程仓库的用户名和密码即可
+git push -u origin master
 ```
 
 
