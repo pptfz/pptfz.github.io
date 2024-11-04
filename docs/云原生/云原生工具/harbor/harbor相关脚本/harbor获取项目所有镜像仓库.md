@@ -87,10 +87,16 @@ cat response_body.txt |jq '.[].name'
 
 :::tip 说明
 
-- harbor2.x版本，`page_size` 最大限制为100，否则调用会报错如下`HTTP Status Code: 422
+- harbor2.x版本，`page_size` 最大限制为100，否则调用会报错如下
+  
+  ```shell
+  HTTP Status Code: 422
   Error fetching data. HTTP Status: 422
-  {"errors":[{"code":"UNPROCESSABLE_ENTITY","message":"validation failure list:\npage_size in query should be less than or equal to 100"}]}`
-
+  {"errors":[{"code":"UNPROCESSABLE_ENTITY","message":"validation failure list:\npage_size in query should be less than or equal to 100"}]}
+  ```
+  
+  
+  
 - 在harbor2.x版本中，可以直接通过项目名获取项目下的镜像仓库，而不像1.x版本需要通过项目id获取
 
 :::
