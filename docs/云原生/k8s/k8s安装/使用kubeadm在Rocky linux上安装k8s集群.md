@@ -468,6 +468,8 @@ systemd 与 cgroup 集成紧密，并将为每个 systemd 单元分配一个 cgr
 
 
 
+<Tabs>
+  <TabItem value="1.x" label="1.x">
 修改 `/etc/containerd/config.toml`
 
 ```shell
@@ -486,6 +488,16 @@ systemd 与 cgroup 集成紧密，并将为每个 systemd 单元分配一个 cgr
 sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
 ```
 
+  </TabItem>
+  <TabItem value="2.x" label="2.x" default>
+    ???
+  </TabItem>
+</Tabs>
+
+
+
+
+
 
 
 #### 修改 pause 镜像地址
@@ -498,7 +510,10 @@ sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/confi
 
 :::
 
-```shell
+<Tabs>
+  <TabItem value="1.x" label="1.x">
+
+```toml
 [plugins."io.containerd.grpc.v1.cri"]
   ......
   sandbox_image = "registry.k8s.io/pause:3.9"
@@ -512,6 +527,19 @@ sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/confi
 sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/containerd/config.toml
 ```
 
+  </TabItem>
+  <TabItem value="2.x" label="2.x">
+
+修改为如下
+
+```toml
+[plugins.'io.containerd.cri.v1.images'.pinned_images]
+  sandbox = 'registry.aliyuncs.com/google_containers/pause:3.10'
+```
+
+  </TabItem>
+</Tabs>
+
 
 
 #### 配置containerd镜像仓库加速
@@ -522,9 +550,17 @@ sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/contain
 
 ##### 修改配置文件
 
+
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="1.x" label="1.x">
+
 修改 `/etc/containerd/config.toml` ，修改 `config_path` ，新增 `/etc/containerd/certs.d`
 
-```yaml
+```toml
 [plugins."io.containerd.grpc.v1.cri".registry]
       config_path = "/etc/containerd/certs.d"
 ```
@@ -536,6 +572,21 @@ sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/contain
 ```shell
 sed -i.bak 's#config_path = ""#config_path = "/etc/containerd/certs.d"#' /etc/containerd/config.toml
 ```
+
+
+
+  </TabItem>
+  <TabItem value="2.x" label="2.x" default>
+
+修改 `/etc/containerd/config.toml` ，修改 `config_path` ，新增 `/etc/containerd/certs.d`
+
+```toml
+[plugins.'io.containerd.cri.v1.images'.registry]
+  config_path = '/etc/containerd/certs.d'
+```
+
+  </TabItem>
+</Tabs>
 
 
 
@@ -700,7 +751,7 @@ source ~/.bashrc
 
 ```bash
 # 这里安装的containerd版本为1.7.17
-export NERDCTL_VERSION=1.7.6
+export NERDCTL_VERSION=1.7.17
 export ARCHITECTURE=arm64
 wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
@@ -830,6 +881,26 @@ buildkitd &
 
 
 
+使用systemd管理buildkit进程
+
+```shell
+cat > /etc/systemd/system/buildkitd.service << EOF
+[Unit]
+Description=Buildkit Daemon
+After=network.target
+
+[Service]
+ExecStart=`which buildkitd` --addr unix:///run/buildkit/buildkitd.sock
+User=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+
+
 `buildkitd` 启动成功后就可以执行 `nerdctl build` 命令了
 
 
@@ -886,38 +957,41 @@ slirp4netns 需要是 v0.4.0 或更高版本。推荐v1.1.7或更高版本。
 
 ### 配置yum源
 
+<Tabs>
+  <TabItem value="官方" label="官方" default>
+
 [官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl)
 
-官方yum源
-
-```bash
-cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+```shell
+export VERSION=1.31
+cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/
+baseurl=https://pkgs.k8s.io/core:/stable:/v$VERSION/rpm/
 enabled=1
 gpgcheck=1
-gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
+gpgkey=https://pkgs.k8s.io/core:/stable:/v$VERSION/rpm/repodata/repomd.xml.key
 exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
 EOF
 ```
 
+  </TabItem>
+  <TabItem value="阿里云" label="阿里云">
+ [阿里云官方文档](https://developer.aliyun.com/mirror/kubernetes?spm=a2c6h.13651102.0.0.34311b11lSAFPB)
 
-
-阿里云yum源
-
-```bash
+```shell
 cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
-baseurl=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.30/rpm/
+baseurl=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.31/rpm/
 enabled=1
 gpgcheck=1
-gpgkey=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.30/rpm/repodata/repomd.xml.key
+gpgkey=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.31/rpm/repodata/repomd.xml.key
 EOF
 ```
 
-
+  </TabItem>
+</Tabs>
 
 
 
@@ -934,7 +1008,7 @@ yum list kubeadm --showduplicates
 指定安装版本
 
 ```bash
-export K8S_VERSION=1.28.3
+export K8S_VERSION=1.31.2
 yum -y install kubelet-${K8S_VERSION} kubeadm-${K8S_VERSION} kubectl-${K8S_VERSION} --disableexcludes=kubernetes
 systemctl enable --now kubelet
 ```

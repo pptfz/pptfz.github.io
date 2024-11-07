@@ -781,32 +781,56 @@ supervisor程序可能会被发送信号，使其在运行时执行某些操作�
 
 
 
+:::tip 说明
+
+如果把supervisor的sock文件和pid文件放在 `/tmp` 下，则还需要如下设置
+
+```shell
+TMP_FILE=/usr/lib/tmpfiles.d/tmp.conf
+
+# 设置Tmpfiles防止sock文件被清理
+grep -w 'x /tmp/supervisor.sock' $TMP_FILE && grep -w 'x /tmp/supervisord.pid' $TMP_FILE
+if [ $? -ne 0 ];then
+   sed -i.bak '/x \/tmp\/supervisord.pid/d' $TMP_FILE && sed -i '/x \/tmp\/supervisor.sock/d' $TMP_FILE
+   echo -e "x /tmp/supervisor.sock\nx /tmp/supervisord.pid" >> $TMP_FILE
+fi
+```
+
+:::
+
+
+
 ```shell
 #!/usr/bin/env bash
 set -e
 
-TMP_FILE=/usr/lib/tmpfiles.d/tmp.conf
-
 # 安装supervisor最新版
-yum -y install python3-pip && pip3 install supervisor
+yum -y install python3-pip && python3 -m pip install --upgrade pip && pip3 install supervisor
 
-# 创建目录
-[ -d /etc/supervisor ] || mkdir /etc/supervisor
+# 创建supervisor用户
+useradd -r -s /bin/false supervisor
+
+# 创建supervisor相关目录
+[ -d /var/log/supervisor ] || mkdir /var/log/supervisor
+[ -d /etc/supervisor/config.d ] || mkdir -p /etc/supervisor/config.d
+[ -d /var/run/supervisor ] || mkdir /var/run/supervisor
+
+# 设置supervisor相关目录所有者为supervisor
+chown -R supervisor:supervisor /etc/supervisor /var/log/supervisor /var/run/supervisor
 
 # 创建supervisor配置文件
 cat > /etc/supervisor/supervisord.conf << EOF
 [unix_http_server]
-file=/tmp/supervisor.sock   
+file=/var/run/supervisor/supervisor.sock   
 chmod=0770
-chown=supervisor:supervisor   ; /tmp/supervisor.sock所有者为supervisor
-
+chown=supervisor:supervisor   ; /var/run/supervisor/supervisor.sock所有者为supervisor
 
 [supervisord]
 logfile=/var/log/supervisor/supervisord.log ; main log file;
 logfile_maxbytes=50MB        ; max main logfile bytes b4 rotation; default 50MB
 logfile_backups=10           ; # of main logfile backups; 0 means none, default 10
 loglevel=info                ; log level; default info; others: debug,warn,trace
-pidfile=/tmp/supervisord.pid ; supervisord pidfile; default supervisord.pid
+pidfile=/var/run/supervisord.pid ; supervisord pidfile; default supervisord.pid
 
 ;[inet_http_server]
 ;port=10.0.0.10:9001
@@ -817,12 +841,11 @@ pidfile=/tmp/supervisord.pid ; supervisord pidfile; default supervisord.pid
 supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
 
 [supervisorctl]
-serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
+serverurl=unix:///var/run/supervisor/supervisor.sock  ; use a unix:// URL  for a unix socket
 
 [include]
 files = /etc/supervisor/config.d/*.ini
 EOF
-
 
 # 设置supervisor日志滚动
 cat > /etc/logrotate.d/supervisor <<EOF
@@ -834,25 +857,18 @@ cat > /etc/logrotate.d/supervisor <<EOF
 }
 EOF
 
-
-# 设置Tmpfiles防止sock文件被清理
-grep -w 'x /tmp/supervisor.sock' $TMP_FILE && grep -w 'x /tmp/supervisord.pid' $TMP_FILE
-if [ $? -ne 0 ];then
-   sed -i.bak '/x \/tmp\/supervisord.pid/d' $TMP_FILE && sed -i '/x \/tmp\/supervisor.sock/d' $TMP_FILE
-   echo -e "x /tmp/supervisor.sock\nx /tmp/supervisord.pid" >> $TMP_FILE
-fi
-
-
-# 将supervisor加入systemd
-cat >/usr/lib/systemd/system/supervisord.service << EOF
+# 使用systemd管理supervisor
+cat > /usr/lib/systemd/system/supervisord.service << EOF
 # supervisord service for systemd (CentOS 7.0+)
 # by ET-CS (https://github.com/ET-CS)
 [Unit]
 Description=Supervisor daemon
 
 [Service]
+User=supervisor
+Group=supervisor
 Type=forking
-ExecStart=`which supervisord`
+ExecStart=`which supervisord` -c /etc/supervisor/supervisord.conf
 ExecStop=`which supervisorctl` $OPTIONS shutdown
 ExecReload=`which supervisorctl` $OPTIONS reload
 KillMode=process
@@ -862,11 +878,6 @@ RestartSec=42s
 [Install]
 WantedBy=multi-user.target
 EOF
-
-
-# 创建supervisor相关目录
-[ -d /var/log/supervisor ] || mkdir /var/log/supervisor
-[ -d /etc/supervisor/config.d ] || mkdir -p /etc/supervisor/config.d
 
 # 启动supervisor
 systemctl daemon-reload
