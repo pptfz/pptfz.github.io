@@ -109,7 +109,7 @@ nc 127.0.0.1 6443 -v
 
 如果检测到有多个或者没有容器运行时，kubeadm 将抛出一个错误并要求你指定一个想要使用的运行时。
 
-参阅[容器运行时](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/) 以了解更多信息。
+参阅 [容器运行时](https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/) 以了解更多信息。
 
 :::tip 说明
 
@@ -159,7 +159,7 @@ sudo sysctl --system
 
 使用以下命令验证 `net.ipv4.ip_forward` 是否设置为 1：
 
-```bash
+```shell
 sysctl net.ipv4.ip_forward
 ```
 
@@ -250,7 +250,12 @@ cgroupDriver: systemd
 
 
 
-下载安装包
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="1.x" label="1.x">
+    下载安装包
 
 ```bash
 export CONTAINERD_VERSION=1.7.17
@@ -272,6 +277,34 @@ bin/containerd-shim-runc-v2
 bin/containerd-shim-runc-v1
 bin/containerd
 ```
+
+  </TabItem>
+  <TabItem value="2.x" label="2.x" default>
+    下载安装包
+
+```shell
+export CONTAINERD_VERSION=2.0.0
+export ARCHITECTURE=arm64
+wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz
+```
+
+
+
+压缩包内容如下
+
+```shell
+$ tar tf containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz 
+bin/
+bin/containerd
+bin/ctr
+bin/containerd-stress
+bin/containerd-shim-runc-v2
+```
+
+  </TabItem>
+</Tabs>
+
+
 
 
 
@@ -357,7 +390,7 @@ systemctl enable --now containerd
 下载安装包
 
 ```bash
-export RUNC_VERSION=1.1.12
+export RUNC_VERSION=1.2.1
 export ARCHITECTURE=arm64
 wget https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.${ARCHITECTURE}
 ```
@@ -376,11 +409,11 @@ install -m 755 runc.${ARCHITECTURE} /usr/local/sbin/runc
 
 ```bash
 $ runc -v
-runc version 1.1.12
-commit: v1.1.12-0-g51d5e946
-spec: 1.0.2-dev
-go: go1.20.13
-libseccomp: 2.5.4
+runc version 1.2.1
+commit: v1.2.1-0-gd7735e38
+spec: 1.2.0
+go: go1.22.8
+libseccomp: 2.5.5
 ```
 
 
@@ -392,7 +425,7 @@ libseccomp: 2.5.4
 下载安装包
 
 ```bash
-export CNI_VERSION=1.5.0
+export CNI_VERSION=1.6.0
 export ARCHITECTURE=arm64
 wget https://github.com/containernetworking/plugins/releases/download/v${CNI_VERSION}/cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 ```
@@ -404,26 +437,26 @@ wget https://github.com/containernetworking/plugins/releases/download/v${CNI_VER
 ```bash
 $ tar tf cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 ./
-./dhcp
-./loopback
-./README.md
-./bandwidth
-./ipvlan
-./vlan
+./vrf
+./firewall
+./LICENSE
+./macvlan
 ./static
 ./host-device
-./LICENSE
-./bridge
-./dummy
-./tuning
-./vrf
-./tap
-./portmap
-./firewall
-./ptp
 ./host-local
-./macvlan
+./loopback
 ./sbr
+./tuning
+./bridge
+./README.md
+./ptp
+./bandwidth
+./vlan
+./portmap
+./ipvlan
+./dummy
+./tap
+./dhcp
 ```
 
 
@@ -470,14 +503,12 @@ systemd 与 cgroup 集成紧密，并将为每个 systemd 单元分配一个 cgr
 
 <Tabs>
   <TabItem value="1.x" label="1.x">
-修改 `/etc/containerd/config.toml`
+修改 `/etc/containerd/config.toml` ，将 `SystemdCgroup = false` 修改为 `SystemdCgroup = true`
 
-```shell
-修改
-    SystemdCgroup = false
-
-修改为
-    SystemdCgroup = true
+```toml
+version = 2
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+  SystemdCgroup = true
 ```
 
 
@@ -490,13 +521,29 @@ sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/confi
 
   </TabItem>
   <TabItem value="2.x" label="2.x" default>
-    ???
-  </TabItem>
+
+[containerd2.x版本修改cgroup驱动官方文档](https://github.com/containerd/containerd/blob/a78a24ec67789218b17b7dd4a0382e9198c38b5a/docs/cri/config.md)
+
+修改 `/etc/containerd/config.toml` ，将 `SystemdCgroup = false` 修改为 `SystemdCgroup = true`
+
+```toml
+version = 3
+[plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.options]
+  SystemdCgroup = true
+```
+
+
+
+用如下命令修改
+
+```shell
+sed -i.bak "/\[plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.options\]/a \ \ \ \ \ \ \ \ \ \ \ \ SystemdCgroup = true" /etc/containerd/config.toml
+```
+
+ 
+
+ </TabItem>
 </Tabs>
-
-
-
-
 
 
 
@@ -510,6 +557,8 @@ sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/confi
 
 :::
 
+修改 `registry.k8s.io` 为 `registry.aliyuncs.com/google_containers`
+
 <Tabs>
   <TabItem value="1.x" label="1.x">
 
@@ -521,16 +570,8 @@ sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/confi
 
 
 
-用如下命令修改
-
-```shell
-sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/containerd/config.toml
-```
-
   </TabItem>
-  <TabItem value="2.x" label="2.x">
-
-修改为如下
+  <TabItem value="2.x" label="2.x" default>
 
 ```toml
 [plugins.'io.containerd.cri.v1.images'.pinned_images]
@@ -540,11 +581,19 @@ sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/contain
   </TabItem>
 </Tabs>
 
+用如下命令修改
+
+```shell
+sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/containerd/config.toml
+```
+
+
+
 
 
 #### 配置containerd镜像仓库加速
 
-[containerd官方文档](https://github.com/containerd/containerd/blob/main/docs/hosts.md)
+[containerd镜像仓库配置官方文档](https://github.com/containerd/containerd/blob/main/docs/hosts.md)
 
 [阿里云官方文档](https://help.aliyun.com/zh/acr/user-guide/accelerate-the-pulls-of-docker-official-images?spm=5176.28426678.J_HeJR_wZokYt378dwP-lLl.261.21795181n1ykLy&scm=20140722.S_help@@%E6%96%87%E6%A1%A3@@60750.S_BB1@bl+BB2@bl+RQW@ag0+os0.ID_60750-RL_containerd%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E5%8A%A0%E9%80%9F-LOC_search~UND~helpdoc~UND~item-OR_ser-V_3-P0_0)
 
@@ -552,13 +601,10 @@ sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/contain
 
 
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+修改 `/etc/containerd/config.toml` ，修改 `config_path` ，新增 `/etc/containerd/certs.d`
 
 <Tabs>
   <TabItem value="1.x" label="1.x">
-
-修改 `/etc/containerd/config.toml` ，修改 `config_path` ，新增 `/etc/containerd/certs.d`
 
 ```toml
 [plugins."io.containerd.grpc.v1.cri".registry]
@@ -578,14 +624,22 @@ sed -i.bak 's#config_path = ""#config_path = "/etc/containerd/certs.d"#' /etc/co
   </TabItem>
   <TabItem value="2.x" label="2.x" default>
 
-修改 `/etc/containerd/config.toml` ，修改 `config_path` ，新增 `/etc/containerd/certs.d`
-
 ```toml
 [plugins.'io.containerd.cri.v1.images'.registry]
   config_path = '/etc/containerd/certs.d'
 ```
 
-  </TabItem>
+
+
+使用如下命令修改
+
+```shell
+sed -i "/\[plugins.'io.containerd.cri.v1.images'.registry\]/a \ \ \ \ \ \ config_path = '/etc/containerd/certs.d'" /etc/containerd/config.toml && sed -i "/config_path = ''/d" /etc/containerd/config.toml
+```
+
+  
+
+</TabItem>
 </Tabs>
 
 
@@ -670,7 +724,7 @@ done: 1.495863023s
 下载安装包
 
 ```bash
-export CRICTL_VERSION=1.30.0
+export CRICTL_VERSION=1.31.1
 export ARCHITECTURE=arm64
 wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${CRICTL_VERSION}/crictl-v${CRICTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
@@ -750,8 +804,8 @@ source ~/.bashrc
 :::
 
 ```bash
-# 这里安装的containerd版本为1.7.17
-export NERDCTL_VERSION=1.7.17
+# 这里安装的containerd版本为2.0.0
+export NERDCTL_VERSION=2.0.0
 export ARCHITECTURE=arm64
 wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
@@ -824,7 +878,7 @@ failed to ping to host unix:///run/buildkit/buildkitd.sock: exec: "buildctl": ex
 下载安装包
 
 ```shell
-export BUILDKIT_VERSION=0.13.2
+export BUILDKIT_VERSION=0.17.1
 export ARCHITECTURE=arm64
 wget https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz
 ```
@@ -865,18 +919,11 @@ tar xf buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz
 
 
 
-拷贝 `buildkitd` 命令
+拷贝命令
 
 ```shell
 cp bin/buildkitd /usr/local/bin
-```
-
-
-
-启动 `buildkitd`
-
-```shell
-buildkitd &
+cp bin/buildctl /usr/local/bin
 ```
 
 
@@ -901,6 +948,14 @@ EOF
 
 
 
+启动 `buildkitd`
+
+```shell
+systemctl daemon-reload && systemctl start buildkitd.service && systemctl enable buildkitd.service 
+```
+
+
+
 `buildkitd` 启动成功后就可以执行 `nerdctl build` 命令了
 
 
@@ -912,8 +967,6 @@ RootlessKit 需要是 v0.10.0 或更高版本。推荐v0.14.1或更高版本。
 slirp4netns 需要是 v0.4.0 或更高版本。推荐v1.1.7或更高版本。
 
 此插件用于 `rootless` 模式，可以参考[docker官方对rootless模式的说明](https://docs.docker.com/engine/security/rootless/)
-
-
 
 
 
@@ -1045,7 +1098,7 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc && source ~/.bashrc
 
 ```yaml
 $ kubeadm config print init-defaults
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 bootstrapTokens:
 - groups:
   - system:bootstrappers:kubeadm:default-node-token
@@ -1061,25 +1114,37 @@ localAPIEndpoint:
 nodeRegistration:
   criSocket: unix:///var/run/containerd/containerd.sock
   imagePullPolicy: IfNotPresent
+  imagePullSerial: true
   name: node
   taints: null
+timeouts:
+  controlPlaneComponentHealthCheck: 4m0s
+  discovery: 5m0s
+  etcdAPICall: 2m0s
+  kubeletHealthCheck: 4m0s
+  kubernetesAPICall: 1m0s
+  tlsBootstrap: 5m0s
+  upgradeManifests: 5m0s
 ---
-apiServer:
-  timeoutForControlPlane: 4m0s
-apiVersion: kubeadm.k8s.io/v1beta3
+apiServer: {}
+apiVersion: kubeadm.k8s.io/v1beta4
+caCertificateValidityPeriod: 87600h0m0s
+certificateValidityPeriod: 8760h0m0s
 certificatesDir: /etc/kubernetes/pki
 clusterName: kubernetes
 controllerManager: {}
 dns: {}
+encryptionAlgorithm: RSA-2048
 etcd:
   local:
     dataDir: /var/lib/etcd
 imageRepository: registry.k8s.io
 kind: ClusterConfiguration
-kubernetesVersion: 1.30.0
+kubernetesVersion: 1.31.0
 networking:
   dnsDomain: cluster.local
   serviceSubnet: 10.96.0.0/12
+proxy: {}
 scheduler: {}
 ```
 
@@ -1093,7 +1158,9 @@ scheduler: {}
 
 初始化方式有命令行和配置文件方式2种
 
-配置文件方式可以参考[官方说明文档](https://pkg.go.dev/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta3) ，如下是官方示例完整配置文件
+<Tabs>
+  <TabItem value="v1beta3" label="v1beta3">
+ 配置文件方式可以参考[官方说明文档(v1beta3)](https://pkg.go.dev/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta3) 
 
 ```yaml
 apiVersion: kubeadm.k8s.io/v1beta3
@@ -1199,6 +1266,136 @@ kind: KubeProxyConfiguration
 # kube-proxy specific options here
 ```
 
+  </TabItem>
+  <TabItem value="v1beta4" label="v1beta4" default>
+配置文件方式可以参考 [官方说明文档(b1beta4)](https://pkg.go.dev/k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm/v1beta4)
+
+```yaml
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: InitConfiguration
+bootstrapTokens:
+- token: "9a08jv.c0izixklcxtmnze7"
+  description: "kubeadm bootstrap token"
+  ttl: "24h"
+- token: "783bde.3f89s0fje9f38fhf"
+  description: "another bootstrap token"
+  usages:
+  - authentication
+  - signing
+  groups:
+  - system:bootstrappers:kubeadm:default-node-token
+nodeRegistration:
+  name: "ec2-10-100-0-1"
+  criSocket: "unix:///var/run/containerd/containerd.sock"
+  taints:
+  - key: "kubeadmNode"
+    value: "someValue"
+    effect: "NoSchedule"
+  kubeletExtraArgs:
+  - name: "v"
+    value: "5"
+  ignorePreflightErrors:
+  - IsPrivilegedUser
+  imagePullPolicy: "IfNotPresent"
+  imagePullSerial: true
+localAPIEndpoint:
+  advertiseAddress: "10.100.0.1"
+  bindPort: 6443
+certificateKey: "e6a2eb8581237ab72a4f494f30285ec12a9694d750b9785706a83bfcbbbd2204"
+skipPhases:
+- preflight
+timeouts:
+  controlPlaneComponentHealthCheck: "60s"
+  kubernetesAPICall: "40s"
+---
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: ClusterConfiguration
+etcd:
+  # one of local or external
+  local:
+    imageRepository: "registry.k8s.io"
+    imageTag: "3.2.24"
+    dataDir: "/var/lib/etcd"
+    extraArgs:
+    - name: "listen-client-urls"
+      value: "http://10.100.0.1:2379"
+    extraEnvs:
+    - name: "SOME_VAR"
+      value: "SOME_VALUE"
+    serverCertSANs:
+    - "ec2-10-100-0-1.compute-1.amazonaws.com"
+    peerCertSANs:
+    - "10.100.0.1"
+  # external:
+    # endpoints:
+    # - "10.100.0.1:2379"
+    # - "10.100.0.2:2379"
+    # caFile: "/etcd/kubernetes/pki/etcd/etcd-ca.crt"
+    # certFile: "/etcd/kubernetes/pki/etcd/etcd.crt"
+    # keyFile: "/etcd/kubernetes/pki/etcd/etcd.key"
+networking:
+  serviceSubnet: "10.96.0.0/16"
+  podSubnet: "10.244.0.0/24"
+  dnsDomain: "cluster.local"
+kubernetesVersion: "v1.21.0"
+controlPlaneEndpoint: "10.100.0.1:6443"
+apiServer:
+  extraArgs:
+  - name: "authorization-mode"
+    value: "Node,RBAC"
+  extraEnvs:
+  - name: "SOME_VAR"
+    value: "SOME_VALUE"
+  extraVolumes:
+  - name: "some-volume"
+    hostPath: "/etc/some-path"
+    mountPath: "/etc/some-pod-path"
+    readOnly: false
+    pathType: File
+  certSANs:
+  - "10.100.1.1"
+  - "ec2-10-100-0-1.compute-1.amazonaws.com"
+controllerManager:
+  extraArgs:
+  - name: "node-cidr-mask-size"
+    value: "20"
+  extraVolumes:
+  - name: "some-volume"
+    hostPath: "/etc/some-path"
+    mountPath: "/etc/some-pod-path"
+    readOnly: false
+    pathType: File
+scheduler:
+  extraArgs:
+  - name: "address"
+    value: "10.100.0.1"
+  extraVolumes:
+  - name: "some-volume"
+    hostPath: "/etc/some-path"
+    mountPath: "/etc/some-pod-path"
+    readOnly: false
+    pathType: File
+certificatesDir: "/etc/kubernetes/pki"
+imageRepository: "registry.k8s.io"
+clusterName: "example-cluster"
+encryptionAlgorithm: "ECDSA-P256"
+dns:
+  disabled: true # disable CoreDNS
+proxy:
+  disabled: true # disable kube-proxy
+---
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+# kubelet specific options here
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+# kube-proxy specific options here
+```
+
+  </TabItem>
+</Tabs>
+
 :::
 
 指定配置文件方式
@@ -1212,7 +1409,7 @@ kubeadm init --config kubeadm.yaml
 `kubeadm.yaml ` 文件内容
 
 ```yaml
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta4
 bootstrapTokens:
 - groups:
   - system:bootstrappers:kubeadm:default-node-token
@@ -1240,8 +1437,9 @@ mode: ipvs  # kube-proxy 模式
 
 ---
 apiServer:
-  timeoutForControlPlane: 4m0s
-apiVersion: kubeadm.k8s.io/v1beta3
+  #timeoutForControlPlane: 4m0s
+  Timeouts.ControlPlaneComponentHealthCheck: 4m0s
+apiVersion: kubeadm.k8s.io/v1beta4
 certificatesDir: /etc/kubernetes/pki
 clusterName: kubernetes
 controllerManager: {}
@@ -1251,7 +1449,7 @@ etcd:
     dataDir: /var/lib/etcd
 imageRepository: registry.aliyuncs.com/google_containers
 kind: ClusterConfiguration
-kubernetesVersion: 1.30.1
+kubernetesVersion: 1.31.2
 networking:
   dnsDomain: cluster.local
   serviceSubnet: 10.96.0.0/12
@@ -1333,11 +1531,12 @@ kubeadm init \
 完整输出如下
 
 ```bash
-[init] Using Kubernetes version: v1.30.1
+[init] Using Kubernetes version: v1.31.2
 [preflight] Running pre-flight checks
 [preflight] Pulling images required for setting up a Kubernetes cluster
 [preflight] This might take a minute or two, depending on the speed of your internet connection
-[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
+[preflight] You can also perform this action beforehand using 'kubeadm config images pull'
+W1108 17:40:41.001062   47749 checks.go:846] detected that the sandbox image "" of the container runtime is inconsistent with that used by kubeadm.It is recommended to use "registry.k8s.io/pause:3.10" as the CRI sandbox image.
 [certs] Using certificateDir folder "/etc/kubernetes/pki"
 [certs] Generating "ca" certificate and key
 [certs] Generating "apiserver" certificate and key
@@ -1368,10 +1567,10 @@ kubeadm init \
 [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
 [kubelet-start] Starting the kubelet
 [wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests"
-[kubelet-check] Waiting for a healthy kubelet. This can take up to 4m0s
-[kubelet-check] The kubelet is healthy after 502.42734ms
+[kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s
+[kubelet-check] The kubelet is healthy after 505.364806ms
 [api-check] Waiting for a healthy API server. This can take up to 4m0s
-[api-check] The API server is healthy after 4.003326169s
+[api-check] The API server is healthy after 3.003759809s
 [upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
 [kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
 [upload-certs] Skipping phase. Please see --upload-certs
@@ -1407,7 +1606,7 @@ Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
 Then you can join any number of worker nodes by running the following on each as root:
 
 kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
-	--discovery-token-ca-cert-hash sha256:8a7e980fb917404682f8cbf5e09d2d822c7a0e541cddeadba28907bffbbd5aaa 
+	--discovery-token-ca-cert-hash sha256:9a1e76a063461c5e5b442cbb5aa838ecf0fd5f8ee124de0cb8b3e307f22b1bec 
 ```
 
 
@@ -1416,33 +1615,33 @@ kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
 
 [官方文档](https://kubernetes.io/zh-cn/docs/reference/setup-tools/kubeadm/kubeadm-init/)
 
-| 选项                                 | 说明                                                         |
-| ------------------------------------ | ------------------------------------------------------------ |
-| --apiserver-advertise-address string | API 服务器所公布的其正在监听的 IP 地址。如果未设置，则使用默认网络接口。 |
-| --apiserver-bind-port int32          | API 服务器绑定的端口。默认值：6443                           |
-| --apiserver-cert-extra-sans strings  | 用于 API Server 服务证书的可选附加主题备用名称（SAN）。可以是 IP 地址和 DNS 名称。 |
-| --cert-dir string                    | 保存和存储证书的路径。默认值 `/etc/kubernetes/pki`           |
-| --certificate-key string             | 用于加密 kubeadm-certs Secret 中的控制平面证书的密钥。       |
-| --config string                      | kubeadm 配置文件的路径。                                     |
-| --control-plane-endpoint string      | 为控制平面指定一个稳定的 IP 地址或 DNS 名称。                |
-| --cri-socket string                  | 要连接的 CRI 套接字的路径。如果为空，则 kubeadm 将尝试自动检测此值； 仅当安装了多个 CRI 或具有非标准 CRI 套接字时，才使用此选项。 |
-| --dry-run                            | 不做任何更改；只输出将要执行的操作。                         |
-| --feature-gates string               | 一组用来描述各种功能特性的键值（key=value）对。选项是：EtcdLearnerMode=true  PublicKeysECDSA=true  RootlessControlPlane=true  UpgradeAddonsBeforeControlPlane=true |
-| -h, --help                           | init 操作的帮助命令。                                        |
-| --ignore-preflight-errors strings    | 错误将显示为警告的检查列表；例如：`IsPrivilegedUser,Swap`。取值为 `all`  时将忽略检查中的所有错误。 |
-| --image-repository string            | 选择用于拉取控制平面镜像的容器仓库。默认值`registry.k8s.io`  |
-| --kubernetes-version string          | 为控制平面选择一个特定的 Kubernetes 版本。默认值：`stable-1` |
-| --node-name string                   | 指定节点的名称。                                             |
-| --patches string                     | 它包含名为 `target[suffix][+patchtype].extension` 的文件的目录的路径。 例如，`kube-apiserver0+merge.yaml`或仅仅是 `etcd.json`。 `target` 可以是 `kube-apiserver`、`kube-controller-manager`、`kube-scheduler`、`etcd`、`kubeletconfiguration` 之一。 `patchtype` 可以是 `strategic`、`merge` 或者 `json` 之一， 并且它们与 kubectl 支持的补丁格式相同。 默认<br/>的 `patchtype` 是 `strategic`。 `extension` 必须是`json` 或`yaml`。 `suffix` 是一个可选字符串，可用于确定首先按字母顺序应用哪些补丁。 |
-| --pod-network-cidr string            | 指明 Pod 网络可以使用的 IP 地址段。如果设置了这个参数，控制平面将会为每一个节点自动分配 CIDR。 |
-| --service-cidr string                | 为服务的虚拟 IP 地址另外指定 IP 地址段。默认值：`10.96.0.0/12` |
-| --service-dns-domain string          | 为服务另外指定域名，例如：`myorg.internal`。 默认值：`cluster.local` |
-| --skip-certificate-key-print         | 不要打印用于加密控制平面证书的密钥。                         |
-| --skip-phases strings                | 要跳过的阶段列表。                                           |
-| --skip-token-print                   | 跳过打印 `kubeadm init` 生成的默认引导令牌。                 |
-| --token string                       | 这个令牌用于建立控制平面节点与工作节点间的双向通信。 格式为 `[a-z0-9]{6}.[a-z0-9]{16}` - 示例：`abcdef.0123456789abcdef` |
-| --token-ttl duration                 | 令牌被自动删除之前的持续时间（例如 1s，2m，3h）。如果设置为 `0`，则令牌将永不过期。 |
-| --upload-certs                       | 将控制平面证书上传到 kubeadm-certs Secret。                  |
+| 选项                                   | 说明                                                         |
+| -------------------------------------- | ------------------------------------------------------------ |
+| `--apiserver-advertise-address string` | API 服务器所公布的其正在监听的 IP 地址。如果未设置，则使用默认网络接口。 |
+| `--apiserver-bind-port int32`          | API 服务器绑定的端口。默认值：6443                           |
+| `--apiserver-cert-extra-sans strings`  | 用于 API Server 服务证书的可选附加主题备用名称（SAN）。可以是 IP 地址和 DNS 名称。 |
+| `--cert-dir string`                    | 保存和存储证书的路径。默认值 `/etc/kubernetes/pki`           |
+| `--certificate-key string`             | 用于加密 kubeadm-certs Secret 中的控制平面证书的密钥。       |
+| `--config string`                      | kubeadm 配置文件的路径。                                     |
+| `--control-plane-endpoint string`      | 为控制平面指定一个稳定的 IP 地址或 DNS 名称。                |
+| `--cri-socket string`                  | 要连接的 CRI 套接字的路径。如果为空，则 kubeadm 将尝试自动检测此值； 仅当安装了多个 CRI 或具有非标准 CRI 套接字时，才使用此选项。 |
+| `--dry-run`                            | 不做任何更改；只输出将要执行的操作。                         |
+| `--feature-gates string`               | 一组用来描述各种功能特性的键值（key=value）对。选项是：EtcdLearnerMode=true  PublicKeysECDSA=true  RootlessControlPlane=true  UpgradeAddonsBeforeControlPlane=true |
+| `-h, --help`                           | init 操作的帮助命令。                                        |
+| `--ignore-preflight-errors strings`    | 错误将显示为警告的检查列表；例如：`IsPrivilegedUser,Swap`。取值为 `all`  时将忽略检查中的所有错误。 |
+| `--image-repository string`            | 选择用于拉取控制平面镜像的容器仓库。默认值`registry.k8s.io`  |
+| `--kubernetes-version string`          | 为控制平面选择一个特定的 Kubernetes 版本。默认值：`stable-1` |
+| `--node-name string`                   | 指定节点的名称。                                             |
+| `--patches string`                     | 它包含名为 `target[suffix][+patchtype].extension` 的文件的目录的路径。 例如，`kube-apiserver0+merge.yaml`或仅仅是 `etcd.json`。 `target` 可以是 `kube-apiserver`、`kube-controller-manager`、`kube-scheduler`、`etcd`、`kubeletconfiguration` 之一。 `patchtype` 可以是 `strategic`、`merge` 或者 `json` 之一， 并且它们与 kubectl 支持的补丁格式相同。 默认<br/>的 `patchtype` 是 `strategic`。 `extension` 必须是`json` 或`yaml`。 `suffix` 是一个可选字符串，可用于确定首先按字母顺序应用哪些补丁。 |
+| `--pod-network-cidr string`            | 指明 Pod 网络可以使用的 IP 地址段。如果设置了这个参数，控制平面将会为每一个节点自动分配 CIDR。 |
+| `--service-cidr string`                | 为服务的虚拟 IP 地址另外指定 IP 地址段。默认值：`10.96.0.0/12` |
+| `--service-dns-domain string`          | 为服务另外指定域名，例如：`myorg.internal`。 默认值：`cluster.local` |
+| `--skip-certificate-key-print`         | 不要打印用于加密控制平面证书的密钥。                         |
+| `--skip-phases strings`                | 要跳过的阶段列表。                                           |
+| `--skip-token-print`                   | 跳过打印 `kubeadm init` 生成的默认引导令牌。                 |
+| `--token string`                       | 这个令牌用于建立控制平面节点与工作节点间的双向通信。 格式为 `[a-z0-9]{6}.[a-z0-9]{16}` - 示例：`abcdef.0123456789abcdef` |
+| `--token-ttl duration`                 | 令牌被自动删除之前的持续时间（例如 1s，2m，3h）。如果设置为 `0`，则令牌将永不过期。 |
+| `--upload-certs`                       | 将控制平面证书上传到 kubeadm-certs Secret。                  |
 
 
 
@@ -1645,7 +1844,8 @@ The CustomResourceDefinition "installations.operator.tigera.io" is invalid: meta
 :::
 
 ```sh
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/tigera-operator.yaml
+export CALICO_VERSION=3.29.0
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v$CALICO_VERSION/manifests/tigera-operator.yaml
 ```
 
 
@@ -1659,7 +1859,24 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0
 :::
 
 ```sh
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/custom-resources.yaml
+wget https://raw.githubusercontent.com/projectcalico/calico/v$CALICO_VERSION/manifests/custom-resources.yaml
+```
+
+
+
+修改pod网段
+
+```shell
+export POD_CIDR=10.244.0.0/16
+sed -i "s#192.168.0.0/16#$POD_CIDR#" custom-resources.yaml
+```
+
+
+
+创建资源
+
+```shell
+kubectl apply -f custom-resources.yaml
 ```
 
 
@@ -1702,11 +1919,11 @@ tigera-operator    tigera-operator-76ff79f7fd-spclf           1/1     Running   
 安装完网络插件后，当所有pod都为 `running` 状态后，集群所有节点状态才为 `Ready`
 
 ```bash
-$ kubectl get no
+$ kubectl get node
 NAME           STATUS   ROLES           AGE   VERSION
-k8s-master01   Ready    control-plane   30m   v1.30.1
-k8s-node01     Ready    <none>          27m   v1.30.1
-k8s-node02     Ready    <none>          27m   v1.30.1
-k8s-node03     Ready    <none>          27m   v1.30.1
+k8s-master01   Ready    control-plane   95m   v1.31.2
+k8s-node01     Ready    <none>          94m   v1.31.2
+k8s-node02     Ready    <none>          94m   v1.31.2
+k8s-node03     Ready    <none>          94m   v1.31.2
 ```
 
