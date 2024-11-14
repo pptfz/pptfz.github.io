@@ -11,11 +11,20 @@ require('dotenv').config();
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '我得发！',
-  tagline: '厚礼蟹！',
+  title: '程序员最讨厌的四件事',
+  // tagline: '1. 写注释 2. 写文档<br />3. 别人不写注释 4. 别人不写文档',
+  tagline: `
+    <div class="line">
+      <span class="alignLeft">1.写注释</span>
+      <span class="alignRight">2.写文档</span>
+    </div>
+    <div class="line">
+      <span class="alignLeft">3.别人不写注释</span>
+      <span class="alignRight">4.别人不写文档</span>
+    </div>
+  `,
   favicon: 'img/favicon.ico',
 
-  
   // Set the production url of your site here
   url: 'https://pptfz.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
@@ -102,7 +111,7 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: '大烩菜',
+            label: '你点我啊',
           },
           // {
           //   to: 'docs/你过来啊/你过来啊',
@@ -175,7 +184,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: '大烩菜',
+                label: '你点我啊',
                 to: '/docs',
               },
             ],
