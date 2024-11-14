@@ -1,6 +1,6 @@
 # supervisor管理大数据任务
 
-**supervisor配置文件 `/etc/supervisor/supervisord.conf` 中定义了include，因此如果想要管理服务，就需要编辑 `/etc/supervisor/config.d/*.ini` 文件**
+supervisor配置文件 `/etc/supervisor/supervisord.conf` 中定义了include，因此如果想要管理服务，就需要编辑 `/etc/supervisor/config.d/*.ini` 文件
 
 ```shell
 [include] 
@@ -9,13 +9,17 @@ files = /etc/supervisor/config.d/*.ini
 
 
 
-**编辑服务配置文件 `/etc/supervisor/config.d/RealtimeReadKafkaDemo3.ini`**
+编辑服务配置文件 `/etc/supervisor/config.d/RealtimeReadKafkaDemo3.ini`
 
-> 由于机器上有多个大数据任务，命名的时候一定要规范，最好有唯一标识符，比如这里我们以类名命名
->
-> 大数据任务分为实时和离线，这个一般以类名或者包名区分
+:::tip 说明
 
-```
+由于机器上有多个大数据任务，命名的时候一定要规范，最好有唯一标识符，比如这里我们以类名命名
+
+大数据任务分为实时和离线，这个一般以类名或者包名区分
+
+:::
+
+```ini
 [program:RealtimeReadKafkaDemo3]
 command=/usr/local/service/spark/bin/spark-submit 
 	--class com.xmadx.game.realTime.RealtimeReadKafkaDemo3 
@@ -38,7 +42,7 @@ user=hadoop
 
 
 
-**将服务加入supervisor**
+将服务加入supervisor
 
 ```sh
 $ supervisorctl update RealtimeReadKafkaDemo3
@@ -47,7 +51,7 @@ RealtimeReadKafkaDemo3: added process group
 
 
 
-**查看状态**
+查看状态
 
 ```sh
 $ supervisorctl status

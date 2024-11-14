@@ -1,6 +1,6 @@
 # supervisor管理需要指定环境变量及目录的服务
 
-:::tip说明
+:::tip 说明
 
 对于部分服务来讲，除了指定启动命令外，还需要额外指定环境变量和目录，例如 gitbook 服务就需要指定文件目录，否则无法正确启动
 
@@ -12,7 +12,7 @@
 
 
 
-:::tip说明
+:::tip 说明
 
 因此，对于例如上述 [helm-dashboard](https://github.com/komodorio/helm-dashboard) 服务来讲，就需要使用 `environment` 和 `directory` 指定环境变量和目录
 
