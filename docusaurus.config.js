@@ -5,12 +5,24 @@
 //const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 import {themes as prismThemes} from 'prism-react-renderer';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+
 
 // 能够读取.env文件中定义的algolia相关变量
 require('dotenv').config();
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
+  ],
   title: '程序员最讨厌的四件事',
   // tagline: '1. 写注释 2. 写文档<br />3. 别人不写注释 4. 别人不写文档',
   tagline: `
@@ -63,9 +75,12 @@ const config = {
           // editUrl:
           //  'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
+        
         // Will be passed to @docusaurus/plugin-content-docs (false to disable)
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         // Will be passed to @docusaurus/plugin-content-blog (false to disable)
         blog: {
@@ -253,13 +268,6 @@ const config = {
       minHeadingLevel: 2,
       maxHeadingLevel: 6,
     },
-    scripts: [
-    {
-      src: "https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js",
-      async: true,
-      defer: true
-    },
-  ]
     }),
 };
 
