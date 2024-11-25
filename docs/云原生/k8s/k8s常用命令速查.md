@@ -38,6 +38,12 @@ $ kubectl get pod ${POD_NAME} -o json | jq '.spec.containers[].name'
 
 
 
+## 查看node节点拥有的镜像
+
+```shell
+kubectl get nodes -o json | jq -r '.items[] | "\(.metadata.name): \(.status.images[].names[])"'
+```
+
 
 
 ## 存储类
