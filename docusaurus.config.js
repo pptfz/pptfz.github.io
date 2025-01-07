@@ -27,8 +27,8 @@ const config = {
   // tagline: '1. 写注释 2. 写文档<br />3. 别人不写注释 4. 别人不写文档',
   tagline: `
     <div class="line">
-      <span class="alignLeft">1.写注释</span>
-      <span class="alignRight">2.写文档</span>
+      <span class="alignLeft">1.自己得写注释</span>
+      <span class="alignRight">2.自己得写文档</span>
     </div>
     <div class="line">
       <span class="alignLeft">3.别人不写注释</span>
@@ -160,6 +160,7 @@ const config = {
               { label: 'go', to: '/docs/go' }, 
               { label: 'python', to: '/docs/python' },
               { label: 'shell', to: '/docs/shell' },
+              { label: '功能脚本', to: '/docs/script' },
             ]
           },
           {
