@@ -643,7 +643,7 @@ func main() {
 
 :::caution 注意
 
-对 `map` 遍历时，遍历输出的键值时无需的，如果需要有序的键值对输出，需要对结果进行排序
+对 `map` 遍历时，遍历输出的键值是无需的，如果需要有序的键值对输出，需要对结果进行排序
 
 :::
 
@@ -651,6 +651,324 @@ func main() {
 a 1
 b 2
 ```
+
+
+
+### 跳转到指定代码标签 - `goto`
+
+#### 使用 `goto` 退出多层循环
+
+普通写法
+
+:::tip 说明
+
+这个程序通过双重 `for` 循环实现了在满足特定条件时跳出两个嵌套循环的功能，核心逻辑如下：
+
+- 使用布尔变量 `breakAgain` 作为标记，用于指示是否需要在外循环中断
+
+- 当 `y == 2` 时，设置 `breakAgain = true`，并通过 `break` 跳出内循环
+
+- 内循环结束后，检查 `breakAgain` 的值。如果为 `true`，则通过外循环中的 `break` 跳出外循环
+
+- 最后输出 `"done"`
+
+程序运行逻辑
+
+- 外循环从 `x = 0` 开始，循环条件是 `x < 10`
+- 内循环从 `y = 0` 开始，循环条件是 `y < 10`
+- 当 `y == 2` 时，设置标记 `breakAgain = true`，并通过 `break` 跳出内循环
+- 外循环检查 `breakAgain`，如果为 `true`，外循环也中断
+
+:::
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	var breakAgain bool
+
+	// 外循环
+	for x := 0; x < 10; x++ {
+
+		// 内循环
+		for y := 0; y < 10; y++ {
+
+			// 当满足某个条件时，退出循环
+			if y == 2 {
+
+				// 设置退出标记
+				breakAgain = true
+
+				// 退出本次循环
+				break
+			}
+		}
+
+		// 根据标记，还需要退出一次循环
+		if breakAgain {
+			break
+		}
+	}
+	fmt.Println("done") // 输出 done
+}
+```
+
+使用 `goto`
+
+:::tip 说明
+
+**外层循环和内层循环**：
+
+- 外层循环：`for x := 0; x < 10; x++`
+- 内层循环：`for y := 0; y < 10; y++`
+
+**条件判断**：
+
+- 当内层循环满足 `y == 2` 时，直接使用 `goto breakHere` 跳转到标签 `breakHere`。
+
+**手动返回**：
+
+- 在外循环之后加上 `return`，防止程序在跳转到标签前继续执行无关代码。
+
+**标签**：
+
+- `breakHere` 是一个标签，执行到此标签时会打印 `"done"`
+
+:::
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	for x := 0; x < 10; x++ {
+
+		for y := 0; y < 10; y++ {
+
+			if y == 2 {
+				// 跳转到标签
+				goto breakHere
+			}
+		}
+	}
+
+	// 手动返回，避免执行进入标签
+	return
+
+	// 标签，标签一般推荐写在行首
+breakHere:
+	fmt.Println("done") // 输出 done
+}
+```
+
+使用 `goto` 的注意事项
+
+1. **优点**：
+   - 代码简洁，逻辑清晰
+   - 避免了通过布尔标记变量来控制循环退出的复杂性
+2. **缺点**：
+   - `goto` 的使用在复杂代码中可能导致程序流程难以跟踪，影响可读性
+   - 在团队协作中，使用 `goto` 通常需要明确说明逻辑，避免误解
+3. **最佳实践**：
+   - `goto` 应仅在跳出嵌套循环、资源清理等简单场景下使用
+   - 如果逻辑复杂，可以考虑用函数封装或使用标签 `break` 来替代
+
+##### 替代实现(推荐)
+
+对于这种跳出多层循环的需求，Go 提供了标签 `break` 的方式，更加语义化
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// 外层循环的标签
+OuterLoop:
+	for x := 0; x < 10; x++ {
+
+		for y := 0; y < 10; y++ {
+
+			if y == 2 {
+				// 使用标签退出外层循环
+				break OuterLoop
+			}
+		}
+	}
+	fmt.Println("done") // 输出 done
+}
+```
+
+
+
+#### 使用 `goto` 集中处理错误
+
+在如下代码示例中，是存在一些重复的错误处理代码，后续在这些代码中如果添加更多的判断，则需要在每一个雷同代码中依次修改，极易造成疏忽和错误
+
+```go
+err := firstcheckError()
+if err != nil {
+  fmt.Println(err)
+  exitProcess()
+  return
+}
+
+err = secondcheckError()
+if err != nil {
+  fmt.Println(err)
+  exitProcess()
+  return
+}
+
+fmt.Println("done")
+```
+
+
+
+改用 `goto` 语句来处理
+
+```go
+	err := firstcheckError()
+	if err != nil {
+		goto onExit
+	}
+
+	err = secondcheckError()
+	if err != nil {
+		goto onExit
+	}
+
+	fmt.Println("done")
+
+	return
+
+onExit:
+	fmt.Println(err)
+	exitProcess()
+```
+
+
+
+### 跳出指定循环（break）- 可以跳出多层循环
+
+:::tip 说明
+
+`break` 语句可以结束 `for` 、`switch` 、`select` 的代码块，`break` 语句还可以在语句后面添加标签，表示退出某个标签对应的代码块，标签要求必须定义在对应的`for` 、`switch` 、`select` 的代码块上
+
+:::
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+OuterLoop:
+	for i := 0; i < 2; i++ {
+		for j := 0; j < 5; j++ {
+			fmt.Printf("i: %d, j: %d\n", i, j) // 调试输出
+			switch j {
+			case 2:
+				fmt.Println("Breaking at case 2")
+				break OuterLoop
+			case 3:
+				fmt.Println("Breaking at case 3")
+				break OuterLoop
+			}
+		}
+	}
+	fmt.Println("Loop exited")
+}
+```
+
+输出
+
+```shell
+i: 0, j: 0
+i: 0, j: 1
+i: 0, j: 2
+Breaking at case 2
+Loop exited
+```
+
+
+
+### 继续下一次循环 - `continue`
+
+:::tip 说明
+
+`continue` 语句可以结束当前循环，开始下一次的循环迭代过程，仅限在 `for` 循环内使用，在 `continue` 语句后添加标签时，表示开始标签对应的循环
+
+:::
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+
+OuterLoop:
+	for i := 0; i < 2; i++ {
+		for j := 0; j < 5; j++ {
+			fmt.Printf("i: %d, j: %d\n", i, j) // 调试输出
+			switch j {
+			case 2:
+				fmt.Println("Breaking at case 2")
+				continue OuterLoop
+			}
+		}
+	}
+}
+```
+
+输出
+
+:::tip 说明
+
+**第一次外循环 (`i = 0`)**：
+
+- `j = 0, 1`: 正常输出
+- `j = 2`: 满足 `case 2`，打印 `Breaking at case 2`，执行 `continue OuterLoop`，跳过当前外循环的剩余部分
+- 进入下一次外循环
+
+**第二次外循环 (`i = 1`)**：
+
+- `j = 0, 1`: 正常输出
+- `j = 2`: 满足 `case 2`，打印 `Breaking at case 2`，执行 `continue OuterLoop`，跳过当前外循环的剩余部分
+- 外循环结束，因为 `i < 2` 不再满足
+
+:::
+
+```shell
+i: 0, j: 0
+i: 0, j: 1
+i: 0, j: 2
+Breaking at case 2
+i: 1, j: 0
+i: 1, j: 1
+i: 1, j: 2
+Breaking at case 2
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

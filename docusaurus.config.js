@@ -9,9 +9,13 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 
+
+
+
 // 能够读取.env文件中定义的algolia相关变量
 require('dotenv').config();
 
+// docusaurus.config.js
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   stylesheets: [
@@ -160,7 +164,7 @@ const config = {
               { label: 'go', to: '/docs/go' }, 
               { label: 'python', to: '/docs/python' },
               { label: 'shell', to: '/docs/shell' },
-              { label: '功能脚本', to: '/docs/script' },
+              { label: '功能脚本', to: '/docs/功能脚本' },
             ]
           },
           {
@@ -237,6 +241,7 @@ const config = {
           },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} 泡泡吐肥皂o`,
+        // copyright: `Copyright © ${new Date().getFullYear()} 泡泡吐肥皂o <div id="site-uptime"></div>`,
       },
       prism: {
         additionalLanguages: ['Bash','nginx','Git','ini','JSON'],
