@@ -49,7 +49,7 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 #### 下载包
 
 ```bash
-helm pull  prometheus-community/prometheus
+helm pull prometheus-community/prometheus
 ```
 
 

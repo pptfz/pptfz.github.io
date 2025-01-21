@@ -3,7 +3,8 @@
 ## 生成自签名证书
 
 ```shell
-openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=gitea.ops.com"
+export DOMAIN=p8s.ops.com
+openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=$DOMAIN"
 ```
 
 
@@ -13,7 +14,8 @@ openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout tls.key -out tls.cr
 ## 将证书和密钥存储为Kubernetes Secret
 
 ```bash
-kubectl create secret tls gitea-tls-secret --cert=tls.crt --key=tls.key
+export SECRET_NAME=p8s-tls-secret
+kubectl create secret tls $SECRET_NAME --cert=tls.crt --key=tls.key
 ```
 
 

@@ -59,25 +59,72 @@ kubectl patch storageclass ${SC_NAME} -p '{"metadata": {"annotations":{"storagec
 
 ## 查看证书过期时间
 
-:::tip 命令
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-通过查看 `kubeconfig` 文件中 `client-certificate-data` 字段的值可以获取证书过期时间
+<Tabs>
+  <TabItem value="通过kubeadm命令" label="通过kubeadm命令" default>
+:::tip 说明
 
-```shell
-echo xxx | base64 --decode | openssl x509 -noout -enddate
-```
+**组件证书**：
+
+- 例如 `admin.conf`、`apiserver`、`apiserver-kubelet-client` 等证书，有效期为 1 年。这些证书在 2025 年 11 月 8 日到期，目前还剩 **298 天**
+
+**证书颁发机构 (CA)**：
+
+- 根 CA (`ca`)、ETCD CA (`etcd-ca`)、以及前端代理 CA (`front-proxy-ca`) 的有效期为 **10 年**，到期时间是 2034 年 11 月 6 日
 
 :::
 
-示例
+```shell
+$ kubeadm certs check-expiration
+[check-expiration] Reading configuration from the cluster...
+[check-expiration] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
 
-输出的时间是UTC时间，换成北京时间需要+8
+CERTIFICATE                EXPIRES                  RESIDUAL TIME   CERTIFICATE AUTHORITY   EXTERNALLY MANAGED
+admin.conf                 Nov 08, 2025 09:40 UTC   298d            ca                      no      
+apiserver                  Nov 08, 2025 09:40 UTC   298d            ca                      no      
+apiserver-etcd-client      Nov 08, 2025 09:40 UTC   298d            etcd-ca                 no      
+apiserver-kubelet-client   Nov 08, 2025 09:40 UTC   298d            ca                      no      
+controller-manager.conf    Nov 08, 2025 09:40 UTC   298d            ca                      no      
+etcd-healthcheck-client    Nov 08, 2025 09:40 UTC   298d            etcd-ca                 no      
+etcd-peer                  Nov 08, 2025 09:40 UTC   298d            etcd-ca                 no      
+etcd-server                Nov 08, 2025 09:40 UTC   298d            etcd-ca                 no      
+front-proxy-client         Nov 08, 2025 09:40 UTC   298d            front-proxy-ca          no      
+scheduler.conf             Nov 08, 2025 09:40 UTC   298d            ca                      no      
+super-admin.conf           Nov 08, 2025 09:40 UTC   298d            ca                      no      
 
-```sh
-echo xxx | base64 --decode | openssl x509 -noout -enddate
-Warning: Reading certificate from stdin since no -in or -new option is given
-notAfter=Nov  1 02:23:23 2024 GMT
+CERTIFICATE AUTHORITY   EXPIRES                  RESIDUAL TIME   EXTERNALLY MANAGED
+ca                      Nov 06, 2034 09:40 UTC   9y              no      
+etcd-ca                 Nov 06, 2034 09:40 UTC   9y              no      
+front-proxy-ca          Nov 06, 2034 09:40 UTC   9y              no      
 ```
+
+  </TabItem>
+  <TabItem value="通过kubectl命令" label="通过kubectl命令">
+
+组件证书
+
+```shell
+$ kubectl config view --raw -o jsonpath='{.users[*].user.client-certificate-data}' | base64 -d | openssl x509 -noout -dates
+notBefore=Nov  8 09:35:40 2024 GMT
+notAfter=Nov  8 09:40:40 2025 GMT
+```
+
+
+
+根证书
+
+```shell
+$ kubectl get configmap kube-root-ca.crt -n kube-system -o jsonpath='{.data.ca\.crt}' | openssl x509 -noout -dates
+notBefore=Nov  8 09:35:40 2024 GMT
+notAfter=Nov  6 09:40:40 2034 GMT
+```
+
+ 
+
+ </TabItem>
+</Tabs>
 
 
 

@@ -213,10 +213,30 @@ echo -n 'admin' | base64
 
 ```shell
 kubectl create secret generic admin-secret \
-  --from-literal=admin-user=YWRtaW4= \
-  --from-literal=admin-password=YWRtaW4= \
+  --from-literal=admin-user=admin \
+  --from-literal=admin-password=admin \
   -n monitor
 ```
+
+生成的secret内容如下
+
+```yaml
+$ kubectl get secrets admin-secret -o yaml
+apiVersion: v1
+data:
+  admin-password: YWRtaW4=
+  admin-user: YWRtaW4=
+kind: Secret
+metadata:
+  creationTimestamp: "2025-01-16T03:33:23Z"
+  name: admin-secret
+  namespace: monitor
+  resourceVersion: "177855"
+  uid: 35123900-b12c-4350-8155-dbd8172315c8
+type: Opaque
+```
+
+
 
 :::
 
