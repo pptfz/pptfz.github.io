@@ -16,13 +16,13 @@ promtheus从根本上将所有数据存储为 [时间序列](https://zh.wikipedi
 
 ##### 定义
 
-指定所测量系统的一般特征，例如 `http_requests_total` 表示收到的 `http` 请求总数
+- 指定所测量系统的一般特征，例如 `http_requests_total` 表示收到的 `http` 请求总数
 
 
 
 ##### 命名规则
 
-指标名称可以包含  [ASCII字母](https://zh.wikipedia.org/wiki/ASCII)、数字、下划线和冒号。它必须匹配正则表达式 `[a-zA-Z_:][a-zA-Z0-9_:]*`
+- 指标名称可以包含  [ASCII字母](https://zh.wikipedia.org/wiki/ASCII)、数字、下划线和冒号。它必须匹配正则表达式 `[a-zA-Z_:][a-zA-Z0-9_:]*`
 
 
 
