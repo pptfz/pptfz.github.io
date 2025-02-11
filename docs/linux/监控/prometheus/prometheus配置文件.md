@@ -113,7 +113,7 @@ scrape_configs:                          # 开始 scrape_configs 部分，定义
     - __meta_kubernetes_service_name
     target_label: service                            # 设置服务名称标签
 
-# 个配置定义了一个名为 kubernetes-pods 的任务，用于监控 Kubernetes 中的 Pod。它使用 Kubernetes 服务发现机制来查找 Pod，并通过一系列的重新标记规则来处理和调整标签
+# 这个配置定义了一个名为 kubernetes-pods 的任务，用于监控 Kubernetes 中的 Pod。它使用 Kubernetes 服务发现机制来查找 Pod，并通过一系列的重新标记规则来处理和调整标签
 - honor_labels: true                                 # 保留原始标签，不覆盖已存在的标签
   job_name: kubernetes-pods                          # 定义任务名称为 kubernetes-pods
   kubernetes_sd_configs:
