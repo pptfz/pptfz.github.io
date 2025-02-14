@@ -10,10 +10,10 @@
 
 | 角色   | IP         | 主机名     | containerd版本 | 硬件配置 | 系统                                | 内核                         | 安装组件                                                     |
 | ------ | ---------- | ---------- | -------------- | -------- | ----------------------------------- | ---------------------------- | ------------------------------------------------------------ |
-| master | 10.0.0.10  | k8s-master | 1.7.17         | 2c4g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kube-apiserver，kube-controller-manager，kube-scheduler，kubelet，etcd |
-| Node01 | 10.0.0.100 | K8s-node01 | 1.7.17         | 4c8g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
-| node02 | 10.0.0.101 | k8s-node02 | 1.7.17         | 4c8g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
-| node03 | 10.0.0.102 | k8s-node03 | 1.7.17         | 2c4g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
+| master | 10.0.0.10  | k8s-master | 2.0.2          | 2c4g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kube-apiserver，kube-controller-manager，kube-scheduler，kubelet，etcd |
+| Node01 | 10.0.0.100 | K8s-node01 | 2.0.2          | 4c8g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
+| node02 | 10.0.0.101 | k8s-node02 | 2.0.2          | 4c8g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
+| node03 | 10.0.0.102 | k8s-node03 | 2.0.2          | 2c4g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
 
 
 
@@ -283,7 +283,7 @@ bin/containerd
     下载安装包
 
 ```shell
-export CONTAINERD_VERSION=2.0.0
+export CONTAINERD_VERSION=2.0.2
 export ARCHITECTURE=arm64
 wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
@@ -390,7 +390,7 @@ systemctl enable --now containerd
 下载安装包
 
 ```bash
-export RUNC_VERSION=1.2.1
+export RUNC_VERSION=1.2.5
 export ARCHITECTURE=arm64
 wget https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.${ARCHITECTURE}
 ```
@@ -409,10 +409,10 @@ install -m 755 runc.${ARCHITECTURE} /usr/local/sbin/runc
 
 ```bash
 $ runc -v
-runc version 1.2.1
-commit: v1.2.1-0-gd7735e38
+runc version 1.2.5
+commit: v1.2.5-0-g59923ef1
 spec: 1.2.0
-go: go1.22.8
+go: go1.22.12
 libseccomp: 2.5.5
 ```
 
@@ -425,7 +425,7 @@ libseccomp: 2.5.5
 下载安装包
 
 ```bash
-export CNI_VERSION=1.6.0
+export CNI_VERSION=1.6.2
 export ARCHITECTURE=arm64
 wget https://github.com/containernetworking/plugins/releases/download/v${CNI_VERSION}/cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 ```
@@ -551,9 +551,9 @@ sed -i.bak "/\[plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.o
 
 :::tip 说明
 
-在 `/etc/containerd/config.toml` 配置文件中，pause镜像的默认地址是 `registry.k8s.io/pause:3.9`，由于某些特殊原因，需要修改这个镜像的地址，可以使用ucloud提供的加速地址
+在 `/etc/containerd/config.toml` 配置文件中，pause镜像的默认地址是 `registry.k8s.io/vi:3.10`，由于某些特殊原因，需要修改这个镜像的地址，可以使用ucloud提供的加速地址
 
-`uhub.service.ucloud.cn/996.icu/pause:3.9` 或者阿里云提供的加速地址 `registry.aliyuncs.com/k8sxio/pause:3.9`
+`uhub.service.ucloud.cn/996.icu/pause:3.10` 或者阿里云提供的加速地址 `registry.aliyuncs.com/k8sxio/pause:3.10`
 
 :::
 
@@ -724,7 +724,7 @@ done: 1.495863023s
 下载安装包
 
 ```bash
-export CRICTL_VERSION=1.31.1
+export CRICTL_VERSION=1.32.0
 export ARCHITECTURE=arm64
 wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${CRICTL_VERSION}/crictl-v${CRICTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
@@ -804,8 +804,8 @@ source ~/.bashrc
 :::
 
 ```bash
-# 这里安装的containerd版本为2.0.0
-export NERDCTL_VERSION=2.0.0
+# 这里安装的containerd版本为2.0.2
+export NERDCTL_VERSION=2.0.3
 export ARCHITECTURE=arm64
 wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
@@ -878,7 +878,7 @@ failed to ping to host unix:///run/buildkit/buildkitd.sock: exec: "buildctl": ex
 下载安装包
 
 ```shell
-export BUILDKIT_VERSION=0.17.1
+export BUILDKIT_VERSION=0.20.0
 export ARCHITECTURE=arm64
 wget https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz
 ```
@@ -1016,7 +1016,7 @@ slirp4netns 需要是 v0.4.0 或更高版本。推荐v1.1.7或更高版本。
 [官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl)
 
 ```shell
-export VERSION=1.31
+export VERSION=1.32
 cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -1061,7 +1061,7 @@ yum list kubeadm --showduplicates
 指定安装版本
 
 ```bash
-export K8S_VERSION=1.31.2
+export K8S_VERSION=1.32.2
 yum -y install kubelet-${K8S_VERSION} kubeadm-${K8S_VERSION} kubectl-${K8S_VERSION} --disableexcludes=kubernetes
 systemctl enable --now kubelet
 ```
@@ -1071,7 +1071,7 @@ systemctl enable --now kubelet
 安装最新版
 
 ```bash
-yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+yum -y install kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl enable --now kubelet
 ```
 
@@ -1438,7 +1438,7 @@ mode: ipvs  # kube-proxy 模式
 ---
 apiServer:
   #timeoutForControlPlane: 4m0s
-  Timeouts.ControlPlaneComponentHealthCheck: 4m0s
+  #Timeouts.ControlPlaneComponentHealthCheck: 4m0s
 apiVersion: kubeadm.k8s.io/v1beta4
 certificatesDir: /etc/kubernetes/pki
 clusterName: kubernetes
@@ -1531,12 +1531,12 @@ kubeadm init \
 完整输出如下
 
 ```bash
-[init] Using Kubernetes version: v1.31.2
+[init] Using Kubernetes version: v1.32.2
 [preflight] Running pre-flight checks
 [preflight] Pulling images required for setting up a Kubernetes cluster
 [preflight] This might take a minute or two, depending on the speed of your internet connection
 [preflight] You can also perform this action beforehand using 'kubeadm config images pull'
-W1108 17:40:41.001062   47749 checks.go:846] detected that the sandbox image "" of the container runtime is inconsistent with that used by kubeadm.It is recommended to use "registry.k8s.io/pause:3.10" as the CRI sandbox image.
+W0226 20:08:09.270938   40112 checks.go:846] detected that the sandbox image "" of the container runtime is inconsistent with that used by kubeadm.It is recommended to use "registry.aliyuncs.com/google_containers/pause:3.10" as the CRI sandbox image.
 [certs] Using certificateDir folder "/etc/kubernetes/pki"
 [certs] Generating "ca" certificate and key
 [certs] Generating "apiserver" certificate and key
@@ -1568,9 +1568,9 @@ W1108 17:40:41.001062   47749 checks.go:846] detected that the sandbox image "" 
 [kubelet-start] Starting the kubelet
 [wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests"
 [kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s
-[kubelet-check] The kubelet is healthy after 505.364806ms
+[kubelet-check] The kubelet is healthy after 504.202261ms
 [api-check] Waiting for a healthy API server. This can take up to 4m0s
-[api-check] The API server is healthy after 3.003759809s
+[api-check] The API server is healthy after 3.519925387s
 [upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
 [kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
 [upload-certs] Skipping phase. Please see --upload-certs
@@ -1606,7 +1606,7 @@ Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
 Then you can join any number of worker nodes by running the following on each as root:
 
 kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
-	--discovery-token-ca-cert-hash sha256:9a1e76a063461c5e5b442cbb5aa838ecf0fd5f8ee124de0cb8b3e307f22b1bec 
+	--discovery-token-ca-cert-hash sha256:dafdfc22fd8670bb77c258232448fbd937fba9ed40428d5d5319a6acdc2c8e96 
 ```
 
 
@@ -1699,7 +1699,7 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 ```bash
 kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
-	--discovery-token-ca-cert-hash sha256:8a7e980fb917404682f8cbf5e09d2d822c7a0e541cddeadba28907bffbbd5aaa
+	--discovery-token-ca-cert-hash sha256:dafdfc22fd8670bb77c258232448fbd937fba9ed40428d5d5319a6acdc2c8e96 
 ```
 
 
@@ -1708,15 +1708,15 @@ kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
 
 ```bash
 $ kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
-> --discovery-token-ca-cert-hash sha256:8a7e980fb917404682f8cbf5e09d2d822c7a0e541cddeadba28907bffbbd5aaa
+> --discovery-token-ca-cert-hash sha256:dafdfc22fd8670bb77c258232448fbd937fba9ed40428d5d5319a6acdc2c8e96 
 [preflight] Running pre-flight checks
-[preflight] Reading configuration from the cluster...
-[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[preflight] Reading configuration from the "kubeadm-config" ConfigMap in namespace "kube-system"...
+[preflight] Use 'kubeadm init phase upload-config --config your-config.yaml' to re-upload it.
 [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
 [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
 [kubelet-start] Starting the kubelet
-[kubelet-check] Waiting for a healthy kubelet. This can take up to 4m0s
-[kubelet-check] The kubelet is healthy after 502.113877ms
+[kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s
+[kubelet-check] The kubelet is healthy after 516.696778ms
 [kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap
 
 This node has joined the cluster:
@@ -1841,10 +1841,12 @@ kube-system   kube-scheduler-k8s-master01            1/1     Running   1        
 The CustomResourceDefinition "installations.operator.tigera.io" is invalid: metadata.annotations: Too long: must have at most 262144 bytes
 ```
 
+会在 `tigera-operator` 命名空间下创建资源
+
 :::
 
 ```sh
-export CALICO_VERSION=3.29.0
+export CALICO_VERSION=3.29.2
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v$CALICO_VERSION/manifests/tigera-operator.yaml
 ```
 

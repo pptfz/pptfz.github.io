@@ -68,7 +68,9 @@ users:
 
 ```shell
 cd $HOME/.kube/config
-KUBECONFIG=config-mac:config-company kubectl config view --flatten > $HOME/.kube/config
+export CONFIG_FILE1=config-mac
+export CONFIG_FILE2=config-company
+KUBECONFIG=$CONFIG_FILE1:$CONFIG_FILE2 kubectl config view --flatten > $HOME/.kube/config
 ```
 
 

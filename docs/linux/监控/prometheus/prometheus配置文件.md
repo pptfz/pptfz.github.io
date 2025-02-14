@@ -15,8 +15,8 @@ global:
 rule_files:                                 # 定义要加载的规则文件列表
 - /etc/config/recording_rules.yml           # 记录规则文件，用于预计算和存储复杂查询结果
 - /etc/config/alerting_rules.yml            # 告警规则文件，定义触发告警的条件
-- /etc/config/rules                         # 可能包含混合规则的文件或目录
-- /etc/config/alerts                        # 可能包含额外告警规则的文件或目录
+- /etc/config/rules                         # 无用，将被删除
+- /etc/config/alerts                        # 无用，将被删除
 
 # 监控prometheus本身
 scrape_configs:                          # 开始 scrape_configs 部分，定义了所有的抓取配置
