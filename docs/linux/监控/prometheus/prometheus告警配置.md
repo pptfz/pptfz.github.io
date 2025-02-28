@@ -433,7 +433,7 @@ data:
     receivers:
       - name: 'slack'  # 接收告警的目标，定义为 'slack'，用于发送到 Slack
         slack_configs:
-          - api_url: 'https://hooks.slack.com/services/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'  # Slack Webhook URL，用来发送告警到 Slack
+          - api_url: 'xxx'  # Slack Webhook URL，用来发送告警到 Slack
             channel: '来一瓶82年拉菲'  # Slack 频道名称，告警将发送到此频道
             send_resolved: true  # 是否在告警解决时发送通知，true 表示发送解决通知
             title: '{{ template "slack.title" . }}'  # 使用 "slack.title" 模板来格式化标题
