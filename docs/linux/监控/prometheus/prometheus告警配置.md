@@ -350,8 +350,8 @@ data:
           - api_url: 'xxx'  # Slack Webhook URL，用来发送告警到 Slack
             channel: 'xxx'  # Slack 频道名称，告警将发送到此频道
             send_resolved: true  # 是否在告警解决时发送通知，true 表示发送解决通知
-            title: '{{ template "slack.default" . }}'  # 使用 "slack.default" 模板来格式化标题
-            text: '{{ template "slack.default" . }}'   # 使用 "slack.default" 模板来格式化通知文本内容
+            title: '{{ template "slack.default" . }}'  # 使用 "slack.title" 模板来格式化标题
+            text: '{{ template "slack.default" . }}'   # 使用 "slack.text" 模板来格式化通知文本内容
 
     route:
       # 告警的路由配置
@@ -399,26 +399,21 @@ spec:
 新增如下内容
 
 ```yaml
-{{ define "slack.default" }}
-{
-  "text": "*告警:* {{ .CommonLabels.alertname }}\n
-           *严重性:* {{ .CommonLabels.severity }}\n
-           *实例:* {{ .CommonLabels.instance }}\n
-           *描述:* {{ .Annotations.description }}\n
-  "attachments": [
-    {
-      "title": "{{ .CommonLabels.alertname }} - {{ .Status }}",
-      "color": "{{ if eq .Status \"firing\" }}#FF0000{{ else }}#00FF00{{ end }}",
-      "fields": [
-        {
-          "title": "告警总结",
-          "value": "{{ .Annotations.summary }}",
-          "short": false
-        }
-      ]
-    }
-  ]
-}
+{{ define "slack.title" }}
+:rotating_light: [告警] {{ .CommonLabels.alertname }} - {{ .Status | toUpper }}
+{{ end }}
+
+{{ define "slack.text" }}
+{{ range .Alerts }}
+*告警名称:* {{ .Labels.alertname }}
+*状态:* {{ .Status | toUpper }}
+*主机:* {{ .Labels.instance }}
+*严重性:* {{ .Labels.severity }}
+*触发时间:* {{ .StartsAt }}
+{{ if .Annotations.summary }}*摘要:* {{ .Annotations.summary }}{{ end }}
+{{ if .Annotations.description }}*详情:* {{ .Annotations.description }}{{ end }}
+---
+{{ end }}
 {{ end }}
 ```
 
@@ -439,45 +434,54 @@ data:
       - name: 'slack'  # 接收告警的目标，定义为 'slack'，用于发送到 Slack
         slack_configs:
           - api_url: 'https://hooks.slack.com/services/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'  # Slack Webhook URL，用来发送告警到 Slack
-            channel: 'alert-robot'  # Slack 频道名称，告警将发送到此频道
+            channel: '来一瓶82年拉菲'  # Slack 频道名称，告警将发送到此频道
             send_resolved: true  # 是否在告警解决时发送通知，true 表示发送解决通知
-            title: '{{ template "slack.default" . }}'  # 使用 "slack.default" 模板来格式化标题
-            text: '{{ template "slack.default" . }}'   # 使用 "slack.default" 模板来格式化通知文本内容
+            title: '{{ template "slack.title" . }}'  # 使用 "slack.title" 模板来格式化标题
+            text: '{{ template "slack.text" . }}'   # 使用 "slack.text" 模板来格式化通知文本内容
 
     route:
       # 告警的路由配置
       group_by: ['alertname', 'cluster', 'service']  # 将相同 alertname、cluster 和 service 的告警分组
       group_wait: 30s  # 每组告警等待的时间，告警发送前的等待时间，通常是为了等待其他告警
-      group_interval: 5m  # 在同一组告警中的告警发送间隔，避免频繁发送相同类型的告警
+      group_interval: 5m  # 同一组告警中的告警发送间隔，避免频繁发送相同类型的告警
       repeat_interval: 12h  # 如果告警持续存在，重新发送告警的时间间隔
       receiver: 'slack'  # 告警发送的接收目标，这里是 Slack 配置
 
     templates:
       - '/etc/alertmanager/*.tmpl'  # 模板文件路径，Alertmanager 会使用这个模板来格式化 Slack 通知的内容
   slack_notification.tmpl: |
-    {{ define "slack.default" }}
-    {
-      "text": "*告警:* {{ .CommonLabels.alertname }}\n
-               *严重性:* {{ .CommonLabels.severity }}\n
-               *实例:* {{ .CommonLabels.instance }}\n
-               *描述:* {{ .Annotations.description }}\n
-      "attachments": [
-        {
-          "title": "{{ .CommonLabels.alertname }} - {{ .Status }}",
-          "color": "{{ if eq .Status \"firing\" }}#FF0000{{ else }}#00FF00{{ end }}",
-          "fields": [
-            {
-              "title": "告警总结",
-              "value": "{{ .Annotations.summary }}",
-              "short": false
-            }
-          ]
-        }
-      ]
-    }
+    {{ define "slack.title" }}
+    :rotating_light: [告警] {{ .CommonLabels.alertname }} - {{ .Status | toUpper }}
+    {{ end }}
+
+    {{ define "slack.text" }}
+    {{ range .Alerts }}
+    *告警名称:* {{ .Labels.alertname }}
+    *状态:* {{ .Status | toUpper }}
+    *主机:* {{ .Labels.instance }}
+    *严重性:* {{ .Labels.severity }}
+    *触发时间:* {{ .StartsAt }}
+    {{ if .Annotations.summary }}*摘要:* {{ .Annotations.summary }}{{ end }}
+    {{ if .Annotations.description }}*详情:* {{ .Annotations.description }}{{ end }}
+    ---
+    {{ end }}
     {{ end }}
 kind: ConfigMap
-......
+metadata:
+  annotations:
+    meta.helm.sh/release-name: prometheus
+    meta.helm.sh/release-namespace: monitor
+  creationTimestamp: "2025-02-27T08:31:15Z"
+  labels:
+    app.kubernetes.io/instance: prometheus
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: alertmanager
+    app.kubernetes.io/version: v0.27.0
+    helm.sh/chart: alertmanager-1.13.1
+  name: prometheus-alertmanager
+  namespace: monitor
+  resourceVersion: "108267"
+  uid: 2f9f897a-c092-4c42-9e82-7850a93f4ce7
 ```
 
 
@@ -486,9 +490,15 @@ kind: ConfigMap
 
 #### slack
 
+告警发生
+
+![iShot_2025-02-27_19.17.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-27_19.17.17.png)
 
 
 
+告警恢复
+
+![iShot_2025-02-28_10.48.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-28_10.48.25.png)
 
 
 

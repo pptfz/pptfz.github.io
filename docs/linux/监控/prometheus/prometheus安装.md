@@ -70,6 +70,14 @@ tar xf prometheus-25.21.0.tgz
 
 :::
 
+修改时区
+
+```yaml
+
+```
+
+
+
 ```bash
 $ helm upgrade --install prometheus -n monitor --create-namespace .
 Release "prometheus" does not exist. Installing it now.

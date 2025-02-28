@@ -187,6 +187,8 @@ tar xf grafana-8.3.6.tgz
 
 `values.yaml` 中可以定义启动参数、资源配置、svc、ingress等，自行修改即可
 
+#### 5.3.1 指定admin密码
+
 :::caution 注意
 
 关于admin用户名和密码的配置处，可以以明文的方式指定，也可以指定外部secret
@@ -251,6 +253,29 @@ admin:
   existingSecret: "admin-secret"
   userKey: admin-user
   passwordKey: admin-password
+```
+
+
+
+#### 5.3.2 修改时区
+
+:::tip 说明
+
+默认时区是UTC+0，如果要修改成UTC+8则需要在 `values.yaml` 文件中进行如下配置
+
+:::
+
+```yaml
+env: 
+  TZ: "Asia/Shanghai"
+## "valueFrom" environment variable references that will be added to deployment pods. Name is templated.
+## ref: https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#envvarsource-v1-core
+## Renders in container spec as:
+##   env:
+##     ...
+##     - name: <key>
+##       valueFrom:
+##         <value rendered as YAML>
 ```
 
 
