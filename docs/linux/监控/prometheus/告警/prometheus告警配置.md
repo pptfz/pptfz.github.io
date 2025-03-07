@@ -79,7 +79,7 @@ groups:
           severity: warning
         annotations:
           summary: "节点 {{ $labels.node }} 内存使用率过高"
-          description: "节点 {{ $labels.node }}（实例 {{ $labels.instance }}）的内存使用率当前为 {{ printf \"%.2f\" $value }}%，已超过 80%，持续时间超过 2 分钟。"
+          description: "节点 {{ $labels.node }}（实例 {{ $labels.instance | reReplaceAll \":.*\" \"\" }}）的内存使用率当前为 {{ printf \"%.2f\" $value }}%，已超过 20%，持续时间超过 2 分钟。"
 ```
 
 
@@ -101,7 +101,7 @@ data:
               severity: warning
             annotations:
               summary: "节点 {{ $labels.node }} 内存使用率过高"
-              description: "节点 {{ $labels.node }} (实例 {{ $labels.instance }}) 内存使用率超过 80%，当前值为 {{ printf \"%.2f\" $value }}%，持续时间超过 2 分钟。"
+              description: "节点 {{ $labels.node }}（实例 {{ $labels.instance | reReplaceAll \":.*\" \"\" }}）的内存使用率当前为 {{ printf \"%.2f\" $value }}%，已超过 20%，持续时间超过 2 分钟。"
 ......
 ```
 
@@ -316,8 +316,8 @@ receivers:
       - api_url: 'xxx'  # Slack Webhook URL，用来发送告警到 Slack
         channel: 'alert-robot'  # Slack 频道名称，告警将发送到此频道
         send_resolved: true  # 是否在告警解决时发送通知，true 表示发送解决通知
-        title: '{{ template "slack.default" . }}'  # 使用 "slack.default" 模板来格式化标题
-        text: '{{ template "slack.default" . }}'   # 使用 "slack.default" 模板来格式化通知文本内容
+        title: '{{ template "slack.title" . }}'  # 使用 "slack.title" 模板来格式化标题
+        text: '{{ template "slack.text" . }}'   # 使用 "slack.text" 模板来格式化通知文本内容
 
 route:
   # 告警的路由配置
@@ -350,8 +350,8 @@ data:
           - api_url: 'xxx'  # Slack Webhook URL，用来发送告警到 Slack
             channel: 'xxx'  # Slack 频道名称，告警将发送到此频道
             send_resolved: true  # 是否在告警解决时发送通知，true 表示发送解决通知
-            title: '{{ template "slack.default" . }}'  # 使用 "slack.title" 模板来格式化标题
-            text: '{{ template "slack.default" . }}'   # 使用 "slack.text" 模板来格式化通知文本内容
+            title: '{{ template "slack.title" . }}'  # 使用 "slack.title" 模板来格式化标题
+            text: '{{ template "slack.text" . }}'   # 使用 "slack.text" 模板来格式化通知文本内容
 
     route:
       # 告警的路由配置
@@ -398,91 +398,56 @@ spec:
 
 新增如下内容
 
+:::tip 说明
+
+
+
+:::
+
 ```yaml
 {{ define "slack.title" }}
 :rotating_light: [告警] {{ .CommonLabels.alertname }} - {{ .Status | toUpper }}
 {{ end }}
 
 {{ define "slack.text" }}
-{{ range .Alerts }}
-*告警名称:* {{ .Labels.alertname }}
-*状态:* {{ .Status | toUpper }}
-*主机:* {{ .Labels.instance }}
-*严重性:* {{ .Labels.severity }}
-*触发时间:* {{ .StartsAt }}
-{{ if .Annotations.summary }}*摘要:* {{ .Annotations.summary }}{{ end }}
-{{ if .Annotations.description }}*详情:* {{ .Annotations.description }}{{ end }}
+{{- if gt (len .Alerts.Firing) 0 -}}
+{{- range $index, $alert := .Alerts -}}
+{{- if eq $index 0 -}}
+**********告警通知**********
+*告警类型:* {{ $alert.Labels.alertname }}
+*告警级别:* {{ $alert.Labels.severity }}
+{{- end }}
 ---
+*告警主题:* {{ $alert.Annotations.summary }}
+*告警详情:* {{ $alert.Annotations.description }}
+*故障时间:* {{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:05:05" }} 
+*故障实例:* {{ reReplaceAll ":.*" "" $alert.Labels.instance }}
+{{- end }}
+{{- end }}
+
+{{- if gt (len .Alerts.Resolved) 0 -}}
+{{- range $index, $alert := .Alerts -}}
+{{- if eq $index 0 -}}
+**********恢复通知**********
+*告警类型:* {{ $alert.Labels.alertname }}
+*告警级别:* {{ $alert.Labels.severity }}
+{{- end }}
+---
+*告警主题:* {{ $alert.Annotations.summary }}
+*告警详情:* {{ $alert.Annotations.description }}
+*故障时间:* {{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:05:05" }}
+
+{{ if ne ($alert.StartsAt.Format "2006-01-02 15:05:05") ($alert.EndsAt.Format "2006-01-02 15:05:05") }}
+*恢复时间:* {{ ($alert.EndsAt.Add 28800e9).Format "2006-01-02 15:05:05" }}
 {{ end }}
-{{ end }}
+
+*故障实例:* {{ reReplaceAll ":.*" "" $alert.Labels.instance }}
+{{- end }}
+{{- end }}
+{{- end }}
 ```
 
 
-
-修改完成后查看cm
-
-```yaml
-$ kubectl get cm prometheus-alertmanager -o yaml
-apiVersion: v1
-data:
-  alertmanager.yml: |-
-    global:
-      # 全局配置，这里设置了解决告警的超时时间
-      resolve_timeout: 5m  # 设置告警解决的超时时间，超时后自动解决告警
-
-    receivers:
-      - name: 'slack'  # 接收告警的目标，定义为 'slack'，用于发送到 Slack
-        slack_configs:
-          - api_url: 'xxx'  # Slack Webhook URL，用来发送告警到 Slack
-            channel: '来一瓶82年拉菲'  # Slack 频道名称，告警将发送到此频道
-            send_resolved: true  # 是否在告警解决时发送通知，true 表示发送解决通知
-            title: '{{ template "slack.title" . }}'  # 使用 "slack.title" 模板来格式化标题
-            text: '{{ template "slack.text" . }}'   # 使用 "slack.text" 模板来格式化通知文本内容
-
-    route:
-      # 告警的路由配置
-      group_by: ['alertname', 'cluster', 'service']  # 将相同 alertname、cluster 和 service 的告警分组
-      group_wait: 30s  # 每组告警等待的时间，告警发送前的等待时间，通常是为了等待其他告警
-      group_interval: 5m  # 同一组告警中的告警发送间隔，避免频繁发送相同类型的告警
-      repeat_interval: 12h  # 如果告警持续存在，重新发送告警的时间间隔
-      receiver: 'slack'  # 告警发送的接收目标，这里是 Slack 配置
-
-    templates:
-      - '/etc/alertmanager/*.tmpl'  # 模板文件路径，Alertmanager 会使用这个模板来格式化 Slack 通知的内容
-  slack_notification.tmpl: |
-    {{ define "slack.title" }}
-    :rotating_light: [告警] {{ .CommonLabels.alertname }} - {{ .Status | toUpper }}
-    {{ end }}
-
-    {{ define "slack.text" }}
-    {{ range .Alerts }}
-    *告警名称:* {{ .Labels.alertname }}
-    *状态:* {{ .Status | toUpper }}
-    *主机:* {{ .Labels.instance }}
-    *严重性:* {{ .Labels.severity }}
-    *触发时间:* {{ .StartsAt }}
-    {{ if .Annotations.summary }}*摘要:* {{ .Annotations.summary }}{{ end }}
-    {{ if .Annotations.description }}*详情:* {{ .Annotations.description }}{{ end }}
-    ---
-    {{ end }}
-    {{ end }}
-kind: ConfigMap
-metadata:
-  annotations:
-    meta.helm.sh/release-name: prometheus
-    meta.helm.sh/release-namespace: monitor
-  creationTimestamp: "2025-02-27T08:31:15Z"
-  labels:
-    app.kubernetes.io/instance: prometheus
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: alertmanager
-    app.kubernetes.io/version: v0.27.0
-    helm.sh/chart: alertmanager-1.13.1
-  name: prometheus-alertmanager
-  namespace: monitor
-  resourceVersion: "108267"
-  uid: 2f9f897a-c092-4c42-9e82-7850a93f4ce7
-```
 
 
 
@@ -492,7 +457,9 @@ metadata:
 
 告警发生
 
-![iShot_2025-02-27_19.17.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-27_19.17.17.png)
+![iShot_2025-03-07_11.33.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-03-07_11.33.27.png)
+
+
 
 
 

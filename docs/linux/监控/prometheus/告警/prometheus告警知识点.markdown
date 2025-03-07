@@ -79,3 +79,53 @@ description: "节点 {{ $labels.node }}（实例 {{ $labels.instance | reReplace
 
 ![iShot_2025-03-05_19.38.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-03-05_19.38.16.png)
 
+
+
+alertmanager `*.tmpl` 告警模版同样可以使用 `reReplaceAll` ，将输出的告警示例中的端口号去掉
+
+```yaml
+{{ define "slack.title" }}
+......
+**********告警通知**********
+*告警类型:* {{ $alert.Labels.alertname }}
+......
+*故障时间:* {{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:05:05" }} 
+*故障实例:* {{ reReplaceAll ":.*" "" $alert.Labels.instance }}
+......
+```
+
+
+
+## 修改告警信息显示时区
+
+prometheus [不支持修改时区](https://prometheus.io/docs/introduction/faq/#can-i-change-the-timezone-why-is-everything-in-utc) ，默认时区为UTC+0
+
+以下为alertmanager告警示例模版，其中 `{{ .StartsAt }}` 的时区是UTC+0
+
+```yaml
+{{ define "slack.title" }}
+:rotating_light: [告警] {{ .CommonLabels.alertname }} - {{ .Status | toUpper }}
+{{ end }}
+
+{{ define "slack.text" }}
+{{ range .Alerts }}
+*告警名称:* {{ .Labels.alertname }}
+*状态:* {{ .Status | toUpper }}
+*主机:* {{ .Labels.instance }}
+*严重性:* {{ .Labels.severity }}
+*触发时间:* {{ .StartsAt }}
+{{ if .Annotations.summary }}*摘要:* {{ .Annotations.summary }}{{ end }}
+{{ if .Annotations.description }}*详情:* {{ .Annotations.description }}{{ end }}
+---
+{{ end }}
+{{ end }}
+```
+
+
+
+要想修改为UTC+8，则需要将 `{{ .StartsAt }}` 修改为如下
+
+```yaml
+{{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:05:05" }} 
+```
+
