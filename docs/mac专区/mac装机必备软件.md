@@ -1,5 +1,11 @@
 # mac装机必备软件
 
+## 宁波上官科技专区
+
+### [直接上官网看，都是精品](https://www.better365.cn/)
+
+
+
 ## 运维工具
 
 ### 小工具类
@@ -120,7 +126,10 @@
 
 
 
-## 宁波上官科技专区
 
-### [直接上官网看，都是精品](https://www.better365.cn/)
 
+## 软件卸载
+
+### appcleaner
+
+- [appcleaner](https://freemacsoft.net/appcleaner/) 是一个删除mac软件的工具
