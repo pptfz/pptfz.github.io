@@ -72,6 +72,10 @@
 
 
 
+## Amazon Q
+
+- [Amazon](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-installing.html) 是一款在终端中提示子命令、选项等具有提示功能的工具
+
 
 
 ### Manico
