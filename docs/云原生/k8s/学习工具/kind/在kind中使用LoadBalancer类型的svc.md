@@ -4,7 +4,7 @@
 
 
 
-cloud-provider-kind 这个插件可以解决在kind安装的k8s集群中使用LoadBalancer类型的sec
+`cloud-provider-kind` 这个插件可以解决在kind安装的k8s集群中使用LoadBalancer类型的svc
 
 
 
@@ -42,7 +42,7 @@ sudo cloud-provider-kind
 
 
 
-cloud-provider-kind运行成功后，可以看到LoadBalancer类型的svc已经获取到了ip
+`cloud-provider-kind` 运行成功后，可以看到LoadBalancer类型的svc已经获取到了ip
 
 ![iShot_2024-06-12_19.23.10](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-06-12_19.23.10.png)
 
