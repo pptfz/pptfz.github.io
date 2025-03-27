@@ -356,3 +356,32 @@ $ history
     3  2025-03-13 11:09:38 ls
 ```
 
+
+
+## 修改默认编辑器
+
+ubuntu默认编辑器是 [nano](https://www.nano-editor.org/) ，例如执行 `visudo` 的时候就是使用nano打开的，但是用不习惯，使用如下命令修改为 [vim](https://www.vim.org/)
+
+```bash
+export EDITOR=vim
+export VISUAL=vim
+```
+
+
+
+## 配置 `sudo su -` 不需要密码
+
+在ubuntu22.04 `/etc/sudoers` 中进行如下配置是不生效的
+
+```bash
+youruser ALL=(ALL) NOPASSWD: ALL
+```
+
+
+
+如下配置是生效的
+
+```shell
+echo "youruser ALL=(ALL) NOPASSWD: /bin/su -" | sudo tee /etc/sudoers.d/youruser
+```
+
