@@ -1079,6 +1079,17 @@ systemctl enable --now kubelet
 
 ### 设置 `kubectl` 命令补全
 
+:::tip 说明
+
+如果做了 `kubectl` 命令的别名 `k` ，则还需要添加如下配置才可以使 `k` 像 `kubectl` 一样的命令补全功能
+
+```shell
+echo 'alias k=kubectl' >> ~/.bashrc
+echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
+```
+
+:::
+
 ```shell
 yum -y install bash-completion 
 echo "source <(kubectl completion bash)" >> ~/.bashrc && source ~/.bashrc
