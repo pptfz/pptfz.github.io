@@ -1,6 +1,8 @@
 # k8s常用命令速查
 
-## 强制删除pod
+## pod
+
+### 强制删除pod
 
 ```sh
 kubectl delete pod <pod-name> --grace-period=0 --force
@@ -8,7 +10,7 @@ kubectl delete pod <pod-name> --grace-period=0 --force
 
 
 
-## 查看pod包含的容器
+### 查看pod包含的容器
 
 :::tip 说明
 
@@ -38,7 +40,9 @@ $ kubectl get pod ${POD_NAME} -o json | jq '.spec.containers[].name'
 
 
 
-## 查看node节点拥有的镜像
+## node
+
+### 查看node节点拥有的镜像
 
 ```shell
 kubectl get nodes -o json | jq -r '.items[] | "\(.metadata.name): \(.status.images[].names[])"'
@@ -46,9 +50,55 @@ kubectl get nodes -o json | jq -r '.items[] | "\(.metadata.name): \(.status.imag
 
 
 
+### 查看node节点上调度的pod
+
+```sh
+export NODE_NAME=''
+kubectl get pods --field-selector spec.nodeName=$NODE_NAME
+```
+
+
+
+### 查看某个node节点上被 `oom kill` 的pod
+
+```shell
+export NODE_NAME=''
+(
+  echo -e "NODE_NAME\tPOD_NAME\tCONTAINER_NAME\tREASON\tFINISHED_AT"
+  kubectl get pods --field-selector spec.nodeName=$NODE_NAME -o json | \
+    jq -r '.items[] |
+      .metadata.name as $pod_name |
+      .spec.nodeName as $node_name |
+      .status.containerStatuses[]? |
+      select(.lastState.terminated.reason == "OOMKilled") |
+      "\($node_name)\t\($pod_name)\t\(.name)\tOOMKilled\t\(.lastState.terminated.finishedAt)"'
+) | column -t
+```
+
+
+
+### 查看某个node节点上运行的pod的资源分配情况
+
+```shell
+export NODE_NAME=''
+(
+  echo -e "POD\tREQUEST_CPU\tREQUEST_MEM\tLIMIT_CPU\tLIMIT_MEM"
+  kubectl get pods --field-selector spec.nodeName=$NODE_NAME -o json | \
+    jq -r '.items[] | 
+      [.metadata.name, 
+       (.spec.containers[] | 
+          .resources.requests.cpu // "none", 
+          .resources.requests.memory // "none", 
+          .resources.limits.cpu // "none", 
+          .resources.limits.memory // "none")] | @tsv'
+) | column -t
+```
+
+
+
 ## 存储类
 
-设置默认存储类
+### 设置默认存储类
 
 ```sh
 export SC_NAME=openebs-hostpath
@@ -125,14 +175,6 @@ notAfter=Nov  6 09:40:40 2034 GMT
 
  </TabItem>
 </Tabs>
-
-
-
-## 查看node节点上调度的pod
-
-```sh
-kubectl get pods --field-selector spec.nodeName=<Node_Name>
-```
 
 
 

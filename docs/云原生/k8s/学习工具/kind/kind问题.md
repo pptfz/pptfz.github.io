@@ -42,7 +42,7 @@ Connection closed by foreign host.
 
 解决方法
 
-提了个 [issues](https://github.com/kubernetes-sigs/kind/issues/3365) ，老外帮解决的，就是在使用kind创建集群的时候，将配置文件中的 `InitConfiguration`  修改为 `JoinConfiguration` 就可以了，在 [官方文档](https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/#config-file) 中也有相关配置说明
+提了个 [issues](https://github.com/kubernetes-sigs/kind/issues/3365) ，老外帮解决的，就是在使用kind创建集群的时候，将配置文件中的 `InitConfiguration`  修改为 `JoinConfiguration` 就可以了，在 [官方文档](https://kind.sigs.k8s.io/docs/user/configuration/#kubeadm-config-patches) 中也有相关配置说明
 
 ```yaml
 10c10
