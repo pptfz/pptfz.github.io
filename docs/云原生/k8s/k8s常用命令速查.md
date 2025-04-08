@@ -239,7 +239,7 @@ kubectl taint nodes node-1 key1=value1:NoSchedule
 :::tip 命令
 
 ```sh
-kubectl taint nodes <node-name> key:-
+kubectl taint nodes <node-name> key:value-
 ```
 
 :::
@@ -249,7 +249,7 @@ kubectl taint nodes <node-name> key:-
 这将从 `node-1` 节点上移除名为 `key1` 的污点
 
 ```sh
-kubectl taint nodes node-1 key1:-
+kubectl taint nodes node-1 key1:value-
 ```
 
 
