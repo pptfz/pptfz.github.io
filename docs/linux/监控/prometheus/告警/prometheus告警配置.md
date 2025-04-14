@@ -400,7 +400,7 @@ spec:
 
 :::tip 说明
 
-
+在 `data` 字段下新增 `*.tmpl` ，例如 `slack.tmpl` ，与 `alertmanager.yml` 同级
 
 :::
 
@@ -466,22 +466,5 @@ spec:
 告警恢复
 
 ![iShot_2025-02-28_10.48.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-28_10.48.25.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
