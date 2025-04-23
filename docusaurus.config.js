@@ -9,9 +9,6 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 
-
-
-
 // 能够读取.env文件中定义的algolia相关变量
 require('dotenv').config();
 
@@ -132,6 +129,11 @@ const config = {
             position: 'left',
             label: '你点我啊',
           },
+          {
+            to: '/blog', 
+            label: '博客', 
+            position: 'left'
+          },
           // {
           //   to: 'docs/你过来啊/你过来啊',
           //   position: 'right',
@@ -229,10 +231,10 @@ const config = {
           {
             title: 'More',
             items: [
-              // {
-              //   label: 'Blog',
-              //   to: '/blog',
-              // },
+              {
+                label: 'Blog',
+                to: '/blog',
+              },
               {
                 label: 'GitHub',
                 href: 'https://github.com/facebook/docusaurus',

@@ -2,6 +2,8 @@
 
 [nexus官网](https://www.sonatype.com/)
 
+[nexus github](https://github.com/sonatype/nexus-public)
+
 [nexus3官方文档](https://help.sonatype.com/repomanager3/)
 
 [nexus3最新版官方下载地址](https://help.sonatype.com/repomanager3/product-information/download)
@@ -14,41 +16,49 @@
 
 
 
-## 1.系统环境
+## nexus安装系统要求
 
-| 系统                                 | 配置  | 硬盘 | java版本                 |
-| ------------------------------------ | ----- | ---- | ------------------------ |
-| CentOS Linux release 7.6.1810 (Core) | 8c16g | 100g | java version "1.8.0_261" |
+[nexus安装系统要求官方文档](https://help.sonatype.com/en/sonatype-nexus-repository-system-requirements.html)
 
 
 
-## 2.安装
+## 二进制包安装
 
-### 2.1 二进制包安装
-
-#### 2.1.1 下载二进制包
+### 下载二进制包
 
 ```shell
-wget https://download.sonatype.com/nexus/3/nexus-3.37.3-02-unix.tar.gz
+wget https://download.sonatype.com/nexus/3/nexus-3.79.1-04-linux-x86_64.tar.gz
 ```
 
 
 
-#### 2.1.2 解压缩包
+### 解压缩包
+
+:::tip 说明
+
+解压缩后是 `nexus-3.79.1-04`  、 `sonatype-work` 2个目录
+
+:::
 
 ```shell
-# 解压缩后是 nexus-3.37.3-02 sonatype-work 2个目录
-tar xf nexus-3.37.3-02-unix.tar.gz
+tar xf nexus-3.79.1-04-linux-x86_64.tar.gz
 ```
 
 
 
-#### 2.1.3 配置nexus
+### 配置nexus
 
-```shell
-etc/nexus-default.properties	# 配置nexus监听端口与地址，默认为8081和0.0.0.0
-bin/nexus.rc	# 配置nexus运行用户
-```
+:::caution 注意
+
+官方不建议使用root作为运行用户，使用普通用户即可
+
+:::
+
+- `etc/nexus.properties` : 配置nexus监听端口与地址，默认为 `8081` 和`0.0.0.0` ，示例文件为 `nexus-default.properties`
+
+- `bin/nexus` : 配置nexus运行用户，`run_as_user` 配置项
+
+- `bin/nexus.vmoptions` : 配置nexus的启动参数，`jvm` 启动参数、数据存放目录、日志存放目录等
 
 
 

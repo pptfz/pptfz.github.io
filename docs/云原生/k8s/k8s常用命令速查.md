@@ -416,3 +416,32 @@ pod/xxx evicted
 node/10.246.140.15 evicted
 ```
 
+
+
+## 集群
+
+### 查看当前集群的容器运行时
+
+```shell
+kubectl get nodes -o wide
+```
+
+
+
+```shell
+export NODE_NAME='ops-ingress-worker'
+kubectl describe no $NODE_NAME | grep 'Container Runtime'
+```
+
+
+
+```shell
+kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.containerRuntimeVersion}{"\n"}{end}'
+```
+
+
+
+
+
+
+
