@@ -113,6 +113,8 @@ iptables 包含 5 张表（tables）:
 
 
 
+表包含的链
+
 | 表名       | 包含的链（Chains）                                           |
 | ---------- | ------------------------------------------------------------ |
 | `filter`   | `INPUT`、`OUTPUT`、`FORWARD`                                 |
@@ -120,6 +122,24 @@ iptables 包含 5 张表（tables）:
 | `mangle`   | `PREROUTING`、`INPUT`、`FORWARD`、`OUTPUT`、`POSTROUTING`    |
 | `raw`      | `PREROUTING`、`OUTPUT`                                       |
 | `security` | `INPUT`、`OUTPUT`、`FORWARD`（仅用于与 SELinux 集成的访问控制） |
+
+![iShot_2025-04-24_11.24.00](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-04-24_11.24.00.png)
+
+
+
+
+
+链存在于的表
+
+| 链名称        | 所在表（Tables）                             |
+| ------------- | -------------------------------------------- |
+| `PREROUTING`  | `raw`, `mangle`, `nat`                       |
+| `INPUT`       | `mangle`, `filter`, `security`               |
+| `FORWARD`     | `mangle`, `filter`, `security`               |
+| `OUTPUT`      | `raw`, `mangle`, `nat`, `filter`, `security` |
+| `POSTROUTING` | `mangle`, `nat`                              |
+
+
 
 
 
@@ -174,7 +194,7 @@ iptables 包含 5 张表（tables）:
 
 ### 遍历链
 
-该 [流程图](https://www.frozentux.net/iptables-tutorial/images/tables_traverse.jpg) 描述了链在任何接口上收到的网络数据包是按照怎样的顺序穿过表的交通管制链。第一个路由策略包括决定数据包的目的地是本地主机（这种情况下，数据包穿过 `INPUT` 链），还是其他主机（数据包穿过 `FORWARD` 链）；中间的路由策略包括决定给传出的数据包使用哪个个源地址、分配哪个接口；最后一个路由策略存在是因为先前的 mangle 与 nat 链可能会改变数据包的路由信息。数据包通过路径上的每一条链时，链中的每一条规则按顺序匹配；无论何时匹配了一条规则，相应的 target/jump 动作将会执行。最常用的3个 target 是 `ACCEPT`, `DROP` ,或者 jump 到用户自定义的链。内置的链有默认的策略，但是用户自定义的链没有默认的策略。在 jump 到的链中，若每一条规则都不能提供完全匹配，那么数据包像[这张图片](https://www.frozentux.net/iptables-tutorial/images/table_subtraverse.jpg)描述的一样返回到调用链。在任何时候，若 `DROP` target 的规则实现完全匹配，那么被匹配的数据包会被丢弃，不会进行进一步处理。如果一个数据包在链中被 `ACCEPT`，那么它也会被所有的父链 `ACCEPT`，并且不再遍历其他父链。然而，要注意的是，数据包还会以正常的方式继续遍历其他表中的其他链。
+该 [流程图](https://www.frozentux.net/iptables-tutorial/images/tables_traverse.jpg) 描述了链在任何接口上收到的网络数据包是按照怎样的顺序穿过表的交通管制链。第一个路由策略包括决定数据包的目的地是本地主机（这种情况下，数据包穿过 `INPUT` 链），还是其他主机（数据包穿过 `FORWARD` 链）；中间的路由策略包括决定给传出的数据包使用哪个个源地址、分配哪个接口；最后一个路由策略存在是因为先前的 mangle 与 nat 链可能会改变数据包的路由信息。数据包通过路径上的每一条链时，链中的每一条规则按顺序匹配；无论何时匹配了一条规则，相应的 `target` / `jump` 动作将会执行。最常用的3个 target 是 `ACCEPT`, `DROP` ,或者 jump 到用户自定义的链。内置的链有默认的策略，但是用户自定义的链没有默认的策略。在 jump 到的链中，若每一条规则都不能提供完全匹配，那么数据包像[这张图片](https://www.frozentux.net/iptables-tutorial/images/table_subtraverse.jpg)描述的一样返回到调用链。在任何时候，若 `DROP` target 的规则实现完全匹配，那么被匹配的数据包会被丢弃，不会进行进一步处理。如果一个数据包在链中被 `ACCEPT`，那么它也会被所有的父链 `ACCEPT`，并且不再遍历其他父链。然而，要注意的是，数据包还会以正常的方式继续遍历其他表中的其他链。
 
 
 

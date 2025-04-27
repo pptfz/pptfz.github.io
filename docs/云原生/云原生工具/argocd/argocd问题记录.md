@@ -1,8 +1,8 @@
-# argocd报错
+# argocd问题记录
 
+## https访问报错
 
-
-使用helm安装的argued，浏览器访问报错 `重定向次数过多`
+使用helm安装的argocd，浏览器访问报错 `重定向次数过多`
 
 
 
@@ -15,8 +15,6 @@
 
 
 解决方法
-
-[在slack中老外的回复](https://app.slack.com/client/T08PSQ7BQ/C01TSERG0KZ)
 
 在ingress配置文件中的 `annotations` 下增加如下一行即可
 
