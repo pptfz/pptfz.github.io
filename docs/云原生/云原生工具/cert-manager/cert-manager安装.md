@@ -98,13 +98,52 @@ cert-manager 提供多种证书存储方案，适应不同安全需求：
 
 ## 架构
 
+### 组件
 
+- **cert-manager-controller**:
+  - 这是 cert-manager 的核心组件,负责整个证书管理流程的协调和控制
+  - 它会监听用户创建的 Certificate 资源,根据配置向外部 CA 申请证书,并将证书存储到 Kubernetes Secrets
+  - 同时它还会监控证书有效期,自动触发续期流程
+
+- **cert-manager-webhook**:
+  - 这是一个 Kubernetes 动态准入控制器(Admission Webhook)
+  - 它会拦截对 Certificate 资源的创建/修改操作,对其进行校验和转换,确保资源的合法性
+
+- **cert-manager-cainjector**:
+  - 这个组件负责将 Issuer 和 ClusterIssuer 资源中的 CA 证书注入到 Kubernetes 的 MutatingWebhookConfiguration 和 ValidatingWebhookConfiguration 中
+  - 这样 cert-manager 的 Webhook 组件就可以使用这些 CA 证书对请求进行验证
+
+- **cert-manager-acmesolver**:
+  - 这是一个辅助组件,用于处理 ACME 协议相关的操作,如域名验证等
+  - 当 cert-manager 需要通过 ACME 协议向 Let's Encrypt 等 CA 申请证书时,就会调用这个组件来完成相关的工作
+
+- **cert-manager-startupapicheck**:
+  - 这是一个启动时检查组件,用于在 cert-manager 启动时验证 API 服务的可用性
+  - 它会检查 cert-manager 所需的 Kubernetes API 资源是否已经就绪,确保 cert-manager 能够正常工作
+
+
+
+### 架构概览
 
 ![iShot_2025-04-27_18.55.15](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-04-27_18.55.15.png)
 
 
 
+- **Issuers**: cert-manager 支持多种证书颁发机构(CA)类型,包括 Let's Encrypt、HashiCorp Vault 和 Venafi 等。这些 Issuer 负责与对应的 CA 进行交互,获取签发的证书
+- **Certificates**: 用户定义 Certificate 资源,描述证书的具体需求,如域名、有效期等
+- **Kubernetes Secrets**: 最终生成的证书私钥和公钥会被存储在 Kubernetes Secrets 中,供应用程序使用
+- **cert-manager**: 这是核心组件,负责整个证书管理流程的协调和控制
 
+
+
+### 工作原理
+
+1. 用户创建 Certificate 资源,定义证书需求
+2. cert-manager 根据 Certificate 资源的配置,选择合适的 Issuer 与之交互
+3. Issuer 与外部 CA 进行通信,请求签发证书
+4. CA 颁发证书后,cert-manager 将证书和私钥存储到 Kubernetes Secrets
+5. 应用程序可以挂载这些 Secrets,获取所需的 TLS 证书
+6. cert-manager 还会持续监控证书有效期,在即将到期时自动触发续期流程
 
 
 
@@ -112,9 +151,7 @@ cert-manager 提供多种证书存储方案，适应不同安全需求：
 
 ## 安装
 
-
-
-
+更多安装方式可参考 [官方安装文档](https://cert-manager.io/docs/installation/) ，这里选择使用 [helm](https://cert-manager.io/docs/installation/helm/) 安装
 
 
 
@@ -144,50 +181,89 @@ tar xf cert-manager-v1.17.1.tgz && cd cert-manager
 
 修改 `values.yaml` 文件
 
-```yaml
-  leaderElection:
-    # Override the namespace used for the leader election lease.
-    namespace: "devops"
+- 指定安装命名空间
+
+  ```yaml
+    leaderElection:
+      # Override the namespace used for the leader election lease.
+      namespace: "devops"
+  ```
+
+- 开启crd
+
+  使用如下开关开启crd
+
+  :::tip 说明
+
+  以下选项是弃用的
+
+  ```yaml
+  installCRDs: false
+  ```
+
+  :::
+
+  ```yaml
+  crds:
+    # This option decides if the CRDs should be installed
+    # as part of the Helm installation.
+    enabled: true
+  ```
+
+  
+
+- 修改镜像标签
+
+  默认使用 `latest` 标签，建议修改为固定版本的标签
+
+  ```yaml
+  repository: quay.io/jetstack/cert-manager-controller
+  repository: quay.io/jetstack/cert-manager-webhook
+  repository: quay.io/jetstack/cert-manager-cainjector
+  repository: quay.io/jetstack/cert-manager-acmesolver
+  repository: quay.io/jetstack/cert-manager-startupapicheck
+  ```
+
+  
+
+安装
+
+```shell
+helm upgrade --install cert-manager -n devops --create-namespace .
 ```
 
 
 
 
 
-使用如下开关开启crd
+查看安装
 
-:::tip 说明
-
-以下选项是弃用的
-
-```yaml
-installCRDs: false
-```
-
-:::
-
-```yaml
-crds:
-  # This option decides if the CRDs should be installed
-  # as part of the Helm installation.
-  enabled: true
+```shell
+$ helm list
+NAME        	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART               	APP VERSION
+cert-manager	devops   	1       	2025-04-28 11:23:48.927844 +0800 CST	deployed	cert-manager-v1.17.1	v1.17.1    
 ```
 
 
 
-默认使用 `latest` 标签，建议修改为固定版本的标签
+```shell
+$ kubectl get all           
+NAME                                           READY   STATUS    RESTARTS   AGE
+pod/cert-manager-77b966f696-v26km              1/1     Running   0          6m6s
+pod/cert-manager-cainjector-745589f58b-5r5lz   1/1     Running   0          6m6s
+pod/cert-manager-webhook-788444886d-wtpl9      1/1     Running   0          6m6s
 
-```yaml
-repository: quay.io/jetstack/cert-manager-controller
-repository: quay.io/jetstack/cert-manager-webhook
-repository: quay.io/jetstack/cert-manager-cainjector
-repository: quay.io/jetstack/cert-manager-acmesolver
-repository: quay.io/jetstack/cert-manager-startupapicheck
+NAME                           TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+service/cert-manager-webhook   ClusterIP   10.96.236.227   <none>        443/TCP   6m6s
+
+NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/cert-manager              1/1     1            1           6m6s
+deployment.apps/cert-manager-cainjector   1/1     1            1           6m6s
+deployment.apps/cert-manager-webhook      1/1     1            1           6m6s
+
+NAME                                                 DESIRED   CURRENT   READY   AGE
+replicaset.apps/cert-manager-77b966f696              1         1         1       6m6s
+replicaset.apps/cert-manager-cainjector-745589f58b   1         1         1       6m6s
+replicaset.apps/cert-manager-webhook-788444886d      1         1         1       6m6s
 ```
-
-
-
-
-
-配置issuer
 
