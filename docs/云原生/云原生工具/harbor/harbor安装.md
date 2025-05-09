@@ -605,17 +605,17 @@ harbor-log
 
 启动的容器及作用
 
-| 容器              | 作用                                                         |
-| ----------------- | ------------------------------------------------------------ |
-| nginx             | 充当了 Harbor 的反向代理和负载均衡器。Nginx 容器会将所有的 HTTPS 流量路由到 Harbor 的 Web 界面和 API 服务上，并将 HTTP 流量重定向到 HTTPS。此外，Nginx 容器还提供了访问 Harbor Docker Registry 的代理，它会将所有的 Docker Registry 流量路由到 Registry 容器上 |
-| harbor-jobservice | 运行 Harbor 的任务服务，用于异步处理 Harbor 的一些任务，如 GC（垃圾回收）等 |
-| harbor-core       | 运行 Harbor 的核心服务，包括 Web 界面、API、Webhook 等       |
-| registry          | 运行 Docker Registry，用于存储和管理 Docker 镜像             |
-| harbor-portal     | 容器。该容器运行 Harbor 的 Web 界面，提供用户界面和 API 服务，以便用户可以使用 Harbor 私有仓库管理和存储 Docker 镜像 |
-| harbor-db         | 运行PostgreSQL 数据库，用于存储 Harbor 的元数据和配置信息    |
-| registryctl       | 运行 Harbor 的控制台，用于管理和监控 Harbor                  |
-| redis             | 运行 Redis，用于存储 Harbor 的缓存信息                       |
-| harbor-log        | 运行 Harbor 的日志服务，用于收集、存储和查询 Harbor 的日志信息 |
+| 容器                | 作用                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| `nginx`             | 充当了 Harbor 的反向代理和负载均衡器。Nginx 容器会将所有的 HTTPS 流量路由到 Harbor 的 Web 界面和 API 服务上，并将 HTTP 流量重定向到 HTTPS。此外，Nginx 容器还提供了访问 Harbor Docker Registry 的代理，它会将所有的 Docker Registry 流量路由到 Registry 容器上 |
+| `harbor-jobservice` | 运行 Harbor 的任务服务，用于异步处理 Harbor 的一些任务，如 GC（垃圾回收）等 |
+| `harbor-core`       | 运行 Harbor 的核心服务，包括 Web 界面、API、Webhook 等       |
+| `registry`          | 运行 Docker Registry，用于存储和管理 Docker 镜像             |
+| `harbor-portal`     | 容器。该容器运行 Harbor 的 Web 界面，提供用户界面和 API 服务，以便用户可以使用 Harbor 私有仓库管理和存储 Docker 镜像 |
+| `harbor-db`         | 运行PostgreSQL 数据库，用于存储 Harbor 的元数据和配置信息    |
+| `registryctl`       | 运行 Harbor 的控制台，用于管理和监控 Harbor                  |
+| `redis`             | 运行 Redis，用于存储 Harbor 的缓存信息                       |
+| `harbor-log`        | 运行 Harbor 的日志服务，用于收集、存储和查询 Harbor 的日志信息 |
 
 
 
@@ -719,20 +719,20 @@ storage_service:
 
 参数说明，可以参考这个 [文档](https://github.com/docker/docs/blob/main/registry/storage-drivers/s3.md)
 
-| 参数           | 说明                                                         | 是否必须 |
-| -------------- | ------------------------------------------------------------ | -------- |
-| accesskey      | aws访问密钥，如果使用[IAM 角色](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)，请忽略从 IAM 获取临时凭证 | 否       |
-| secretkey      | aws密钥，如果使用[IAM 角色](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)，请忽略从 IAM 获取临时凭证 | 否       |
-| region         | 存储桶所在区域                                               | ✅        |
-| bucket         | 存储桶名称                                                   | ✅        |
-| regionendpoint | s3兼容存储服务(Minio等)的端点                                | 否       |
-| encrypt        | 指定注册表是否以加密格式存储图像，默认为 `false`             | 否       |
-| keyid          | 用于加密的可选 KMS 密钥 ID（encrypt 必须为 `true`，否则将忽略此参数），默认为 `none` | 否       |
-| secure         | 是否使用 HTTPS 而不是 HTTP，默认为 `true`                    | 否       |
-| skipverify     | 当值设置为 `true` 时跳过 TLS 验证，默认为 `false`            | 否       |
-| v4auth         | 注册表是否使用 AWS 身份验证的版本 4，默认值为`true`          | 否       |
-| chunksize      | S3 API 要求分段上传块至少为 5MB，该值应该是大于 `5 * 1024 * 1024` 的数字 | 否       |
-| rootdirectory  | 这是应用于所有 S3 密钥的前缀，以允许在必要时对存储桶中的数据进行分段 | 否       |
-| storageclass   | 应用于每个注册表文件的 S3 存储类，默认值为 `STANDARD`        | 否       |
-| accelerate     | 注册表是否应使用 S3 Transfer Acceleration，在使用此选项之前，必须在存储桶上启用加速端点，默认为 `false` | 否       |
+| 参数             | 说明                                                         | 是否必须 |
+| ---------------- | ------------------------------------------------------------ | -------- |
+| `accesskey`      | aws访问密钥，如果使用[IAM 角色](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)，请忽略从 IAM 获取临时凭证 | 否       |
+| `secretkey`      | aws密钥，如果使用[IAM 角色](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)，请忽略从 IAM 获取临时凭证 | 否       |
+| `region`         | 存储桶所在区域                                               | ✅        |
+| `bucket`         | 存储桶名称                                                   | ✅        |
+| `regionendpoint` | s3兼容存储服务(Minio等)的端点                                | 否       |
+| `encrypt`        | 指定注册表是否以加密格式存储图像，默认为 `false`             | 否       |
+| `keyid`          | 用于加密的可选 KMS 密钥 ID（encrypt 必须为 `true`，否则将忽略此参数），默认为 `none` | 否       |
+| `secure`         | 是否使用 HTTPS 而不是 HTTP，默认为 `true`                    | 否       |
+| `skipverify`     | 当值设置为 `true` 时跳过 TLS 验证，默认为 `false`            | 否       |
+| `v4auth`         | 注册表是否使用 AWS 身份验证的版本 4，默认值为`true`          | 否       |
+| `chunksize`      | S3 API 要求分段上传块至少为 5MB，该值应该是大于 `5 * 1024 * 1024` 的数字 | 否       |
+| `rootdirectory`  | 这是应用于所有 S3 密钥的前缀，以允许在必要时对存储桶中的数据进行分段 | 否       |
+| `storageclass`   | 应用于每个注册表文件的 S3 存储类，默认值为 `STANDARD`        | 否       |
+| `accelerate`     | 注册表是否应使用 S3 Transfer Acceleration，在使用此选项之前，必须在存储桶上启用加速端点，默认为 `false` | 否       |
 

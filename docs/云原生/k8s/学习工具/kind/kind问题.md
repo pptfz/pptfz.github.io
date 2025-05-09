@@ -110,3 +110,53 @@ containerdConfigPatches:
 
 
 
+## 代理问题导致的kind拉取镜像失败
+
+kind创建的k8s集群部署deployment拉取镜像失败
+
+```shell
+Events:
+  Type     Reason     Age               From               Message
+  ----     ------     ----              ----               -------
+  Normal   Scheduled  18s               default-scheduler  Successfully assigned ingress-nginx/ingress-nginx-admission-create-jm8fx to ops-ingress-worker2
+  Normal   BackOff    18s               kubelet            Back-off pulling image "registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.4@sha256:a9f03b34a3cbfbb26d103a14046ab2c5130a80c3d69d526ff8063d2b37b9fd3f"
+  Warning  Failed     18s               kubelet            Error: ImagePullBackOff
+  Normal   Pulling    5s (x2 over 18s)  kubelet            Pulling image "registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.4@sha256:a9f03b34a3cbfbb26d103a14046ab2c5130a80c3d69d526ff8063d2b37b9fd3f"
+  Warning  Failed     5s (x2 over 18s)  kubelet            Failed to pull image "registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.4@sha256:a9f03b34a3cbfbb26d103a14046ab2c5130a80c3d69d526ff8063d2b37b9fd3f": failed to pull and unpack image "registry.k8s.io/ingress-nginx/kube-webhook-certgen@sha256:a9f03b34a3cbfbb26d103a14046ab2c5130a80c3d69d526ff8063d2b37b9fd3f": failed to resolve reference "registry.k8s.io/ingress-nginx/kube-webhook-certgen@sha256:a9f03b34a3cbfbb26d103a14046ab2c5130a80c3d69d526ff8063d2b37b9fd3f": failed to do request: Head "https://registry.k8s.io/v2/ingress-nginx/kube-webhook-certgen/manifests/sha256:a9f03b34a3cbfbb26d103a14046ab2c5130a80c3d69d526ff8063d2b37b9fd3f": proxyconnect tcp: dial tcp 127.0.0.1:7890: connect: connection refused
+  Warning  Failed     5s (x2 over 18s)  kubelet            Error: ErrImagePull
+```
+
+
+
+看events事件是如下报错
+
+```shell
+roxyconnect tcp: dial tcp 127.0.0.1:7890: connect: connection refused
+```
+
+
+
+原因是在创建kind集群前有相关代理配置，如下
+
+```shell
+$ env | grep -i proxy
+http_proxy=http://127.0.0.1:7890
+all_proxy=socks5://127.0.0.1:7890
+GOPROXY=https://goproxy.cn,direct
+https_proxy=http://127.0.0.1:7890
+```
+
+
+
+解决的方法是在创建kind集群前临时取消相关的代理变量配置
+
+```shell
+# 取消相关代理变量
+$ unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy
+
+# 验证
+$ env | grep -i proxy                                
+all_proxy=socks5://127.0.0.1:7890
+GOPROXY=https://goproxy.cn,direct
+```
+

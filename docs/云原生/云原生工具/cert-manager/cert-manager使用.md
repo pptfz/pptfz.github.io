@@ -6,7 +6,7 @@
 
 ## 域名有公网解析
 
-
+ 
 
 
 
@@ -22,7 +22,7 @@
 
 ### 创建issuer
 
-在安装完 cert-manager 之后,第一件需要配置的就是 `Issuer` 或 `ClusterIssuer`。这些资源代表了能够对证书签名请求进行签发的证书颁发机构(CA)
+在安装完 cert-manager 之后，第一件需要配置的就是 `Issuer` 或 `ClusterIssuer`。这些资源代表了能够对证书签名请求进行签发的证书颁发机构(CA)
 
 :::tip 说明
 
@@ -143,7 +143,6 @@ spec:
         pathType: Prefix
 status:
   loadBalancer: {}
-
 ```
 
 
