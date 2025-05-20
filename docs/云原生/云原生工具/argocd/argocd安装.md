@@ -20,7 +20,7 @@
 
 ### 包含组件
 
-## API Server（ArgoCD 接口服务器）
+#### API Server（ArgoCD 接口服务器）
 
 **API Server** 是 ArgoCD 的核心服务，提供 **gRPC / REST 接口**，被 Web UI、CLI 和 CI/CD 系统调用。它的职责包括：
 
@@ -33,7 +33,7 @@
 
 
 
-## Repository Server（Git 仓库处理服务）
+#### Repository Server（Git 仓库处理服务）
 
 **Repository Server** 是 ArgoCD 的内部服务，主要作用是处理 Git 仓库中的内容：
 
@@ -48,7 +48,7 @@
 
 
 
-## Application Controller（应用控制器）
+#### Application Controller（应用控制器）
 
 **Application Controller** 是一个 Kubernetes 控制器，负责 ArgoCD 最核心的GitOps同步能力：
 
@@ -97,10 +97,6 @@ Core 版包含的组件更少、部署起来也更简单：
 
 
 
-
-
-
-
 | 组件名                             | 功能                  | 描述                                     |
 | ---------------------------------- | --------------------- | ---------------------------------------- |
 | `argocd-server`                    | API 层                | 接收 CLI/UI 请求，处理登录、展示应用状态 |
@@ -119,7 +115,7 @@ Core 版包含的组件更少、部署起来也更简单：
 
 更多安装方式可以参考 [官方文档](https://argo-cd.readthedocs.io/en/stable/operator-manual/installation/)
 
-这里选择helm安装，[argocd helm](https://artifacthub.io/packages/helm/argo-cd-oci/argo-cd)
+这里选择helm安装，[argocd helm](https://artifacthub.io/packages/helm/argo-cd-oci/argo-cd) ，[github中的argocd helm源码](https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd)
 
 
 
@@ -156,10 +152,6 @@ tar xf argo-cd-7.8.28.tgz && cd argo-cd
 
 
 修改 `values.yaml`
-
-
-
-
 
 
 
