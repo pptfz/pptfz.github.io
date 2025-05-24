@@ -57,11 +57,65 @@
 
 ### CLI命令行
 
+#### 登录argocd
+
+```shell
+$ argocd login argocd.ops.com --insecure --grpc-web         
+Username: admin
+Password: 
+'admin:login' logged in successfully
+Context 'argocd.ops.com' updated
+```
 
 
 
+#### 查看当前集群
+
+```shell
+$ argocd cluster list
+SERVER                          NAME        VERSION  STATUS   MESSAGE                                                  PROJECT
+https://kubernetes.default.svc  in-cluster           Unknown  Cluster has no applications and is not being monitored.
+```
 
 
+
+#### 设置当前命名空间为 `argocd`
+
+```shell
+kubectl config set-context --current --namespace=argocd
+```
+
+
+
+#### 创建应用程序
+
+:::tip 说明
+
+使用 `argocd` 命令创建应用程序的语法如下
+
+```
+argocd app create 应用程序名称 \ 
+  --repo git仓库地址 \
+  --path git仓库子目录 \ 
+  --dest-server 目标k8s集群地址 \
+  --dest-namespace 应用部署的命名空间
+```
+
+:::
+
+```shell
+export APP_NAME='guestbook'
+export GIT_REPO='https://gitee.com/pptfz/argocd-example-apps'
+export GIT_REPO_PATH='guestbook'
+export DEST_CLUSTER='https://kubernetes.default.svc'
+export DEST_CLUSTER_NAMESPACE='default'
+
+argocd app create ${APP_NAME} \
+  --repo ${GIT_REPO} \
+  --path ${GIT_REPO_PATH} \
+  --dest-server ${DEST_CLUSTER} \
+  --dest-namespace ${DEST_CLUSTER_NAMESPACE}
+```
 
 
 

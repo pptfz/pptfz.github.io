@@ -1,6 +1,6 @@
-# argucd cli使用
+# argocd cli使用
 
-
+## 登录集群
 
 
 
@@ -40,7 +40,7 @@ Context 'argocd.ops.com' updated
 
 
 
-查看当前集群
+## 查看集群
 
 ```shell
 $ argocd cluster list
@@ -52,7 +52,30 @@ https://kubernetes.default.svc  in-cluster           Unknown  Cluster has no app
 
 
 
-删除集群连接
+## 添加集群
+
+查看 `context` 名称
+
+```sh
+kubectl config get-contexts -o name
+```
+
+
+
+添加集群
+
+```shell
+export CONTEXTNAME='xxx'
+argocd cluster add $CONTEXTNAME
+```
+
+
+
+
+
+
+
+## 删除集群
 
 ```shell
 argocd cluster rm 集群名称
