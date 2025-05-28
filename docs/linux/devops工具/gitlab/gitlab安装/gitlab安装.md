@@ -2,7 +2,7 @@
 
 
 
-# CentOS7安装gitlab-ce
+# gitlab安装
 
 [gitlab官网](https://about.gitlab.com/)
 
@@ -14,9 +14,9 @@
 
 
 
-## 1.rpm包安装
+## rpm包安装
 
-### 1.1 安装依赖包
+### 安装依赖包
 
 [不使用postfix使用其他方式发送邮件参考官方文档](https://docs.gitlab.com/omnibus/settings/smtp.html)
 
@@ -30,7 +30,7 @@ systemctl start postfix && systemctl enable postfix
 
 
 
-### 1.2 下载安装包
+### 下载安装包
 
 [gitlab官方rpm包下载地址](https://packages.gitlab.com/gitlab/gitlab-ce)
 
@@ -43,7 +43,7 @@ wget --content-disposition https://packages.gitlab.com/gitlab/gitlab-ce/packages
 
 
 
-### 1.3 安装
+### 安装
 
 :::tip 说明
 
@@ -57,7 +57,7 @@ yum -y localinstall gitlab-ce-${VERSION}-ce.0.el7.x86_64.rpm
 
 
 
-### 1.4 修改配置文件
+### 修改配置文件
 
 :::tip 说明
 
@@ -74,7 +74,7 @@ sed -i.bak "/^external_url/c external_url 'http://$DOMAIN'" /etc/gitlab/gitlab.r
 
 
 
-### 1.5 启动gitlab
+### 启动gitlab
 
 ```shell
 # 启动gitlab
@@ -136,11 +136,11 @@ tcp6       0      0 ::1:9168                :::*                    LISTEN      
 
 
 
-## 2.yum安装
+## yum安装
 
 [yum安装官方文档](https://about.gitlab.com/install/#centos-7)
 
-### 2.1 安装并配置必要的依赖项
+### 安装并配置必要的依赖项
 
 安装依赖包
 
@@ -162,13 +162,10 @@ systemctl start postfix
 
 
 
-### 2.1 添加官方yum源
+### 添加官方yum源
 
 ```shell
 curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
-
-
-curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.rpm.sh | sudo bash
 ```
 
 
@@ -231,7 +228,7 @@ tcp6       0      0 ::1:9168                :::*                    LISTEN      
 
 
 
-### 2.3 关闭https自动重定向
+### 关闭https自动重定向
 
 :::tip 说明
 
@@ -255,9 +252,9 @@ gitlab-ctl reconfigure
 
 
 
-## 3.docker安装
+## docker安装
 
-### 3.1 使用docker engine安装
+### 使用docker engine安装
 
 [使用docker安装](https://docs.gitlab.com/ee/install/docker/installation.html#install-gitlab-using-docker-engine)
 
@@ -282,7 +279,7 @@ docker run --detach \
 
 
 
-### 3.2 使用docker-compose安装
+### 使用docker-compose安装
 
 [使用docker-compose安装](https://docs.gitlab.com/ee/install/docker/installation.html#install-gitlab-using-docker-compose)
 
@@ -345,7 +342,7 @@ EOF
 
 
 
-### 3.2 启动
+### 启动
 
 ```shell
 docker-compose up -d
@@ -363,9 +360,43 @@ a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 
 
 
 
+## helm安装
+
+### 添加仓库
+
+```shell
+helm repo add gitlab http://charts.gitlab.io/ && helm repo up
+```
 
 
-## 4.访问gitlab
+
+### 下载包
+
+```shell
+helm pull gitlab/gitlab
+```
+
+
+
+### 解压缩
+
+:::tip 说明
+
+这里安装的chat版本是9.0.1，应用版本是18.0.1
+
+:::
+
+```shell
+tar xf gitlab-9.0.1.tgz 
+```
+
+
+
+
+
+
+
+## 访问gitlab
 
 **gitlab默认端口为80，第一次访问需要设置root密码，最少8位**
 
@@ -384,8 +415,6 @@ a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 
 **这里的警告为gitlab默认开启了开放注册，点击 `learn more` 查看关闭方法**
 
 ![iShot2021-06-20_01.26.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-20_01.26.03.png)
-
-
 
 
 
@@ -427,11 +456,9 @@ gitlab默认开启注册
 
 
 
-## 5.gitlab相关文件、命令、服务
+## gitlab相关文件、命令、服务
 
-### 5.1 gitlab相关文件
-
-
+### gitlab相关文件
 
 **gitlab相关文件路径说明**
 
@@ -448,18 +475,13 @@ gitlab默认开启注册
 
 
 
-### 5.2 gitlab相关命令
-
-
+### gitlab相关命令
 
 **运维管理命令**
 
 | 命令                                                    | 说明     |
 | ------------------------------------------------------- | -------- |
 | `cat /opt/gitlab/embedded/service/gitlab-rails/VERSION` | 查看版本 |
-|                                                         |          |
-|                                                         |          |
-|                                                         |          |
 
 
 
@@ -487,7 +509,7 @@ gitlab默认开启注册
 
 
 
-### 5.3 gitlab相关服务
+### gitlab相关服务
 
 **运行命令 `gitlab-ctl status` 查看gitlab所有服务**
 
@@ -516,22 +538,21 @@ run: sidekiq: (pid 3271) 54294s; run: log: (pid 3286) 54291s
 
 [官方文档对于各服务指标的说明](https://docs.gitlab.com/ce/administration/monitoring/)
 
-| 服务名            | 默认监听端口 | 说明                                              |
-| ----------------- | ------------ | ------------------------------------------------- |
-| alertmanager      | TCP:9093     | 告警工具                                          |
-| gitaly            | TCP:9236     | 提供集群功能                                      |
-| gitlab-exporter   | ---          | 监控gitlab指标                                    |
-| gitlab-workhorse  | TCP:9229     | gitlab反向代理，处理文件上传、下载，git推拉等操作 |
-| grafana           | TCP:3000     | 出图工具                                          |
-| logrotate         | ---          | 日志切割                                          |
-| nginx             | TCP:80       | 静态web服务器                                     |
-| node-exporter     | TCP:9100     | Prometheus用来监控服务器指标                      |
-| postgres-exporter | TCP:9187     | 导出PostgreSQL指标                                |
-| postgresql        | UDP:60387    | 默认数据库                                        |
-| prometheus        | TCP:9090     | 监控                                              |
-| puma              | TCP:8080     | 默认的web服务器                                   |
-| redis             | ---          | 缓存服务                                          |
-| redis-exporter    | TCP:9121     | 监控redis                                         |
-| sidekiq           | TCP:8082     | 依赖redis的消息队列                               |
-
+| 服务名              | 默认监听端口 | 说明                                              |
+| ------------------- | ------------ | ------------------------------------------------- |
+| `alertmanager`      | `TCP:9093`   | 告警工具                                          |
+| `gitaly`            | `TCP:9236`   | 提供集群功能                                      |
+| `gitlab-exporter`   | `---`        | 监控gitlab指标                                    |
+| `gitlab-workhorse`  | `TCP:9229`   | gitlab反向代理，处理文件上传、下载，git推拉等操作 |
+| `grafana`           | `TCP:3000`   | 出图工具                                          |
+| `logrotate`         | `---`        | 日志切割                                          |
+| `nginx`             | `TCP:80`     | 静态web服务器                                     |
+| `node-exporter`     | `TCP:9100`   | Prometheus用来监控服务器指标                      |
+| `postgres-exporter` | `TCP:9187`   | 导出PostgreSQL指标                                |
+| `postgresql`        | `UDP:60387`  | 默认数据库                                        |
+| `prometheus`        | `TCP:9090`   | 监控                                              |
+| `puma`              | `TCP:8080`   | 默认的web服务器                                   |
+| `redis`             | ---          | 缓存服务                                          |
+| `redis-exporter`    | `TCP:9121`   | 监控redis                                         |
+| `sidekiq`           | `TCP:8082`   | 依赖redis的消息队列                               |
 

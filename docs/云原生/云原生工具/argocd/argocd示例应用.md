@@ -93,10 +93,10 @@ kubectl config set-context --current --namespace=argocd
 
 使用 `argocd` 命令创建应用程序的语法如下
 
-```
-argocd app create 应用程序名称 \ 
+```shell
+argocd app create 应用程序名称 \
   --repo git仓库地址 \
-  --path git仓库子目录 \ 
+  --path git仓库子目录 \
   --dest-server 目标k8s集群地址 \
   --dest-namespace 应用部署的命名空间
 ```

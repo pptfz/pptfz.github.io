@@ -13,7 +13,7 @@ files = /etc/supervisor/config.d/*.ini
 
 :::caution 注意
 
-需要注意的是 `/usr/sbin/nginx` 表示在后台运行，但是**<span style={{color: 'red'}}>supervisor不能监控后台程序</span>**， 所以supervisor就一直执行这个命令 ，因此会报错
+需要注意的是 `/usr/sbin/nginx` 表示在后台运行，但是<span style={{color: 'red'}}>**supervisor不能监控后台程序**</span>， 所以supervisor就一直执行这个命令 ，因此会报错
 
 :::
 
