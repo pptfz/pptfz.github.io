@@ -261,6 +261,7 @@ gitlab-ctl reconfigure
 [gitlab社区版docker hub地址](https://hub.docker.com/r/gitlab/gitlab-ce/tags/)
 
 ```shell
+mkdir -p /data/gitlab
 export GITLAB_HOME=/data/gitlab
 docker run --detach \
    --hostname gitlab.example.com \
@@ -283,6 +284,17 @@ docker run --detach \
 
 [使用docker-compose安装](https://docs.gitlab.com/ee/install/docker/installation.html#install-gitlab-using-docker-compose)
 
+
+
+创建gitlab数据目录
+
+```shell
+mkdir -p /data/gitlab
+export GITLAB_HOME=/data/gitlab
+```
+
+
+
 编辑docker-compose.yml文件
 
 默认 `https` 和 `ssh` 端口
@@ -290,16 +302,16 @@ docker run --detach \
 ```yaml
 # 自行修改相对应的域名、映射的端口、挂载的卷
 cat > docker-compose.yml <<EOF
-version: '3.6'
 services:
-  web:
-    image: 'gitlab/gitlab-ee:latest'
+  gitlab:
+    image: gitlab/gitlab-ce:<version>-ce.0
+    container_name: gitlab
     restart: always
     hostname: 'gitlab.example.com'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'https://gitlab.example.com'
         # Add any other gitlab.rb configuration here, each on its own line
+        external_url 'https://gitlab.example.com'
     ports:
       - '80:80'
       - '443:443'
@@ -319,19 +331,20 @@ EOF
 ```yaml
 # 自行修改相对应的域名、映射的端口、挂载的卷
 cat > docker-compose.yml <<EOF
-version: '3.6'
 services:
-  web:
-    image: 'gitlab/gitlab-ee:latest'
+  gitlab:
+    image: gitlab/gitlab-ce:<version>-ce.0
+    container_name: gitlab
     restart: always
     hostname: 'gitlab.example.com'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://gitlab.example.com:8929'
-        gitlab_rails['gitlab_shell_ssh_port'] = 2224
+        gitlab_rails['gitlab_shell_ssh_port'] = 2424
     ports:
       - '8929:8929'
-      - '2224:22'
+      - '443:443'
+      - '2424:22'
     volumes:
       - '$GITLAB_HOME/config:/etc/gitlab'
       - '$GITLAB_HOME/logs:/var/log/gitlab'
@@ -357,40 +370,6 @@ $ docker ps -a
 CONTAINER ID   IMAGE                     COMMAND             CREATED         STATUS                   PORTS                                                                                                           NAMES
 a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 3 minutes (healthy)   0.0.0.0:80->80/tcp, :::80->80/tcp, 0.0.0.0:443->443/tcp, :::443->443/tcp, 0.0.0.0:222->22/tcp, :::222->22/tcp   gitlab
 ```
-
-
-
-## helm安装
-
-### 添加仓库
-
-```shell
-helm repo add gitlab http://charts.gitlab.io/ && helm repo up
-```
-
-
-
-### 下载包
-
-```shell
-helm pull gitlab/gitlab
-```
-
-
-
-### 解压缩
-
-:::tip 说明
-
-这里安装的chat版本是9.0.1，应用版本是18.0.1
-
-:::
-
-```shell
-tar xf gitlab-9.0.1.tgz 
-```
-
-
 
 
 
