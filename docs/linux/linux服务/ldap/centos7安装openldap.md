@@ -264,7 +264,7 @@ olcRootPW: {SSHA}uUFY4EJIccmbnIZBPMiq06QK4HG9vO/a
 创建 `modify-olcDatabase={2}hdb.ldif` 文件，用来修改 `/etc/openldap/slapd.d/cn\=config/olcDatabase={2}hdb.ldif` 文件中的  `olcSuffix` 、`olcRootDN` 字段
 
 ```shell
-cat >> modify-olcDatabase={2}hdb.ldif EOF
+cat >> modify-olcDatabase={2}hdb.ldif << EOF
 dn: olcDatabase={2}hdb,cn=config
 changetype: modify
 replace: olcSuffix
@@ -539,9 +539,9 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/ppolicy.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/openldap.ldif
+ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/collective.ldif
 ```
-
-
 
 
 
@@ -562,8 +562,6 @@ SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
 adding new entry "cn=cosine,cn=schema,cn=config"
 ```
-
-
 
 
 
@@ -590,73 +588,6 @@ ldap_add: Other (e.g., implementation specific) error (80)
 
 
 
-
-
-
-导入 `cosine.ldif`
-
-```shell
-$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif
-
-SASL/EXTERNAL authentication started
-SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
-SASL SSF: 0
-adding new entry "cn=cosine,cn=schema,cn=config"
-```
-
-
-
-导入 `nis.ldif`
-
-```sh
-$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif
-
-SASL/EXTERNAL authentication started
-SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
-SASL SSF: 0
-adding new entry "cn=nis,cn=schema,cn=config"
-```
-
-
-
-导入 `inetorgperson.ldif`
-
-```shell
-$ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
-
-SASL/EXTERNAL authentication started
-SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
-SASL SSF: 0
-adding new entry "cn=inetorgperson,cn=schema,cn=config"
-```
-
-
-
-### 6.修改 `migrate_common.ph` 文件
-
-> **`/usr/share/migrationtools/migrate_common.ph` 文件主要是用于生成ldif文件使用**
-
-```shell
-vim /usr/share/migrationtools/migrate_common.ph +71
-
-修改如下三行
-	$DEFAULT_MAIL_DOMAIN = "padl.com";
-	$DEFAULT_BASE = "dc=padl,dc=com";
-	$EXTENDED_SCHEMA = 0;
-
-修改为
-	$DEFAULT_MAIL_DOMAIN = "pptfz.com";
-	$DEFAULT_BASE = "dc=pptfz,dc=com";
-	$EXTENDED_SCHEMA = 1;
-```
-
-
-
-修改完成后重启服务
-
-```shell
-systemctl restart slapd
-```
 
 
 
