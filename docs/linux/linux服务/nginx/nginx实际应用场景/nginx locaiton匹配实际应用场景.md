@@ -2,7 +2,7 @@
 
 # nginx locaiton匹配实际应用场景
 
-## 1.location 自动添加后缀
+## location 自动添加后缀
 
 有这么一种场景，一些服务安装启动后，访问的的url是这样的 `IP:端口/xxx`，例如 [zabbix](https://github.com/zabbix/zabbix)，访问的url是 `IP:端口/zabbix`，还有 [dolphinscheduler](https://github.com/apache/incubator-dolphinscheduler)，访问的url是 `IP:12345/dolphinscheduler`，这个是服务源码路由写死的，不可以更改，zabbix还好，单词可以记住，但是 dolphinscheduler 实在是记不住，那现在就想配置直接以域名的形式访问，然后自动匹配后边的uir，例如访问zabbix，直接输入设置的域名 `zabbix.ac.com` ，然后跳转到 `zabbix.abc.com/zabbix` ，在nginx中需要做如下配置
 
@@ -149,11 +149,13 @@ status:
 
 
 
-## 2.location 配置静态资源
+## location 解决静态资源丢失问题
 
 ```nginx
-location ~ .*\.(gif|jpg|jpeg|bmp|png|ico|txt|js|css|ttf)$ {
-    root /var/www;
-  }
+location ~* \.(css|images|js|png|jpg|jpeg|gif|ico|svg)$ {
+  proxy_pass http://127.0.0.1:8080;
+  expires max;
+  access_log off;
+}
 ```
 

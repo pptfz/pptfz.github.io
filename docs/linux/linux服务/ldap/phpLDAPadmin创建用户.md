@@ -1,7 +1,5 @@
 # phpLDAPadmin创建用户
 
-
-
 ## 1.点击 `创建新条目`
 
 ![iShot2021-09-20_22.13.05](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-20_22.13.05.png)

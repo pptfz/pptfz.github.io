@@ -239,7 +239,7 @@ modifiersName: cn=config
   olcRootDN: cn=Manager,dc=my-domain,dc=com
 
 修改为
-	olcSuffix: dc=os,dc=com
+	olcSuffix: dc=ops,dc=com
 	olcRootDN: cn=admin,dc=ops,dc=com	
 ```
 
@@ -545,6 +545,10 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/collective.ldif
 
 
 
+导入完基本的 `schema` 安装就结束了
+
+
+
 #### 导入 `schema` 的结果说明
 
 ##### 正确导入
@@ -584,127 +588,5 @@ adding new entry "cn=core,cn=schema,cn=config"
 ldap_add: Other (e.g., implementation specific) error (80)
 	additional info: olcAttributeTypes: Duplicate attributeType: "2.5.4.2"
 ```
-
-
-
-
-
-
-
-## docker安装
-
-openldap docker 安装有 [bitnami](https://hub.docker.com/r/bitnami/openldap) 和 [osixia](https://github.com/osixia/docker-openldap)，这里选择 osixia 提供的镜像
-
-[osixia openldap docker github地址](https://github.com/osixia/docker-openldap)
-
-
-
-### 启动容器
-
-:::tip
-
-需要持久化2个目录
-
-- `/var/lib/ldap` : ldap数据库文件目录
-- `/etc/ldap/slapd.d` : ldap配置文件目录
-
-:::
-
-```shell
-docker run \
-  -d \
-  -p 389:389 \
-  -p 636:636 \
-  -v /data/docker-volume/openldap/data:/var/lib/ldap \
-  -v /data/docker-volume/openldap/config:/etc/ldap/slapd.d \
-  --env LDAP_ORGANISATION="pptfz" \
-  --env LDAP_DOMAIN="pptfz.com" \
-  --env LDAP_ADMIN_PASSWORD="123456" \
-  --name openldap \
-  --hostname openldap \
-  --network bridge \
-  --restart=always \
-  osixia/openldap:1.5.0
-```
-
-
-
-**ldap参数说明**
-
-| 参数                        | 说明           |
-| --------------------------- | -------------- |
-| `--env LDAP_ORGANISATION`   | ldap组织名称   |
-| `--env LDAP_DOMAIN`         | ldap域名称     |
-| `--env LDAP_ADMIN_PASSWORD` | ldap管理员密码 |
-
-
-
-可以执行如下命令在容器中进行搜索
-
-```shell
-docker exec 容器名称 ldapsearch -x -H ldap://localhost -b dc=example,dc=org -D "cn=admin,dc=example,dc=org" -w 密码
-```
-
-
-
-输出结果
-
-```shell
-$ docker exec openldap ldapsearch -x -H ldap://localhost -b dc=pptfz,dc=com -D "cn=admin,dc=pptfz,dc=com" -w 123456
-# extended LDIF
-#
-# LDAPv3
-# base <dc=pptfz,dc=com> with scope subtree
-# filter: (objectclass=*)
-# requesting: ALL
-#
-
-# pptfz.com
-dn: dc=pptfz,dc=com
-objectClass: top
-objectClass: dcObject
-objectClass: organization
-o: pptfz
-dc: pptfz
-
-# search result
-search: 2
-result: 0 Success
-
-# numResponses: 2
-# numEntries: 1
-```
-
-
-
-### 使用docker备份ldap
-
-[docker备份openldap github地址](https://github.com/osixia/docker-openldap-backup)
-
-
-
-```shell
-docker run \
-  -d \
-  --env LDAP_BACKUP_CONFIG_CRON_EXP="0 5 * * *" \
-  -v /data/openldap/backup:/data/backup \
-  --name openldap-backup \
-  -h openldap-backup \
-  --detach \
-  osixia/openldap-backup:1.5.0
-```
-
-
-
-然后会在 `/data/openldap/backup`  目录下生成以下备份文件
-
-![iShot_2022-09-10_22.41.40](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-09-10_22.41.40.png)
-
-
-
-解压缩后
-
-![iShot_2022-09-10_22.42.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-09-10_22.42.58.png)
-
 
 

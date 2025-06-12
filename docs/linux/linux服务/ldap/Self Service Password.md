@@ -93,7 +93,7 @@ $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
 
 
 
-## 1.Self Service Password简介
+## Self Service Password简介
 
 **简介**
 
@@ -141,13 +141,13 @@ $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
 
 
 
-## 2.安装
+## 安装
 
-### 2.1 标准安装
+### 标准安装
 
 
 
-### 2.2 dokcer安装
+### dokcer安装
 
 [self service password dockerhub地址](https://hub.docker.com/r/ltbproject/self-service-password)
 
@@ -185,7 +185,7 @@ docker run \
 
 
 
-## 3.配置ldap连接
+## 配置ldap连接
 
 修改配置文件 `config.inc.php` 
 
@@ -215,7 +215,7 @@ docker restart self-service-password
 
 
 
-## 4.访问
+## 访问
 
 浏览器访问 `IP:8000`
 
@@ -225,7 +225,7 @@ docker restart self-service-password
 
 
 
-## 5.配置修改密码策略
+## 配置修改密码策略
 
 修改配置文件 `config.inc.php` 
 
@@ -284,7 +284,7 @@ $show_extended_error = true;
 
 
 
-## 6.配置邮件重置密码
+## 配置邮件重置密码
 
 **<span style={{color: 'red'}}>⚠️在self service password中使用邮箱重置密码功能的前提是邮箱必须是ldap中用户绑定的邮箱</span>**
 

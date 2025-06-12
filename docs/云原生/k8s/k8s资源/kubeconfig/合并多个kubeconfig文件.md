@@ -108,7 +108,7 @@ kubectl config delete-context kubernetes-admin@kubernetes
 
 ## 将新集群加入kubeconfig文件
 
-备份原有config文件
+备份原有 `config` 文件
 
 ```shell
 cp config{,.bak}

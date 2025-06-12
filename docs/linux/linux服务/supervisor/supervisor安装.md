@@ -808,7 +808,9 @@ set -e
 yum -y install python3-pip && python3 -m pip install --upgrade pip && pip3 install supervisor
 
 # 创建supervisor用户
-useradd -r -s /bin/false supervisor
+if ! id supervisor &>/dev/null; then
+  useradd -r -s /sbin/nologin supervisor
+fi
 
 # 创建supervisor相关目录
 [ -d /var/log/supervisor ] || mkdir /var/log/supervisor

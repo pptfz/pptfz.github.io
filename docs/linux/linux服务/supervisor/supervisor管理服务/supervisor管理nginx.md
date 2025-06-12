@@ -20,11 +20,13 @@ files = /etc/supervisor/config.d/*.ini
 `/usr/sbin/nginx` 后必须加参数  `-g 'daemon off;'`  表示在前台运行
 
 ```ini
+cat > /etc/supervisor/config.d/nginx.ini << EOF
 [program:nginx]
 command = `which nginx` -g 'daemon off;'
 stdout_logfile = /var/log/supervisor/nginx.log
 redirect_stderr = true
 autorestart = true
+EOF
 ```
 
 

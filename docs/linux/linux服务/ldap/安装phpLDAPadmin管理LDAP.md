@@ -1,10 +1,6 @@
 # 安装phpLDAPadmin管理LDAP
 
-
-
 [phpLDAPadmin官网](http://phpldapadmin.sourceforge.net/wiki/index.php/Main_Page)
-
-
 
 ## 标准安装
 
@@ -322,7 +318,7 @@ mv mozillaOrgPerson.xml bak/
 
 [phpldapadmin github地址](https://github.com/osixia/docker-phpLDAPadmin)
 
-
+### `osixia/phpldapadmin`
 
 启动容器
 
@@ -357,25 +353,21 @@ docker run \
 
 
 
-
-
 登录后
 
 ![iShot_2022-09-09_22.17.54](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-09-09_22.17.54.png)
 
 
 
-
-
-
+### `phpldapadmin/phpldapadmin`
 
 [phpLDAPadmin docker镜像](https://github.com/leenooks/phpLDAPadmin/wiki/Docker-Container)
 
 
 
+#### 设置加密密钥
 
-
-
+可以选择为容器设置一个加密密钥，该密钥将用于加密在PLA会话期间的Cookie等数据。如需长期保留加密密钥，请务必完成此项设置，执行完成后复制最后输出的 `base64` 一行，用于后续传递给变量 `APP_KEY`
 
 ```shell
 $ docker run -it --rm phpldapadmin/phpldapadmin:2.1.3 ./artisan key:generate --show
@@ -400,9 +392,9 @@ base64:IeijsYKXA0Yzs+WZAZCRodb/UIAdTOSeFimwpgHVh3k=
 
 
 
+#### 启动容器
 
-
-
+支持的 [环境变量](https://github.com/leenooks/phpLDAPadmin/wiki/Configuration-Variables)
 
 | 变量             | 示例值                                  | 默认值   | 说明                                                         |
 | ---------------- | --------------------------------------- | -------- | ------------------------------------------------------------ |
@@ -418,28 +410,210 @@ base64:IeijsYKXA0Yzs+WZAZCRodb/UIAdTOSeFimwpgHVh3k=
 
 
 
-
-
-
-
-```
-docker run --rm -it \
+```shell
+docker run -d \
   --name phpldapadmin \
-  --network host \
-  -e LDAP_HOST=10.0.16.17 \
-  -e LDAP_PORT=389 \
+  -e APP_KEY="base64:IeijsYKXA0Yzs+WZAZCRodb/UIAdTOSeFimwpgHVh3k=" \
+  -e APP_URL="http://phpldapadmin.pptfz.cn" \
+  -e LDAP_HOST="10.0.16.17" \
+  -e LDAP_PORT="389" \
   -e LDAP_BASE_DN="dc=ops,dc=com" \
   -e LDAP_USERNAME="cn=admin,dc=ops,dc=com" \
   -e LDAP_PASSWORD="admin" \
   -e LDAP_LOGIN_ATTR="uid" \
   -e LDAP_LOGIN_OBJECTCLASS="inetOrgPerson" \
-  -e LDAP_CACHE=yes \
-  -e APP_URL=http://10.0.16.17:8080 \
-  -e APP_KEY=base64:IeijsYKXA0Yzs+WZAZCRodb/UIAdTOSeFimwpgHVh3k= \
-  -p 8080:80 \
   -v phpldapadmin_sessions:/app/storage/framework/sessions \
   -v phpldapadmin_logs:/app/storage/logs \
+  -p 8080:8080 \
   phpldapadmin/phpldapadmin:2.1.3
-
 ```
+
+
+
+##### 优化启动
+
+上述命令在启动容器的时候传递了 ` APP_KEY` 、`LDAP_PASSWORD` 等密钥密码信息，这样做虽然方便但是不安全
+
+使用 `--env-file` 隐藏密码，将敏感信息写入 `.env` 文件，并设置权限
+
+创建 `.env` 文件
+
+:::tip 说明
+
+我们可以把所有的变量全部放到 `.env` 文件中，也可以只把涉及到密钥密码的变量放到 `.env` 文件中
+
+:::
+
+```shell
+APP_KEY="base64:IeijsYKXA0Yzs+WZAZCRodb/UIAdTOSeFimwpgHVh3k="
+APP_URL="http://phpldapadmin.pptfz.cn"
+LDAP_HOST="10.0.16.17"
+LDAP_PORT="389"
+LDAP_BASE_DN="dc=ops,dc=com"
+LDAP_USERNAME="cn=admin,dc=ops,dc=com"
+LDAP_PASSWORD="admin"
+LDAP_LOGIN_ATTR="uid"
+LDAP_LOGIN_OBJECTCLASS="inetOrgPerson"
+```
+
+
+
+设置 `.env` 文件权限
+
+```shell
+chmod 600 .env
+```
+
+
+
+启动容器时指定 `.env` 文件
+
+```shell
+docker run -d \
+  --name phpldapadmin \
+  --env-file .env \
+  -v phpldapadmin_sessions:/app/storage/framework/sessions \
+  -v phpldapadmin_logs:/app/storage/logs \
+  -p 8080:8080 \
+  phpldapadmin/phpldapadmin:2.1.3
+```
+
+
+
+#### 配置登录
+
+##### 创建上级组织单元（OU）
+
+创建文件
+
+```shell
+cat > add-ou-devops.ldif << EOF
+dn: ou=devops,dc=ops,dc=com
+objectClass: organizationalUnit
+ou: devops
+EOF
+```
+
+
+
+导入
+
+```shell
+$ ldapadd -x -D "cn=admin,dc=ops,dc=com" -W -f add-ou-devops.ldif
+Enter LDAP Password: 
+adding new entry "ou=devops,dc=ops,dc=com"
+```
+
+
+
+确认成功创建
+
+```shell
+$ ldapsearch -x -b "dc=ops,dc=com" "(ou=devops)"
+# extended LDIF
+#
+# LDAPv3
+# base <dc=ops,dc=com> with scope subtree
+# filter: (ou=devops)
+# requesting: ALL
+#
+
+# devops, ops.com
+dn: ou=devops,dc=ops,dc=com
+objectClass: organizationalUnit
+ou: devops
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1
+```
+
+
+
+##### 创建一个LDAP用户条目
+
+创建文件
+
+```shell
+cat > add-user-admin.ldif << EOF
+dn: uid=admin,ou=devops,dc=ops,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+uid: admin
+cn: Administrator
+sn: Admin
+userPassword: {SSHA}Gg2f+NuyBsdnVXhoeAkuP+rCSH2325iB
+EOF
+```
+
+
+
+导入
+
+```shell
+$ ldapadd -x -D "cn=admin,dc=ops,dc=com" -W -f add-user-admin.ldif
+Enter LDAP Password: 
+adding new entry "uid=admin,ou=devops,dc=ops,dc=com"
+```
+
+
+
+确认导入
+
+```shell
+$ ldapsearch -x -D "cn=admin,dc=ops,dc=com" -W -b "dc=ops,dc=com" "(uid=admin)"
+Enter LDAP Password: 
+# extended LDIF
+#
+# LDAPv3
+# base <dc=ops,dc=com> with scope subtree
+# filter: (uid=admin)
+# requesting: ALL
+#
+
+# admin, devops, ops.com
+dn: uid=admin,ou=devops,dc=ops,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+uid: admin
+cn: Administrator
+sn: Admin
+userPassword:: e1NTSEF9R2cyZitOdXlCc2RuVlhob2VBa3VQK3JDU0gyMzI1aUI=
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1
+```
+
+
+
+#### 登录
+
+:::tip 说明
+
+这里我们选择的是uid登录，用户名和密码都是 `admin`
+
+:::
+
+![iShot_2025-06-11_14.19.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-11_14.19.49.png)
+
+
+
+登录后首页面
+
+![iShot_2025-06-11_14.21.05](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-11_14.21.05.png)
+
+
+
+登录方式错误或用户名密码错误则会提示如下
+
+![iShot_2025-06-07_19.49.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-07_19.49.32.png)
 
