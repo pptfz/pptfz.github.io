@@ -235,12 +235,12 @@ modifiersName: cn=config
 
 ```sh
 修改如下两行
-	olcSuffix: dc=my-domain,dc=com
+  olcSuffix: dc=my-domain,dc=com
   olcRootDN: cn=Manager,dc=my-domain,dc=com
 
 修改为
-	olcSuffix: dc=ops,dc=com
-	olcRootDN: cn=admin,dc=ops,dc=com	
+  olcSuffix: dc=ops,dc=com
+  olcRootDN: cn=admin,dc=ops,dc=com	
 ```
 
 
@@ -588,5 +588,4 @@ adding new entry "cn=core,cn=schema,cn=config"
 ldap_add: Other (e.g., implementation specific) error (80)
 	additional info: olcAttributeTypes: Duplicate attributeType: "2.5.4.2"
 ```
-
 
