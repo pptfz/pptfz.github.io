@@ -255,7 +255,7 @@ olcRootPW: {SSHA}uUFY4EJIccmbnIZBPMiq06QK4HG9vO/a
 
 :::caution 注意
 
-修改ldap的相关文件不要使用命令手动编辑，在开头也会有 `# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.` 的相关提示，正确的方式是先创建 `*ldif` 文件，然后使用 `ldapmodify` 命令进行修改
+修改ldap的相关文件不要使用命令手动编辑，在开头也会有 `# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.` 的相关提示，正确的方式是先创建 `*.ldif` 文件，然后使用 `ldapmodify` 命令进行修改
 
 :::
 

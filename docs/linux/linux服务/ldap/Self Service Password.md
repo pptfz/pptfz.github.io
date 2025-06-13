@@ -153,48 +153,51 @@ $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
 
 
 
-**<span style={{color: 'red'}}>⚠️官方文档docker启动命令有坑，这里稍做了一下修改</span>**
+#### 获取配置文件
+
+创建持久化目录
 
 ```shell
-# /var/www/conf/config.inc.local.php在ssp容器中是一个空目录！！！
--v /home/test/ssp.conf.php:/var/www/conf/config.inc.local.php
+[ -d /data/docker-volume/ssp ] || mkdir -p /data/docker-volume/ssp
 ```
 
 
 
-创建volume
-
-```
-docker volume create ssp
-```
-
-
-
-直接启动容器
+运行临时容器，拷贝配置文件
 
 ```shell
-docker run \
-    -d \
-    --restart=always \
-    --name self-service-password \
-    -h self-service-password \
-    -p 8000:80 \
-    -v ssp:/var/www/conf/ \
-    -it docker.io/ltbproject/self-service-password:latest
+docker run --name ssp-temp -d docker.io/ltbproject/self-service-password:1.7.3
+docker cp ssp-temp:/var/www/config.inc.php.orig /data/docker-volume/ssp/config.inc.local.php
+docker rm -f ssp-temp
 ```
 
 
 
-## 配置ldap连接
+#### 启动容器
 
-修改配置文件 `config.inc.php` 
+```shell
+docker run -d \
+  --restart=always \
+  --name self-service-password \
+  -p 8000:80 \
+  -v /data/docker-volume/ssp/config.inc.local.php:/var/www/conf/config.inc.local.php \
+  docker.io/ltbproject/self-service-password:1.7.3
+```
+
+
+
+#### 修改配置文件
+
+##### 配置ldap连接
+
+修改配置文件 `config.inc.local.php`
 
 ```php
 # LDAP
-$ldap_url = "ldap://172.30.100.17:389";	// 修改为ldap服务器地址
+$ldap_url = "ldap://10.0.16.17:389";	// 修改为ldap服务器地址
 $ldap_starttls = false;
-$ldap_binddn = "cn=admin,dc=qike,dc=com";	// ldap管理员账号
-$ldap_bindpw = '123456';	// ldap管理员密码
+$ldap_binddn = "cn=admin,dc=ops,dc=com";	// ldap管理员账号
+$ldap_bindpw = 'admin';	// ldap管理员密码
 // for GSSAPI authentication, comment out ldap_bind* and uncomment ldap_krb5ccname lines
 //$ldap_krb5ccname = "/path/to/krb5cc";
 $ldap_base = "dc=qike,dc=com";	// ldap搜索参数
@@ -203,6 +206,29 @@ $ldap_fullname_attribute = "cn";
 $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";	// 用户搜索规则
 $ldap_use_exop_passwd = false;
 $ldap_use_ppolicy_control = false;
+```
+
+
+
+##### 配置 `keyphrase`
+
+[关于配置keyphrase的官方文档说明](https://self-service-password.readthedocs.io/en/latest/config_general.html#security)
+
+:::tip 说明
+
+默认配置是 `$keyphrase = "secret";` ，需要将值 `secret` 修改为随机字符串
+
+如果未在 `$login_forbidden_chars` 中配置字符，则仅允许字母数字字符，默认的配置是
+
+```php
+$login_forbidden_chars = "*()&|";
+```
+
+:::
+
+```shell
+修改为任意字符的随机字符串
+$keyphrase = "pfFad4rs5aGn9Q";
 ```
 
 
@@ -219,7 +245,9 @@ docker restart self-service-password
 
 浏览器访问 `IP:8000`
 
-![iShot2021-09-20_19.29.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-20_19.29.51.png)
+![iShot_2025-06-13_15.10.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-13_15.10.44.png)
+
+
 
 
 
@@ -227,11 +255,11 @@ docker restart self-service-password
 
 ## 配置修改密码策略
 
-修改配置文件 `config.inc.php` 
+修改配置文件 `config.inc.local.php` 
 
 ```php
 # 设置密码长度
-$pwd_min_length = 4;	# 最少位数
+$pwd_min_length = 2;	# 最少位数
 $pwd_max_length = 8;	# 最多位数
 
 # 设置大小写、数字、特殊字符最小数量
@@ -256,9 +284,9 @@ $pwd_diff_last_min_chars = 3;
 $pwd_forbidden_words = array("azerty", "qwerty", "password");
 
 # 总是向用户显示密码策略
-$pwd_show_policy = always
+$pwd_show_policy = "always";
 
-# 配置策略是显示在表单上方还是下方
+# 配置策略是显示在表单上方还是下方 above是上方 below是下方
 $pwd_show_policy_pos = "above";
 
 # 当密码被拒绝时，您可以显示目录返回的错误信息。消息内容取决于您的 LDAP 服务器软件。
@@ -272,13 +300,15 @@ $show_extended_error = true;
 - `always`: 策略总是显示
 
 - `never`: 策略从不显示
-- `onerror`: 仅当密码因此被拒绝时才显示策略，并且用户正确提供了他的旧密码。
+- `onerror`: 仅当密码因此被拒绝时才显示策略，并且用户正确提供了他的旧密码
 
 
 
 配置完成后重启容器，刷新页面，刚才配置的密码策略就显示出来了
 
-![iShot2021-09-20_20.30.08](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-20_20.30.08.png)
+![iShot_2025-06-13_15.25.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-13_15.25.25.png)
+
+
 
 
 
@@ -288,7 +318,7 @@ $show_extended_error = true;
 
 **<span style={{color: 'red'}}>⚠️在self service password中使用邮箱重置密码功能的前提是邮箱必须是ldap中用户绑定的邮箱</span>**
 
-修改配置文件 `config.inc.php` 
+修改配置文件 `config.inc.local.php` 
 
 配置邮件
 

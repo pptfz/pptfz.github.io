@@ -10,13 +10,6 @@ yum -y install docker-ce
 
 systemctl start docker && systemctl enable docker  
 
-# 配置rainbond镜像加速地址
-cat > /etc/docker/daemon.json <<-'EOF'
-{
-  "registry-mirrors": ["https://docker.rainbond.cc"]
-}
-EOF
-
 # 配置完成后重启docker
 systemctl restart docker
 ```
@@ -52,7 +45,7 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 ### 1.2 安装docker最新版
 
 ```python
-yum -y install docker-ce
+yum -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 

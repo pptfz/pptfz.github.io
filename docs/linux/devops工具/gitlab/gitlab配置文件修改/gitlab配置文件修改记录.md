@@ -20,14 +20,24 @@
 
 ## gitlab修改默认80端口
 
-**修改 `/var/opt/gitlab/nginx/conf/gitlab-http.conf` 文件中 `listen` 处**
+修改 `/var/opt/gitlab/nginx/conf/gitlab-http.conf` 文件中 `listen` 配置项
 
-⚠️ 依次执行完命令  `gitlab-ctl restart` 和  `gitlab-ctl reconfigure` 才会有文件 `/var/opt/gitlab/nginx/conf/gitlab-http.conf`
+:::说明
 
-```shell
+依次执行完命令  `gitlab-ctl restart` 和  `gitlab-ctl reconfigure` 后才会生成文件 `/var/opt/gitlab/nginx/conf/gitlab-http.conf`
+
+:::
+
+```nginx
 server {
   listen *:80;
 ...
 ```
 
-⚠️ 修改完后执行 `gitlab-ctl restart`重启即可，不能执行 `gitlab-ctl reconfigure` 重载配置文件，否则会覆盖修改
+
+
+:::caution 注意
+
+修改完后执行 `gitlab-ctl restart` 重启即可，不能执行 `gitlab-ctl reconfigure` 重载配置文件，否则会覆盖修改
+
+:::
