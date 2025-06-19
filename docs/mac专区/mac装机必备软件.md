@@ -122,6 +122,10 @@
 
 
 
+### Google Drive
+
+- [Google Drive](https://workspace.google.com/products/drive/) 是谷歌出品的一款同步工具
+
 
 
 ## 软件卸载
@@ -129,3 +133,11 @@
 ### appcleaner
 
 - [appcleaner](https://freemacsoft.net/appcleaner/) 是一个删除mac软件的工具
+
+
+
+## 可视化工具
+
+### Cork
+
+- [Cork](https://github.com/buresdv/Cork) 是一款mac homebrew 可视化管理工具
