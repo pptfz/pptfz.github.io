@@ -125,10 +125,9 @@ docker run \
 
 
 
-### 创建volume和network
+### 创建network
 
 ```shell
-docker volume create openldap_data
 docker network create ldap-net
 ```
 
@@ -145,6 +144,7 @@ docker run -d \
   -e LDAP_ROOT="dc=ops,dc=com" \
   -e LDAP_ADMIN_USERNAME="admin" \
   -e LDAP_ADMIN_PASSWORD="admin" \
+  -e LDAP_ALLOW_ANON_BINDING=no \
   -v openldap_data:/bitnami/openldap \
   bitnami/openldap:2.6.10
 ```
@@ -153,11 +153,12 @@ docker run -d \
 
 **变量说明**
 
-| 变量                  | 说明                                   |
-| --------------------- | -------------------------------------- |
-| `LDAP_ROOT`           | baseDN，默认值 `dc=example,dc=org`     |
-| `LDAP_ADMIN_USERNAME` | ldap管理员用户名，默认值 `admin`       |
-| `LDAP_ADMIN_PASSWORD` | ldap管理员密码，默认值 `adminpassword` |
+| 变量                      | 说明                                   |
+| ------------------------- | -------------------------------------- |
+| `LDAP_ROOT`               | baseDN，默认值 `dc=example,dc=org`     |
+| `LDAP_ADMIN_USERNAME`     | ldap管理员用户名，默认值 `admin`       |
+| `LDAP_ADMIN_PASSWORD`     | ldap管理员密码，默认值 `adminpassword` |
+| `LDAP_ALLOW_ANON_BINDING` | 禁止匿名用户登录                       |
 
 
 

@@ -10,6 +10,10 @@
 
 安装phpldapadmin会同时安装php5.4以及httpd2.4.6
 
+yum安装的phpldapadmin汉化文件在  `/usr/share/phpldapadmin/locale/zh_CN/LC_MESSAGES` 目录下
+
+![iShot_2025-06-18_15.55.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-18_15.55.51.png)
+
 :::
 
 ```shell
@@ -312,15 +316,13 @@ mv mozillaOrgPerson.xml bak/
 
 
 
-
-
 ## docker安装
 
 [phpldapadmin github地址](https://github.com/osixia/docker-phpLDAPadmin)
 
 ### `osixia/phpldapadmin`
 
-启动容器
+#### 启动容器
 
 :::tip 说明
 
@@ -333,11 +335,10 @@ docker run \
   -d \
   -p 8081:80 \
   -v phpldapadmin:/container/service/phpldapadmin/assets/config \
-  --privileged \
   --name phpldapadmin \
   --hostname phpldapadmin \
-  --env PHPLDAPADMIN_HTTPS=false \
-  --env PHPLDAPADMIN_LDAP_HOSTS=10.0.8.4 \
+  -e PHPLDAPADMIN_HTTPS=false \
+  -e PHPLDAPADMIN_LDAP_HOSTS=10.0.0.102 \
   --restart=always \
   --detach \
   osixia/phpldapadmin:0.9.0
@@ -345,17 +346,250 @@ docker run \
 
 
 
-浏览器访问
+#### 浏览器访问
 
 `IP:端口`
 
-![iShot_2022-09-09_22.16.56](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-09-09_22.16.56.png)
+![iShot_2025-06-18_13.59.10](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-18_13.59.10.png)
 
 
 
 登录后
 
-![iShot_2022-09-09_22.17.54](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-09-09_22.17.54.png)
+![iShot_2025-06-18_13.56.53](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-18_13.56.53.png)
+
+
+
+#### 禁止匿名登录
+
+如果使用 [bitnami](https://hub.docker.com/r/bitnami/openldap) 镜像安装openldap，则需要在启动容器的时候添加环境变量 `LDAP_ALLOW_ANON_BINDING=no` 关闭匿名登录，这样在连接phpldapadmin的时候，虽然登录页面还是有 `Anonymous` 的按钮，但是点击登录提示是失败的
+
+![iShot_2025-06-18_14.35.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-18_14.35.41.png)
+
+
+
+#### 汉化
+
+##### 临时方法
+
+[osixia docker镜像](https://github.com/osixia/docker-phpLDAPadmin) 安装后默认是英文的
+
+进入容器查看支持的语言，发现是没有中文的
+
+```shell
+$ docker exec -it phpldapadmin bash
+$ locale -a
+C
+C.UTF-8
+en_US.utf8
+POSIX
+```
+
+
+
+但是在 `/var/www/phpldapadmin/locale/` 目录下是有多语言支持的
+
+```shell
+$ ls -l /var/www/phpldapadmin/locale/
+total 0
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 ca_ES
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 cs_CZ
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 da_DK
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 de_DE
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 es_ES
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 fi_FI
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 fr_FR
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 gn_PY
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 hu_HU
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 it_IT
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 ja_JP
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 nb_NO
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 nl_BE
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 oc_FR
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 pl_PL
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 pt_BR
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 ru_RU
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 sk_SK
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 sv_FI
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 tr_TR
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 uk_UA
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 zh_CN
+drwxr-xr-x 3 www-data www-data 25 Jun 18 08:11 zh_TW
+```
+
+
+
+查看 `/etc/locale.gen` 文件内容，默认生效的是英文
+
+```shell
+$ egrep -v '^$|#' /etc/locale.gen
+en_US.UTF-8 UTF-8
+```
+
+
+
+修改  `/etc/locale.gen` 文件，将注释的中文配置取消
+
+```shell
+sed -i 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen
+```
+
+
+
+再次查看   `/etc/locale.gen` 文件
+
+```shell
+$ egrep -v '^$|#' /etc/locale.gen
+zh_CN.UTF-8 UTF-8
+en_US.UTF-8 UTF-8
+```
+
+
+
+根据 `/etc/locale.gen` 中的配置，生成本地语言环境文件
+
+```shell
+$ locale-gen
+Generating locales (this might take a while)...
+  zh_CN.UTF-8... done
+  en_US.UTF-8... done
+Generation complete.
+```
+
+
+
+重启docker容器即可
+
+
+
+
+
+##### 永久方法
+
+临时方法是手动进入容器修改，但是如果删除容器后配置就失效了，因此永久方式就是依据官方 [Dockerfile](https://github.com/osixia/docker-phpLDAPadmin/blob/stable/image/Dockerfile) 制作一个新的镜像，
+
+
+
+克隆仓库
+
+```shell
+git clone https://github.com/osixia/docker-phpLDAPadmin.git
+```
+
+
+
+修改Dockerfile
+
+:::tip 说明
+
+新增如下命令，把涉及到nginx的相关源配置全部删除，因为基础镜像引用到了nginx相关源，但是nginx相关源的GPG key 已经过期，因此会造成构建失败
+
+```shell
+RUN sed -i '/nginx.org/d' /etc/apt/sources.list /etc/apt/sources.list.d/*.list 2>/dev/null || true
+```
+
+
+
+由于基础镜像nginx相关源GPG key 已经过期，构建失败报错如下
+
+```shell
+W: GPG error: http://nginx.org/packages/mainline/debian buster InRelease: The following signatures were invalid: EXPKEYSIG ABF5BD827BD9BF62 nginx signing key <signing-key@nginx.com>
+E: The repository 'http://nginx.org/packages/mainline/debian buster InRelease' is not signed.
+```
+
+
+
+在 `apt-get update` 后新增如下命令，使镜像默认语言环境为中文
+
+```shell
+RUN apt-get update \
+	&& sed -i 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen \
+	&& locale-gen \
+```
+
+:::
+
+
+
+```dockerfile
+cat > Dockerfile << EOF
+FROM osixia/web-baseimage:release-1.2.0-dev
+
+# phpLDAPadmin version
+ARG PHPLDAPADMIN_VERSION=1.2.5
+
+# Add multiple process stack to supervise apache2 and php7.3-fpm
+# sources: https://github.com/osixia/docker-light-baseimage/blob/stable/image/tool/add-multiple-process-stack
+#          https://github.com/osixia/docker-light-baseimage/blob/stable/image/tool/add-service-available
+#          https://github.com/osixia/docker-web-baseimage/blob/stable/image/service-available/:apache2/download.sh
+#          https://github.com/osixia/docker-web-baseimage/blob/stable/image/service-available/:php7.3-fpm/download.sh
+#          https://github.com/osixia/light-baseimage/blob/stable/image/service-available/:ssl-tools/download.sh
+# Install ca-certificates, curl and php dependencies
+# Download phpLDAPadmin, check file integrity, and unzip phpLDAPadmin to /var/www/phpldapadmin_bootstrap
+# Remove curl
+RUN sed -i '/nginx.org/d' /etc/apt/sources.list /etc/apt/sources.list.d/*.list 2>/dev/null || true
+
+RUN apt-get update \
+	&& sed -i 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen \
+	&& locale-gen \
+	&& /container/tool/add-multiple-process-stack \
+	&& /container/tool/add-service-available :apache2 :php7.3-fpm :ssl-tools \
+	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+	ca-certificates \
+	curl \
+	php7.3-ldap \
+	php7.3-readline \
+	php7.3-xml \
+	&& curl -o phpldapadmin.tar.gz -SL https://github.com/leenooks/phpLDAPadmin/archive/${PHPLDAPADMIN_VERSION}.tar.gz \
+	&& mkdir -p /var/www/phpldapadmin_bootstrap /var/www/phpldapadmin \
+	&& tar -xzf phpldapadmin.tar.gz --strip 1 -C /var/www/phpldapadmin_bootstrap \
+	&& apt-get remove -y --purge --auto-remove curl ca-certificates \
+	&& rm phpldapadmin.tar.gz \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Add service directory to /container/service
+ADD service /container/service
+
+# Use baseimage install-service script
+# https://github.com/osixia/docker-light-baseimage/blob/stable/image/tool/install-service
+RUN /container/tool/install-service
+
+# Add default env variables
+ADD environment /container/environment/99-default
+
+# Set phpLDAPadmin data directory in a data volume
+VOLUME ["/var/www/phpldapadmin"]
+
+# Expose http and https default ports
+EXPOSE 80 443
+EOF
+```
+
+
+
+构建
+
+使用 **Docker Buildx** 来构建跨平台镜像，否则本地 Docker 默认只支持你当前机器的架构
+
+```
+docker buildx create --use --name mybuilder
+docker buildx inspect mybuilder --bootstrap
+```
+
+
+
+多平台构建必须加 `--push` 推送到远程仓库，否则生成的镜像不会显示在本地，单平台构建时可以用 `--load` 加载到本地
+
+```shell
+docker buildx build --platform linux/amd64,linux/arm64 -t pptfz/phpldapadmin:1.2.5 . --push
+```
+
+
+
+推送成功后就可以使用自己构建的镜像解决 `osixia/phpldapadmin` 默认语言为英文的问题了
+
+![iShot_2025-06-19_11.09.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-19_11.09.44.png)
 
 
 
