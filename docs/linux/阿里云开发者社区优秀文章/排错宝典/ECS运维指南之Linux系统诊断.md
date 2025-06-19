@@ -1443,7 +1443,9 @@ yum -y install initscripts
 
 > **主机网络不通，路由不正确，0.0.0.0 指向了 eth0。**
 
-![iShot2020-08-0512.35.25-6602152](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2020-08-0512.35.25-6602152.png)
+![iShot2020-08-0512.35.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2020-08-0512.35.25.png)
+
+
 
 **问题分析**
 

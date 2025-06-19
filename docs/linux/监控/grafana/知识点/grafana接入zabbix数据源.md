@@ -128,7 +128,7 @@ zabbix api地址如下，如果localhost无法解析，则需要把localhost改�
 
 
 
-![iShot2020-06-1112.26.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2020-06-1112.26.11-1849599.png)
+![iShot_2025-06-19_16.51.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-19_16.51.45.png)
 
 
 

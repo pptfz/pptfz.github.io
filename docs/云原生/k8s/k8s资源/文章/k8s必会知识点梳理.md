@@ -413,7 +413,9 @@ nameserver 10.233.0.3search default.svc.cluster.local svc.cluster.localcluster.l
 
 域名格式如下：
 
-![img](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/640-20200330194246900.png)
+![iShot_2025-06-19_16.47.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-19_16.47.28.png)
+
+
 
 
 
