@@ -70,7 +70,7 @@ kubecm completion zsh > "${fpath[1]}/_kubecm"
 
 ### 添加集群
 
-:::caution注意
+:::caution 注意
 
 在执行添加操作的时候，`.kube` 目录下 `config` 文件必须存在，文件内容可以为空
 
@@ -93,11 +93,11 @@ Add Context: prod
 
 参数说明
 
-| 参数           | 说明                    |
-| -------------- | ----------------------- |
-| -c             | 覆盖本地kubecconfig文件 |
-| -f             | 指定要合并的文件        |
-| --context-name | 指定上下文名称          |
+| 参数             | 说明                    |
+| ---------------- | ----------------------- |
+| `-c`             | 覆盖本地kubecconfig文件 |
+| `-f`             | 指定要合并的文件        |
+| `--context-name` | 指定上下文名称          |
 
 
 
@@ -144,7 +144,7 @@ Kubernetes master is running at https://10.250.8.20:6443
 
 ### 切换集群
 
-:::tip说明
+:::tip 说明
 
 执行 `kubecm switch`  可以进行交互式选择
 

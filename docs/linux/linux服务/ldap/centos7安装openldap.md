@@ -203,6 +203,60 @@ $ slappasswd -s admin
 
 
 
+### ldap相关命令连接ldap不同方式说明
+
+:::tip 说明
+
+`-H ldap://` 与 `-H ldapi:///` 的对比说明
+
+| 形式                  | 协议类型      | 说明                                             | 用途场景                       |
+| --------------------- | ------------- | ------------------------------------------------ | ------------------------------ |
+| `-H ldap://localhost` | TCP 明文协议  | 使用标准 TCP/IP 连接，默认端口是 389             | 本地或远程连接，适合大多数情况 |
+| `-H ldapi:///`        | UNIX 域套接字 | 使用本地 Unix Socket 文件（如 `/var/run/ldapi`） | 本机内部通信，权限更精细更安全 |
+
+:::
+
+#### `-H ldap://localhost`
+
+- 使用标准 **LDAP 协议**，通过 TCP 端口（通常是 389）。
+- 可以连接到本机或远程服务器。
+- 明文传输（不加密），如需加密应使用 `ldaps://` 或 StartTLS。
+- 通常需要用户名/密码进行身份验证。
+
+示例
+
+```shell
+ldapsearch -H ldap://localhost -D "cn=admin,dc=ops,dc=com" -w admin ...
+```
+
+
+
+#### `-H ldapi:///`
+
+- 使用 **本地 UNIX socket**（LDAP over IPC）。
+- 不需要走网络，连接速度更快、更安全。
+- 可以使用本地用户凭据自动认证（如 `EXTERNAL` 机制）。
+- 通常只允许 `root` 或 `ldap` 用户访问 socket 文件。
+- 
+
+示例（使用 EXTERNAL 本地认证）
+
+```shell
+ldapsearch -H ldapi:/// -Y EXTERNAL -b cn=config
+```
+
+
+
+#### 附加说明 `ldaps://`
+
+如果希望使用 **加密的 TCP 连接**，可以使用如下方式，这是使用 SSL 加密的 LDAP 连接，默认端口是 `636`
+
+```shell
+-H ldaps://localhost
+```
+
+
+
 ### 修改相关配置文件
 
 #### 修改 `/etc/openldap/slapd.d/cn=config/olcDatabase={2}hdb.ldif`

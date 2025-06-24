@@ -512,11 +512,13 @@ RUN apt-get update \
 
 
 ```dockerfile
-cat > Dockerfile << EOF
 FROM osixia/web-baseimage:release-1.2.0-dev
 
 # phpLDAPadmin version
 ARG PHPLDAPADMIN_VERSION=1.2.5
+
+
+RUN sed -i '/nginx.org/d' /etc/apt/sources.list /etc/apt/sources.list.d/*.list 2>/dev/null || true
 
 # Add multiple process stack to supervise apache2 and php7.3-fpm
 # sources: https://github.com/osixia/docker-light-baseimage/blob/stable/image/tool/add-multiple-process-stack
@@ -527,12 +529,10 @@ ARG PHPLDAPADMIN_VERSION=1.2.5
 # Install ca-certificates, curl and php dependencies
 # Download phpLDAPadmin, check file integrity, and unzip phpLDAPadmin to /var/www/phpldapadmin_bootstrap
 # Remove curl
-RUN sed -i '/nginx.org/d' /etc/apt/sources.list /etc/apt/sources.list.d/*.list 2>/dev/null || true
-
 RUN apt-get update \
+	&& /container/tool/add-multiple-process-stack \
 	&& sed -i 's/# zh_CN.UTF-8 UTF-8/zh_CN.UTF-8 UTF-8/' /etc/locale.gen \
 	&& locale-gen \
-	&& /container/tool/add-multiple-process-stack \
 	&& /container/tool/add-service-available :apache2 :php7.3-fpm :ssl-tools \
 	&& LC_ALL=C DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 	ca-certificates \
@@ -563,7 +563,6 @@ VOLUME ["/var/www/phpldapadmin"]
 
 # Expose http and https default ports
 EXPOSE 80 443
-EOF
 ```
 
 

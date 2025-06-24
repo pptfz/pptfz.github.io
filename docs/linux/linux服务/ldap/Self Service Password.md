@@ -145,6 +145,268 @@ $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
 
 ### 标准安装
 
+[官方安装文档](https://self-service-password.readthedocs.io/en/latest/installation.html)
+
+
+
+#### 安装php
+
+##### 安装 [remi](https://blog.remirepo.net/pages/Config-en) 源
+
+```shell
+yum -y install epel-release && \
+yum -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm
+```
+
+
+
+##### 安装php7.4
+
+:::tip 说明
+
+self-service-password依赖的php>=7.4
+
+:::
+
+```sh
+export PHP_VERSION=php74
+yum -y install \
+  ${PHP_VERSION}-php-fpm \
+  ${PHP_VERSION}-php-cli \
+  ${PHP_VERSION}-php-bcmath \
+  ${PHP_VERSION}-php-gd \
+  ${PHP_VERSION}-php-json \
+  ${PHP_VERSION}-php-mbstring \
+  ${PHP_VERSION}-php-mcrypt \
+  ${PHP_VERSION}-php-mysqlnd \
+  ${PHP_VERSION}-php-opcache \
+  ${PHP_VERSION}-php-pdo \
+  ${PHP_VERSION}-php-pecl-crypto \
+  ${PHP_VERSION}-php-pecl-mcrypt \
+  ${PHP_VERSION}-php-pecl-geoip \
+  ${PHP_VERSION}-php-recode \
+  ${PHP_VERSION}-php-snmp \
+  ${PHP_VERSION}-php-soap \
+  ${PHP_VERSION}-php-xml \
+  ${PHP_VERSION}-php-ldap \
+  ${PHP_VERSION}-php-common
+```
+
+
+
+##### 安装位置
+
+| 类型               | 路径                                            | 说明                                                         |
+| ------------------ | ----------------------------------------------- | ------------------------------------------------------------ |
+| 安装目录           | `/etc/opt/remi/php74`                           | PHP 安装目录                                                 |
+| PHP 主程序         | `/opt/remi/php74/root/usr/bin/php`              | 执行 PHP 程序用                                              |
+| 主配置文件         | `/etc/opt/remi/php74/php.ini`                   | 主配置文件                                                   |
+| 池（Pool）配置文件 | `/etc/opt/remi/php74/php-fpm.d/www.conf`        | 用于配置 php-fpm 接收请求的方式、进程管理、运行用户、监听端口/套接字等参数 |
+| socket文件         | `/var/opt/remi/php74/run/php-fpm/www.sock`      | PHP-FPM socket文件                                           |
+| php-fpm 配置       | `/etc/opt/remi/php74/php-fpm.conf`              | PHP-FPM 配置文件                                             |
+| 扩展模块           | `/opt/remi/php74/root/usr/lib64/php/modules`    | 所有模块 `.so` 文件目录                                      |
+| systemd 启动       | `/usr/lib/systemd/system/php74-php-fpm.service` | 使用 `systemctl` 管理 FPM 服务                               |
+
+
+
+##### 启动php74
+
+```shell
+systemctl enable php74-php-fpm && systemctl start php74-php-fpm
+```
+
+
+
+##### 修改目录权限
+
+```shell
+chown -R www.www /var/opt/remi/php74
+chown -R www.www /etc/opt/remi/php74
+```
+
+
+
+##### 修改php-fpm运行用户
+
+修改 `/etc/opt/remi/php74/php-fpm.d/www.conf` 中的以下几项，默认是 `apache` 用户
+
+```shell
+user = www
+group = www
+listen.acl_users = www
+```
+
+
+
+##### 修改 `/var/cache/self-service-password` 目录权限
+
+:::caution 注意
+
+必须将 `/var/cache/self-service-password` 目录以及目录下所有文件的权限修改为 php-fpm 的运行用户，否则访问会报错500
+
+:::
+
+```shell
+chown -R www.www /var/cache/self-service-password
+```
+
+
+
+##### 重启php-fpm
+
+```shell
+systemctl restart php74-php-fpm
+```
+
+
+
+#### 添加yum源
+
+```shell
+cat > /etc/yum.repos.d/ltb-project.repo << 'EOF'
+[ltb-project-noarch]
+name=LTB project packages (noarch)
+baseurl=https://ltb-project.org/rpm/$releasever/noarch
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-LTB-project
+EOF
+```
+
+
+
+#### 导入存储库密钥
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="el7/el8" label="el7/el8" default>
+
+```shell
+rpm --import https://ltb-project.org/documentation/_static/RPM-GPG-KEY-LTB-project
+```
+
+  </TabItem>
+  <TabItem value="el9" label="el9">
+
+```shell
+rpm --import https://ltb-project.org/documentation/_static/RPM-GPG-KEY-LTB-PROJECT-SECURITY
+```
+
+  </TabItem>
+</Tabs>
+
+
+
+#### yum安装
+
+```shell
+yum -y install self-service-password
+```
+
+
+
+##### 查看安装位置
+
+```shell
+rpm -ql self-service-password
+```
+
+
+
+| 文件类型    | 路径示例                                       |
+| ----------- | ---------------------------------------------- |
+| 源码目录    | `/usr/share/self-service-password/`            |
+| 配置文件    | `/etc/self-service-password/config.inc.php`    |
+| Apache 配置 | `/etc/httpd/conf.d/self-service-password.conf` |
+
+
+
+#### 配置nginx
+
+[webserver配置官方文档](https://self-service-password.readthedocs.io/en/latest/config_webserver.html)
+
+
+
+:::tip 说明
+
+这里依据官方的文件进行了一下修改
+
+如果想要在 `access_log` 后添加 `main` 字段，则需要取消 `nginx.conf` 中 `http` 块下的 `log_format  main` 的注释
+
+:::
+
+```nginx
+server {
+listen 80;
+
+root /usr/share/self-service-password/htdocs;
+index index.php index.html index.htm;
+
+# Make site accessible from http://localhost/
+server_name ssp.ops.com;
+
+# Disable sendfile as per https://docs.vagrantup.com/v2/synced-folders/virtualbox.html
+sendfile off;
+
+    gzip on;
+    gzip_comp_level 6;
+    gzip_min_length 1000;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript text/x-js;
+    gzip_vary on;
+    gzip_proxied any;
+    gzip_disable "MSIE [1-6]\.(?!.*SV1)";
+
+# Add stdout logging
+
+error_log /var/log/nginx/ssp.ops.com_error.log warn;
+access_log /var/log/nginx/ssp.ops.com_access.log main;
+
+
+# pass the PHP scripts to FastCGI server listening on socket
+#
+location ~ \.php {
+    fastcgi_pass unix:/var/opt/remi/php74/run/php-fpm/www.sock;
+    fastcgi_split_path_info       ^(.+\.php)(/.+)$;
+    fastcgi_param PATH_INFO       $fastcgi_path_info;
+    fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_index index.php;
+        try_files $fastcgi_script_name =404;
+    fastcgi_read_timeout 600;
+    include fastcgi_params;
+}
+
+    error_page 404 /404.html;
+    location = /404.html {
+            root /usr/share/nginx/html;
+            internal;
+}
+
+# deny access to . files, for security
+#
+location ~ /\. {
+        log_not_found off;
+        deny all;
+}
+
+location ~ /scripts {
+        log_not_found off;
+        deny all;
+}
+
+}
+```
+
+
+
+#### 访问
+
+![iShot_2025-06-20_17.10.43](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-20_17.10.43.png)
+
+
+
 
 
 ### dokcer安装
@@ -181,7 +443,7 @@ docker run -d \
   --name self-service-password \
   -p 8000:80 \
   -v /data/docker-volume/ssp/config.inc.local.php:/var/www/conf/config.inc.local.php \
-  docker.io/ltbproject/self-service-password:1.7.3
+  ltbproject/self-service-password:1.7.3
 ```
 
 
@@ -316,7 +578,11 @@ $show_extended_error = true;
 
 ## 配置邮件重置密码
 
-**<span style={{color: 'red'}}>⚠️在self service password中使用邮箱重置密码功能的前提是邮箱必须是ldap中用户绑定的邮箱</span>**
+:::caution 注意
+
+在self service password中使用邮箱重置密码功能的前提是邮箱必须是ldap中用户绑定的邮箱
+
+:::
 
 修改配置文件 `config.inc.local.php` 
 
