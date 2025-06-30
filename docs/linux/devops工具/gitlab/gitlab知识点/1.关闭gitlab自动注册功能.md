@@ -1,0 +1,42 @@
+[toc]
+
+
+
+# 关闭gitlab自动注册功能
+
+gitlab登陆界面默认有注册功能，可根据需求关闭
+
+![iShot_2024-09-02_15.39.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_15.39.06.png)
+
+
+
+
+
+## 第一步、选择 `Admin area`
+
+![iShot_2024-09-02_15.35.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_15.35.41.png)
+
+
+
+
+
+## 第二步、选择 `Settings`
+
+![iShot_2024-09-02_15.40.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_15.40.11.png)
+
+
+
+
+
+## 第三步、找到 `Sing-up Restrictions`  取消勾选 `Sign-up enabled ` 然后保存
+
+![iShot_2024-09-02_15.40.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_15.40.49.png)
+
+
+
+
+
+## 第四步、退出验证
+
+![iShot_2024-09-02_15.41.52](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_15.41.52.png)
+
