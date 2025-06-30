@@ -1,0 +1,114 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+
+/* custom.css */
+/* .scroll-container {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.scrolling-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+} */
+
+
+.scroll-container {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  background-color: #f0f0f0; /* 浅灰色背景 */
+}
+
+.scrolling-text {
+  display: inline-block;
+  padding-left: 100%;
+  font-weight: bold;
+  font-size: 18px;
+  animation: 
+    scroll 30s linear infinite,
+    colorChange 10s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
+@keyframes colorChange {
+  0%, 100% { color: #ff0000; } /* 红 */
+  20% { color: #ff8000; }      /* 橙 */
+  40% { color: #0000ff; }      /* 蓝 */
+  60% { color: #008000; }      /* 绿 */
+  80% { color: #8b00ff; }      /* 紫 */
+}
+
+
+/* 右下角 GIF 图片 */
+.gifImageBottom {
+  position: fixed;
+  bottom: 50px; /* 距离底部 */
+  right: 30px;  /* 距离右侧 */
+  z-index: 9999; /* 确保 GIF 在最上面 */
+  max-width: 200px; /* 设置合适的尺寸 */
+  max-height: 200px;
+}
+
+/* 右上角 GIF 图片 */
+.gifImageTop {
+  position: fixed;
+  top: 130px; /* 距离顶部 */
+  right: -5px; /* 距离右侧 */
+  z-index: 9999; /* 确保 GIF 在最上面 */
+  max-width: 200px; /* 设置合适的尺寸 */
+  max-height: 200px;
+  background-color: transparent; /* 设置背景透明 */
+}
+
+
+
+
