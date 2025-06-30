@@ -238,11 +238,109 @@ id_rsa.decrypted
 
 
 
-## SSH Agent 缓存私钥
+
+
+## 解决 SSH 私钥密码重复输入
+
+当私钥设置了密码后，每次推送使用私钥都会提示输入密码，这个时候可以采取一些方法，设置只需要输入一次即可
 
 
 
-当本机私钥设置了密码后，每次提交都需要手动输入密码
+### SSH Agent 缓存私钥
+
+#### 启动 `ssh-agent`
+
+```shell
+eval "$(ssh-agent -s)"
+```
+
+
+
+#### 添加私钥到 Agent 中
+
+:::tip 说明
+
+执行此命令会提示输入一次密码
+
+:::
+
+```shell
+ssh-add ~/.ssh/id_rsa
+```
+
+
+
+#### 验证
+
+:::tip 说明
+
+当有如下输出的时候说明已经配置好了
+
+```shell
+3072 SHA256:ui111llO11whn00UXzga7b9m111QE4Ks11111kcZksM /Users/pptfz/.ssh/id_rsa (RSA)
+```
+
+:::
+
+```shell
+ssh-add -l
+```
+
+
+
+#### 配置 `ssh-agent` 自动启动
+
+可以将如下配置加入到shell配置文件中，例如 `~/.zshrc` ，每次重启终端 `ssh-agent` 都会自动启动，但是需要输入一次密码
+
+```shell
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+```
+
+
+
+### `Keychain` 自动记住密钥
+
+修改密钥加载方式，确保 macOS 可以记住它
+
+```shell
+ssh-add --apple-use-keychain ~/.ssh/id_rsa
+```
+
+
+
+
+
+#### 编辑 SSH 配置文件 `~/.ssh/config`
+
+:::tip 说明
+
+这里Host处使用了 `*` ，表示匹配所有，如果想要单独匹配，则每一个域名是一段配置，如下
+
+```shell
+Host github.com
+  HostName github.com
+  User git
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa_github
+
+Host gitee.com
+  HostName gitee.com
+  User git
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa_gitee
+```
+
+:::
+
+```shell
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+```
 
 
 
