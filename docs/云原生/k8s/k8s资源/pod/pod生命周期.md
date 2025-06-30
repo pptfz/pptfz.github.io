@@ -1,12 +1,9 @@
 # pod生命周期
 
-<<<<<<< HEAD
+
 [k8s pod生命周期官方文档](https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/pod-lifecycle/)
 =======
 [k8s pod生命周期官方文档](https://kubernetes.io/zh/docs/concepts/workloads/pods/pod-lifecycle/#pod-conditions)
-
-
->>>>>>> 19b7231a2c167e70ec96cc7f71f67f131e724dda
 
 
 
