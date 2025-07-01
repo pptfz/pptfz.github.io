@@ -206,7 +206,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: '你点我啊',
+                label: '你不要过来啊',
                 to: '/docs',
               },
             ],
