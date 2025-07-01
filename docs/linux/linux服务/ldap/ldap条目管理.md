@@ -2174,4 +2174,35 @@ ldapdelete -x \
 
 
 
-### 
+## 操作总结
+
+增加属性值
+
+```shell
+dn: dn名称，例如cn=java,dc=ops,dc=com
+changetype: modify
+add: 要增加的属性名称，例如description
+要增加的属性名称: 属性值
+```
+
+
+
+修改属性值
+
+```shell
+dn: dn名称，例如cn=java,dc=ops,dc=com
+changetype: modify
+replace: 要修改的属性名称，例如gidNumber
+要修改的属性名称: 属性值
+```
+
+
+
+删除属性
+
+```shell
+dn: dn名称，例如cn=java,dc=ops,dc=com
+changetype: modify
+delete: 要删除的属性名称，例如description
+```
+
