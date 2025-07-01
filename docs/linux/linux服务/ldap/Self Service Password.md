@@ -427,11 +427,77 @@ location ~ /scripts {
 
 运行临时容器，拷贝配置文件
 
+:::tip 说明
+
+这里需要拷贝2个配置文件，一个是 `Self Service Password` 的配置文件 `config.inc.php.orig` ，另一个是用于定义系统界面、错误提示、邮件内容等的**中文显示文本**的配置文件 `zh-CN.inc.php`
+
+:::
+
 ```shell
-docker run --name ssp-temp -d docker.io/ltbproject/self-service-password:1.7.3
+docker run --name ssp-temp -d ltbproject/self-service-password:1.7.3
+
 docker cp ssp-temp:/var/www/config.inc.php.orig /data/docker-volume/ssp/config.inc.local.php
+docker cp ssp-temp:/var/www/lang/zh-CN.inc.php /data/docker-volume/ssp/zh-CN.inc.php
+
 docker rm -f ssp-temp
 ```
+
+
+
+#### 解决重置密码链接为纯文本问题
+
+收到的密码重置邮件，其中的链接是纯文本的，因此需要修改配置
+
+![iShot_2025-07-01_10.38.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-07-01_10.38.50.png)
+
+
+
+
+
+修改 `config.inc.local.php`
+
+:::tip 说明
+
+以下修改解决了邮件中链接为纯文本的问题，将纯文本修改为超链接
+
+:::
+
+```php
+修改
+	$mail_contenttype = 'text/plain';
+修改为
+	$mail_contenttype = 'text/html';
+```
+
+
+
+
+
+修改 `zh-CN.inc.php` 
+
+:::tip 说明
+
+`zh-CN.inc.php` 所在路径位于容器中的  `/var/www/lang` 目录下
+
+以下修改解决了邮件中超链接点击无法自动跳转到浏览器的问题
+
+:::
+
+```php
+修改
+$messages['resetmessage'] = "{login} 您好，\n\n点击以下链接重置您的密码:\n{url}\n\n如果您没有请求修改密码，请忽略本邮件。";
+
+修改为
+$messages['resetmessage'] = "{login} 您好，<br><br>点击以下链接重置您的密码：<br><a href='{url}'>{url}</a><br><br>如果您没有请求修改密码，请忽略本邮件。";
+```
+
+
+
+这样在后续收到的密码重置邮件中点击链接就可以自动跳转到浏览器了
+
+![iShot_2025-07-01_11.23.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-07-01_11.23.49.png)
+
+
 
 
 
@@ -440,9 +506,11 @@ docker rm -f ssp-temp
 ```shell
 docker run -d \
   --restart=always \
+  --hostname self-service-password \
   --name self-service-password \
   -p 8000:80 \
   -v /data/docker-volume/ssp/config.inc.local.php:/var/www/conf/config.inc.local.php \
+  -v /data/docker-volume/ssp/zh-CN.inc.php:/var/www/lang/zh-CN.inc.php \
   ltbproject/self-service-password:1.7.3
 ```
 
@@ -645,13 +713,15 @@ $reset_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . "://" . $_SERVER['HTTP_X_FORWA
 
 在邮件选项下输入ldap中绑定的邮箱就可以发出重置邮件了
 
-旧版提示
+旧版页面
 
 ![iShot2021-09-20_21.11.15](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-20_21.11.15.png)
 
 
 
-新版提示
+新版页面
+
+![iShot_2025-07-01_10.42.36](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-07-01_10.42.36.png)
 
 ![iShot_2025-06-27_19.32.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-27_19.32.42.png)
 
@@ -659,17 +729,17 @@ $reset_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . "://" . $_SERVER['HTTP_X_FORWA
 
 
 
-收到的密码重置邮件
-
-> 使用电脑客户端链接是纯文本的，但是在浏览器中打开是超链接
-
-![iShot2021-09-20_21.30.00](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-20_21.30.00.png)
-
-
-
 在密码重置邮件中点击链接访问就可以修改密码了
 
+旧版页面
+
 ![iShot2021-09-20_21.13.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-20_21.13.12.png)
+
+
+
+新版页面
+
+![iShot_2025-07-01_10.47.23](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-07-01_10.47.23.png)
 
 
 
@@ -680,36 +750,4 @@ $reset_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . "://" . $_SERVER['HTTP_X_FORWA
 ![iShot2021-09-20_21.17.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-20_21.17.37.png)
 
 
-
-## 解决重置密码链接为纯文本问题
-
-修改 `config.inc.local.php`
-
-```php
-修改
-	$mail_contenttype = 'text/plain';
-修改为
-	$mail_contenttype = 'text/html';
-```
-
-
-
-
-
-替换文件
-
-:::tip 说明
-
-```php
-替换
-	$messages['resetmessage'] = "点击以下链接重置您的密码: {url}";
-替换为
-	$messages['resetmessage'] = "点击以下链接重置您的密码: <a href="{url}">{url}</a>";
-```
-
-:::
-
-```shell
-sed -i -E 's/(resetmessage.*)\{url\}/\1<a href="{url}">{url}<\/a>/g'  lang/*.inc.php
-```
 
