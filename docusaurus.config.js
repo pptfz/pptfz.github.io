@@ -127,7 +127,7 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: '你点我啊',
+            label: '你不要过来啊',
           },
           {
             to: '/blog', 
