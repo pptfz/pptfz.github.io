@@ -11,8 +11,8 @@ const FeatureList = [
     description: (
       <>
         {/* Docusaurus从一开始就被设计成易于安装和使用，让你的网站快速运行。 */}
-        {/* <span className={styles.highlightText}>凯迪拉克不拉客～</span> */}
-        <span className={styles.highlightText}>k8s</span>
+        <span className={styles.highlightText}>凯迪拉克不拉客～</span>
+        {/* <span className={styles.highlightText}>k8s</span> */}
       </>
     ),
   },
@@ -23,8 +23,8 @@ const FeatureList = [
     description: (
       <>
         {/* Docusaurus让你专注于你的文档，我们来做事物。并继续将你的文档移到<code>docs</code>目录中。 */}
-        {/* <span className={styles.highlightTextBlue}>只拉技师和模特～</span> */}
-        <span className={styles.highlightTextBlue}>p9s</span>
+        <span className={styles.highlightTextBlue}>只拉技师和模特～</span>
+        {/* <span className={styles.highlightTextBlue}>p9s</span> */}
       </>
     ),
   }, 
@@ -35,8 +35,8 @@ const FeatureList = [
     description: (
       <>
         {/* Docusaurus让你专注于你的文档，我们来做事物。并继续将你的文档移到<code>docs</code>目录中。 */}
-        {/* <span className={styles.highlightTextGreen}>趁着年轻多吃苦～</span> */}
-        <span className={styles.highlightTextGreen}>devops</span>
+        <span className={styles.highlightTextGreen}>趁着年轻多吃苦～</span>
+        {/* <span className={styles.highlightTextGreen}>devops</span> */}
         
       </>
     ),
@@ -48,8 +48,8 @@ const FeatureList = [
     description: (
       <>
         {/* 通过重用React扩展或自定义你的网站布局。Docusaurus可以在重用相同的页眉和页脚的同时进行扩展。 */}
-        {/* <span className={styles.highlightTextPink}>年底提辆CT5～</span> */}
-        <span className={styles.highlightTextPink}>cloud native</span>
+        <span className={styles.highlightTextPink}>年底提辆CT5～</span>
+        {/* <span className={styles.highlightTextPink}>cloud native</span> */}
       </>
     ),
   },
