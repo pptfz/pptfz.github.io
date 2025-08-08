@@ -1,5 +1,17 @@
 # k8s常用命令速查
 
+## kubectl
+
+### 设置当前 context 的默认 namespace
+
+```shell
+export CONTEXT=production
+export NS=production
+kubectl config set-context $CONTEXT --namespace=$NS
+```
+
+
+
 ## pod
 
 ### 强制删除pod
