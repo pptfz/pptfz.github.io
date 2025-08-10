@@ -158,8 +158,25 @@ rocky linux 使用 [networkManager](https://github.com/BornToBeRoot/NETworkManag
 
 #### 重启网络
 
+:::tip 说明
+
+使用如下命令重启网络会导致单个网卡出现2个ip，需要重启服务器才可以
+
 ```sh
 systemctl restart NetworkManager
+```
+
+:::
+
+使用如下命令可不重启服务器使网卡ip修改生效
+
+```shell
+# 查看连接名，一般为网卡名称
+nmcli connection show
+
+# 重载网卡
+nmcli connection reload
+nmcli connection up <连接名>
 ```
 
 
