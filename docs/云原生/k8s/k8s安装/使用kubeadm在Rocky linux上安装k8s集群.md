@@ -8,12 +8,12 @@
 
 
 
-| 角色   | IP         | 主机名     | containerd版本 | 硬件配置 | 系统                                | 内核                         | 安装组件                                                     |
-| ------ | ---------- | ---------- | -------------- | -------- | ----------------------------------- | ---------------------------- | ------------------------------------------------------------ |
-| master | 10.0.0.10  | k8s-master | 2.0.2          | 2c4g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kube-apiserver，kube-controller-manager，kube-scheduler，kubelet，etcd |
-| Node01 | 10.0.0.100 | K8s-node01 | 2.0.2          | 4c8g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
-| node02 | 10.0.0.101 | k8s-node02 | 2.0.2          | 4c8g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
-| node03 | 10.0.0.102 | k8s-node03 | 2.0.2          | 2c4g     | Rocky Linux release 9.3 (Blue Onyx) | 5.14.0-362.8.1.el9_3.aarch64 | kubelet，kube-proxy，containerd，etcd                        |
+| 角色   | IP         | 主机名     | containerd版本 | 硬件配置 | 系统                                  | 内核                  | 安装组件                                                     |
+| ------ | ---------- | ---------- | -------------- | -------- | ------------------------------------- | --------------------- | ------------------------------------------------------------ |
+| master | 10.0.0.10  | k8s-master | 2.0.2          | 2c4g     | Rocky Linux release 10.0 (Red Quartz) | 6.12.0-55.12.1.el10_0 | kube-apiserver，kube-controller-manager，kube-scheduler，kubelet，etcd |
+| Node01 | 10.0.0.100 | K8s-node01 | 2.0.2          | 4c8g     | Rocky Linux release 10.0 (Red Quartz) | 6.12.0-55.12.1.el10_0 | kubelet，kube-proxy，containerd，etcd                        |
+| node02 | 10.0.0.101 | k8s-node02 | 2.0.2          | 4c8g     | Rocky Linux release 10.0 (Red Quartz) | 6.12.0-55.12.1.el10_0 | kubelet，kube-proxy，containerd，etcd                        |
+| node03 | 10.0.0.102 | k8s-node03 | 2.0.2          | 2c4g     | Rocky Linux release 10.0 (Red Quartz) | 6.12.0-55.12.1.el10_0 | kubelet，kube-proxy，containerd，etcd                        |
 
 
 
@@ -145,6 +145,19 @@ Docker Engine 没有实现 [CRI](https://kubernetes.io/zh-cn/docs/concepts/archi
 
 #### 启用 IPv4 数据包转发
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a $'
+cat <<EOF > /etc/sysctl.d/k8s.conf
+net.ipv4.ip_forward = 1
+EOF
+sysctl --system
+'
+```
+
+:::
+
 ```bash
 # 设置所需的 sysctl 参数，参数在重新启动后保持不变
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
@@ -157,7 +170,15 @@ sudo sysctl --system
 
 
 
-使用以下命令验证 `net.ipv4.ip_forward` 是否设置为 1：
+使用以下命令验证 `net.ipv4.ip_forward` 是否设置为 1
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a 'sysctl net.ipv4.ip_forward'
+```
+
+:::
 
 ```shell
 sysctl net.ipv4.ip_forward
@@ -255,11 +276,33 @@ import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="1.x" label="1.x">
-    下载安装包
+下载安装包
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+CONTAINERD_VERSION=1.7.17; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz \
+'
+```
+
+:::
 
 ```bash
 export CONTAINERD_VERSION=1.7.17
-export ARCHITECTURE=arm64
+export ARCHITECTURE=$(
+  case "$(uname -m)" in
+    x86_64) echo amd64 ;;
+    aarch64) echo arm64 ;;
+    *) echo "unsupported"; exit 1 ;;
+  esac
+)
+
 wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
 
@@ -280,11 +323,33 @@ bin/containerd
 
   </TabItem>
   <TabItem value="2.x" label="2.x" default>
-    下载安装包
+下载安装包
+
+:::tip 使用ansible执行
 
 ```shell
-export CONTAINERD_VERSION=2.0.2
-export ARCHITECTURE=arm64
+ansible all -m shell -a '\
+CONTAINERD_VERSION=2.1.4; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz \
+'
+```
+
+:::
+
+```shell
+export CONTAINERD_VERSION=2.1.4
+export ARCHITECTURE=$(
+  case "$(uname -m)" in
+    x86_64) echo amd64 ;;
+    aarch64) echo arm64 ;;
+    *) echo "unsupported"; exit 1 ;;
+  esac
+)
+
 wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
 
@@ -306,9 +371,22 @@ bin/containerd-shim-runc-v2
 
 
 
-
-
 解压缩
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+CONTAINERD_VERSION=2.1.4; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+tar Cxzvf /usr/local containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz \
+'
+```
+
+:::
 
 ```bash
 tar Cxzvf /usr/local containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.gz
@@ -319,6 +397,14 @@ tar Cxzvf /usr/local containerd-${CONTAINERD_VERSION}-linux-${ARCHITECTURE}.tar.
 使用systemd管理containerd
 
 下载文件
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m get_url -a "url=https://raw.githubusercontent.com/containerd/containerd/main/containerd.service dest=/usr/lib/systemd/system/containerd.service mode=0644"
+```
+
+:::
 
 ```shell
 curl https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -o /usr/lib/systemd/system/containerd.service
@@ -376,6 +462,15 @@ WantedBy=multi-user.target
 
 重新加载 systemd 的配置并设置containerd服务开机自启
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m systemd -a "daemon_reload=yes"
+ansible all -b -m systemd -a "name=containerd enabled=yes"
+```
+
+:::
+
 ```shell
 systemctl daemon-reload
 systemctl enable --now containerd
@@ -391,7 +486,7 @@ systemctl enable --now containerd
 
 ```bash
 export RUNC_VERSION=1.2.5
-export ARCHITECTURE=arm64
+export ARCHITECTURE=`uname -m`
 wget https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.${ARCHITECTURE}
 ```
 
@@ -426,7 +521,7 @@ libseccomp: 2.5.5
 
 ```bash
 export CNI_VERSION=1.6.2
-export ARCHITECTURE=arm64
+export ARCHITECTURE=`uname -m`
 wget https://github.com/containernetworking/plugins/releases/download/v${CNI_VERSION}/cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 ```
 
@@ -725,7 +820,7 @@ done: 1.495863023s
 
 ```bash
 export CRICTL_VERSION=1.32.0
-export ARCHITECTURE=arm64
+export ARCHITECTURE=`uname -m`
 wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${CRICTL_VERSION}/crictl-v${CRICTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
 
@@ -806,7 +901,7 @@ source ~/.bashrc
 ```bash
 # 这里安装的containerd版本为2.0.2
 export NERDCTL_VERSION=2.0.3
-export ARCHITECTURE=arm64
+export ARCHITECTURE=`uname -m`
 wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
 
@@ -879,7 +974,7 @@ failed to ping to host unix:///run/buildkit/buildkitd.sock: exec: "buildctl": ex
 
 ```shell
 export BUILDKIT_VERSION=0.20.0
-export ARCHITECTURE=arm64
+export ARCHITECTURE=`uname -m`
 wget https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz
 ```
 

@@ -6,6 +6,12 @@
 
 
 
+## 架构
+
+![prometheus-architecture](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/prometheus-architecture.gif)
+
+
+
 ## 安装方式
 
 ### 源码安装
