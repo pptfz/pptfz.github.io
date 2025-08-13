@@ -12,6 +12,67 @@ kubectl config set-context $CONTEXT --namespace=$NS
 
 
 
+### kubeconfig重命名
+
+:::tip 说明
+
+kubeconfig重命名需要修改 `clusters` 、`users` 、`contexts` 3个指标
+
+:::
+
+:::caution 注意
+
+macOS 的 `sed -i` 需要一个参数指定备份后缀（可以是空字符串，但空字符串后面不能直接跟文件名，必须写成 `-i ''` ），格式是 `sed -i '' "s/old/new/g" 文件名`
+
+```shell
+sed -i '' "s/name: $OLD_USERS/name: $NEW_USERS/g" $KUBE_CONFIG
+sed -i '' "s/user: $OLD_USERS/user: $NEW_USERS/g" $KUBE_CONFIG
+
+sed -i '' "s/name: $OLD_CLUSTERS/name: $NEW_CLUSTERS/g" $KUBE_CONFIG
+sed -i '' "s/cluster: $OLD_CLUSTERS/cluster: $NEW_CLUSTERS/g" $KUBE_CONFIG
+```
+
+:::
+
+```shell
+# 设置环境变量
+export OLD_USERS=kubernetes-admin
+export OLD_CLUSTERS=kubernetes
+export OLD_CONTEXTS=kubernetes-admin@kubernetes
+
+export NEW_USERS=rocky9
+export NEW_CLUSTERS=rocky9
+export NEW_CONTEXTS=rocky9
+
+export KUBE_CONFIG=~/.kube/config
+
+# 修改 contexts 名
+kubectl config rename-context $OLD_CONTEXTS $NEW_CONTEXTS
+
+# 修改 users 名
+sed -i "s/name: $OLD_USERS/name: $NEW_USERS/g" $KUBE_CONFIG
+sed -i "s/user: $OLD_USERS/user: $NEW_USERS/g" $KUBE_CONFIG
+
+# 修改 cluster 名
+sed -i "s/name: $OLD_CLUSTERS/name: $NEW_CLUSTERS/g" ~/.kube/config
+sed -i "s/cluster: $OLD_CLUSTERS/cluster: $NEW_CLUSTERS/g" ~/.kube/config
+```
+
+
+
+修改完成后查看
+
+```shell
+$ kubecm ls
++------------+----------------------+----------------------+----------------------+-----------------------------------+---------------+
+|   CURRENT  |         NAME         |        CLUSTER       |         USER         |               SERVER              |   Namespace   |
++============+======================+======================+======================+===================================+===============+
+|      *     |        rocky9        |        rocky9        |        rocky9        |       https://10.0.0.10:6443      |    monitor    |
++------------+----------------------+----------------------+----------------------+-----------------------------------+---------------+
+```
+
+
+
 ## pod
 
 ### 强制删除pod

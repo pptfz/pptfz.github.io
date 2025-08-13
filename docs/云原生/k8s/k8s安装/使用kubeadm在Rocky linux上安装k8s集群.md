@@ -484,15 +484,52 @@ systemctl enable --now containerd
 
 下载安装包
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+RUNC_VERSION=1.3.0; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+wget https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.${ARCHITECTURE} \
+'
+```
+
+:::
+
 ```bash
-export RUNC_VERSION=1.2.5
-export ARCHITECTURE=`uname -m`
+export RUNC_VERSION=1.3.0
+export ARCHITECTURE=$(
+  case "$(uname -m)" in
+    x86_64) echo amd64 ;;
+    aarch64) echo arm64 ;;
+    *) echo "unsupported"; exit 1 ;;
+  esac
+)
+
 wget https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.${ARCHITECTURE}
 ```
 
 
 
 安装
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+RUNC_VERSION=1.3.0; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+install -m 755 runc.${ARCHITECTURE} /usr/local/sbin/runc \
+'
+```
+
+:::
 
 ```bash
 install -m 755 runc.${ARCHITECTURE} /usr/local/sbin/runc
@@ -504,11 +541,11 @@ install -m 755 runc.${ARCHITECTURE} /usr/local/sbin/runc
 
 ```bash
 $ runc -v
-runc version 1.2.5
-commit: v1.2.5-0-g59923ef1
-spec: 1.2.0
-go: go1.22.12
-libseccomp: 2.5.5
+runc version 1.3.0
+commit: v1.3.0-0-g4ca628d1
+spec: 1.2.1
+go: go1.23.8
+libseccomp: 2.5.6
 ```
 
 
@@ -519,9 +556,31 @@ libseccomp: 2.5.5
 
 下载安装包
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+CNI_VERSION=1.7.1; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+wget https://github.com/containernetworking/plugins/releases/download/v${CNI_VERSION}/cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz \
+'
+```
+
+:::
+
 ```bash
-export CNI_VERSION=1.6.2
-export ARCHITECTURE=`uname -m`
+export CNI_VERSION=1.7.1
+export ARCHITECTURE=$(
+  case "$(uname -m)" in
+    x86_64) echo amd64 ;;
+    aarch64) echo arm64 ;;
+    *) echo "unsupported"; exit 1 ;;
+  esac
+)
+
 wget https://github.com/containernetworking/plugins/releases/download/v${CNI_VERSION}/cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 ```
 
@@ -558,7 +617,31 @@ $ tar tf cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 
 解压缩
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+CNI_VERSION=1.7.1; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+tar Cxzvf /usr/local/bin cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz \
+'
+```
+
+:::
+
 ```bash
+export CNI_VERSION=1.7.1
+export ARCHITECTURE=$(
+  case "$(uname -m)" in
+    x86_64) echo amd64 ;;
+    aarch64) echo arm64 ;;
+    *) echo "unsupported"; exit 1 ;;
+  esac
+)
+
 tar Cxzvf /usr/local/bin cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 ```
 
@@ -571,6 +654,14 @@ tar Cxzvf /usr/local/bin cni-plugins-linux-${ARCHITECTURE}-v${CNI_VERSION}.tgz
 #### 创建containerd配置文件
 
 [官方说明文档](https://github.com/containerd/containerd/blob/main/docs/getting-started.md#advanced-topics)
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a 'mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.toml'
+```
+
+:::
 
 ```shell
 mkdir -p /etc/containerd && containerd config default > /etc/containerd/config.toml
@@ -610,6 +701,14 @@ version = 2
 
 用如下命令修改
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m replace -a "path=/etc/containerd/config.toml regexp='^SystemdCgroup = false' replace='SystemdCgroup = true' backup=yes"
+```
+
+:::
+
 ```bash
 sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
 ```
@@ -619,7 +718,15 @@ sed -i.bak 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/confi
 
 [containerd2.x版本修改cgroup驱动官方文档](https://github.com/containerd/containerd/blob/a78a24ec67789218b17b7dd4a0382e9198c38b5a/docs/cri/config.md)
 
-修改 `/etc/containerd/config.toml` ，将 `SystemdCgroup = false` 修改为 `SystemdCgroup = true`
+修改 `/etc/containerd/config.toml` ，在 `[plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.options]` 下新增  `SystemdCgroup = true`
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m lineinfile -a "path=/etc/containerd/config.toml insertafter=\"ShimCgroup = ''\" line='            SystemdCgroup = true' backup=yes"
+```
+
+:::
 
 ```toml
 version = 3
@@ -629,7 +736,9 @@ version = 3
 
 
 
-用如下命令修改
+
+
+使用sed修改
 
 ```shell
 sed -i.bak "/\[plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.options\]/a \ \ \ \ \ \ \ \ \ \ \ \ SystemdCgroup = true" /etc/containerd/config.toml
