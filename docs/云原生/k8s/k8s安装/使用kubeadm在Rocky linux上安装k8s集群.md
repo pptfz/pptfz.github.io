@@ -755,7 +755,7 @@ sed -i.bak "/\[plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.o
 
 :::tip 说明
 
-在 `/etc/containerd/config.toml` 配置文件中，pause镜像的默认地址是 `registry.k8s.io/vi:3.10`，由于某些特殊原因，需要修改这个镜像的地址，可以使用ucloud提供的加速地址
+在 `/etc/containerd/config.toml` 配置文件中，pause镜像的默认地址是 `registry.k8s.io/pause:3.10`，由于某些特殊原因，需要修改这个镜像的地址，可以使用ucloud提供的加速地址
 
 `uhub.service.ucloud.cn/996.icu/pause:3.10` 或者阿里云提供的加速地址 `registry.aliyuncs.com/k8sxio/pause:3.10`
 
@@ -764,7 +764,7 @@ sed -i.bak "/\[plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.o
 修改 `registry.k8s.io` 为 `registry.aliyuncs.com/google_containers`
 
 <Tabs>
-  <TabItem value="1.x" label="1.x">
+  <TabItem value="containerd 1.x" label="containerd 1.x">
 
 ```toml
 [plugins."io.containerd.grpc.v1.cri"]
@@ -772,24 +772,46 @@ sed -i.bak "/\[plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.o
   sandbox_image = "registry.k8s.io/pause:3.9"
 ```
 
+用如下命令修改
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m replace -a "path=/etc/containerd/config.toml regexp='registry.k8s.io/pause:3.9' replace='registry.aliyuncs.com/google_containers/pause:3.9'"
+```
+
+:::
+
+```shell
+sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/containerd/config.toml
+```
+
 
 
   </TabItem>
-  <TabItem value="2.x" label="2.x" default>
+  <TabItem value="containerd 2.x" label="containerd 2.x" default>
 
 ```toml
 [plugins.'io.containerd.cri.v1.images'.pinned_images]
   sandbox = 'registry.aliyuncs.com/google_containers/pause:3.10'
 ```
 
-  </TabItem>
-</Tabs>
-
 用如下命令修改
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m replace -a "path=/etc/containerd/config.toml regexp='registry.k8s.io/pause:3.10' replace='registry.aliyuncs.com/google_containers/pause:3.10'"
+```
+
+:::
 
 ```shell
 sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/containerd/config.toml
 ```
+
+</TabItem>
+</Tabs>
 
 
 
@@ -802,8 +824,6 @@ sed -i 's#registry.k8s.io#registry.aliyuncs.com/google_containers#' /etc/contain
 [阿里云官方文档](https://help.aliyun.com/zh/acr/user-guide/accelerate-the-pulls-of-docker-official-images?spm=5176.28426678.J_HeJR_wZokYt378dwP-lLl.261.21795181n1ykLy&scm=20140722.S_help@@%E6%96%87%E6%A1%A3@@60750.S_BB1@bl+BB2@bl+RQW@ag0+os0.ID_60750-RL_containerd%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93%E5%8A%A0%E9%80%9F-LOC_search~UND~helpdoc~UND~item-OR_ser-V_3-P0_0)
 
 ##### 修改配置文件
-
-
 
 修改 `/etc/containerd/config.toml` ，修改 `config_path` ，新增 `/etc/containerd/certs.d`
 
@@ -852,6 +872,14 @@ sed -i "/\[plugins.'io.containerd.cri.v1.images'.registry\]/a \ \ \ \ \ \ config
 
 ##### 重启containerd
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m systemd -a "name=containerd state=restarted"
+```
+
+:::
+
 ```shell
 systemctl restart containerd
 ```
@@ -860,6 +888,14 @@ systemctl restart containerd
 
 ##### 创建目录
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m file -a "path=/etc/containerd/certs.d/docker.io state=directory mode=0755"
+```
+
+:::
+
 ```bash
 mkdir -p /etc/containerd/certs.d/docker.io
 ```
@@ -867,6 +903,14 @@ mkdir -p /etc/containerd/certs.d/docker.io
 
 
 ##### 创建 `hosts.toml` 文件并写入以下内容
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m copy -a "content='server = \"https://registry-1.docker.io\"\n\n[host.\"https://bqr1dr1n.mirror.aliyuncs.com\"]\n  capabilities = [\"pull\", \"resolve\", \"push\"]' dest=/etc/containerd/certs.d/docker.io/hosts.toml"
+```
+
+:::
 
 ```bash
 cat > /etc/containerd/certs.d/docker.io/hosts.toml << 'EOF'
@@ -927,15 +971,52 @@ done: 1.495863023s
 
 下载安装包
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+CRICTL_VERSION=1.33.0; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${CRICTL_VERSION}/crictl-v${CRICTL_VERSION}-linux-${ARCHITECTURE}.tar.gz \
+'
+```
+
+:::
+
 ```bash
-export CRICTL_VERSION=1.32.0
-export ARCHITECTURE=`uname -m`
+export CRICTL_VERSION=1.33.0
+export ARCHITECTURE=$(
+  case "$(uname -m)" in
+    x86_64) echo amd64 ;;
+    aarch64) echo arm64 ;;
+    *) echo "unsupported"; exit 1 ;;
+  esac
+)
+
 wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v${CRICTL_VERSION}/crictl-v${CRICTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
 
 
 
 解压缩
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+CRICTL_VERSION=1.33.0; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+tar Cxzvf /usr/local/bin crictl-v${CRICTL_VERSION}-linux-${ARCHITECTURE}.tar.gz \
+'
+```
+
+:::
 
 ```bash
 tar Cxzvf /usr/local/bin crictl-v${CRICTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
@@ -955,6 +1036,14 @@ WARN[0000] image connect using default endpoints: [unix:///run/containerd/contai
 解决方法
 
 因为使用的是containerd，因此需要将容器运行时修改为containerd，修改完成后就可以成功执行命令了
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a "crictl config --set runtime-endpoint=unix:///run/containerd/containerd.sock --set image-endpoint=unix:///run/containerd/containerd.sock" 
+```
+
+:::
 
 ```shell
 crictl config --set runtime-endpoint=unix:///run/containerd/containerd.sock --set image-endpoint=unix:///run/containerd/containerd.sock
@@ -977,6 +1066,17 @@ disable-pull-on-run: false
 
 
 配置 `crictl` 命令补全
+
+:::tip 使用ansible执行
+
+!!!!!!!!! 第二个有问题！！！！！！！！！
+
+```shell
+ansible all -b -m lineinfile -a "path=~/.bashrc line='source <(crictl completion bash)' state=present"
+ansible all -b -m shell -a "source ~/.bashrc"
+```
+
+:::
 
 ```shell
 echo "source <(crictl completion bash)" >> ~/.bashrc
@@ -1007,10 +1107,31 @@ source ~/.bashrc
 
 :::
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+NERDCTL_VERSION=2.1.3; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz \
+'
+```
+
+:::
+
 ```bash
-# 这里安装的containerd版本为2.0.2
-export NERDCTL_VERSION=2.0.3
-export ARCHITECTURE=`uname -m`
+export NERDCTL_VERSION=2.1.3
+export ARCHITECTURE=$(
+  case "$(uname -m)" in
+    x86_64) echo amd64 ;;
+    aarch64) echo arm64 ;;
+    *) echo "unsupported"; exit 1 ;;
+  esac
+)
+
 wget https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 ```
 
@@ -1031,6 +1152,21 @@ containerd-rootless.sh
 
 :::
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+NERDCTL_VERSION=2.1.3; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+tar xf nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz \
+'
+```
+
+:::
+
 ```shell
 tar xf nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz 
 ```
@@ -1039,6 +1175,14 @@ tar xf nerdctl-${NERDCTL_VERSION}-linux-${ARCHITECTURE}.tar.gz
 
 拷贝二进制文件
 
+:::tip 使用ansible执行
+
+```sh
+ansible all -m shell -a 'mv nerdctl /usr/local/bin'
+```
+
+:::
+
 ```shell
 mv nerdctl /usr/local/bin
 ```
@@ -1046,6 +1190,17 @@ mv nerdctl /usr/local/bin
 
 
 配置 `nerdctl` 命令补全
+
+:::tip 使用ansible执行
+
+!!!!! 第二个有问题 ！！！！！！！
+
+```shell
+ansible all -b -m lineinfile -a "path=~/.bashrc line='source <(nerdctl completion bash)' state=present"
+ansible all -b -m shell -a "source ~/.bashrc"
+```
+
+:::
 
 ```shell
 echo "source <(nerdctl completion bash)" >> ~/.bashrc
@@ -1081,9 +1236,31 @@ failed to ping to host unix:///run/buildkit/buildkitd.sock: exec: "buildctl": ex
 
 下载安装包
 
+:::tip 使用ansible执行
+
 ```shell
-export BUILDKIT_VERSION=0.20.0
-export ARCHITECTURE=`uname -m`
+ansible all -m shell -a '\
+BUILDKIT_VERSION=0.23.2; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+wget https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz \
+'
+```
+
+:::
+
+```shell
+export BUILDKIT_VERSION=0.23.2
+export ARCHITECTURE=$(
+  case "$(uname -m)" in
+    x86_64) echo amd64 ;;
+    aarch64) echo arm64 ;;
+    *) echo "unsupported"; exit 1 ;;
+  esac
+)
+
 wget https://github.com/moby/buildkit/releases/download/v${BUILDKIT_VERSION}/buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz
 ```
 
@@ -1117,6 +1294,21 @@ bin/buildkitd
 
 :::
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a '\
+BUILDKIT_VERSION=0.23.2; \
+ARCH=$(uname -m); \
+if [ "$ARCH" = "x86_64" ]; then ARCHITECTURE=amd64; \
+elif [ "$ARCH" = "aarch64" ]; then ARCHITECTURE=arm64; \
+else echo "Unsupported architecture: $ARCH" && exit 1; fi; \
+tar xf buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz \
+'
+```
+
+:::
+
 ```bash
 tar xf buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz
 ```
@@ -1124,6 +1316,14 @@ tar xf buildkit-v${BUILDKIT_VERSION}.linux-${ARCHITECTURE}.tar.gz
 
 
 拷贝命令
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -m shell -a 'cp bin/{buildkitd,buildctl} /usr/local/bin'
+```
+
+:::
 
 ```shell
 cp bin/buildkitd /usr/local/bin
@@ -1133,6 +1333,14 @@ cp bin/buildctl /usr/local/bin
 
 
 使用systemd管理buildkit进程
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m copy -a "dest=/etc/systemd/system/buildkitd.service content='[Unit]\nDescription=Buildkit Daemon\nAfter=network.target\n\n[Service]\nExecStart=/usr/local/bin/buildkitd --addr unix:///run/buildkit/buildkitd.sock\nUser=root\nRestart=always\n\n[Install]\nWantedBy=multi-user.target\n'"
+```
+
+:::
 
 ```shell
 cat > /etc/systemd/system/buildkitd.service << EOF
@@ -1153,6 +1361,14 @@ EOF
 
 
 启动 `buildkitd`
+
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m systemd -a "name=buildkitd state=started enabled=yes daemon_reload=yes"
+```
+
+:::
 
 ```shell
 systemctl daemon-reload && systemctl start buildkitd.service && systemctl enable buildkitd.service 
@@ -1219,8 +1435,22 @@ slirp4netns 需要是 v0.4.0 或更高版本。推荐v1.1.7或更高版本。
 
 [官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl)
 
+:::tip 使用ansible执行
+
 ```shell
-export VERSION=1.32
+ansible all -b -m copy -a "dest=/etc/yum.repos.d/kubernetes.repo content='[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.33/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.33/rpm/repodata/repomd.xml.key
+exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni'"
+```
+
+:::
+
+```shell
+export VERSION=1.33
 cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -1235,6 +1465,19 @@ EOF
   </TabItem>
   <TabItem value="阿里云" label="阿里云">
  [阿里云官方文档](https://developer.aliyun.com/mirror/kubernetes?spm=a2c6h.13651102.0.0.34311b11lSAFPB)
+
+:::tip 使用ansible执行
+
+```sh
+ansible all -b -m copy -a "dest=/etc/yum.repos.d/kubernetes.repo content='[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.33/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://mirrors.aliyun.com/kubernetes-new/core/stable/v1.33/rpm/repodata/repomd.xml.key'"
+```
+
+:::
 
 ```shell
 cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
@@ -1265,7 +1508,7 @@ yum list kubeadm --showduplicates
 指定安装版本
 
 ```bash
-export K8S_VERSION=1.32.2
+export K8S_VERSION=1.33.3
 yum -y install kubelet-${K8S_VERSION} kubeadm-${K8S_VERSION} kubectl-${K8S_VERSION} --disableexcludes=kubernetes
 systemctl enable --now kubelet
 ```
@@ -1273,6 +1516,18 @@ systemctl enable --now kubelet
 
 
 安装最新版
+
+:::tip 使用ansible执行
+
+```shell
+# 安装 kubelet、kubeadm、kubectl
+ansible all -b -m yum -a "name='kubelet,kubeadm,kubectl' state=present disable_excludes='kubernetes'"
+
+# 启动并开机自启 kubelet
+ansible all -b -m systemd -a "name=kubelet enabled=yes state=started"
+```
+
+:::
 
 ```bash
 yum -y install kubelet kubeadm kubectl --disableexcludes=kubernetes
@@ -1287,9 +1542,30 @@ systemctl enable --now kubelet
 
 如果做了 `kubectl` 命令的别名 `k` ，则还需要添加如下配置才可以使 `k` 像 `kubectl` 一样的命令补全功能
 
+:::tip 使用ansible执行
+
+```shell
+ansible all -b -m lineinfile -a "path=~/.bashrc line='alias k=kubectl' state=present"
+ansible all -b -m lineinfile -a "path=~/.bashrc line='complete -o default -F __start_kubectl k' state=present"
+```
+
+:::
+
 ```shell
 echo 'alias k=kubectl' >> ~/.bashrc
 echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
+```
+
+:::
+
+:::tip 使用ansible执行
+
+```shell
+# 安装 bash-completion
+ansible all -b -m yum -a "name=bash-completion state=present"
+
+# 给 root 用户的 bashrc 添加 kubectl 自动补全
+ansible all -b -m lineinfile -a "path=~/.bashrc line='source <(kubectl completion bash)' state=present"
 ```
 
 :::
@@ -1304,8 +1580,6 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc && source ~/.bashrc
 ## 使用kubeadm创建集群
 
 [官方文档](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
-
-
 
 ### 初始化master节点
 
@@ -1664,7 +1938,7 @@ etcd:
     dataDir: /var/lib/etcd
 imageRepository: registry.aliyuncs.com/google_containers
 kind: ClusterConfiguration
-kubernetesVersion: 1.31.2
+kubernetesVersion: 1.33.3
 networking:
   dnsDomain: cluster.local
   serviceSubnet: 10.96.0.0/12
@@ -1734,7 +2008,7 @@ kubeadm config images pull --image-repository registry.aliyuncs.com/google_conta
 kubeadm init \
 --apiserver-advertise-address=10.0.0.12 \
 --image-repository registry.aliyuncs.com/google_containers \
---kubernetes-version v1.30.0 \
+--kubernetes-version v1.33.3 \
 --service-cidr=10.96.0.0/16 \
 --pod-network-cidr=10.244.0.0/16
 ```
@@ -1746,24 +2020,23 @@ kubeadm init \
 完整输出如下
 
 ```bash
-[init] Using Kubernetes version: v1.32.2
+[init] Using Kubernetes version: v1.33.3
 [preflight] Running pre-flight checks
 [preflight] Pulling images required for setting up a Kubernetes cluster
 [preflight] This might take a minute or two, depending on the speed of your internet connection
 [preflight] You can also perform this action beforehand using 'kubeadm config images pull'
-W0226 20:08:09.270938   40112 checks.go:846] detected that the sandbox image "" of the container runtime is inconsistent with that used by kubeadm.It is recommended to use "registry.aliyuncs.com/google_containers/pause:3.10" as the CRI sandbox image.
 [certs] Using certificateDir folder "/etc/kubernetes/pki"
 [certs] Generating "ca" certificate and key
 [certs] Generating "apiserver" certificate and key
-[certs] apiserver serving cert is signed for DNS names [k8s-master01 kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10.0.0.10]
+[certs] apiserver serving cert is signed for DNS names [k8s-master01 kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10.0.0.20]
 [certs] Generating "apiserver-kubelet-client" certificate and key
 [certs] Generating "front-proxy-ca" certificate and key
 [certs] Generating "front-proxy-client" certificate and key
 [certs] Generating "etcd/ca" certificate and key
 [certs] Generating "etcd/server" certificate and key
-[certs] etcd/server serving cert is signed for DNS names [k8s-master01 localhost] and IPs [10.0.0.10 127.0.0.1 ::1]
+[certs] etcd/server serving cert is signed for DNS names [k8s-master01 localhost] and IPs [10.0.0.20 127.0.0.1 ::1]
 [certs] Generating "etcd/peer" certificate and key
-[certs] etcd/peer serving cert is signed for DNS names [k8s-master01 localhost] and IPs [10.0.0.10 127.0.0.1 ::1]
+[certs] etcd/peer serving cert is signed for DNS names [k8s-master01 localhost] and IPs [10.0.0.20 127.0.0.1 ::1]
 [certs] Generating "etcd/healthcheck-client" certificate and key
 [certs] Generating "apiserver-etcd-client" certificate and key
 [certs] Generating "sa" key and public key
@@ -1783,9 +2056,14 @@ W0226 20:08:09.270938   40112 checks.go:846] detected that the sandbox image "" 
 [kubelet-start] Starting the kubelet
 [wait-control-plane] Waiting for the kubelet to boot up the control plane as static Pods from directory "/etc/kubernetes/manifests"
 [kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s
-[kubelet-check] The kubelet is healthy after 504.202261ms
-[api-check] Waiting for a healthy API server. This can take up to 4m0s
-[api-check] The API server is healthy after 3.519925387s
+[kubelet-check] The kubelet is healthy after 1.002491732s
+[control-plane-check] Waiting for healthy control plane components. This can take up to 4m0s
+[control-plane-check] Checking kube-apiserver at https://10.0.0.20:6443/livez
+[control-plane-check] Checking kube-controller-manager at https://127.0.0.1:10257/healthz
+[control-plane-check] Checking kube-scheduler at https://127.0.0.1:10259/livez
+[control-plane-check] kube-controller-manager is healthy after 2.315389204s
+[control-plane-check] kube-scheduler is healthy after 3.914227531s
+[control-plane-check] kube-apiserver is healthy after 5.503354225s
 [upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
 [kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
 [upload-certs] Skipping phase. Please see --upload-certs
@@ -1820,8 +2098,8 @@ Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
 
 Then you can join any number of worker nodes by running the following on each as root:
 
-kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
-	--discovery-token-ca-cert-hash sha256:dafdfc22fd8670bb77c258232448fbd937fba9ed40428d5d5319a6acdc2c8e96 
+kubeadm join 10.0.0.20:6443 --token abcdef.0123456789abcdef \
+	--discovery-token-ca-cert-hash sha256:976dee883d1f3cd7b65dee012e0f2b6a42f451f852cf5e7ce1ac6053a7a5f3df 
 ```
 
 
@@ -1922,16 +2200,14 @@ kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
 在node节点执行 `kubeadm join` 输出如下
 
 ```bash
-$ kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
-> --discovery-token-ca-cert-hash sha256:dafdfc22fd8670bb77c258232448fbd937fba9ed40428d5d5319a6acdc2c8e96 
 [preflight] Running pre-flight checks
 [preflight] Reading configuration from the "kubeadm-config" ConfigMap in namespace "kube-system"...
-[preflight] Use 'kubeadm init phase upload-config --config your-config.yaml' to re-upload it.
+[preflight] Use 'kubeadm init phase upload-config --config your-config-file' to re-upload it.
 [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
 [kubelet-start] Writing kubelet environment file with flags to file "/var/lib/kubelet/kubeadm-flags.env"
 [kubelet-start] Starting the kubelet
 [kubelet-check] Waiting for a healthy kubelet at http://127.0.0.1:10248/healthz. This can take up to 4m0s
-[kubelet-check] The kubelet is healthy after 516.696778ms
+[kubelet-check] The kubelet is healthy after 502.369018ms
 [kubelet-start] Waiting for the kubelet to perform the TLS Bootstrap
 
 This node has joined the cluster:
@@ -1958,7 +2234,7 @@ kubeadm token create
 ```shell
 $ kubeadm token list
 TOKEN                     TTL         EXPIRES                USAGES                   DESCRIPTION                                                EXTRA GROUPS
-abcdef.0123456789abcdef   23h         2024-05-25T09:32:35Z   authentication,signing   <none>                                                     system:bootstrappers:kubeadm:default-node-token
+abcdef.0123456789abcdef   3h          2025-08-13T20:04:44Z   authentication,signing   <none>                                                     system:bootstrappers:kubeadm:default-node-token
 ```
 
 
@@ -1967,7 +2243,7 @@ abcdef.0123456789abcdef   23h         2024-05-25T09:32:35Z   authentication,sign
 
 ```shell
 $ openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
-8a7e980fb917404682f8cbf5e09d2d822c7a0e541cddeadba28907bffbbd5aaa
+976dee883d1f3cd7b65dee012e0f2b6a42f451f852cf5e7ce1ac6053a7a5f3df
 ```
 
 
@@ -2061,8 +2337,9 @@ The CustomResourceDefinition "installations.operator.tigera.io" is invalid: meta
 :::
 
 ```sh
-export CALICO_VERSION=3.29.2
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v$CALICO_VERSION/manifests/tigera-operator.yaml
+export CALICO_VERSION=3.30.2
+wget https://raw.githubusercontent.com/projectcalico/calico/v$CALICO_VERSION/manifests/tigera-operator.yaml
+kubectl create -f tigera-operator.yaml
 ```
 
 
@@ -2138,9 +2415,9 @@ tigera-operator    tigera-operator-76ff79f7fd-spclf           1/1     Running   
 ```bash
 $ kubectl get node
 NAME           STATUS   ROLES           AGE   VERSION
-k8s-master01   Ready    control-plane   95m   v1.31.2
-k8s-node01     Ready    <none>          94m   v1.31.2
-k8s-node02     Ready    <none>          94m   v1.31.2
-k8s-node03     Ready    <none>          94m   v1.31.2
+k8s-master01   Ready    control-plane   95m   v1.33.3
+k8s-node01     Ready    <none>          94m   v1.33.3
+k8s-node02     Ready    <none>          94m   v1.33.3
+k8s-node03     Ready    <none>          94m   v1.33.3
 ```
 
