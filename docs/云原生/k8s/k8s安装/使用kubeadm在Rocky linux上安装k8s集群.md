@@ -1069,11 +1069,8 @@ disable-pull-on-run: false
 
 :::tip 使用ansible执行
 
-!!!!!!!!! 第二个有问题！！！！！！！！！
-
 ```shell
 ansible all -b -m lineinfile -a "path=~/.bashrc line='source <(crictl completion bash)' state=present"
-ansible all -b -m shell -a "source ~/.bashrc"
 ```
 
 :::
@@ -1193,11 +1190,8 @@ mv nerdctl /usr/local/bin
 
 :::tip 使用ansible执行
 
-!!!!! 第二个有问题 ！！！！！！！
-
 ```shell
 ansible all -b -m lineinfile -a "path=~/.bashrc line='source <(nerdctl completion bash)' state=present"
-ansible all -b -m shell -a "source ~/.bashrc"
 ```
 
 :::
@@ -2190,6 +2184,14 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 [kubeadm join 官方文档](https://kubernetes.io/zh-cn/docs/reference/setup-tools/kubeadm/kubeadm-join/)
 
+:::tip 使用ansible执行
+
+```shell
+ansible node -b -m shell -a "kubeadm join 10.0.0.20:6443 --token abcdef.0123456789abcdef --discovery-token-ca-cert-hash sha256:8d29b6eba645f3f041d3e9984ac75b3e800aaad60a3d61aada4914559bfe032b"
+```
+
+:::
+
 ```bash
 kubeadm join 10.0.0.10:6443 --token abcdef.0123456789abcdef \
 	--discovery-token-ca-cert-hash sha256:dafdfc22fd8670bb77c258232448fbd937fba9ed40428d5d5319a6acdc2c8e96 
@@ -2361,8 +2363,9 @@ wget https://raw.githubusercontent.com/projectcalico/calico/v$CALICO_VERSION/man
 修改pod网段
 
 ```shell
-export POD_CIDR=10.244.0.0/16
-sed -i "s#192.168.0.0/16#$POD_CIDR#" custom-resources.yaml
+export CUST_POD_CIDR=10.244.0.0/16
+export FILE_POD_CIDR=192.168.0.0/16
+sed -i "s#192.168.0.0/16#$CUST_POD_CIDR#" custom-resources.yaml
 ```
 
 
