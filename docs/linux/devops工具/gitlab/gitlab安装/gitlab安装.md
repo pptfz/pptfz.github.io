@@ -170,7 +170,7 @@ curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rp
 
 
 
-### 2.2 安装
+### 安装
 
 :::tip 说明
 
@@ -261,8 +261,10 @@ gitlab-ctl reconfigure
 [gitlab社区版docker hub地址](https://hub.docker.com/r/gitlab/gitlab-ce/tags/)
 
 ```shell
-mkdir -p /data/gitlab
 export GITLAB_HOME=/data/gitlab
+export GITLAB_VERSION=18.2.2
+
+mkdir -p /data/gitlab
 docker run --detach \
    --hostname gitlab.example.com \
    --env GITLAB_OMNIBUS_CONFIG="external_url 'http://gitlab.example.com'" \
@@ -273,7 +275,7 @@ docker run --detach \
    --volume $GITLAB_HOME/logs:/var/log/gitlab \
    --volume $GITLAB_HOME/data:/var/opt/gitlab \
    --shm-size 256m \
-   gitlab/gitlab-ce:<version>-ce.0
+   gitlab/gitlab-ce:${GITLAB_VERSION}-ce.0
 ```
 
 
@@ -300,18 +302,22 @@ export GITLAB_HOME=/data/gitlab
 默认 `https` 和 `ssh` 端口
 
 ```yaml
+export GITLAB_VERSION=18.2.2
+export GITLAB_HOSTNAME=gitlab.example.com
+export GITLAB_DOMAIN=gitlab.example.com
+
 # 自行修改相对应的域名、映射的端口、挂载的卷
 cat > docker-compose.yml <<EOF
 services:
   gitlab:
-    image: gitlab/gitlab-ce:<version>-ce.0
+    image: gitlab/gitlab-ce:${GITLAB_VERSION}-ce.0
     container_name: gitlab
     restart: always
-    hostname: 'gitlab.example.com'
+    hostname: '$GITLAB_HOSTNAME'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
         # Add any other gitlab.rb configuration here, each on its own line
-        external_url 'https://gitlab.example.com'
+        external_url 'https://$GITLAB_DOMAIN'
     ports:
       - '80:80'
       - '443:443'
@@ -329,17 +335,21 @@ EOF
 自定义 `http` 和 `ssh` 端口
 
 ```yaml
+export GITLAB_VERSION=18.2.2
+export GITLAB_HOSTNAME=gitlab.example.com
+export GITLAB_DOMAIN=gitlab.example.com
+
 # 自行修改相对应的域名、映射的端口、挂载的卷
 cat > docker-compose.yml <<EOF
 services:
   gitlab:
-    image: gitlab/gitlab-ce:<version>-ce.0
+    image: gitlab/gitlab-ce:${GITLAB_VERSION}-ce.0
     container_name: gitlab
     restart: always
-    hostname: 'gitlab.example.com'
+    hostname: '$GITLAB_HOSTNAME'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://gitlab.example.com:8929'
+        external_url 'http://$GITLAB_DOMAIN:8929'
         gitlab_rails['gitlab_shell_ssh_port'] = 2424
     ports:
       - '8929:8929'
