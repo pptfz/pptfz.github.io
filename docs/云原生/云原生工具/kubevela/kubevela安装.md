@@ -48,6 +48,18 @@ docker run --rm -it -v ~/.kube:/root/.kube oamdev/vela-cli:version
 
 
 
+查看版本
+
+```shell
+$ vela version     
+CLI Version: 1.10.3
+Core Version: 
+GitRevision: ef9b6f3cc10a4b6871b5698ca41fea3f6b3bcaec
+GolangVersion: go1.24.3
+```
+
+
+
 ## 安装KubeVela Core
 
 <Tabs>

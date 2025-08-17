@@ -1552,6 +1552,8 @@ echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
 
 :::
 
+
+
 :::tip 使用ansible执行
 
 ```shell
