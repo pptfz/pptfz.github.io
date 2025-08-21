@@ -19,6 +19,9 @@ jumpserver的录像文件存放位置默认是 `/data/jumpserver/core/data/media
 使用 `asciinema` 命令可以播放 `cast` 格式的文件
 
 ```shell
-asciinema play 1e79be60-248d-46b5-a6bc-572a2d348b47.cast
+asciinema play 83f86c11-a9a8-4502-bdae-262f95d0d92b
 ```
 
+
+
+![iShot_2025-08-21_09.56.52](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-08-21_09.56.52.GIF)
