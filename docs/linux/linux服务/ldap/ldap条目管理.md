@@ -110,7 +110,7 @@ adding new entry "cn=java,dc=ops,dc=com"
 
 导入后查询
 
-::tip 说明
+:::tip 说明
 
 `"(cn=java)"` 表示查询过滤器（查找 cn=java 的条目），不写默认查找所有
 
