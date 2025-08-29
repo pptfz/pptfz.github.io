@@ -260,14 +260,24 @@ gitlab-ctl reconfigure
 
 [gitlab社区版docker hub地址](https://hub.docker.com/r/gitlab/gitlab-ce/tags/)
 
-```shell
-export GITLAB_HOME=/data/gitlab
-export GITLAB_VERSION=18.2.2
+创建目录 设置环境变量
 
-mkdir -p /data/gitlab
+```shell
+mkdir -p /data/docker-volume/gitlab
+export GITLAB_HOME=/data/docker-volume/gitlab
+export GITLAB_VERSION=18.2.5
+export GITLAB_HOSTNAME=gitlab.example.com
+export GITLAB_DOMAIN=gitlab.example.com
+```
+
+
+
+启动容器
+
+```shell
 docker run --detach \
-   --hostname gitlab.example.com \
-   --env GITLAB_OMNIBUS_CONFIG="external_url 'http://gitlab.example.com'" \
+   --hostname $GITLAB_HOSTNAME \
+   --env GITLAB_OMNIBUS_CONFIG="external_url 'http://$GITLAB_DOMAIN'" \
    --publish 443:443 --publish 80:80 --publish 22:22 \
    --name gitlab \
    --restart always \
@@ -288,11 +298,14 @@ docker run --detach \
 
 
 
-创建gitlab数据目录
+创建目录 设置环境变量
 
 ```shell
-mkdir -p /data/gitlab
-export GITLAB_HOME=/data/gitlab
+mkdir -p /data/docker-volume/gitlab
+export GITLAB_VERSION=18.2.5
+export GITLAB_HOSTNAME=gitlab.example.com
+export GITLAB_DOMAIN=gitlab.example.com
+export GITLAB_HOME=/data/docker-volume/gitlab
 ```
 
 
@@ -302,10 +315,6 @@ export GITLAB_HOME=/data/gitlab
 默认 `https` 和 `ssh` 端口
 
 ```yaml
-export GITLAB_VERSION=18.2.2
-export GITLAB_HOSTNAME=gitlab.example.com
-export GITLAB_DOMAIN=gitlab.example.com
-
 # 自行修改相对应的域名、映射的端口、挂载的卷
 cat > docker-compose.yml <<EOF
 services:
@@ -335,10 +344,6 @@ EOF
 自定义 `http` 和 `ssh` 端口
 
 ```yaml
-export GITLAB_VERSION=18.2.2
-export GITLAB_HOSTNAME=gitlab.example.com
-export GITLAB_DOMAIN=gitlab.example.com
-
 # 自行修改相对应的域名、映射的端口、挂载的卷
 cat > docker-compose.yml <<EOF
 services:
