@@ -1,4 +1,4 @@
-# metrics server
+# metrics server安装
 
 [metrics server github地址](https://github.com/kubernetes-sigs/metrics-server)
 
