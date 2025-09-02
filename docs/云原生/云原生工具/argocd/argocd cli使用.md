@@ -1,5 +1,52 @@
 # argocd cli使用
 
+## 安装
+
+[argocd cli官方安装文档](https://argo-cd.readthedocs.io/en/stable/cli_installation/#download-with-curl)
+
+
+
+### 下载二进制文件
+
+```shell
+export ARGOCD_CLI_VERSION=3.1.1
+export ARCHITECTURE=$(
+  case "$(uname -m)" in
+    x86_64) echo amd64 ;;
+    aarch64) echo arm64 ;;
+    *) echo "unsupported"; exit 1 ;;
+  esac
+)
+
+wget https://github.com/argoproj/argo-cd/releases/download/v${ARGOCD_CLI_VERSION}/argocd-linux-${ARCHITECTURE}
+```
+
+
+
+### 移动二进制文件
+
+```shell
+mv argocd-linux-${ARCHITECTURE} /usr/local/bin/argocd && chmod +x /usr/local/bin/argocd  
+```
+
+
+
+### 查看版本
+
+```shell
+$ argocd version
+argocd: v3.1.1+fa342d1
+  BuildDate: 2025-08-25T16:00:16Z
+  GitCommit: fa342d153e0e7942938256aea491a68439a53c44
+  GitTreeState: clean
+  GoVersion: go1.24.6
+  Compiler: gc
+  Platform: linux/arm64
+{"level":"fatal","msg":"Argo CD server address unspecified","time":"2025-09-02T19:15:31+08:00"}
+```
+
+
+
 ## 集群 cluster
 
 ### 登录集群
@@ -33,6 +80,8 @@ Password:
 'admin:login' logged in successfully
 Context 'argocd.ops.com' updated
 ```
+
+
 
 
 
