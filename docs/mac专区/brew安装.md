@@ -11,7 +11,6 @@ import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="官方源" label="官方源" default>
-
 [brew 官方文档](https://brew.sh/zh-cn/)
 
 ```shell
@@ -20,7 +19,6 @@ import TabItem from '@theme/TabItem';
 
   </TabItem>
   <TabItem value="清华大学源" label="清华大学源">
-
 [清华大学源官方文档](https://mirrors4.tuna.tsinghua.edu.cn/help/homebrew/)
 
 首先，需要确保系统中安装了 bash、git 和 curl，对于 macOS 用户需额外要求安装 Command Line Tools (CLT) for Xcode。
@@ -106,15 +104,14 @@ export HOMEBREW_API_DOMAIN="https://mirrors.ustc.edu.cn/homebrew-bottles/api"
 /bin/bash -c "$(curl -fsSL https://mirrors.ustc.edu.cn/misc/brew-install.sh)"
 ```
 
-  </TabItem>
-
 :::
 
 ```shell
 /bin/bash -c "$(curl -fsSL https://github.com/Homebrew/install/raw/HEAD/install.sh)"</Tabs>
 ```
 
-
+  </TabItem>
+</Tabs>
 
 
 
@@ -178,8 +175,6 @@ brew update
 
 **注：如果用户设置了环境变量 `HOMEBREW_BREW_GIT_REMOTE` 和 `HOMEBREW_CORE_GIT_REMOTE`，则每次执行 `brew update` 时，`brew` 程序本身和 Core Tap (`homebrew-core`) 的远程将被自动设置。推荐用户将这两个环境变量设置加入 shell 的 profile 设置中。**
 
-
-
 ```shell
 test -r ~/.bash_profile && echo 'export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"' >> ~/.bash_profile  # bash
 test -r ~/.bash_profile && echo 'export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"' >> ~/.bash_profile
@@ -201,7 +196,7 @@ test -r ~/.zprofile && echo 'export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tu
 
 :::tip 说明
 
-若用户设置了环境变量 HOMEBREW_BREW_GIT_REMOTE，则每次运行 brew update 时将会自动设置远程。推荐用户将环境变量 HOMEBREW_BREW_GIT_REMOTE 加入 shell 的 profile 设置中。
+若用户设置了环境变量 `HOMEBREW_BREW_GIT_REMOTE` ，则每次运行 `brew update` 时将会自动设置远程。推荐用户将环境变量 `HOMEBREW_BREW_GIT_REMOTE` 加入 shell 的 profile 设置中。
 
 ```shell
 # 对于 bash 用户
@@ -273,7 +268,9 @@ brew update
 
   
 
-**注：重置回默认远程后，用户应该删除 shell 的 profile 设置中的环境变量 `HOMEBREW_BREW_GIT_REMOTE` 和 `HOMEBREW_CORE_GIT_REMOTE` 以免运行 `brew update` 时远程再次被更换。**  </TabItem>
+**注：重置回默认远程后，用户应该删除 shell 的 profile 设置中的环境变量 `HOMEBREW_BREW_GIT_REMOTE` 和 `HOMEBREW_CORE_GIT_REMOTE` 以免运行 `brew update` 时远程再次被更换。**  
+
+</TabItem>
   <TabItem value="中科大" label="中科大">
 
 [中科大官方文档](https://mirrors.ustc.edu.cn/help/brew.git.html#_3)
