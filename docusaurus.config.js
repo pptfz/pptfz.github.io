@@ -149,6 +149,12 @@ const config = {
             label: 'devops',
             items: [
               { label: 'devops', to: '/docs/devops' },
+              { label: 'ansible', to: '/docs/ansible' },
+              { label: 'gitea', to: '/docs/gitea' },
+              { label: 'gitlab', to: '/docs/gitlab' },
+              { label: 'jenkins', to: '/docs/jenkins' },
+              { label: 'spug', to: '/docs/spug' },
+              { label: 'walle', to: '/docs/walle' },
             ]
           },
           {
@@ -182,6 +188,7 @@ const config = {
               { label: 'prometheus', to: '/docs/prometheus' },
               { label: 'zabbix', to: '/docs/zabbix' },
               { label: 'grafana', to: '/docs/grafana' },
+              { label: 'nightingale', to: '/docs/nightingale' },
             ]
           }, 
           {
