@@ -146,10 +146,17 @@ const config = {
             ]
           },
           {
+            label: 'devops',
+            items: [
+              { label: 'devops', to: '/docs/devops' },
+            ]
+          },
+          {
             label: 'Linux',
             items: [
               { label: 'Linux服务', to: '/docs/Linux服务' },
               { label: 'Linux命令', to: '/docs/Linux命令' },
+              { label: 'Linux系统', to: '/docs/Linux系统' },
             ]
           },
           {
