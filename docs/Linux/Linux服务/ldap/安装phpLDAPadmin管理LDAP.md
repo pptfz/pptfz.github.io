@@ -330,6 +330,8 @@ mv mozillaOrgPerson.xml bak/
 
 :::
 
+
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -675,9 +677,6 @@ base64:IeijsYKXA0Yzs+WZAZCRodb/UIAdTOSeFimwpgHVh3k=
 | `SERVER_NAME`    | `ip address/port`                       | `:8080`  | 控制容器内部监听的端口（phpLDAPadmin 对外暴露的端口），一般保持默认，除非你要映射别的端口 |
 
 
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="docker" label="docker" default>
