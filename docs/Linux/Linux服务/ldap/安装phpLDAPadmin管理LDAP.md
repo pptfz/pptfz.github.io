@@ -330,6 +330,12 @@ mv mozillaOrgPerson.xml bak/
 
 :::
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="docker" label="docker" default>
+
 ```shell
 docker run \
   -d \
@@ -343,6 +349,33 @@ docker run \
   --detach \
   osixia/phpldapadmin:0.9.0
 ```
+
+  </TabItem>
+  <TabItem value="docker compose" label="docker compose">
+
+```shell
+cat > docker-compose.yaml << EOF
+services:
+  phpldapadmin:
+    image: osixia/phpldapadmin:0.9.0
+    container_name: phpldapadmin
+    hostname: phpldapadmin
+    ports:
+      - "8081:80"
+    environment:
+      PHPLDAPADMIN_HTTPS: "false"
+      PHPLDAPADMIN_LDAP_HOSTS: "10.0.0.102"
+    volumes:
+      - phpldapadmin:/container/service/phpldapadmin/assets/config
+    restart: always
+
+volumes:
+  phpldapadmin:
+EOF
+```
+
+  </TabItem>
+</Tabs>
 
 
 
