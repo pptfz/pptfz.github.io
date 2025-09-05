@@ -167,7 +167,7 @@ systemctl restart httpd
 
 :::tip 说明
 
-前搭建openldap服务端中设置的用户名为 `cn=admin,dc=ops,dc=com`
+之前搭建openldap服务端中设置的用户名为 `cn=admin,dc=ops,dc=com`
 
 密码为 `admin`
 
