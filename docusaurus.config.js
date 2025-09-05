@@ -134,11 +134,6 @@ const config = {
             label: '博客', 
             position: 'left'
           },
-          // {
-          //   to: 'docs/你过来啊/你过来啊',
-          //   position: 'right',
-          //   label: '你过来啊',
-          // },
           {
             label: 'mac专区',
             items: [

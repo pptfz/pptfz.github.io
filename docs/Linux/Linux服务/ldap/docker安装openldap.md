@@ -19,6 +19,14 @@ openldap docker 安装有 [bitnami](https://hub.docker.com/r/bitnami/openldap) �
 
 :::
 
+
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="docker" label="docker" default>
+
 ```shell
 docker run \
   -d \
@@ -35,6 +43,39 @@ docker run \
   --restart=always \
   osixia/openldap:1.5.0
 ```
+
+  </TabItem>
+  <TabItem value="docker compose" label="docker compose">
+
+```shell
+cat > docker-compose.yaml << EOF
+services:
+  openldap:
+    image: osixia/openldap:1.5.0
+    container_name: openldap
+    hostname: openldap
+    restart: always
+    environment:
+      LDAP_ORGANISATION: "ops"
+      LDAP_DOMAIN: "ops.com"
+      LDAP_ADMIN_PASSWORD: "admin"
+    ports:
+      - "389:389"
+      - "636:636"
+    volumes:
+      - /data/docker-volume/openldap/data:/var/lib/ldap
+      - /data/docker-volume/openldap/config:/etc/ldap/slapd.d
+    networks:
+      - bridge
+
+networks:
+  bridge:
+    driver: bridge
+EOF
+```
+
+  </TabItem>
+</Tabs>
 
 
 
@@ -90,6 +131,9 @@ result: 0 Success
 
 [docker备份openldap github地址](https://github.com/osixia/docker-openldap-backup)
 
+<Tabs>
+  <TabItem value="docker" label="docker" default>
+
 ```shell
 docker run \
   -d \
@@ -100,6 +144,27 @@ docker run \
   --detach \
   osixia/openldap-backup:1.5.0
 ```
+
+  </TabItem>
+  <TabItem value="docker-compose" label="docker-compose">
+
+```shell
+cat > docker-compose.yaml << EOF
+services:
+  openldap-backup:
+    image: osixia/openldap-backup:1.5.0
+    container_name: openldap-backup
+    hostname: openldap-backup
+    restart: always
+    environment:
+      - LDAP_BACKUP_CONFIG_CRON_EXP=0 5 * * *
+    volumes:
+      - /data/openldap/backup:/data/backup
+EOF
+```
+
+  </TabItem>
+</Tabs>
 
 
 
@@ -135,6 +200,9 @@ docker network create ldap-net
 
 #### 启动容器
 
+<Tabs>
+  <TabItem value="docker" label="docker" default>
+
 ```shell
 docker run -d \
   --name openldap\
@@ -148,6 +216,41 @@ docker run -d \
   -v openldap_data:/bitnami/openldap \
   bitnami/openldap:2.6.10
 ```
+
+  </TabItem>
+  <TabItem value="docker compose" label="docker compose">
+
+```shell
+cat > docker-compose.yaml << EOF
+services:
+  openldap:
+    image: bitnami/openldap:2.6.10
+    container_name: openldap
+    restart: always
+    ports:
+      - "1389:389"
+      - "1636:636"
+    environment:
+      - LDAP_ROOT=dc=ops,dc=com
+      - LDAP_ADMIN_USERNAME=admin
+      - LDAP_ADMIN_PASSWORD=admin
+      - LDAP_ALLOW_ANON_BINDING=no
+    volumes:
+      - openldap_data:/bitnami/openldap
+    networks:
+      - ldap-net
+
+volumes:
+  openldap_data:
+
+networks:
+  ldap-net:
+    driver: bridge
+EOF
+```
+
+  </TabItem>
+</Tabs>
 
 
 

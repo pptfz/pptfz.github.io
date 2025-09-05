@@ -501,6 +501,9 @@ $messages['resetmessage'] = "{login} 您好，<br><br>点击以下链接重置�
 
 #### 启动容器
 
+<Tabs>
+  <TabItem value="docker" label="docker" default>
+
 ```shell
 docker run -d \
   --restart=always \
@@ -511,6 +514,28 @@ docker run -d \
   -v /data/docker-volume/ssp/zh-CN.inc.php:/var/www/lang/zh-CN.inc.php \
   ltbproject/self-service-password:1.7.3
 ```
+
+  </TabItem>
+  <TabItem value="docker compose" label="docker compose">
+
+```shell
+cat > docker-compose.yaml << EOF
+services:
+  self-service-password:
+    image: ltbproject/self-service-password:1.7.3
+    container_name: self-service-password
+    hostname: self-service-password
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - /data/docker-volume/ssp/config.inc.local.php:/var/www/conf/config.inc.local.php
+      - /data/docker-volume/ssp/zh-CN.inc.php:/var/www/lang/zh-CN.inc.php
+EOF
+```
+
+  </TabItem>
+</Tabs>
 
 
 

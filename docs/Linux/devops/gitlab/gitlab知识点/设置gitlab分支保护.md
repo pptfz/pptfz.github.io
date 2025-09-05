@@ -1,0 +1,217 @@
+[toc]
+
+
+
+# 设置gitlab分支保护
+
+## 第一步、新建组、项目、用户
+
+gitlab中以root用户新建一个组，名称任意；一个项目，名称任意；新建测试用户，名称任意
+
+> 这里新建组 test ，新建项目 test，新建用户 xiaoming 并设置密码
+
+
+
+
+
+
+
+
+
+## 第二步、配置公钥及权限
+
+选择另外一台机器，做为测试机，使用如下命令生成密钥对，这里把测试用户 xiaoming 的公钥添加gitlab账户中
+
+```shell
+#生成密钥
+ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' -q
+
+#注册密钥
+cat .ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+添加测试机 root 用户的公钥到 xiaoming 用户中
+
+![iShot_2024-09-02_16.18.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.18.06.png)
+
+
+
+
+
+gitlab root用户端把测试用户 xiaoming 添加到测试项目中并设置权限为 `Developer`
+
+![iShot_2024-09-02_16.19.08](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.19.08.png)
+
+
+
+
+
+## 第三步、测试机克隆gitlab端创建的项目并创建文件提交至master分支
+
+**测试机克隆项目**
+
+⚠️这里自定义了一个域名
+
+⚠️如果gitlab是docker启动的，并且把宿主机的任意ssh端口映射到docker容器中，则在克隆的时候需要注意修改克隆远程仓库的地址形式
+
+```shell
+错误地址：git remote add origin git@10.0.0.13:222/root/jenkins-test1.git
+正确地址： git remote add origin ssh://git@10.0.0.13:222/root/jenkins-test.git
+```
+
+
+
+```shell
+git clone ssh://git@gitlab.my.com:222/test/test.git
+```
+
+
+
+
+
+**测试机创建文件并推送代码**
+
+```shell
+#配置用户、邮箱信息
+$ git config --local user.name 'xiaoming'
+$ git config --local user.email 'xiaoming@163.com'
+$ touch branch-test
+$ git add .
+$ git commit -m 'touch branch-test'
+[master (root-commit) 2583ff0] touch branch-test
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 branch-test
+
+$ git push origin master
+Counting objects: 3, done.
+Writing objects: 100% (3/3), 212 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To ssh://git@gitlab.my.com:222/test/test.git
+ * [new branch]      master -> master
+```
+
+**上述操作可以看到，普通用户 xiaoming 是可以直接推送代码到 master 分支的，接下来做分支保护，只允许项目的master的能推送到master分支**
+
+
+
+## 第四步、gitlab配置分支保护
+
+进入项目， `Settings` --> `Repository`
+
+![iShot_2024-09-02_16.11.08](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.11.08.png)
+
+
+
+`Protected Branches` --> `Expand`
+
+![iShot_2024-09-02_16.20.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.20.37.png)
+
+
+
+
+
+Branch：你要保护的分支(master或者dev)
+
+Allowed to merge：谁有权限去跟这个分支合并
+
+Allowed to push：允许往分支上去推送
+
+![iShot_2024-09-02_16.21.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.21.31.png)
+
+
+
+
+
+设置完成后点击 `Protect`
+
+![iShot_2024-09-02_16.22.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.22.46.png)
+
+
+
+
+
+测试机再次推送，可以看到会提示不被允许
+
+```shell
+$ git add .
+$ git commit -m 'master分支保护测试'
+[master ab7374e] master分支保护测试
+ 1 file changed, 1 insertion(+)
+$ git push origin master
+Counting objects: 5, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 310 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+remote: GitLab: You are not allowed to push code to protected branches on this project.
+To ssh://git@gitlab.my.com:222/test/test.git
+ ! [remote rejected] master -> master (pre-receive hook declined)
+error: failed to push some refs to 'ssh://git@gitlab.my.com:222/test/test.git'
+```
+
+
+
+## 非master用户提交合并请求
+
+xiaoming 用户无法推送代码到 master 分支，因为有 master 分支保护
+
+![iShot_2024-09-02_16.24.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.24.20.png)
+
+
+
+点击 `Merge requests` 发起合并代码请求
+
+![iShot_2024-09-02_16.25.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.25.24.png)
+
+
+
+
+
+点击 `New merge request in test`
+
+![iShot_2024-09-02_16.26.13](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.26.13.png)
+
+
+
+
+
+选择源分支和合并分支
+
+![iShot_2024-09-02_16.26.59](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.26.59.png)
+
+
+
+
+
+
+
+填写标题、描述、提交信息
+
+![iShot_2024-09-02_16.27.59](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.27.59.png)
+
+
+
+
+
+提交完成
+
+![iShot_2024-09-02_16.28.57](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.28.57.png)
+
+
+
+登陆到root用户查看合并请求
+
+![iShot_2024-09-02_16.29.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.29.33.png)
+
+
+
+![iShot_2024-09-02_16.30.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.30.30.png)
+
+
+
+
+
+选择 `Merge` 合并完后就可以看到合并后的代码了
+
+![iShot_2024-09-02_16.31.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.31.31.png)
+

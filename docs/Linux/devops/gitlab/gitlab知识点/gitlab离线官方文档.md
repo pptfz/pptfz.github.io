@@ -1,0 +1,25 @@
+# gitlab离线官方文档
+
+[gitlab官方文档](https://docs.gitlab.com/)
+
+[gitlab离线官方文档说明](https://docs.gitlab.com/archives/)
+
+[gitlab github地址](https://github.com/gitlabhq/gitlabhq)
+
+
+
+gitlab提供了离线文档镜像，只需要启动相对应版本的容器即可
+
+```shell
+docker run -it --rm -p 4000:4000 registry.gitlab.com/gitlab-org/gitlab-docs:15.7
+```
+
+![iShot_2024-09-02_16.44.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.44.21.png)
+
+
+
+
+
+启动容器后访问 `IP:4000`
+
+![iShot_2024-09-02_16.44.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.44.58.png)

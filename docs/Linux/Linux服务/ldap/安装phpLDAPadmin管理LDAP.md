@@ -643,6 +643,12 @@ base64:IeijsYKXA0Yzs+WZAZCRodb/UIAdTOSeFimwpgHVh3k=
 
 
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="docker" label="docker" default>
+
 ```shell
 docker run -d \
   --name phpldapadmin \
@@ -660,6 +666,47 @@ docker run -d \
   -p 8080:8080 \
   phpldapadmin/phpldapadmin:2.1.3
 ```
+
+  </TabItem>
+  <TabItem value="docker compose" label="docker compose">
+
+```sh
+cat > docker-compose.yaml << EOF
+services:
+  phpldapadmin:
+    image: phpldapadmin/phpldapadmin:2.1.3
+    container_name: phpldapadmin
+    environment:
+      APP_KEY: "base64:IeijsYKXA0Yzs+WZAZCRodb/UIAdTOSeFimwpgHVh3k="
+      APP_URL: "http://phpldapadmin.pptfz.cn"
+      LDAP_HOST: "10.0.16.17"
+      LDAP_PORT: "389"
+      LDAP_BASE_DN: "dc=ops,dc=com"
+      LDAP_USERNAME: "cn=admin,dc=ops,dc=com"
+      LDAP_PASSWORD: "admin"
+      LDAP_LOGIN_ATTR: "uid"
+      LDAP_LOGIN_OBJECTCLASS: "inetOrgPerson"
+    volumes:
+      - phpldapadmin_sessions:/app/storage/framework/sessions
+      - phpldapadmin_logs:/app/storage/logs
+    ports:
+      - "8080:8080"
+    restart: always
+
+volumes:
+  phpldapadmin_sessions:
+  phpldapadmin_logs:
+EOF
+```
+
+  </TabItem>
+</Tabs>
+
+
+
+
+
+
 
 
 
