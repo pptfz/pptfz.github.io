@@ -186,6 +186,8 @@ EOF
 
 [bitnami openldap dockerhub 地址](https://hub.docker.com/r/bitnami/openldap)
 
+[bitnami openldap官方文档](https://techdocs.broadcom.com/us/en/vmware-tanzu/bitnami-secure-images/bitnami-secure-images/services/bsi-app-doc/apps-containers-openldap-index.html)
+
 如有问题可以在 [bitnami containers](https://github.com/bitnami/containers) 提
 
 
@@ -203,9 +205,15 @@ docker network create ldap-net
 <Tabs>
   <TabItem value="docker" label="docker" default>
 
+:::tip 说明
+
+如果使用宿主机目录显式指定，即 `-v /data/docker-volume/openldap:/bitnami/openldap` ，则需要设置宿主机目录权限为`1001`  `chown -R 1001:1001 /data/docker-volume/openldap` ，否则会报错 `mkdir: cannot create directory '/bitnami/openldap/data': Permission denied`
+
+:::
+
 ```shell
 docker run -d \
-  --name openldap\
+  --name openldap \
   --network ldap-net \
   -p 389:1389 \
   -p 636:1636 \
