@@ -4,8 +4,6 @@
 
 [sonarqube 官网](https://www.sonarqube.org/)
 
-[sonarqube 7.9(LTS版) 官方文档](https://docs.sonarqube.org/7.9/)
-
 [sonarqube dockerhub地址](https://hub.docker.com/_/sonarqube/)
 
 
