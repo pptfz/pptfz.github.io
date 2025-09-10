@@ -1,4 +1,4 @@
-# phpLDAPadmin创建用户
+# phpldapadmin创建用户
 
 ## 1.点击 `创建新条目`
 
