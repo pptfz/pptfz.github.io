@@ -4,6 +4,11 @@
 
 [docker备份openldap github地址](https://github.com/osixia/docker-openldap-backup)
 
+
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 <Tabs>
   <TabItem value="docker" label="docker" default>
 
