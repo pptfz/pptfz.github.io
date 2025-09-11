@@ -4,7 +4,7 @@
 
 ### shell脚本方式
 
-##### 编辑组文件
+#### 编辑组文件
 
 ```shell
 cat > groups.txt << EOF
@@ -22,7 +22,7 @@ EOF
 
 
 
-##### 批量增加组
+#### 批量增加组
 
 ```shell
 cat > add-groups.sh << 'AAA'
@@ -36,7 +36,7 @@ BIND_DN="cn=admin,dc=ops,dc=com"         # 管理员账号
 BIND_PWD="admin"                            # 管理员密码
 GID_START=1000                            # 起始 GID
 LDAP_HOST="localhost"
-LDAP_HOST_PORT="1389"
+LDAP_HOST_PORT="389"
 
 GROUP_FILE="groups.txt"                   # 组名文件，每行一个组
 
@@ -96,7 +96,7 @@ AAA
 
 
 
-##### 批量删除组
+#### 批量删除组
 
 ```shell
 cat > delete-groups.sh << 'EOF'
@@ -109,7 +109,7 @@ BASE_DN="dc=ops,dc=com"                   # LDAP 根
 BIND_DN="cn=admin,dc=ops,dc=com"         # 管理员账号
 BIND_PWD="admin"                          # 管理员密码
 LDAP_HOST="localhost"
-LDAP_HOST_PORT="1389"
+LDAP_HOST_PORT="389"
 
 GROUP_FILE="groups.txt"                   # 待删除的组名文件，每行一个组
 
@@ -167,11 +167,9 @@ EOF
 
 ## ldap批量操作用户
 
-### 批量增加/删除用户
+### shell脚本方式
 
-#### shell脚本方式
-
-##### 编辑用户文件
+#### 编辑用户文件
 
 ```shell
 cat > users.txt << EOF
@@ -183,7 +181,7 @@ EOF
 
 
 
-##### 批量增加用户
+#### 批量增加用户
 
 ```shell
 cat > add-users.sh << 'AAA'
@@ -194,7 +192,7 @@ BIND_DN="cn=admin,dc=ops,dc=com"
 BIND_PWD="admin"
 
 LDAP_HOST="localhost"
-LDAP_HOST_PORT="1389"
+LDAP_HOST_PORT="389"
 
 GROUP_DN="cn=go,${BASE_DN}"
 GROUP_GID=1000
@@ -236,7 +234,7 @@ AAA
 
 
 
-##### 批量删除用户
+#### 批量删除用户
 
 删除每一个用户前有确认提示
 
@@ -248,7 +246,7 @@ BASE_DN="cn=go,dc=ops,dc=com"
 BIND_DN="cn=admin,dc=ops,dc=com"
 BIND_PWD="admin"
 LDAP_HOST="localhost"
-LDAP_HOST_PORT="1389"
+LDAP_HOST_PORT="389"
 USER_FILE="users.txt"
 
 while read -r USERNAME
@@ -277,7 +275,7 @@ EOF
 
 删除一个组前有确认提示
 
-```
+```shell
 cat > del-go-users.sh << 'EOF'
 #!/bin/bash
 
@@ -286,7 +284,7 @@ BASE_DN="cn=go,dc=ops,dc=com"
 BIND_DN="cn=admin,dc=ops,dc=com"
 BIND_PWD="admin"
 LDAP_HOST="localhost"
-LDAP_HOST_PORT="1389"
+LDAP_HOST_PORT="389"
 USER_FILE="users.txt"
 
 # 提示即将删除的组
@@ -309,7 +307,6 @@ else
     echo "Deletion cancelled."
 fi
 EOF
-
 ```
 
 

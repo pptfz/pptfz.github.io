@@ -1,6 +1,6 @@
 # openldap备份
 
-### 使用docker备份ldap
+## openldap使用osixia镜像
 
 [docker备份openldap github地址](https://github.com/osixia/docker-openldap-backup)
 
@@ -55,4 +55,18 @@ EOF
 解压缩后
 
 ![iShot_2022-09-10_22.42.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-09-10_22.42.58.png)
+
+
+
+
+
+## openldap使用bitnami镜像
+
+
+
+
+
+
+
+
 
