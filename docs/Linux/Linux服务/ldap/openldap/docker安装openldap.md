@@ -39,7 +39,6 @@ docker run \
   -e LDAP_ADMIN_PASSWORD="admin" \
   --name openldap \
   --hostname openldap \
-  --network bridge \
   --restart=always \
   osixia/openldap:1.5.0
 ```
@@ -65,12 +64,6 @@ services:
     volumes:
       - /data/docker-volume/openldap/data:/var/lib/ldap
       - /data/docker-volume/openldap/config:/etc/ldap/slapd.d
-    networks:
-      - bridge
-
-networks:
-  bridge:
-    driver: bridge
 EOF
 ```
 

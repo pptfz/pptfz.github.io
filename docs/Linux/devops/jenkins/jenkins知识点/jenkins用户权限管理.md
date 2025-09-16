@@ -2,6 +2,10 @@
 
 # jenkins用户权限管理
 
+[Jenkins Role-Strategy plugin github地址](https://github.com/jenkinsci/role-strategy-plugin)
+
+[Role-based Authorization Strategy jenkins地址](https://plugins.jenkins.io/role-strategy/)
+
 
 
 ## 1.安装插件 `Role-based Authorization Strategy`
