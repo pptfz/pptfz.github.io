@@ -1,4 +1,4 @@
-# openldap备份
+# openldap备份恢复
 
 
 
@@ -8,7 +8,11 @@
 
 
 
-### 支持的环境变量
+### 备份
+
+使用 [osixia/openldap](https://hub.docker.com/r/osixia/openldap) 安装的openldap可以使用 [docker-openldap-backup](https://github.com/osixia/docker-openldap-backup) 镜像进行备份
+
+#### 支持的环境变量
 
 | 变量名                        | 说明                     |
 | ----------------------------- | ------------------------ |
@@ -18,7 +22,7 @@
 
 
 
-### 需要注意的点
+#### 需要注意的点
 
 :::caution 注意
 
@@ -49,7 +53,7 @@ services:
 
 
 
-### 启动备份容器
+#### 启动备份容器
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -100,9 +104,9 @@ EOF
 
 
 
-### 查看备份文件
+#### 查看备份文件
 
-然后会在 `/data/openldap/backup`  目录下生成以下备份文件
+会在 `/data/openldap/backup`  目录下生成以下备份文件
 
 ![iShot_2025-09-15_17.40.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-15_17.40.11.png)
 
@@ -518,9 +522,215 @@ modifyTimestamp: 20250911062049Z
 
 
 
+### 恢复
+
+ldap中新建了很多组，其中有用户的组是 `go` 和 `java` ，分别有3个user
+
+![iShot_2025-09-15_17.44.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-15_17.44.48.png)
+
+
+
+#### 模拟删除
+
+手动删除一些数据，删除了 `php` 组，`go` 组和 `java` 组中的某些用户
+
+![iShot_2025-09-17_11.29.53](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_11.29.53.png)
+
+
+
+#### 恢复步骤
+
+##### 第一步 停止openldap容器
+
+```sh
+docker stop openldap
+```
+
+
+
+##### 第二步 启动一个临时容器
+
+:::tip 说明
+
+启动临时容器是为了挂载数据和配置，还需要注意原openldap安装时的持久化目录路径要写对
+
+:::
+
+```shell
+docker run --rm -it \
+  -v /data/docker-volume/openldap/data:/var/lib/ldap \
+  -v /data/docker-volume/openldap/config:/etc/ldap/slapd.d \
+  -v /data/openldap/backup:/backup \
+  osixia/openldap:1.5.0 bash
+```
+
+
+
+启动的临时容器输出如下
+
+```shell
+***  INFO   | 2025-09-17 07:51:19 | CONTAINER_LOG_LEVEL = 3 (info)
+***  INFO   | 2025-09-17 07:51:19 | Search service in CONTAINER_SERVICE_DIR = /container/service :
+***  INFO   | 2025-09-17 07:51:19 | link /container/service/:ssl-tools/startup.sh to /container/run/startup/:ssl-tools
+***  INFO   | 2025-09-17 07:51:19 | link /container/service/slapd/startup.sh to /container/run/startup/slapd
+***  INFO   | 2025-09-17 07:51:19 | link /container/service/slapd/process.sh to /container/run/process/slapd/run
+***  INFO   | 2025-09-17 07:51:19 | Environment files will be proccessed in this order : 
+Caution: previously defined variables will not be overriden.
+/container/environment/99-default/default.startup.yaml
+/container/environment/99-default/default.yaml
+
+To see how this files are processed and environment variables values,
+run this container with '--loglevel debug'
+***  INFO   | 2025-09-17 07:51:19 | Running /container/run/startup/:ssl-tools...
+***  INFO   | 2025-09-17 07:51:19 | Running /container/run/startup/slapd...
+***  INFO   | 2025-09-17 07:51:19 | openldap user and group adjustments
+***  INFO   | 2025-09-17 07:51:19 | get current openldap uid/gid info inside container
+***  INFO   | 2025-09-17 07:51:19 | -------------------------------------
+***  INFO   | 2025-09-17 07:51:19 | openldap GID/UID
+***  INFO   | 2025-09-17 07:51:19 | -------------------------------------
+***  INFO   | 2025-09-17 07:51:19 | User uid: 911
+***  INFO   | 2025-09-17 07:51:19 | User gid: 911
+***  INFO   | 2025-09-17 07:51:19 | uid/gid changed: false
+***  INFO   | 2025-09-17 07:51:19 | -------------------------------------
+***  INFO   | 2025-09-17 07:51:19 | updating file uid/gid ownership
+***  INFO   | 2025-09-17 07:51:19 | No certificate file and certificate key provided, generate:
+***  INFO   | 2025-09-17 07:51:19 | /container/service/slapd/assets/certs/ldap.crt and /container/service/slapd/assets/certs/ldap.key
+2025/09/17 07:51:19 [INFO] generate received request
+2025/09/17 07:51:19 [INFO] received CSR
+2025/09/17 07:51:19 [INFO] generating key: ecdsa-384
+2025/09/17 07:51:19 [INFO] encoded CSR
+2025/09/17 07:51:19 [INFO] signed certificate with serial number 277944086958316277406466799911729315396297533973
+***  INFO   | 2025-09-17 07:51:19 | Link /container/service/:ssl-tools/assets/default-ca/default-ca.pem to /container/service/slapd/assets/certs/ca.crt
+***  INFO   | 2025-09-17 07:51:19 | Start OpenLDAP...
+***  INFO   | 2025-09-17 07:51:19 | Waiting for OpenLDAP to start...
+***  INFO   | 2025-09-17 07:51:19 | Add TLS config...
+***  INFO   | 2025-09-17 07:51:19 | Disable replication config...
+***  INFO   | 2025-09-17 07:51:19 | Stop OpenLDAP...
+***  INFO   | 2025-09-17 07:51:19 | Configure ldap client TLS configuration...
+***  INFO   | 2025-09-17 07:51:19 | Remove config files...
+***  INFO   | 2025-09-17 07:51:19 | First start is done...
+***  INFO   | 2025-09-17 07:51:19 | Remove file /container/environment/99-default/default.startup.yaml
+***  INFO   | 2025-09-17 07:51:19 | Environment files will be proccessed in this order : 
+Caution: previously defined variables will not be overriden.
+/container/environment/99-default/default.yaml
+
+To see how this files are processed and environment variables values,
+run this container with '--loglevel debug'
+***  INFO   | 2025-09-17 07:51:19 | Running /container/run/process/slapd/run...
+***  INFO   | 2025-09-17 07:51:19 | Running bash...
+root@cdb66a1dcd8c:/# 68ca6877 @(#) $OpenLDAP: slapd 2.4.57+dfsg-1~bpo10+1 (Jan 30 2021 06:59:51) $
+	Debian OpenLDAP Maintainers <pkg-openldap-devel@lists.alioth.debian.org>
+68ca6877 slapd starting
+```
+
+
+
+
+
+##### 第三步 清空数据目录
+
+:::caution 注意
+
+这里清空的是临时容器中的 `/var/lib/ldap/` 对应的是宿主机目录 `/data/docker-volume/openldap/data` ，也就是openldap安装时指定的数据持久化目录，这里也就相当于清除原openldap中的数据目录
+
+:::
+
+```shell
+rm -rf /var/lib/ldap/*
+```
+
+
+
+##### 第四步 进行数据恢复
+
+:::caution 注意
+
+命令最后的 `-n 数字` 这个数字需要先查看openldap数据目录中的主数据库LDIF编号，这里为 `olcDatabase={1}mdb.ldif` ，`-n` 后边对应的数字就是1
+
+```shell
+$ tree /data/docker-volume/openldap/
+/data/docker-volume/openldap/
+├── config
+│   ├── cn=config
+│   │   ├── cn=module{0}.ldif
+│   │   ├── cn=schema
+│   │   │   ├── cn={0}core.ldif
+│   │   │   ├── cn={1}cosine.ldif
+│   │   │   ├── cn={2}nis.ldif
+│   │   │   ├── cn={3}inetorgperson.ldif
+│   │   │   ├── cn={4}ppolicy.ldif
+│   │   │   ├── cn={5}kopano.ldif
+│   │   │   ├── cn={6}openssh-lpk.ldif
+│   │   │   ├── cn={7}postfix-book.ldif
+│   │   │   └── cn={8}samba.ldif
+│   │   ├── cn=schema.ldif
+│   │   ├── olcDatabase={0}config.ldif # 配置数据库
+│   │   ├── olcDatabase={-1}frontend.ldif # 前端数据库
+│   │   ├── olcDatabase={1}mdb # 主数据数据库目录
+│   │   │   ├── olcOverlay={0}memberof.ldif
+│   │   │   └── olcOverlay={1}refint.ldif
+│   │   └── olcDatabase={1}mdb.ldif # 主数据库 LDIF
+│   ├── cn=config.ldif
+│   ├── docker-openldap-was-admin-password-set
+│   └── docker-openldap-was-started-with-tls
+└── data
+    ├── data.mdb
+    └── lock.mdb
+
+6 directories, 21 files
+```
+
+:::
+
+```shell
+slapadd -F /etc/ldap/slapd.d -l /backup/20250917T072301-data -n 1
+```
+
+输出
+
+```shell
+_#################### 100.00% eta   none elapsed            none fast!         
+Closing DB...
+```
+
+
+
+这一步执行成功后就可以退出临时容器了
+
+
+
+##### 第五步 修改目录文件权限
+
+```shell
+chown -R openldap:openldap /var/lib/ldap
+chown -R openldap:openldap /etc/ldap/slapd.d
+```
+
+
+
+##### 第六步 退出容器，启动原 openldap 容器
+
+```shell
+docker start openldap
+```
+
+
+
+启动容器后再次查看，可以看到数据已经恢复了
+
+![iShot_2025-09-17_16.50.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_16.50.06.png)
+
+
+
 
 
 ## openldap使用bitnami镜像
+
+使用 [bitnami/openldap](https://hub.docker.com/r/bitnami/openldap) 安装的openldap无法使用 [docker-openldap-backup](https://github.com/osixia/docker-openldap-backup) 镜像进行备份，需要手动执行命令进行备份
+
+
+
+
 
 
 
