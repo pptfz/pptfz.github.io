@@ -732,13 +732,20 @@ docker start openldap
 
 
 
-
+备份
 
 ```yaml
-
+docker exec openldap slapcat -F /bitnami/openldap/slapd.d -b "dc=zmexing,dc=com" -l /tmp/backup.ldif
+docker cp openldap:/tmp/backup.ldif ./backup-$(date +%Y%m%d).ldif
 ```
 
 
 
 
+
+恢复
+
+```
+slapadd -F /bitnami/openldap/slapd.d -b "dc=zmexing,dc=com" -l backup.ldif 
+```
 
