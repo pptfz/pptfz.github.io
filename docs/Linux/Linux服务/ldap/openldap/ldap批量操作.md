@@ -212,8 +212,7 @@ cat > add-cns.sh << 'AAA'
 # 配置部分
 # ========================
 BASE_DN="dc=ops,dc=com"           # LDAP 根
-OU="ou_name1"                     # 目标 OU 名
-OU_DN="ou=${OU},${BASE_DN}"          # 指定组要放的 OU
+OU=""                             # 目标 OU 名（留空表示不使用 OU）
 BIND_DN="cn=admin,dc=ops,dc=com"  # 管理员账号
 BIND_PWD="admin"                  # 管理员密码
 GID_START=1000                    # 起始 GID
@@ -249,7 +248,15 @@ do
     [[ -z "$GROUPNAME" || "$GROUPNAME" =~ ^# ]] && continue  # 跳过空行/注释
 
     ESCAPED_GROUPNAME=$(escape_dn "$GROUPNAME")
-    DN="cn=${ESCAPED_GROUPNAME},${OU_DN}"
+
+    # 判断 OU 是否设置
+    if [ -n "$OU" ]; then
+        PARENT_DN="ou=${OU},${BASE_DN}"
+    else
+        PARENT_DN="${BASE_DN}"
+    fi
+
+    DN="cn=${ESCAPED_GROUPNAME},${PARENT_DN}"
 
     if ldapsearch -x -H ldap://${LDAP_HOST}:${LDAP_HOST_PORT} \
         -D "${BIND_DN}" -w "${BIND_PWD}" -b "${DN}" cn | grep -q "^cn:"; then
@@ -272,7 +279,6 @@ EOF
 
     CURRENT_GID=$((CURRENT_GID+1))
 done < "$GROUP_FILE"
-
 AAA
 ```
 
@@ -367,34 +373,56 @@ EOF
 
 #### 批量增加用户
 
+:::tip 说明
+
+此脚本同时支持两种 **用户 DN 格式**
+
+- **模式1：只有 CN**（`uid=xxx,cn=xxx,dc=ops,dc=com`）
+- **模式2：OU + CN**（`uid=xxx,ou=xxx,cn=xxx,dc=ops,dc=com`）
+
+:::
+
 ```shell
 cat > add-users.sh << 'AAA'
 #!/bin/bash
 
-BASE_DN="dc=ops,dc=com"
-BIND_DN="cn=admin,dc=ops,dc=com"
-BIND_PWD="admin"
+# ======================
+# 配置部分
+# ======================
+BASE_SUFFIX="dc=ops,dc=com"
+USER_OU=""                # 可选，留空则不加 OU，例如 "ou_name1"
+GROUP_CN="go"          # 组 CN，例如 "go"
+GROUP_GID=1000
+PASSWORD="{SSHA}uUFY4EJIccmbnIZBPMiq06QK4HG9vO/a"  # 默认密码 admin
+EMAIL_DOMAIN="ops.com"
+LOGIN_SHELL=/bin/bash
 
+BIND_DN="cn=admin,${BASE_SUFFIX}"
+BIND_PWD="admin"
 LDAP_HOST="localhost"
 LDAP_HOST_PORT="389"
 
-GROUP_DN="cn=go,${BASE_DN}" # 这里指定用户基于的组
-GROUP_GID=1000
-PASSWORD="{SSHA}uUFY4EJIccmbnIZBPMiq06QK4HG9vO/a" # 创建的用户密码为admin
-DOMAIN="ops.com"
-LOGIN_SHELL=/bin/bash
-
 UID_START=1001
-USER_FILE="users.txt" 
+USER_FILE="users.txt"
 
+# ======================
+# 拼接用户 DN
+# ======================
 while read -r USERNAME
 do
-  EMAIL="${USERNAME}@${DOMAIN}"
+  EMAIL="${USERNAME}@${EMAIL_DOMAIN}"
   USER_UID=$UID_START
 
-  # 注意这里 EOF 不加单引号，保证变量会展开
+  if [ -n "$USER_OU" ]; then
+    USER_DN="uid=${USERNAME},cn=${GROUP_CN},ou=${USER_OU},${BASE_SUFFIX}"
+  else
+    USER_DN="uid=${USERNAME},cn=${GROUP_CN},${BASE_SUFFIX}"
+  fi
+
+  echo "==> 正在创建 ${USER_DN}"
+
   ldapadd -x -H ldap://${LDAP_HOST}:${LDAP_HOST_PORT} -D "${BIND_DN}" -w "${BIND_PWD}" <<EOF
-dn: uid=${USERNAME},${GROUP_DN}
+dn: ${USER_DN}
 objectClass: inetOrgPerson
 objectClass: posixAccount
 objectClass: top
@@ -413,7 +441,6 @@ EOF
 
 done < "$USER_FILE"
 AAA
-
 ```
 
 

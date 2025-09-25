@@ -108,6 +108,14 @@ EOF
 
 会在 `/data/openldap/backup`  目录下生成以下备份文件
 
+:::tip 说明
+
+`config.gz` 对应的是 `/etc/ldap/slapd.d` 配置文件目录
+
+`data.gz` 对应的是 `/var/lib/ldap` 数据目录
+
+:::
+
 ![iShot_2025-09-15_17.40.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-15_17.40.11.png)
 
 
@@ -631,7 +639,7 @@ root@cdb66a1dcd8c:/# 68ca6877 @(#) $OpenLDAP: slapd 2.4.57+dfsg-1~bpo10+1 (Jan 3
 
 :::caution 注意
 
-这里清空的是临时容器中的 `/var/lib/ldap/` 对应的是宿主机目录 `/data/docker-volume/openldap/data` ，也就是openldap安装时指定的数据持久化目录，这里也就相当于清除原openldap中的数据目录
+这里清空的是临时容器中的 `/var/lib/ldap/` ，对应的是宿主机目录 `/data/docker-volume/openldap/data` ，也就是openldap安装时指定的数据持久化目录，这里也就相当于清除原openldap中的数据目录
 
 :::
 
@@ -730,22 +738,121 @@ docker start openldap
 
 
 
+### 备份
+
+:::tip 说明
+
+在 OpenLDAP 里，**数据 (dc=xxx,dc=com)** 和 **配置 (cn=config，包括 schema、ACL 等)** 是分开的两个数据库：
+
+- **业务数据库 (mdb)**：存储你的 `dc=xxx,dc=com` 下的用户、组等。
+- **配置数据库 (cn=config)**：存储全局配置、schema、模块、ACL 等。
+
+:::
 
 
-备份
 
-```yaml
-docker exec openldap slapcat -F /bitnami/openldap/slapd.d -b "dc=zmexing,dc=com" -l /tmp/backup.ldif
-docker cp openldap:/tmp/backup.ldif ./backup-$(date +%Y%m%d).ldif
+#### 备份数据文件
+
+```shell
+# 进入容器执行备份
+slapcat -F /bitnami/openldap/slapd.d -b "dc=ops,dc=com" -l data-backup.ldif
 ```
 
 
 
+#### 备份配置文件
 
-
-恢复
-
+```shell
+# 进入容器执行备份
+slapcat -n 0 -F /bitnami/openldap/slapd.d > config-backup.ldif
 ```
-slapadd -F /bitnami/openldap/slapd.d -b "dc=zmexing,dc=com" -l backup.ldif 
+
+
+
+### 模拟删除
+
+手动删除所有内容
+
+![iShot_2025-09-25_10.40.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-25_10.40.48.png)
+
+
+
+
+
+### 恢复
+
+#### 恢复数据文件
+
+:::caution 注意
+
+直接进行恢复会报错，原因是  `slapadd` 导入的 `backup.ldif` 里面有根条目 `dc=ops,dc=com`，但数据库里已经存在同样的条目，所以报了 `Key already exists` 错误，因此需要先删除根条目
+
+```shell
+$ slapadd -F /bitnami/openldap/slapd.d -b "dc=ops,dc=com" -l data-backup.ldif
+mdb_id2entry_put: mdb_put failed: MDB_KEYEXIST: Key/data pair already exists(-30799) "dc=ops,dc=com"
+=> mdb_tool_entry_put: id2entry_add failed: err=-30799
+=> mdb_tool_entry_put: txn_aborted! MDB_KEYEXIST: Key/data pair already exists (-30799)
+slapadd: could not add entry dn="dc=ops,dc=com" (line=1): txn_aborted! MDB_KEYEXIST: Key/data pair already exists (-30799)
+Closing DB...
 ```
+
+:::
+
+
+
+##### 删除根条目
+
+删除根条目  `dn: dc=ops,dc=com` 
+
+```shell
+# 先进行删除
+ldapdelete -x -r 'dc=ops,dc=com' -H 'ldap://localhost:1389' -D 'cn=admin,dc=ops,dc=com' -w admin
+```
+
+
+
+##### 执行恢复
+
+```shell
+slapadd -F /bitnami/openldap/slapd.d -b "dc=ops,dc=com" -l backup.ldif
+```
+
+
+
+恢复成功后所有内容就都还原了
+
+![iShot_2025-09-25_10.46.47](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-25_10.46.47.png)
+
+
+
+#### 恢复配置文件
+
+:::caution 注意
+
+直接进行恢复会报错，需要先删除容器中  `/bitnami/openldap/slapd.d` 目录下的所有内容
+
+```shell
+$ slapadd -F /bitnami/openldap/slapd.d -n 0 -l config-backup.ldif slapadd: could not add entry dn="cn=config" (line=1): Closing DB...
+```
+
+:::
+
+##### 删除目录下所有内容
+
+```shell
+# 进入容器删除目录下的所有内容
+rm -rf /bitnami/openldap/slapd.d/*
+```
+
+
+
+##### 执行恢复
+
+```shell
+slapadd -F /bitnami/openldap/slapd.d -n 0 -l config-backup.ldif
+```
+
+
+
+恢复成功后需要重启容器才能生效
 

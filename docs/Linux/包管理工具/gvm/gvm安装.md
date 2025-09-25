@@ -12,7 +12,7 @@ gvm是一个go版本管理工具，可以很方便的切换当前系统使用的
 
 ## 2.安装
 
-:::tip说明
+:::tip 说明
 
 如果系统使用的是 `zsh` 则需要将 `bash` 修改为 `zsh` 
 
@@ -39,7 +39,7 @@ bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/bins
 
 脚本内容如下，其中有一行配置 `SRC_REPO=${SRC_REPO:-https://github.com/moovweb/gvm.git}` ，这里的地址是 `github.com` ，由于某些特殊原因，我们需要将这个地址修改为加速地址
 
-:::tip说明
+:::tip 说明
 
 修改
 
