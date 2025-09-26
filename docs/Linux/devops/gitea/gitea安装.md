@@ -278,9 +278,5 @@ DISABLE_REGISTRATION = true
 
 
 
-
-
-
-
 <h3>我喜欢这个软件最重要的一点就是</h3><h2 style={{color: 'red'}}>这个软件支持中文！！！</h2>
 

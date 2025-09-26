@@ -2,19 +2,51 @@
 
 
 
-# CentOS7.5安装jenkins-2.176
+# jenkins安装
 
 [jenkins中文官网](https://jenkins.io/zh/)
 
 [jenkins官网](https://jenkins.io)
 
+[jenkins github](https://github.com/jenkinsci/jenkins)
 
 
-## 1.安装jdk8 
 
-> **jenkins运行依赖jdk**
+## 标准安装
 
-**自行到[oracle官网](https://www.oracle.com/technetwork/java/javase/downloads/index.html)下载jdk**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 
+
+
+
+
+
+### 安装jdk
+
+jenkins版本与jdk版本兼容说明 [官方文档](https://www.jenkins.io/doc/book/platform-information/support-policy-java/)
+
+
+
+
+
+**自行到 [oracle官网](https://www.oracle.com/technetwork/java/javase/downloads/index.html) 下载jdk**
 
 
 
@@ -172,3 +204,13 @@ https://pkg.jenkins.io/redhat-stable/
 **默认语言填写zh_CN**
 
 ![iShot_2024-08-22_17.16.39](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.16.39.png)
+
+
+
+
+
+
+
+
+
+## docker安装
