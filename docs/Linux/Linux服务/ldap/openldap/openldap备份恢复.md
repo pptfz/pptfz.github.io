@@ -852,7 +852,7 @@ rm -rf /bitnami/openldap/slapd.d/*
 slapadd -F /bitnami/openldap/slapd.d -n 0 -l config-backup.ldif
 ```
 
-
+ 
 
 恢复成功后需要重启容器才能生效
 

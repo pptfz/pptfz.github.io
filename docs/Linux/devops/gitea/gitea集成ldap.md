@@ -16,9 +16,39 @@ ldap认证类型有 [LDAP (via BindDN)](https://docs.gitea.cn/usage/authenticati
 
 
 
+## 配置认证源
+
 ldap via BindDN 配置页面
 
 ![iShot_2025-09-18_10.15.34](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-18_10.15.34.png)
+
+
+
+更多详细配置可参考 [官方文档](https://docs.gitea.cn/usage/authentication#ldapvia-binddn)
+
+
+
+绑定DN
+
+```shell
+cn=admin,dc=ops,dc=com
+```
+
+
+
+用户搜索基准
+
+```shell
+ou=ou_name1,dc=ops,dc=com
+```
+
+
+
+用户过滤规则
+
+```shell
+(&(objectClass=posixAccount)(|(uid=%[1]s)(mail=%[1]s)))
+```
 
 
 

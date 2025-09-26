@@ -253,7 +253,28 @@ gitea-db-1   mysql:8              "docker-entrypoint.s…"   db        About a m
 
 gitea配置文件是 `gitea/gitea/conf/app.ini`
 
-例如，手动关闭页面注册按钮，修改 `app.ini ` 文件中的`SHOW_REGISTRATION_BUTTON` 一项
+例如，手动关闭页面注册按钮，修改 `app.ini` 文件中的`DISABLE_REGISTRATION` 一项
+
+```shell
+[service]
+DISABLE_REGISTRATION = true
+```
+
+
+
+
+
+默认是允许注册的
+
+![iShot_2025-09-26_11.40.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-26_11.40.24.png)
+
+
+
+关闭注册后注册按钮就不见了
+
+![iShot_2025-09-26_12.31.00](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-26_12.31.00.png)
+
+
 
 
 
