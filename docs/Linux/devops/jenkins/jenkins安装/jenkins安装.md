@@ -18,199 +18,402 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 
-
-
-
-
-
 ### 安装jdk
 
 jenkins版本与jdk版本兼容说明 [官方文档](https://www.jenkins.io/doc/book/platform-information/support-policy-java/)
 
+| Supported Java versions      | Long term support (LTS) release | Weekly release        |
+| ---------------------------- | ------------------------------- | --------------------- |
+| Java 17 or Java 21           | 2.479.1 (October 2024)          | 2.463 (June 2024)     |
+| Java 11, Java 17, or Java 21 | 2.426.1 (November 2023)         | 2.419 (August 2023)   |
+| Java 11 or Java 17           | 2.361.1 (September 2022)        | 2.357 (June 2022)     |
+| Java 8, Java 11, or Java 17  | 2.346.1 (June 2022)             | 2.340 (March 2022)    |
+| Java 8 or Java 11            | 2.164.1 (March 2019)            | 2.164 (February 2019) |
+| Java 8                       | 2.60.1 (June 2017)              | 2.54 (April 2017)     |
+| Java 7                       | 1.625.1 (October 2015)          | 1.612 (May 2015)      |
 
 
 
 
-**自行到 [oracle官网](https://www.oracle.com/technetwork/java/javase/downloads/index.html) 下载jdk**
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="openjdk" label="openjdk" default>
+
+openjdk安装可参考 [官方文档](https://openjdk.org/install/)
+
+查看可安装版本
+
+```shell
+dnf list available | grep openjdk
+```
 
 
 
-```python
-1.解压缩包
-[root@jenkins ~]# tar xf jdk-8u211-linux-x64.tar.gz -C /usr/local
+安装
 
-2.导出环境变量
-[root@jenkins ~]# cat >/etc/profile.d/jdk8.sh<<'EOF'
-export JAVA_HOME=/usr/local/jdk1.8.0_211
+```shell
+dnf -y install java-21-openjdk
+```
+
+ 
+
+ </TabItem>
+  <TabItem value="oracle jdk" label="oracle jdk">
+
+可在 [oracle官网](https://www.oracle.com/java/technologies/downloads/) 下载jdk
+
+下载安装包
+
+```shell
+wget https://download.oracle.com/java/21/latest/jdk-21_linux-aarch64_bin.tar.gz
+```
+
+
+
+解压缩包
+
+```shell
+tar xf jdk-21_linux-aarch64_bin.tar.gz -C /usr/local
+```
+
+ 
+
+导出环境变量
+
+```shell
+cat > /etc/profile.d/jdk21.sh <<'EOF'
+export JAVA_HOME=/usr/local/jdk-21.0.8
 export PATH=$JAVA_HOME/bin:$JAVA_HOME/jre:$JAVA_HOME/lib:$PATH
 export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 export JAVA_HOME PATH CLASSPATH
 EOF
-
-3.使配置生效
-[root@jenkins ~]# source /etc/profile
-
-4.链接java命令，否则后续启动jenkins会报错
-[root@jenkins ~]# ln -s /usr/local/jdk1.8.0_211/bin/java /usr/bin/java
-
-5.查看java版本
-[root@jenkins ~]# java -version
-java version "1.8.0_211"
-Java(TM) SE Runtime Environment (build 1.8.0_211-b12)
-Java HotSpot(TM) 64-Bit Server VM (build 25.211-b12, mixed mode)
 ```
 
 
 
-## 2.安装jenkins，这里安装长期支持版
+使配置生效
 
-```python
-#安装LTS(长期支持版)
-LTS (长期支持) 版本每12周从常规版本流中选择，作为该时间段的稳定版本。
-[root@jenkins ~]# curl -o /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-
-[root@jenkins ~]# rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-
-[root@jenkins ~]# yum -y install jenkins
-
-
-#安装每周更新版
-每周都会发布一个新版本，为用户和插件开发人员提供错误修复和功能。
-[root@jenkins ~]# curl -o /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
-
-[root@jenkins ~]# rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
-
-[root@jenkins ~]# yum -y install jenkins
-
-
-#安装指定版本
-https://pkg.jenkins.io/redhat-stable/
+```shell
+source /etc/profile
 ```
 
 
 
-## 3.修改jenkins配置文件，让jenkins以root用户运行
+链接命令
 
-```python
-[root@jenkins ~]# sed -i.bak '29cJENKINS_USER="root"' /etc/sysconfig/jenkins
+```shell
+ln -s /usr/local/jdk-21.0.8/bin/java /usr/bin/java
 ```
 
 
 
-## 4.启动jenkins
+查看版本
 
-```python
-#启动jenins并加入开机自启
-[root@jenkins ~]# systemctl enable jenkins && systemctl start jenkins
+```shell
+$ java -version
+java version "21.0.8" 2025-07-15 LTS
+Java(TM) SE Runtime Environment (build 21.0.8+12-LTS-250)
+Java HotSpot(TM) 64-Bit Server VM (build 21.0.8+12-LTS-250, mixed mode, sharing)
+```
+
+ </TabItem>
+</Tabs>
+
+
+
+### 安装jenkins
+
+#### rpm包安装
+
+[jenkins lts版 rpm包官方下载地址](https://get.jenkins.io/redhat-stable/?utm_source=chatgpt.com)
+
+下载安装包
+
+```shell
+wget https://get.jenkins.io/redhat-stable/jenkins-2.516.3-1.1.noarch.rpm
 ```
 
 
 
-## **5.浏览器访问jenkins**
+安装
 
-**jenkins刚启动比较慢，等待启动完成**
-
-![iShot_2024-08-22_17.01.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.01.20.png)
-
-
+```shell
+dnf localinstall jenkins-2.516.3-1.1.noarch.rpm
+```
 
 
 
-**从/var/lib/jenkins/secrets/initialAdminPassword文件按中获取密码**
+#### yum源安装
 
-![iShot_2024-08-22_17.03.04](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.03.04.png)
+<Tabs>
+  <TabItem value="lts版" label="lts版" default>
 
+```shell
+# 下载源
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 
+# 导入key
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
 
+# 安装jenkins
+yum -y install jenkins
+```
 
+  </TabItem>
+  <TabItem value="每周发布版" label="每周发布版">
 
+```shell
+# 下载源
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo
 
+# 导入key
+rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key
 
-**是否安装插件，自行选择**
+# 安装jenkins
+yum -y install jenkins
+```
 
-![iShot_2024-08-22_17.19.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.19.09.png)
-
-
-
-
-
-**选择插件进行安装，必须选择Locale插件，修改jenkins语言**
-
-![iShot_2024-08-22_17.04.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.04.26.png)
-
-
-
-
-
-**等待安装完成**
-
-![iShot_2024-08-22_17.09.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.09.24.png)
-
-
-
-**插件安装完成后创建管理员用户，输入密码、用户全名、邮件地址**
-
-![iShot_2024-08-22_17.10.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.10.51.png)
+  </TabItem>
+</Tabs>
 
 
 
-**jenkins URL默认为主机IP地址加8080端口**
+### 查看jenkins相关配置
 
-![iShot_2024-08-22_17.11.52](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.11.52.png)
+:::tip 说明
 
+高版本的jenkins配置文件目录在 `/var/lib/jenkins`
 
+:::
 
-
-
-**jenkins首界面**
-
-![iShot_2024-08-22_17.13.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.13.32.png)
-
-
-
-
-
-## 6.设置jenkins默认语言为中文
-
-**选择jenkins管理**
-
-![iShot_2024-08-22_17.14.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.14.18.png)
-
-
-
-**配置系统**
-
-![iShot_2024-08-22_17.15.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.15.48.png)
-
-
-
-
-
-**默认语言填写zh_CN**
-
-![iShot_2024-08-22_17.16.39](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_17.16.39.png)
+```shell
+$ egrep -v '^$|#' /usr/lib/systemd/system/jenkins.service
+[Unit]
+Description=Jenkins Continuous Integration Server
+Requires=network.target
+After=network.target
+StartLimitBurst=5
+StartLimitIntervalSec=5m
+[Service]
+Type=notify
+NotifyAccess=main
+ExecStart=/usr/bin/jenkins
+Restart=on-failure
+SuccessExitStatus=143
+User=jenkins
+Group=jenkins
+Environment="JENKINS_HOME=/var/lib/jenkins"
+WorkingDirectory=/var/lib/jenkins
+Environment="JENKINS_WEBROOT=%C/jenkins/war"
+Environment="JAVA_OPTS=-Djava.awt.headless=true"
+Environment="JENKINS_PORT=8080"
+[Install]
+WantedBy=multi-user.target
+```
 
 
 
 
+
+### 启动jenkins
+
+```shell
+systemctl enable jenkins && systemctl start jenkins
+```
+
+
+
+### 访问jenkins
+
+jenkins刚启动比较慢，等待启动完成
+
+![iShot_2025-09-28_15.14.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.14.46.png)
+
+
+
+
+
+从 `/var/lib/jenkins/secrets/initialAdminPassword` 文件按中获取密码
+
+![iShot_2025-09-28_15.16.34](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.16.34.png)
+
+
+
+### 配置jenkins
+
+#### 安装插件
+
+![iShot_2025-09-28_15.19.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.19.32.png)
+
+
+
+
+
+等待安装完成
+
+![iShot_2025-09-28_15.20.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.20.33.png)
+
+
+
+#### 创建管理员用户(可选)
+
+也可以使用admin用户继续
+
+![iShot_2025-09-28_15.24.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.24.21.png)
+
+
+
+#### 确认jenkins访问地址
+
+![iShot_2025-09-28_15.26.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.26.30.png)
+
+
+
+
+
+#### 开始使用
+
+![iShot_2025-09-28_15.30.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.30.26.png)
+
+
+
+
+
+#### jenkins登陆首界面
+
+![iShot_2025-09-28_15.33.13](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.33.13.png)
 
 
 
 
 
 ## docker安装
+
+[jenkins dockerhub](https://hub.docker.com/r/jenkins/jenkins)
+
+[jenkins docker github](https://github.com/jenkinsci/docker/blob/master/README.md)
+
+[jenkins docker安装官方文档](https://www.jenkins.io/doc/book/installing/docker/)
+
+<Tabs>
+  <TabItem value="docker" label="docker" default>
+
+```shell
+docker run \
+  -d \
+  -h jenkins \
+  --name jenkins \
+  --restart=on-failure \
+  -p 8080:8080 \
+  -p 50000:50000 \
+  -v jenkins_home:/var/jenkins_home \
+  jenkins/jenkins:2.516.3-lts-jdk21
+```
+
+  </TabItem>
+  <TabItem value="docker compose" label="docker compose">
+
+```yaml
+cat > docker-compoe.yaml << EOF
+services:
+  jenkins:
+    hostname: jenkins
+    container_name: jenkins
+    restart: on-failure
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    image: jenkins/jenkins:2.516.3-lts-jdk21
+volumes:
+  jenkins_home:
+    name: jenkins_home
+EOF
+```
+
+  </TabItem>
+</Tabs>
+
+
+
+登陆jenkins后如果提示jenkins反向代理配置错误，参考 [官方提供的nginx配置](https://www.jenkins.io/doc/book/system-administration/reverse-proxy-configuration-nginx/) 即可
+
+```nginx
+upstream jenkins {
+  keepalive 32; # keepalive connections
+  server 127.0.0.1:8080; # jenkins ip and port
+}
+
+# Required for Jenkins websocket agents
+map $http_upgrade $connection_upgrade {
+  default upgrade;
+  '' close;
+}
+
+server {
+  listen          80;       # Listen on port 80 for IPv4 requests
+
+  server_name     jenkins.example.com;  # replace 'jenkins.example.com' with your server domain name
+
+  # this is the jenkins web root directory
+  # (mentioned in the output of "systemctl cat jenkins")
+  root            /var/run/jenkins/war/;
+
+  access_log      /var/log/nginx/jenkins.access.log;
+  error_log       /var/log/nginx/jenkins.error.log;
+
+  # pass through headers from Jenkins that Nginx considers invalid
+  ignore_invalid_headers off;
+
+  location ~ "^\/static\/[0-9a-fA-F]{8}\/(.*)$" {
+    # rewrite all static files into requests to the root
+    # E.g /static/12345678/css/something.css will become /css/something.css
+    rewrite "^\/static\/[0-9a-fA-F]{8}\/(.*)" /$1 last;
+  }
+
+  location /userContent {
+    # have nginx handle all the static requests to userContent folder
+    # note : This is the $JENKINS_HOME dir
+    root /var/lib/jenkins/;
+    if (!-f $request_filename){
+      # this file does not exist, might be a directory or a /**view** url
+      rewrite (.*) /$1 last;
+      break;
+    }
+    sendfile on;
+  }
+
+  location / {
+      sendfile off;
+      proxy_pass         http://jenkins;
+      proxy_redirect     default;
+      proxy_http_version 1.1;
+
+      # Required for Jenkins websocket agents
+      proxy_set_header   Connection        $connection_upgrade;
+      proxy_set_header   Upgrade           $http_upgrade;
+
+      proxy_set_header   Host              $http_host;
+      proxy_set_header   X-Real-IP         $remote_addr;
+      proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+      proxy_set_header   X-Forwarded-Proto $scheme;
+      proxy_max_temp_file_size 0;
+
+      #this is the maximum upload size
+      client_max_body_size       10m;
+      client_body_buffer_size    128k;
+
+      proxy_connect_timeout      90;
+      proxy_send_timeout         90;
+      proxy_read_timeout         90;
+      proxy_request_buffering    off; # Required for HTTP CLI commands
+  }
+}
+```
+
+
+
