@@ -27,7 +27,7 @@
 - `Server`
 
   ```shell
-  ldap://10.0.0.99:389
+  10.0.0.99:389
   ```
 
 - `root DN`
@@ -59,10 +59,47 @@
 - `Manager DN/Manager Password`
 
   ```shell
-   cn=admin,dc=ops,dc=com
+  cn=admin,dc=ops,dc=com
+  ```
+
+
+
+- `Display Name LDAP attribute`
+
+  :::tip 说明
+
+  指定用户的显示名称，支持的属性如下
+
+  - `hasSubordinates`
+  - `mail`
+  - `gidNumber`
+  - `cn`
+  - `structuralObjectClass`
+  - `modifiersName`
+  - `creatorsName`
+  - `objectClass`
+  - `loginShell`
+  - `userPassword`
+  - `subschemaSubentry`
+  - `uid`
+  - `entryUUID`
+  - `uidNumber`
+  - `homeDirectory`
+  - `createTimestamp`
+  - `entryCSN`
+  - `sn`
+  - `modifyTimestamp`
+  - `entryDN`
+
+  :::
+
+  ```
+  sn
   ```
 
   
+
+
 
 
 
