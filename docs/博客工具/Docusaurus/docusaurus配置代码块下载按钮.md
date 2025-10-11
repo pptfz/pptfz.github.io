@@ -1,17 +1,35 @@
-import React, { useEffect } from 'react';
+# docusaurus配置代码块下载按钮
 
+[download-button插件](https://prismjs.com/plugins/download-button/)
+
+编辑 `src/theme/Root.js` 新增如下内容
+
+:::tip 说明
+
+主要实现了以下功能
+
+- 通过 `querySelectorAll('pre:not(.pre-wrapper)')` 找到页面中的所有 `<pre>` 代码块；
+
+- 为每个代码块动态添加一个“下载”按钮；
+
+- 鼠标悬停时按钮显示，移开后自动隐藏；
+
+- 自动识别代码语言（如 `language-js`），并根据语言类型生成对应后缀；
+
+- 使用 `Blob` + `a.download` 实现前端文件下载；
+
+- 通过 `MutationObserver` 确保在 Docusaurus 页面切换后仍能自动生效；
+
+- 保持与原生“复制代码”按钮的样式风格一致，不会遮挡或干扰。
+
+:::
+
+```js
 export default function Root({ children }) {
   useEffect(() => {
-    // -------------------------------
-    // live2d widget（右下角 Live2D 看板娘）
-    // -------------------------------
-    const live2dScript = document.createElement('script');
-    live2dScript.src =
-      'https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js';
-    live2dScript.async = true;
-    document.body.appendChild(live2dScript);
-
-    // -------------------------------
+  ......
+  
+      // -------------------------------
     // 添加下载按钮逻辑（核心部分）
     // -------------------------------
     function addDownloadButtons() {
@@ -132,31 +150,12 @@ export default function Root({ children }) {
       observer.disconnect();
     };
   }, []);
+```
 
-  // -------------------------------
-  // 页面内容结构 + 两个右侧 GIF 动画
-  // -------------------------------
-  return (
-    <div>
-      {children}
 
-      {/* 右下角 GIF */}
-      <div className="gifImageBottom">
-        <img
-          src="https://raw.githubusercontent.com/pptfz/picgo-images/master/img/dance-2straps.gif"
-          alt="Bottom GIF"
-          className="gifImage"
-        />
-      </div>
 
-      {/* 右上角 GIF */}
-      <div className="gifImageTop">
-        <img
-          src="https://raw.githubusercontent.com/pptfz/picgo-images/master/img/sing-dance-rap-basketball-transparent.gif"
-          alt="Top GIF"
-          className="gifImageTop"
-        />
-      </div>
-    </div>
-  );
-}
+
+
+效果如下
+
+![iShot_2025-10-11_10.27.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-10-11_10.27.21.png)

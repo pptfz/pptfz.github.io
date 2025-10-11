@@ -52,8 +52,12 @@ const config = {
   trailingSlash: false,
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
-
+  // onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
@@ -255,7 +259,8 @@ const config = {
         // copyright: `Copyright © ${new Date().getFullYear()} 泡泡吐肥皂o <div id="site-uptime"></div>`,
       },
       prism: {
-        additionalLanguages: ['Bash','nginx','Git','ini','JSON'],
+        // https://prismjs.com/#supported-languages
+        additionalLanguages: ['bash','nginx','git','ini','json','docker','yaml'],
         theme: prismThemes.dracula, // 亮色模式下的样式
         darkTheme: prismThemes.dracula, // 暗色模式下的样式
       },
