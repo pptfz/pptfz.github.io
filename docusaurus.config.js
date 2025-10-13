@@ -84,7 +84,7 @@ const config = {
         // Will be passed to @docusaurus/plugin-content-docs (false to disable)
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          remarkPlugins: [remarkMath],
+          remarkPlugins: [remarkMath], 
           rehypePlugins: [rehypeKatex],
         },
         // Will be passed to @docusaurus/plugin-content-blog (false to disable)

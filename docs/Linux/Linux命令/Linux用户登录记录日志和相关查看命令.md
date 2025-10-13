@@ -4,7 +4,7 @@
 
 # Linux用户登录记录日志和相关查看命令总结
 
-## 1.Linux用户登录信息放在三个文件中
+## Linux用户登录信息放在三个文件中
 
 :::tip 说明
 
@@ -24,7 +24,7 @@
 
 
 
-### 1.1 `/var/run/utmp`
+### `/var/run/utmp`
 
 :::tip 说明
 
@@ -63,7 +63,7 @@ $ uptime
 
 
 
-### 1.2 `/var/log/wtmp`
+### `/var/log/wtmp`
 
 :::tip 说明
 
@@ -91,7 +91,7 @@ root     pts/0        12.66.16.12   Mon Oct 28 15:22 - 20:20  (04:57)
 
 
 
-### 1.3 `/var/log/btmp`
+### `/var/log/btmp`
 
 :::tip 说明
 
@@ -111,7 +111,7 @@ btmp begins Fri Nov  1 03:49:01 2019
 
 
 
-## 2.相关命令
+## 相关命令
 
 :::tip 说明
 
@@ -132,7 +132,7 @@ btmp begins Fri Nov  1 03:49:01 2019
 
 
 
-### 2.1 lastlog
+### lastlog
 
 :::tip 说明
 
@@ -160,7 +160,7 @@ nobody                                     **Never logged in**
 
 
 
-### 2.2 last
+### last
 
 :::tip 说明
 
@@ -188,7 +188,7 @@ root     pts/1        23.6.55.122   Mon Oct 28 20:19 - 00:54  (04:35)
 
 
 
-### 2.3 lastb
+### lastb
 
 :::tip 说明
 
@@ -206,7 +206,7 @@ btmp begins Fri Nov  1 03:49:01 2019
 
 
 
-### 2.4 ac
+### ac
 
 :::tip 说明
 
@@ -223,7 +223,7 @@ $ ac
 
 
 
-### 2.5 who
+### who
 
 :::tip 说明
 
@@ -247,7 +247,7 @@ NAME     LINE         TIME             IDLE          PID COMMENT
 
 
 
-### 2.6 w
+### w
 
 :::tip 说明
 
@@ -269,7 +269,7 @@ root     pts/1    23.66.1.2   21:17    4.00s  0.04s  0.00s w
 
 
 
-### 2.7 users
+### users
 
 :::tip 说明
 
@@ -288,7 +288,7 @@ root root
 
 
 
-### 2.8 utmpdump
+### utmpdump
 
 :::tip 说明
 
@@ -362,5 +362,4 @@ Utmp undump of hehe
 $ wc -l /var/log/wtmp.bak
 5 /var/log/wtmp.bak
 ```
-
 

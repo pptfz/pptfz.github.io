@@ -84,7 +84,7 @@ VM环境
 
 [ingress-nginx官方安装文档](https://kubernetes.github.io/ingress-nginx/deploy/)
 
-
+[k8s版本与ingress-nginx版本兼容列表](https://github.com/kubernetes/ingress-nginx?tab=readme-ov-file#supported-versions-table)
 
 添加helm仓库
 

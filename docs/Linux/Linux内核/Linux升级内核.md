@@ -19,7 +19,7 @@ $ uname -r
 
 ## 1.rpm包安装
 
-[参考官方网站](https://elrepo.org/tiki/HomePage)
+[参考官方网站](https://elrepo.org/wiki/)
 
 [CentOS7内核rpm包下载地址](https://elrepo.org/linux/kernel/el7/x86_64/RPMS/)
 
@@ -45,8 +45,8 @@ yum -y install https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
 
 :::tip 说明
 
-- [kernel-lt](https://elrepo.org/tiki/kernel-lt)：长期维护版
-- [kernel-ml](https://elrepo.org/tiki/kernel-ml)：最新稳定版
+- [kernel-lt](https://elrepo.org/wiki/doku.php?id=kernel-lt)：长期维护版
+- [kernel-ml](https://elrepo.org/wiki/doku.php?id=kernel-ml)：最新稳定版
 
 
 
@@ -126,7 +126,7 @@ reboot
 
 :::tip 说明
 
-6.x的内核需要gcc5.1+版本，更多要求可以参考[官方文档](https://docs.kernel.org/process/changes.html#changes)
+6.x的内核需要gcc5.1+版本，更多要求可以参考 [官方文档](https://docs.kernel.org/process/changes.html#changes)
 
 :::
 
