@@ -1,4 +1,4 @@
-# jenkins对接ldap
+# jenkins集成ldap
 
 ## 安装ldap插件
 
@@ -93,7 +93,7 @@
 
   :::
 
-  ```
+  ```shell
   sn
   ```
 
