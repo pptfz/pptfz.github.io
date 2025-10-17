@@ -18,7 +18,7 @@
 
 `系统管理` -> `安全` -> `全局安全配置` -> `安全域`
 
-![iShot_2025-09-28_19.00.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_19.00.09.png)
+![iShot_2025-10-13_16.40.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-10-13_16.40.20.png)
 
 
 
