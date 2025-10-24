@@ -29,14 +29,51 @@ send-feishu-webhook/
 
 ### 配置文件 `config.yaml`
 
+:::tip 说明
+
+- 支持webhook安全校验
+- 根据不同数据源发送消息到不同webhook 
+- 开头的配置是作为**回退配置**，当工单的数据源没有在任何webhook组中匹配到时使用
+
+:::
+
 ```yaml
 feishu:
+  # 默认发送webhook
   webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/xxx"
-  secret: "xxxxxxxxxxxxxxxxxxxxxxx"
+  secret: "xxx"
 
 server:
   port: 5000
   mode: "release"
+
+webhooks:
+  ###################################################### ai ######################################################
+  - name: "ai"
+    data_sources:
+      - "airobot"
+      - "aiteacher"
+    webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/xxx"
+    secret: "xxx"
+
+  ###################################################### game ######################################################
+  - name: "game"
+    data_sources:
+      - "gameaaa"
+      - "gamebbb"
+    webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/xxx"
+    secret: "xxx"
+
+
+  ###################################################### 后续新增 ######################################################
+  # 全新的webhook组
+  - name: "webhook_new_team"
+    data_sources:
+      - "team_a_db"
+      - "team_b_db" 
+      - "analytics_db"
+    webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/ffffffffffff"
+    secret: "secret_for_new_team"
 ```
 
 
@@ -57,6 +94,7 @@ import (
     "net/http"
     "os"
     "regexp"
+    "strconv"
     "strings"
     "time"
 
@@ -66,8 +104,9 @@ import (
 
 // Config 配置文件结构体
 type Config struct {
-    Feishu FeishuConfig `yaml:"feishu"`
-    Server ServerConfig `yaml:"server"`
+    Feishu    FeishuConfig     `yaml:"feishu"`
+    Server    ServerConfig     `yaml:"server"`
+    Webhooks  []WebhookConfig  `yaml:"webhooks"`
 }
 
 type FeishuConfig struct {
@@ -78,6 +117,13 @@ type FeishuConfig struct {
 type ServerConfig struct {
     Port int    `yaml:"port"`
     Mode string `yaml:"mode"`
+}
+
+type WebhookConfig struct {
+    Name        string   `yaml:"name"`        // webhook名称标识
+    DataSources []string `yaml:"data_sources"` // 该webhook对应的数据源列表
+    WebhookURL  string   `yaml:"webhook_url"`  // 飞书webhook地址
+    Secret      string   `yaml:"secret"`       // 签名密钥
 }
 
 // 全局配置变量
@@ -115,14 +161,30 @@ func InitConfig() {
 
     AppConfig = config
     log.Printf("Configuration loaded successfully from %s", configPath)
+    log.Printf("Loaded %d webhook configurations", len(config.Webhooks))
+    
+    // 打印webhook配置信息
+    for _, webhook := range config.Webhooks {
+        log.Printf("Webhook '%s' handles data sources: %v", 
+            webhook.Name, webhook.DataSources)
+    }
 }
 
-// calculateSignature 计算签名
-func calculateSignature(secret string, timestamp int64) string {
+// calculateFeishuSignature 计算飞书webhook签名（修正版）
+func calculateFeishuSignature(secret string, timestamp int64) string {
+    // 飞书签名规则：timestamp + "\n" + secret
     stringToSign := fmt.Sprintf("%d\n%s", timestamp, secret)
-    hmacCode := hmac.New(sha256.New, []byte(stringToSign))
-    hmacCode.Write([]byte(stringToSign))
-    signature := base64.StdEncoding.EncodeToString(hmacCode.Sum(nil))
+    
+    log.Printf("String to sign: %q", stringToSign)
+    
+    // 使用HMAC-SHA256算法计算签名
+    h := hmac.New(sha256.New, []byte(stringToSign))
+    h.Write([]byte("")) // 飞书签名是对空字符串进行签名
+    
+    // 对结果进行Base64编码
+    signature := base64.StdEncoding.EncodeToString(h.Sum(nil))
+    
+    log.Printf("Calculated signature: %s", signature)
     return signature
 }
 
@@ -158,6 +220,40 @@ func extractMarkdownText(data map[string]interface{}) []string {
     }
 
     return result
+}
+
+// extractDataSource 从消息内容中提取数据源信息
+func extractDataSource(lines []string) string {
+    for _, line := range lines {
+        key, value := cleanInputLine(line)
+        if key == "数据源" && value != "" {
+            log.Printf("Found data source: %s", value)
+            return value
+        }
+    }
+    log.Println("Data source not found in message")
+    return ""
+}
+
+// findWebhookConfig 根据数据源名称查找对应的webhook配置
+func findWebhookConfig(dataSourceName string) *WebhookConfig {
+    if AppConfig == nil || len(AppConfig.Webhooks) == 0 {
+        log.Println("No webhook configurations available")
+        return nil
+    }
+
+    // 遍历所有webhook配置，查找数据源是否在该webhook的数据源列表中
+    for _, webhook := range AppConfig.Webhooks {
+        for _, ds := range webhook.DataSources {
+            if ds == dataSourceName {
+                log.Printf("Found matching webhook '%s' for data source: %s", webhook.Name, dataSourceName)
+                return &webhook
+            }
+        }
+    }
+
+    log.Printf("No matching webhook found for data source: %s", dataSourceName)
+    return nil
 }
 
 // isRedundantTitleLine 判断是否为冗余的标题行
@@ -282,23 +378,31 @@ func formatNotificationContent(lines []string) string {
     return strings.Join(formattedLines, "\n")
 }
 
-// sendFeishuNotification 发送通知到飞书（优化版）
-func sendFeishuNotification(lines []string) {
-    if AppConfig == nil {
-        log.Println("Configuration not initialized")
+// sendFeishuNotification 发送通知到飞书（修复签名问题）
+func sendFeishuNotification(lines []string, webhookConfig *WebhookConfig) {
+    if webhookConfig == nil {
+        log.Println("No webhook configuration provided")
         return
     }
 
+    // 使用秒级时间戳
     timestamp := time.Now().Unix()
-    signature := calculateSignature(AppConfig.Feishu.Secret, timestamp)
+    
+    // 检查是否需要签名
+    var signature string
+    if webhookConfig.Secret != "" {
+        signature = calculateFeishuSignature(webhookConfig.Secret, timestamp)
+        log.Printf("Using signature for secure webhook")
+    } else {
+        log.Printf("No secret provided, sending without signature")
+    }
 
     // 重新格式化消息内容
     formattedContent := formatNotificationContent(lines)
 
+    // 构建请求数据
     sendData := map[string]interface{}{
-        "timestamp": timestamp,
-        "sign":      signature,
-        "msg_type":  "interactive",
+        "msg_type": "interactive",
         "card": map[string]interface{}{
             "config": map[string]interface{}{
                 "wide_screen_mode": true,
@@ -322,16 +426,28 @@ func sendFeishuNotification(lines []string) {
         },
     }
 
+    // 如果启用了安全校验，添加timestamp和sign字段
+    if webhookConfig.Secret != "" {
+        sendData["timestamp"] = strconv.FormatInt(timestamp, 10)
+        sendData["sign"] = signature
+    }
+
     jsonData, err := json.Marshal(sendData)
     if err != nil {
         log.Printf("Error marshaling JSON: %v", err)
         return
     }
 
-    log.Printf("Webhook URL: %s", AppConfig.Feishu.WebhookURL)
+    log.Printf("Sending to webhook: %s", webhookConfig.Name)
+    log.Printf("Webhook URL: %s", webhookConfig.WebhookURL)
+    log.Printf("Timestamp: %d", timestamp)
+    if webhookConfig.Secret != "" {
+        log.Printf("Signature: %s", signature)
+    }
     log.Printf("Request Body: %s", string(jsonData))
 
-    resp, err := http.Post(AppConfig.Feishu.WebhookURL, "application/json", strings.NewReader(string(jsonData)))
+    // 发送请求
+    resp, err := http.Post(webhookConfig.WebhookURL, "application/json", strings.NewReader(string(jsonData)))
     if err != nil {
         log.Printf("Error sending request: %v", err)
         return
@@ -344,12 +460,14 @@ func sendFeishuNotification(lines []string) {
         return
     }
 
-    log.Printf("Response: %d %s", resp.StatusCode, string(body))
+    log.Printf("Response Status: %d", resp.StatusCode)
+    log.Printf("Response Body: %s", string(body))
 
     if resp.StatusCode == 200 {
-        log.Println("Notification sent successfully.")
+        log.Printf("Notification sent successfully to webhook: %s", webhookConfig.Name)
     } else {
-        log.Printf("Failed to send notification. Status code: %d, Response: %s", resp.StatusCode, string(body))
+        log.Printf("Failed to send notification to webhook %s. Status code: %d, Response: %s", 
+            webhookConfig.Name, resp.StatusCode, string(body))
     }
 }
 
@@ -368,9 +486,34 @@ func handleYearningNotification(c *gin.Context) {
 
     // 提取 markdown 的 text 字段并逐行处理
     lines := extractMarkdownText(data)
+    
+    // 提取数据源信息
+    dataSourceName := extractDataSource(lines)
+    
+    // 根据数据源查找对应的webhook配置
+    var webhookConfig *WebhookConfig
+    if dataSourceName != "" {
+        webhookConfig = findWebhookConfig(dataSourceName)
+    }
+    
+    // 如果没有找到对应的webhook配置，使用默认配置
+    if webhookConfig == nil {
+        log.Println("Using default feishu configuration")
+        if AppConfig != nil {
+            webhookConfig = &WebhookConfig{
+                Name:       "default",
+                WebhookURL: AppConfig.Feishu.WebhookURL,
+                Secret:     AppConfig.Feishu.Secret,
+            }
+        } else {
+            log.Println("No configuration available")
+            c.JSON(http.StatusInternalServerError, gin.H{"error": "Configuration not available"})
+            return
+        }
+    }
 
-    // 发送提取内容到飞书
-    sendFeishuNotification(lines)
+    // 发送提取内容到对应的飞书群
+    sendFeishuNotification(lines, webhookConfig)
 
     c.JSON(http.StatusOK, gin.H{"message": "Notification processed."})
 }
@@ -395,6 +538,7 @@ func main() {
         log.Fatalf("Failed to start server: %v", err)
     }
 }
+
 ```
 
 

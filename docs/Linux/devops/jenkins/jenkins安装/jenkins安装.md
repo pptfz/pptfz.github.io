@@ -309,6 +309,7 @@ docker run \
   --restart=on-failure \
   -p 8080:8080 \
   -p 50000:50000 \
+  -e TZ=Asia/Shanghai \
   -v jenkins_home:/var/jenkins_home \
   jenkins/jenkins:2.516.3-lts-jdk21
 ```
@@ -328,6 +329,8 @@ services:
       - 50000:50000
     volumes:
       - jenkins_home:/var/jenkins_home
+    environment:
+      - TZ=Asia/Shanghai
     image: jenkins/jenkins:2.516.3-lts-jdk21
 volumes:
   jenkins_home:
