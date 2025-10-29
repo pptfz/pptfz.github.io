@@ -260,7 +260,7 @@ const config = {
       },
       prism: {
         // https://prismjs.com/#supported-languages
-        additionalLanguages: ['bash','nginx','git','ini','json','docker','yaml'],
+        additionalLanguages: ['bash','nginx','git','ini','json','docker','yaml','toml'],
         theme: prismThemes.dracula, // 亮色模式下的样式
         darkTheme: prismThemes.dracula, // 暗色模式下的样式
       },
