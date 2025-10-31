@@ -62,7 +62,7 @@ tar xf nexus-3.79.1-04-linux-x86_64.tar.gz
 
 
 
-#### 2.1.4 启动nexus
+### 启动nexus
 
 :::tip
 
@@ -79,7 +79,7 @@ This account is currently not available.
 
 以普通用户运行nexus
 
-- 方式一	前台运行
+- 方式一    前台运行
 
   ```shell
   ./nexus run
@@ -95,28 +95,26 @@ This account is currently not available.
 
   
 
-#### 2.1.5 登陆nexus
-
-`admin` 用户初始密码在 `sonatype-work/nexus3/admin.password!`
-
-点击 `next` ，接下里就是设置 `admin` 用户密码以及是否允许匿名用户登陆
-
-![iShot2022-01-09_16.58.02](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-09_16.58.02.png)
 
 
+## docker安装
 
-### 2.2 docker安装
-
-#### 2.2.1 创建目录
+### 创建目录
 
 ```shell
-export NEXUS_DIR_PATH="/some/dir/nexus-data"
+export NEXUS_DIR_PATH="/data/docker-project/nexus-data"
 [ -d ${NEXUS_DIR_PATH} ] ||  mkdir ${NEXUS_DIR_PATH} && chown -R 200 ${NEXUS_DIR_PATH}
 ```
 
 
 
-#### 2.2.2 启动容器
+### 启动容器
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="docker" label="docker" default>
 
 ```shell
 docker run -d \
@@ -127,7 +125,48 @@ docker run -d \
  -v ${NEXUS_DIR_PATH}:/nexus-data sonatype/nexus3
 ```
 
+  </TabItem>
+  <TabItem value="compose" label="compose">
 
+```yaml
+cat > docker-compose.yaml << EOF
+services:
+  nexus3:
+    ports:
+      - 8081:8081
+    container_name: nexus
+    hostname: nexus
+    restart: always
+    volumes:
+      - /data/docker-project/nexus-data:/nexus-data
+    image: sonatype/nexus3:3.85.0
+EOF
+```
+
+  </TabItem>
+</Tabs>
+
+
+
+
+
+
+
+```shell
+
+```
+
+
+
+
+
+### 登陆nexus
+
+`admin` 用户初始密码在 `sonatype-work/nexus3/admin.password!`
+
+点击 `next` ，接下来就是设置 `admin` 用户密码以及是否允许匿名用户登陆
+
+![iShot2022-01-09_16.58.02](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-09_16.58.02.png)
 
 
 

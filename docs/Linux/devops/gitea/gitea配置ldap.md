@@ -1,4 +1,4 @@
-# gitea集成ldap
+# gitea配置ldap
 
 [gitea集成ldap官方文档](https://docs.gitea.cn/usage/authentication?_highlight=ldap#ldapsimple-auth)
 

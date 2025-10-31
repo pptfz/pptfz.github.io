@@ -1,6 +1,6 @@
 [toc]
 
-# gitlab集成ldap
+# gitlab配置ldap
 
 [gitlab官方文档总地址](https://docs.gitlab.com/)
 

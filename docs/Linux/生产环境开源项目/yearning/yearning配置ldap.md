@@ -1,4 +1,4 @@
-# yearning对接ldap
+# yearning配置ldap
 
 
 
