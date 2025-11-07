@@ -16,11 +16,11 @@
   "dependencies": {
     "@babel/plugin-syntax-jsx": "^7.25.9",
     "@docsearch/js": "^3.6.0",
-    "@docusaurus/core": "^3.9.1",
-    "@docusaurus/preset-classic": "^3.9.1",
-    "@docusaurus/theme-classic": "^3.9.1",
-    "@docusaurus/theme-common": "^3.9.1",
-    "@docusaurus/theme-search-algolia": "^3.9.1",
+    "@docusaurus/core": "^3.9.2",
+    "@docusaurus/preset-classic": "^3.9.2",
+    "@docusaurus/theme-classic": "^3.9.2",
+    "@docusaurus/theme-common": "^3.9.2",
+    "@docusaurus/theme-search-algolia": "^3.9.2",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "dotenv": "^16.4.5",
@@ -37,8 +37,8 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.26.3",
-    "@docusaurus/module-type-aliases": "^3.9.1",
-    "@docusaurus/types": "^3.9.1"
+    "@docusaurus/module-type-aliases": "^3.9.2",
+    "@docusaurus/types": "^3.9.2"
   },
   "browserslist": {
     "production": [
