@@ -198,6 +198,14 @@ const config = {
               { label: 'redis', to: '/docs/redis' },
             ]
           }, 
+          {
+            label: '云厂商知识点',
+            items: [
+              { label: '阿里云', to: '/docs/阿里云' },
+              { label: '腾讯云', to: '/docs/腾讯云' },
+              { label: 'aws', to: '/docs/aws' },
+            ]
+          },
           
           // {
           //   type: 'docSidebar',
