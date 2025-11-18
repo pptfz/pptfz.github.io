@@ -44,7 +44,7 @@ helm3相较于helm2的变化
 
 ```shell
 export HELM_VERSION=3.2.4
-wget https://get.helm.sh/helm-v{HELM_VERSION}-linux-amd64.tar.gz
+wget https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz
 tar xf helm-v{HELM_VERSION}-linux-amd64.tar.gz
 mv linux-amd64/helm /usr/local/bin
 ```
