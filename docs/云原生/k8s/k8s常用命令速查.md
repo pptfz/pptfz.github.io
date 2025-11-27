@@ -246,6 +246,31 @@ notAfter=Nov  6 09:40:40 2034 GMT
 
  
 
+secret证书
+
+```shell
+$ export SECRET_NAME=xxx
+$ kubectl get secret $SECRET_NAME -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -dates
+notBefore=Dec 12 00:00:00 2024 GMT
+notAfter=Dec 12 23:59:59 2025 GMT
+```
+
+
+
+```shell
+$ export SECRET_NAME=xxx
+$ kubectl get secret $SECRET_NAME -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl x509 -noout -text | grep -A 2 -B 2 Validity
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=CN, O=WoTrus CA Limited, CN=WoTrus OV Server CA  [Run by the Issuer]
+        Validity
+            Not Before: Dec 12 00:00:00 2024 GMT
+            Not After : Dec 12 23:59:59 2025 GMT
+```
+
+
+
+
+
  </TabItem>
 </Tabs>
 

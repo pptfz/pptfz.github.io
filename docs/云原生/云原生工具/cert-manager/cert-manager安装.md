@@ -186,7 +186,7 @@ tar xf cert-manager-v1.17.1.tgz && cd cert-manager
   ```yaml
     leaderElection:
       # Override the namespace used for the leader election lease.
-      namespace: "devops"
+      namespace: "cert-manager"
   ```
 
 - 开启crd
@@ -229,7 +229,7 @@ tar xf cert-manager-v1.17.1.tgz && cd cert-manager
 安装
 
 ```shell
-helm upgrade --install cert-manager -n devops --create-namespace .
+helm upgrade --install cert-manager -n cert-manager --create-namespace .
 ```
 
 
