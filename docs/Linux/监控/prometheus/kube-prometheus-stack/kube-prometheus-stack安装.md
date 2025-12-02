@@ -59,6 +59,12 @@ tar xf  kube-prometheus-stack-79.7.1.tgz
 
 
 
+## 安装
+
+```shell
+helm upgrade --install kube-prometheus-stack -n kube-prometheus-stack --create-namespace .
+```
+
 
 
 
