@@ -59,6 +59,12 @@ tar xf  kube-prometheus-stack-79.7.1.tgz
 
 
 
+
+
+
+
+
+
 ## 安装
 
 ```shell
@@ -72,6 +78,61 @@ helm upgrade --install kube-prometheus-stack -n kube-prometheus-stack --create-n
 
 
 
+
+安装完成后发现没有 `prometheus` pod
+
+```shell
+$ k get pod
+NAME                                                        READY   STATUS    RESTARTS   AGE
+alertmanager-kube-prometheus-stack-alertmanager-0           2/2     Running   0          2m51s
+kube-prometheus-stack-grafana-0                             3/3     Running   0          2m52s
+kube-prometheus-stack-kube-state-metrics-787d55fc86-fzs4l   1/1     Running   0          2m52s
+kube-prometheus-stack-operator-d58f748bb-qnmzl              1/1     Running   0          2m52s
+kube-prometheus-stack-prometheus-node-exporter-5rpdx        1/1     Running   0          2m52s
+kube-prometheus-stack-prometheus-node-exporter-qxxbj        1/1     Running   0          2m52s
+kube-prometheus-stack-prometheus-node-exporter-zm9st        1/1     Running   0          2m52s
+```
+
+
+
+
+
+查看日志报错发现是sc的问题
+
+```shell
+$ kubectl logs -n kube-prometheus-stack deploy/kube-prometheus-stack-operator
+ts=2025-12-03T02:04:33.627620701Z level=info caller=/go/pkg/mod/k8s.io/client-go@v0.34.1/tools/cache/shared_informer.go:356 msg="Caches are synced" controller=prometheus
+ts=2025-12-03T02:04:33.627623701Z level=info caller=/workspace/pkg/prometheus/server/operator.go:446 msg="successfully synced all caches" component=prometheus-controller
+ts=2025-12-03T02:04:33.63089128Z level=error caller=/workspace/pkg/operator/resource_reconciler.go:680 msg="Unhandled Error" logger=UnhandledError err="sync \"kube-prometheus-stack/kube-prometheus-stack-prometheus\" failed: storage class \"gluster\" does not exist"
+ts=2025-12-03T02:04:33.634116901Z level=error caller=/workspace/pkg/operator/resource_reconciler.go:680 msg="Unhandled Error" logger=UnhandledError err="sync \"kube-prometheus-stack/kube-prometheus-stack-prometheus\" failed: storage class \"gluster\" does not exist"
+ts=2025-12-03T02:04:33.64053081Z level=error caller=/workspace/pkg/operator/resource_reconciler.go:680 msg="Unhandled Error" logger=UnhandledError err="sync \"kube-prometheus-stack/kube-prometheus-stack-prometheus\" failed: storage class \"gluster\" does not exist"
+ts=2025-12-03T02:04:33.644490472Z level=error caller=/workspace/pkg/operator/resource_reconciler.go:680 msg="Unhandled Error" logger=UnhandledError err="sync \"kube-prometheus-stack/kube-prometheus-stack-prometheus\" failed: storage class \"gluster\" does not exist"
+ts=2025-12-03T02:04:33.649291967Z level=error caller=/workspace/pkg/operator/resource_reconciler.go:680 msg="Unhandled Error" logger=UnhandledError err="sync \"kube-prometheus-stack/kube-prometheus-stack-prometheus\" failed: storage class \"gluster\" does not exist"
+```
+
+
+
+在 `values.yaml` 中，sc默认是 `gluster` 
+
+```yaml
+prometheus:
+  prometheusSpec:
+  ......
+    storageSpec: 
+    ## Using PersistentVolumeClaim
+    ##
+     volumeClaimTemplate:
+       spec:
+         storageClassName: gluster
+         accessModes: ["ReadWriteOnce"]
+         resources:
+           requests:
+             storage: 50Gi
+```
+
+
+
+![iShot_2025-12-03_10.06.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-12-03_10.06.12.png)
 
 
 
