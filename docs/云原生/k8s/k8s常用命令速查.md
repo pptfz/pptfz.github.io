@@ -57,8 +57,8 @@ export KUBE_CONFIG=~/.kube/config
 kubectl config rename-context $OLD_NAME $NEW_NAME
 
 # 修改 users 名
-sed -i "s/name: $OLD_AUTHINFO/name: $NEW_AUTHINFO/g" $KUBE_CONFIG
-sed -i "s/user: $OLD_AUTHINFO/user: $NEW_AUTHINFO/g" $KUBE_CONFIG
+sed -i "s/name: \"$OLD_AUTHINFO\"/name: \"$NEW_AUTHINFO\"/g" $KUBE_CONFIG
+sed -i "s/user: \"$OLD_AUTHINFO\"/user: \"$NEW_AUTHINFO\"/g" $KUBE_CONFIG
 
 # 修改 cluster 名
 sed -i "s/name: $OLD_CLUSTER/name: $NEW_CLUSTER/g" ~/.kube/config
