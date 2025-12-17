@@ -1,5 +1,36 @@
 # k8s常用命令速查
 
+## 网络
+
+### 网络调试工具
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+[nicolaka/netshoot](https://hub.docker.com/r/nicolaka/netshoot)
+
+<Tabs>
+
+  <TabItem value="amd" label="amd" default>
+
+```shell
+kubectl run net-test --rm -it --image=registry.cn-beijing.aliyuncs.com/pptfzo/netshoot:v0.14-amd64 -- bash
+```
+
+  </TabItem>
+
+  <TabItem value="arm" label="arm">
+
+```shell
+kubectl run net-test --rm -it --image=registry.cn-beijing.aliyuncs.com/pptfzo/netshoot:v0.14-arm64 -- bash
+```
+
+  </TabItem>
+
+</Tabs>
+
+
+
 ## kubectl
 
 ### 设置当前 context 的默认 namespace
@@ -120,9 +151,6 @@ kubectl patch storageclass ${SC_NAME} -p '{"metadata": {"annotations":{"storagec
 
 
 ## 查看证书过期时间
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="通过kubeadm命令" label="通过kubeadm命令" default>

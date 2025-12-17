@@ -85,21 +85,9 @@ harbor                  Active   106d
 
 
 
+## 也可以使用如下命令进行删除
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-```
+```shell
 export NS=xxx
 kubectl get namespace $NS -o json \
   | jq 'del(.spec.finalizers)' \
