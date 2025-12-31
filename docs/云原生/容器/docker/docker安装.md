@@ -16,6 +16,24 @@ systemctl restart docker
 
 
 
+## 配置docker镜像加速
+
+```json
+{
+    "registry-mirrors": [
+        "https://0vmzj3q6.mirror.aliyuncs.com",
+        "https://docker.m.daocloud.io",
+        "https://mirror.baidubce.com",
+        "https://dockerproxy.com",
+        "https://mirror.iscas.ac.cn",
+        "https://huecker.io",
+        "https://dockerhub.timeweb.cloud",
+        "https://noohub.ru",
+        "https://vlgh0kqj.mirror.aliyuncs.com"
+    ]
+}
+```
+
 
 
 # docker安装
@@ -83,26 +101,6 @@ Server: Docker Engine - Community
 ```
 
 
-
-### 1.5 配置docker镜像加速
-
-配置 [rainbond](https://mp.weixin.qq.com/s/pXrxedldKOoD97bMDYy3pQ) 镜像加速地址
-
-```shell
-cat > /etc/docker/daemon.json <<-'EOF'
-{
-  "registry-mirrors": ["https://docker.rainbond.cc"]
-}
-EOF
-```
-
-
-
-配置完成后重启docker
-
-```shell
-systemctl restart docker
-```
 
 
 
@@ -202,28 +200,6 @@ yum -y install docker-ce-18.03.1.ce docker-ce-cli-18.01.1.ce
 ```python
 $ docker -v
 Docker version 18.03.1-ce, build 9ee9f40
-```
-
-
-
-### 2.5 配置docker镜像加速
-
-配置阿里云镜像加速地址
-
-```shell
-cat > /etc/docker/daemon.json <<-'EOF'
-{
-  "registry-mirrors": ["https://gqk8w9va.mirror.aliyuncs.com"]
-}
-EOF
-```
-
-
-
-配置完成后重启docker
-
-```shell
-systemctl restart docker
 ```
 
 

@@ -106,7 +106,7 @@ helm pull ingress-nginx/ingress-nginx
 解压缩
 
 ```shell
-tar xf ingress-nginx-4.8.4.tgz && cd ingress-nginx
+tar xf ingress-nginx-4.14.1.tgz && cd ingress-nginx
 ```
 
 
