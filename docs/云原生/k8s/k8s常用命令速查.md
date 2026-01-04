@@ -83,6 +83,16 @@ $ kubectl get pod ${POD_NAME} -o json | jq '.spec.containers[].name'
 
 
 
+### 重启重启过的pod
+
+```sh
+kubectl get pod -A \
+| awk 'NR>1 && $5>0 {print $1, $2}' \
+| xargs -n2 kubectl delete pod -n
+```
+
+
+
 ## node
 
 ### 查看node节点拥有的镜像
