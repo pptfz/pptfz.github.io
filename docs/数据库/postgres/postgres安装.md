@@ -24,7 +24,7 @@
 | `POSTGRES_USER`             | 如果未指定则使用默认超级用户 `postgres`                      | ❌        |
 | `POSTGRES_DB`               | 指定 **初始化时创建的默认数据库名**，如果未指定，则使用`POSTGRES_USER`的值 | ❌        |
 | `POSTGRES_INITDB_ARGS`      | 给 `postgres initdb` 传额外参数，开启数据页校验（提高数据安全） | ❌        |
-| `POSTGRES_INITDB_WALDIR`    | 定义Postgres事务日志存放路径，默认情况下，事务日志存储在主 Postgres 数据文件夹的子目录中<br>⚠️PostgreSQL 9.x 里变量名叫 `POSTGRES_INITDB_XLOGDIR` | ❌        |
+| `POSTGRES_INITDB_WALDIR`    | 定义Postgres事务日志存放路径，默认情况下，事务日志存储在主 Postgres 数据文件夹的子目录中，⚠️PostgreSQL 9.x 里变量名叫 `POSTGRES_INITDB_XLOGDIR` | ❌        |
 | `POSTGRES_HOST_AUTH_METHOD` | 用于控制`auth-method`，用于`host`连接，适用于`all`数据库、`all`用户和`all`地址。如果未指定，则使用 `scram-sha-256` 密码认证（14+ 版本;旧版本为 `md5`） | ❌        |
 | `PGDATA`                    | pg的数据持久化目录为 `/var/lib/postgresql/data` ，从 **PostgreSQL 18 起** ，变成了 `/var/lib/postgresql/<version>/docker` | ❌        |
 
