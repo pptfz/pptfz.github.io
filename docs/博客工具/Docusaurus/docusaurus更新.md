@@ -1,9 +1,9 @@
 # docusaurus更新
 
-查看安装的版本
+查看当前已安装的版本
 
 ```javascript
-npx docusaurus --version
+$ npx docusaurus --version
 3.6.2
 ```
 
