@@ -91,7 +91,7 @@ AssertionError:
 django-mirage-field key length (MIRAGE_SECRET_KEY or SECRET_KEY) must be longer than 32 characters!
 ```
 
-::;
+:::
 
 ```shell
 SECRET_KEY="4GjsJiFenGBICVd0HDhcCoLRusXmJCNr"
