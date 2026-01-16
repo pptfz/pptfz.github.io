@@ -1,8 +1,8 @@
-# Archery安装
+# archery安装
 
-[Archery官网](https://archerydms.com/)
+[archery官网](https://archerydms.com/)
 
-[Archery github](https://github.com/hhyo/Archery)
+[archery github](https://github.com/hhyo/Archery)
 
 
 

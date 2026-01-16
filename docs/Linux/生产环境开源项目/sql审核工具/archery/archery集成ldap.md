@@ -13,7 +13,7 @@ AUTH_LDAP_BIND_DN='cn=xxx,dc=xxx,dc=xxx'
 AUTH_LDAP_BIND_PASSWORD='xxx'
 #AUTH_LDAP_USER_DN_TEMPLATE='uid=%(user)s,ou=people,dc=xxx,dc=xxx'
 AUTH_LDAP_ALWAYS_UPDATE_USER=True
-AUTH_LDAP_USER_ATTR_MAP={'username'='cn','name'='sn','email'='mail'}
+AUTH_LDAP_USER_ATTR_MAP={'username'='uid','name'='sn','email'='mail'}
 AUTH_LDAP_USER_SEARCH_BASE='dc=xxx,dc=xxx'
 ```
 
@@ -32,15 +32,15 @@ AUTH_LDAP_USER_SEARCH_BASE='dc=xxx,dc=xxx'
 
 
 
+最好 [设置默认资源组和默认权限组](https://archerydms.com/home/#_15) ，新用户第一次登陆时会自动关联，可避免用户登陆后出现的无权限报错问题
 
 
 
+![iShot_2026-01-15_17.22.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-15_17.22.20.png)
 
 
 
-
-
-`archery` 
+ `archery` 容器日志报错如下
 
 ```shell
 [2026-01-15 10:16:47,934][MainThread:140663319430976][task_id:default][exception_logging_middleware.py:12][ERROR]- Traceback (most recent call last):
@@ -80,6 +80,12 @@ Traceback (most recent call last):
     raise PermissionDenied
 django.core.exceptions.PermissionDenied
 ```
+
+
+
+
+
+
 
 
 
