@@ -1,5 +1,21 @@
 # k8s常用命令速查
 
+## 虚拟机
+
+:::tip 说明
+
+pd虚拟机安装的k8s集群，因为mac电脑休眠或关机会导致pod创建失败、pvc绑定失败等问题，因此需要重启一下相关服务
+
+:::
+
+```shell
+alias k8sfix='systemctl restart containerd kubelet && \
+	kubectl -n calico-system rollout restart ds/calico-node && \
+	kubectl -n kube-system rollout restart ds/kube-proxy'
+```
+
+
+
 ## 网络
 
 ### 网络调试工具

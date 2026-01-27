@@ -39,6 +39,14 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 
 
 
+### 更新仓库
+
+```shell
+helm repo update
+```
+
+
+
 ### 下载包
 
 ```shell
