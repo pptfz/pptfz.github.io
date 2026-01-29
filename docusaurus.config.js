@@ -210,8 +210,8 @@ const config = {
           {
             label: 'AI',
             items: [
-              { label: 'LLM工程平台', to: '/docs/LLM工程平台' },
-              { label: 'AI应用可视化平台', to: '/docs/AI应用可视化平台' },
+              { label: 'LLM工程平台', to: '/docs/AI/LLM工程平台' },
+              { label: 'AI应用可视化平台', to: '/docs/AI/应用可视化平台' },
             ]
           },
           
