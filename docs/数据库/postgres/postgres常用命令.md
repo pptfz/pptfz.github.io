@@ -6,10 +6,6 @@
 
 
 
-
-
-
-
 ```
 pg_dump -h localhost -U postgres -d dbname -t table_name > table.sql
 ```
@@ -19,4 +15,14 @@ pg_dump -h localhost -U postgres -d dbname -t table_name > table.sql
 ```
 psql -h localhost -U postgres -d dbname < table.sql
 ```
+
+
+
+
+
+
+
+
+
+
 
