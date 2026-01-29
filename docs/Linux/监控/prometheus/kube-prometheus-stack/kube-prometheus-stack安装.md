@@ -65,11 +65,10 @@ tar xf  kube-prometheus-stack-79.7.1.tgz
 
 ### 编辑 `values.yaml`
 
+- 配置ingress
+- 配置sc
 
-
-
-
-
+- 配置其他项
 
 
 
@@ -85,7 +84,7 @@ helm upgrade --install kube-prometheus-stack -n kube-prometheus-stack --create-n
 
 
 
-
+### 一个小插曲
 
 安装完成后发现没有 `prometheus` pod
 
@@ -120,7 +119,7 @@ ts=2025-12-03T02:04:33.649291967Z level=error caller=/workspace/pkg/operator/res
 
 
 
-在 `values.yaml` 中，sc默认是 `gluster` 
+在 `values.yaml` 中，sc默认是 `gluster` ，修改sc为当前集群可用的sc即可
 
 ```yaml
 prometheus:
@@ -144,3 +143,59 @@ prometheus:
 
 
 
+### 报错
+
+prometheus pod一直为 `Pending` 状态
+
+```shell
+$ k get pod
+NAME                                                       READY   STATUS    RESTARTS   AGE
+prometheus-kube-prometheus-stack-prometheus-0              0/2     Pending   0          2m21s
+```
+
+
+
+
+
+发现是pvc一直 `pending`
+
+```shell
+$ k get pvc
+NAME                                                                                           STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS       VOLUMEATTRIBUTESCLASS   AGE
+prometheus-kube-prometheus-stack-prometheus-db-prometheus-kube-prometheus-stack-prometheus-0   Pending                                                                        openebs-hostpath   <unset>                 13m
+```
+
+
+
+`Events` 报错`failed to provision volume with StorageClass "openebs-hostpath": claim.Spec.Selector is not supported`
+
+```shell
+Events:
+  Type     Reason                Age                  From                                                                                               Message
+  ----     ------                ----                 ----                                                                                               -------
+  Normal   WaitForFirstConsumer  10m                  persistentvolume-controller                                                                        waiting for first consumer to be created before binding
+  Normal   Provisioning          2m58s (x7 over 10m)  openebs.io/local_openebs-localpv-provisioner-6fc86fd79-nlvlk_1c2e3965-f0a4-412c-9950-bfbe15b7e670  External provisioner is provisioning volume for claim "kube-prometheus-stack/prometheus-kube-prometheus-stack-prometheus-db-prometheus-kube-prometheus-stack-prometheus-0"
+  Warning  ProvisioningFailed    2m58s (x7 over 10m)  openebs.io/local_openebs-localpv-provisioner-6fc86fd79-nlvlk_1c2e3965-f0a4-412c-9950-bfbe15b7e670  failed to provision volume with StorageClass "openebs-hostpath": claim.Spec.Selector is not supported
+```
+
+
+
+
+
+解决方法是在 `prometheus` 配置持久化的 `volumeClaimTemplate` 下把 `selector: {}` 注释
+
+```yaml
+    storageSpec: 
+    ## Using PersistentVolumeClaim
+    ##
+     volumeClaimTemplate:
+       spec:
+         storageClassName: openebs-hostpath
+         accessModes: ["ReadWriteOnce"]
+         resources:
+           requests:
+             storage: 50Gi
+         #selector: {} # 注释这一行
+```
+
+![iShot_2026-01-29_21.13.39](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-29_21.13.39.png)
