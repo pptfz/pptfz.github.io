@@ -82,8 +82,6 @@ helm upgrade --install kube-prometheus-stack -n kube-prometheus-stack --create-n
 
 
 
-
-
 ### 一个小插曲
 
 安装完成后发现没有 `prometheus` pod
@@ -140,6 +138,16 @@ prometheus:
 
 
 ![iShot_2025-12-03_10.06.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-12-03_10.06.12.png)
+
+
+
+修改完成后再重新安装就可以了
+
+```shell
+$ k get pod
+NAME                                                       READY   STATUS    RESTARTS   AGE
+prometheus-kube-prometheus-stack-prometheus-0              2/2     Running   0          13h
+```
 
 
 
