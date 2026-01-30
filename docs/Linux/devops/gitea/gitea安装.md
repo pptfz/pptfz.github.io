@@ -16,7 +16,7 @@
 
 [gitea英文文档](https://docs.gitea.io/en-us/)
 
-[gitea中文文档](https://docs.gitea.io/zh-cn/)
+[gitea中文文档](https://docs.gitea.com/zh-cn/)
 
 
 
@@ -34,7 +34,7 @@ Gitea其实是Gogs的孪生兄弟，因为这是从Gogs源码的基础上开发�
 
 ## 安装
 
-gitea安装方式有很多种，详情看[官网](https://docs.gitea.io/zh-cn/)，这里选择docker安装，docker安装中的数据库有3种，``sqlite3``、``mysql``、``pg``
+gitea安装方式有很多种，详情看[官网](https://docs.gitea.com/zh-cn/category/installation)，这里选择docker安装，docker安装中的数据库有3种，``sqlite3``、``mysql``、``pg``
 
 
 
@@ -195,6 +195,54 @@ gitea-db-1   mysql:8              "docker-entrypoint.s…"   db        About a m
 
 
 
+### helm安装
+
+#### 添加仓库
+
+```shell
+helm repo add gitea https://dl.gitea.com/charts
+```
+
+
+
+#### 更新仓库
+
+```shell
+helm repo update
+```
+
+
+
+#### 下载包
+
+```shell
+helm pull gitea/gitea
+```
+
+
+
+#### 解压缩
+
+```shell
+tar xf gitea-12.5.0.tgz 
+```
+
+
+
+#### 编辑 `values.yaml` 文件
+
+自行设置相关值
+
+
+
+#### 安装
+
+```shell
+helm upgrade --install gitea -n gitea --create-namespace .
+```
+
+
+
 ## 初始配置
 
 浏览器访问 `IP:3000`
@@ -279,4 +327,10 @@ DISABLE_REGISTRATION = true
 
 
 <h3>我喜欢这个软件最重要的一点就是</h3><h2 style={{color: 'red'}}>这个软件支持中文！！！</h2>
+
+
+
+
+
+
 
