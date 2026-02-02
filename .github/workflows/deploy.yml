@@ -9,14 +9,17 @@ jobs:
   build:
     name: Build Docusaurus
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # ===== 记录开始时间（秒）=====
+      - name: Record build start time
+        run: echo "BUILD_START_TS=$(date +%s)" >> $GITHUB_ENV
+
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
@@ -37,47 +40,48 @@ jobs:
           path: build
 
       - name: Extract commit message
-        id: extract_commit_message
         run: echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
 
+      # ===== 计算构建耗时 =====
       - name: Calculate build duration
-        id: calc_duration
         run: |
-          # GitHub 提供 job.started_at，可以直接计算耗时
-          START="${{ job.started_at }}"
-          END=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          if [ -z "$START" ]; then
-            echo "DURATION_FMT=未知" >> $GITHUB_ENV
-          else
-            DURATION_SEC=$(( $(date -d "$END" +%s) - $(date -d "$START" +%s) ))
-            MINUTES=$(( DURATION_SEC / 60 ))
-            SECONDS=$(( DURATION_SEC % 60 ))
-            echo "DURATION_FMT=${MINUTES} 分 ${SECONDS} 秒" >> $GITHUB_ENV
-          fi
+          END_TS=$(date +%s)
+          DURATION=$((END_TS - BUILD_START_TS))
+          MIN=$((DURATION / 60))
+          SEC=$((DURATION % 60))
+          echo "BUILD_DURATION=${MIN} 分 ${SEC} 秒" >> $GITHUB_ENV
 
+      # ===== 成功通知 =====
       - name: Send success notification
         if: success()
         env:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
-          COMMIT_MSG: ${{ env.COMMIT_MSG }}
-          DURATION_FMT: ${{ env.DURATION_FMT }}
         run: |
-          TIMESTAMP=$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S')
-          curl -X POST -H 'Content-Type: application/json' \
-            -d "{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"**发布结果通知**\n\n**申请标题：** ${COMMIT_MSG}\n\n**应用名称：** docusaurus\n\n**应用版本：** master#${{ github.sha }}\n\n**执行人员：** Webhook\n\n**发布结果：** <font color='info'>成功</font>\n\n**构建耗时：** ${DURATION_FMT}\n\n**发布时间：** ${TIMESTAMP}\n\n> 来自 GitHub Actions\"}}" \
-            https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{
+            \"msgtype\": \"markdown\",
+            \"markdown\": {
+              \"content\": \"**发布结果通知**\\n\\n**申请标题：** ${COMMIT_MSG}\\n\\n**应用名称：** docusaurus\\n\\n**应用版本：** master#${{ github.sha }}\\n\\n**执行人员：** Webhook\\n\\n**发布结果：** <font color=\\\"info\\\">成功</font>\\n\\n**构建耗时：** ${BUILD_DURATION}\\n\\n**发布时间：** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
+            }
+          }" \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
 
+      # ===== 失败通知 =====
       - name: Send failure notification
         if: failure()
         env:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
-          COMMIT_MSG: ${{ env.COMMIT_MSG }}
-          DURATION_FMT: ${{ env.DURATION_FMT }}
         run: |
-          TIMESTAMP=$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S')
-          curl -X POST -H 'Content-Type: application/json' \
-            -d "{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"**发布结果通知**\n\n申请标题： ${COMMIT_MSG}\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： <font color='waring'>失败</font>\n\n**构建耗时：** ${DURATION_FMT}\n\n**发布时间：** ${TIMESTAMP}\n\n> 来自 GitHub Actions\"}}" \
-            https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{
+            \"msgtype\": \"markdown\",
+            \"markdown\": {
+              \"content\": \"**发布结果通知**\\n\\n申请标题： ${COMMIT_MSG}\\n\\n应用名称： docusaurus\\n\\n应用版本： master#${{ github.sha }}\\n\\n执行人员： Webhook\\n\\n发布结果： <font color=\\\"warning\\\">失败</font>\\n\\n**构建耗时：** ${BUILD_DURATION}\\n\\n**发布时间：** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
+            }
+          }" \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
 
   deploy:
     name: Deploy to GitHub Pages
