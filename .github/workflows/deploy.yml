@@ -10,11 +10,13 @@ jobs:
     name: Build Docusaurus
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
@@ -38,31 +40,34 @@ jobs:
         id: extract_commit_message
         run: echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
 
-      - name: Send notification on success
+      - name: Send success notification
         if: success()
         env:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
           COMMIT_MSG: ${{ env.COMMIT_MSG }}
-          GITHUB_RUN_STARTED_AT: ${{ github.run_started_at }}
         run: |
-          DURATION_FMT=$(python3 -c "import os; from datetime import datetime; start=datetime.strptime(os.environ['GITHUB_RUN_STARTED_AT'],'%Y-%m-%dT%H:%M:%SZ'); delta=datetime.utcnow()-start; m,s=divmod(int(delta.total_seconds()),60); print(f'{m} 分 {s} 秒')")
-          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          # 计算构建耗时
+          DURATION_FMT=$(python3 -c "from datetime import datetime; start='${{ github.run_started_at }}'; start_dt=datetime.strptime(start, '%Y-%m-%dT%H:%M:%SZ'); delta=datetime.utcnow()-start_dt; m,s=divmod(int(delta.total_seconds()),60); print(f'{m} 分 {s} 秒')")
+
+          TIMESTAMP=$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S')
+
           curl -X POST -H 'Content-Type: application/json' \
-          -d "{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"**发布结果通知**\n\n**申请标题：** ${COMMIT_MSG}\n\n**应用名称：** docusaurus\n\n**应用版本：** master#${{ github.sha }}\n\n**执行人员：** Webhook\n\n**发布结果：** <font color='info'>成功</font>\n\n**构建耗时：** ${DURATION_FMT}\n\n**发布时间：** ${TIMESTAMP}\n\n> 来自 GitHub Actions\"}}" \
-          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+            -d "{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"**发布结果通知**\n\n**申请标题：** ${COMMIT_MSG}\n\n**应用名称：** docusaurus\n\n**应用版本：** master#${{ github.sha }}\n\n**执行人员：** Webhook\n\n**发布结果：** <font color='info'>成功</font>\n\n**构建耗时：** ${DURATION_FMT}\n\n**发布时间：** ${TIMESTAMP}\n\n> 来自 GitHub Actions\"}}" \
+            https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
 
       - name: Send failure notification
         if: failure()
         env:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
           COMMIT_MSG: ${{ env.COMMIT_MSG }}
-          GITHUB_RUN_STARTED_AT: ${{ github.run_started_at }}
         run: |
-          DURATION_FMT=$(python3 -c "import os; from datetime import datetime; start=datetime.strptime(os.environ['GITHUB_RUN_STARTED_AT'],'%Y-%m-%dT%H:%M:%SZ'); delta=datetime.utcnow()-start; m,s=divmod(int(delta.total_seconds()),60); print(f'{m} 分 {s} 秒')")
-          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          DURATION_FMT=$(python3 -c "from datetime import datetime; start='${{ github.run_started_at }}'; start_dt=datetime.strptime(start, '%Y-%m-%dT%H:%M:%SZ'); delta=datetime.utcnow()-start_dt; m,s=divmod(int(delta.total_seconds()),60); print(f'{m} 分 {s} 秒')")
+
+          TIMESTAMP=$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M:%S')
+
           curl -X POST -H 'Content-Type: application/json' \
-          -d "{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"**发布结果通知**\n\n申请标题： ${COMMIT_MSG}\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： <font color='waring'>失败</font>\n\n**构建耗时：** ${DURATION_FMT}\n\n发布时间： ${TIMESTAMP}\n\n> 来自 GitHub Actions\"}}" \
-          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+            -d "{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"**发布结果通知**\n\n申请标题： ${COMMIT_MSG}\n\n应用名称： docusaurus\n\n应用版本： master#${{ github.sha }}\n\n执行人员： Webhook\n\n发布结果： <font color='waring'>失败</font>\n\n**构建耗时：** ${DURATION_FMT}\n\n**发布时间：** ${TIMESTAMP}\n\n> 来自 GitHub Actions\"}}" \
+            https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
 
   deploy:
     name: Deploy to GitHub Pages
