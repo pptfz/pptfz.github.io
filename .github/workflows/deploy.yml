@@ -142,7 +142,7 @@ jobs:
           COMMIT_MSG: ${{ env.COMMIT_MSG }}
         run: |
           # 计算构建耗时
-          START_TS=$(date -d "${GITHUB_RUN_STARTED_AT}" +%s)
+          START_TS=$(date -u -d "${GITHUB_RUN_STARTED_AT}" +%s)
           END_TS=$(date +%s)
           DURATION=$((END_TS - START_TS))
           DURATION_FMT="$(($DURATION / 60)) 分 $(($DURATION % 60)) 秒"
