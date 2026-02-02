@@ -43,12 +43,16 @@ jobs:
       - name: Calculate build duration
         id: calc_duration
         run: |
-          START="${{ github.run_started_at }}"
+          # GitHub 提供 job.started_at，可以直接计算耗时
+          START="${{ job.started_at }}"
+          END=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           if [ -z "$START" ]; then
-            echo "DURATION_FMT=0 分 0 秒" >> $GITHUB_ENV
+            echo "DURATION_FMT=未知" >> $GITHUB_ENV
           else
-            DURATION_FMT=$(python3 -c "from datetime import datetime; start='$START'; delta=datetime.utcnow()-datetime.strptime(start, '%Y-%m-%dT%H:%M:%SZ'); m,s=divmod(int(delta.total_seconds()),60); print(f'{m} 分 {s} 秒')")
-            echo "DURATION_FMT=$DURATION_FMT" >> $GITHUB_ENV
+            DURATION_SEC=$(( $(date -d "$END" +%s) - $(date -d "$START" +%s) ))
+            MINUTES=$(( DURATION_SEC / 60 ))
+            SECONDS=$(( DURATION_SEC % 60 ))
+            echo "DURATION_FMT=${MINUTES} 分 ${SECONDS} 秒" >> $GITHUB_ENV
           fi
 
       - name: Send success notification
