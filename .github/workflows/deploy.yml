@@ -141,8 +141,8 @@ jobs:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
           COMMIT_MSG: ${{ env.COMMIT_MSG }}
         run: |
-          # 计算构建耗时
-          START_TS=$(date -u -d "${GITHUB_RUN_STARTED_AT}" +%s)
+          # 计算构建耗时 将 GitHub UTC 时间正确转换为秒
+          START_TS=$(date -d "$(echo $GITHUB_RUN_STARTED_AT | sed 's/Z//')" +%s)
           END_TS=$(date +%s)
           DURATION=$((END_TS - START_TS))
           DURATION_FMT="$(($DURATION / 60)) 分 $(($DURATION % 60)) 秒"
