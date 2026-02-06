@@ -213,14 +213,7 @@ const config = {
               { label: 'LLM工程平台', to: '/docs/LLM工程平台' },
               { label: 'AI应用可视化平台', to: '/docs/AI应用可视化平台' },
             ]
-          },
-          {
-            label: 'ljq',
-            items: [
-              { label: 'jq-linux', to: '/docs/jq-linux' },
-              { label: 'jq-云平台', to: '/docs/jq-云平台' },
-            ]
-          },          
+          },        
           
           // {
           //   type: 'docSidebar',

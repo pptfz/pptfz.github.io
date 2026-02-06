@@ -172,6 +172,52 @@ EOF
 
 
 
+## helm安装
+
+[nexus3 helm安装github](https://github.com/sonatype/helm3-charts)
+
+[nexus3 helm安装官方文档](https://sonatype.github.io/helm3-charts/)
+
+
+
+### 添加仓库
+
+```shell
+helm repo add sonatype https://sonatype.github.io/helm3-charts/
+```
+
+
+
+### 下载包
+
+```shell
+helm pull sonatype/nexus-repository-manager
+```
+
+
+
+### 解压缩
+
+```shell
+tar xf nexus-repository-manager-64.2.0.tgz
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 使用systemd管理nexus
 
 编辑配置文件 `/etc/systemd/system/nexus.service`
@@ -221,6 +267,8 @@ redirect_stderr = true
 autorestart = true
 EOF
 ```
+
+
 
 
 
