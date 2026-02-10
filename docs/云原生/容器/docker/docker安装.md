@@ -4,7 +4,7 @@
 
 ```shell
 # 阿里云yum源
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 
 yum -y install docker-ce
 
@@ -40,200 +40,177 @@ systemctl restart docker
 
 [docker官方安装文档](https://docs.docker.com/engine/install/centos/)
 
-## 1.安装docker最新版
+## 包管理器安装
 
-### 1.1 下载yum源
+### yum
 
-阿里云源
+#### 下载yum源
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="阿里云源" label="阿里云源" default>
 
 ```shell
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 ```
 
-
-
-官方源
+  </TabItem>
+  <TabItem value="官方源" label="官方源">
 
 ```shell
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
+  </TabItem>
+</Tabs>
 
 
-### 1.2 安装docker最新版
 
-```python
+
+
+#### 安装docker
+
+<Tabs>
+
+  <TabItem value="最新版" label="最新版" default>
+
+```shell
 yum -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+  </TabItem>
+
+  <TabItem value="指定版本" label="指定版本">
+
+查看可用版本
+
+```shell
+$ yum list docker-ce --showduplicates | sort -r
+Loading mirror speeds from cached hostfile
+Loaded plugins: fastestmirror, langpacks
+Installed Packages
+docker-ce.x86_64            3:26.1.4-1.el7                     docker-ce-stable 
+docker-ce.x86_64            3:26.1.4-1.el7                     @docker-ce-stable
+docker-ce.x86_64            3:26.1.3-1.el7                     docker-ce-stable 
+docker-ce.x86_64            3:26.1.2-1.el7                     docker-ce-stable 
+docker-ce.x86_64            3:26.1.1-1.el7                     docker-ce-stable 
+docker-ce.x86_64            3:26.1.0-1.el7                     docker-ce-stable 
+docker-ce.x86_64            3:26.0.2-1.el7                     docker-ce-stable 
+docker-ce.x86_64            3:26.0.1-1.el7                     docker-ce-stable 
+docker-ce.x86_64            3:26.0.0-1.el7                     docker-ce-stable 
+docker-ce.x86_64            3:25.0.5-1.el7                     docker-ce-stable 
+......
 ```
 
 
 
-### 1.3 启动docker
+安装指定版本
 
-```python
+```shell
+export DOCKER_VERSION=25.0.5
+yum -y install docker-ce-${DOCKER_VERSION}.ce docker-ce-cli-${DOCKER_VERSION}.ce containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+ </TabItem>
+
+</Tabs>
+
+
+
+#### 启动docker
+
+```shell
 systemctl start docker && systemctl enable docker  
 ```
 
 
 
-### 1.4 查看docker版本
+#### 查看docker版本
 
-```python
+```shell
 $ docker version
-Client:
- Version:           18.09.1
- API version:       1.39
- Go version:        go1.10.6
- Git commit:        4c52b90
- Built:             Wed Jan  9 19:35:01 2019
+Client: Docker Engine - Community
+ Version:           29.1.2
+ API version:       1.52
+ Go version:        go1.25.5
+ Git commit:        890dcca
+ Built:             Tue Dec  2 21:55:19 2025
  OS/Arch:           linux/amd64
- Experimental:      false
+ Context:           default
 
 Server: Docker Engine - Community
  Engine:
-  Version:          18.09.1
-  API version:      1.39 (minimum version 1.12)
-  Go version:       go1.10.6
-  Git commit:       4c52b90
-  Built:            Wed Jan  9 19:06:30 2019
+  Version:          29.1.2
+  API version:      1.52 (minimum version 1.44)
+  Go version:       go1.25.5
+  Git commit:       de45c2a
+  Built:            Tue Dec  2 21:55:19 2025
   OS/Arch:          linux/amd64
   Experimental:     false
+ containerd:
+  Version:          v2.2.0
+  GitCommit:        1c4457e00facac03ce1d75f7b6777a7a851e5c41
+ runc:
+  Version:          1.3.4
+  GitCommit:        v1.3.4-0-gd6d73eb8
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0
 ```
 
 
 
 
 
-### 1.6 创建并运行第一个容器
-
-```shell
-$ docker run -d -p 80:80 nginx
-Unable to find image 'nginx:latest' locally
-latest: Pulling from library/nginx
-6ae821421a7d: Pull complete 
-da4474e5966c: Pull complete 
-eb2aec2b9c9f: Pull complete 
-Digest: sha256:dd2d0ac3fff2f007d99e033b64854be0941e19a2ad51f174d9240dda20d9f534
-Status: Downloaded newer image for nginx:latest
-6cd3a11bda37336b8d6f0ba3e266e697945f72d520bbd0225a6e93818c8d581d
-```
-
-
-
-
-
-## 2.安装docker指定版本
-
-### 2.1 下载yum源
-
-阿里云yum源
-
-```shell
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-```
-
-
-
-官方源
-
-```shell
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-```
-
-
-
-### 2.2 查看可用版本
-
-```python
-$ yum list docker-ce --showduplicates | sort -r
-已加载插件：fastestmirror, langpacks
-可安装的软件包
- * webtatic: uk.repo.webtatic.com
- * updates: mirrors.aliyun.com
-Loading mirror speeds from cached hostfile
- * extras: mirrors.aliyun.com
-docker-ce.x86_64            3:19.03.3-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:19.03.2-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:19.03.1-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:19.03.0-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:18.09.9-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:18.09.8-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:18.09.7-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:18.09.6-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:18.09.5-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:18.09.4-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:18.09.3-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:18.09.2-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:18.09.1-3.el7                     docker-ce-stable
-docker-ce.x86_64            3:18.09.0-3.el7                     docker-ce-stable
-docker-ce.x86_64            18.06.3.ce-3.el7                    docker-ce-stable
-docker-ce.x86_64            18.06.2.ce-3.el7                    docker-ce-stable
-docker-ce.x86_64            18.06.1.ce-3.el7                    docker-ce-stable
-docker-ce.x86_64            18.06.0.ce-3.el7                    docker-ce-stable
-docker-ce.x86_64            18.03.1.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            18.03.0.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            17.12.1.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            17.12.0.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            17.09.1.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            17.09.0.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            17.06.2.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            17.06.1.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            17.06.0.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            17.03.3.ce-1.el7                    docker-ce-stable
-docker-ce.x86_64            17.03.2.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            17.03.1.ce-1.el7.centos             docker-ce-stable
-docker-ce.x86_64            17.03.0.ce-1.el7.centos             docker-ce-stable
-```
-
-
-
-### 2.3 安装docker指定版本
-
-```python
-yum -y install docker-ce-18.03.1.ce docker-ce-cli-18.01.1.ce
-```
-
-
-
-### 2.4 查看版本
-
-```python
-$ docker -v
-Docker version 18.03.1-ce, build 9ee9f40
-```
-
-
-
-## 3.二进制安装docker
-
-**系统环境**
-
-| 内核版本               | 内存 | docker版本 |
-| ---------------------- | ---- | ---------- |
-| 3.10.0-1062.el7.x86_64 | 1c2G | 18.09.9    |
+## 二进制安装docker
 
 [docker二进制包下载地址](https://download.docker.com/linux/static/stable/x86_64/)
 
-### 3.1 下载docker二进制包
+
+
+### 下载docker二进制包
+
+<Tabs>
+
+  <TabItem value="amd64" label="amd64" default>
 
 ```shell
-export DOCKER_VERSION=18.09.9
+export DOCKER_VERSION=29.2.1
 wget https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_VERSION}.tgz
 ```
 
+  </TabItem>
 
-
-### 3.2 解压缩包
+  <TabItem value="arm64" label="arm64">
 
 ```shell
-tar xf docker-DOCKER_VERSION.tgz -C /usr/local/
+export DOCKER_VERSION=29.2.1
+wget https://download.docker.com/linux/static/stable/aarch64/docker-${DOCKER_VERSION}.tgz
+```
+
+  </TabItem>
+
+</Tabs>
+
+
+
+### 解压缩包
+
+```shell
+tar xf docker-${DOCKER_VERSION}.tgz -C /usr/local/
 ```
 
 
 
-### 3.3 导出环境变量
+### 导出环境变量
+
+:::tip 说明
 
 如果后续想要使用systemd管理docker，最好把docker二进制包中的所有文件拷贝到 `/usr/bin` ，否则会管理失败
+
+:::
 
 ```shell
 cp /usr/local/docker/* /usr/bin
@@ -241,7 +218,7 @@ cp /usr/local/docker/* /usr/bin
 
 
 
-### 3.4 使用systemd管理docker
+### 使用systemd管理docker
 
 [Control Docker with systemd 官方文档关于使用systemd管理docker的说明](https://docs.docker.com/config/daemon/systemd/)
 
@@ -251,13 +228,9 @@ cp /usr/local/docker/* /usr/bin
 
 :::tip 说明
 
-
-
 Manually create the systemd unit files
 
 When installing the binary without a package, you may want to integrate Docker with systemd. For this, install the two unit files (`service` and `socket`) from [the github repository](https://github.com/moby/moby/tree/master/contrib/init/systemd) to `/etc/systemd/system`.
-
-
 
 :::
 
@@ -270,9 +243,9 @@ wget https://github.com/moby/moby/raw/branch/branch/master/contrib/init/systemd/
 
 
 
-**这里我们直接向文件写入内容**
+这里我们直接向文件写入内容
 
-**docker.service**
+- `docker.service`
 
 ```shell
 cat > /etc/systemd/system/docker.service <<'EOF'
@@ -314,7 +287,7 @@ EOF
 
 
 
-**docker.socket**
+- `docker.socket`
 
 ```shell
 cat >/etc/systemd/system/docker.socket<<EOF
@@ -346,19 +319,15 @@ Systemd 默认从目录 `/etc/systemd/system/` 读取配置文件。
 
 :::tip 说明
 
-
-
  执行 `sudo systemctl enable clamd@scan.service` 等同于
 
 `sudo ln -s '/usr/lib/systemd/system/clamd@scan.service' '/etc/systemd/system/multi-user.target.wants/clamd@scan.service'`
-
-
 
 :::
 
 
 
-### 3.5 重新加载服务并启动docker
+### 重新加载服务并启动docker
 
 ```shell
 systemctl daemon-reload
@@ -367,39 +336,11 @@ systemctl start docker && systemctl enable docker
 
 
 
-### 3.6 验证docker版本
-
-```shell
-$ docker version
-Client: Docker Engine - Community
- Version:           18.09.9
- API version:       1.39
- Go version:        go1.11.13
- Git commit:        039a7df9ba
- Built:             Wed Sep  4 16:50:02 2019
- OS/Arch:           linux/amd64
- Experimental:      false
-
-Server: Docker Engine - Community
- Engine:
-  Version:          18.09.9
-  API version:      1.39 (minimum version 1.12)
-  Go version:       go1.11.13
-  Git commit:       039a7df9ba
-  Built:            Wed Sep  4 16:55:50 2019
-  OS/Arch:          linux/amd64
-  Experimental:     false
-```
-
-
+### 补充点
 
 :::tip 说明
 
-
-
 二进制安装的dcoker默认是没有命令补全的，需要从yum安装的机器上拷贝 `/usr/share/bash-completion/completions` 下名为 `docker` 的文件并且移动到 `/usr/share/bash-completion/completions`
-
-
 
 :::
 
