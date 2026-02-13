@@ -327,9 +327,12 @@ harbor在线安装包解压后会有一个 `harbor.yml.tmpl` 示例配置文件
 
 - `jobservice` 
   - `max_job_workers` : 作业服务中复制工作者的最大数量。对于每个图像复制作业，工作人员将存储库的所有标签同步到远程目标。增加这个数字允许系统中有更多的并发复制作业。但是，由于每个worker都会消耗一定的网络/CPU/IO资源，所以根据宿主机的硬件资源来设置该属性的值。默认值为 10。
+  - `max_job_duration_hours` : 单个任务最长允许运行时间（单位：小时）
+  - `job_loggers` : 任务日志输出方式
+    - `STD_OUTPUT` : 输出到容器标准输出（docker logs 可查看）
+    - `FILE` : 同时写入本地日志文件 `/var/log/harbor`
 - `notification` 
   - `webhook_job_max_retry` : 设置 Web 挂钩作业的最大重试次数。默认值为 10。
-
 - `log` : 配置日志记录。Harbor 使用 rsyslog 来收集每个容器的日志。
   - `level` : 将日志记录级别设置为`debug`、`info`、`warning`、`error`或`fatal`。默认值为`info`。
   - `local` : 设置日志保留参数
@@ -340,7 +343,6 @@ harbor在线安装包解压后会有一个 `harbor.yml.tmpl` 示例配置文件
     - `protocol` : 系统日志服务器的传输协议。默认为 TCP。
     - `host` : 系统日志服务器的 URL。
     - `port` : syslog服务器监听的端口
-
 - `proxy` : 配置由 trivy-adapter、复制作业服务和 Harbor 使用的代理。如果不需要代理，请留空。有些代理有白名单设置，如果启用了Trivy，你需要将以下url添加到代理服务器白名单中：`github.com`, `github-releases.githubusercontent.com`, 和`*.s3.amazonaws.com.`
   - `http_proxy` : 配置 HTTP 代理，例如 `http://my.proxy.com:3128`
   - `https_proxy` : 配置 HTTPS 代理，例如 `http://my.proxy.com:3128`
@@ -421,19 +423,14 @@ harbor在线安装包解压后会有一个 `harbor.yml.tmpl` 示例配置文件
 #### 4.1.2 编辑配置文件
 
 ```yaml
+export HARBOR_VERSION=2.14.2
 cat > harbor.yml << EOF
 # 指定harbor访问域名
 hostname: harbor.ops.com
 
 # 指定http端口
 http:
-  port: 80
-
-# 指定https端口及证书 
-https:
-  port: 443
-  certificate: /data/harbor/cert/harbor.ops.com.crt
-  private_key: /data/harbor/cert/harbor.ops.com.key
+  port: 8080
  
 # 指定admin密码 
 harbor_admin_password: Harbor12345 
@@ -473,12 +470,21 @@ trivy:
   
   # 是否跳过验证注册表证书
   insecure: false
-   
+
+
 jobservice:
   # 用于harbor镜像复制的最大worker数
   max_job_workers: 10
-  
-  # jobLogger清理的持续时间，单位是天，如果设置为stdout则忽略
+
+  # 单个任务最长允许运行时间（单位：小时）
+  max_job_duration_hours: 24
+
+  # 任务日志输出方式
+  job_loggers:
+    - STD_OUTPUT # 输出到容器标准输出（docker logs 可查看）
+    - FILE # 同时写入本地日志文件 /var/log/harbor
+
+  # jobLogger清理的持续时间，单位是天，如果设置为stdout则忽略  
   logger_sweeper_duration: 1
 
 notification:
@@ -503,7 +509,7 @@ log:
     location: /var/log/harbor
 
 # harbor的版本
-_version: 2.8.0    
+_version: ${HARBOR_VERSION} 
 
 # 相关代理配置
 proxy:
@@ -515,7 +521,7 @@ proxy:
     - jobservice
     - trivy
     
-# 
+# 清理 registry 临时上传目录
 upload_purging:
   enabled: true
   age: 168h
@@ -569,17 +575,17 @@ EOF
 ### 4.3 查看安装
 
 ```shell
-$ docker ps -a
-CONTAINER ID   IMAGE                                COMMAND                  CREATED         STATUS                   PORTS                                                                            NAMES
-c397f48df28c   goharbor/harbor-jobservice:v2.8.0    "/harbor/entrypoint.…"   7 minutes ago   Up 7 minutes (healthy)                                                                                    harbor-jobservice
-e3d4b41fc52c   goharbor/nginx-photon:v2.8.0         "nginx -g 'daemon of…"   7 minutes ago   Up 7 minutes (healthy)   0.0.0.0:80->8080/tcp, :::80->8080/tcp, 0.0.0.0:443->8443/tcp, :::443->8443/tcp   nginx
-6cfa4d7a301d   goharbor/harbor-core:v2.8.0          "/harbor/entrypoint.…"   7 minutes ago   Up 7 minutes (healthy)                                                                                    harbor-core
-e5df0889b8f2   goharbor/harbor-portal:v2.8.0        "nginx -g 'daemon of…"   7 minutes ago   Up 7 minutes (healthy)                                                                                    harbor-portal
-4501c20b7f3d   goharbor/harbor-registryctl:v2.8.0   "/home/harbor/start.…"   7 minutes ago   Up 7 minutes (healthy)                                                                                    registryctl
-5214bef7630a   goharbor/registry-photon:v2.8.0      "/home/harbor/entryp…"   7 minutes ago   Up 7 minutes (healthy)                                                                                    registry
-fccf8fc79e15   goharbor/redis-photon:v2.8.0         "redis-server /etc/r…"   7 minutes ago   Up 7 minutes (healthy)                                                                                    redis
-1838075510e2   goharbor/harbor-db:v2.8.0            "/docker-entrypoint.…"   7 minutes ago   Up 7 minutes (healthy)                                                                                    harbor-db
-2936c15b6a56   goharbor/harbor-log:v2.8.0           "/bin/sh -c /usr/loc…"   7 minutes ago   Up 7 minutes (healthy)   127.0.0.1:1514->10514/tcp 
+$ docker compose ps
+NAME                IMAGE                                 COMMAND                  SERVICE       CREATED          STATUS                    PORTS
+harbor-core         goharbor/harbor-core:v2.14.2          "/harbor/entrypoint.…"   core          12 minutes ago   Up 12 minutes (healthy)   
+harbor-db           goharbor/harbor-db:v2.14.2            "/docker-entrypoint.…"   postgresql    12 minutes ago   Up 12 minutes (healthy)   
+harbor-jobservice   goharbor/harbor-jobservice:v2.14.2    "/harbor/entrypoint.…"   jobservice    12 minutes ago   Up 12 minutes (healthy)   
+harbor-log          goharbor/harbor-log:v2.14.2           "/bin/sh -c /usr/loc…"   log           12 minutes ago   Up 12 minutes (healthy)   127.0.0.1:1514->10514/tcp
+harbor-portal       goharbor/harbor-portal:v2.14.2        "nginx -g 'daemon of…"   portal        12 minutes ago   Up 12 minutes (healthy)   
+nginx               goharbor/nginx-photon:v2.14.2         "nginx -g 'daemon of…"   proxy         12 minutes ago   Up 12 minutes (healthy)   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp
+redis               goharbor/redis-photon:v2.14.2         "redis-server /etc/r…"   redis         12 minutes ago   Up 12 minutes (healthy)   
+registry            goharbor/registry-photon:v2.14.2      "/home/harbor/entryp…"   registry      12 minutes ago   Up 12 minutes (healthy)   
+registryctl         goharbor/harbor-registryctl:v2.14.2   "/home/harbor/start.…"   registryctl   12 minutes ago   Up 12 minutes (healthy)  
 ```
 
 
@@ -589,16 +595,16 @@ fccf8fc79e15   goharbor/redis-photon:v2.8.0         "redis-server /etc/r…"   7
 会启动如下容器
 
 ```shell
-$ docker ps -a --format '{{.Names}}'
-nginx
-harbor-jobservice
+$ docker compose ps --format '{{.Names}}'
 harbor-core
-registry
-harbor-portal
 harbor-db
-registryctl
-redis
+harbor-jobservice
 harbor-log
+harbor-portal
+nginx
+redis
+registry
+registryctl
 ```
 
 
@@ -616,8 +622,6 @@ harbor-log
 | `registryctl`       | 运行 Harbor 的控制台，用于管理和监控 Harbor                  |
 | `redis`             | 运行 Redis，用于存储 Harbor 的缓存信息                       |
 | `harbor-log`        | 运行 Harbor 的日志服务，用于收集、存储和查询 Harbor 的日志信息 |
-
-
 
 
 

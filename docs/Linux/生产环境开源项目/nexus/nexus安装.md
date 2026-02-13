@@ -64,7 +64,7 @@ tar xf nexus-3.79.1-04-linux-x86_64.tar.gz
 
 ### 启动nexus
 
-:::tip
+:::caution 注意
 
 **运行nexus的用户必须能登陆系统，不能是系统用户运行nexus，否则会报错如下**
 
@@ -139,22 +139,12 @@ services:
     restart: always
     volumes:
       - /data/docker-project/nexus-data:/nexus-data
-    image: sonatype/nexus3:3.85.0
+    image: sonatype/nexus3:3.89.1
 EOF
 ```
 
   </TabItem>
 </Tabs>
-
-
-
-
-
-
-
-```shell
-
-```
 
 
 
@@ -199,20 +189,20 @@ helm pull sonatype/nexus-repository-manager
 ### 解压缩
 
 ```shell
-tar xf nexus-repository-manager-64.2.0.tgz
+tar xf nexus-repository-manager-64.2.0.tgz && cd nexus-repository-manager/
 ```
 
 
 
+### 编辑 `values.yaml`
 
 
 
+### 安装
 
-
-
-
-
-
+```shell
+helm upgrade --install nexus3 -n nexus --create-namespace .
+```
 
 
 
