@@ -166,6 +166,329 @@ yarn build -> npm run build
 
 `deploy.yml` 文件内容
 
+:::tip 说明
+
+① 工作流名称
+
+```yaml
+name: Deploy to GitHub Pages
+```
+
+说明
+
+- 定义工作流名称
+- 在 GitHub Actions 页面展示
+- 仅用于显示，不影响执行逻辑
+
+
+
+② 触发条件
+
+```yaml
+on:
+  push:
+    branches:
+      - master
+```
+
+说明
+
+- `on:`
+  - 定义触发方式
+- `push:`
+  - 当代码被 push 时触发
+- `branches:`
+  - 限定触发分支
+- `- master`
+  - 只有 push 到 master 分支才会运行
+
+等价理解
+
+> 只要有人 push 到 master，就自动开始部署
+
+
+
+③ 定义 Job：build
+
+```yaml
+jobs:
+  build:
+    name: Build Docusaurus
+```
+
+说明
+
+- `jobs:`
+  - 定义任务集合
+- `build:`
+  - 第一个任务名称
+- `name:`
+  - 在 Actions 页面显示的任务名
+
+
+
+④ 运行环境
+
+```yaml
+runs-on: ubuntu-latest
+```
+
+说明
+
+- 使用 GitHub 提供的 Ubuntu 虚拟机
+- 每次运行都是全新环境
+- 不保留上次状态
+
+
+
+⑤ 记录开始时间
+
+```yaml
+- name: Record build start time
+  run: echo "BUILD_START_TS=$(date +%s)" >> $GITHUB_ENV
+```
+
+说明
+
+- 获取当前时间戳（秒）
+- 写入环境变量 `BUILD_START_TS`
+- 用于后面计算构建耗时
+
+
+
+⑥ 拉取代码
+
+```
+- uses: actions/checkout@v4
+  with:
+    fetch-depth: 0
+```
+
+说明
+
+- 拉取仓库代码到虚拟机
+- `fetch-depth: 0`
+  - 拉完整 git 历史
+  - 避免 shallow clone 问题
+
+
+
+⑦ 安装 Node
+
+```yaml
+- uses: actions/setup-node@v4
+  with:
+    node-version: 20
+    cache: npm
+```
+
+说明
+
+- 安装 Node.js 20
+- 开启 npm 缓存
+- 加快依赖安装速度
+
+
+
+⑧ 安装依赖
+
+```yaml
+- name: Install dependencies
+  run: npm ci
+```
+
+说明
+
+- 根据 package-lock.json 安装依赖
+- 比 npm install 更稳定
+- CI 推荐用法
+
+
+
+⑨ 构建网站
+
+```yaml
+- name: Build website
+  env:
+    ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+    ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+    ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+  run: npm run build
+```
+
+
+
+说明
+
+- 设置 Algolia 环境变量
+- 从 GitHub Secrets 读取
+- 执行 `npm run build`
+- 生成 build 目录
+
+
+
+⑩ 上传构建产物
+
+```yaml
+- name: Upload Build Artifact
+  uses: actions/upload-pages-artifact@v3
+  with:
+    path: build
+```
+
+说明
+
+- 把 build 目录打包
+- 上传为 GitHub Pages 专用 Artifact
+- 供 deploy 阶段使用
+
+
+
+⑪ 提取 commit 信息
+
+```yaml
+- name: Extract commit info
+  run: |
+    echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
+    echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+```
+
+说明
+
+- 获取最新 commit 信息
+- 获取短 commit hash（7位）
+- 写入环境变量
+
+
+
+⑫ 计算构建耗时
+
+```yaml
+- name: Calculate build duration
+```
+
+说明
+
+- 计算当前时间 - 开始时间
+- 得到分钟 + 秒
+- 写入 `BUILD_DURATION`
+
+
+
+⑬ 成功通知
+
+```yaml
+- name: Send success notification
+  if: success()
+```
+
+说明
+
+- 仅在 build 成功时执行
+- 发送企业微信通知
+- 包含：
+  - 仓库名
+  - 分支
+  - commit
+  - 构建耗时
+  - 访问地址
+  - Actions 链接
+
+
+
+⑭ 失败通知
+
+```
+- name: Send failure notification
+  if: failure()
+```
+
+说明
+
+- 仅在失败时执行
+- 发送失败通知
+- 帮助快速定位问题
+
+
+
+⑮ 第二个 Job：deploy
+
+```
+deploy:
+  name: Deploy to GitHub Pages
+  needs: build
+```
+
+说明
+
+- `needs: build`
+  - 必须等 build 成功后才执行
+
+
+
+⑯ 权限
+
+```yaml
+permissions:
+  pages: write
+  id-token: write
+```
+
+说明
+
+- 允许写入 GitHub Pages
+- 允许使用 OIDC 认证
+
+
+
+⑰ 指定环境
+
+```yaml
+environment:
+  name: github-pages
+  url: ${{ steps.deployment.outputs.page_url }}
+```
+
+说明
+
+- 指定部署环境
+- 显示部署后的 URL
+
+
+
+⑱ 执行部署
+
+```yaml
+- name: Deploy to GitHub Pages
+  id: deployment
+  uses: actions/deploy-pages@v4
+```
+
+说明
+
+- 使用官方 deploy-pages action
+- 将 artifact 发布到 GitHub Pages
+
+
+
+# 🔥 整体执行流程图
+
+```
+push master
+     ↓
+build job
+     ↓
+构建网站
+     ↓
+发送通知
+     ↓
+deploy job
+     ↓
+发布到 GitHub Pages
+```
+
+:::
+
 ```yaml
 name: Deploy to GitHub Pages
 
@@ -173,31 +496,34 @@ on:
   push:
     branches:
       - master
-    # Review gh actions docs if you want to further define triggers, paths, etc
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 
 jobs:
   build:
     name: Build Docusaurus
     runs-on: ubuntu-latest
+
     steps:
+      # ===== 记录开始时间 =====
+      - name: Record build start time
+        run: echo "BUILD_START_TS=$(date +%s)" >> $GITHUB_ENV
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: npm
-      # 使用yarn配置如下
-      # - name: Install dependencies
-      #   run: yarn install --frozen-lockfile
-      # - name: Build website
-      #   run: yarn build
 
-      # 使用npm配置如下
       - name: Install dependencies
         run: npm ci
+
       - name: Build website
+        env:
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
         run: npm run build
 
       - name: Upload Build Artifact
@@ -205,20 +531,77 @@ jobs:
         with:
           path: build
 
+      # ===== 提取提交信息 =====
+      - name: Extract commit info
+        run: |
+          echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
+          echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
+
+      # ===== 计算构建耗时 =====
+      - name: Calculate build duration
+        run: |
+          END_TS=$(date +%s)
+          DURATION=$((END_TS - BUILD_START_TS))
+          MIN=$((DURATION / 60))
+          SEC=$((DURATION % 60))
+          echo "BUILD_DURATION=${MIN} 分 ${SEC} 秒" >> $GITHUB_ENV
+
+      # ===== 成功通知 =====
+      - name: Send success notification
+        if: success()
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
+        run: |
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          REPO="${{ github.repository }}"
+          BRANCH="${{ github.ref_name }}"
+          REF_TYPE="${{ github.ref_type }}"
+          ACTOR="${{ github.actor }}"
+          ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          PAGE_URL="https://${{ github.repository_owner }}.github.io/"
+          COMMIT_URL="https://github.com/${REPO}/commit/${{ github.sha }}"
+
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{
+            \"msgtype\": \"markdown\",
+            \"markdown\": {
+              \"content\": \"# 🚀 Docusaurus 发布通知\\n\\n---\\n\\n📦 **仓库:** ${REPO}\\n🏷️ **引用类型:** ${REF_TYPE}\\n🌿 **名称:** ${BRANCH}\\n🔖 **Commit:** [${SHORT_SHA}](${COMMIT_URL})\\n📝 **提交信息:** ${COMMIT_MSG}\\n👤 **触发人:** ${ACTOR}\\n\\n🕒 **构建耗时:** ${BUILD_DURATION}\\n⏰ **发布时间:** ${TIMESTAMP}\\n\\n🌐 **访问地址:** [点击访问](${PAGE_URL})\\n🔎 **构建详情:** [点击查看](${ACTION_URL})\\n\\n---\\n\\n## ✅ 发布状态: <font color=\\\"info\\\">成功</font>\"
+            }
+          }" \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+
+      # ===== 失败通知 =====
+      - name: Send failure notification
+        if: failure()
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
+        run: |
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          REPO="${{ github.repository }}"
+          BRANCH="${{ github.ref_name }}"
+          REF_TYPE="${{ github.ref_type }}"
+          ACTOR="${{ github.actor }}"
+          ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          COMMIT_URL="https://github.com/${REPO}/commit/${{ github.sha }}"
+
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{
+            \"msgtype\": \"markdown\",
+            \"markdown\": {
+              \"content\": \"# 🚨 Docusaurus 发布失败通知\\n\\n---\\n\\n📦 **仓库:** ${REPO}\\n🏷️ **引用类型:** ${REF_TYPE}\\n🌿 **名称:** ${BRANCH}\\n🔖 **Commit:** [${SHORT_SHA}](${COMMIT_URL})\\n📝 **提交信息:** ${COMMIT_MSG}\\n👤 **触发人:** ${ACTOR}\\n\\n🕒 **构建耗时:** ${BUILD_DURATION}\\n⏰ **发布时间:** ${TIMESTAMP}\\n\\n🔎 **构建详情:** [点击查看](${ACTION_URL})\\n\\n---\\n\\n## ❌ 发布状态: <font color=\\\"warning\\\">失败</font>\"
+            }
+          }" \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+
   deploy:
     name: Deploy to GitHub Pages
     needs: build
-
-    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-      pages: write # to deploy to Pages
-      id-token: write # to verify the deployment originates from an appropriate source
-
-    # Deploy to the github-pages environment
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
