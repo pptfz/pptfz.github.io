@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -11,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ===== 记录开始时间（秒）=====
+      # ===== 记录开始时间 =====
       - name: Record build start time
         run: echo "BUILD_START_TS=$(date +%s)" >> $GITHUB_ENV
 
@@ -39,8 +41,30 @@ jobs:
         with:
           path: build
 
+      # ===== 提取提交信息 =====
       - name: Extract commit message
-        run: echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
+        run: |
+          MSG=$(git log -1 --pretty=%B | tr -d '\n' | sed 's/"/\\"/g')
+          echo "COMMIT_MSG=${MSG}" >> $GITHUB_ENV
+
+      # ===== 提取发布信息 =====
+      - name: Extract release info
+        run: |
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          echo "SHORT_SHA=${SHORT_SHA}" >> $GITHUB_ENV
+
+          if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
+            echo "RELEASE_TYPE=Tag 发布" >> $GITHUB_ENV
+            TAG_NAME=${GITHUB_REF#refs/tags/}
+            echo "VERSION_TAG=${TAG_NAME}" >> $GITHUB_ENV
+          else
+            echo "RELEASE_TYPE=Branch 发布" >> $GITHUB_ENV
+            BRANCH_NAME=${GITHUB_REF#refs/heads/}
+            echo "VERSION_TAG=${BRANCH_NAME}#${SHORT_SHA}" >> $GITHUB_ENV
+          fi
+
+          echo "REPO_NAME=${{ github.repository }}" >> $GITHUB_ENV
+          echo "COMMIT_URL=https://github.com/${{ github.repository }}/commit/${{ github.sha }}" >> $GITHUB_ENV
 
       # ===== 计算构建耗时 =====
       - name: Calculate build duration
@@ -58,13 +82,22 @@ jobs:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
         run: |
           TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+
+          MESSAGE="# 🚀 发布结果通知\n\n"
+          MESSAGE+="发布类型：${RELEASE_TYPE}\n\n"
+          MESSAGE+="申请标题：${COMMIT_MSG}\n\n"
+          MESSAGE+="应用名称：${REPO_NAME}\n\n"
+          MESSAGE+="版本标识：${VERSION_TAG}\n\n"
+          MESSAGE+="执行人员：${{ github.actor }}\n\n"
+          MESSAGE+="发布结果：<font color=\"info\">成功</font>\n\n"
+          MESSAGE+="构建耗时：${BUILD_DURATION}\n\n"
+          MESSAGE+="发布时间：${TIMESTAMP}\n\n"
+          MESSAGE+="🔗 [查看 Commit](${COMMIT_URL})\n\n"
+          MESSAGE+="📋 查看日志：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\n"
+          MESSAGE+="来自 GitHub Actions"
+
           curl -X POST -H "Content-Type: application/json" \
-          -d "{
-            \"msgtype\": \"markdown\",
-            \"markdown\": {
-              \"content\": \"**发布结果通知**\\n\\n**申请标题:** ${COMMIT_MSG}\\n\\n**应用名称:** docusaurus\\n\\n**应用版本:** master#${{ github.sha }}\\n\\n**执行人员:** Webhook\\n\\n**发布结果:** <font color=\\\"info\\\">成功</font>\\n\\n**构建耗时:** ${BUILD_DURATION}\\n\\n**发布时间:** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
-            }
-          }" \
+          -d "{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"${MESSAGE}\"}}" \
           https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
 
       # ===== 失败通知 =====
@@ -74,13 +107,22 @@ jobs:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
         run: |
           TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+
+          MESSAGE="# ❌ 发布结果通知\n\n"
+          MESSAGE+="发布类型：${RELEASE_TYPE}\n\n"
+          MESSAGE+="申请标题：${COMMIT_MSG}\n\n"
+          MESSAGE+="应用名称：${REPO_NAME}\n\n"
+          MESSAGE+="版本标识：${VERSION_TAG}\n\n"
+          MESSAGE+="执行人员：${{ github.actor }}\n\n"
+          MESSAGE+="发布结果：<font color=\"warning\">失败</font>\n\n"
+          MESSAGE+="构建耗时：${BUILD_DURATION}\n\n"
+          MESSAGE+="发布时间：${TIMESTAMP}\n\n"
+          MESSAGE+="🔗 [查看 Commit](${COMMIT_URL})\n\n"
+          MESSAGE+="📋 查看日志：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\n\n"
+          MESSAGE+="来自 GitHub Actions"
+
           curl -X POST -H "Content-Type: application/json" \
-          -d "{
-            \"msgtype\": \"markdown\",
-            \"markdown\": {
-              \"content\": \"**发布结果通知**\\n\\n申请标题: ${COMMIT_MSG}\\n\\n应用名称: docusaurus\\n\\n应用版本: master#${{ github.sha }}\\n\\n执行人员: Webhook\\n\\n发布结果: <font color=\\\"warning\\\">失败</font>\\n\\n**构建耗时:** ${BUILD_DURATION}\\n\\n**发布时间:** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
-            }
-          }" \
+          -d "{\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"${MESSAGE}\"}}" \
           https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
 
   deploy:
@@ -91,8 +133,8 @@ jobs:
       id-token: write
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
