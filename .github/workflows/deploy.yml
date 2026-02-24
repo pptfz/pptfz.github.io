@@ -1,66 +1,99 @@
-name: Deploy Docusaurus
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - master
 
-permissions:
-  contents: write
-
 jobs:
   build:
+    name: Build Docusaurus
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      # ===== 记录开始时间（秒）=====
+      - name: Record build start time
+        run: echo "BUILD_START_TS=$(date +%s)" >> $GITHUB_ENV
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
         with:
-          node-version: 18
+          fetch-depth: 0
 
-      - name: Install Dependencies
-        run: npm install
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      - name: Build Website
-        id: build
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build website
+        env:
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
         run: npm run build
 
-      - name: Deploy to GitHub Pages
-        if: success()
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Build Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          path: build
 
-      # =========================
-      # ✅ 成功通知
-      # =========================
-      - name: Notify Success
+      - name: Extract commit message
+        run: echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
+
+      # ===== 计算构建耗时 =====
+      - name: Calculate build duration
+        run: |
+          END_TS=$(date +%s)
+          DURATION=$((END_TS - BUILD_START_TS))
+          MIN=$((DURATION / 60))
+          SEC=$((DURATION % 60))
+          echo "BUILD_DURATION=${MIN} 分 ${SEC} 秒" >> $GITHUB_ENV
+
+      # ===== 成功通知 =====
+      - name: Send success notification
         if: success()
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
         run: |
-          curl "${{ secrets.WECHAT_WEBHOOK }}" \
-          -H 'Content-Type: application/json' \
-          -d '{
-                "msgtype": "markdown",
-                "markdown": {
-                  "content": "# 🚀 发布结果通知\n\n发布类型：Branch 发布\n申请标题：${{ github.event.head_commit.message }}\n应用名称：${{ github.repository }}\n版本标识：${{ github.ref_name }}#${{ github.sha }}\n执行人员：${{ github.actor }}\n发布结果：<font color=\"info\">发布成功</font>"
-                }
-              }'
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{
+            \"msgtype\": \"markdown\",
+            \"markdown\": {
+              \"content\": \"**发布结果通知**\\n\\n**申请标题:** ${COMMIT_MSG}\\n\\n**应用名称:** docusaurus\\n\\n**应用版本:** master#${{ github.sha }}\\n\\n**执行人员:** Webhook\\n\\n**发布结果:** <font color=\\\"info\\\">成功</font>\\n\\n**构建耗时:** ${BUILD_DURATION}\\n\\n**发布时间:** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
+            }
+          }" \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
 
-      # =========================
-      # ❌ 失败通知
-      # =========================
-      - name: Notify Failure
+      # ===== 失败通知 =====
+      - name: Send failure notification
         if: failure()
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
         run: |
-          curl "${{ secrets.WECHAT_WEBHOOK }}" \
-          -H 'Content-Type: application/json' \
-          -d '{
-                "msgtype": "markdown",
-                "markdown": {
-                  "content": "# 🚀 发布结果通知\n\n发布类型：Branch 发布\n申请标题：${{ github.event.head_commit.message }}\n应用名称：${{ github.repository }}\n版本标识：${{ github.ref_name }}#${{ github.sha }}\n执行人员：${{ github.actor }}\n发布结果：<font color=\"warning\">发布失败</font>"
-                }
-              }'
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          curl -X POST -H "Content-Type: application/json" \
+          -d "{
+            \"msgtype\": \"markdown\",
+            \"markdown\": {
+              \"content\": \"**发布结果通知**\\n\\n申请标题: ${COMMIT_MSG}\\n\\n应用名称: docusaurus\\n\\n应用版本: master#${{ github.sha }}\\n\\n执行人员: Webhook\\n\\n发布结果: <font color=\\\"warning\\\">失败</font>\\n\\n**构建耗时:** ${BUILD_DURATION}\\n\\n**发布时间:** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
+            }
+          }" \
+          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 
