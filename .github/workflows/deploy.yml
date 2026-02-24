@@ -8,12 +8,12 @@ on:
       - '*'
 
 jobs:
+
   build:
     name: Build Docusaurus
     runs-on: ubuntu-latest
 
     steps:
-      # ===== 记录开始时间 =====
       - name: Record build start time
         run: echo "BUILD_START_TS=$(date +%s)" >> $GITHUB_ENV
 
@@ -30,33 +30,23 @@ jobs:
         run: npm ci
 
       - name: Build website
-        env:
-          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
-          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
-          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
         run: npm run build
 
-      - name: Upload Build Artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: build
 
-      # ===== 提取提交信息 =====
-      - name: Extract commit message
+      - name: Save metadata
         run: |
-          MSG=$(git log -1 --pretty=%B | tr -d '\n' | sed 's/"/\\"/g')
-          echo "COMMIT_MSG=${MSG}" >> $GITHUB_ENV
-
-      # ===== 提取发布信息 =====
-      - name: Extract release info
-        run: |
+          echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n' | sed 's/"/\\"/g')" >> $GITHUB_ENV
           SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
-          echo "SHORT_SHA=${SHORT_SHA}" >> $GITHUB_ENV
+          echo "SHORT_SHA=$SHORT_SHA" >> $GITHUB_ENV
 
           if [[ "${GITHUB_REF}" == refs/tags/* ]]; then
             echo "RELEASE_TYPE=Tag 发布" >> $GITHUB_ENV
             TAG_NAME=${GITHUB_REF#refs/tags/}
-            echo "VERSION_TAG=${TAG_NAME}" >> $GITHUB_ENV
+            echo "VERSION_TAG=$TAG_NAME" >> $GITHUB_ENV
           else
             echo "RELEASE_TYPE=Branch 发布" >> $GITHUB_ENV
             BRANCH_NAME=${GITHUB_REF#refs/heads/}
@@ -67,8 +57,7 @@ jobs:
           echo "COMMIT_URL=https://github.com/${{ github.repository }}/commit/${{ github.sha }}" >> $GITHUB_ENV
           echo "RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
 
-      # ===== 计算构建耗时 =====
-      - name: Calculate build duration
+      - name: Save build duration
         run: |
           END_TS=$(date +%s)
           DURATION=$((END_TS - BUILD_START_TS))
@@ -76,96 +65,64 @@ jobs:
           SEC=$((DURATION % 60))
           echo "BUILD_DURATION=${MIN} 分 ${SEC} 秒" >> $GITHUB_ENV
 
-      # ===== 成功通知（企业卡片）=====
-      - name: Send success notification
-        if: success()
-        env:
-          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
-        run: |
-          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
-
-          curl -X POST "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}" \
-          -H "Content-Type: application/json" \
-          -d "{
-            \"msgtype\": \"template_card\",
-            \"template_card\": {
-              \"card_type\": \"text_notice\",
-              \"source\": {
-                \"desc\": \"GitHub Actions\"
-              },
-              \"main_title\": {
-                \"title\": \"🚀 发布成功\",
-                \"desc\": \"${REPO_NAME}\"
-              },
-              \"emphasis_content\": {
-                \"title\": \"SUCCESS\",
-                \"desc\": \"构建完成\"
-              },
-              \"sub_title_text\": \"${COMMIT_MSG}\",
-              \"horizontal_content_list\": [
-                {\"keyname\": \"发布类型\", \"value\": \"${RELEASE_TYPE}\"},
-                {\"keyname\": \"版本标识\", \"value\": \"${VERSION_TAG}\"},
-                {\"keyname\": \"执行人员\", \"value\": \"${{ github.actor }}\"},
-                {\"keyname\": \"构建耗时\", \"value\": \"${BUILD_DURATION}\"},
-                {\"keyname\": \"发布时间\", \"value\": \"${TIMESTAMP}\"}
-              ],
-              \"jump_list\": [
-                {\"type\": 1, \"title\": \"查看 Commit\", \"url\": \"${COMMIT_URL}\"},
-                {\"type\": 1, \"title\": \"查看构建日志\", \"url\": \"${RUN_URL}\"}
-              ]
-            }
-          }"
-
-      # ===== 失败通知（企业卡片）=====
-      - name: Send failure notification
-        if: failure()
-        env:
-          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
-        run: |
-          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
-
-          curl -X POST "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}" \
-          -H "Content-Type: application/json" \
-          -d "{
-            \"msgtype\": \"template_card\",
-            \"template_card\": {
-              \"card_type\": \"text_notice\",
-              \"source\": {
-                \"desc\": \"GitHub Actions\"
-              },
-              \"main_title\": {
-                \"title\": \"❌ 发布失败\",
-                \"desc\": \"${REPO_NAME}\"
-              },
-              \"emphasis_content\": {
-                \"title\": \"FAILED\",
-                \"desc\": \"构建异常\"
-              },
-              \"sub_title_text\": \"${COMMIT_MSG}\",
-              \"horizontal_content_list\": [
-                {\"keyname\": \"发布类型\", \"value\": \"${RELEASE_TYPE}\"},
-                {\"keyname\": \"版本标识\", \"value\": \"${VERSION_TAG}\"},
-                {\"keyname\": \"执行人员\", \"value\": \"${{ github.actor }}\"},
-                {\"keyname\": \"构建耗时\", \"value\": \"${BUILD_DURATION}\"},
-                {\"keyname\": \"发布时间\", \"value\": \"${TIMESTAMP}\"}
-              ],
-              \"jump_list\": [
-                {\"type\": 1, \"title\": \"查看 Commit\", \"url\": \"${COMMIT_URL}\"},
-                {\"type\": 1, \"title\": \"查看构建日志\", \"url\": \"${RUN_URL}\"}
-              ]
-            }
-          }"
   deploy:
-    name: Deploy to GitHub Pages
+    name: Deploy
     needs: build
+    runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-    runs-on: ubuntu-latest
 
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
+
+  notify:
+    name: Notify WeCom
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Send notification
+        env:
+          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
+        run: |
+          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+
+          if [[ "${{ needs.build.result }}" == "success" && "${{ needs.deploy.result }}" == "success" ]]; then
+            STATUS_TITLE="🚀 发布成功"
+            STATUS_DESC="SUCCESS"
+          else
+            STATUS_TITLE="❌ 发布失败"
+            STATUS_DESC="FAILED"
+          fi
+
+          curl -X POST "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}" \
+          -H "Content-Type: application/json" \
+          -d "{
+            \"msgtype\": \"template_card\",
+            \"template_card\": {
+              \"card_type\": \"text_notice\",
+              \"source\": { \"desc\": \"GitHub Actions\" },
+              \"main_title\": {
+                \"title\": \"${STATUS_TITLE}\",
+                \"desc\": \"${{ github.repository }}\"
+              },
+              \"emphasis_content\": {
+                \"title\": \"${STATUS_DESC}\",
+                \"desc\": \"构建结果\"
+              },
+              \"sub_title_text\": \"Commit: ${{ github.sha }}\",
+              \"horizontal_content_list\": [
+                {\"keyname\": \"发布类型\", \"value\": \"${RELEASE_TYPE}\"},
+                {\"keyname\": \"版本标识\", \"value\": \"${VERSION_TAG}\"},
+                {\"keyname\": \"执行人员\", \"value\": \"${{ github.actor }}\"},
+                {\"keyname\": \"发布时间\", \"value\": \"${TIMESTAMP}\"}
+              ],
+              \"jump_list\": [
+                {\"type\": 1, \"title\": \"查看 Commit\", \"url\": \"https://github.com/${{ github.repository }}/commit/${{ github.sha }}\"},
+                {\"type\": 1, \"title\": \"查看构建日志\", \"url\": \"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}
+              ]
+            }
+          }"
