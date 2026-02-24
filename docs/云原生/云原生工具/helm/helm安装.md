@@ -95,3 +95,12 @@ $ ./get_helm.sh
   </TabItem>
 </Tabs>
 
+
+
+查看版本
+
+```shell
+$ helm version
+version.BuildInfo{Version:"v4.1.1", GitCommit:"5caf0044d4ef3d62a955440272999e139aafbbed", GitTreeState:"clean", GoVersion:"go1.25.7", KubeClientVersion:"v1.35"}
+```
+
