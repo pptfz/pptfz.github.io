@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ===== 记录开始时间（秒）=====
+      # ===== 记录开始时间 =====
       - name: Record build start time
         run: echo "BUILD_START_TS=$(date +%s)" >> $GITHUB_ENV
 
@@ -39,8 +39,11 @@ jobs:
         with:
           path: build
 
-      - name: Extract commit message
-        run: echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
+      # ===== 提取提交信息 =====
+      - name: Extract commit info
+        run: |
+          echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
+          echo "SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_ENV
 
       # ===== 计算构建耗时 =====
       - name: Calculate build duration
@@ -58,11 +61,18 @@ jobs:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
         run: |
           TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          REPO="${{ github.repository }}"
+          BRANCH="${{ github.ref_name }}"
+          REF_TYPE="${{ github.ref_type }}"
+          ACTOR="${{ github.actor }}"
+          ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          PAGE_URL="https://${{ github.repository_owner }}.github.io/"
+
           curl -X POST -H "Content-Type: application/json" \
           -d "{
             \"msgtype\": \"markdown\",
             \"markdown\": {
-              \"content\": \"**发布结果通知**\\n\\n**申请标题:** ${COMMIT_MSG}\\n\\n**应用名称:** docusaurus\\n\\n**应用版本:** master#${{ github.sha }}\\n\\n**执行人员:** Webhook\\n\\n**发布结果:** <font color=\\\"info\\\">成功</font>\\n\\n**构建耗时:** ${BUILD_DURATION}\\n\\n**发布时间:** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
+              \"content\": \"# 🚀 Docusaurus 发布通知\\n\\n---\\n\\n📦 **仓库:** ${REPO}\\n🏷️ **引用类型:** ${REF_TYPE}\\n🌿 **名称:** ${BRANCH}\\n🔖 **Commit:** ${SHORT_SHA}\\n📝 **提交信息:** ${COMMIT_MSG}\\n👤 **触发人:** ${ACTOR}\\n\\n🕒 **构建耗时:** ${BUILD_DURATION}\\n⏰ **发布时间:** ${TIMESTAMP}\\n\\n🌐 **访问地址:** ${PAGE_URL}\\n🔎 **构建详情:** [点击查看](${ACTION_URL})\\n\\n---\\n\\n## ✅ 发布状态: <font color=\\\"info\\\">成功</font>\"
             }
           }" \
           https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
@@ -74,11 +84,17 @@ jobs:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
         run: |
           TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          REPO="${{ github.repository }}"
+          BRANCH="${{ github.ref_name }}"
+          REF_TYPE="${{ github.ref_type }}"
+          ACTOR="${{ github.actor }}"
+          ACTION_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
           curl -X POST -H "Content-Type: application/json" \
           -d "{
             \"msgtype\": \"markdown\",
             \"markdown\": {
-              \"content\": \"**发布结果通知**\\n\\n申请标题: ${COMMIT_MSG}\\n\\n应用名称: docusaurus\\n\\n应用版本: master#${{ github.sha }}\\n\\n执行人员: Webhook\\n\\n发布结果: <font color=\\\"warning\\\">失败</font>\\n\\n**构建耗时:** ${BUILD_DURATION}\\n\\n**发布时间:** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
+              \"content\": \"# 🚨 Docusaurus 发布失败通知\\n\\n---\\n\\n📦 **仓库:** ${REPO}\\n🏷️ **引用类型:** ${REF_TYPE}\\n🌿 **名称:** ${BRANCH}\\n🔖 **Commit:** ${SHORT_SHA}\\n📝 **提交信息:** ${COMMIT_MSG}\\n👤 **触发人:** ${ACTOR}\\n\\n🕒 **构建耗时:** ${BUILD_DURATION}\\n⏰ **发布时间:** ${TIMESTAMP}\\n\\n🔎 **构建详情:** [点击查看](${ACTION_URL})\\n\\n---\\n\\n## ❌ 发布状态: <font color=\\\"warning\\\">失败</font>\"
             }
           }" \
           https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
@@ -96,4 +112,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v4
