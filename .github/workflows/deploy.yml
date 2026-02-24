@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - 'v*'
 
 jobs:
   build:
@@ -11,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # ===== 记录开始时间（秒）=====
+      # ===== 记录开始时间 =====
       - name: Record build start time
         run: echo "BUILD_START_TS=$(date +%s)" >> $GITHUB_ENV
 
@@ -39,6 +41,7 @@ jobs:
         with:
           path: build
 
+      # ===== 提取 commit message =====
       - name: Extract commit message
         run: echo "COMMIT_MSG=$(git log -1 --pretty=%B | tr -d '\n')" >> $GITHUB_ENV
 
@@ -51,36 +54,36 @@ jobs:
           SEC=$((DURATION % 60))
           echo "BUILD_DURATION=${MIN} 分 ${SEC} 秒" >> $GITHUB_ENV
 
-      # ===== 成功通知 =====
-      - name: Send success notification
-        if: success()
+      # ===== 统一通知（支持 branch / tag）=====
+      - name: Send notification
+        if: always()
         env:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
         run: |
-          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+          SHORT_SHA=${GITHUB_SHA::7}
           TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
-          curl -X POST -H "Content-Type: application/json" \
-          -d "{
-            \"msgtype\": \"markdown\",
-            \"markdown\": {
-              \"content\": \"**发布结果通知**\\n\\n**申请标题: ** ${COMMIT_MSG}\\n\\n**应用名称: ** docusaurus\\n\\n**应用版本: ** master#${SHORT_SHA}\\n\\n**执行人员: ** Webhook\\n\\n**发布结果: ** <font color=\\\"info\\\">成功</font>\\n\\n**构建耗时: ** ${BUILD_DURATION}\\n\\n**发布时间:** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
-            }
-          }" \
-          https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
 
-      # ===== 失败通知 =====
-      - name: Send failure notification
-        if: failure()
-        env:
-          WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
-        run: |
-          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
-          TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
+          # 判断成功失败
+          if [ "${{ job.status }}" == "success" ]; then
+            RESULT="成功"
+            COLOR="info"
+          else
+            RESULT="失败"
+            COLOR="warning"
+          fi
+
+          # 判断是 branch 还是 tag
+          if [ "${GITHUB_REF_TYPE}" == "tag" ]; then
+            REF_DISPLAY="Tag 发布"
+          else
+            REF_DISPLAY="Branch 发布"
+          fi
+
           curl -X POST -H "Content-Type: application/json" \
           -d "{
             \"msgtype\": \"markdown\",
             \"markdown\": {
-              \"content\": \"**发布结果通知**\\n\\n申请标题: ${COMMIT_MSG}\\n\\n应用名称: docusaurus\\n\\n应用版本: master#${SHORT_SHA}\\n\\n执行人员: Webhook\\n\\n发布结果: <font color=\\\"warning\\\">失败</font>\\n\\n**构建耗时：** ${BUILD_DURATION}\\n\\n**发布时间：** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
+              \"content\": \"**发布结果通知**\\n\\n**发布类型: ** ${REF_DISPLAY}\\n\\n**申请标题: ** ${COMMIT_MSG}\\n\\n**应用名称: ** docusaurus\\n\\n**版本标识: ** [${GITHUB_REF_NAME}#${SHORT_SHA}](https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA})\\n\\n**执行人员: ** ${GITHUB_ACTOR}\\n\\n**发布结果: ** <font color=\\\"${COLOR}\\\">${RESULT}</font>\\n\\n**构建耗时: ** ${BUILD_DURATION}\\n\\n**发布时间: ** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
             }
           }" \
           https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
@@ -95,6 +98,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
