@@ -57,12 +57,13 @@ jobs:
         env:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
         run: |
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
           TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
           curl -X POST -H "Content-Type: application/json" \
           -d "{
             \"msgtype\": \"markdown\",
             \"markdown\": {
-              \"content\": \"**发布结果通知**\\n\\n**申请标题：** ${COMMIT_MSG}\\n\\n**应用名称：** docusaurus\\n\\n**应用版本：** master#${{ github.sha }}\\n\\n**执行人员：** Webhook\\n\\n**发布结果：** <font color=\\\"info\\\">成功</font>\\n\\n**构建耗时：** ${BUILD_DURATION}\\n\\n**发布时间：** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
+              \"content\": \"**发布结果通知**\\n\\n**申请标题: ** ${COMMIT_MSG}\\n\\n**应用名称: ** docusaurus\\n\\n**应用版本: ** master#${SHORT_SHA}\\n\\n**执行人员: ** Webhook\\n\\n**发布结果: ** <font color=\\\"info\\\">成功</font>\\n\\n**构建耗时: ** ${BUILD_DURATION}\\n\\n**发布时间:** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
             }
           }" \
           https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
@@ -73,12 +74,13 @@ jobs:
         env:
           WEBHOOK_KEY: ${{ secrets.WECHAT_WEBHOOK_KEY }}
         run: |
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
           TIMESTAMP=$(TZ=Asia/Shanghai date "+%Y-%m-%d %H:%M:%S")
           curl -X POST -H "Content-Type: application/json" \
           -d "{
             \"msgtype\": \"markdown\",
             \"markdown\": {
-              \"content\": \"**发布结果通知**\\n\\n申请标题： ${COMMIT_MSG}\\n\\n应用名称： docusaurus\\n\\n应用版本： master#${{ github.sha }}\\n\\n执行人员： Webhook\\n\\n发布结果： <font color=\\\"warning\\\">失败</font>\\n\\n**构建耗时：** ${BUILD_DURATION}\\n\\n**发布时间：** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
+              \"content\": \"**发布结果通知**\\n\\n申请标题: ${COMMIT_MSG}\\n\\n应用名称: docusaurus\\n\\n应用版本: master#${SHORT_SHA}\\n\\n执行人员: Webhook\\n\\n发布结果: <font color=\\\"warning\\\">失败</font>\\n\\n**构建耗时：** ${BUILD_DURATION}\\n\\n**发布时间：** ${TIMESTAMP}\\n\\n> 来自 GitHub Actions\"
             }
           }" \
           https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=${WEBHOOK_KEY}
