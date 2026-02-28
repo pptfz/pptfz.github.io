@@ -8,5 +8,9 @@
 
 
 
-![iShot2020-10-28_15.06.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2020-10-28_15.06.18.png)
+![linuxrm](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/linuxrm.gif)
+
+
+
+
 
