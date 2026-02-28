@@ -212,6 +212,7 @@ const config = {
             items: [
               { label: 'LLM工程平台', to: '/docs/LLM工程平台' },
               { label: 'AI应用可视化平台', to: '/docs/AI应用可视化平台' },
+              { label: 'AI编程工具', to: '/docs/AI编程工具' },
             ]
           },        
           
