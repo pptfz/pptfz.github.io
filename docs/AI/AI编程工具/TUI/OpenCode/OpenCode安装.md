@@ -56,7 +56,7 @@ $ opencode -v
 
 
 
-终端执行 `opencode` 会进入交互式洁面
+终端执行 `opencode` 会进入交互式命令行
 
 ![iShot_2026-02-28_17.14.22](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-28_17.14.22.png)
 
