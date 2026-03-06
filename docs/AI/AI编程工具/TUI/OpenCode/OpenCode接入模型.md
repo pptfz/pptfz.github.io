@@ -10,6 +10,8 @@
 
 
 
+## 编辑配置文件
+
 编辑 `~/.config/opencode/opencode.json` ，写入以下内容，替换实际的apikey
 
 :::tip 说明
@@ -112,7 +114,7 @@
 
 
 
-
+## 选择模型
 
 在命令行输入 `/models` ，输入 `Model Studio Coding Plan` ，选择模型后即可使用
 

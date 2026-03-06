@@ -2,9 +2,7 @@
 
 [toc]
 
-# CentOS7手动安装OpenVPN
-
-[参考链接](http://www.zhangblog.com/2020/05/09/openvpn01/)
+# OpenVPN安装
 
 ## 1.前期环境准备
 
@@ -79,25 +77,6 @@ iptables -t nat -D POSTROUTING 1
 
 
 
-#### 1.2.3 系统时间与硬件时间同步
-
-```shell
-# 配置时间同步
-$ crontab -l
-*/10 * * * * /usr/sbin/ntpdate ntp1.aliyun.com >/dev/null 2>&1
-
-# 系统使用上海时间
-$ ll /etc/localtime
-lrwxrwxrwx. 1 root root 35 Mar  7  2019 /etc/localtime -> ../usr/share/zoneinfo/Asia/Shanghai
-
-# 查看硬件时间
-$ hwclock --show 
-Thu 27 May 2021 02:49:25 PM CST  -0.109431 seconds
-
-# 系统时间同步到硬件时间
-hwclock --systohc
-```
-
 
 
 
@@ -107,7 +86,7 @@ hwclock --systohc
 ### 2.1 安装依赖包
 
 ```shell
-yum -y install lz4-devel lzo-devel pam-devel openssl-devel systemd-devel sqlite-devel autoconf automake libtool libtool-ltdl
+yum -y install lzo-devel lz4-devel pam-devel openssl-devel libcap-ng-devel
 ```
 
 
@@ -120,10 +99,14 @@ yum -y install lz4-devel lzo-devel pam-devel openssl-devel systemd-devel sqlite-
 
 [openvpn官网源码包下载地址](https://openvpn.net/community-downloads/)
 
+[openvpn官方安装文档](https://openvpn.net/community-docs/installing-openvpn.html)
+
 #### 2.2.1 下载源码包
 
 ```shell
-wget https://github.com/OpenVPN/openvpn/archive/v2.4.9.tar.gz
+export OPENVPN_VERSION=2.7.0
+wget 
+https://github.com/OpenVPN/openvpn/releases/download/v${OPENVPN_VERSION}/openvpn-${OPENVPN_VERSION}.tar.gz
 ```
 
 
@@ -131,21 +114,41 @@ wget https://github.com/OpenVPN/openvpn/archive/v2.4.9.tar.gz
 #### 2.2.2 解压缩并进入源码目录
 
 ```shell
-tar xf v2.4.9.tar.gz && cd openvpn-2.4.9
+tar xf openvpn-${OPENVPN_VERSION}.tar.gz && cd openvpn-${OPENVPN_VERSION}
 ```
 
 
 
-#### 2.2.3 开始编译安装
+#### 2.2.3 编译安装
 
-> `nproc` 命令可以直接获取系统核心数
+:::tip 说明
+
+openvpn2.7.0版本要求系统的openssl最低版本为1.1.0，如果系统的openssl版本低于1.1.0则会有如下报错
+
+```sh
+checking additionally if OpenSSL is available and version >= 1.1.0... configure: error: OpenSSL version too old
+```
+
+
+
+解决方法是安装 **OpenSSL 1.1 dev**
 
 ```shell
-# 生成configure文件
-autoreconf -i -v -f
+yum -y install openssl11 openssl11-devel
+```
 
-# 编译安装
-./configure --prefix=/usr/local/openvpn --enable-lzo --enable-lz4 --enable-crypto --enable-server --enable-plugins --enable-port-share --enable-iproute2 --enable-pf --enable-plugin-auth-pam --enable-pam-dlopen --enable-systemd
+:::
+
+```shell
+./configure \
+--prefix=/usr/local/openvpn \
+--sysconfdir=/etc/openvpn \
+--enable-systemd \
+--enable-pam-dlopen \
+--enable-selinux \
+--with-crypto-library=openssl \
+OPENSSL_CFLAGS="-I/usr/include/openssl11" \
+OPENSSL_LIBS="-L/usr/lib64/openssl11 -lssl -lcrypto"
 
 make -j${nproc} && make install
 ```
