@@ -16,14 +16,62 @@
 
 
 
-supervisor组件
+### supervisor组件
 
-| 组件                | 说明                                                         |
-| ------------------- | ------------------------------------------------------------ |
-| `supervisord`       | Supervisor 的服务端进程名为 supervisord。<br/>它负责：<br/>启动其管理的子程序（child programs）；<br/>响应客户端发送的命令；<br/>在子程序崩溃或退出时自动重启；<br/>记录子程序的标准输出（stdout）和标准错误（stderr）；<br/>生成和处理与子程序生命周期相关的“事件”。<br/>服务端进程依赖 配置文件 来运行。<br/>这个配置文件通常位于 `/etc/supervisord.conf`。<br/>配置文件采用 `Windows-INI` 风格。<br/>因为文件中可能包含明文的用户名和密码，所以必须通过 正确的文件系统权限 来保证安全。 |
-| `supervisorctl`     | Supervisor 的命令行客户端名为 supervisorctl。<br/><br/>它提供了一个类似 shell 的交互界面，用来操作 supervisord 提供的功能。<br/><br/>通过 supervisorctl，用户可以：<br/>连接到不同的 supervisord 实例（一次连接一个）；<br/>查看 supervisord 管理的子程序状态；<br/>启动或停止子程序；<br/>获取正在运行的进程列表。<br/><br/>命令行客户端通过 UNIX 域套接字 或 互联网（TCP）套接字 与服务端通信。<br/>服务端可以要求客户端在执行命令前提供 身份认证。<br/>客户端通常使用与服务端相同的配置文件，但只要有 [supervisorctl] 配置段的文件都可以使用。 |
-| `Web Server`        | 如果在配置中启用了 **`[inet_http_server]`** 部分，并让 `supervisord` 监听一个 **HTTP 端口**，那么就可以通过浏览器访问一个 **简单的 Web 管理界面**。</br> 这个 Web 界面提供的功能与 `supervisorctl` 命令行工具基本类似，可以用于查看和控制进程状态。 |
-| `XML-RPC Interface` | 与提供 Web 界面的 **HTTP 服务器** 同时，也提供了一个 **XML-RPC 接口**，可以通过它来查询和控制 **Supervisor** 以及它管理的所有程序，详细使用方法请参考 [XML-RPC API Documentation](https://supervisord.org/api.html#xml-rpc) |
+#### `supervisord`
+
+**Supervisor 的服务端进程名为 `supervisord`。**
+
+它负责：
+
+- 启动其管理的子程序（child programs）；
+
+- 响应客户端发送的命令；
+
+- 在子程序崩溃或退出时自动重启；
+
+- 记录子程序的标准输出（stdout）和标准错误（stderr）；
+
+- 生成和处理与子程序生命周期相关的“事件”。
+
+
+
+服务端进程依赖 **配置文件** 来运行。
+
+- 这个配置文件通常位于 `/etc/supervisord.conf`。
+- 配置文件采用 **Windows-INI 风格**。
+- 因为文件中可能包含明文的用户名和密码，所以必须通过 **正确的文件系统权限** 来保证安全。
+
+
+
+#### `supervisorctl`
+
+Supervisor 的命令行客户端叫做 **`supervisorctl`**。它提供了一个类似 **shell** 的交互界面，让用户可以使用 **`supervisord`** 提供的各种功能。
+
+通过 `supervisorctl`，用户可以：
+
+- 连接到不同的 **`supervisord`** 实例（一次连接一个）；
+- 查看被管理的子进程的状态；
+- 启动或停止子进程；
+- 获取当前正在运行的进程列表。
+
+命令行客户端通过 **UNIX 域套接字** 或 **TCP 套接字** 与服务端通信。
+ 服务端可以要求客户端在执行命令前提供 **身份验证**。
+ 客户端通常使用与服务端相同的配置文件，但只要配置文件里有 `[supervisorctl]` 段，也可以使用。
+
+
+
+#### `Web Server`
+
+如果在配置中启用了 **`[inet_http_server]`** 部分，并让 `supervisord` 监听一个 **HTTP 端口**，那么就可以通过浏览器访问一个 **简单的 Web 管理界面**。这个 Web 界面提供的功能与 `supervisorctl` 命令行工具基本类似，可以用于查看和控制进程状态。
+
+
+
+#### `XML-RPC Interface`
+
+与提供 Web 界面的 **HTTP 服务器** 同时，也提供了一个 **XML-RPC 接口**，可以通过它来查询和控制 **Supervisor** 以及它管理的所有程序，详细使用方法请参考 [XML-RPC API Documentation](https://supervisord.org/api.html#xml-rpc)
+
+
 
 
 
