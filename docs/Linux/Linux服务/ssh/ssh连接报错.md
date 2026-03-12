@@ -1,6 +1,6 @@
 # ssh连接报错
 
-## 报错1 WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+## WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
 
 
 
@@ -34,5 +34,42 @@ $ ssh-keygen -R 10.0.0.222
 # Host 10.0.0.222 found: line 32
 /Users/hehe/.ssh/known_hosts updated.
 Original contents retained as /Users/hehe/.ssh/known_hosts.old
+```
+
+
+
+## 使用 `ZenTermLite` 连接rocky linux报错
+
+终端中使用密钥可以ssh连接
+
+```shell
+ssh -i id_ed25519 pptfz@10.0.0.111
+```
+
+
+
+但是使用 `ZenTermLite` 一直报错认证失败
+
+![iShot_2026-03-12_14.21.27](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-03-12_14.21.27.png)
+
+
+
+解决方法是修改rocky linux的加密策略，以下方法为临时解决方法，还是和 `ZenTermLite` 工具本身有关(已经不更新了)
+
+
+
+查看加密策略，默认是 `DEFAULT`
+
+```shell
+$ update-crypto-policies --show
+DEFAULT
+```
+
+
+
+修改为 `LEGACY` 后就可以使用 `ZenTermLite` 进行ssh登陆了
+
+```shell
+update-crypto-policies --set LEGACY
 ```
 
