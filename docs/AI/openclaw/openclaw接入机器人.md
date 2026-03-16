@@ -278,7 +278,9 @@ openclaw plugins install @openclaw/feishu
 
 确认导入权限
 
-![iShot_2026-03-14_18.59.02](/Users/pptfz/Desktop/iShot_2026-03-14_18.59.02.png)
+![iShot_2026-03-16_16.48.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-03-16_16.48.21.png)
+
+
 
 
 
