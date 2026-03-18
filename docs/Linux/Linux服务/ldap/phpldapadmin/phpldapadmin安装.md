@@ -348,7 +348,6 @@ docker run \
   -e PHPLDAPADMIN_HTTPS=false \
   -e PHPLDAPADMIN_LDAP_HOSTS=10.0.0.102 \
   --restart=always \
-  --detach \
   osixia/phpldapadmin:0.9.0
 ```
 
