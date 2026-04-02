@@ -6,7 +6,7 @@
 
 :::tip 说明
 
-`GatewayClass` 是 `Envoy Gateway` 的入口控制器
+`GatewayClass` 是 `Envoy Gateway` 的入口控制器，类似于 ingressclass
 
 
 
@@ -48,6 +48,8 @@ EOF
 
 :::tip 说明
 
+Gateway 是 **Gateway API 中的 "入口网关实例"**，相当于 **Ingress Controller + LoadBalancer Service 的组合体**
+
 官方示例 `Gateway` 配置
 
 ```yaml
@@ -70,7 +72,7 @@ spec:
 创建Gateway
 
 ```yaml
-cat > Gateway.yaml << EOF
+cat << 'EOF' | kubectl apply -f -
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
@@ -81,9 +83,15 @@ spec:
     - name: http
       protocol: HTTP
       port: 80
+      allowedRoutes:
+        namespaces:
+          from: All
     - name: https
       protocol: HTTPS
       port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
 EOF
 ```
 
@@ -99,11 +107,11 @@ pptfz   pptfz   10.0.0.231   False        8s
 
 
 
-gateway创建完后会自动创建LoadBalancer类型的sec
+gateway创建完后会自动创建LoadBalancer类型的svc
 
 :::tip 说明
 
-svc的命名规则是 `envoy-<gateway-namespace>-<gateway-name>-<随机后缀>`
+svc的命名规则是 `envoy-<gateway-namespace>-<gateway-name>-<哈希值>`
 
 :::
 
@@ -121,6 +129,10 @@ envoy-gateway                               ClusterIP      10.96.250.227   <none
 [HTTPRoute](https://gateway-api.sigs.k8s.io/api-types/httproute/)
 
 :::tip 说明
+
+HTTPRoute 是 **Gateway API 中的路由规则定义**，相当于 **Ingress 的升级版**
+
+
 
 官方示例 `HTTPRoute` 配置
 
@@ -154,6 +166,30 @@ spec:
 创建HTTPRoute
 
 ```yaml
-
+cat << 'EOF' | kubectl apply -f -
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: gitea-envoy-gateway.ops.com
+spec:
+  parentRefs:
+    - name: pptfz
+      namespace: envoy-gateway-system # 主要这里要填写gateway的namespace
+  hostnames:
+    - "gitea-envoy-gateway.ops.com"
+  rules:
+    - backendRefs:
+        - group: ""
+          kind: Service
+          name: gitea-http # 注意这里要填写正确的svc名称
+          port: 3000
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+EOF
 ```
+
+
 

@@ -20,6 +20,8 @@ helm pull oci://docker.io/envoyproxy/gateway-helm
 
 ## 修改 `values.yaml`
 
+如无特殊需求，默认配置即可
+
 
 
 
