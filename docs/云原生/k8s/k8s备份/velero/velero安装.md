@@ -102,6 +102,7 @@ mv velero-v${VELERO_VERSION}-linux-arm64/velero /usr/local/bin
 
   </TabItem>
 
+</Tabs>
   </TabItem>
 </Tabs>
 
