@@ -13,7 +13,9 @@ author: 咚哒哒哒哒
 ---
 ## MCP篇 — 让AI连接外部世界
 
-![图片](OpenCode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD(5)%EF%BC%9AMCP%E7%AF%87,%20%E8%AE%A9AI%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8%E4%B8%96%E7%95%8C/640.png)
+![640.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.11.png)
+
+
 
 AI现在已经很会说了。写代码、改Bug、聊架构，它都能接得挺顺。可你真让它去"查一下数据库最近10条记录"、"看看浏览器控制台有没有报错"、"找一下这个库的文档怎么用"，它大概率还是只能给建议，自己下不了手。
 
@@ -25,7 +27,9 @@ ___
 
 ## 01 Skills vs MCP：谁是包，谁是源
 
-![图片](OpenCode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD(5)%EF%BC%9AMCP%E7%AF%87,%20%E8%AE%A9AI%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8%E4%B8%96%E7%95%8C/640.1.webp)
+![640.12](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.12.png)
+
+
 
 **`Skills` = USB主机上的软件**，管"怎么做事"：先干什么、后干什么、什么时候算完成。
 
@@ -146,6 +150,8 @@ ___
 
 ## 05 实战2：Chrome DevTools MCP — 调试已登录页面
 
+![640.13](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.13.png)
+
 再往前走一步，就是浏览器调试。
 
 这个场景特别实用，尤其是那种已经登录、状态很复杂的页面。你不用重新走登录流程，AI可以直接连当前浏览器会话。
@@ -193,6 +199,8 @@ ___
 
 ## 06 实战3：context7 MCP — 快速找文档
 
+![640.14](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.14.png)
+
 第三个场景更高频，几乎每天都会碰到。
 
 写代码时最常见的卡点，不是完全不会写，而是忘了某个库的具体用法。这个时候，`context7`比你自己开浏览器慢慢翻省事得多。
@@ -239,6 +247,8 @@ headers: { 'Cache-Control': 'max-age=3600' }
 ___
 
 ## 07 常用MCP装机清单
+
+![640.15](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.15.png)
 
 如果你刚开始配`MCP`，不用一上来装一堆。按用途先装最常用的几类就够了：
 

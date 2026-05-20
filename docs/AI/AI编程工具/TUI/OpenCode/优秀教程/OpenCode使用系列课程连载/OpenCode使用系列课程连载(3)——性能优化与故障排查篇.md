@@ -130,7 +130,7 @@ ___
 
 #### 模型选择决策
 
-![模型决策流程](OpenCode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD(3)%E2%80%94%E2%80%94%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E7%AF%87/svg%253E.svg)
+![640.3](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.3.png)
 
 模型决策流程
 
@@ -383,7 +383,7 @@ ___
 
 OpenCode 支持多层级配置，不同位置的配置文件有不同优先级。
 
-![配置文件优先级](OpenCode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD(3)%E2%80%94%E2%80%94%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E7%AF%87/svg%253E.svg)
+![640.4](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.4.png)
 
 配置文件优先级
 
@@ -715,7 +715,9 @@ opencode --continue
 |   开发时间   |  3 天  | 1.5 天 | 快 50% |
 |   响应时间   | 45 秒  | 20 秒  | 快 56% |
 
-![成本优化对比](OpenCode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD(3)%E2%80%94%E2%80%94%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B8%8E%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E7%AF%87/svg%253E.svg)
+![640.5](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.5.png)
+
+
 
 成本优化对比
 

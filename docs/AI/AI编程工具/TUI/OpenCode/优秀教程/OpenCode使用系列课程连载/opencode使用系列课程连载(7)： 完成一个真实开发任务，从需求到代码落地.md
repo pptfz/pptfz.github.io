@@ -17,7 +17,9 @@ author: 咚哒哒哒哒
 
 再继续数功能，就有点像给瑞士军刀数刀片了。
 
-所以这一篇不讲概念，直接上工地。![图片](opencode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD(7)%EF%BC%9A%20%E5%AE%8C%E6%88%90%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E5%BC%80%E5%8F%91%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%BB%8E%E9%9C%80%E6%B1%82%E5%88%B0%E4%BB%A3%E7%A0%81%E8%90%BD%E5%9C%B0/640.webp)
+所以这一篇不讲概念，直接上工地。
+
+![640.22](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.22.png)
 
 我拿一个真实的小任务来讲：`svg-renderer`。它现在就在我的写作目录旁边，不是为了写文章临时编出来的案例。
 
@@ -37,7 +39,9 @@ author: 咚哒哒哒哒
 
 SVG 在本地看着挺好，一到发布流程里就不那么舒服了。你要么手工截图，要么找工具转换，要么打开各种在线网站。一次两次还行，图一多就开始烦。
 
-![图片](opencode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD(7)%EF%BC%9A%20%E5%AE%8C%E6%88%90%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E5%BC%80%E5%8F%91%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%BB%8E%E9%9C%80%E6%B1%82%E5%88%B0%E4%BB%A3%E7%A0%81%E8%90%BD%E5%9C%B0/svg%253E.svg)
+![640.23](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.23.png)
+
+
 
 第六篇里我就有一批插图：封面、使用场景图、编码工作流、上下文管理、提速技巧……这些图如果一张张手工转，技术含量不高，但非常消耗耐心。
 
@@ -316,7 +320,9 @@ node render.js --config "C:\path\to\render.config.json"
 不用写得很正式，就按未来的我隔一段时间再回来用，也能看懂的标准来写。
 ```
 
-![图片](opencode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD(7)%EF%BC%9A%20%E5%AE%8C%E6%88%90%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E5%BC%80%E5%8F%91%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%BB%8E%E9%9C%80%E6%B1%82%E5%88%B0%E4%BB%A3%E7%A0%81%E8%90%BD%E5%9C%B0/svg%253E.svg)
+![640.24](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.24.png)
+
+
 
 ## 这过程中 OpenCode 到底帮了什么
 
@@ -326,7 +332,9 @@ node render.js --config "C:\path\to\render.config.json"
 
 我的分工大概是这样。
 
-![图片](opencode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD(7)%EF%BC%9A%20%E5%AE%8C%E6%88%90%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E5%BC%80%E5%8F%91%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%BB%8E%E9%9C%80%E6%B1%82%E5%88%B0%E4%BB%A3%E7%A0%81%E8%90%BD%E5%9C%B0/svg%253E.svg)
+![640.25](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.25.png)
+
+
 
 OpenCode 适合做这些事：
 
@@ -443,7 +451,9 @@ DONE success=6 failed=0
 
 ## 最后给一份真实开发任务检查表
 
-![图片](opencode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD(7)%EF%BC%9A%20%E5%AE%8C%E6%88%90%E4%B8%80%E4%B8%AA%E7%9C%9F%E5%AE%9E%E5%BC%80%E5%8F%91%E4%BB%BB%E5%8A%A1%EF%BC%8C%E4%BB%8E%E9%9C%80%E6%B1%82%E5%88%B0%E4%BB%A3%E7%A0%81%E8%90%BD%E5%9C%B0/svg%253E.svg)
+![640.26](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.26.png)
+
+
 
 如果你也想用 OpenCode 做一个真实小任务，可以照着这份检查表走。
 
@@ -466,7 +476,7 @@ DONE success=6 failed=0
 9.  有没有补 README、示例或使用说明？
     
 10.  这个工具下次还能不能被你自己用起来？
-    
+
 
 最后一条很关键。
 

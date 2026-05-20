@@ -10,8 +10,9 @@ author: 咚哒哒哒哒
 > ## Excerpt
 > 前面三篇，我们把 OpenCode 的基础使用、进阶技巧、性能优化和故障排查基本串起来了。如果你已经跟着折腾过一遍，大概率会有个感觉：这工具能干活，但还没到“越用越顺手”的状态。这点差距，很多时候不在模型，也不在 prompt，而在你有没有真正进入 OpenCode 的 Skills 这一层。没有 Skills，很多任务都得现聊现编；有了它，事情才开始按更稳定、更像老手的方式推进。这一篇就聊 Sk
 
----
-## ![图片](OpenCode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94Skills%E6%8A%80%E8%83%BD%E6%89%A9%E5%B1%95%E7%AF%87%EF%BC%9A%E4%BB%8E%E4%BC%9A%E7%94%A8%E5%88%B0%E4%BC%9A%E9%A9%BE%E9%A9%AD/640.webp)
+## 
+
+![640.6](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.6.png)
 
 前面三篇，我们把 OpenCode 的基础使用、进阶技巧、性能优化和故障排查基本串起来了。
 
@@ -54,7 +55,9 @@ ___
 
 ## 二、先搞懂：Skill 不是命令，而是工作流能力包
 
-![图片](OpenCode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94Skills%E6%8A%80%E8%83%BD%E6%89%A9%E5%B1%95%E7%AF%87%EF%BC%9A%E4%BB%8E%E4%BC%9A%E7%94%A8%E5%88%B0%E4%BC%9A%E9%A9%BE%E9%A9%AD/svg%253E.svg)
+![640.7](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.7.png)
+
+
 
 很多人第一次看到 `Skill`，会下意识把它理解成“一个更高级的命令”或者“一个封装好的提示词模板”。
 
@@ -98,7 +101,9 @@ ___
 
 ## 三、Skill 是怎么被加载的：知道一点原理，但别陷进去
 
-![图片](OpenCode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94Skills%E6%8A%80%E8%83%BD%E6%89%A9%E5%B1%95%E7%AF%87%EF%BC%9A%E4%BB%8E%E4%BC%9A%E7%94%A8%E5%88%B0%E4%BC%9A%E9%A9%BE%E9%A9%AD/svg%253E.svg)
+![640.8](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.8.png)
+
+
 
 这部分知道一点就够了，目的是理解：为什么有些 Skill 会自动触发，为什么有些要手动调用，为什么换个项目之后表现又不太一样。
 
@@ -222,7 +227,7 @@ ___
 
 ## 五、必装 Skills 装机指南：新手先装什么，办公装什么，开发装什么
 
-![图片](OpenCode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94Skills%E6%8A%80%E8%83%BD%E6%89%A9%E5%B1%95%E7%AF%87%EF%BC%9A%E4%BB%8E%E4%BC%9A%E7%94%A8%E5%88%B0%E4%BC%9A%E9%A9%BE%E9%A9%AD/svg%253E.svg)
+![640.9](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.9.png)
 
 如果你刚接触 Skill 生态，很容易走两个极端：要么完全不装，要么一口气装二十个。
 
@@ -317,7 +322,9 @@ ___
 
 ## 六、全局 Skill、项目 Skill，到底怎么分工
 
-![图片](OpenCode%E4%BD%BF%E7%94%A8%E7%B3%BB%E5%88%97%E8%AF%BE%E7%A8%8B%E8%BF%9E%E8%BD%BD%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94Skills%E6%8A%80%E8%83%BD%E6%89%A9%E5%B1%95%E7%AF%87%EF%BC%9A%E4%BB%8E%E4%BC%9A%E7%94%A8%E5%88%B0%E4%BC%9A%E9%A9%BE%E9%A9%AD/svg%253E.svg)
+![640.10](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/640.10.png)
+
+
 
 很多人折腾一圈后，真正卡住的不是“怎么装”，而是“装在哪”。
 
