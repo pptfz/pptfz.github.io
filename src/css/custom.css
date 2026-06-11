@@ -30,6 +30,16 @@
 }
 
 
+/* ============================================================
+ * 修复跑马灯公告栏导致的整页横向溢出  2026-06-10
+ * 原因：.scrolling-text 的 padding-left:100% + transform 让 <body> 出现横向滚动条
+ * 修复：禁止整页横向溢出，跑马灯效果不受影响
+ * ============================================================ */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
 /* custom.css */
 /* .scroll-container {
   overflow: hidden;
@@ -53,11 +63,71 @@
 } */
 
 
+/* ============================================================
+ * 顶部跑马灯：非主流改造  2026-06-10
+ * 备份：.backup-bg-20260610_140630/custom.css
+ * 改动：
+ *   1. 背景：从 #f0f0f0 浅灰 → 流动渐变 + 网点 + 扫光（呼应 hero）
+ *   2. 文字：从 colorChange 循环切色 → 白色霓虹发光呼吸
+ *   3. 加上下两条彩虹光晕分隔线
+ * ============================================================ */
 .scroll-container {
   overflow: hidden;
   white-space: nowrap;
   width: 100%;
-  background-color: #f0f0f0; /* 浅灰色背景 */
+  position: relative;
+
+  /* 多层背景叠加（同 hero 风格） */
+  background:
+    /* 1. 小网点纹理 */
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.15) 1px, transparent 1.5px) 0 0 / 18px 18px,
+    /* 2. 大彩色光斑 */
+    radial-gradient(circle at 15% 50%, rgba(255, 215, 0, 0.45), transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(0, 255, 209, 0.4), transparent 45%),
+    radial-gradient(circle at 85% 50%, rgba(255, 105, 180, 0.5), transparent 40%),
+    /* 3. 斜条纹扫光 */
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.05) 0,
+      rgba(255, 255, 255, 0.05) 2px,
+      transparent 2px,
+      transparent 10px
+    ),
+    /* 4. 流动渐变底色 */
+    linear-gradient(90deg, #6c3eb7 0%, #ff4d8d 25%, #00c9a7 50%, #ffa500 75%, #6c3eb7 100%);
+  background-size:
+    18px 18px,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    400% 100%;
+  animation: scrollBarFlow 20s linear infinite;
+}
+
+@keyframes scrollBarFlow {
+  0%   { background-position: 0 0, 0% 50%, 50% 50%, 100% 50%, 0 0, 0% 50%; }
+  100% { background-position: 0 0, 0% 50%, 50% 50%, 100% 50%, 0 0, 400% 50%; }
+}
+
+/* 上下两条彩虹光晕（跟 hero 呼应） */
+.scroll-container::before,
+.scroll-container::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  filter: blur(1px);
+  z-index: 3;
+  pointer-events: none;
+}
+.scroll-container::before {
+  top: 0;
+  background: linear-gradient(90deg, transparent, #ffeb3b, #ff4d8d, #00c9a7, transparent);
+}
+.scroll-container::after {
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, #00c9a7, #ff4d8d, #ffeb3b, transparent);
 }
 
 .scrolling-text {
@@ -65,27 +135,56 @@
   padding-left: 100%;
   font-weight: bold;
   font-size: 18px;
-  animation: 
+  /* 删掉原 colorChange，换成白色 + 霓虹发光呼吸 */
+  color: #fff;
+  letter-spacing: 1.5px;
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 0.95),
+    0 0 10px rgba(255, 105, 180, 0.8),
+    0 0 18px rgba(0, 255, 209, 0.65),
+    0 0 32px rgba(170, 90, 255, 0.5),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+  animation:
     scroll 30s linear infinite,
-    colorChange 10s linear infinite;
+    textGlowPulse 2.8s ease-in-out infinite alternate;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes scroll {
-  0% {
-    transform: translate(0, 0);
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(-100%, 0); }
+}
+
+@keyframes textGlowPulse {
+  from {
+    text-shadow:
+      0 0 4px rgba(255, 255, 255, 0.95),
+      0 0 10px rgba(255, 105, 180, 0.8),
+      0 0 18px rgba(0, 255, 209, 0.65),
+      0 0 32px rgba(170, 90, 255, 0.5),
+      0 1px 2px rgba(0, 0, 0, 0.3);
   }
-  100% {
-    transform: translate(-100%, 0);
+  to {
+    text-shadow:
+      0 0 6px rgba(255, 255, 255, 1),
+      0 0 14px rgba(0, 255, 209, 0.95),
+      0 0 24px rgba(170, 90, 255, 0.8),
+      0 0 40px rgba(255, 105, 180, 0.65),
+      0 1px 2px rgba(0, 0, 0, 0.3);
   }
 }
 
-@keyframes colorChange {
-  0%, 100% { color: #ff0000; } /* 红 */
-  20% { color: #ff8000; }      /* 橙 */
-  40% { color: #0000ff; }      /* 蓝 */
-  60% { color: #008000; }      /* 绿 */
-  80% { color: #8b00ff; }      /* 紫 */
-}
+/* ============================================================
+ * （旧的颜色循环 colorChange 已不再使用，保留注释方便回滚参考）
+ * @keyframes colorChange {
+ *   0%, 100% { color: #ff0000; }
+ *   20% { color: #ff8000; }
+ *   40% { color: #0000ff; }
+ *   60% { color: #008000; }
+ *   80% { color: #8b00ff; }
+ * }
+ * ============================================================ */
 
 
 /* 右下角 GIF 图片 */
@@ -110,6 +209,1394 @@
 }
 
 
+/* ============================================================
+ * Tagline（hero subtitle）排版修正  2026-06-10
+ * 原因：docusaurus.config.js 里 tagline 用了全局 class .line / .alignLeft / .alignRight，
+ *      CSS module 选择器会被哈希化匹配不到，所以放这里走全局 CSS。
+ * 目的：让"1.自己得写注释 2.自己得写文档"这两行居中对齐，
+ *      不要 space-between 左右分散。
+ * 备份：.backup-spotlight-hero-20260610_135042/custom.css
+ * ============================================================ */
+.hero__subtitle .line {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  line-height: 1.8;
+  flex-wrap: wrap;
+}
+.hero__subtitle .alignLeft,
+.hero__subtitle .alignRight {
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+ * 顶部导航栏（navbar）非主流改造  2026-06-10
+ * 备份：.backup-navbar-20260610_145814/custom.css
+ * 目的：让 navbar 不再是普通白底，做成跟跑马灯/hero 同系的流动渐变
+ *       做"承上启下"的过渡，让三段（跑马灯 / navbar / hero）视觉连贯
+ * ============================================================ */
+
+/* 导航栏整体背景 */
+.navbar {
+  /* 多层叠加：网点 + 流动渐变底色 */
+  background:
+    /* 1. 小网点纹理 */
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.12) 1px, transparent 1.5px) 0 0 / 20px 20px,
+    /* 2. 流动渐变底色（紫 → 粉 → 青 → 紫） */
+    linear-gradient(120deg, #4a148c 0%, #c2185b 25%, #00838f 50%, #6c3eb7 75%, #4a148c 100%);
+  background-size:
+    20px 20px,
+    400% 400%;
+  animation: navbarFlow 18s ease-in-out infinite;
+
+  /* 加一点底部阴影分隔，不靠传统边框 */
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+
+  /* 关键：去掉默认底部 border（不然会有突兀的灰线） */
+  border-bottom: none;
+}
+
+@keyframes navbarFlow {
+  0%   { background-position: 0 0,         0%   50%; }
+  50%  { background-position: 10px 10px,   100% 50%; }
+  100% { background-position: 0 0,         0%   50%; }
+}
+
+/* 标题文字"喜欢🎤💃rap🏀" */
+.navbar__title {
+  color: #fff !important;
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 0.9),
+    0 0 10px rgba(255, 105, 180, 0.65),
+    0 0 18px rgba(0, 255, 209, 0.45);
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+/* logo 加点光晕 */
+.navbar__logo {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5))
+          drop-shadow(0 0 10px rgba(0, 255, 209, 0.4));
+}
+
+/* 主要导航链接（"基础"、"博客"等顶部菜单） */
+.navbar__link {
+  color: rgba(255, 255, 255, 0.92) !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: transform 0.25s ease, text-shadow 0.25s ease;
+}
+
+.navbar__link:hover {
+  color: #fff !important;
+  transform: translateY(-2px);
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.85),
+    0 0 14px rgba(255, 105, 180, 0.7),
+    0 0 24px rgba(0, 255, 209, 0.5);
+}
+
+/* hover 时取消上浮（之前会有彩虹下划线，已去掉） */
+
+/* 右侧图标按钮（GitHub、主题切换） */
+.navbar__item .navbar__link svg,
+.navbar .clean-btn svg {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+.navbar__item .navbar__link:hover svg,
+.navbar .clean-btn:hover svg {
+  filter:
+    drop-shadow(0 0 6px rgba(255, 255, 255, 0.9))
+    drop-shadow(0 0 14px rgba(0, 255, 209, 0.7));
+  transform: scale(1.12);
+}
+
+/* 主题切换按钮颜色 */
+.navbar .clean-btn {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* 移动端汉堡菜单图标 */
+.navbar__toggle {
+  color: #fff;
+}
+
+/* 移动端展开侧边栏（保持白底，否则字看不见） */
+.navbar-sidebar {
+  background: linear-gradient(180deg, #1a0033 0%, #16213e 100%);
+}
+.navbar-sidebar .navbar__title,
+.navbar-sidebar .navbar__link,
+.navbar-sidebar .menu__link {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+.navbar-sidebar .menu__link:hover,
+.navbar-sidebar .menu__link--active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff !important;
+}
+
+/* 深色主题模式下，navbar 保持彩色渐变（不要变成默认的黑色） */
+[data-theme='dark'] .navbar {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.12) 1px, transparent 1.5px) 0 0 / 20px 20px,
+    linear-gradient(120deg, #4a148c 0%, #c2185b 25%, #00838f 50%, #6c3eb7 75%, #4a148c 100%);
+  background-size: 20px 20px, 400% 400%;
+  animation: navbarFlow 18s ease-in-out infinite;
+}
+
+
+/* ============================================================
+ * 导航栏下拉菜单（dropdown）非主流改造  2026-06-10
+ * 备份：.backup-dropdown-20260610_150143/custom.css
+ * 目的：白底浅灰字 → 深紫玻璃质感 + 渐变文字 + 霓虹 hover
+ * 涉及：mac专区 / devops / Linux / 云原生 / 编程 / 监控 / 数据库 / 云厂商知识点 / AI
+ * ============================================================ */
+
+/* 下拉菜单容器：深紫毛玻璃质感 */
+.dropdown__menu {
+  background:
+    /* 网点纹理（淡） */
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1px, transparent 1.5px) 0 0 / 18px 18px,
+    /* 半透明深紫渐变底 */
+    linear-gradient(135deg, rgba(26, 0, 51, 0.96) 0%, rgba(45, 0, 75, 0.96) 50%, rgba(26, 0, 51, 0.96) 100%);
+  background-size: 18px 18px, 100% 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px !important;
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(255, 105, 180, 0.2),
+    0 0 60px rgba(0, 200, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  /* 毛玻璃 */
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  padding: 6px !important;
+  overflow: hidden;  /* 让顶上彩虹光线被裁剪 */
+  /* ⚠️ 不要设 position:relative！会破坏 Docusaurus 默认的 absolute 定位，
+   *    导致下拉菜单占据文档流空间，把 navbar 按钮挤到下一行 */
+}
+
+/* 下拉菜单顶部彩虹光线（呼应跑马灯/hero） */
+.dropdown__menu::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffeb3b, #ff4d8d, #00c9a7, transparent);
+  filter: blur(0.5px);
+  pointer-events: none;
+}
+
+/* 下拉项 */
+.dropdown__link {
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+  padding: 8px 14px !important;
+  margin: 2px 0;
+  transition: background 0.2s ease, transform 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
+  position: relative;
+}
+
+/* hover：彩虹流光渐变背景 + 文字爆光 */
+.dropdown__link:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 128, 0.25) 0%,
+    rgba(138, 43, 226, 0.25) 50%,
+    rgba(0, 200, 255, 0.25) 100%
+  ) !important;
+  color: #fff !important;
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.7),
+    0 0 14px rgba(255, 105, 180, 0.6),
+    0 0 24px rgba(0, 255, 209, 0.4);
+  transform: translateX(4px);
+}
+
+/* 当前激活项 */
+.dropdown__link--active {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 128, 0.18) 0%,
+    rgba(0, 200, 255, 0.18) 100%
+  ) !important;
+  color: #fff !important;
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.6),
+    0 0 12px rgba(0, 255, 209, 0.45);
+  font-weight: 600;
+}
+
+/* 下拉触发器（navbar 上"mac专区"那种按钮）右侧的小箭头 */
+.navbar__link--right svg,
+.dropdown > .navbar__link::after {
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+}
+
+/* 深色主题下也用同一套深紫玻璃 */
+[data-theme='dark'] .dropdown__menu {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1px, transparent 1.5px) 0 0 / 18px 18px,
+    linear-gradient(135deg, rgba(26, 0, 51, 0.96) 0%, rgba(45, 0, 75, 0.96) 50%, rgba(26, 0, 51, 0.96) 100%);
+  background-size: 18px 18px, 100% 100%;
+}
+[data-theme='dark'] .dropdown__link {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* 搜索弹窗（顺手也美化一下）—— Docusaurus 用 algolia DocSearch 时这些 class 会出现 */
+/* 如果没用搜索可忽略 */
+.DocSearch-Modal {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.06) 1px, transparent 1.5px) 0 0 / 18px 18px,
+    linear-gradient(135deg, #1a0033 0%, #2d004b 50%, #1a0033 100%) !important;
+}
+
+
+/* ============================================================
+ * 9 个下拉菜单独立风格  2026-06-10
+ * 备份：.backup-dd9styles-20260610_151315/custom.css
+ * 
+ * DOM 顺序（.navbar__items 子元素位置）：
+ *   :nth-child(1)  = .navbar__toggle（移动端汉堡键，桌面也存在）
+ *   :nth-child(2)  = .navbar__brand（logo + title）
+ *   :nth-child(3)  = "你不要过来啊"
+ *   :nth-child(4)  = "博客"
+ *   :nth-child(5)  = mac专区    dropdown #1
+ *   :nth-child(6)  = devops     dropdown #2
+ *   :nth-child(7)  = Linux      dropdown #3
+ *   :nth-child(8)  = 云原生     dropdown #4
+ *   :nth-child(9)  = 编程       dropdown #5
+ *   :nth-child(10) = 监控       dropdown #6
+ *   :nth-child(11) = 数据库     dropdown #7
+ *   :nth-child(12) = 云厂商知识点 dropdown #8
+ *   :nth-child(13) = AI         dropdown #9
+ * ============================================================ */
+
+/* ─── 通用：navbar 上的 dropdown 按钮样式 ─── */
+.navbar__items > .dropdown > .navbar__link {
+  font-weight: 600;
+  letter-spacing: 0.3px;     /* 原 0.5px，字间距收窄一点 */
+  padding: 3px 6px;          /* 原 4px 10px，左右内边距压缩 */
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+
+/* ─── 通用：dropdown 按钮的 SVG 图标 ─── */
+.navbar__items > .dropdown > .navbar__link::before {
+  margin-right: 2px;
+  flex-shrink: 0;
+}
+
+/* ─── navbar 所有项（含 link、dropdown、icon）的外边距压缩 ─── */
+.navbar__items .navbar__item,
+.navbar__items > .dropdown {
+  margin: 0 1px;             /* 项与项之间几乎贴在一起 */
+}
+
+/* 普通链接也收窄 padding */
+.navbar__items > .navbar__link {
+  padding: 3px 6px !important;
+  letter-spacing: 0.3px;
+}
+
+/* ─── 通用：下拉链接基础 ─── */
+.dropdown__link {
+  font-size: 14px;
+  padding: 7px 14px !important;
+}
+
+
+/* ================================================================
+ * 1. mac专区 — 🍎 苹果磨砂玻璃（白雾半透明 + 深灰字）
+ * ================================================================ */
+.navbar__items > :nth-child(5) > .navbar__link::before {
+  content: '' !important;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%2523ffffff%22%3E%3Cpath%20d%3D%22M17.05%2020.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24%200-1.44.62-2.2.44-3.06-.35C2.79%2015.25%203.51%207.59%209.05%207.31c1.35.07%202.29.74%203.08.8%201.18-.24%202.31-.93%203.57-.84%201.51.12%202.65.72%203.4%201.8-3.12%201.87-2.38%205.98.48%207.13-.57%201.5-1.31%202.99-2.54%204.09zM12%207.25c-.15-2.23%201.66-4.07%203.74-4.25.29%202.58-2.34%204.5-3.74%204.25z%22/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.navbar__items > :nth-child(5) > .navbar__link {
+  background: rgba(255, 255, 255, 0.1);
+}
+.navbar__items > :nth-child(5) > .navbar__link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+}
+.navbar__items > :nth-child(5) .dropdown__menu {
+  background: rgba(245, 245, 247, 0.92) !important;
+  backdrop-filter: blur(20px) saturate(1.8) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 0 0 0.5px rgba(0, 0, 0, 0.04) !important;
+}
+.navbar__items > :nth-child(5) .dropdown__link {
+  border-radius: 8px;
+}
+.navbar__items > :nth-child(5) .dropdown__link:hover {
+  background: rgba(0, 0, 0, 0.05) !important;
+  color: #0071e3 !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+
+/* ================================================================
+ * 2. devops — 🖥️ 黑客终端（黑底绿字等宽 + 光标闪烁）
+ * ================================================================ */
+.navbar__items > :nth-child(6) > .navbar__link::before {
+  content: '' !important;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%252300ff41%22%3E%3Cpath%20d%3D%22M19.14%2012.94c.04-.3.06-.61.06-.94%200-.32-.02-.64-.07-.94l2.03-1.58a.49.49%200%200%200%20.12-.61l-1.92-3.32a.488.488%200%200%200-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484%200%200%200-.48-.41h-3.84c-.24%200-.43.17-.47.41l-.36%202.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47%200-.59.22L2.74%208.87c-.12.21-.08.47.12.61l2.03%201.58c-.05.3-.09.63-.09.94%200%20.31.02.64.07.94l-2.03%201.58a.49.49%200%200%200-.12.61l1.92%203.32c.12.22.37.29.59.22l2.39-.96c.5.38%201.03.7%201.62.94l.36%202.54c.05.24.24.41.48.41h3.84c.24%200%20.44-.17.47-.41l.36-2.54c.59-.24%201.13-.56%201.62-.94l2.39.96c.22.08.47%200%20.59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12%2015.6c-1.98%200-3.6-1.62-3.6-3.6s1.62-3.6%203.6-3.6%203.6%201.62%203.6%203.6-1.62%203.6-3.6%203.6z%22/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.navbar__items > :nth-child(6) > .navbar__link {
+  background: rgba(0, 20, 0, 0.3);
+  font-family: 'Courier New', 'Consolas', monospace;
+}
+.navbar__items > :nth-child(6) > .navbar__link:hover {
+  background: rgba(0, 255, 0, 0.15);
+  box-shadow: 0 0 16px rgba(0, 255, 0, 0.3);
+}
+.navbar__items > :nth-child(6) .dropdown__menu {
+  background: #0a0a0a !important;
+  border: 1px solid #00ff4130 !important;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.15) !important;
+}
+.navbar__items > :nth-child(6) .dropdown__menu::before {
+  background: linear-gradient(90deg, transparent, #00ff41, transparent) !important;
+}
+.navbar__items > :nth-child(6) .dropdown__link {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 13px;
+}
+.navbar__items > :nth-child(6) .dropdown__link::before {
+  content: '> ';
+  color: #00cc33;
+}
+.navbar__items > :nth-child(6) .dropdown__link:hover {
+  background: rgba(0, 255, 65, 0.1) !important;
+  color: #00ff41 !important;
+  text-shadow: 0 0 8px #00ff41, 0 0 16px rgba(0, 255, 65, 0.4) !important;
+  transform: none !important;
+}
+
+
+/* ================================================================
+ * 3. Linux — 🐧 Tux 黑黄（深藏青底 + 金黄字）
+ * ================================================================ */
+.navbar__items > :nth-child(7) > .navbar__link::before {
+  content: '' !important;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%2523ffc107%22%3E%3Cpath%20d%3D%22M12.504%200c-.155%200-.315.008-.48.021-4.226.333-3.105%204.807-3.17%206.298-.076%201.092-.3%201.953-1.05%203.02-.885%201.051-2.127%202.75-2.716%204.521-.278.832-.41%201.684-.287%202.489a.424.424%200%200%200-.11.135c-.26.268-.45.6-.663.839-.199.199-.485.267-.797.4-.313.136-.658.269-.864.68-.09.189-.136.394-.132.602%200%20.199.027.4.055.536.058.399.116.728.04.97-.249.68-.28%201.145-.106%201.484.174.334.535.47.94.601.81.2%201.91.135%202.774.6.926.466%201.866.67%202.616.47.526-.116.97-.464%201.208-.946.587-.003%201.23-.269%202.26-.334.699-.058%201.574.267%202.577.2.025.134.063.198.114.333l.003.003c.391.778%201.113%201.132%201.884%201.071.771-.06%201.592-.536%202.257-1.306.631-.765%201.683-1.084%202.378-1.503.348-.199.629-.469.649-.853.023-.4-.2-.811-.714-1.376v-.097l-.003-.003c-.17-.2-.25-.535-.338-.926-.085-.401-.182-.786-.492-1.046h-.003c-.059-.054-.123-.067-.188-.135a.357.357%200%200%200-.19-.064c.431-1.278.264-2.55-.173-3.694-.533-1.41-1.465-2.638-2.175-3.483-.796-1.005-1.576-1.957-1.56-3.368.026-2.152.236-6.133-3.544-6.139zm.529%203.405h.013c.213%200%20.396.062.584.198.19.135.33.332.438.533.105.259.158.459.166.724%200-.02.006-.04.006-.06v.105a.086.086%200%200%201-.004-.021l-.004-.024a1.807%201.807%200%200%201-.15.706.953.953%200%200%201-.213.335c-.087-.04-.196-.083-.32-.124a1.59%201.59%200%200%200-.142-.108%201.42%201.42%200%200%200-.105-.366.745.745%200%200%201-.111-.343c-.027-.131-.027-.262-.014-.394.014-.13.04-.262.067-.36.094-.197.187-.394.293-.39zm-2.834.123c.349%200%20.618.198.798.467.18.27.27.598.27.992%200%20.089-.012.183-.024.27a.582.582%200%200%200-.13-.069c-.06-.04-.135-.092-.157-.13a1.215%201.215%200%200%200%20.035-.32c0-.265-.085-.413-.165-.484A.276.276%200%200%200%2010.7%204.13c-.108%200-.187.069-.241.137-.054.069-.084.158-.084.241v.005c-.27-.118-.448-.295-.448-.554%200-.297.32-.434.572-.434z%22/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.navbar__items > :nth-child(7) > .navbar__link {
+  background: rgba(0, 40, 80, 0.35);
+}
+.navbar__items > :nth-child(7) > .navbar__link:hover {
+  background: rgba(255, 193, 7, 0.2);
+  box-shadow: 0 0 16px rgba(255, 193, 7, 0.3);
+}
+.navbar__items > :nth-child(7) .dropdown__menu {
+  background: linear-gradient(135deg, #001a33 0%, #002244 50%, #001a33 100%) !important;
+  border: 1px solid rgba(255, 193, 7, 0.25) !important;
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.12) !important;
+}
+.navbar__items > :nth-child(7) .dropdown__menu::before {
+  background: linear-gradient(90deg, transparent, #ffc107, #001a33, #ffc107, transparent) !important;
+}
+.navbar__items > :nth-child(7) .dropdown__link {
+}
+.navbar__items > :nth-child(7) .dropdown__link::before {
+  content: '$ ';
+  color: #ff9800;
+  font-family: 'Courier New', monospace;
+}
+.navbar__items > :nth-child(7) .dropdown__link:hover {
+  background: rgba(255, 193, 7, 0.12) !important;
+  color: #ffe082 !important;
+  text-shadow: 0 0 8px rgba(255, 193, 7, 0.5) !important;
+  transform: none !important;
+}
+
+
+/* ================================================================
+ * 4. 云原生 — ☁️ K8s 蓝（深蓝 + 浅蓝光晕）
+ * ================================================================ */
+.navbar__items > :nth-child(8) > .navbar__link::before {
+  content: '' !important;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%2523326ce5%22%3E%3Cpath%20d%3D%22M11.96%200h.08l2.32.92c.41.16.81.39%201.18.66.79.59%201.4%201.4%201.78%202.32.36.88.5%201.85.4%202.78l-.06.6%201.97%202.55c.36.46.65.99.84%201.55.27.79.39%201.63.34%202.46-.05.83-.28%201.65-.66%202.4-.31.6-.74%201.15-1.26%201.6l-.45.39-.14%203.21c-.02.45-.13.9-.32%201.31-.27.59-.69%201.11-1.21%201.5-.51.39-1.13.66-1.78.77-.66.11-1.34.05-1.96-.16l-.57-.21-2.5%201.93c-.36.28-.76.5-1.19.66-.61.22-1.27.32-1.92.27-.66-.05-1.3-.24-1.87-.56-.58-.32-1.07-.77-1.45-1.31l-.33-.5-3.16-.41c-.45-.06-.88-.19-1.28-.4-.58-.3-1.07-.74-1.43-1.27-.36-.53-.59-1.15-.65-1.79-.07-.65%200-1.31.22-1.92l.2-.57-1.61-2.79c-.23-.4-.4-.83-.49-1.27-.13-.65-.13-1.32%200-1.97.13-.65.39-1.27.77-1.81.37-.54.85-1%201.4-1.34l.5-.32%201.05-3.02c.15-.43.36-.84.64-1.21.4-.55.91-1%201.51-1.32.61-.32%201.28-.5%201.97-.55l.6-.04%201.97-2.55c.28-.36.6-.69.96-.96zm5.61%2013.69l-1.06%201.06-2.65-2.65%202.06-2.06%201.99%201.99-.34%201.66zm-7.36%202.74l-.78-.31-.31-.78L8.71%2014l1.5-3.61%203.61%201.5%201.66%204.01-1.5%203.61-3.77.22zm-3.04-9.69l.79-.79%202.96%201.23-.62%201.5-3.13-1.94zm9.34-1.79l1.04%201.04.41%201.98-1.98-.41-1.04-1.04%201.57-1.57zM7.31%206.51L8.86%205l1.78%201.78-1.55%201.55-1.78-1.82zM5.5%2012.86l.31.78.78.31%203.61-1.5-1.5-3.61-4.01-1.66L3.08%2010.79l2.42%202.07z%22/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.navbar__items > :nth-child(8) > .navbar__link {
+  background: rgba(0, 80, 180, 0.25);
+}
+.navbar__items > :nth-child(8) > .navbar__link:hover {
+  background: rgba(50, 140, 255, 0.25);
+  box-shadow: 0 0 20px rgba(50, 140, 255, 0.35);
+}
+.navbar__items > :nth-child(8) .dropdown__menu {
+  background: linear-gradient(135deg, #0a1628 0%, #0d2137 50%, #0a1628 100%) !important;
+  border: 1px solid rgba(50, 140, 255, 0.2) !important;
+  box-shadow: 0 0 24px rgba(50, 140, 255, 0.12) !important;
+}
+.navbar__items > :nth-child(8) .dropdown__menu::before {
+  background: linear-gradient(90deg, transparent, #326ce5, #64b5f6, #326ce5, transparent) !important;
+}
+.navbar__items > :nth-child(8) .dropdown__link {
+}
+.navbar__items > :nth-child(8) .dropdown__link:hover {
+  background: rgba(50, 140, 255, 0.15) !important;
+  color: #90caf9 !important;
+  text-shadow: 0 0 8px rgba(50, 140, 255, 0.5), 0 0 20px rgba(50, 140, 255, 0.2) !important;
+  transform: none !important;
+}
+
+
+/* ================================================================
+ * 5. 编程 — 🌈 彩虹代码（深紫底 + 彩虹流光文字）
+ * ================================================================ */
+.navbar__items > :nth-child(9) > .navbar__link::before {
+  content: '' !important;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%2523ff6b9d%22%3E%3Cpath%20d%3D%22M9.4%2016.6L4.8%2012l4.6-4.6L8%206l-6%206%206%206%201.4-1.4zm5.2%200l4.6-4.6-4.6-4.6L16%206l6%206-6%206-1.4-1.4z%22/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.navbar__items > :nth-child(9) > .navbar__link {
+  background: rgba(80, 0, 140, 0.25);
+}
+.navbar__items > :nth-child(9) > .navbar__link:hover {
+  background: rgba(140, 0, 255, 0.2);
+  box-shadow: 0 0 20px rgba(140, 0, 255, 0.3);
+}
+.navbar__items > :nth-child(9) .dropdown__menu {
+  background: linear-gradient(135deg, #1a0033 0%, #2d004b 50%, #1a0033 100%) !important;
+  border: 1px solid rgba(140, 0, 255, 0.2) !important;
+  box-shadow: 0 0 24px rgba(140, 0, 255, 0.12) !important;
+}
+.navbar__items > :nth-child(9) .dropdown__menu::before {
+  background: linear-gradient(90deg, #ff0080, #ff8a00, #ffea00, #00ff88, #00d4ff, #8a2be2, #ff0080) !important;
+}
+.navbar__items > :nth-child(9) .dropdown__link {
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: rainbowLink 5s linear infinite !important;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
+}
+@keyframes rainbowLink {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.navbar__items > :nth-child(9) .dropdown__link:hover {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7))
+          drop-shadow(0 0 16px rgba(255, 0, 128, 0.5)) !important;
+  transform: none !important;
+  background: linear-gradient(90deg, #ff0080, #ff8a00, #ffea00, #00ff88, #00d4ff, #8a2be2, #ff0080) !important;
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+
+/* ================================================================
+ * 6. 监控 — 🚨 报警红（深红底 + 黄字 + 脉冲光效）
+ * ================================================================ */
+.navbar__items > :nth-child(10) > .navbar__link::before {
+  content: '' !important;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%2523e6522c%22%3E%3Cpath%20d%3D%22M12%200C6.49%200%202%204.49%202%2010c0%20.31.01.61.04.91C2.32%2016.13%206.7%2020%2012%2020c5.3%200%209.68-3.87%209.96-9.09.03-.3.04-.6.04-.91C22%204.49%2017.51%200%2012%200zm0%201.5c1.32%200%202.5.86%202.5%201.91%200%201.05-1.18%201.91-2.5%201.91-1.32%200-2.5-.86-2.5-1.91%200-1.05%201.18-1.91%202.5-1.91zm-5.43%2018C5.31%2019.5%204.5%2018.69%204.5%2018v-1.5h15V18c0%20.69-.81%201.5-2.07%201.5H6.57zM19.5%2015h-15v-1.5c0-2.66%201.34-5%203.36-6.39.34%201.26%201.62%202.21%203.14%202.21s2.8-.95%203.14-2.21c2.02%201.39%203.36%203.73%203.36%206.39V15zM12%2022.5c-.55%200-1-.45-1-1s.45-1%201-1%201%20.45%201%201-.45%201-1%201z%22/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.navbar__items > :nth-child(10) > .navbar__link {
+  background: rgba(200, 0, 0, 0.25);
+  animation: alertBtn 2s ease-in-out infinite;
+}
+@keyframes alertBtn {
+  0%, 100% { background: rgba(200, 0, 0, 0.25); }
+  50%      { background: rgba(200, 0, 0, 0.45); }
+}
+.navbar__items > :nth-child(10) > .navbar__link:hover {
+  background: rgba(255, 0, 0, 0.35);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+.navbar__items > :nth-child(10) .dropdown__menu {
+  background: linear-gradient(135deg, #1a0000 0%, #330000 50%, #1a0000 100%) !important;
+  border: 1px solid rgba(255, 0, 0, 0.25) !important;
+  box-shadow: 0 0 24px rgba(255, 0, 0, 0.15) !important;
+}
+.navbar__items > :nth-child(10) .dropdown__menu::before {
+  background: linear-gradient(90deg, transparent, #ff1744, #ffc107, #ff1744, transparent) !important;
+}
+.navbar__items > :nth-child(10) .dropdown__link {
+  font-weight: 600;
+}
+.navbar__items > :nth-child(10) .dropdown__link::before {
+  content: '⚠ ';
+}
+.navbar__items > :nth-child(10) .dropdown__link:hover {
+  background: rgba(255, 0, 0, 0.15) !important;
+  color: #ffe082 !important;
+  text-shadow: 0 0 6px rgba(255, 193, 7, 0.6), 0 0 14px rgba(255, 0, 0, 0.3) !important;
+  transform: none !important;
+}
+
+
+/* ================================================================
+ * 7. 数据库 — 💾 蓝绿矩阵（深青底 + 数据流动效果）
+ * ================================================================ */
+.navbar__items > :nth-child(11) > .navbar__link::before {
+  content: '' !important;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%252300d4aa%22%3E%3Cpath%20d%3D%22M12%203C7.58%203%204%204.79%204%207v10c0%202.21%203.59%204%208%204s8-1.79%208-4V7c0-2.21-3.58-4-8-4zm6%2014c0%20.5-2.13%202-6%202s-6-1.5-6-2v-2.23c1.61.78%203.72%201.23%206%201.23s4.39-.45%206-1.23V17zm0-4c0%20.5-2.13%202-6%202s-6-1.5-6-2v-2.23c1.61.78%203.72%201.23%206%201.23s4.39-.45%206-1.23V13zm-6-3c-3.87%200-6-1.5-6-2s2.13-2%206-2%206%201.5%206%202-2.13%202-6%202z%22/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.navbar__items > :nth-child(11) > .navbar__link {
+  background: rgba(0, 80, 80, 0.25);
+}
+.navbar__items > :nth-child(11) > .navbar__link:hover {
+  background: rgba(0, 200, 200, 0.2);
+  box-shadow: 0 0 20px rgba(0, 200, 200, 0.3);
+}
+.navbar__items > :nth-child(11) .dropdown__menu {
+  background: linear-gradient(135deg, #001a1a 0%, #003333 50%, #001a1a 100%) !important;
+  border: 1px solid rgba(0, 200, 200, 0.2) !important;
+  box-shadow: 0 0 24px rgba(0, 200, 200, 0.1) !important;
+}
+.navbar__items > :nth-child(11) .dropdown__menu::before {
+  background: linear-gradient(90deg, transparent, #00bcd4, #4dd0e1, #00bcd4, transparent) !important;
+}
+.navbar__items > :nth-child(11) .dropdown__link {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 13px;
+}
+.navbar__items > :nth-child(11) .dropdown__link::before {
+  content: '▸ ';
+  color: #00897b;
+}
+.navbar__items > :nth-child(11) .dropdown__link:hover {
+  background: rgba(0, 200, 200, 0.12) !important;
+  color: #80deea !important;
+  text-shadow: 0 0 8px rgba(0, 200, 200, 0.5) !important;
+  transform: none !important;
+}
+
+
+/* ================================================================
+ * 8. 云厂商知识点 — 👑 金色奢华（深棕底 + 金字 + 火焰光晕）
+ * ================================================================ */
+.navbar__items > :nth-child(12) > .navbar__link::before {
+  content: '' !important;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%2523ffd700%22%3E%3Cpath%20d%3D%22M19.35%2010.04C18.67%206.59%2015.64%204%2012%204%209.11%204%206.6%205.64%205.35%208.04%202.34%208.36%200%2010.91%200%2014c0%203.31%202.69%206%206%206h13c2.76%200%205-2.24%205-5%200-2.64-2.05-4.78-4.65-4.96zM14%2013l-3%204.5L9%2015l-3%204h12l-4-6z%22/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.navbar__items > :nth-child(12) > .navbar__link {
+  background: rgba(180, 120, 0, 0.2);
+}
+.navbar__items > :nth-child(12) > .navbar__link:hover {
+  background: rgba(255, 193, 7, 0.25);
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+}
+.navbar__items > :nth-child(12) .dropdown__menu {
+  background: linear-gradient(135deg, #1a1200 0%, #332200 50%, #1a1200 100%) !important;
+  border: 1px solid rgba(255, 193, 7, 0.2) !important;
+  box-shadow: 0 0 24px rgba(255, 193, 7, 0.1) !important;
+}
+.navbar__items > :nth-child(12) .dropdown__menu::before {
+  background: linear-gradient(90deg, transparent, #ffd54f, #ff8f00, #ffd54f, transparent) !important;
+}
+.navbar__items > :nth-child(12) .dropdown__link {
+  font-weight: 500;
+}
+.navbar__items > :nth-child(12) .dropdown__link::before {
+  content: '✦ ';
+  color: #ff8f00;
+}
+.navbar__items > :nth-child(12) .dropdown__link:hover {
+  background: rgba(255, 193, 7, 0.12) !important;
+  color: #ffe082 !important;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 152, 0, 0.25) !important;
+  transform: none !important;
+}
+
+
+/* ================================================================
+ * 9. AI — 🤖 赛博朋克（紫粉霓虹 + 文字流光 + 矩阵竖线）
+ * ================================================================ */
+.navbar__items > :nth-child(13) > .navbar__link::before {
+  content: '' !important;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22%2523a855f7%22%3E%3Cpath%20d%3D%22M22.282%209.821a5.985%205.985%200%200%200-.516-4.91%206.046%206.046%200%200%200-6.51-2.9A6.065%206.065%200%200%200%204.981%204.18a5.985%205.985%200%200%200-3.998%202.9%206.046%206.046%200%200%200%20.743%207.097%205.98%205.98%200%200%200%20.51%204.911%206.051%206.051%200%200%200%206.515%202.9A5.985%205.985%200%200%200%2013.26%2024a6.056%206.056%200%200%200%205.772-4.206%205.99%205.99%200%200%200%203.997-2.9%206.056%206.056%200%200%200-.747-7.073zM13.26%2022.43a4.476%204.476%200%200%201-2.876-1.04l.141-.081%204.779-2.758a.795.795%200%200%200%20.392-.681v-6.737l2.02%201.168a.071.071%200%200%201%20.038.052v5.583a4.504%204.504%200%200%201-4.494%204.494zM3.6%2018.304a4.47%204.47%200%200%201-.535-3.014l.142.085%204.783%202.759a.771.771%200%200%200%20.78%200l5.843-3.369v2.332a.08.08%200%200%201-.033.062L9.74%2019.95a4.5%204.5%200%200%201-6.14-1.646zM2.34%207.896a4.485%204.485%200%200%201%202.366-1.973V11.6a.766.766%200%200%200%20.388.677l5.815%203.354-2.02%201.168a.076.076%200%200%201-.071%200l-4.83-2.786A4.504%204.504%200%200%201%202.34%207.872zm16.597%203.855l-5.833-3.387L15.119%207.2a.076.076%200%200%201%20.071%200l4.83%202.791a4.494%204.494%200%200%201-.676%208.105v-5.678a.79.79%200%200%200-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776%200%200%200-.785%200L9.409%209.23V6.897a.066.066%200%200%201%20.028-.061l4.83-2.787a4.5%204.5%200%200%201%206.68%204.66zm-12.64%204.135l-2.02-1.164a.08.08%200%200%201-.038-.057V6.075a4.5%204.5%200%200%201%207.375-3.453l-.142.08-4.778%202.758a.795.795%200%200%200-.393.681zm1.097-2.365l2.602-1.5%202.607%201.5v3l-2.597%201.5-2.607-1.5z%22/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.navbar__items > :nth-child(13) > .navbar__link {
+  background: rgba(120, 0, 200, 0.25);
+}
+.navbar__items > :nth-child(13) > .navbar__link:hover {
+  background: rgba(180, 0, 255, 0.2);
+  box-shadow: 0 0 20px rgba(180, 0, 255, 0.35), 0 0 40px rgba(255, 0, 128, 0.2);
+}
+.navbar__items > :nth-child(13) .dropdown__menu {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 0, 128, 0.06) 0px,
+      rgba(255, 0, 128, 0.06) 1px,
+      transparent 1px,
+      transparent 30px
+    ),
+    linear-gradient(135deg, #0d001a 0%, #1a0033 50%, #0d001a 100%) !important;
+  background-size: 30px 30px, 100% 100% !important;
+  border: 1px solid rgba(180, 0, 255, 0.25) !important;
+  box-shadow:
+    0 0 24px rgba(180, 0, 255, 0.12),
+    0 0 48px rgba(255, 0, 128, 0.08) !important;
+}
+.navbar__items > :nth-child(13) .dropdown__menu::before {
+  background: linear-gradient(90deg, transparent, #ff0080, #8a2be2, #00d4ff, #ff0080, transparent) !important;
+}
+.navbar__items > :nth-child(13) .dropdown__link {
+  text-shadow: 0 0 6px rgba(224, 64, 251, 0.4);
+}
+.navbar__items > :nth-child(13) .dropdown__link::before {
+  content: '◆ ';
+  color: #00d4ff;
+  font-size: 10px;
+}
+.navbar__items > :nth-child(13) .dropdown__link:hover {
+  background: rgba(180, 0, 255, 0.12) !important;
+  color: #f48fb1 !important;
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.6),
+    0 0 14px rgba(255, 0, 128, 0.5),
+    0 0 28px rgba(138, 43, 226, 0.3) !important;
+  transform: none !important;
+}
+
+
+/* ============================================================
+ * 9 个下拉里每个 link 的独立渐变色  2026-06-10
+ * 备份：.backup-dditems-20260610_152628/custom.css
+ *
+ * 设计思路：每个下拉框内部，每条 link 都有独立渐变色，
+ * 但保持在主题色系内（不会乱）。文字用 background-clip:text 渐变，
+ * hover 时渐变流动 + 光晕。
+ *
+ * 通用渐变流动动画
+ * ============================================================ */
+
+@keyframes ddItemFlow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* 通用：所有 dropdown link 加上文字清晰度增强 + 顺滑 transition */
+.dropdown__menu .dropdown__link {
+  transition: filter 0.3s ease, letter-spacing 0.3s ease, padding-left 0.3s ease !important;
+  /* 字号加大、加粗 —— 让渐变文字更清晰 */
+  font-size: 14.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  padding: 8px 14px !important;
+  /* drop-shadow 给文字加描边轮廓 —— 让渐变色边缘更锐利 */
+  filter:
+    drop-shadow(0 0 1px rgba(0, 0, 0, 0.9))
+    drop-shadow(0 0 3px rgba(0, 0, 0, 0.7))
+    drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+}
+
+/* 给 <li> 加半透明渐变药丸底（每个 dropdown 各有色调，下面单独覆盖） */
+.dropdown__menu li {
+  background: linear-gradient(135deg, rgba(40, 0, 60, 0.55), rgba(0, 40, 60, 0.55)) !important;
+  border-radius: 10px !important;
+  margin: 3px 6px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.04) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* hover 时药丸更亮 + 微微浮起 */
+.dropdown__menu li:hover {
+  background: linear-gradient(135deg, rgba(60, 0, 90, 0.7), rgba(0, 60, 90, 0.7)) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow:
+    inset 0 0 12px rgba(255, 255, 255, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  transform: translateX(2px) !important;
+}
+
+/* ─── 每个 dropdown 的药丸底色（呼应自己的主题色）─── */
+
+/* 🍎 mac专区 (5) — 苹果磨砂玻璃浅色（特殊：白雾底） */
+.navbar__items > :nth-child(5) .dropdown__menu li {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(240, 240, 250, 0.75)) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+.navbar__items > :nth-child(5) .dropdown__menu li:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 230, 250, 0.9)) !important;
+}
+
+/* 🖥️ devops (6) — 深森林绿 */
+.navbar__items > :nth-child(6) .dropdown__menu li {
+  background: linear-gradient(135deg, rgba(0, 50, 30, 0.6), rgba(20, 60, 40, 0.55)) !important;
+}
+.navbar__items > :nth-child(6) .dropdown__menu li:hover {
+  background: linear-gradient(135deg, rgba(0, 80, 40, 0.75), rgba(20, 90, 50, 0.7)) !important;
+}
+
+/* 🐧 Linux (7) — 深藏青蓝 */
+.navbar__items > :nth-child(7) .dropdown__menu li {
+  background: linear-gradient(135deg, rgba(15, 25, 60, 0.65), rgba(30, 40, 80, 0.6)) !important;
+}
+.navbar__items > :nth-child(7) .dropdown__menu li:hover {
+  background: linear-gradient(135deg, rgba(25, 40, 100, 0.8), rgba(40, 55, 120, 0.75)) !important;
+}
+
+/* ☁️ 云原生 (8) — 深海蓝 */
+.navbar__items > :nth-child(8) .dropdown__menu li {
+  background: linear-gradient(135deg, rgba(10, 30, 70, 0.6), rgba(20, 50, 100, 0.55)) !important;
+}
+.navbar__items > :nth-child(8) .dropdown__menu li:hover {
+  background: linear-gradient(135deg, rgba(20, 50, 110, 0.75), rgba(30, 70, 140, 0.7)) !important;
+}
+
+/* 🌈 编程 (9) — 深紫红 */
+.navbar__items > :nth-child(9) .dropdown__menu li {
+  background: linear-gradient(135deg, rgba(50, 10, 70, 0.6), rgba(30, 10, 90, 0.55)) !important;
+}
+.navbar__items > :nth-child(9) .dropdown__menu li:hover {
+  background: linear-gradient(135deg, rgba(80, 20, 110, 0.75), rgba(50, 20, 130, 0.7)) !important;
+}
+
+/* 🚨 监控 (10) — 深酒红 */
+.navbar__items > :nth-child(10) .dropdown__menu li {
+  background: linear-gradient(135deg, rgba(70, 10, 20, 0.6), rgba(50, 20, 30, 0.55)) !important;
+}
+.navbar__items > :nth-child(10) .dropdown__menu li:hover {
+  background: linear-gradient(135deg, rgba(110, 20, 30, 0.75), rgba(80, 30, 40, 0.7)) !important;
+}
+
+/* 💾 数据库 (11) — 深青蓝 */
+.navbar__items > :nth-child(11) .dropdown__menu li {
+  background: linear-gradient(135deg, rgba(0, 40, 50, 0.6), rgba(10, 50, 60, 0.55)) !important;
+}
+.navbar__items > :nth-child(11) .dropdown__menu li:hover {
+  background: linear-gradient(135deg, rgba(0, 70, 80, 0.75), rgba(10, 80, 100, 0.7)) !important;
+}
+
+/* 👑 云厂商 (12) — 深棕金 */
+.navbar__items > :nth-child(12) .dropdown__menu li {
+  background: linear-gradient(135deg, rgba(60, 35, 10, 0.6), rgba(70, 50, 20, 0.55)) !important;
+}
+.navbar__items > :nth-child(12) .dropdown__menu li:hover {
+  background: linear-gradient(135deg, rgba(90, 55, 15, 0.75), rgba(110, 75, 25, 0.7)) !important;
+}
+
+/* 🤖 AI (13) — 深紫粉 */
+.navbar__items > :nth-child(13) .dropdown__menu li {
+  background: linear-gradient(135deg, rgba(60, 10, 70, 0.6), rgba(70, 10, 50, 0.55)) !important;
+}
+.navbar__items > :nth-child(13) .dropdown__menu li:hover {
+  background: linear-gradient(135deg, rgba(90, 20, 110, 0.75), rgba(100, 20, 80, 0.7)) !important;
+}
+
+/* mac 专区是浅色底，深色 drop-shadow 在白底上会糊，用浅色光晕替代 */
+.navbar__items > :nth-child(5) .dropdown__menu .dropdown__link {
+  filter:
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.9))
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15)) !important;
+}
+
+
+/* ============================================================
+ * 1️⃣ mac专区（:nth-child(5)）只有 1 项
+ * 苹果 iCloud 渐变（粉→紫→蓝）
+ * ============================================================ */
+.navbar__items > :nth-child(5) .dropdown__menu li:nth-child(1) .dropdown__link {
+  background-image: linear-gradient(90deg, #ff6b6b, #c471ed, #4facfe, #ff6b6b) !important;
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: ddItemFlow 6s linear infinite !important;
+}
+.navbar__items > :nth-child(5) .dropdown__menu li:nth-child(1) .dropdown__link:hover {
+  filter: drop-shadow(0 0 8px rgba(196, 113, 237, 0.7)) !important;
+  letter-spacing: 1.5px !important;
+}
+
+
+/* ============================================================
+ * 2️⃣ devops（:nth-child(6)）7 项 — 绿色系 7 阶
+ * devops/ansible/gitea/gitlab/jenkins/spug/walle
+ * ============================================================ */
+/* 1. devops 翠绿 → 草绿 */
+.navbar__items > :nth-child(6) .dropdown__menu li:nth-child(1) .dropdown__link {
+  background-image: linear-gradient(90deg, #00ff41, #7fff00, #00ff41) !important;
+}
+/* 2. ansible 红辣椒（ansible logo 色） */
+.navbar__items > :nth-child(6) .dropdown__menu li:nth-child(2) .dropdown__link {
+  background-image: linear-gradient(90deg, #ff6b35, #ff3838, #ff6b35) !important;
+}
+/* 3. gitea 茶色 → 暖橘 */
+.navbar__items > :nth-child(6) .dropdown__menu li:nth-child(3) .dropdown__link {
+  background-image: linear-gradient(90deg, #5d9c59, #a4dd00, #5d9c59) !important;
+}
+/* 4. gitlab 橘红 → 深橙（gitlab 官色） */
+.navbar__items > :nth-child(6) .dropdown__menu li:nth-child(4) .dropdown__link {
+  background-image: linear-gradient(90deg, #fc6d26, #e24329, #fca326, #fc6d26) !important;
+}
+/* 5. jenkins 蓝白（jenkins 官色） */
+.navbar__items > :nth-child(6) .dropdown__menu li:nth-child(5) .dropdown__link {
+  background-image: linear-gradient(90deg, #4d4d4d, #d33833, #4d4d4d) !important;
+}
+/* 6. spug 青绿 */
+.navbar__items > :nth-child(6) .dropdown__menu li:nth-child(6) .dropdown__link {
+  background-image: linear-gradient(90deg, #1abc9c, #16a085, #1abc9c) !important;
+}
+/* 7. walle 钢铁灰蓝 */
+.navbar__items > :nth-child(6) .dropdown__menu li:nth-child(7) .dropdown__link {
+  background-image: linear-gradient(90deg, #5b86e5, #36d1dc, #5b86e5) !important;
+}
+
+/* devops 通用文字效果 */
+.navbar__items > :nth-child(6) .dropdown__menu .dropdown__link {
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: ddItemFlow 5s linear infinite !important;
+}
+.navbar__items > :nth-child(6) .dropdown__menu .dropdown__link::before {
+  -webkit-text-fill-color: initial;
+}
+.navbar__items > :nth-child(6) .dropdown__menu .dropdown__link:hover {
+  filter: drop-shadow(0 0 6px currentColor) drop-shadow(0 0 12px rgba(255, 255, 255, 0.3)) !important;
+  letter-spacing: 1px !important;
+}
+
+
+/* ============================================================
+ * 3️⃣ Linux（:nth-child(7)）3 项 — 黑黄红系
+ * Linux服务 / Linux命令 / Linux系统
+ * ============================================================ */
+.navbar__items > :nth-child(7) .dropdown__menu li:nth-child(1) .dropdown__link {
+  background-image: linear-gradient(90deg, #ffc107, #ff5722, #ffc107) !important;
+}
+.navbar__items > :nth-child(7) .dropdown__menu li:nth-child(2) .dropdown__link {
+  background-image: linear-gradient(90deg, #ffeb3b, #ff9800, #ffeb3b) !important;
+}
+.navbar__items > :nth-child(7) .dropdown__menu li:nth-child(3) .dropdown__link {
+  background-image: linear-gradient(90deg, #cddc39, #ff5722, #cddc39) !important;
+}
+.navbar__items > :nth-child(7) .dropdown__menu .dropdown__link {
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: ddItemFlow 6s linear infinite !important;
+}
+.navbar__items > :nth-child(7) .dropdown__menu .dropdown__link::before {
+  -webkit-text-fill-color: initial;
+}
+.navbar__items > :nth-child(7) .dropdown__menu .dropdown__link:hover {
+  filter: drop-shadow(0 0 6px #ffc107) !important;
+  letter-spacing: 1px !important;
+}
+
+
+/* ============================================================
+ * 4️⃣ 云原生（:nth-child(8)）3 项 — 蓝青色系
+ * k8s / 容器 / 云原生工具
+ * ============================================================ */
+.navbar__items > :nth-child(8) .dropdown__menu li:nth-child(1) .dropdown__link {
+  /* k8s 蓝白渐变 */
+  background-image: linear-gradient(90deg, #326ce5, #64b5f6, #326ce5) !important;
+}
+.navbar__items > :nth-child(8) .dropdown__menu li:nth-child(2) .dropdown__link {
+  /* 容器 docker 蓝 */
+  background-image: linear-gradient(90deg, #2496ed, #00ddff, #2496ed) !important;
+}
+.navbar__items > :nth-child(8) .dropdown__menu li:nth-child(3) .dropdown__link {
+  /* 云原生工具 紫蓝 */
+  background-image: linear-gradient(90deg, #5b86e5, #c471ed, #5b86e5) !important;
+}
+.navbar__items > :nth-child(8) .dropdown__menu .dropdown__link {
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: ddItemFlow 6s linear infinite !important;
+}
+.navbar__items > :nth-child(8) .dropdown__menu .dropdown__link:hover {
+  filter: drop-shadow(0 0 8px rgba(50, 140, 255, 0.7)) !important;
+  letter-spacing: 1px !important;
+}
+
+
+/* ============================================================
+ * 5️⃣ 编程（:nth-child(9)）4 项 — 彩虹分布
+ * go / python / shell / 功能脚本
+ * ============================================================ */
+.navbar__items > :nth-child(9) .dropdown__menu li:nth-child(1) .dropdown__link {
+  /* go 官色青蓝 */
+  background-image: linear-gradient(90deg, #00add8, #5dc9e2, #00add8) !important;
+}
+.navbar__items > :nth-child(9) .dropdown__menu li:nth-child(2) .dropdown__link {
+  /* python 官色蓝黄 */
+  background-image: linear-gradient(90deg, #3776ab, #ffd43b, #3776ab) !important;
+}
+.navbar__items > :nth-child(9) .dropdown__menu li:nth-child(3) .dropdown__link {
+  /* shell 终端绿 */
+  background-image: linear-gradient(90deg, #4eaa25, #89e051, #4eaa25) !important;
+}
+.navbar__items > :nth-child(9) .dropdown__menu li:nth-child(4) .dropdown__link {
+  /* 功能脚本 紫粉 */
+  background-image: linear-gradient(90deg, #c471ed, #f64f59, #c471ed) !important;
+}
+.navbar__items > :nth-child(9) .dropdown__menu .dropdown__link {
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: ddItemFlow 5s linear infinite !important;
+}
+.navbar__items > :nth-child(9) .dropdown__menu .dropdown__link:hover {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5))
+          drop-shadow(0 0 20px currentColor) !important;
+  letter-spacing: 1.5px !important;
+}
+
+
+/* ============================================================
+ * 6️⃣ 监控（:nth-child(10)）4 项 — 红橙黄报警系
+ * prometheus / zabbix / grafana / nightingale
+ * ============================================================ */
+.navbar__items > :nth-child(10) .dropdown__menu li:nth-child(1) .dropdown__link {
+  /* prometheus 官色橙 */
+  background-image: linear-gradient(90deg, #e6522c, #ff8a65, #e6522c) !important;
+}
+.navbar__items > :nth-child(10) .dropdown__menu li:nth-child(2) .dropdown__link {
+  /* zabbix 红 */
+  background-image: linear-gradient(90deg, #d40000, #ff5252, #d40000) !important;
+}
+.navbar__items > :nth-child(10) .dropdown__menu li:nth-child(3) .dropdown__link {
+  /* grafana 官色橙金 */
+  background-image: linear-gradient(90deg, #f46800, #fff100, #f46800) !important;
+}
+.navbar__items > :nth-child(10) .dropdown__menu li:nth-child(4) .dropdown__link {
+  /* nightingale 夜空蓝紫 */
+  background-image: linear-gradient(90deg, #6366f1, #ec4899, #6366f1) !important;
+}
+.navbar__items > :nth-child(10) .dropdown__menu .dropdown__link {
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: ddItemFlow 4.5s linear infinite !important;
+}
+.navbar__items > :nth-child(10) .dropdown__menu .dropdown__link::before {
+  -webkit-text-fill-color: initial;
+}
+.navbar__items > :nth-child(10) .dropdown__menu .dropdown__link:hover {
+  filter: drop-shadow(0 0 8px currentColor) !important;
+  letter-spacing: 1px !important;
+}
+
+
+/* ============================================================
+ * 7️⃣ 数据库（:nth-child(11)）4 项 — 数据色
+ * mongodb / mysql / redis / postgres
+ * ============================================================ */
+.navbar__items > :nth-child(11) .dropdown__menu li:nth-child(1) .dropdown__link {
+  /* mongodb 官色绿 */
+  background-image: linear-gradient(90deg, #00684a, #00ed64, #00684a) !important;
+}
+.navbar__items > :nth-child(11) .dropdown__menu li:nth-child(2) .dropdown__link {
+  /* mysql 海豚蓝橙 */
+  background-image: linear-gradient(90deg, #00758f, #f29111, #00758f) !important;
+}
+.navbar__items > :nth-child(11) .dropdown__menu li:nth-child(3) .dropdown__link {
+  /* redis 红 */
+  background-image: linear-gradient(90deg, #dc382d, #ff6b6b, #dc382d) !important;
+}
+.navbar__items > :nth-child(11) .dropdown__menu li:nth-child(4) .dropdown__link {
+  /* postgres 海豚蓝 */
+  background-image: linear-gradient(90deg, #336791, #6cb6ff, #336791) !important;
+}
+.navbar__items > :nth-child(11) .dropdown__menu .dropdown__link {
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: ddItemFlow 5.5s linear infinite !important;
+}
+.navbar__items > :nth-child(11) .dropdown__menu .dropdown__link::before {
+  -webkit-text-fill-color: initial;
+}
+.navbar__items > :nth-child(11) .dropdown__menu .dropdown__link:hover {
+  filter: drop-shadow(0 0 6px currentColor) drop-shadow(0 0 14px rgba(0, 255, 255, 0.3)) !important;
+  letter-spacing: 1px !important;
+}
+
+
+/* ============================================================
+ * 8️⃣ 云厂商知识点（:nth-child(12)）3 项 — 金奢华系
+ * 阿里云 / 腾讯云 / aws
+ * ============================================================ */
+.navbar__items > :nth-child(12) .dropdown__menu li:nth-child(1) .dropdown__link {
+  /* 阿里云 橙金（阿里官色） */
+  background-image: linear-gradient(90deg, #ff6a00, #ffaa00, #ff6a00) !important;
+}
+.navbar__items > :nth-child(12) .dropdown__menu li:nth-child(2) .dropdown__link {
+  /* 腾讯云 蓝（腾讯官色） */
+  background-image: linear-gradient(90deg, #00a4ff, #006eff, #00a4ff) !important;
+}
+.navbar__items > :nth-child(12) .dropdown__menu li:nth-child(3) .dropdown__link {
+  /* aws 橙黑（aws 官色） */
+  background-image: linear-gradient(90deg, #ff9900, #ffc107, #ff9900) !important;
+}
+.navbar__items > :nth-child(12) .dropdown__menu .dropdown__link {
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: ddItemFlow 5s linear infinite !important;
+}
+.navbar__items > :nth-child(12) .dropdown__menu .dropdown__link::before {
+  -webkit-text-fill-color: initial;
+}
+.navbar__items > :nth-child(12) .dropdown__menu .dropdown__link:hover {
+  filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 18px rgba(255, 215, 0, 0.4)) !important;
+  letter-spacing: 1.5px !important;
+}
+
+
+/* ============================================================
+ * 9️⃣ AI（:nth-child(13)）4 项 — 赛博朋克紫粉青
+ * LLM工程平台 / AI应用可视化平台 / AI编程工具 / openclaw
+ * ============================================================ */
+.navbar__items > :nth-child(13) .dropdown__menu li:nth-child(1) .dropdown__link {
+  /* LLM工程平台 紫红 */
+  background-image: linear-gradient(90deg, #ff006e, #8338ec, #ff006e) !important;
+}
+.navbar__items > :nth-child(13) .dropdown__menu li:nth-child(2) .dropdown__link {
+  /* AI应用可视化平台 蓝紫 */
+  background-image: linear-gradient(90deg, #3a86ff, #8338ec, #3a86ff) !important;
+}
+.navbar__items > :nth-child(13) .dropdown__menu li:nth-child(3) .dropdown__link {
+  /* AI编程工具 青绿 */
+  background-image: linear-gradient(90deg, #00f5d4, #00bbf9, #00f5d4) !important;
+}
+.navbar__items > :nth-child(13) .dropdown__menu li:nth-child(4) .dropdown__link {
+  /* openclaw 极光粉绿 */
+  background-image: linear-gradient(90deg, #fb5607, #ffbe0b, #fb5607) !important;
+}
+.navbar__items > :nth-child(13) .dropdown__menu .dropdown__link {
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  animation: ddItemFlow 4s linear infinite !important;
+}
+.navbar__items > :nth-child(13) .dropdown__menu .dropdown__link::before {
+  -webkit-text-fill-color: initial;
+}
+.navbar__items > :nth-child(13) .dropdown__menu .dropdown__link:hover {
+  filter: drop-shadow(0 0 10px currentColor)
+          drop-shadow(0 0 24px rgba(255, 0, 128, 0.4)) !important;
+  letter-spacing: 1.5px !important;
+}
 
 
 
+/* ============================================================
+ * 左侧文档侧边栏改造 - 非主流深紫玻璃风  2026-06-10
+ * 备份：.backup-sidebar-20260610_165418/custom.css
+ *
+ * 关键 class：
+ *   .theme-doc-sidebar-container   — 整个侧栏容器
+ *   .menu                          — 滚动区
+ *   .menu__list                    — 列表
+ *   .menu__list-item               — 每个条目
+ *   .menu__link                    — 链接
+ *   .menu__link--active            — 当前激活
+ *   .menu__list-item-collapsible   — 可折叠目录
+ *   .menu__caret                   — 折叠箭头
+ * ============================================================ */
+
+/* ─── 1. 整个侧栏容器：青蓝→粉桃流动渐变（清爽明亮版）+ 网点 ─── */
+.theme-doc-sidebar-container {
+  /* 强制覆盖 Docusaurus 默认菜单颜色变量（防止 dark theme 下字变白）*/
+  --ifm-menu-color-active: #1a1f2e;
+  --ifm-menu-color: #2a3550;
+  --ifm-menu-color-background-hover: transparent;
+  --ifm-menu-color-background-active: transparent;
+
+  background:
+    /* 1. 网点纹理 */
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.18) 1px, transparent 1.5px) 0 0 / 16px 16px,
+    /* 2. 流动渐变底色：青蓝 → 薄荷 → 粉桃 → 浅黄（清爽明亮） */
+    linear-gradient(180deg,
+      #a8e6ff 0%,
+      #b8f0e0 25%,
+      #ffd6e7 55%,
+      #ffe8b8 85%,
+      #d4f0ff 100%) !important;
+  background-size: 16px 16px, 100% 200%;
+  animation: sidebarBgFlow 22s ease-in-out infinite;
+  border-right: 1px solid rgba(255, 140, 200, 0.4) !important;
+  box-shadow:
+    2px 0 12px rgba(180, 220, 255, 0.4),
+    inset -1px 0 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+@keyframes sidebarBgFlow {
+  0%, 100% { background-position: 0 0, 0% 0%; }
+  50%      { background-position: 0 0, 0% 100%; }
+}
+
+/* ─── 2. menu 滚动区：透明背景 + 文字默认浅色 ─── */
+.theme-doc-sidebar-container .menu {
+  background: transparent !important;
+  padding: 12px 8px !important;
+}
+
+/* 滚动条美化（浅色版）*/
+.theme-doc-sidebar-container .menu::-webkit-scrollbar {
+  width: 6px;
+}
+.theme-doc-sidebar-container .menu::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff6b9d, #c471ed, #4facfe) !important;
+  border-radius: 3px;
+}
+.theme-doc-sidebar-container .menu::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ─── 3. 每个 menu 项：扁平样式（无独立框，只有 hover/active 才显形）─── */
+.theme-doc-sidebar-container .menu__list-item {
+  margin: 1px 0 !important;
+}
+
+.theme-doc-sidebar-container .menu__link,
+.theme-doc-sidebar-container .menu__list-item-collapsible {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 6px !important;
+  color: #2a3550 !important;
+  font-weight: 500 !important;
+  padding: 6px 12px !important;
+  transition: all 0.25s ease !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* hover 效果：浅色高亮 + 左侧霓虹条 + 文字加深 + 右移 */
+.theme-doc-sidebar-container .menu__link:hover,
+.theme-doc-sidebar-container .menu__list-item-collapsible:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 230, 245, 0.45)) !important;
+  border-color: rgba(255, 105, 180, 0.4) !important;
+  color: #1a1f2e !important;
+  -webkit-text-fill-color: #1a1f2e !important;
+  transform: translateX(4px);
+  box-shadow:
+    0 0 12px rgba(255, 105, 180, 0.2),
+    inset 3px 0 0 #ff6b9d;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+}
+
+/* hover 时左侧霓虹条用 ::before 实现，避免影响 box 布局 */
+.theme-doc-sidebar-container .menu__link::before,
+.theme-doc-sidebar-container .menu__list-item-collapsible::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(180deg, #ff6b9d, #c471ed, #4facfe);
+  transition: width 0.3s ease;
+  border-radius: 8px 0 0 8px;
+}
+.theme-doc-sidebar-container .menu__link:hover::before,
+.theme-doc-sidebar-container .menu__list-item-collapsible:hover::before {
+  width: 3px;
+}
+
+/* ─── 4. 当前激活项：彩虹流光文字 + 左侧霓虹竖条（无背景）─── */
+.theme-doc-sidebar-container .menu__link--active,
+.theme-doc-sidebar-container .menu__list-item-collapsible:has(.menu__link--active) {
+  background: transparent !important;
+  border: none !important;
+  font-weight: 700 !important;
+  box-shadow: inset 3px 0 0 #ff6b9d !important;
+}
+
+.theme-doc-sidebar-container .menu__link--active {
+  color: transparent !important;
+  background-image: linear-gradient(90deg, #e91e63, #ff6f00, #c471ed, #1976d2, #e91e63) !important;
+  background-size: 200% 100% !important;
+  -webkit-background-clip: text !important;
+          background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: sidebarActiveFlow 4s linear infinite !important;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+}
+
+/* active 项 hover 时：停止彩虹流光，变深色实心文字 + 浅粉底（清晰可读）*/
+.theme-doc-sidebar-container .menu__link--active:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 230, 245, 0.5)) !important;
+  background-image: none !important;
+  color: #1a1f2e !important;
+  -webkit-text-fill-color: #1a1f2e !important;
+  animation: none !important;
+  filter: none !important;
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+  box-shadow: inset 3px 0 0 #ff6b9d, 0 0 12px rgba(255, 105, 180, 0.2) !important;
+}
+
+@keyframes sidebarActiveFlow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ─── 5. 折叠箭头：粉蓝霓虹小方块（浅底版）─── */
+.theme-doc-sidebar-container .menu__caret {
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.5), rgba(79, 172, 254, 0.5)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  margin-left: 8px;
+  border-radius: 6px;
+  padding: 4px !important;
+  width: 24px !important;
+  height: 24px !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(255, 105, 180, 0.3);
+}
+.theme-doc-sidebar-container .menu__caret::before {
+  filter: brightness(0.3) drop-shadow(0 0 2px rgba(255, 255, 255, 0.9)) !important;
+  transition: transform 0.3s ease;
+}
+.theme-doc-sidebar-container .menu__caret:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.8), rgba(79, 172, 254, 0.8)) !important;
+  border-color: #fff !important;
+  box-shadow:
+    0 0 12px rgba(255, 105, 180, 0.6),
+    0 0 20px rgba(79, 172, 254, 0.3);
+  transform: scale(1.1);
+}
+
+/* ─── 6. 子菜单缩进 ─── */
+.theme-doc-sidebar-container .menu__list .menu__list {
+  margin-left: 8px !important;
+  padding-left: 8px !important;
+  border-left: 1px dashed rgba(255, 105, 180, 0.4);
+  margin-top: 4px !important;
+}
+
+/* 子菜单项：扁平，字号默认 */
+.theme-doc-sidebar-container .menu__list .menu__list .menu__link,
+.theme-doc-sidebar-container .menu__list .menu__list .menu__list-item-collapsible {
+  background: transparent !important;
+  border: none !important;
+  padding: 6px 12px !important;
+  color: #3a4560 !important;
+  -webkit-text-fill-color: #3a4560 !important;
+}
+
+/* ─── 7. 侧栏底部"调整侧边栏宽度"的按钮（如果有）─── */
+.theme-doc-sidebar-container .resizeHandle_BkXX {
+  background: linear-gradient(180deg, transparent, rgba(255, 105, 180, 0.4), transparent) !important;
+}
+
+/* ─── 8. 折叠/展开整个侧栏的按钮 ─── */
+button[title*="折叠"], button[title*="展开"] {
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(79, 172, 254, 0.2)) !important;
+  border: 1px solid rgba(255, 105, 180, 0.4) !important;
+  color: #fff !important;
+  transition: all 0.3s ease;
+}
+button[title*="折叠"]:hover, button[title*="展开"]:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 157, 0.4), rgba(79, 172, 254, 0.4)) !important;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+}

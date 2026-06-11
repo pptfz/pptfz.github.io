@@ -1,6 +1,9 @@
 /**
  * CSS files with the .module.css suffix will be treated as CSS modules
  * and scoped locally.
+ *
+ * 修改日期：2026-06-10
+ * 备份位置：.backup-spotlight-hero-20260610_135042/pages/index.module.css
  */
 
 .heroBanner {
@@ -8,6 +11,121 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+
+  /* ============ 非主流多层动态背景  2026-06-10 ============
+   * 备份：.backup-bg-20260610_140630/index.module.css
+   * 4 层叠加：
+   *   1. 径向网点：复古点阵纹理
+   *   2. 大型径向光斑：粉/紫/青三色泡泡漂移
+   *   3. 斜向条纹：扫光效果
+   *   4. 主底色：流动的青-绿-紫渐变
+   */
+  background:
+    /* 1. 小网点纹理（最上层） */
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.18) 1px, transparent 1.5px) 0 0 / 22px 22px,
+    /* 2. 大彩色光斑漂移 */
+    radial-gradient(circle at 20% 30%, rgba(255, 105, 180, 0.55), transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(0, 255, 209, 0.45), transparent 50%),
+    radial-gradient(circle at 65% 80%, rgba(170, 90, 255, 0.55), transparent 50%),
+    radial-gradient(circle at 30% 85%, rgba(255, 215, 0, 0.35), transparent 45%),
+    /* 3. 斜条纹扫光（底层） */
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06) 0,
+      rgba(255, 255, 255, 0.06) 2px,
+      transparent 2px,
+      transparent 12px
+    ),
+    /* 4. 流动渐变底色 */
+    linear-gradient(120deg, #00c9a7 0%, #2e8555 25%, #6c3eb7 50%, #ff4d8d 75%, #00c9a7 100%);
+  background-size:
+    22px 22px,        /* 网点 */
+    100% 100%,        /* 光斑 */
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,        /* 斜条纹 */
+    400% 400%;        /* 流动渐变要超大才有"流动"感 */
+
+  animation: heroFlow 18s ease-in-out infinite;
+}
+
+/* 流动渐变动画：让大底色慢慢漂移 */
+@keyframes heroFlow {
+  0%   { background-position: 0 0,         0% 0%,   100% 0%, 50% 100%, 0% 100%, 0 0, 0% 50%; }
+  50%  { background-position: 11px 11px,   100% 50%, 0% 50%, 100% 0%, 50% 0%,  0 0, 100% 50%; }
+  100% { background-position: 0 0,         0% 0%,   100% 0%, 50% 100%, 0% 100%, 0 0, 0% 50%; }
+}
+
+/* hero 上下加一道光晕分隔线（让 hero 跟下面区域有"切割"感） */
+.heroBanner::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #ffeb3b, #ff4d8d, #00c9a7, transparent);
+  filter: blur(1px);
+  z-index: 2;
+}
+.heroBanner::after {
+  content: "";
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00c9a7, #ff4d8d, #ffeb3b, transparent);
+  filter: blur(1px);
+  z-index: 2;
+}
+
+/* 标题加霓虹发光 + 轻微抖动 */
+.heroBanner :global(.hero__title) {
+  color: #fff;
+  text-shadow:
+    0 0 4px rgba(255, 255, 255, 0.9),
+    0 0 10px rgba(255, 105, 180, 0.7),
+    0 0 20px rgba(0, 255, 209, 0.6),
+    0 0 40px rgba(170, 90, 255, 0.5);
+  letter-spacing: 2px;
+  animation: titleGlow 3.5s ease-in-out infinite alternate;
+}
+@keyframes titleGlow {
+  from {
+    text-shadow:
+      0 0 4px rgba(255, 255, 255, 0.9),
+      0 0 10px rgba(255, 105, 180, 0.7),
+      0 0 20px rgba(0, 255, 209, 0.6),
+      0 0 40px rgba(170, 90, 255, 0.5);
+  }
+  to {
+    text-shadow:
+      0 0 6px rgba(255, 255, 255, 1),
+      0 0 14px rgba(0, 255, 209, 0.9),
+      0 0 28px rgba(170, 90, 255, 0.8),
+      0 0 50px rgba(255, 105, 180, 0.7);
+  }
+}
+
+/* 副标题（tagline）加点字间距和浅描边，更"非主流" */
+.heroBanner :global(.hero__subtitle) {
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35), 0 0 8px rgba(255, 255, 255, 0.25);
+  letter-spacing: 1px;
+}
+
+/* "我啥也没动啊🤔" 按钮加点霓虹边框光晕 */
+.heroBanner :global(.button) {
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.5),
+    0 0 24px rgba(0, 255, 209, 0.45),
+    0 0 36px rgba(255, 105, 180, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.heroBanner :global(.button:hover) {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    0 0 18px rgba(255, 255, 255, 0.7),
+    0 0 36px rgba(0, 255, 209, 0.65),
+    0 0 54px rgba(255, 105, 180, 0.55);
 }
 
 @media screen and (max-width: 996px) {
@@ -22,3 +140,66 @@
   justify-content: center;
 }
 
+/* ============ tagline 排版（探照灯层用，CSS module 哈希化后只匹配本组件） ============ */
+.line {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  line-height: 1.8;
+  flex-wrap: wrap;
+}
+.alignLeft,
+.alignRight {
+  white-space: nowrap;
+}
+
+/* ============ 探照灯效果 ============ */
+.spotlightHero {
+  cursor: none;  /* 桌面端隐藏系统鼠标 */
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+}
+
+/* 探照灯层：深色背景，clip-path 跟随鼠标圆形展开 */
+.spotlightLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 默认：圆心在屏幕外、半径 0，看不见 */
+  clip-path: circle(0px at -300px -300px);
+  -webkit-clip-path: circle(0px at -300px -300px);
+  transition: clip-path 0.15s ease-out, -webkit-clip-path 0.15s ease-out;
+  will-change: clip-path;
+  pointer-events: none;  /* 不挡鼠标事件 */
+}
+
+/* 探照灯层内的标题和 tagline 用白色 */
+.spotlightLayer .hero__title {
+  color: #fff;
+}
+.spotlightLayer .hero__subtitle {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 探照灯层里的假按钮（不是真 Link，只是视觉占位） */
+.fakeButton {
+  cursor: none;
+  opacity: 0.9;
+}
+
+/* ============ 移动端：禁用探照灯 ============ */
+@media (hover: none) {
+  .spotlightHero {
+    cursor: auto;
+  }
+  .spotlightLayer {
+    display: none;
+  }
+}
