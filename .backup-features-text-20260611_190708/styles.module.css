@@ -1,0 +1,69 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.featureSvg {
+  height: 200px;
+  width: 200px;
+}
+
+
+/* 设置首页字体的效果 */
+/* styles.module.css */
+/* 基本样式 */
+.featureSvg {
+  height: 200px;
+  width: 200px;
+}
+
+.highlightText {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff6ec7, #f7b42c);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: neon 3s ease-in-out infinite;
+}
+
+.highlightTextBlue {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: neon 4s ease-in-out infinite;
+}
+
+.highlightTextGreen {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #32cd32, #228b22);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: neon 5s ease-in-out infinite;
+}
+
+.highlightTextPink {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #f41ebb, #ff00ea);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: neon 6s ease-in-out infinite;
+}
+
+/* 闪烁效果的动画 */
+@keyframes neon {
+  0% {
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff;
+  }
+  50% {
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+  }
+  100% {
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff, 0 0 15px #ff00ff;
+  }
+}
