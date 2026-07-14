@@ -1,0 +1,195 @@
+/* ============================================================
+ * 文档内容区顶部时钟条 - 霓虹赛博朋克风
+ * 放在内容区顶部右侧（左侧目录栏右边的白色区域顶部）
+ * ============================================================ */
+
+.clockBar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.clockItem {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px 6px;
+  border-radius: 10px;
+  /* 浅色系底色，透明度由滑块控制 */
+  --clock-bg-opacity: 0.9;
+  background: rgba(255, 235, 245, var(--clock-bg-opacity));
+  border: 1px solid rgba(220, 100, 160, 0.45);
+  box-shadow:
+    0 2px 12px rgba(220, 100, 160, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* 上排：国旗 + 时间 */
+.clockTopRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 时区切换按钮（国旗） */
+.tzToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(220, 100, 160, 0.12);
+  border: 1px solid rgba(220, 100, 160, 0.3);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+}
+
+.tzToggle:hover {
+  background: rgba(220, 100, 160, 0.22);
+  border-color: rgba(220, 100, 160, 0.5);
+  box-shadow: 0 0 6px rgba(220, 100, 160, 0.35);
+}
+
+.tzFlag {
+  font-size: 16px;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+}
+
+/* 时间数字 */
+.clockTime {
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-weight: 700;
+  font-size: 16px;
+  color: #c2185b;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 1px;
+}
+
+/* ─── 时区下拉列表 ─── */
+.tzList {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 150px;
+  /* 背景跟随时钟底色透明度变化 */
+  background: rgba(255, 235, 245, calc(var(--clock-bg-opacity) * 0.98 + 0.02));
+  border: 1px solid rgba(220, 100, 160, 0.35);
+  border-radius: 8px;
+  box-shadow:
+    0 8px 24px rgba(220, 100, 160, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 100;
+  padding: 4px;
+}
+
+.tzOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  color: #555;
+  font-size: 12px;
+  text-align: left;
+  border-radius: 5px;
+}
+
+.tzOption:hover {
+  background: rgba(220, 100, 160, 0.12);
+  color: #c2185b;
+}
+
+.tzOptionActive {
+  background: rgba(220, 100, 160, 0.15);
+  color: #c2185b;
+  font-weight: 700;
+}
+
+.tzOptionFlag {
+  font-size: 14px;
+}
+
+.tzOptionName {
+  flex: 1;
+  font-weight: 600;
+}
+
+.tzOptionOffset {
+  font-size: 10px;
+  font-weight: 700;
+  color: #c2185b;
+  font-family: 'Courier New', monospace;
+}
+
+/* 移动端 */
+@media (max-width: 768px) {
+  .clockTime {
+    font-size: 14px;
+  }
+}
+
+/* ─── 透明度调节滑块（时间下方，小号） ─── */
+.opacityRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.opacityIcon {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.opacitySlider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 60px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(220, 100, 160, 0.25);
+  outline: none;
+  cursor: pointer;
+}
+
+.opacitySlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e91e63;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 4px rgba(220, 100, 160, 0.5);
+  cursor: grab;
+  transition: transform 0.15s ease;
+}
+
+.opacitySlider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 6px rgba(220, 100, 160, 0.7);
+}
+
+.opacitySlider::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e91e63;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 4px rgba(220, 100, 160, 0.5);
+  cursor: grab;
+}
+
+@media (max-width: 768px) {
+  .opacitySlider {
+    width: 60px;
+  }
+}
