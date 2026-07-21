@@ -665,8 +665,8 @@ yum -y install python3-pip && python3 -m pip install --upgrade pip && pip instal
 [ -d /etc/supervisor/config.d ] || mkdir -p /etc/supervisor/config.d
 [ -d /var/run/supervisor ] || mkdir /var/run/supervisor
 
-# 设置supervisor相关目录所有者为supervisor
-chown -R supervisor:supervisor /etc/supervisor /var/log/supervisor /var/run/supervisor
+# 设置supervisor相关目录所有者为root
+chown -R root:root /etc/supervisor /var/log/supervisor /var/run/supervisor
 
 # 创建supervisor配置文件
 cat > /etc/supervisor/supervisord.conf << EOF
