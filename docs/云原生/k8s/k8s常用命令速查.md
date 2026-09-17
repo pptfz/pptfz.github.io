@@ -169,10 +169,18 @@ export NODE_NAME=''
 
 ### 设置默认存储类
 
+:::tip 说明
+
+取消默认存储类把最后的 `true` 改为 `false` 即可
+
+:::
+
 ```sh
 export SC_NAME=openebs-hostpath
 kubectl patch storageclass ${SC_NAME} -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
+
+
 
 
 

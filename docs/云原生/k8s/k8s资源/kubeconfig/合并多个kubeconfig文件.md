@@ -111,23 +111,29 @@ kubectl config delete-context kubernetes-admin@kubernetes
 备份原有 `config` 文件
 
 ```shell
-cp config{,.bak}
+cd ~/.kube && cp config{,.bak}
 ```
 
 
 
-将新 `kubeconfig` 内容写入到 `new-kubeconfig.yaml`
+将新 `kubeconfig` 内容写入到 `new-kubeconfig`
+
+:::tip 说明
+
+执行以下命令后，粘贴新集群kubeconfig内容，然后按 `ctrl+d`
+
+:::
 
 ```shell
-cat config > new-kubeconfig.yaml
+cat > new-kubeconfig
 ```
 
 
 
-设置环境变量以同时使用 `~/.kube/config` 和 `new-kubeconfig.yaml` 文件
+设置环境变量以同时使用 `config` 和 `new-kubeconfig` 文件
 
 ```shell
-export KUBECONFIG=~/.kube/config:new-kubeconfig.yaml
+export KUBECONFIG=~/.kube/config:new-kubeconfig
 ```
 
 
@@ -135,7 +141,7 @@ export KUBECONFIG=~/.kube/config:new-kubeconfig.yaml
 合并 `kubeconfig` 文件
 
 ```shell
-kubectl config view --merge --flatten > merged-config.yaml
+kubectl config view --merge --flatten > merged-config
 ```
 
 
@@ -143,6 +149,14 @@ kubectl config view --merge --flatten > merged-config.yaml
 将生成的合并文件替换原有的 `~/.kube/config` 文件
 
 ```shell
-mv merged-config.yaml ~/.kube/config
+mv merged-config config
+```
+
+
+
+取消环境变量
+
+```sh
+unset KUBECONFIG
 ```
 
