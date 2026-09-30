@@ -57,7 +57,7 @@ Kubernetes 控制面也使用 Secret； 例如，[引导令牌 Secret](https://k
 
 ###### 创建Secret
 
-:::tip说明
+:::tip 说
 
 `Secret` 对象用来存储敏感数据，如 Pod 用于访问服务的凭据。例如，为访问数据库，你可能需要一个 Secret 来存储所需的用户名及密码。
 
@@ -69,7 +69,7 @@ Kubernetes 控制面也使用 Secret； 例如，[引导令牌 Secret](https://k
 
 **方法1	使用原始数据**
 
-:::tip说明
+:::tip 说
 
 你必须使用单引号 `''` 转义字符串中的特殊字符，如 `$`、`\`、`*`、`=`和`!` 。否则，你的 shell 将会解析这些字符。
 
@@ -87,7 +87,7 @@ kubectl create secret generic db-user-pass \
 
 1.将凭据保存到文件
 
-:::tip说明
+:::tip 说
 
 `-n` 标志用来确保生成文件的文末没有多余的换行符。这很重要，因为当 `kubectl` 读取文件并将内容编码为 base64 字符串时，额外的换行符也会被编码。 你不需要对文件中包含的字符串中的特殊字符进行转义。
 
@@ -164,7 +164,7 @@ $ kubectl get secret db-user-pass -o jsonpath='{.data}'
 
 2.解码 `password` 数据
 
-:::caution注意
+:::caution 注
 
 这是一个出于文档编制目的的示例。实际上，该方法可能会导致包含编码数据的命令存储在 Shell 的历史记录中。任何可以访问你的计算机的人都可以找到该命令并对 Secret 进行解码。 更好的办法是将查看和解码命令一同使用。
 
@@ -219,7 +219,7 @@ type: Opaque
 
 ###### 创建Secret
 
-:::tip说明
+:::tip 说
 
 你可以先用 JSON 或 YAML 格式在一个清单文件中定义 `Secret` 对象，然后创建该对象。 [Secret](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.27/#secret-v1-core) 资源包含 2 个键值对：`data` 和 `stringData`。 `data` 字段用来存储 base64 编码的任意数据。 提供 `stringData` 字段是为了方便，它允许 Secret 使用未编码的字符串。 `data` 和 `stringData` 的键必须由字母、数字、`-`、`_` 或 `.` 组成。
 
@@ -231,7 +231,7 @@ type: Opaque
 
 1.将这些字符串转换为 base64
 
-:::tip说明
+:::tip 说
 
 Secret 数据的 JSON 和 YAML 序列化结果是以 base64 编码的。 换行符在这些字符串中无效，必须省略。 在 Darwin/macOS 上使用 `base64` 工具时，用户不应该使用 `-b` 选项分割长行。 相反地，Linux 用户**应该**在 `base64` 地命令中添加 `-w 0` 选项， 或者在 `-w` 选项不可用的情况下，输入 `base64 | tr -d '\n'`。
 

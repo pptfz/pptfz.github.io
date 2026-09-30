@@ -97,7 +97,7 @@ $ cat /var/lib/nfs/etab
 
 #### 2.1.1 编辑yaml文件
 
-:::tip说明
+:::tip 说
 
 用户真正使用的是pvc，而要使用pvc的前提就是必须要先和某个符合条件的pv进行一对一的绑定，比如存储容器、访问模式，以及pvc和pv的storageClassName 字段必须一样，这样才能够进行绑定，当pvc和pv绑定成功后就可以直接使用这个pvc对象了
 
@@ -253,7 +253,7 @@ test-volumes
 
 ### 2.2 通过StorageClass自动创建pv
 
-:::tip说明
+:::tip 说
 
 上述这种方式是手动创建pv pvc，如果想要自动创建pv pvc则需要使用StorageClass了，并且需要一个对应的provisioner来自动创建pv，比如这里我们使用的nfs存储，则可以使用 [nfs-subdir-external-provisioner](https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner) 这个 provisioner，它使用现有的和已配置的nfs服务器来支持通过pvc动态配置pv，持久卷配置为 `${namespace}-${pvcName}-${pvName}`
 
@@ -273,7 +273,7 @@ helm repo add nfs-subdir-external-provisioner https://kubernetes-sigs.github.io/
 
 安装
 
-:::tip说明
+:::tip 说
 
 `--set storageClass.defaultClass=true` 指定sc为默认sc
 

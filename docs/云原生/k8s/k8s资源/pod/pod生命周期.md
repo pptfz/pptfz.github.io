@@ -304,7 +304,7 @@ probe 是由 [kubelet](https://kubernetes.io/zh-cn/docs/reference/command-line-t
 
 
 
-:::tip**说明：**
+:::tip *
 
 请注意，如果你只是想在 Pod 被删除时能够排空请求，则不一定需要使用就绪态探针； 在删除 Pod 时，Pod 会自动将自身置于未就绪状态，无论就绪态探针是否存在。 等待 Pod 中的容器停止期间，Pod 会一直处于未就绪状态。
 
@@ -338,7 +338,7 @@ probe 是由 [kubelet](https://kubernetes.io/zh-cn/docs/reference/command-line-t
 
    1. 如果 Pod 中的容器之一定义了 `preStop` [回调](https://kubernetes.io/zh-cn/docs/concepts/containers/container-lifecycle-hooks)， `kubelet` 开始在容器内运行该回调逻辑。如果超出体面终止限期时， `preStop` 回调逻辑仍在运行，`kubelet` 会请求给予该 Pod 的宽限期一次性增加 2 秒钟。
 
-   :::tip**说明：** 
+   :::tip *
 
    如果 `preStop` 回调所需要的时间长于默认的体面终止限期，你必须修改 `terminationGracePeriodSeconds` 属性值来使其正常工作。
 
@@ -346,7 +346,7 @@ probe 是由 [kubelet](https://kubernetes.io/zh-cn/docs/reference/command-line-t
 
    1. `kubelet` 接下来触发容器运行时发送 TERM 信号给每个容器中的进程 1。
 
-      :::tip**说明：** 
+      :::tip *
 
       Pod 中的容器会在不同时刻收到 TERM 信号，接收顺序也是不确定的。 如果关闭的顺序很重要，可以考虑使用 `preStop` 回调逻辑来协调。
 
@@ -360,7 +360,7 @@ probe 是由 [kubelet](https://kubernetes.io/zh-cn/docs/reference/command-line-t
 
 #### 强制终止 Pod
 
-:::caution**注意：** 
+:::caution *
 
 对于某些工作负载及其 Pod 而言，强制删除很可能会带来某种破坏。
 
@@ -370,7 +370,7 @@ probe 是由 [kubelet](https://kubernetes.io/zh-cn/docs/reference/command-line-t
 
 将宽限期限强制设置为 `0` 意味着立即从 API 服务器删除 Pod。 如果 Pod 仍然运行于某节点上，强制删除操作会触发 `kubelet` 立即执行清理操作。
 
-:::tip**说明：** 
+:::tip *
 
 你必须在设置 `--grace-period=0` 的同时额外设置 `--force` 参数才能发起强制删除请求。
 
@@ -378,7 +378,7 @@ probe 是由 [kubelet](https://kubernetes.io/zh-cn/docs/reference/command-line-t
 
 执行强制删除操作时，API 服务器不再等待来自 `kubelet` 的、关于 Pod 已经在原来运行的节点上终止执行的确认消息。 API 服务器直接删除 Pod 对象，这样新的与之同名的 Pod 即可以被创建。 在节点侧，被设置为立即终止的 Pod 仍然会在被强行杀死之前获得一点点的宽限时间。
 
-:::caution**注意：**
+:::caution *
 
 马上删除时不等待确认正在运行的资源已被终止。这些资源可能会无限期地继续在集群上运行。
 

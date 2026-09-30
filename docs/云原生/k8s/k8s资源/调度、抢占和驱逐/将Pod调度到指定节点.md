@@ -133,7 +133,7 @@ EOF
 - `requiredDuringSchedulingIgnoredDuringExecution`： 调度器只有在规则被满足的时候才能执行调度。此功能类似于 `nodeSelector`， 但其语法表达能力更强。
 - `preferredDuringSchedulingIgnoredDuringExecution`： 调度器会尝试寻找满足对应规则的节点。如果找不到匹配的节点，调度器仍然会调度该 Pod。
 
-:::tip说明
+:::tip 说
 
 在上述类型中，`IgnoredDuringExecution` 意味着如果节点标签在 Kubernetes 调度 Pod 后发生了变更，Pod 仍将继续运行。
 
@@ -187,7 +187,7 @@ EOF
 
 
 
-:::tip说明
+:::tip 说
 
 如果你同时指定了 `nodeSelector` 和 `nodeAffinity`，**两者** 必须都要满足， 才能将 Pod 调度到候选节点上。
 
@@ -311,7 +311,7 @@ EOF
 
 
 
-:::tip说明
+:::tip 说
 
 如果你希望 Kubernetes 能够成功地调度此例中的 Pod，你必须拥有打了 `kubernetes.io/os=linux` 标签的节点。
 
@@ -329,7 +329,7 @@ Pod 间亲和性与反亲和性的规则格式为“如果 X 上已经运行了�
 
 你会通过 `topologyKey` 来表达拓扑域（X）的概念，其取值是系统用来标示域的节点标签键。 相关示例可参见[常用标签、注解和污点](https://kubernetes.io/zh-cn/docs/reference/labels-annotations-taints/)。
 
-:::tip说明
+:::tip 说
 
 Pod 间亲和性和反亲和性都需要相当的计算量，因此会在大规模集群中显著降低调度速度。 我们不建议在包含数百个节点的集群中使用这类设置。
 
@@ -527,7 +527,7 @@ EOF
 
 
 
-:::tip说明
+:::tip 说
 
 `nodeName` 旨在供自定义调度程序或需要绕过任何已配置调度程序的高级场景使用。 如果已分配的 Node 负载过重，绕过调度程序可能会导致 Pod 失败。 你可以使用[节点亲和性](https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity)或 [`nodeselector` 字段](https://kubernetes.io/zh-cn/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector)将 Pod 分配给特定 Node，而无需绕过调度程序。
 
@@ -573,7 +573,7 @@ spec:
 
 
 
-:::tip说明
+:::tip 说
 
 `Gt` 和 `Lt` 操作符不能与非整数值一起使用。 如果给定的值未解析为整数，则该 Pod 将无法被调度。 另外，`Gt` 和 `Lt` 不适用于 `podAffinity`。
 

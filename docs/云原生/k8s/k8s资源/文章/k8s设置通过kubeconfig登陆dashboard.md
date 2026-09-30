@@ -99,7 +99,7 @@ kubectl config --kubeconfig=dashboard-config.yaml set-cluster ctyun --server=htt
 
 3.将用户详细信息添加到配置文件中
 
-:::caution注意
+:::caution 注
 
 将密码保存到 Kubernetes 客户端配置中有风险。 一个较好的替代方式是使用凭据插件并单独保存这些凭据。 参阅 [client-go 凭据插件](https://kubernetes.io/zh-cn/docs/reference/access-authn-authz/authentication/#client-go-credential-plugins)
 
@@ -107,7 +107,7 @@ kubectl config --kubeconfig=dashboard-config.yaml set-cluster ctyun --server=htt
 
 
 
-:::tip说明
+:::tip 说
 
 - 要删除用户，可以运行 `kubectl --kubeconfig=config-demo config unset users.<name>`
 - 要删除集群，可以运行 `kubectl --kubeconfig=config-demo config unset clusters.<name>`

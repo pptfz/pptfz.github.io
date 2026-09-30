@@ -22,7 +22,7 @@ yum -y install -y gcc gcc-c++ automake autoconf cmake bison-devel ncurses-devel 
 
 ## 2.下载boost
 
-:::tip说明
+:::tip 说
 
 5.7版本源码编译安装需要下载一个Boost C++ 1.59.0（这是一组扩充C++功能的经过同行评审（Peer-reviewed）且开放源代码程序库。大多数的函数为了能够以开放源代码、封闭项目的方式运作，而授权于Boost软件许可协议（Boost Software License）之下。）
 
@@ -105,7 +105,7 @@ useradd -M -s /bin/nologin mysql
 
 ## 9.编辑主配置文件
 
-:::caution注意
+:::caution 注
 
 **<span style={{color: 'red'}}>⚠️如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
 
@@ -157,7 +157,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 ## 13.初始化mysql
 
-:::tip说明
+:::tip 说
 
 **<span style={{color: 'red'}}>⚠️MySQL 5.7.6之前的版本使用如下方式初始化数据库</span>**
 

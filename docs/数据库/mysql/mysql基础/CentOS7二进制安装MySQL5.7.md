@@ -12,7 +12,7 @@
 
 
 
-:::caution注意
+:::caution 注
 
 **二进制安装mysql的启动脚本`support-files/mysql.server` 和安装目录下的 `bin/mysqld_safe`  这两个文件中都是默认使用 `/usr/local/mysql`，如果安装目录不在 `/usr/local/` 下，需要修改这两个文件中的路径，即把 `/usr/local` 替换为mysql安装目录**
 
@@ -64,7 +64,7 @@ useradd -M -s /bin/nologin mysql
 
 ## 6.编辑主配置文件，myql5.7二进制包默认没有mysql配置文件
 
-:::caution注意
+:::caution 注
 
 **<span style={{color: 'red'}}>如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
 
@@ -116,7 +116,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 ## 10.初始化mysql
 
-:::tip说明
+:::tip 说
 
 **<span style={{color: 'red'}}>mysql5.7初始化没有提示！！！</span>**
 

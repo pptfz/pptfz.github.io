@@ -127,7 +127,7 @@ resource:
 
 基于这一指标设定，HPA 控制器会维持扩缩目标中的 Pods 的平均资源利用率在 60%。 利用率是 Pod 的当前资源用量与其请求值之间的比值。 关于如何计算利用率以及如何计算平均值的细节可参考[算法](https://kubernetes.io/zh-cn/docs/tasks/run-application/horizontal-pod-autoscale/#algorithm-details)小节。
 
-:::tip说明
+:::tip 说
 
 由于所有的容器的资源用量都会被累加起来，Pod 的总体资源用量值可能不会精确体现各个容器的资源用量。 这一现象也会导致一些问题，例如某个容器运行时的资源用量非常高，但因为 Pod 层面的资源用量总值让人在可接受的约束范围内，HPA 不会执行扩大目标对象规模的操作。
 
@@ -155,7 +155,7 @@ containerResource:
 
 在上面的例子中，HPA 控制器会对目标对象执行扩缩操作以确保所有 Pod 中 `application` 容器的平均 CPU 用量为 60%。
 
-:::tip说明
+:::tip 说
 
 如果你要更改 HorizontalPodAutoscaler 所跟踪记录的容器的名称，你可以按一定顺序来执行这一更改， 确保在应用更改的过程中用来判定扩缩行为的容器可用。 在更新定义容器的资源（如 Deployment）之前，你需要更新相关的 HPA， 使之能够同时跟踪记录新的和老的容器名称。这样，HPA 就能够在整个更新过程中继续计算并提供扩缩操作建议。
 

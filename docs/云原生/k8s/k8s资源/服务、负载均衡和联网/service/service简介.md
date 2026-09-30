@@ -42,7 +42,7 @@ Service 对象的名称必须是有效的 [RFC 1035 标签名称](https://kubern
 
 
 
-:::tip说明
+:::tip 说
 
 需要注意的是，Service 能够将一个接收 `port` 映射到任意的 `targetPort`。 默认情况下，`targetPort` 将被设置为与 `port` 字段相同的值。
 
@@ -145,7 +145,7 @@ endpoints:
 
 
 
-:::tip说明
+:::tip 说
 
 端点 IP 地址**必须不是** ：本地回路地址（IPv4 的 127.0.0.0/8、IPv6 的 ::1/128） 或链路本地地址（IPv4 的 169.254.0.0/16 和 224.0.0.0/24、IPv6 的 fe80::/64）。
 
@@ -163,7 +163,7 @@ endpoints:
 
 访问没有选择算符的 Service，与有选择算符的 Service 的原理相同。 在没有选择算符的 Service [示例](https://kubernetes.io/zh-cn/docs/concepts/services-networking/service/#services-without-selectors)中， 流量被路由到 EndpointSlice 清单中定义的两个端点之一： 通过 TCP 协议连接到 10.1.2.3 或 10.4.5.6 的端口 9376。
 
-:::tip说明
+:::tip 说
 
 Kubernetes API 服务器不允许代理到未被映射至 Pod 上的端点。由于此约束，当 Service 没有选择算符时，诸如 `kubectl proxy <service-name>` 之类的操作将会失败。这可以防止 Kubernetes API 服务器被用作调用者可能无权访问的端点的代理。
 
@@ -198,7 +198,7 @@ spec:
 
 
 
-:::tip说明
+:::tip 说
 
 与一般的 Kubernetes 名称一样，端口名称只能包含小写字母数字字符 和 `-`。 端口名称还必须以字母数字字符开头和结尾。
 
@@ -288,7 +288,7 @@ Kubernetes `ServiceTypes` 允许指定你所需要的 Service 类型。
 
 
 
-:::tip说明
+:::tip 说
 
 你需要使用 kube-dns 1.7 及以上版本或者 CoreDNS 0.0.8 及以上版本才能使用 `ExternalName` 类型。
 
@@ -350,7 +350,7 @@ spec:
 
 
 
-:::tip说明
+:::tip 说
 
 此服务呈现为 `<NodeIP>:spec.ports[*].nodePort` 和 `.spec.clusterIP:spec.ports[*].port`。 如果设置了 kube-proxy 的 `--nodeport-addresses` 标志或 kube-proxy 配置文件中的等效字段， 则 `<NodeIP>` 将是过滤的节点 IP 地址（或可能的 IP 地址）。
 
@@ -406,7 +406,7 @@ status:
 
 
 
-:::tip说明
+:::tip 说
 
 可用于 LoadBalancer 类型服务的协议集仍然由云提供商决定。 如果云提供商不支持混合协议，他们将只提供单一协议。
 
@@ -487,7 +487,7 @@ spec:
 
 
 
-:::tip说明
+:::tip 说
 
 ExternalName 服务接受 IPv4 地址字符串，但作为包含数字的 DNS 名称，而不是 IP 地址。 类似于 IPv4 地址的外部名称不能由 CoreDNS 或 ingress-nginx 解析，因为外部名称旨在指定规范的 DNS 名称。 要对 IP 地址进行硬编码，请考虑使用[无头 Services](https://kubernetes.io/zh-cn/docs/concepts/services-networking/service/#headless-services)。
 
@@ -509,7 +509,7 @@ ExternalName 服务接受 IPv4 地址字符串，但作为包含数字的 DNS �
 
 
 
-:::tip说明
+:::tip 说
 
 有关这部分内容，我们要感谢 [Alen Komljen](https://akomljen.com/) 刊登的 [Kubernetes Tips - Part1](https://akomljen.com/kubernetes-tips-part-1/) 这篇博文。
 

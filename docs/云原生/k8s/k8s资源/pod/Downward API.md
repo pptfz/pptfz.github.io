@@ -83,7 +83,7 @@
 
 #### 使用pod字段作为环境变量的值
 
-:::tip说明
+:::tip 说明
 
 本示例中的字段是 Pod 字段，不是 Pod 中 Container 的字段。
 
@@ -395,7 +395,7 @@ drwxrwxrwt    3 root     root           120 Oct 30 08:43 ..
 
 用符号链接可实现元数据的动态原子性刷新；更新将写入一个新的临时目录， 然后通过使用 [rename(2)](http://man7.org/linux/man-pages/man2/rename.2.html) 完成 `..data` 符号链接的原子性更新。
 
-:::tip说明
+:::tip 说明
 
 如果容器以 [subPath](https://kubernetes.io/zh-cn/docs/concepts/storage/volumes/#using-subpath) 卷挂载方式来使用 Downward API，则该容器无法收到更新事件。
 

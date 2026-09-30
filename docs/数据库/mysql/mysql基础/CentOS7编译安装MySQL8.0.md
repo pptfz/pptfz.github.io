@@ -22,7 +22,7 @@ yum -y install bison-devel ncurses-devel openssl-devel libtirpc-devel
 
 ## 2.安装cmake
 
-:::tip说明
+:::tip 说
 
 **<span style={{color: 'red'}}>mysql8源码编译安装需要的cmake版本为3.5.1+，在centos7.9中yum源安装的cmake版本为2.8.12.2，在使用cmake编译配置的时候会报错如下</span>**
 
@@ -40,7 +40,7 @@ yum -y install cmake3
 
 ## 3.安装gcc
 
-:::tip说明
+:::tip 说
 
 **<span style={{color: 'red'}}>mysql8源码编译安装需要的gcc版本为5.3+，在centos7.9中yum源安装的gcc版本为4.8.5，在编译配置的时候会报错如下</span>**
 
@@ -94,7 +94,7 @@ Boost库被列为MySQL的一个可选依赖项，用于提供额外的功能支�
 
 ### 4.2 安装boost
 
-:::tip说明
+:::tip 说
 
 mysql8.0.22需要的boost版本为1.73.0
 
@@ -197,7 +197,7 @@ useradd -M -s /bin/nologin mysql
 
 ## 10.编辑主配置文件
 
-:::caution注意
+:::caution 注
 
 **<span style={{color: 'red'}}>如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从 `/tmp` 下找socket文件</span>**
 
@@ -251,7 +251,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 ## 14.初始化mysql
 
-:::tip说明
+:::tip 说
 
 mysql8初始化没有提示
 

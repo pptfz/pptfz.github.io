@@ -129,7 +129,7 @@ Hello from the Kubernetes cluster
 
 
 
-:::tip说明
+:::tip 说
 
 cronjob会创建job来执行具体的任务，job会以 `定义的job名称-随机数字` 命名，并且默认会有3个job，这是由`.spec.successfulJobsHistoryLimit` 字段决定的，随机数字每隔定义的执行时间增加1，并且心增加的pod会替换掉第一个pod
 
@@ -167,7 +167,7 @@ kubectl delete cronjob hello
 
 CronJob 配置也需要包括 [`.spec`](https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status) 部分。
 
-:::tip说明
+:::tip 说
 
 如果你修改了一个 CronJob，你所做的修改将只被应用到将来所运行的任务上， 对当前 CronJob 内处于运行中的 Job 集合（和 Job 里面的 Pod）不会产生任何变化，它们将继续运行。 也就是说，对 CronJob 的修改不更新现有的任务，即使这些任务处于运行状态。
 
@@ -183,7 +183,7 @@ CronJob 配置也需要包括 [`.spec`](https://git.k8s.io/community/contributor
 
 > 步长可被用于范围组合。范围后面带有 `/<数字>` 可以声明范围内的步幅数值。 例如，`0-23/2` 可被用在小时字段来声明命令在其他数值的小时数执行 （V7 标准中对应的方法是 `0,2,4,6,8,10,12,14,16,18,20,22`）。 步长也可以放在通配符后面，因此如果你想表达 “每两小时”，就用 `*/2` 。
 
-:::tip说明
+:::tip 说
 
 调度中的问号 (`?`) 和星号 `*` 含义相同，它们用来表示给定字段的任何可用值。
 
@@ -223,7 +223,7 @@ CronJob 配置也需要包括 [`.spec`](https://git.k8s.io/community/contributor
 
 `.spec.suspend` 字段也是可选的。如果设置为 `true` ，后续发生的执行都会被挂起。 这个设置对已经开始的执行不起作用。默认是 `false`。
 
-:::caution注意
+:::caution 注
 
 在调度时间内挂起的执行都会被统计为错过的任务。当 `.spec.suspend` 从 `true` 改为 `false` 时， 且没有[开始的最后期限](https://kubernetes.io/zh-cn/docs/tasks/job/automated-tasks-with-cron-jobs/#starting-deadline)，错过的任务会被立即调度。
 

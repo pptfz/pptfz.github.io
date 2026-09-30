@@ -186,7 +186,7 @@ round-trip min/avg/max = 0.093/0.093/0.093 ms
 
 进入到busybox容器进行nslookup Headless Service测试
 
-:::caution注意
+:::caution 注
 
 busybox镜像要使用1.28.x，其余版本会有问题
 
@@ -280,7 +280,7 @@ StatefulSet 中的每个 Pod 根据 StatefulSet 的名称和 Pod 的序号派生
 
 
 
-:::tip说明
+:::tip 说
 
 集群域会被设置为 `cluster.local`，除非有[其他配置](https://kubernetes.io/zh-cn/docs/concepts/services-networking/dns-pod-service/)。
 
@@ -395,7 +395,7 @@ Kubernetes 控制平面会等到被更新的 Pod 进入 Running 和 Ready 状态
 
 
 
-:::tip说明
+:::tip 说
 
 `maxUnavailable` 字段处于 Alpha 阶段，仅当 API 服务器启用了 `MaxUnavailableStatefulSet` [特性门控](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/feature-gates/)时才起作用。
 

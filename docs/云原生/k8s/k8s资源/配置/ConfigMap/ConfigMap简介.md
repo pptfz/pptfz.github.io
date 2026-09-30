@@ -12,7 +12,7 @@ ConfigMap 将你的环境配置信息和 [容器镜像](https://kubernetes.io/zh
 
 
 
-:::caution注意
+:::caution 注
 
 ConfigMap 并不提供保密或者加密功能。 如果你想存储的数据是机密的，请使用 [Secret](https://kubernetes.io/zh-cn/docs/concepts/configuration/secret/)， 或者使用其他第三方工具来保证你的数据的私密性，而不是用 ConfigMap。
 
@@ -48,7 +48,7 @@ ConfigMap 的名字必须是一个合法的 [DNS 子域名](https://kubernetes.i
 
 你可以写一个引用 ConfigMap 的 Pod 的 `spec`，并根据 ConfigMap 中的数据在该 Pod 中配置容器。这个 Pod 和 ConfigMap 必须要在同一个 [名字空间](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/namespaces/) 中。
 
-:::tip说明
+:::tip 说
 
  [静态 Pod](https://kubernetes.io/zh-cn/docs/tasks/configure-pod-container/static-pod/) 中的 `spec` 字段不能引用 ConfigMap 或任何其他 API 对象。
 
@@ -190,7 +190,7 @@ ConfigMap 既可以通过 watch 操作实现内容传播（默认形式），也
 
 
 
-:::tip说明
+:::tip 说
 
 **以环境变量方式使用的 ConfigMap 数据不会被自动更新。 更新这些数据需要重新启动 Pod。**
 

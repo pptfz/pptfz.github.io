@@ -118,7 +118,7 @@ RollingUpdate
 
 编辑yaml文件
 
-:::tip说明
+:::tip 说
 
 如果只更新容器镜像，可以使用如下命令
 
@@ -237,7 +237,7 @@ kubectl get pods -l name=fluentd-elasticsearch -o wide -n kube-system
 
 一旦找到这些节点，从节点上删除一些非 DaemonSet Pod，为新的 DaemonSet Pod 腾出空间。
 
-:::tip说明
+:::tip 说
 
 当所删除的 Pod 不受任何控制器管理，也不是多副本的 Pod时，上述操作将导致服务中断。 同时，上述操作也不会考虑 [PodDisruptionBudget](https://kubernetes.io/zh-cn/docs/tasks/run-application/configure-pdb/) 所施加的约束。
 
@@ -286,7 +286,7 @@ REVISION  CHANGE-CAUSE
 
 
 
-:::tip说明
+:::tip 说
 
 在创建时，DaemonSet 的变化原因从 `kubernetes.io/change-cause` 注解（annotation） 复制到其修订版本中。用户可以在 `kubectl` 命令中设置 `--record=true`， 将执行的命令记录在变化原因注解中。
 
@@ -296,7 +296,7 @@ REVISION  CHANGE-CAUSE
 
 执行以下命令，来查看指定版本的详细信息：
 
-:::tip说明
+:::tip 说
 
 执行命令 `kubectl rollout history daemonset <daemonset-name> --revision=<revision>` 查看ds历史修改记录
 

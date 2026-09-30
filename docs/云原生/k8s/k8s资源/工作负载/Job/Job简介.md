@@ -214,7 +214,7 @@ Pod 中的容器可能因为多种不同原因失效，例如因为其中的进�
 
 当 [`JobTrackingWithFinalizers`](https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/job/#job-tracking-with-finalizers) 特性被禁用时， 失败的 Pod 数目仅基于 API 中仍然存在的 Pod。
 
-:::tip说明
+:::tip 说
 
 如果你的 Job 的 `restartPolicy` 被设置为 "OnFailure"，就要注意运行该 Job 的 Pod 会在 Job 到达失效回退次数上限时自动被终止。 这会使得调试 Job 中可执行文件的工作变得非常棘手。 我们建议在调试 Job 时将 `restartPolicy` 设置为 "Never"， 或者使用日志系统来确保失效 Job 的输出不会意外遗失。
 
@@ -381,7 +381,7 @@ pi     1/1           10s        33s
 
 挂起job
 
-:::tip说明
+:::tip 说
 
 执行命令 `kubectl patch job job-name --type=strategic --patch '{"spec":{"suspend":true}}'` 挂起活跃的job
 
@@ -395,7 +395,7 @@ kubectl patch job pi --type=strategic --patch '{"spec":{"suspend":true}}'
 
 查看挂起的job
 
-:::tip说明
+:::tip 说
 
 Job 的 `status` 可以用来确定 Job 是否被挂起，或者曾经被挂起。
 
@@ -466,7 +466,7 @@ Events:
 
 **特性状态：** `Kubernetes v1.23 [beta]`
 
-:::tip说明
+:::tip 说
 
 为了使用此功能，你必须在 [API 服务器](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/kube-apiserver/)上启用 `JobMutableNodeSchedulingDirectives` [特性门控](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/feature-gates/)。 默认情况下启用。
 
@@ -543,7 +543,7 @@ spec:
 
 **特性状态：** `Kubernetes v1.25 [alpha]`
 
-:::tip说明
+:::tip 说
 
 只有你在集群中启用了 `JobPodFailurePolicy` [特性门控](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/feature-gates/) 你才能为某个 Job 配置 Pod 失效策略。 此外，建议启用 `PodDisruptionConditions` 特性门控以便在 Pod 失效策略中检测和处理 Pod 干扰状况 （参考：[Pod 干扰状况](https://kubernetes.io/zh-cn/docs/concepts/workloads/pods/disruptions#pod-disruption-conditions)）。 这两个特性门控都是在 Kubernetes v1.25 中提供的。
 
@@ -607,7 +607,7 @@ EOF
 
 
 
-:::tip说明
+:::tip 说
 
 因为 Pod 模板中指定了 `restartPolicy: Never`， 所以 kubelet 将不会重启 Pod 中的 `main` 容器。
 
@@ -619,7 +619,7 @@ Pod 失效策略的第二条规则， 指定对于状况为 `DisruptionTarget` �
 
 
 
-:::tip说明
+:::tip 说
 
 如果根据 Pod 失效策略或 Pod 回退失效策略判定 Pod 已经失效， 并且 Job 正在运行多个 Pod，Kubernetes 将终止该 Job 中仍处于 Pending 或 Running 的所有 Pod。
 
@@ -657,7 +657,7 @@ Pod 失效策略的第二条规则， 指定对于状况为 `DisruptionTarget` �
 
 **特性状态：** `Kubernetes v1.23 [beta]`
 
-:::tip说明
+:::tip 说
 
 要使用该行为，你必须为 [API 服务器](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/kube-apiserver/) 和[控制器管理器](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/kube-controller-manager/) 启用 `JobTrackingWithFinalizers` [特性门控](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/feature-gates/)。 默认是启用的。
 

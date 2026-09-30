@@ -24,7 +24,7 @@ DaemonSet 的一些典型用法：
 
 编辑yaml文件
 
-:::tip说明
+:::tip 说
 
 `spec.selector.matchLabels.name` 必须与 `spec.template.metadata.labels.name` 相同
 

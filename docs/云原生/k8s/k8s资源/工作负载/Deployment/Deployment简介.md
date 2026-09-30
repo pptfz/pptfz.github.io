@@ -61,7 +61,7 @@ EOF
 
 - `selector` 字段定义 Deployment 如何查找要管理的 Pod。 在这里，你选择在 Pod 模板中定义的标签（`app: nginx`）。 不过，更复杂的选择规则是也可能的，只要 Pod 模板本身满足所给规则即可。
 
-:::tip说明
+:::tip 说
 
 `spec.selector.matchLabels` 字段是 `{key,value}` 键值对映射。 在 `matchLabels` 映射中的每个 `{key,value}` 映射等效于 `matchExpressions` 中的一个元素， 即其 `key` 字段是 “key”，`operator` 为 “In”，`values` 数组仅包含 “value”。 在 `matchLabels` 和 `matchExpressions` 中给出的所有条件都必须满足才能匹配。
 
@@ -136,7 +136,7 @@ nginx-deployment-66b6c48dd5-xcsx4   1/1     Running   0          2m12s   app=ngi
 
 
 
-:::tip说明
+:::tip 说
 
 你必须在 Deployment 中指定适当的选择算符和 Pod 模板标签（在本例中为 `app: nginx`）。 标签或者选择算符不要与其他控制器（包括其他 Deployment 和 StatefulSet）重叠。 Kubernetes 不会阻止你这样做，但是如果多个控制器具有重叠的选择算符， 它们可能会发生冲突执行难以预料的操作。
 
@@ -146,7 +146,7 @@ nginx-deployment-66b6c48dd5-xcsx4   1/1     Running   0          2m12s   app=ngi
 
 ### Pod-template-hash 标签
 
-:::caution注意
+:::caution 注
 
 不要更改此标签。
 
@@ -160,7 +160,7 @@ Deployment 控制器将 `pod-template-hash` 标签添加到 Deployment 所创建
 
 ## 更新 Deployment
 
-:::tip说明
+:::tip 说
 
 仅当 Deployment Pod 模板（即 `.spec.template`）发生改变时，例如模板的标签或容器镜像被更新， 才会触发 Deployment 上线。其他更新（如对 Deployment 执行扩缩容的操作）不会触发上线动作。
 
@@ -306,7 +306,7 @@ Events:
 
 
 
-:::tip说明
+:::tip 说
 
 **Kubernetes 在计算 `availableReplicas` 数值时不考虑终止过程中的 Pod**， `availableReplicas` 的值一定介于 `replicas - maxUnavailable` 和 `replicas + maxSurge` 之间。 因此，你可能在上线期间看到 Pod 个数比预期的多，Deployment 所消耗的总的资源也大于 `replicas + maxSurge` 个 Pod 所用的资源，直到被终止的 Pod 所设置的 `terminationGracePeriodSeconds` 到期为止。
 
@@ -328,7 +328,7 @@ Deployment 控制器每次注意到新的 Deployment 时，都会创建一个 Re
 
 通常不鼓励更新标签选择算符。建议你提前规划选择算符。 在任何情况下，如果需要更新标签选择算符，请格外小心， 并确保自己了解这背后可能发生的所有事情。
 
-:::tip说明
+:::tip 说
 
 在 API 版本 `apps/v1` 中，Deployment 标签选择算符在创建后是不可变的。
 
@@ -344,7 +344,7 @@ Deployment 控制器每次注意到新的 Deployment 时，都会创建一个 Re
 
 有时，你可能想要回滚 Deployment；例如，当 Deployment 不稳定时（例如进入反复崩溃状态）。 默认情况下，Deployment 的所有上线记录都保留在系统中，以便可以随时回滚 （你可以通过修改修订历史记录限制来更改这一约束）。
 
-:::tip说明
+:::tip 说
 
 Deployment 被触发上线时，系统就会创建 Deployment 的新的修订版本。 这意味着仅当 Deployment 的 Pod 模板（`.spec.template`）发生更改时，才会创建新修订版本 -- 例如，模板的标签或容器镜像发生变化。 其他更新，如 Deployment 的扩缩容操作不会创建 Deployment 修订版本。 这是为了方便同时执行手动缩放或自动缩放。 换言之，当你回滚到较早的修订版本时，只有 Deployment 的 Pod 模板部分会被回滚。
 
@@ -396,7 +396,7 @@ nginx-deployment-559d658b74-vtw7t   1/1     Running            0          41m
 nginx-deployment-66bc5d6c8-jmrtq    0/1     ImagePullBackOff   0          2m5s
 ```
 
-:::tip说明
+:::tip 说
 
 Deployment 控制器自动停止有问题的上线过程，并停止对新的 ReplicaSet 扩容。 这行为取决于所指定的 rollingUpdate 参数（具体为 `maxUnavailable`）。 默认情况下，Kubernetes 将此值设置为 25%。
 
@@ -456,7 +456,7 @@ Events:
 
 ### 检查 Deployment 上线历史
 
-:::tip说明
+:::tip 说
 
 在1.23版本之前，要想查看deployment修改历史，在创建或更新deployment时需要添加 `--record` 选项，否则查看历史记录会显示 `none`
 
@@ -806,7 +806,7 @@ nginx-deployment-66b6c48dd5   0         0         0       13m
 
 
 
-:::tip说明
+:::tip 说
 
 你不可以回滚处于暂停状态的 Deployment，除非先恢复其执行状态。
 
@@ -913,7 +913,7 @@ kubectl patch deployment/nginx-deployment -p '{"spec":{"progressDeadlineSeconds"
 
 
 
-:::tip说明
+:::tip 说
 
 除了报告 `Reason=ProgressDeadlineExceeded` 状态之外，Kubernetes 对已停止的 Deployment 不执行任何操作。更高级别的编排器可以利用这一设计并相应地采取行动。 例如，将 Deployment 回滚到其以前的版本。
 
@@ -1027,7 +1027,7 @@ $ echo $?
 
 你可以在 Deployment 中设置 `.spec.revisionHistoryLimit` 字段以指定保留此 Deployment 有多少个旧的 ReplicaSet。其余的 ReplicaSet 将在后台被垃圾回收。 默认情况下，此值为 10。
 
-:::tip说明
+:::tip 说
 
 显式将此字段设置为 0 将导致 Deployment 的所有历史记录被清空，因此 Deployment 将无法回滚。
 
@@ -1083,7 +1083,7 @@ Deployment 对象的名称必须是合法的 [DNS 子域名](https://kubernetes.
 
 当 Pod 的标签和选择算符匹配，但其模板和 `.spec.template` 不同时，或者此类 Pod 的总数超过 `.spec.replicas` 的设置时，Deployment 会终结之。 如果 Pod 总数未达到期望值，Deployment 会基于 `.spec.template` 创建新的 Pod。
 
-:::tip说明
+:::tip 说
 
 你不应直接创建与此选择算符匹配的 Pod，也不应通过创建另一个 Deployment 或者类似于 ReplicaSet 或 ReplicationController 这类控制器来创建标签与此选择算符匹配的 Pod。 如果这样做，第一个 Deployment 会认为它创建了这些 Pod。 Kubernetes 不会阻止你这么做。
 
@@ -1103,7 +1103,7 @@ Deployment 对象的名称必须是合法的 [DNS 子域名](https://kubernetes.
 
 如果 `.spec.strategy.type==Recreate`，在创建新 Pod 之前，所有现有的 Pod 会被杀死。
 
-:::tip说明
+:::tip 说
 
 这只会确保为了升级而创建新 Pod 之前其他 Pod 都已终止。如果你升级一个 Deployment， 所有旧版本的 Pod 都会立即被终止。控制器等待这些 Pod 被成功移除之后， 才会创建新版本的 Pod。如果你手动删除一个 Pod，其生命周期是由 ReplicaSet 来控制的， 后者会立即创建一个替换 Pod（即使旧的 Pod 仍然处于 Terminating 状态）。 如果你需要一种“最多 n 个”的 Pod 个数保证，你需要考虑使用 [StatefulSet](https://kubernetes.io/zh-cn/docs/concepts/workloads/controllers/statefulset/)。
 

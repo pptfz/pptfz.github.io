@@ -12,7 +12,7 @@
 
 
 
-:::caution注意
+:::caution 注
 
 所有 **CronJob** 的 `schedule:` 时间都是基于 [kube-controller-manager](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/kube-controller-manager/). 的时区。
 

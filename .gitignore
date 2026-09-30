@@ -22,3 +22,9 @@ yarn-error.log*
 .env
 
 .workbuddy
+
+# Backups（所有备份统一放 .bak 目录，不提交）
+/.bak/
+/.backup-*/
+*.bak
+*.backup

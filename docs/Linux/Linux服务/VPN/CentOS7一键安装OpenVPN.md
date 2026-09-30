@@ -319,7 +319,7 @@ The client configuration is available in: /root/pptfz.ovpn
 New clients can be added by running this script again.
 ```
 
-:::tip说明
+:::tip 说
 
 **客户端文件是 `/root/pptfz.ovpn` ，在最后的输出中有提示，这里的客户端文件名称是自定义的，然后把这个文件下载到本地，后续配置VPN认证的时候需要用到这个客户端文件**
 
@@ -366,7 +366,7 @@ Compile time defines: enable_async_push=no enable_comp_stub=no enable_crypto=yes
 
 ### 2.1 编辑脚本
 
-:::tip说明
+:::tip 说
 
 **这个是现在公司线上用到的文件，目前没有找到出处，不知道为什么，总之就是利用一个存放用户名密码的自定义文件 `/etc/openvpn/psw-file` 来作为认证文件**
 

@@ -271,7 +271,7 @@ Query OK, 0 rows affected (0.20 sec)
 
 #### 6.3.1 增加列
 
-:::tip说明
+:::tip 说
 
 修改列中不支持before，只有after和first
 
@@ -390,7 +390,7 @@ mysql> desc t1;
 
 `alter table 表名 change 旧列名 新列名 数据类型;`
 
-:::tip说明
+:::tip 说
 
 **<span style={{color: 'red'}}>change既可以修改列名，又可以修改列类型</span>**
 
@@ -1138,7 +1138,7 @@ mysql> select 7%3;
 
 ``pow   幂运算``
 
-:::tip说明
+:::tip 说
 
 mysql中不支持 `**` 方式的幂运算，需要用到 `pow` 方法
 
@@ -1372,7 +1372,7 @@ mysql> select not 5>3;
 
 ### 9.4 排序	order by
 
-:::tip说明
+:::tip 说
 
 默认为升序
 
@@ -1496,7 +1496,7 @@ mysql> select name from t1 group by name;
 
 **来个错误示例**
 
-:::tip错误原因
+:::tip 错
 
 `group by` 语句会将列中值相同的行合并，例如上边的 `t1` 表中，有多个名字相同的人小明，`group by` 已经将多个小明的值合并为一个，但是小明是姓名相同的不同的人，成绩也不同，因此查询的时候会报错
 
@@ -1690,7 +1690,7 @@ mysql> select * from t1 where age not in(18,19,30);
 
 ### 10.1 mysql API
 
-:::tip说明
+:::tip 说
 
 **mysql API就是能够不进入mysql而在命令行中执行sql语句，在命令行中使用-e选项**
 

@@ -372,7 +372,7 @@ EOF
 
 
 
-:::tip说明
+:::tip 说
 
 与 HTTP 和 TCP 探针不同，gRPC 探测**不能使用**命名端口或定制主机。
 
@@ -464,7 +464,7 @@ startupProbe:
 
 有时候，应用会暂时性地无法为请求提供服务。 例如，应用在启动时可能需要加载大量的数据或配置文件，或是启动后要依赖等待外部服务。 在这种情况下，既不想杀死应用，也不想给它发送请求。 Kubernetes 提供了就绪探针来发现并缓解这些情况。 容器所在 Pod 上报还未就绪的信息，并且不接受通过 Kubernetes Service 的流量。
 
-:::tip说明
+:::tip 说
 
 就绪探针在容器的整个生命周期中保持运行状态。
 
@@ -510,7 +510,7 @@ HTTP 和 TCP 的就绪探针配置也和存活探针的配置完全相同。
 - `successThreshold`：探针在失败后，被视为成功的最小连续成功数。默认值是 1。 存活和启动探测的这个值必须是 1。最小值是 1。
 - `failureThreshold`：当探测失败时，Kubernetes 的重试次数。 对存活探测而言，放弃就意味着重新启动容器。 对就绪探测而言，放弃意味着 Pod 会被打上未就绪的标签。默认值是 3。最小值是 1。
 
-:::tip说明
+:::tip 说
 
 在 Kubernetes 1.20 版本之前，`exec` 探针会忽略 `timeoutSeconds`： 探针会无限期地持续运行，甚至可能超过所配置的限期，直到返回结果为止。
 
@@ -594,7 +594,7 @@ startupProbe:
 
 在 1.21 及更高版本中，用户可以指定一个探针层面的 `terminationGracePeriodSeconds` 作为探针规约的一部分。 当 Pod 层面和探针层面的 `terminationGracePeriodSeconds` 都已设置，kubelet 将使用探针层面设置的值。
 
-:::tip说明
+:::tip 说
 
 从 Kubernetes 1.25 开始，默认启用 `ProbeTerminationGracePeriod` 特性。 选择禁用此特性的用户，请注意以下事项:
 

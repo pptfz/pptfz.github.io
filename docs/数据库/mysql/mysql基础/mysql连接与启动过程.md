@@ -47,7 +47,7 @@
 
 ### 1.2 连接方式
 
-:::tip说明
+:::tip 说
 
 在mysql命令行中执行命令 `status` 可以查看当前连接方式
 
@@ -99,7 +99,7 @@ Connection:		10.0.0.11 via TCP/IP
 
 ### 2.2 配置文件读取顺序
 
-:::tip说明
+:::tip 说
 
 **此顺序为使用 `/etc/init.d/mysql.service` 启动脚本方法生效，使用systemd不生效**
 
@@ -123,7 +123,7 @@ Connection:		10.0.0.11 via TCP/IP
 
 
 
-:::tip说明
+:::tip 说
 
 **<span style={{color: 'red'}}>命令行中加上--defaults-file=xxx，以上文件都不读取</span>**
 

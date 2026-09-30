@@ -261,7 +261,7 @@ matchLabels:
 
 **在 ReplicaSet 中，`.spec.template.metadata.labels` 的值必须与 `spec.selector` 值相匹配，否则该配置会被 API 拒绝。**
 
-:::tip说明
+:::tip 说
 
 对于设置了相同的 `.spec.selector`，但 `.spec.template.metadata.labels` 和 `.spec.template.spec` 字段不同的两个 ReplicaSet 而言，每个 ReplicaSet 都会忽略被另一个 ReplicaSet 所创建的 Pod。
 
@@ -385,7 +385,7 @@ Pod 如果未设置此注解，则隐含的设置值为 0。负值也是可接�
 
 此功能特性处于 Beta 阶段，默认被启用。你可以通过为 kube-apiserver 和 kube-controller-manager 设置[特性门控](https://kubernetes.io/zh-cn/docs/reference/command-line-tools-reference/feature-gates/) `PodDeletionCost` 来禁用此功能。
 
-:::tip说明
+:::tip 说
 
 - 此机制实施时仅是尽力而为，并不能对 Pod 的删除顺序作出任何保证；
 - 用户应避免频繁更新注解值，例如根据某观测度量值来更新此注解值是应该避免的。 这样做会在 API 服务器上产生大量的 Pod 更新操作。

@@ -56,7 +56,7 @@ useradd -M -s /sbin/nologin mysql
 
 ## 6.编辑主配置文件，myql8.0二进制包默认没有mysql配置文件
 
-:::caution注意
+:::caution 注
 
 **<span style={{color: 'red'}}>如果指定了mysql的socket文件位置，则必须添加`[client]`标签并同时指定socket文件位置，否则客户端会从/tmp下找socket文件</span>**
 
@@ -108,7 +108,7 @@ cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
 
 ## 10.初始化mysql
 
-:::tip说明
+:::tip 说
 
 **<span style={{color: 'red'}}>mysql8.0初始化没有提示！！！</span>**
 
