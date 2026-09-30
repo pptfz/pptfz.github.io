@@ -1,0 +1,134 @@
+- generic [ref=e3]:
+  - region "跳到主要内容":
+    - link "跳到主要内容" [ref=e4] [cursor=pointer]:
+      - /url: "#__docusaurus_skipToContent_fallback"
+  - banner [ref=e5]:
+    - generic [ref=e6]: 一名运维，两台电脑，三餐不定，只为设备工作四平八稳，拼得五脏俱损，六神无主，仍然七点起床，八点出发，晚上九点不返，十分辛苦！😂 十年运维，九转功成，八面张罗，忙得七窍流血，换得六神不宁，五体欠安，仍然四处奔波，三更不眠，只为两个铜板，一生拼搏！
+  - navigation "主导航" [ref=e9]:
+    - generic [ref=e10]:
+      - generic [ref=e11]:
+        - link "My Site Logo 喜欢🎤💃rap🏀" [ref=e12] [cursor=pointer]:
+          - /url: /
+          - img "My Site Logo" [ref=e14]
+          - generic [ref=e15]: 喜欢🎤💃rap🏀
+        - link "你不要过来啊" [ref=e16] [cursor=pointer]:
+          - /url: /docs
+        - link "博客" [ref=e17] [cursor=pointer]:
+          - /url: /blog
+        - button "mac专区" [ref=e19] [cursor=pointer]
+        - button "devops" [ref=e21] [cursor=pointer]
+        - button "Linux" [ref=e23] [cursor=pointer]
+        - button "云原生" [ref=e25] [cursor=pointer]
+        - button "编程" [ref=e27] [cursor=pointer]
+        - button "监控" [ref=e29] [cursor=pointer]
+        - button "数据库" [ref=e31] [cursor=pointer]
+        - button "云厂商知识点" [ref=e33] [cursor=pointer]
+        - button "AI" [ref=e35] [cursor=pointer]
+      - generic [ref=e36]:
+        - link [ref=e37] [cursor=pointer]:
+          - /url: https://github.com/facebook/docusaurus
+          - text: GitHub
+          - img "(opens in new tab)" [ref=e38]
+        - button "切换浅色/暗黑模式（当前为浅色模式）" [ref=e41] [cursor=pointer]
+        - button "搜索 (Command+K)" [ref=e45] [cursor=pointer]:
+          - generic [ref=e46]: 搜索
+  - generic [ref=e50]:
+    - banner [ref=e51]:
+      - generic [ref=e52]:
+        - heading "程序员最讨厌的四件事" [level=1] [ref=e53]
+        - paragraph [ref=e54]:
+          - generic [ref=e55]:
+            - generic [ref=e56]: 1.自己得写注释
+            - generic [ref=e57]: 2.自己得写文档
+          - generic [ref=e58]:
+            - generic [ref=e59]: 3.别人不写注释
+            - generic [ref=e60]: 4.别人不写文档
+        - link "我啥也没动啊🤔" [ref=e62] [cursor=pointer]:
+          - /url: /docs
+      - generic:
+        - generic:
+          - heading "程序员的真实内心" [level=1]
+          - paragraph:
+            - generic:
+              - generic: 1.代码这么清晰还要注释？
+              - generic: 2.代码就是最好的文档！
+            - generic:
+              - generic: 3.这写的啥玩意儿？！
+              - generic: 4.连个文档都没有？！
+          - generic: 被你抓包了 🫣
+    - main [ref=e63]:
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - img "🎤" [ref=e69]
+          - generic [ref=e70]:
+            - heading "🎤" [level=3] [ref=e71]
+            - paragraph [ref=e72]: 凯迪拉克不拉客～
+        - generic [ref=e73]:
+          - img "💃" [ref=e75]
+          - generic [ref=e76]:
+            - heading "💃" [level=3] [ref=e77]
+            - paragraph [ref=e78]: 只拉技师和模特～
+        - generic [ref=e79]:
+          - img "rap" [ref=e81]
+          - generic [ref=e82]:
+            - heading "rap" [level=3] [ref=e83]
+            - paragraph [ref=e84]: 趁着年轻多吃苦～
+        - generic [ref=e85]:
+          - img "🏀" [ref=e87]
+          - generic [ref=e88]:
+            - heading "🏀" [level=3] [ref=e89]
+            - paragraph [ref=e90]: 年底提辆CT5～
+  - generic [ref=e93]:
+    - generic [ref=e94]: 🛡️
+    - generic [ref=e95]: 本站已安全运行
+    - generic [ref=e96]: "2298"
+    - generic [ref=e97]: 天
+    - generic [ref=e98]: "02"
+    - generic [ref=e99]: 时
+    - generic [ref=e100]: "00"
+    - generic [ref=e101]: 分
+    - generic [ref=e102]: "18"
+    - generic [ref=e103]: 秒
+  - contentinfo [ref=e104]:
+    - generic [ref=e105]:
+      - generic [ref=e106]:
+        - generic [ref=e107]:
+          - generic [ref=e108]: Docs
+          - list [ref=e109]:
+            - listitem [ref=e110]:
+              - link "你不要过来啊" [ref=e111] [cursor=pointer]:
+                - /url: /docs
+        - generic [ref=e112]:
+          - generic [ref=e113]: Community
+          - list [ref=e114]:
+            - listitem [ref=e115]:
+              - link [ref=e116] [cursor=pointer]:
+                - /url: https://stackoverflow.com/questions/tagged/docusaurus
+                - text: Stack Overflow
+                - img "(opens in new tab)" [ref=e117]
+            - listitem [ref=e119]:
+              - link [ref=e120] [cursor=pointer]:
+                - /url: https://discordapp.com/invite/docusaurus
+                - text: Discord
+                - img "(opens in new tab)" [ref=e121]
+            - listitem [ref=e123]:
+              - link [ref=e124] [cursor=pointer]:
+                - /url: https://twitter.com/docusaurus
+                - text: Twitter
+                - img "(opens in new tab)" [ref=e125]
+        - generic [ref=e127]:
+          - generic [ref=e128]: More
+          - list [ref=e129]:
+            - listitem [ref=e130]:
+              - link "Blog" [ref=e131] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e132]:
+              - link [ref=e133] [cursor=pointer]:
+                - /url: https://github.com/facebook/docusaurus
+                - text: GitHub
+                - img "(opens in new tab)" [ref=e134]
+      - generic [ref=e136]: Copyright © 2026 泡泡吐肥皂o
+  - generic:
+    - img "Bottom GIF"
+  - generic:
+    - img "Top GIF"

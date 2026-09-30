@@ -1,0 +1,87 @@
+[     805ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:29890
+[    1725ms] [LOG] 
+  く__,.ヘヽ.        /  ,ー､ 〉
+           ＼ ', !-─‐-i  /  /´
+           ／｀ｰ'       L/／｀ヽ､
+         /   ／,   /|   ,   ,       ',
+       ｲ   / /-‐/  ｉ  L_ ﾊ ヽ!   i
+        ﾚ ﾍ 7ｲ｀ﾄ   ﾚ'ｧ-ﾄ､!ハ|   |
+          !,/7 '0'     ´0iソ|    |
+          |.从"    _     ,,,, / |./    |
+          ﾚ'| i＞.､,,__  _,.イ /   .i   |
+            ﾚ'| | / k_７_/ﾚ'ヽ,  ﾊ.  |
+              | |/i 〈|/   i  ,.ﾍ |  i  |
+             .|/ /  ｉ：    ﾍ!    ＼  |
+              kヽ>､ﾊ    _,.ﾍ､    /､!
+              !'〈//｀Ｔ´', ＼ ｀'7'ｰr'
+              ﾚ'ヽL__|___i,___,ンﾚ|ノ
+                  ﾄ-,/  |___./
+                  'ｰ'    !_,.:
+ @ https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js:43
+[    1725ms] [ERROR] Live2D widget version 0 is deprecated, please use version 1 instead: https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.1/dist/autoload.js @ https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js:63
+[    2017ms] [LOG] Live2D %s 2.1.00_1 @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[    2017ms] [LOG] profile : Desktop @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[    2018ms] [LOG]   [PROFILE_NAME] = Desktop @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[    2018ms] [LOG]   [USE_ADJUST_TRANSLATION] = false @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[    2018ms] [LOG]   [USE_CACHED_POLYGON_IMAGE] = false @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[    2018ms] [LOG]   [EXPAND_W] = 2 @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[    8403ms] [LOG] %c ()=>{} @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/waifu-tips.js:4
+[  279140ms] [LOG] [HMR] Reload all css @ webpack-internal:///./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js:247
+[  310054ms] [LOG] [HMR] Reload all css @ webpack-internal:///./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js:247
+[  370806ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:29890
+[  371144ms] [LOG] 
+  く__,.ヘヽ.        /  ,ー､ 〉
+           ＼ ', !-─‐-i  /  /´
+           ／｀ｰ'       L/／｀ヽ､
+         /   ／,   /|   ,   ,       ',
+       ｲ   / /-‐/  ｉ  L_ ﾊ ヽ!   i
+        ﾚ ﾍ 7ｲ｀ﾄ   ﾚ'ｧ-ﾄ､!ハ|   |
+          !,/7 '0'     ´0iソ|    |
+          |.从"    _     ,,,, / |./    |
+          ﾚ'| i＞.､,,__  _,.イ /   .i   |
+            ﾚ'| | / k_７_/ﾚ'ヽ,  ﾊ.  |
+              | |/i 〈|/   i  ,.ﾍ |  i  |
+             .|/ /  ｉ：    ﾍ!    ＼  |
+              kヽ>､ﾊ    _,.ﾍ､    /､!
+              !'〈//｀Ｔ´', ＼ ｀'7'ｰr'
+              ﾚ'ヽL__|___i,___,ンﾚ|ノ
+                  ﾄ-,/  |___./
+                  'ｰ'    !_,.:
+ @ https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js:43
+[  371144ms] [ERROR] Live2D widget version 0 is deprecated, please use version 1 instead: https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.1/dist/autoload.js @ https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js:63
+[  371172ms] [LOG] Live2D %s 2.1.00_1 @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  371172ms] [LOG] profile : Desktop @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  371172ms] [LOG]   [PROFILE_NAME] = Desktop @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  371172ms] [LOG]   [USE_ADJUST_TRANSLATION] = false @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  371172ms] [LOG]   [USE_CACHED_POLYGON_IMAGE] = false @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  371172ms] [LOG]   [EXPAND_W] = 2 @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  371220ms] [LOG] %c ()=>{} @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/waifu-tips.js:4
+[  424564ms] [LOG] [HMR] Reload all css @ webpack-internal:///./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js:247
+[  474564ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:29890
+[  474835ms] [LOG] 
+  く__,.ヘヽ.        /  ,ー､ 〉
+           ＼ ', !-─‐-i  /  /´
+           ／｀ｰ'       L/／｀ヽ､
+         /   ／,   /|   ,   ,       ',
+       ｲ   / /-‐/  ｉ  L_ ﾊ ヽ!   i
+        ﾚ ﾍ 7ｲ｀ﾄ   ﾚ'ｧ-ﾄ､!ハ|   |
+          !,/7 '0'     ´0iソ|    |
+          |.从"    _     ,,,, / |./    |
+          ﾚ'| i＞.､,,__  _,.イ /   .i   |
+            ﾚ'| | / k_７_/ﾚ'ヽ,  ﾊ.  |
+              | |/i 〈|/   i  ,.ﾍ |  i  |
+             .|/ /  ｉ：    ﾍ!    ＼  |
+              kヽ>､ﾊ    _,.ﾍ､    /､!
+              !'〈//｀Ｔ´', ＼ ｀'7'ｰr'
+              ﾚ'ヽL__|___i,___,ンﾚ|ノ
+                  ﾄ-,/  |___./
+                  'ｰ'    !_,.:
+ @ https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js:43
+[  474836ms] [ERROR] Live2D widget version 0 is deprecated, please use version 1 instead: https://fastly.jsdelivr.net/npm/live2d-widgets@1.0.1/dist/autoload.js @ https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js:63
+[  474848ms] [LOG] Live2D %s 2.1.00_1 @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  474848ms] [LOG] profile : Desktop @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  474848ms] [LOG]   [PROFILE_NAME] = Desktop @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  474848ms] [LOG]   [USE_ADJUST_TRANSLATION] = false @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  474848ms] [LOG]   [USE_CACHED_POLYGON_IMAGE] = false @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  474848ms] [LOG]   [EXPAND_W] = 2 @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/live2d.min.js:0
+[  474936ms] [LOG] %c ()=>{} @ https://fastly.jsdelivr.net/npm/live2d-widgets@0/waifu-tips.js:4
