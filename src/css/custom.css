@@ -1178,8 +1178,8 @@ html, body {
 
 
 /* ============================================================
- * 3️⃣ Linux（:nth-child(7)）3 项 — 黑黄红系
- * Linux服务 / Linux命令 / Linux系统
+ * 3️⃣ Linux（:nth-child(7)）4 项 — 黑黄红系
+ * Linux服务 / Linux命令 / Linux系统 / Linux存储
  * ============================================================ */
 .navbar__items > :nth-child(7) .dropdown__menu li:nth-child(1) .dropdown__link {
   background-image: linear-gradient(90deg, #ffc107, #ff5722, #ffc107) !important;
@@ -1189,6 +1189,10 @@ html, body {
 }
 .navbar__items > :nth-child(7) .dropdown__menu li:nth-child(3) .dropdown__link {
   background-image: linear-gradient(90deg, #cddc39, #ff5722, #cddc39) !important;
+}
+/* 4. Linux存储 琥珀金（2026-10-08 新增） */
+.navbar__items > :nth-child(7) .dropdown__menu li:nth-child(4) .dropdown__link {
+  background-image: linear-gradient(90deg, #ffd54f, #ff6f00, #ffd54f) !important;
 }
 .navbar__items > :nth-child(7) .dropdown__menu .dropdown__link {
   background-size: 200% 100% !important;
