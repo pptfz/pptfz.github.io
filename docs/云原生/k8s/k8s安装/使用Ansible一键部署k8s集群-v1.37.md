@@ -1,0 +1,760 @@
+[toc]
+
+# 使用Ansible一键部署k8s集群（v1.37）
+
+> 本文是[《使用kubeadm安装最新版k8s集群（v1.37）》](./使用kubeadm安装最新版k8s集群-v1.37.md)的**配套自动化部署笔记**：把手工分步安装的 5 个步骤原样自动化，5 个 play 文件与该笔记的第 1~5 节一一对应，完全按 Kubernetes 官方文档顺序执行。
+>
+> 设计原则：
+>
+> - **失败即中止**：任一节点任一任务失败（下载失败、安装失败、校验失败），整个部署立即停止
+> - **可重复执行**：所有任务幂等，排查修复后直接重跑，已完成的步骤自动跳过
+> - **自动识别操作系统**：RedHat 系（Rocky/CentOS/RHEL）走 yum 分支，Debian 系（Ubuntu）走 apt 分支
+
+## 1. 使用方法
+
+### 1.1 准备文件
+
+先创建目录结构（以 `k8s-ansible/` 为例）：
+
+```bash
+mkdir -p k8s-ansible/{group_vars,plays} && cd k8s-ansible
+```
+
+然后把[第 3 节](#3-完整文件内容)中的 **`cat > ...` 命令块按顺序整段复制到终端执行**（每块回车后即生成对应文件），最终目录结构如下：
+
+```bash
+k8s-ansible/
+├── inventory.ini          # 主机清单：节点 IP 在这里改（唯一需要改 IP 的地方）
+├── group_vars/
+│   └── all.yml            # 全局变量：版本、网段、镜像仓库
+├── site.yml               # 入口：按顺序导入 5 个分步 play
+└── plays/
+    ├── 01-prepare.yml     # 步骤 1：前置准备
+    ├── 02-containerd.yml  # 步骤 2：容器运行时
+    ├── 03-k8s-packages.yml# 步骤 3：kubeadm/kubelet/kubectl
+    ├── 04-master-init.yml # 步骤 4：初始化 master
+    └── 05-node-join.yml   # 步骤 5：node 加入集群 + 最终验证
+```
+
+### 1.2 执行
+
+```bash
+# 前提：三台机器已配置 SSH 免密登录，执行用户有 sudo/root 权限
+cd k8s-ansible/
+
+# 1. 修改 inventory.ini 中的节点 IP（10.0.0.10/11/12 换成你的）
+# 2. 按需修改 group_vars/all.yml（版本、网段、镜像仓库）
+
+# 语法检查（不实际连接节点）
+ansible-playbook -i inventory.ini site.yml --syntax-check
+
+# 正式安装
+ansible-playbook -i inventory.ini site.yml
+```
+
+:::caution 变量与手工笔记一一对应
+`group_vars/all.yml` 中的变量（`k8s_version`、`pod_cidr`、`image_registry` 等）与手工安装笔记开头的「变量约定」**一一对应**，两边保持一致即可混用手工/自动方式安装。
+:::
+
+## 2. 与手工步骤的对应关系
+
+| Play 文件 | 手工笔记章节 | 内容 |
+| --- | --- | --- |
+| `01-prepare.yml` | 第 1 节 前置准备 | 硬件检查（内存/CPU）、主机名、hosts、swap、SELinux/AppArmor、时间同步、内核模块、sysctl、防火墙 |
+| `02-containerd.yml` | 第 2 节 容器运行时 | containerd/runc/CNI 下载解压、SystemdCgroup、pause 镜像、启动验证 |
+| `03-k8s-packages.yml` | 第 3 节 三件套安装 | pkgs.k8s.io 仓库（yum/apt 自动识别）、指定版本安装与锁版本、版本一致性校验 |
+| `04-master-init.yml` | 第 4 节 初始化 master | 预拉镜像、`kubeadm init`、kubectl 凭证、flannel（含网段校验）、等待 CoreDNS |
+| `05-node-join.yml` | 第 5 节 添加 node | 逐台 join（token 现场生成）、等待所有节点 Ready、输出集群状态 |
+
+## 3. 完整文件内容
+
+:::tip 一键生成全部文件
+以下每个代码块都是**可直接整段复制执行**的 heredoc 命令：`<<'EOF'` 带单引号，YAML 中的 `{{ }}` Ansible 变量会**原样写入文件**，不会被 shell 展开。配合 1.1 的 `mkdir` 命令，8 块复制完即完成全部文件准备。
+:::
+
+### 3.1 inventory.ini
+
+```bash
+cat > inventory.ini <<'EOF'
+# ============================================================
+# Kubernetes 集群主机清单 —— 换环境只需要改这里的 IP
+# 主机名不可重复（kubeadm 要求主机名/MAC/product_uuid 唯一）
+# ============================================================
+
+[k8s_master]
+k8s-master01 ansible_host=10.0.0.10
+
+[k8s_nodes]
+k8s-node01 ansible_host=10.0.0.11
+k8s-node02 ansible_host=10.0.0.12
+
+[k8s_cluster:children]
+k8s_master
+k8s_nodes
+
+# 也可按需加连接参数，例如：
+# [k8s_cluster:vars]
+# ansible_user=root
+# ansible_ssh_private_key_file=~/.ssh/id_rsa
+EOF
+```
+
+### 3.2 group_vars/all.yml
+
+```bash
+cat > group_vars/all.yml <<'EOF'
+# ============================================================
+# Kubernetes 集群安装全局变量 —— 与手工笔记「变量约定」一一对应
+# 换版本 / 换网段 / 换镜像仓库只需要改这个文件
+# ============================================================
+
+# ---------- 版本变量（写笔记时的最新版，可按需修改）----------
+k8s_version: v1.37.1          # Kubernetes 稳定版，见 https://dl.k8s.io/release/stable.txt
+k8s_minor: "1.37"             # pkgs.k8s.io 仓库小版本
+k8s_deb_pkg_version: 1.37.1-1.1   # Ubuntu apt 包版本（不带 v 前缀，以 apt-cache madison kubeadm 输出为准）
+containerd_version: "2.4.1"   # containerd 版本
+runc_version: "1.5.2"         # runc 版本
+cni_plugins_version: v1.9.1   # CNI 插件版本
+flannel_version: v0.28.9      # flannel 版本
+pause_version: "3.10"         # pause 沙箱镜像版本
+
+# ---------- 集群网络（节点 IP 在 inventory.ini 里改）----------
+pod_cidr: 10.244.0.0/16       # Pod 网段（flannel 默认，须与 kube-flannel.yml 的 Network 一致）
+service_cidr: 10.96.0.0/12    # Service 网段（官方默认）
+
+# ---------- 镜像仓库（国内网络可替换）----------
+image_registry: registry.k8s.io
+# 国内拉取失败时可换成：
+# image_registry: registry.aliyuncs.com/google_containers
+pause_image: "registry.k8s.io/pause:{{ pause_version }}"
+# 国内网络可换成：
+# pause_image: "registry.aliyuncs.com/google_containers/pause:{{ pause_version }}"
+
+# ---------- 其他 ----------
+ntp_server: ntp.aliyun.com    # 时间同步服务器
+download_dir: /tmp/k8s-install    # 安装包下载目录（重复执行时已下载的自动跳过）
+flannel_wait_timeout: 600s    # 等待 CoreDNS 就绪的超时时间
+node_ready_retries: 30        # 等待所有节点 Ready 的重试次数（每次间隔 10 秒）
+EOF
+```
+
+### 3.3 site.yml
+
+```bash
+cat > site.yml <<'EOF'
+# ============================================================
+# kubeadm 一键部署 Kubernetes 集群（v1.37）—— 入口
+# 完全按照 kubernetes.io 官方文档步骤，5 个 play 对应手工笔记第 1~5 节
+#
+# 使用方法：
+#   ansible-playbook -i inventory.ini site.yml
+#
+# 设计原则：
+#   - 失败即中止：任一节点任一任务失败，整个部署立即停止（any_errors_fatal）
+#   - 可重复执行：所有任务幂等，已完成的步骤自动跳过
+#   - 自动识别操作系统：RedHat 系走 yum 分支，Debian/Ubuntu 走 apt 分支
+# ============================================================
+
+- import_playbook: plays/01-prepare.yml
+- import_playbook: plays/02-containerd.yml
+- import_playbook: plays/03-k8s-packages.yml
+- import_playbook: plays/04-master-init.yml
+- import_playbook: plays/05-node-join.yml
+EOF
+```
+
+### 3.4 plays/01-prepare.yml
+
+```bash
+cat > plays/01-prepare.yml <<'EOF'
+# ============================================================
+# 步骤 1：前置准备（所有节点）—— 对应手工笔记第 1 节
+# 官方文档：https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+# 主机名、hosts、swap、SELinux/AppArmor、时间同步、内核模块、sysctl、防火墙
+# ============================================================
+- name: 步骤 1 | 前置准备（所有节点）
+  hosts: k8s_cluster
+  any_errors_fatal: true    # 任何一个节点失败，立即中止整个部署
+  become: true
+  tasks:
+    - name: 检查全局变量是否已正确配置（fail fast）
+      ansible.builtin.assert:
+        that:
+          - k8s_version is defined
+          - k8s_minor is defined
+          - pod_cidr is defined
+          - service_cidr is defined
+        fail_msg: "group_vars/all.yml 中的变量未正确配置，请检查后再执行"
+
+    - name: 检查内存不低于 2GB（官方要求）
+      ansible.builtin.assert:
+        that: ansible_memtotal_mb >= 1900
+        fail_msg: "内存不足 2GB，不满足官方最低要求"
+
+    - name: 控制平面节点 CPU 至少 2 核（官方要求）
+      ansible.builtin.assert:
+        that: ansible_facts['processor_vcpus'] >= 2
+        fail_msg: "控制平面节点 CPU 不足 2 核，不满足官方最低要求"
+      when: inventory_hostname in groups['k8s_master']
+
+    # ---------- 1.1 主机名与 hosts 解析 ----------
+    - name: 设置主机名（与 inventory 中定义一致，幂等）
+      ansible.builtin.hostname:
+        name: "{{ inventory_hostname }}"
+
+    - name: 配置 hosts 解析（IP 取自 inventory，换环境只改 inventory.ini）
+      ansible.builtin.blockinfile:
+        path: /etc/hosts
+        marker: "# {mark} ANSIBLE MANAGED - k8s cluster"
+        block: |
+          {% for h in groups['k8s_cluster'] %}
+          {{ hostvars[h].ansible_host }} {{ h }}
+          {% endfor %}
+
+    # ---------- 1.2 关闭 swap ----------
+    - name: 关闭 swap 并注释 /etc/fstab 中的 swap 行（官方要求，幂等）
+      ansible.builtin.shell: |
+        swapoff -a
+        if grep -qE '^\s*[^#].*\sswap\s' /etc/fstab; then
+          sed -ri 's/.*swap.*/#&/' /etc/fstab
+          echo changed
+        fi
+      register: swap_off
+      changed_when: "'changed' in swap_off.stdout"
+
+    - name: 验证 swap 已关闭（总量应为 0，否则失败退出）
+      ansible.builtin.shell: free -m | awk '/Swap/{print $2}'
+      register: swap_check
+      changed_when: false
+      failed_when: swap_check.stdout.strip() != '0'
+
+    # ---------- 1.3 安全模块（RedHat 设 SELinux permissive；Ubuntu 用 AppArmor 无需操作）----------
+    - name: 将 SELinux 设置为 permissive 模式（仅 RedHat 系，官方要求）
+      ansible.builtin.shell: |
+        if command -v getenforce >/dev/null 2>&1 && [ "$(getenforce)" = "Enforcing" ]; then
+          setenforce 0
+          echo changed
+        fi
+      register: selinux_off
+      changed_when: "'changed' in selinux_off.stdout"
+      when: ansible_facts['os_family'] == 'RedHat'
+
+    - name: 持久化 SELinux permissive（仅 RedHat 系）
+      ansible.builtin.lineinfile:
+        path: /etc/selinux/config
+        regexp: '^SELINUX='
+        line: 'SELINUX=permissive'
+      when: ansible_facts['os_family'] == 'RedHat'
+
+    # ---------- 1.4 时间同步 ----------
+    - name: 安装 chrony
+      ansible.builtin.package:
+        name: chrony
+        state: present
+
+    - name: 配置 NTP 服务器（RedHat 系，配置文件 /etc/chrony.conf）
+      ansible.builtin.replace:
+        path: /etc/chrony.conf
+        regexp: '^(pool|server)\s+\S+'
+        replace: 'pool {{ ntp_server }} iburst'
+      when: ansible_facts['os_family'] == 'RedHat'
+      notify: 重启 chrony
+
+    - name: 配置 NTP 服务器（Ubuntu，配置文件 /etc/chrony/chrony.conf）
+      ansible.builtin.replace:
+        path: /etc/chrony/chrony.conf
+        regexp: '^(pool|server)\s+\S+'
+        replace: 'pool {{ ntp_server }} iburst'
+      when: ansible_facts['os_family'] == 'Debian'
+      notify: 重启 chrony
+
+    - name: 启动 chrony 并设置开机自启（服务名：RedHat 为 chronyd，Ubuntu 为 chrony）
+      ansible.builtin.service:
+        name: "{{ 'chronyd' if ansible_facts['os_family'] == 'RedHat' else 'chrony' }}"
+        state: started
+        enabled: true
+
+    # ---------- 1.5 内核模块与 sysctl（Ubuntu 与 RedHat 系命令完全相同）----------
+    - name: 加载 overlay、br_netfilter 模块并持久化（官方 + flannel 要求）
+      ansible.builtin.copy:
+        dest: /etc/modules-load.d/k8s.conf
+        mode: "0644"
+        content: |
+          overlay
+          br_netfilter
+
+    - name: 立即加载内核模块（幂等）
+      ansible.builtin.shell: modprobe overlay && modprobe br_netfilter
+      changed_when: false
+
+    - name: 配置 sysctl 参数（官方要求，重启后保持不变）
+      ansible.builtin.copy:
+        dest: /etc/sysctl.d/k8s.conf
+        mode: "0644"
+        content: |
+          net.bridge.bridge-nf-call-iptables  = 1
+          net.bridge.bridge-nf-call-ip6tables = 1
+          net.ipv4.ip_forward                 = 1
+
+    - name: 应用 sysctl 参数（幂等）
+      ansible.builtin.command: sysctl --system
+      changed_when: false
+
+    - name: 验证 br_netfilter 已加载（flannel 依赖，缺失直接失败退出）
+      ansible.builtin.command: lsmod
+      register: lsmod_out
+      changed_when: false
+      failed_when: "'br_netfilter' not in lsmod_out.stdout"
+
+    - name: 验证 IPv4 转发已开启（缺失直接失败退出）
+      ansible.builtin.command: sysctl -n net.ipv4.ip_forward
+      register: ip_forward
+      changed_when: false
+      failed_when: ip_forward.stdout.strip() != '1'
+
+    # ---------- 1.6 防火墙（实验环境关闭；生产环境请按官方端口表精确放行）----------
+    - name: 关闭 firewalld（仅 RedHat 系，未安装则跳过）
+      ansible.builtin.shell: |
+        if systemctl list-unit-files firewalld.service 2>/dev/null | grep -q firewalld; then
+          systemctl is-active firewalld >/dev/null 2>&1 && systemctl disable --now firewalld
+        fi
+      when: ansible_facts['os_family'] == 'RedHat'
+      changed_when: false
+
+    - name: 关闭 ufw（仅 Ubuntu，未启用则跳过）
+      ansible.builtin.shell: |
+        if command -v ufw >/dev/null 2>&1 && ufw status 2>/dev/null | grep -q 'Status: active'; then
+          ufw disable
+        fi
+      when: ansible_facts['os_family'] == 'Debian'
+      changed_when: false
+
+  handlers:
+    - name: 重启 chrony
+      ansible.builtin.service:
+        name: "{{ 'chronyd' if ansible_facts['os_family'] == 'RedHat' else 'chrony' }}"
+        state: restarted
+EOF
+```
+
+### 3.5 plays/02-containerd.yml
+
+```bash
+cat > plays/02-containerd.yml <<'EOF'
+# ============================================================
+# 步骤 2：安装容器运行时 containerd（所有节点）—— 对应手工笔记第 2 节
+# 官方文档：https://kubernetes.io/zh-cn/docs/setup/production-environment/container-runtimes/
+# containerd 官方入门：https://github.com/containerd/containerd/blob/main/docs/getting-started.md
+# 按官方推荐使用二进制 tar 包安装，命令与发行版无关（Ubuntu/Rocky 相同）
+# ============================================================
+- name: 步骤 2 | 安装容器运行时 containerd（所有节点）
+  hosts: k8s_cluster
+  any_errors_fatal: true
+  become: true
+  tasks:
+    - name: 创建下载目录
+      ansible.builtin.file:
+        path: "{{ download_dir }}"
+        state: directory
+        mode: "0755"
+
+    # ---------- 2.1 安装 containerd ----------
+    - name: 下载 containerd 二进制包（下载失败立即中止）
+      ansible.builtin.get_url:
+        url: "https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-amd64.tar.gz"
+        dest: "{{ download_dir }}/containerd-{{ containerd_version }}-linux-amd64.tar.gz"
+        mode: "0644"
+        timeout: 120
+
+    - name: 解压 containerd 到 /usr/local（幂等：已安装则跳过）
+      ansible.builtin.unarchive:
+        src: "{{ download_dir }}/containerd-{{ containerd_version }}-linux-amd64.tar.gz"
+        dest: /usr/local
+        creates: /usr/local/bin/containerd
+
+    - name: 下载 containerd systemd 服务文件（官方提供）
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/containerd/containerd/main/containerd.service
+        dest: /usr/lib/systemd/system/containerd.service
+        mode: "0644"
+        timeout: 60
+
+    # ---------- 2.2 安装 runc ----------
+    - name: 下载 runc（下载失败立即中止）
+      ansible.builtin.get_url:
+        url: "https://github.com/opencontainers/runc/releases/download/v{{ runc_version }}/runc.amd64"
+        dest: "{{ download_dir }}/runc.amd64"
+        mode: "0644"
+        timeout: 120
+
+    - name: 安装 runc 到 /usr/local/sbin（幂等：已安装则跳过）
+      ansible.builtin.command: install -m 755 {{ download_dir }}/runc.amd64 /usr/local/sbin/runc
+      args:
+        creates: /usr/local/sbin/runc
+
+    # ---------- 2.3 安装 CNI 插件 ----------
+    - name: 创建 CNI 插件目录（官方路径 /opt/cni/bin）
+      ansible.builtin.file:
+        path: /opt/cni/bin
+        state: directory
+        mode: "0755"
+
+    - name: 下载 CNI 插件压缩包（下载失败立即中止）
+      ansible.builtin.get_url:
+        url: "https://github.com/containernetworking/plugins/releases/download/{{ cni_plugins_version }}/cni-plugins-linux-amd64-{{ cni_plugins_version }}.tgz"
+        dest: "{{ download_dir }}/cni-plugins-linux-amd64-{{ cni_plugins_version }}.tgz"
+        mode: "0644"
+        timeout: 120
+
+    - name: 解压 CNI 插件到 /opt/cni/bin（幂等：已安装则跳过）
+      ansible.builtin.unarchive:
+        src: "{{ download_dir }}/cni-plugins-linux-amd64-{{ cni_plugins_version }}.tgz"
+        dest: /opt/cni/bin
+        creates: /opt/cni/bin/loopback
+
+    # ---------- 2.4 生成配置并设置 systemd cgroup 驱动 ----------
+    - name: 生成 containerd 默认配置（幂等：已存在则不覆盖）
+      ansible.builtin.shell: containerd config default > /etc/containerd/config.toml
+      args:
+        creates: /etc/containerd/config.toml
+
+    - name: 将 runc 的 cgroup 驱动改为 systemd（官方要求，与 kubelet 一致）
+      ansible.builtin.lineinfile:
+        path: /etc/containerd/config.toml
+        regexp: '^SystemdCgroup = false'
+        line: 'SystemdCgroup = true'
+
+    - name: 验证 SystemdCgroup 已开启（默认配置省略该项时失败退出，提示手动处理）
+      ansible.builtin.command: grep -c 'SystemdCgroup = true' /etc/containerd/config.toml
+      register: cgroup_check
+      changed_when: false
+      failed_when: cgroup_check.stdout | int < 1
+
+    # ---------- 2.5 配置 pause 沙箱镜像 ----------
+    - name: 配置 pause 沙箱镜像（国内网络可在 group_vars 中替换镜像地址）
+      ansible.builtin.lineinfile:
+        path: /etc/containerd/config.toml
+        regexp: '^sandbox_image = '
+        line: 'sandbox_image = "{{ pause_image }}"'
+
+    # ---------- 2.6 启动 containerd ----------
+    - name: 启动 containerd 并设置开机自启（每次重启确保配置生效）
+      ansible.builtin.systemd:
+        name: containerd
+        state: restarted
+        enabled: true
+        daemon_reload: true
+
+    - name: 验证 containerd 运行正常（异常直接失败退出）
+      ansible.builtin.command: ctr version
+      register: ctr_ver
+      changed_when: false
+      failed_when: ctr_ver.rc != 0
+EOF
+```
+
+### 3.6 plays/03-k8s-packages.yml
+
+```bash
+cat > plays/03-k8s-packages.yml <<'EOF'
+# ============================================================
+# 步骤 3：安装 kubeadm、kubelet、kubectl（所有节点）—— 对应手工笔记第 3 节
+# 官方文档：https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+# 自动识别操作系统：RedHat 系走 yum 分支，Debian/Ubuntu 走 apt 分支
+# ============================================================
+- name: 步骤 3 | 安装 kubeadm、kubelet、kubectl（所有节点）
+  hosts: k8s_cluster
+  any_errors_fatal: true
+  become: true
+  tasks:
+    # ==================== RedHat 系（Rocky / CentOS / RHEL）====================
+    - name: 配置 pkgs.k8s.io yum 仓库（RedHat 系）
+      ansible.builtin.copy:
+        dest: /etc/yum.repos.d/kubernetes.repo
+        mode: "0644"
+        content: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v{{ k8s_minor }}/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v{{ k8s_minor }}/rpm/repodata/repomd.xml.key
+          exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+      when: ansible_facts['os_family'] == 'RedHat'
+
+    - name: 安装三件套指定版本（RedHat 系，版本变量 k8s_version）
+      ansible.builtin.yum:
+        name:
+          - "kubelet-{{ k8s_version }}"
+          - "kubeadm-{{ k8s_version }}"
+          - "kubectl-{{ k8s_version }}"
+        state: present
+        disable_excludes: kubernetes
+      when: ansible_facts['os_family'] == 'RedHat'
+
+    # ==================== Debian 系（Ubuntu）====================
+    - name: 安装依赖并更新缓存（Ubuntu）
+      ansible.builtin.apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gpg
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: 导入 pkgs.k8s.io 仓库公钥（Ubuntu，幂等：已存在则跳过）
+      ansible.builtin.shell: |
+        mkdir -p -m 755 /etc/apt/keyrings
+        if [ ! -f /etc/apt/keyrings/kubernetes-apt-keyring.gpg ]; then
+          curl -fsSL https://pkgs.k8s.io/core:/stable:/v{{ k8s_minor }}/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+        fi
+      when: ansible_facts['os_family'] == 'Debian'
+      changed_when: false
+
+    - name: 配置 pkgs.k8s.io apt 仓库（Ubuntu）
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/kubernetes.list
+        mode: "0644"
+        content: |
+          deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v{{ k8s_minor }}/deb/ /
+      when: ansible_facts['os_family'] == 'Debian'
+      register: apt_repo
+
+    - name: 更新 apt 缓存（仓库配置发生变更时）
+      ansible.builtin.apt:
+        update_cache: true
+      when: ansible_facts['os_family'] == 'Debian' and apt_repo is changed
+
+    - name: 安装三件套指定版本（Ubuntu，版本变量 k8s_deb_pkg_version，不带 v 前缀）
+      ansible.builtin.apt:
+        name:
+          - "kubelet={{ k8s_deb_pkg_version }}"
+          - "kubeadm={{ k8s_deb_pkg_version }}"
+          - "kubectl={{ k8s_deb_pkg_version }}"
+        state: present
+      when: ansible_facts['os_family'] == 'Debian'
+
+    - name: 锁定三件套版本防止 apt upgrade 自动升级（Ubuntu 官方命令 apt-mark hold）
+      ansible.builtin.command: apt-mark hold kubelet kubeadm kubectl
+      when: ansible_facts['os_family'] == 'Debian'
+      changed_when: false
+
+    # ==================== 通用验证 ====================
+    - name: 验证 kubeadm 版本与目标版本一致（不一致直接失败退出）
+      ansible.builtin.command: kubeadm version -o short
+      register: kubeadm_ver
+      changed_when: false
+      failed_when: k8s_version not in kubeadm_ver.stdout
+
+    - name: 验证 kubelet、kubectl 版本一致
+      ansible.builtin.command: "{{ ver_cmd }}"
+      loop:
+        - kubelet --version
+        - kubectl version --client
+      loop_control:
+        loop_var: ver_cmd
+      register: ver_check
+      changed_when: false
+      failed_when: k8s_version not in ver_check.stdout
+
+    # 官方说明：kubelet 在 kubeadm init/join 之前每隔几秒重启一次（crashloop）是正常现象，
+    # 因此这里只设置开机自启，不强制要求服务处于 running 状态
+    - name: 设置 kubelet 开机自启（init 前处于 crashloop 属正常现象，官方说明）
+      ansible.builtin.systemd:
+        name: kubelet
+        enabled: true
+EOF
+```
+
+### 3.7 plays/04-master-init.yml
+
+```bash
+cat > plays/04-master-init.yml <<'EOF'
+# ============================================================
+# 步骤 4：初始化 master 节点（仅 k8s-master01）—— 对应手工笔记第 4 节
+# 官方文档：https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+# 幂等设计：检测 /etc/kubernetes/admin.conf，已初始化则跳过（不会重复 init）
+# ============================================================
+- name: 步骤 4 | 初始化 master 节点
+  hosts: k8s_master
+  any_errors_fatal: true
+  become: true
+  tasks:
+    - name: 检查是否已初始化（幂等：已初始化则跳过 kubeadm init）
+      ansible.builtin.stat:
+        path: /etc/kubernetes/admin.conf
+      register: k8s_initialized
+
+    # ---------- 4.1 预拉取控制平面镜像 ----------
+    - name: 预拉取控制平面镜像（失败立即中止，国内网络请先在 group_vars 替换 image_registry）
+      ansible.builtin.command:
+        argv:
+          - kubeadm
+          - config
+          - images
+          - pull
+          - --image-repository={{ image_registry }}
+          - --kubernetes-version={{ k8s_version }}
+      when: not k8s_initialized.stat.exists
+      changed_when: false
+
+    # ---------- 4.2 初始化控制平面 ----------
+    - name: 初始化控制平面（kubeadm init，advertise-address 取自 inventory）
+      ansible.builtin.command:
+        argv:
+          - kubeadm
+          - init
+          - --apiserver-advertise-address={{ hostvars[inventory_hostname].ansible_host }}
+          - --image-repository={{ image_registry }}
+          - --kubernetes-version={{ k8s_version }}
+          - --pod-network-cidr={{ pod_cidr }}
+          - --service-cidr={{ service_cidr }}
+      when: not k8s_initialized.stat.exists
+
+    # ---------- 4.3 配置 kubectl（为 root 用户）----------
+    - name: 创建 kubectl 配置目录
+      ansible.builtin.file:
+        path: /root/.kube
+        state: directory
+        mode: "0700"
+
+    - name: 配置 kubectl 凭证（幂等：已存在则跳过）
+      ansible.builtin.copy:
+        src: /etc/kubernetes/admin.conf
+        dest: /root/.kube/config
+        remote_src: true
+        mode: "0600"
+        force: false
+
+    # ---------- 4.4 安装 Pod 网络插件 flannel ----------
+    - name: 下载 kube-flannel.yml（下载失败立即中止）
+      ansible.builtin.get_url:
+        url: "https://github.com/flannel-io/flannel/releases/download/{{ flannel_version }}/kube-flannel.yml"
+        dest: "{{ download_dir }}/kube-flannel.yml"
+        mode: "0644"
+        timeout: 120
+
+    - name: 校验 flannel Network 网段与 POD_CIDR 一致（不一致直接失败退出，提示检查网段配置）
+      ansible.builtin.command: grep -A 4 'net-conf.json' {{ download_dir }}/kube-flannel.yml
+      register: flannel_conf
+      changed_when: false
+      failed_when: pod_cidr not in flannel_conf.stdout
+
+    - name: 安装 flannel（kubectl apply，幂等）
+      ansible.builtin.command: kubectl apply -f {{ download_dir }}/kube-flannel.yml
+      register: flannel_apply
+      changed_when: "'created' in flannel_apply.stdout"
+      failed_when: flannel_apply.rc != 0
+
+    # ---------- 4.5 验证控制平面 ----------
+    - name: 等待 CoreDNS 就绪（超时即失败；不装好 CNI 插件 CoreDNS 不会启动，官方说明）
+      ansible.builtin.command: kubectl wait --for=condition=Ready pod -l k8s-app=kube-dns -n kube-system --timeout={{ flannel_wait_timeout }}
+      changed_when: false
+
+    - name: 显示控制平面 Pod 状态
+      ansible.builtin.command: kubectl get pods -A
+      register: pods_status
+      changed_when: false
+
+    - name: 输出控制平面 Pod 状态
+      ansible.builtin.debug:
+        var: pods_status.stdout_lines
+EOF
+```
+
+### 3.8 plays/05-node-join.yml
+
+```bash
+cat > plays/05-node-join.yml <<'EOF'
+# ============================================================
+# 步骤 5：添加 node 节点 + 最终验证 —— 对应手工笔记第 5 节
+# 官方文档：https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
+# 幂等设计：检测 /etc/kubernetes/kubelet.conf，已加入则跳过
+# join 命令每次在 master 上现场生成（kubeadm token create），不存在 token 过期问题
+# serial: 1 —— 逐台加入，一台失败立即停止，避免批量出问题
+# ============================================================
+- name: 步骤 5 | 添加 node 节点
+  hosts: k8s_nodes
+  serial: 1
+  any_errors_fatal: true
+  become: true
+  tasks:
+    - name: 检查是否已加入集群（幂等：已加入则跳过 join）
+      ansible.builtin.stat:
+        path: /etc/kubernetes/kubelet.conf
+      register: joined
+
+    - name: 在 master 上现场生成 join 命令（含新 token，见官方 kubeadm token 文档）
+      ansible.builtin.command: kubeadm token create --print-join-command
+      delegate_to: "{{ groups['k8s_master'][0] }}"
+      register: join_command
+      changed_when: false
+      when: not joined.stat.exists
+
+    - name: 加入集群（join 失败立即中止）
+      ansible.builtin.command: "{{ join_command.stdout }}"
+      args:
+        creates: /etc/kubernetes/kubelet.conf
+      when: not joined.stat.exists
+
+    - name: 确认 kubelet 服务运行
+      ansible.builtin.systemd:
+        name: kubelet
+        state: started
+
+# ============================================================
+# 最终验证：等待所有节点 Ready（node 加入后 flannel DaemonSet
+# 会自动在其上运行，需要 1~2 分钟，因此用轮询等待）
+# ============================================================
+- name: 最终验证 | 等待所有节点 Ready
+  hosts: k8s_master
+  any_errors_fatal: true
+  become: true
+  tasks:
+    - name: 轮询等待所有节点 Ready（每 10 秒一次，超时即失败退出）
+      ansible.builtin.command: kubectl get nodes --no-headers
+      register: node_status
+      until:
+        - node_status.stdout_lines | length == groups['k8s_cluster'] | length
+        - "'NotReady' not in node_status.stdout"
+      retries: "{{ node_ready_retries }}"
+      delay: 10
+      changed_when: false
+
+    - name: 显示集群节点状态
+      ansible.builtin.command: kubectl get nodes -o wide
+      register: nodes_out
+      changed_when: false
+
+    - name: 输出集群节点状态
+      ansible.builtin.debug:
+        var: nodes_out.stdout_lines
+
+    - name: 部署完成提示
+      ansible.builtin.debug:
+        msg: "集群部署完成：{{ groups['k8s_cluster'] | length }} 个节点全部 Ready，可开始使用 kubectl 部署应用"
+EOF
+```
+
+## 4. 失败处理与幂等设计
+
+**失败即中止**：
+
+- 所有 play 设置 `any_errors_fatal: true`——任一节点任一任务失败，整个部署立即停止，不会"带病继续"
+- 关键操作后都有验证任务（swap 是否关闭、br_netfilter 是否加载、SystemdCgroup 是否开启、三件套版本是否一致、flannel 网段是否匹配），验证不过直接失败退出
+- GitHub 下载（containerd/runc/CNI/flannel）均设置超时，下载失败立即中止；国内网络建议先替换 `group_vars/all.yml` 中的镜像仓库变量，或给执行机配置代理
+
+**可重复执行（幂等）**：
+
+- 配置文件、软件包类任务：Ansible 模块自身幂等，无变化自动跳过
+- 二进制解压/安装：`creates` 判断（如 `/usr/local/bin/containerd`），已安装直接跳过
+- `kubeadm init`：检测 `/etc/kubernetes/admin.conf`，已初始化则**不会重复 init**
+- `kubeadm join`：检测 `/etc/kubernetes/kubelet.conf`，已加入则跳过；join 命令每次在 master 上用 `kubeadm token create --print-join-command` 现场生成，**不存在 token 过期问题**
+- node 加入采用 `serial: 1` 逐台执行，一台失败立即停止，不会批量出问题
+
+**安装失败想重来**：先在失败节点执行 `kubeadm reset`（见手工笔记 6.7）并删除 `/etc/kubernetes` 后，直接重跑 playbook 即可。
+
+**操作系统自动识别**：playbook 通过 `ansible_facts['os_family']` 自动走 RedHat（yum）或 Debian（apt）分支，与手工笔记中的双系统选项卡一一对应，无需修改。
