@@ -10,7 +10,7 @@
 
 ### argocd架构图
 
-![iShot_2025-04-25_16.57.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-04-25_16.57.41.png)
+![iShot_2025-04-25_16.57.41](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-04-25_16.57.41.png)
 
 
 

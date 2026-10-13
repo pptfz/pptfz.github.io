@@ -8,7 +8,7 @@
 
 管理员右上角 `个人信息和配置` -> `管理后台` -> `身份及认证` -> `认证源` -> `添加认证源`
 
-![iShot_2025-09-18_10.07.00](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-18_10.07.00.png)
+![iShot_2025-09-18_10.07.00](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-18_10.07.00.png)
 
 
 
@@ -20,7 +20,7 @@ ldap认证类型有 [LDAP (via BindDN)](https://docs.gitea.cn/usage/authenticati
 
 ldap via BindDN 配置页面
 
-![iShot_2025-09-18_10.15.34](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-18_10.15.34.png)
+![iShot_2025-09-18_10.15.34](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-18_10.15.34.png)
 
 
 

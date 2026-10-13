@@ -6,13 +6,13 @@
 
 ### 1.1 git工作流程
 
-![iShot_2024-08-22_15.08.56](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_15.08.56.png)
+![iShot_2024-08-22_15.08.56](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-22_15.08.56.png)
 
 
 
 ### 1.2 git四种状态
 
-![iShot_2024-08-22_15.19.29](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_15.19.29.png)
+![iShot_2024-08-22_15.19.29](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-22_15.19.29.png)
 
 
 
@@ -20,7 +20,7 @@
 
 ### 2.1 git工作区域及文件颜色
 
-![iShot_2024-08-22_15.21.00](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-22_15.21.00.png)
+![iShot_2024-08-22_15.21.00](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-22_15.21.00.png)
 
 
 
@@ -62,7 +62,7 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-![iShot_2024-10-31_19.46.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-10-31_19.46.12.png)
+![iShot_2024-10-31_19.46.12](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-10-31_19.46.12.png)
 
 
 
@@ -85,7 +85,7 @@ Changes to be committed:
 	new file:   bbb
 ```
 
-![iShot_2024-10-31_19.48.01](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-10-31_19.48.01.png)
+![iShot_2024-10-31_19.48.01](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-10-31_19.48.01.png)
 
 
 
@@ -116,7 +116,7 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-![iShot_2024-11-01_10.47.22](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-11-01_10.47.22.png)
+![iShot_2024-11-01_10.47.22](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-11-01_10.47.22.png)
 
 
 
@@ -135,7 +135,7 @@ Changes to be committed:
 	new file:   bbb
 ```
 
-![iShot_2024-10-31_19.48.01](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-10-31_19.48.01.png)
+![iShot_2024-10-31_19.48.01](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-10-31_19.48.01.png)
 
 
 
@@ -235,7 +235,7 @@ Changes to be committed:
 	new file:   bbb
 ```
 
-![iShot_2024-11-01_19.13.34](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-11-01_19.13.34.png)
+![iShot_2024-11-01_19.13.34](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-11-01_19.13.34.png)
 
 
 
@@ -508,7 +508,7 @@ Changes not staged for commit:
 	modified:   aaa
 ```
 
-![iShot_2024-11-04_14.24.05](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-11-04_14.24.05.png)
+![iShot_2024-11-04_14.24.05](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-11-04_14.24.05.png)
 
 
 
@@ -556,7 +556,7 @@ Untracked files:
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-![iShot_2024-11-04_15.20.54](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-11-04_15.20.54.png)
+![iShot_2024-11-04_15.20.54](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-11-04_15.20.54.png)
 
 3.往文件bbb中写入内容
 

@@ -54,7 +54,7 @@ f144b44069ab        none                null                local
 
 ### 原理
 
-![bridge 桥接模式](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/docker-network-bridge.png)
+![bridge 桥接模式](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/docker-network-bridge.png)
 
 Docker 启动时会在宿主机上创建一块 Linux 网桥 `docker0`（默认网段 `172.17.0.0/16`），每个容器的网卡通过 **veth pair** 一端插进容器、一端挂在 `docker0` 上：
 
@@ -109,7 +109,7 @@ iptables -t nat -nvL DOCKER
 
 ### 原理
 
-![host 模式](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/docker-network-host.png)
+![host 模式](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/docker-network-host.png)
 
 容器**没有独立的网络命名空间**，和宿主机共用同一套网络栈：网卡、IP、端口、路由表全部一致。
 
@@ -146,7 +146,7 @@ iptables -t nat -nvL DOCKER
 
 ### 原理
 
-![none 模式](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/docker-network-none.png)
+![none 模式](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/docker-network-none.png)
 
 容器有独立的网络命名空间，但**只包含 `lo` 网卡**，不接任何网络：没有 `eth0`、没有路由、不能上网也不能被访问。
 
@@ -181,7 +181,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 ### 原理
 
-![container 模式](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/docker-network-container.png)
+![container 模式](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/docker-network-container.png)
 
 新容器**不创建自己的网络命名空间**，直接共享指定容器的：两个容器 `ip a` 结果完全一样，进程相互隔离，但可以通过 `localhost` 互相访问。
 

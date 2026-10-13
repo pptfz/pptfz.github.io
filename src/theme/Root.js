@@ -143,7 +143,7 @@ export default function Root({ children }) {
       {/* 右下角 GIF */}
       <div className="gifImageBottom">
         <img
-          src="https://raw.githubusercontent.com/pptfz/picgo-images/master/img/dance-2straps.gif"
+          src="https://raw.githubusercontent.com/pptfz/piclist-images/master/img/dance-2straps.gif"
           alt="Bottom GIF"
           className="gifImage"
         />
@@ -152,7 +152,7 @@ export default function Root({ children }) {
       {/* 右上角 GIF */}
       <div className="gifImageTop">
         <img
-          src="https://raw.githubusercontent.com/pptfz/picgo-images/master/img/sing-dance-rap-basketball-transparent.gif"
+          src="https://raw.githubusercontent.com/pptfz/piclist-images/master/img/sing-dance-rap-basketball-transparent.gif"
           alt="Top GIF"
           className="gifImageTop"
         />

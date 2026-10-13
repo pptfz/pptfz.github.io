@@ -48,7 +48,7 @@ GitLab Runner 具有以下功能
 
 ### runner 执行流程
 
-![iShot_2022-07-04_10.59.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-07-04_10.59.44.png)
+![iShot_2022-07-04_10.59.44](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2022-07-04_10.59.44.png)
 
 
 
@@ -96,7 +96,7 @@ GitLab Runner 具有以下功能
 
 
 
-![iShot_2025-06-16_14.01.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-16_14.01.30.png)
+![iShot_2025-06-16_14.01.30](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-16_14.01.30.png)
 
 
 
@@ -247,7 +247,7 @@ rbac:
 
 `admin` -> `CI/CD` -> `Runners` -> `Create instance runner`
 
-![iShot_2025-06-16_14.32.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-16_14.32.11.png)
+![iShot_2025-06-16_14.32.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-16_14.32.11.png)
 
 
 
@@ -283,13 +283,13 @@ rbac:
 
 :::
 
-![iShot_2025-06-16_16.03.39](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-16_16.03.39.png)
+![iShot_2025-06-16_16.03.39](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-16_16.03.39.png)
 
 
 
 创建完runner的页面，复制显示的 `runner authentication token` 并在 `values.yaml` 中指定
 
-![iShot_2025-06-16_17.02.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-16_17.02.11.png)
+![iShot_2025-06-16_17.02.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-16_17.02.11.png)
 
 
 
@@ -472,7 +472,7 @@ Configuration (with the authentication token) was saved in "/home/gitlab-runner/
 
 :::
 
-![iShot_2025-06-17_13.28.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-17_13.28.21.png)
+![iShot_2025-06-17_13.28.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-17_13.28.21.png)
 
 
 

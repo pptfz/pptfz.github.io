@@ -247,19 +247,19 @@ helm upgrade --install gitea -n gitea --create-namespace .
 
 浏览器访问 `IP:3000`
 
-![iShot_2025-09-17_19.16.36](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_19.16.36.png)
+![iShot_2025-09-17_19.16.36](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-17_19.16.36.png)
 
 
 
 ### 数据库设置
 
-![iShot_2025-09-17_19.21.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_19.21.42.png)
+![iShot_2025-09-17_19.21.42](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-17_19.21.42.png)
 
 
 
 ### 一般设置
 
-![iShot_2025-09-17_19.22.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_19.22.55.png)
+![iShot_2025-09-17_19.22.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-17_19.22.55.png)
 
 
 
@@ -267,19 +267,19 @@ helm upgrade --install gitea -n gitea --create-namespace .
 
 #### 电子邮箱设置
 
-![iShot_2025-09-17_19.25.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_19.25.58.png)
+![iShot_2025-09-17_19.25.58](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-17_19.25.58.png)
 
 
 
 #### 服务器和第三方服务设置
 
-![iShot_2025-09-17_19.28.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_19.28.11.png)
+![iShot_2025-09-17_19.28.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-17_19.28.11.png)
 
 
 
 #### 管理员账号设置
 
-![iShot_2025-09-17_19.29.47](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_19.29.47.png)
+![iShot_2025-09-17_19.29.47](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-17_19.29.47.png)
 
 
 
@@ -289,7 +289,7 @@ helm upgrade --install gitea -n gitea --create-namespace .
 
 确认初始配置后点击 `立即安装` 就会自动登陆
 
-![iShot_2025-09-17_19.36.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_19.36.19.png)
+![iShot_2025-09-17_19.36.19](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-17_19.36.19.png)
 
 
 
@@ -314,13 +314,13 @@ DISABLE_REGISTRATION = true
 
 默认是允许注册的
 
-![iShot_2025-09-26_11.40.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-26_11.40.24.png)
+![iShot_2025-09-26_11.40.24](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-26_11.40.24.png)
 
 
 
 关闭注册后注册按钮就不见了
 
-![iShot_2025-09-26_12.31.00](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-26_12.31.00.png)
+![iShot_2025-09-26_12.31.00](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-26_12.31.00.png)
 
 
 

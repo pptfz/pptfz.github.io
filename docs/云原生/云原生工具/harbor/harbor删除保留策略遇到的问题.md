@@ -8,7 +8,7 @@ harbor版本：v2.10
 
 在harbor api控制台做了如下操作，本意为针对项目id为66的项目配置镜像删除策略为保留最近拉取的3个
 
-![iShot_2024-12-04_16.21.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-12-04_16.21.03.png)
+![iShot_2024-12-04_16.21.03](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-12-04_16.21.03.png)
 
 实际 `curl` 命令如下
 
@@ -62,7 +62,7 @@ curl -X 'PUT' \
 
 返回如下
 
-![iShot_2024-12-04_16.22.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-12-04_16.22.06.png)
+![iShot_2024-12-04_16.22.06](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-12-04_16.22.06.png)
 
 
 
@@ -70,7 +70,7 @@ curl -X 'PUT' \
 
 执行完成后，在harbor控制台查看，发现一直在转圈，误以为是有问题，实际上是因为项目数量很多，有900多个
 
-![iShot_2024-12-04_16.18.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-12-04_16.18.55.png)
+![iShot_2024-12-04_16.18.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-12-04_16.18.55.png)
 
 
 
@@ -78,7 +78,7 @@ curl -X 'PUT' \
 
 误以为配置有问题，想要删除，执行了如下操作
 
-![iShot_2024-12-04_16.27.10](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-12-04_16.27.10.png)
+![iShot_2024-12-04_16.27.10](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-12-04_16.27.10.png)
 
 实际curl命令如下
 
@@ -94,7 +94,7 @@ curl -X 'DELETE' \
 
 返回如下
 
-![iShot_2024-12-04_16.28.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-12-04_16.28.49.png)
+![iShot_2024-12-04_16.28.49](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-12-04_16.28.49.png)
 
 
 
@@ -102,7 +102,7 @@ curl -X 'DELETE' \
 
 执行完删除后在项目的 `策略` 选项卡中就报错 `internal server error`
 
-![iShot_2024-12-04_16.19.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-12-04_16.19.24.png)
+![iShot_2024-12-04_16.19.24](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-12-04_16.19.24.png)
 
 
 

@@ -36,7 +36,7 @@ AUTH_LDAP_USER_SEARCH_BASE='dc=xxx,dc=xxx'
 
 
 
-![iShot_2026-01-15_17.22.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-15_17.22.20.png)
+![iShot_2026-01-15_17.22.20](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-15_17.22.20.png)
 
 
 

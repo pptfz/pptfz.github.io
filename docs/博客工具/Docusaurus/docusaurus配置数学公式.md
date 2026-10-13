@@ -76,4 +76,4 @@ $$
 
 效果如下
 
-![iShot_2024-11-21_17.21.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-11-21_17.21.45.png)
+![iShot_2024-11-21_17.21.45](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-11-21_17.21.45.png)

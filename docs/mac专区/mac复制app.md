@@ -2,7 +2,7 @@
 
 以 `ZenTermLite` 为例
 
-![iShot_2025-08-21_14.41.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-08-21_14.41.28.png)
+![iShot_2025-08-21_14.41.28](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-08-21_14.41.28.png)
 
 
 
@@ -17,7 +17,7 @@ cp -R ZenTermLite.app/ 厚礼蟹.app
 
 复制后就会在访达中出现了
 
-![iShot_2025-08-21_14.45.01](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-08-21_14.45.01.png)
+![iShot_2025-08-21_14.45.01](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-08-21_14.45.01.png)
 
 
 
@@ -27,7 +27,7 @@ cp -R ZenTermLite.app/ 厚礼蟹.app
 
 在 `访达` -> `应用程序` -> 右键显示简介 -> `名称与扩展名`  修改应用程序名字
 
-![iShot_2025-08-21_14.47.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-08-21_14.47.45.png)
+![iShot_2025-08-21_14.47.45](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-08-21_14.47.45.png)
 
 
 
@@ -104,7 +104,7 @@ iconutil -c icns ~/Desktop/newapp.iconset
 
 可以拖拽图片到左上角替换
 
-![iShot_2025-08-21_15.22.22](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-08-21_15.22.22.png)
+![iShot_2025-08-21_15.22.22](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-08-21_15.22.22.png)
 
 
 
@@ -162,7 +162,7 @@ cp ~/Desktop/newapp.icns /Applications/厚礼蟹.app/Contents/Resources/AppIcon.
 
 修改完 `Info.plist` 文件后打开就会报错了
 
-![iShot_2025-08-21_15.48.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-08-21_15.48.03.png)
+![iShot_2025-08-21_15.48.03](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-08-21_15.48.03.png)
 
 
 

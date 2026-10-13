@@ -91,13 +91,13 @@ systemctl enable gitlab-runsvdir.service
 
 低版本
 
-![iShot2021-06-20_01.20.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-20_01.20.14.png)
+![iShot2021-06-20_01.20.14](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-06-20_01.20.14.png)
 
 
 
 高版本
 
-![iShot_2024-09-23_12.08.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-23_12.08.42.png)
+![iShot_2024-09-23_12.08.42](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-23_12.08.42.png)
 
 
 
@@ -394,13 +394,13 @@ a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 
 
 **gitlab默认端口为80，第一次访问需要设置root密码，最少8位**
 
-![iShot2021-06-20_01.22.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-20_01.22.44.png)
+![iShot2021-06-20_01.22.44](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-06-20_01.22.44.png)
 
 
 
 **初始页面**
 
-![iShot2021-06-20_01.24.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-20_01.24.18.png)
+![iShot2021-06-20_01.24.18](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-06-20_01.24.18.png)
 
 
 
@@ -408,7 +408,7 @@ a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 
 
 **这里的警告为gitlab默认开启了开放注册，点击 `learn more` 查看关闭方法**
 
-![iShot2021-06-20_01.26.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-20_01.26.03.png)
+![iShot2021-06-20_01.26.03](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-06-20_01.26.03.png)
 
 
 
@@ -416,7 +416,7 @@ a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 
 
 点击 `Admin Area`  -> `Settings` -> `General` -> `Sign-up restrictions` 
 
-![iShot2021-06-20_01.32.23](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-20_01.32.23.png)
+![iShot2021-06-20_01.32.23](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-06-20_01.32.23.png)
 
 
 
@@ -424,7 +424,7 @@ a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 
 
 取消勾选 `Sign-up enabled` ，保存即可
 
-![iShot2021-06-20_01.35.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-20_01.35.58.png)
+![iShot2021-06-20_01.35.58](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-06-20_01.35.58.png)
 
 
 
@@ -434,7 +434,7 @@ a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 
 
 gitlab默认开启注册
 
-![iShot2021-06-20_14.54.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-20_14.54.27.png)
+![iShot2021-06-20_14.54.27](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-06-20_14.54.27.png)
 
 
 
@@ -444,7 +444,7 @@ gitlab默认开启注册
 
 关闭后
 
-![iShot2021-06-20_14.57.52](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-06-20_14.57.52.png)
+![iShot2021-06-20_14.57.52](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-06-20_14.57.52.png)
 
 
 

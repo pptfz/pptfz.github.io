@@ -322,7 +322,7 @@ location ~ /scripts {
 
 #### 访问
 
-![iShot_2025-06-20_17.10.43](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-20_17.10.43.png)
+![iShot_2025-06-20_17.10.43](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-20_17.10.43.png)
 
 
 
@@ -367,7 +367,7 @@ docker rm -f ssp-temp
 
 收到的密码重置邮件，其中的链接是纯文本的，因此需要修改配置
 
-![iShot_2025-07-01_10.38.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-07-01_10.38.50.png)
+![iShot_2025-07-01_10.38.50](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-07-01_10.38.50.png)
 
 
 
@@ -412,7 +412,7 @@ $messages['resetmessage'] = "{login} 您好，<br><br>点击以下链接重置�
 
 这样在后续收到的密码重置邮件中点击链接就可以自动跳转到浏览器了
 
-![iShot_2025-07-01_11.23.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-07-01_11.23.49.png)
+![iShot_2025-07-01_11.23.49](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-07-01_11.23.49.png)
 
 
 
@@ -517,7 +517,7 @@ docker restart self-service-password
 
 浏览器访问 `IP:8000`
 
-![iShot_2025-06-13_15.10.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-13_15.10.44.png)
+![iShot_2025-06-13_15.10.44](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-13_15.10.44.png)
 
 
 
@@ -578,7 +578,7 @@ $show_extended_error = true;
 
 配置完成后重启容器，刷新页面，刚才配置的密码策略就显示出来了
 
-![iShot_2025-06-13_15.25.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-13_15.25.25.png)
+![iShot_2025-06-13_15.25.25](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-13_15.25.25.png)
 
 
 
@@ -657,15 +657,15 @@ $reset_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . "://" . $_SERVER['HTTP_X_FORWA
 
 旧版页面
 
-![iShot2021-09-20_21.11.15](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-20_21.11.15.png)
+![iShot2021-09-20_21.11.15](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-09-20_21.11.15.png)
 
 
 
 新版页面
 
-![iShot_2025-07-01_10.42.36](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-07-01_10.42.36.png)
+![iShot_2025-07-01_10.42.36](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-07-01_10.42.36.png)
 
-![iShot_2025-06-27_19.32.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-27_19.32.42.png)
+![iShot_2025-06-27_19.32.42](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-27_19.32.42.png)
 
 
 
@@ -675,13 +675,13 @@ $reset_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . "://" . $_SERVER['HTTP_X_FORWA
 
 旧版页面
 
-![iShot2021-09-20_21.13.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-20_21.13.12.png)
+![iShot2021-09-20_21.13.12](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-09-20_21.13.12.png)
 
 
 
 新版页面
 
-![iShot_2025-07-01_10.47.23](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-07-01_10.47.23.png)
+![iShot_2025-07-01_10.47.23](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-07-01_10.47.23.png)
 
 
 
@@ -689,7 +689,7 @@ $reset_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . "://" . $_SERVER['HTTP_X_FORWA
 
 重置密码的邮箱必须是ldap中用户绑定的邮箱，输入其他邮箱会报错邮箱与用户不一致
 
-![iShot2021-09-20_21.17.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-20_21.17.37.png)
+![iShot2021-09-20_21.17.37](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-09-20_21.17.37.png)
 
 
 

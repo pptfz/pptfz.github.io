@@ -581,19 +581,19 @@ logging:
 
 - 飞书
 
-![iShot_2026-01-12_10.11.54](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-12_10.11.54.png)
+![iShot_2026-01-12_10.11.54](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-12_10.11.54.png)
 
 
 
 - 企业微信
 
-![iShot_2026-01-12_14.40.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-12_14.40.30.png)
+![iShot_2026-01-12_14.40.30](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-12_14.40.30.png)
 
 
 
 - 钉钉
 
-  ![iShot_2026-01-12_14.43.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-12_14.43.30.png)
+  ![iShot_2026-01-12_14.43.30](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-12_14.43.30.png)
 
 
 

@@ -6,7 +6,7 @@
 
 效果如下
 
-![iShot_2024-10-09_12.12.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-10-09_12.12.46.png)
+![iShot_2024-10-09_12.12.46](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-10-09_12.12.46.png)
 
 
 

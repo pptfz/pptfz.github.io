@@ -157,7 +157,7 @@ result: 0 Success
 
 在phpldapadmin中查看创建的组
 
-![iShot_2025-06-24_19.18.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-24_19.18.26.png)
+![iShot_2025-06-24_19.18.26](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-24_19.18.26.png)
 
 
 
@@ -1376,7 +1376,7 @@ result: 0 Success
 
 在 `phpldapadmin` 中查看，可以看到 `xiaoming` 用户已经创建在了 `java` 组下
 
-![iShot_2025-06-25_16.52.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-25_16.52.14.png)
+![iShot_2025-06-25_16.52.14](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-25_16.52.14.png)
 
 
 

@@ -46,7 +46,7 @@ description: "节点 {{ $labels.node }}（实例 {{ $labels.instance }}）的内
 
 如下图所示，prometheus中告警的 `description` 中 `instance` 是带有端口号的
 
-![iShot_2025-03-05_19.41.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-03-05_19.41.25.png)
+![iShot_2025-03-05_19.41.25](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-03-05_19.41.25.png)
 
 
 
@@ -77,7 +77,7 @@ description: "节点 {{ $labels.node }}（实例 {{ $labels.instance | reReplace
 
 使用替换函数后，prometheus中告警的 `description` 中 `instance` 的端口号就被替换为空了
 
-![iShot_2025-03-05_19.38.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-03-05_19.38.16.png)
+![iShot_2025-03-05_19.38.16](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-03-05_19.38.16.png)
 
 
 

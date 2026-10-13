@@ -32,7 +32,7 @@ cat .ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
 添加测试机 root 用户的公钥到 xiaoming 用户中
 
-![iShot_2024-09-02_16.18.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.18.06.png)
+![iShot_2024-09-02_16.18.06](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.18.06.png)
 
 
 
@@ -40,7 +40,7 @@ cat .ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
 gitlab root用户端把测试用户 xiaoming 添加到测试项目中并设置权限为 `Developer`
 
-![iShot_2024-09-02_16.19.08](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.19.08.png)
+![iShot_2024-09-02_16.19.08](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.19.08.png)
 
 
 
@@ -98,13 +98,13 @@ To ssh://git@gitlab.my.com:222/test/test.git
 
 进入项目， `Settings` --> `Repository`
 
-![iShot_2024-09-02_16.11.08](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.11.08.png)
+![iShot_2024-09-02_16.11.08](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.11.08.png)
 
 
 
 `Protected Branches` --> `Expand`
 
-![iShot_2024-09-02_16.20.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.20.37.png)
+![iShot_2024-09-02_16.20.37](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.20.37.png)
 
 
 
@@ -116,7 +116,7 @@ Allowed to merge：谁有权限去跟这个分支合并
 
 Allowed to push：允许往分支上去推送
 
-![iShot_2024-09-02_16.21.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.21.31.png)
+![iShot_2024-09-02_16.21.31](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.21.31.png)
 
 
 
@@ -124,7 +124,7 @@ Allowed to push：允许往分支上去推送
 
 设置完成后点击 `Protect`
 
-![iShot_2024-09-02_16.22.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.22.46.png)
+![iShot_2024-09-02_16.22.46](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.22.46.png)
 
 
 
@@ -155,13 +155,13 @@ error: failed to push some refs to 'ssh://git@gitlab.my.com:222/test/test.git'
 
 xiaoming 用户无法推送代码到 master 分支，因为有 master 分支保护
 
-![iShot_2024-09-02_16.24.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.24.20.png)
+![iShot_2024-09-02_16.24.20](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.24.20.png)
 
 
 
 点击 `Merge requests` 发起合并代码请求
 
-![iShot_2024-09-02_16.25.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.25.24.png)
+![iShot_2024-09-02_16.25.24](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.25.24.png)
 
 
 
@@ -169,7 +169,7 @@ xiaoming 用户无法推送代码到 master 分支，因为有 master 分支保�
 
 点击 `New merge request in test`
 
-![iShot_2024-09-02_16.26.13](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.26.13.png)
+![iShot_2024-09-02_16.26.13](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.26.13.png)
 
 
 
@@ -177,7 +177,7 @@ xiaoming 用户无法推送代码到 master 分支，因为有 master 分支保�
 
 选择源分支和合并分支
 
-![iShot_2024-09-02_16.26.59](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.26.59.png)
+![iShot_2024-09-02_16.26.59](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.26.59.png)
 
 
 
@@ -187,7 +187,7 @@ xiaoming 用户无法推送代码到 master 分支，因为有 master 分支保�
 
 填写标题、描述、提交信息
 
-![iShot_2024-09-02_16.27.59](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.27.59.png)
+![iShot_2024-09-02_16.27.59](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.27.59.png)
 
 
 
@@ -195,17 +195,17 @@ xiaoming 用户无法推送代码到 master 分支，因为有 master 分支保�
 
 提交完成
 
-![iShot_2024-09-02_16.28.57](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.28.57.png)
+![iShot_2024-09-02_16.28.57](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.28.57.png)
 
 
 
 登陆到root用户查看合并请求
 
-![iShot_2024-09-02_16.29.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.29.33.png)
+![iShot_2024-09-02_16.29.33](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.29.33.png)
 
 
 
-![iShot_2024-09-02_16.30.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.30.30.png)
+![iShot_2024-09-02_16.30.30](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.30.30.png)
 
 
 
@@ -213,5 +213,5 @@ xiaoming 用户无法推送代码到 master 分支，因为有 master 分支保�
 
 选择 `Merge` 合并完后就可以看到合并后的代码了
 
-![iShot_2024-09-02_16.31.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.31.31.png)
+![iShot_2024-09-02_16.31.31](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.31.31.png)
 

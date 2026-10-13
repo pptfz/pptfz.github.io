@@ -29,7 +29,7 @@
 
 `Applications` -> `+ NEW APP`
 
-![iShot_2025-05-21_17.02.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-05-21_17.02.41.png)
+![iShot_2025-05-21_17.02.41](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-05-21_17.02.41.png)
 
 
 
@@ -37,13 +37,13 @@
 
 #### `GENERAL(一般)` 配置
 
-![iShot_2025-05-23_10.58.56](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-05-23_10.58.56.png)
+![iShot_2025-05-23_10.58.56](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-05-23_10.58.56.png)
 
 
 
 #### `SOURCE(git仓库)` 配置
 
-![iShot_2025-05-23_11.06.54](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-05-23_11.06.54.png)
+![iShot_2025-05-23_11.06.54](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-05-23_11.06.54.png)
 
 
 
@@ -51,7 +51,7 @@
 
 #### `DESTINATION(目标部署集群)` 配置
 
-![iShot_2025-05-23_11.11.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-05-23_11.11.55.png)
+![iShot_2025-05-23_11.11.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-05-23_11.11.55.png)
 
 
 
@@ -123,7 +123,7 @@ argocd app create ${APP_NAME} \
 
 应用创建完成后就可以开始同步了
 
-![iShot_2025-05-23_11.18.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-05-23_11.18.17.png)
+![iShot_2025-05-23_11.18.17](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-05-23_11.18.17.png)
 
 
 

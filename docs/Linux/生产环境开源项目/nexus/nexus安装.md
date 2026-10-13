@@ -156,7 +156,7 @@ EOF
 
 点击 `next` ，接下来就是设置 `admin` 用户密码以及是否允许匿名用户登陆
 
-![iShot2022-01-09_16.58.02](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2022-01-09_16.58.02.png)
+![iShot2022-01-09_16.58.02](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2022-01-09_16.58.02.png)
 
 
 

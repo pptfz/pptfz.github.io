@@ -10,11 +10,11 @@
 
 [官方文档说明](https://help.sonatype.com/en/helm-repositories.html)
 
-![iShot_2026-02-13_10.21.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-02-13_10.21.42.png)
+![iShot_2026-02-13_10.21.42](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-13_10.21.42.png)
 
 
 
-![20260213103254_91_92](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/20260213103254_91_92.png)
+![20260213103254_91_92](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/20260213103254_91_92.png)
 
 
 
@@ -22,7 +22,7 @@
 
 点击左上角 `Settings`
 
-![iShot_2026-02-11_18.58.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-02-11_18.58.03.png)
+![iShot_2026-02-11_18.58.03](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-11_18.58.03.png)
 
 
 
@@ -30,19 +30,19 @@
 
 点击 `Repositories` 
 
-![iShot_2026-02-11_19.03.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-02-11_19.03.21.png)
+![iShot_2026-02-11_19.03.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-11_19.03.21.png)
 
 
 
 点击 `Create repository`
 
-![iShot_2026-02-11_19.05.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-02-11_19.05.16.png)
+![iShot_2026-02-11_19.05.16](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-11_19.05.16.png)
 
 
 
 选择 `helm（hosted）`
 
-![iShot_2026-02-11_19.07.05](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-02-11_19.07.05.png)
+![iShot_2026-02-11_19.07.05](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-11_19.07.05.png)
 
 
 
@@ -67,11 +67,11 @@
 
 :::
 
-![iShot_2026-02-11_19.09.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-02-11_19.09.16.png)
+![iShot_2026-02-11_19.09.16](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-11_19.09.16.png)
 
 
 
-![iShot_2026-02-11_19.34.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-02-11_19.34.18.png)
+![iShot_2026-02-11_19.34.18](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-11_19.34.18.png)
 
 
 

@@ -158,7 +158,7 @@ e2d2040ec4a2   postgres:17                         "docker-entrypoint.s…"   22
 
 用户名密码均为 `admin`
 
-![iShot_2025-09-10_16.05.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-10_16.05.58.png)
+![iShot_2025-09-10_16.05.58](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-10_16.05.58.png)
 
 
 
@@ -166,13 +166,13 @@ e2d2040ec4a2   postgres:17                         "docker-entrypoint.s…"   22
 
 首次登陆需要更新密码
 
-![iShot_2025-09-10_16.06.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-10_16.06.55.png)
+![iShot_2025-09-10_16.06.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-10_16.06.55.png)
 
 
 
 登陆后首页面
 
-![iShot_2025-09-10_16.11.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-10_16.11.14.png)
+![iShot_2025-09-10_16.11.14](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-10_16.11.14.png)
 
 
 
@@ -190,13 +190,13 @@ e2d2040ec4a2   postgres:17                         "docker-entrypoint.s…"   22
 
 `Administration` -> `Marketplace` -> `Plugins`  下搜索 `chinese` ，选择 `Chinese Pack LOCALIZATION` 安装，安装显示 `install Pending`后重启服务器即可
 
-![iShot2021-09-06_17.21.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-06_17.21.45.png)
+![iShot2021-09-06_17.21.45](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-09-06_17.21.45.png)
 
 
 
 汉化效果
 
-![iShot2021-09-07_17.30.54](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-07_17.30.54.png)
+![iShot2021-09-07_17.30.54](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-09-07_17.30.54.png)
 
 
 
@@ -216,5 +216,5 @@ wget https://github.com/xuhuisheng/sonar-l10n-zh/releases/download/sonar-l10n-zh
 
 重启服务即可完成汉化
 
-![iShot_2025-09-10_16.17.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-10_16.17.45.png)
+![iShot_2025-09-10_16.17.45](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-10_16.17.45.png)
 

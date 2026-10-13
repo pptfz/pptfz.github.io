@@ -24,7 +24,7 @@ iptables 可以检测、修改、转发、重定向和丢弃 IPv4 数据包。�
 
 理解 iptables 如何工作的关键是这张[图](https://www.frozentux.net/iptables-tutorial/images/tables_traverse.jpg)。图中在上面的小写字母代表**表**，在下面的大写字母代表**链**。**从任何网络端口**进来的每一个 IP 数据包都要从上到下的穿过这张图。一种常见的错误认知是认为 iptables 对从内部端口进入的数据包和从面向互联网端口进入的数据包采取不同的处理方式，相反，iptables 对从任何端口进入的数据包都会采取相同的处理方式。可以定义规则使 iptables 采取不同的方式对待从不同端口进入的数据包。当然一些数据包是用于本地进程的，因此在图中表现为从顶端进入，到 `<Local Process>` 停止，而另一些数据包是由本地进程生成的，因此在图中表现为从 `<Local Process>` 发出，一直向下穿过该流程图。一份关于该流程图如何工作的详细解释请参考[这里](https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html#TRAVERSINGOFTABLES)
 
-![iShot_2025-04-21_15.57.01](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-04-21_15.57.01.png)
+![iShot_2025-04-21_15.57.01](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-04-21_15.57.01.png)
 
 
 
@@ -123,7 +123,7 @@ iptables 包含 5 张表（tables）:
 | `raw`      | `PREROUTING`、`OUTPUT`                                       |
 | `security` | `INPUT`、`OUTPUT`、`FORWARD`（仅用于与 SELinux 集成的访问控制） |
 
-![iShot_2025-04-24_11.24.00](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-04-24_11.24.00.png)
+![iShot_2025-04-24_11.24.00](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-04-24_11.24.00.png)
 
 
 

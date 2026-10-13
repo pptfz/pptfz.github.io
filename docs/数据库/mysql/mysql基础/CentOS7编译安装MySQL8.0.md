@@ -26,7 +26,7 @@ yum -y install bison-devel ncurses-devel openssl-devel libtirpc-devel
 
 **<span style={{color: 'red'}}>mysql8源码编译安装需要的cmake版本为3.5.1+，在centos7.9中yum源安装的cmake版本为2.8.12.2，在使用cmake编译配置的时候会报错如下</span>**
 
-![iShot_2023-03-28_11.20.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-03-28_11.20.09.png)
+![iShot_2023-03-28_11.20.09](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2023-03-28_11.20.09.png)
 
 :::
 
@@ -44,13 +44,13 @@ yum -y install cmake3
 
 **<span style={{color: 'red'}}>mysql8源码编译安装需要的gcc版本为5.3+，在centos7.9中yum源安装的gcc版本为4.8.5，在编译配置的时候会报错如下</span>**
 
-![iShot_2023-03-28_11.23.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-03-28_11.23.35.png)
+![iShot_2023-03-28_11.23.35](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2023-03-28_11.23.35.png)
 
 
 
 在安装完 `gcc7` 后，需要将安装的 `cc` 、`c++` 命令软链接到 `/usr/bin` 下，否则会报错如下
 
-![iShot_2023-03-28_14.08.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-03-28_14.08.03.png)
+![iShot_2023-03-28_14.08.03](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2023-03-28_14.08.03.png)
 
 :::
 
@@ -98,7 +98,7 @@ Boost库被列为MySQL的一个可选依赖项，用于提供额外的功能支�
 
 mysql8.0.22需要的boost版本为1.73.0
 
-![iShot_2023-03-28_11.46.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2023-03-28_11.46.49.png)
+![iShot_2023-03-28_11.46.49](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2023-03-28_11.46.49.png)
 
 
 

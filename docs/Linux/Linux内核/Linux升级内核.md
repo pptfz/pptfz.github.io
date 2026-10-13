@@ -13,7 +13,7 @@ $ uname -r
 
 **可根据自己实际需求下载对应版本**
 
-![iShot_2022-08-30_14.48.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-08-30_14.48.11.png)
+![iShot_2022-08-30_14.48.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2022-08-30_14.48.11.png)
 
 
 

@@ -260,7 +260,7 @@ CORS_ORIGIN_WHITELIST = (
 
 在不配置 `settings.py` 相关安全配置的情况下，登陆显示如下
 
-![iShot_2026-01-13_14.52.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-13_14.52.50.png)
+![iShot_2026-01-13_14.52.50](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-13_14.52.50.png)
 
 
 
@@ -280,11 +280,11 @@ CORS_ORIGIN_WHITELIST = (
 
 ## 登陆
 
-![iShot_2026-01-13_15.36.18](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-13_15.36.18.png)
+![iShot_2026-01-13_15.36.18](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-13_15.36.18.png)
 
 
 
 登陆后首页面
 
-![iShot_2026-01-13_15.37.36](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-13_15.37.36.png)
+![iShot_2026-01-13_15.37.36](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-13_15.37.36.png)
 

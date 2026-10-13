@@ -40,7 +40,7 @@ print (dic,dic1)
 
 **赋值示意图**
 
-![iShot_2024-08-29_14.19.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.19.45.png)
+![iShot_2024-08-29_14.19.45](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_14.19.45.png)
 
 
 
@@ -84,7 +84,7 @@ print (id(lst[1]),id(new_lst[1]))		//浅拷贝只拷贝第一层内存空间，�
 
 **浅拷贝单层元素示意图（增加元素）**
 
-![iShot_2024-08-29_14.24.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.24.14.png)
+![iShot_2024-08-29_14.24.14](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_14.24.14.png)
 
 
 
@@ -92,13 +92,13 @@ print (id(lst[1]),id(new_lst[1]))		//浅拷贝只拷贝第一层内存空间，�
 
 **浅拷贝多层元素示意图（修改元素）**
 
-![iShot_2024-08-29_14.27.07](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.27.07.png)
+![iShot_2024-08-29_14.27.07](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_14.27.07.png)
 
 
 
 **浅拷贝多层元素示意图（第二层增加元素）**
 
-![iShot_2024-08-29_14.29.15](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.29.15.png)
+![iShot_2024-08-29_14.29.15](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_14.29.15.png)
 
 
 
@@ -157,7 +157,7 @@ print (id(lst[-1]),id(new_lst[-1]))
 
 #### 1.2.4 深拷贝原理图
 
-![iShot_2024-08-29_14.30.36](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.30.36.png)
+![iShot_2024-08-29_14.30.36](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_14.30.36.png)
 
 
 

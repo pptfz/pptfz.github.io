@@ -15,7 +15,7 @@
 
  `values.yaml` 中gitea的ssh端口配置为 `LoadBalancer` 类型，端口为 `2222`，并且手动指定 `loadBalancerIP` 
 
-![iShot_2026-02-11_15.04.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-02-11_15.04.48.png)
+![iShot_2026-02-11_15.04.48](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-11_15.04.48.png)
 
 
 
@@ -29,7 +29,7 @@
 
 需要使用 `ssh://git@gitea-ssh.ops.com:2222/devops/cmdb.git`
 
-![iShot_2026-02-11_15.14.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-02-11_15.14.21.png)
+![iShot_2026-02-11_15.14.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-11_15.14.21.png)
 
 :::
 

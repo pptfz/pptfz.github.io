@@ -10,7 +10,7 @@ LVM（Logical Volume Manager，逻辑卷管理器）是 Linux 内核提供的磁
 
 三层架构：
 
-![LVM 三层架构](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/lvm-architecture.png)
+![LVM 三层架构](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/lvm-architecture.png)
 
 ### 核心概念
 

@@ -12,5 +12,5 @@
 - 或者域名没有对应的有效证书 `secret`
 - 那么 `nginx` 会回退使用它内置的 **自签名伪证书**
 
-![iShot_2025-05-13_18.42.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-05-13_18.42.33.png)
+![iShot_2025-05-13_18.42.33](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-05-13_18.42.33.png)
 

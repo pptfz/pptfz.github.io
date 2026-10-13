@@ -18,7 +18,7 @@ spug上线方式分为 `常规发布`和`自定义发布`，其中常规发布�
 
 walle github
 
-![iShot_2024-09-03_18.37.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.37.45.png)
+![iShot_2024-09-03_18.37.45](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.37.45.png)
 
 
 
@@ -28,7 +28,7 @@ walle github
 
 spug上线方式，常规发布是沿用了瓦力的上线逻辑
 
-![iShot_2024-09-03_18.34.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.34.46.png)
+![iShot_2024-09-03_18.34.46](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.34.46.png)
 
 
 
@@ -36,7 +36,7 @@ spug上线方式，常规发布是沿用了瓦力的上线逻辑
 
 瓦力上线流程示意图
 
-![iShot2020-07-2010.13.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2020-07-2010.13.06.png)
+![iShot2020-07-2010.13.06](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2020-07-2010.13.06.png)
 
 
 
@@ -78,7 +78,7 @@ git地址
 
 spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全局密钥` 和 `独立密钥` 两种，如果上传了独立密钥则以上传的为主，反之以全局密钥为主，生产中我们是选择的修改全局密钥，因为我们是有一台跳板机，可以免密登陆其他机器
 
-![iShot_2024-09-03_18.51.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.51.31.png)
+![iShot_2024-09-03_18.51.31](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.51.31.png)
 
 
 
@@ -86,7 +86,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 
 
-![iShot_2024-09-03_18.52.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.52.49.png)
+![iShot_2024-09-03_18.52.49](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.52.49.png)
 
 
 
@@ -98,7 +98,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 机器导入有 `单个新建` 和 `批量导入` 两种方式，批量导入按照官方提供的模版填写导入即可，这里仅作演示，选择新建即可
 
-![iShot_2024-09-03_18.44.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.44.37.png)
+![iShot_2024-09-03_18.44.37](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.44.37.png)
 
 
 
@@ -108,7 +108,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 新建主机会让你选择主机类别，如果是第一次添加的话需要手动设置类别
 
-![iShot_2024-09-03_18.48.36](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.48.36.png)
+![iShot_2024-09-03_18.48.36](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.48.36.png)
 
 
 
@@ -118,7 +118,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 自定义主机类别
 
-![iShot_2024-09-03_18.50.15](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.50.15.png)
+![iShot_2024-09-03_18.50.15](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.50.15.png)
 
 
 
@@ -126,7 +126,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 填写其他信息，包括 `主机名称`，`连接信息`，`备注信息`
 
-![iShot_2024-09-03_18.54.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.54.12.png)
+![iShot_2024-09-03_18.54.12](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.54.12.png)
 
 
 
@@ -136,7 +136,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 如果连接成功则会提示操作成功
 
-![iShot_2024-09-03_18.55.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.55.37.png)
+![iShot_2024-09-03_18.55.37](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.55.37.png)
 
 
 
@@ -146,7 +146,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 这样我们就手动添加了一台主机，如果想要批量添加主机则下载官方提供的主机导入模版填写上传即可
 
-![iShot_2024-09-03_18.56.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.56.27.png)
+![iShot_2024-09-03_18.56.27](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.56.27.png)
 
 
 
@@ -156,7 +156,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 在 `应用发布` 中选择 `应用管理`，点击 `新建`
 
-![iShot_2024-09-03_18.40.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.40.32.png)
+![iShot_2024-09-03_18.40.32](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.40.32.png)
 
 
 
@@ -166,13 +166,13 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 新建应用
 
-![iShot_2024-09-03_18.41.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.41.30.png)
+![iShot_2024-09-03_18.41.30](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.41.30.png)
 
 
 
 新建后的应用
 
-![iShot_2024-09-03_18.42.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.42.58.png)
+![iShot_2024-09-03_18.42.58](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.42.58.png)
 
 
 
@@ -182,7 +182,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 在要发布的项目中点击 `新建发布`
 
-![iShot_2024-09-03_18.57.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.57.24.png)
+![iShot_2024-09-03_18.57.24](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.57.24.png)
 
 
 
@@ -192,7 +192,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 选择 `常规发布`
 
-![iShot_2024-09-03_18.59.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_18.59.44.png)
+![iShot_2024-09-03_18.59.44](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_18.59.44.png)
 
 
 
@@ -202,7 +202,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 需要选择发布环境，如果是第一次发布则需要新建环境
 
-![iShot_2024-09-03_19.00.34](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.00.34.png)
+![iShot_2024-09-03_19.00.34](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.00.34.png)
 
 
 
@@ -212,7 +212,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 新建环境可以在新建发布中选择 `新建环境`，也可以在 `配置中心`中选择 `环境管理`然后再新建环境
 
-![iShot_2024-09-03_19.01.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.01.51.png)
+![iShot_2024-09-03_19.01.51](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.01.51.png)
 
 
 
@@ -220,7 +220,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 这里我们新建一个测试环境
 
-![iShot_2024-09-03_19.05.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.05.35.png)
+![iShot_2024-09-03_19.05.35](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.05.35.png)
 
 
 
@@ -236,7 +236,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 >
 > 需要修改为&emsp;&emsp;ssh://git@10.0.0.11:10022/web_test/web_test_one.git
 
-![iShot_2024-09-03_19.06.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.06.48.png)
+![iShot_2024-09-03_19.06.48](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.06.48.png)
 
 
 
@@ -262,7 +262,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 
 
-![iShot_2024-09-03_19.08.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.08.14.png)
+![iShot_2024-09-03_19.08.14](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.08.14.png)
 
 
 
@@ -270,7 +270,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 这里可以做自定义配置
 
-![iShot_2024-09-03_19.09.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.09.35.png)
+![iShot_2024-09-03_19.09.35](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.09.35.png)
 
 
 
@@ -285,7 +285,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
   - spug官网[内置了全局变量](https://spug.dev/docs/deploy-config/#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F)，当然也可以自定义全局变量
 
-    ![iShot_2024-09-03_19.10.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.10.58.png)
+    ![iShot_2024-09-03_19.10.58](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.10.58.png)
 
 
 
@@ -295,7 +295,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
   - 在部署spug的服务器上执行
 
-    ![iShot_2024-09-03_19.12.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.12.45.png)
+    ![iShot_2024-09-03_19.12.45](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.12.45.png)
 
 
 
@@ -305,7 +305,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
   - 在这里一般进行项目的依赖包安装和编译工作
 
-    ![iShot_2024-09-03_19.14.00](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.14.00.png)
+    ![iShot_2024-09-03_19.14.00](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.14.00.png)
 
 
 
@@ -315,7 +315,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
   - 在发布的目标主机上运行，当前目录为目标主机上待发布的源代码目录，生产中我们设置为 `/data/release/项目名(一般为域名)`
 
-    ![iShot_2024-09-03_19.14.59](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.14.59.png)
+    ![iShot_2024-09-03_19.14.59](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.14.59.png)
 
 
 
@@ -342,7 +342,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
     chown -R www.www /data/release/$PROJECT_NAME /data/xmadx_api/$PROJECT_NAME
     ```
 
-    ![iShot_2024-09-03_19.16.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.16.55.png)
+    ![iShot_2024-09-03_19.16.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.16.55.png)
 
 
 
@@ -352,7 +352,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 在 `应用发布` 中选择 `发布申请` ，然后点击 `新建发布申请`
 
-![iShot_2024-09-03_19.18.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.18.11.png)
+![iShot_2024-09-03_19.18.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.18.11.png)
 
 
 
@@ -402,7 +402,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 开始发布，选择应用的环境(如测试、生产、灰度等)，点击要上线的项目
 
-![iShot_2024-09-03_19.19.16](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.19.16.png)
+![iShot_2024-09-03_19.19.16](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.19.16.png)
 
 
 
@@ -410,7 +410,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 填写发布相关信息
 
-![iShot_2024-09-03_19.20.05](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.20.05.png)
+![iShot_2024-09-03_19.20.05](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.20.05.png)
 
 
 
@@ -420,7 +420,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 开始发布，点击 `发布`
 
-![iShot_2024-09-03_19.21.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.21.11.png)
+![iShot_2024-09-03_19.21.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.21.11.png)
 
 
 
@@ -430,7 +430,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 还需要再点击 `发布`
 
-![iShot_2024-09-03_19.22.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.22.25.png)
+![iShot_2024-09-03_19.22.25](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.22.25.png)
 
 
 
@@ -440,13 +440,13 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 发布成功
 
-![iShot_2024-09-03_19.28.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.28.55.png)
+![iShot_2024-09-03_19.28.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.28.55.png)
 
 
 
 
 
-![iShot_2024-09-03_19.29.43](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.29.43.png)
+![iShot_2024-09-03_19.29.43](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.29.43.png)
 
 
 
@@ -456,7 +456,7 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 浏览器访问
 
-![iShot_2024-09-03_19.34.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.34.55.png)
+![iShot_2024-09-03_19.34.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.34.55.png)
 
 
 
@@ -464,9 +464,9 @@ spug中新建主机有 `密码` 和 `密钥` 两种方式，其中密钥有 `全
 
 这里可以看到nginx配置文件中的root根目录 `/data/a01_web/webtest.pptfz.com`实际上是软链接到了 `/data/release/webtest.pptfz.com/时间目录`
 
-![iShot_2024-09-03_19.30.40](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.30.40.png)
+![iShot_2024-09-03_19.30.40](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.30.40.png)
 
-![iShot_2024-09-03_19.34.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.34.12.png)
+![iShot_2024-09-03_19.34.12](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.34.12.png)
 
 
 
@@ -494,7 +494,7 @@ EOF
 
 在gogs中查看提交的文件
 
-![iShot_2024-09-03_19.36.02](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.36.02.png)
+![iShot_2024-09-03_19.36.02](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.36.02.png)
 
 
 
@@ -504,7 +504,7 @@ EOF
 
 spug上线发布，操作流程和之前一样，找到对应的项目，然后点击发布
 
-![iShot_2024-09-03_19.37.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.37.06.png)
+![iShot_2024-09-03_19.37.06](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.37.06.png)
 
 
 
@@ -512,7 +512,7 @@ spug上线发布，操作流程和之前一样，找到对应的项目，然后�
 
 浏览器查看，已经更新
 
-![iShot_2024-09-03_19.37.52](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.37.52.png)
+![iShot_2024-09-03_19.37.52](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.37.52.png)
 
 
 
@@ -520,7 +520,7 @@ spug上线发布，操作流程和之前一样，找到对应的项目，然后�
 
 web机器查看，可以看到 `/data/release/webtest.pptfz.com`下已经有2个时间命名的目录了，这就是每一次发布的源码，而nginx中配置的root根目录总是指向最新的软链接， `1_1_20210208125502` 是第一次发布的内容，`1_2_20210208143842`是第二次发布的内容
 
-![iShot_2024-09-03_19.38.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.38.55.png)
+![iShot_2024-09-03_19.38.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.38.55.png)
 
 
 
@@ -528,7 +528,7 @@ web机器查看，可以看到 `/data/release/webtest.pptfz.com`下已经有2个
 
 现在做一下回滚操作，在要回滚的项目中点击 `回滚`
 
-![iShot_2024-09-03_19.39.43](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.39.43.png)
+![iShot_2024-09-03_19.39.43](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.39.43.png)
 
 
 
@@ -536,7 +536,7 @@ web机器查看，可以看到 `/data/release/webtest.pptfz.com`下已经有2个
 
 回滚确认
 
-![iShot_2024-09-03_19.40.39](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.40.39.png)
+![iShot_2024-09-03_19.40.39](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.40.39.png)
 
 
 
@@ -544,7 +544,7 @@ web机器查看，可以看到 `/data/release/webtest.pptfz.com`下已经有2个
 
 点击 `回滚` 后会重新生成上线单，点击 `发布` 即可，和正常上线流程一样
 
-![iShot_2024-09-03_19.41.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.41.51.png)
+![iShot_2024-09-03_19.41.51](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.41.51.png)
 
 
 
@@ -554,7 +554,7 @@ web机器查看，可以看到 `/data/release/webtest.pptfz.com`下已经有2个
 
 回滚成功
 
-![iShot_2024-09-03_19.42.57](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.42.57.png)
+![iShot_2024-09-03_19.42.57](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.42.57.png)
 
 
 
@@ -562,4 +562,4 @@ web机器查看，可以看到 `/data/release/webtest.pptfz.com`下已经有2个
 
 浏览器验证，可以看到，内容又回到了第一次提交的内容 `第一次测试`
 
-![iShot_2024-09-03_19.43.47](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-03_19.43.47.png)
+![iShot_2024-09-03_19.43.47](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-03_19.43.47.png)

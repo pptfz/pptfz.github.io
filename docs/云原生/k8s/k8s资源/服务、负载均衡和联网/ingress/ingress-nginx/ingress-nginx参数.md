@@ -94,5 +94,5 @@ spec:
 
 
 
-![iShot_2025-05-12_14.33.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-05-12_14.33.45.png)
+![iShot_2025-05-12_14.33.45](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-05-12_14.33.45.png)
 

@@ -18,7 +18,7 @@
 
 **每一个IP地址包括两部分：网络地址和主机地址**
 
-![iShot_2024-08-29_15.21.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_15.21.21.png)
+![iShot_2024-08-29_15.21.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_15.21.21.png)
 
 - A类IP地址由1字节的⽹络地址和3字节主机地址组成， ⽹络地址的最⾼位必须是“0”，地址范围1.0.0.1-126.255.255.254可⽤的A类⽹络有126个， 每个⽹络能容纳1677214个主机
 
@@ -141,7 +141,7 @@
 
 **示意图**
 
-![iShot_2024-08-29_15.25.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_15.25.09.png)
+![iShot_2024-08-29_15.25.09](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_15.25.09.png)
 
 
 
@@ -151,7 +151,7 @@
 
 **TCP/IP协议簇中各协议之间的关系**
 
-![iShot_2024-08-29_15.30.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_15.30.09.png)
+![iShot_2024-08-29_15.30.09](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_15.30.09.png)
 
 
 
@@ -161,7 +161,7 @@
 
 **OSI七层模型示意图**
 
-![iShot_2024-08-29_15.32.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_15.32.11.png)
+![iShot_2024-08-29_15.32.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_15.32.11.png)
 
 
 
@@ -244,4 +244,4 @@ mac地址是计算机上一个唯一的地址，是在计算机的网卡上的�
 
 **TCP/IP与OSI七层模型对比**
 
-![iShot_2024-08-29_15.33.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_15.33.49.png)
+![iShot_2024-08-29_15.33.49](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_15.33.49.png)

@@ -6,7 +6,7 @@
 
 使用普通用户 `uid=go_user1,cn=go,ou=ou_name1,dc=ops,dc=com` 登陆，默认是可以看到所有信息的
 
-![iShot_2025-09-23_15.37.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-23_15.37.50.png)
+![iShot_2025-09-23_15.37.50](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-23_15.37.50.png)
 
 
 
@@ -333,7 +333,7 @@ result: 32 No such object
 
 使用普通用户登陆phpldapadmin也报错 `This base cannot be created with PLA.`
 
-![iShot_2025-09-24_17.03.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-24_17.03.55.png)
+![iShot_2025-09-24_17.03.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-24_17.03.55.png)
 
 
 
@@ -422,7 +422,7 @@ ldapsearch -x -H ldap://localhost:1389 -D "cn=readonly,dc=ops,dc=com" -w readonl
 
 使用 `readonly` 用户登陆phpldapadmin也可以了
 
-![iShot_2025-09-24_19.27.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-24_19.27.37.png)
+![iShot_2025-09-24_19.27.37](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-24_19.27.37.png)
 
 
 

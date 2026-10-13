@@ -12,13 +12,13 @@ grafana面板中当有如下配置时，选择不同的app后，相对应的pod�
 
 
 
-![iShot_2025-11-20_10.27.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-11-20_10.27.41.png)
+![iShot_2025-11-20_10.27.41](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-11-20_10.27.41.png)
 
 
 
 可以在这个图中看到，当选择app  `python-demo` 后，显示的pod还是 `go-demo`
 
-![iShot_2025-11-20_10.25.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-11-20_10.25.33.png)
+![iShot_2025-11-20_10.25.33](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-11-20_10.25.33.png)
 
 
 
@@ -32,7 +32,7 @@ grafana面板中当有如下配置时，选择不同的app后，相对应的pod�
 
 这里的 `app` 名称是metric指标中定义的名称
 
-![iShot_2025-11-21_15.00.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-11-21_15.00.12.png)
+![iShot_2025-11-21_15.00.12](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-11-21_15.00.12.png)
 
 
 
@@ -46,10 +46,10 @@ grafana面板中当有如下配置时，选择不同的app后，相对应的pod�
 
 
 
-![iShot_2025-11-21_14.08.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-11-21_14.08.14.png)
+![iShot_2025-11-21_14.08.14](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-11-21_14.08.14.png)
 
 
 
 配置完成后，选择不同的app右边的pod就会自动刷新了
 
-![iShot_2025-11-21_14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-11-21_14.gif)
+![iShot_2025-11-21_14](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-11-21_14.gif)

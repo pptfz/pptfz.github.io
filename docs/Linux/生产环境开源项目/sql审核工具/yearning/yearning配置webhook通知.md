@@ -2,7 +2,7 @@
 
 yearning内置的webhook通知目前只支持钉钉，当然也可以通过程序自定义通知
 
-![iShot_2025-10-09_18.57.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-10-09_18.57.17.png)
+![iShot_2025-10-09_18.57.17](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-10-09_18.57.17.png)
 
 
 
@@ -626,7 +626,7 @@ networks:
 
 ### 通知效果
 
-![iShot_2025-10-10_15.36.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-10-10_15.36.50.png)
+![iShot_2025-10-10_15.36.50](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-10-10_15.36.50.png)
 
 
 
@@ -1230,7 +1230,7 @@ networks:
 
 ### 通知效果
 
-![iShot_2025-10-10_15.17.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-10-10_15.17.30.png)
+![iShot_2025-10-10_15.17.30](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-10-10_15.17.30.png)
 
 
 
@@ -1881,4 +1881,4 @@ networks:
 
 ### 通知效果
 
-![iShot_2025-10-10_14.56.38](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-10-10_14.56.38.png)
+![iShot_2025-10-10_14.56.38](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-10-10_14.56.38.png)

@@ -85,7 +85,7 @@ services:
 
 可以在这里选择操作系统，架构以及软件版本
 
-![iShot_2026-01-08_10.38.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-08_10.38.24.png)
+![iShot_2026-01-08_10.38.24](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-08_10.38.24.png)
 
 
 

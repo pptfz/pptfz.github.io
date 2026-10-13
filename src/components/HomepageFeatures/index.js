@@ -6,7 +6,7 @@ const FeatureList = [
   {
     title: '🎤',
     // Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    // imageUrl: "https://raw.githubusercontent.com/pptfz/picgo-images/master/img/dance-straps1.gif",
+    // imageUrl: "https://raw.githubusercontent.com/pptfz/piclist-images/master/img/dance-straps1.gif",
     imageUrl: require('@site/static/img/ikun/dance-straps1.gif').default,
     description: (
       <>

@@ -371,7 +371,7 @@ docker ps -al
 
 #### 3.1.5 SSH 连接测试
 
-![iShot_2024-08-23_11.22.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.22.20.png)
+![iShot_2024-08-23_11.22.20](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-23_11.22.20.png)
 
 ### 3.2 示例二：基础 Dockerfile —— 多服务
 
@@ -446,7 +446,7 @@ docker ps -al
 
 **SSH 镜像测试**
 
-![iShot_2024-08-23_11.19.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-23_11.19.19.png)
+![iShot_2024-08-23_11.19.19](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-23_11.19.19.png)
 
 **Apache 镜像测试**
 

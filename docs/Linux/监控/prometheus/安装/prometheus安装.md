@@ -8,7 +8,7 @@
 
 ## 架构
 
-![prometheus-architecture](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/prometheus-architecture.gif)
+![prometheus-architecture](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/prometheus-architecture.gif)
 
 
 
@@ -151,7 +151,7 @@ prometheus-server-69786c785-vbzbb                    2/2     Running   0        
 
 默认界面如下
 
-![iShot_2024-05-30_17.23.40](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-05-30_17.23.40.png)
+![iShot_2024-05-30_17.23.40](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-05-30_17.23.40.png)
 
 
 

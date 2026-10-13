@@ -230,7 +230,7 @@ systemctl enable jenkins && systemctl start jenkins
 
 jenkins刚启动比较慢，等待启动完成
 
-![iShot_2025-09-28_15.14.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.14.46.png)
+![iShot_2025-09-28_15.14.46](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-28_15.14.46.png)
 
 
 
@@ -238,7 +238,7 @@ jenkins刚启动比较慢，等待启动完成
 
 从 `/var/lib/jenkins/secrets/initialAdminPassword` 文件按中获取密码
 
-![iShot_2025-09-28_15.16.34](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.16.34.png)
+![iShot_2025-09-28_15.16.34](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-28_15.16.34.png)
 
 
 
@@ -246,7 +246,7 @@ jenkins刚启动比较慢，等待启动完成
 
 #### 安装插件
 
-![iShot_2025-09-28_15.19.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.19.32.png)
+![iShot_2025-09-28_15.19.32](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-28_15.19.32.png)
 
 
 
@@ -254,7 +254,7 @@ jenkins刚启动比较慢，等待启动完成
 
 等待安装完成
 
-![iShot_2025-09-28_15.20.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.20.33.png)
+![iShot_2025-09-28_15.20.33](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-28_15.20.33.png)
 
 
 
@@ -262,13 +262,13 @@ jenkins刚启动比较慢，等待启动完成
 
 也可以使用admin用户继续
 
-![iShot_2025-09-28_15.24.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.24.21.png)
+![iShot_2025-09-28_15.24.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-28_15.24.21.png)
 
 
 
 #### 确认jenkins访问地址
 
-![iShot_2025-09-28_15.26.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.26.30.png)
+![iShot_2025-09-28_15.26.30](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-28_15.26.30.png)
 
 
 
@@ -276,7 +276,7 @@ jenkins刚启动比较慢，等待启动完成
 
 #### 开始使用
 
-![iShot_2025-09-28_15.30.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.30.26.png)
+![iShot_2025-09-28_15.30.26](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-28_15.30.26.png)
 
 
 
@@ -284,7 +284,7 @@ jenkins刚启动比较慢，等待启动完成
 
 #### jenkins登陆首界面
 
-![iShot_2025-09-28_15.33.13](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-28_15.33.13.png)
+![iShot_2025-09-28_15.33.13](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-28_15.33.13.png)
 
 
 

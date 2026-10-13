@@ -123,7 +123,7 @@ kubectl apply -f PrometheusAlert-Deployment.yaml
 
 用户名密码是在 [app.config](https://github.com/feiyu563/PrometheusAlert/blob/master/conf/app-example.conf) 中配置的，默认是 `prometheusalert`
 
-![iShot_2025-04-09_17.21.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-04-09_17.21.17.png)
+![iShot_2025-04-09_17.21.17](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-04-09_17.21.17.png)
 
 
 
@@ -131,7 +131,7 @@ kubectl apply -f PrometheusAlert-Deployment.yaml
 
 登录后的web页面
 
-![iShot_2025-04-09_17.18.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-04-09_17.18.37.png)
+![iShot_2025-04-09_17.18.37](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-04-09_17.18.37.png)
 
 
 

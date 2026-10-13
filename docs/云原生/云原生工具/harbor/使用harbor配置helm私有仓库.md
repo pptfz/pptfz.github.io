@@ -6,7 +6,7 @@
 
 ### 创建项目
 
-![iShot_2026-02-12_17.48.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-02-12_17.48.03.png)
+![iShot_2026-02-12_17.48.03](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-02-12_17.48.03.png)
 
 
 

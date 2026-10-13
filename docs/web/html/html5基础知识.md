@@ -23,7 +23,7 @@
 
 
 
-![iShot_2024-09-02_11.35.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_11.35.11.png)
+![iShot_2024-09-02_11.35.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_11.35.11.png)
 
 
 
@@ -108,7 +108,7 @@
 
 **运行以上代码，浏览器中就会每隔2秒刷新一次**
 
-![iShot_2024-09-02_11.36.13](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_11.36.13.png)
+![iShot_2024-09-02_11.36.13](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_11.36.13.png)
 
 
 
@@ -136,7 +136,7 @@
 
 
 
-![iShot_2024-09-02_11.37.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_11.37.32.png)
+![iShot_2024-09-02_11.37.32](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_11.37.32.png)
 
 
 
@@ -163,7 +163,7 @@
 </html>
 ```
 
-![iShot_2024-09-02_11.39.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_11.39.11.png)
+![iShot_2024-09-02_11.39.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_11.39.11.png)
 
 
 
@@ -234,7 +234,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.06.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.06.17.png)
+![iShot_2024-09-02_14.06.17](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.06.17.png)
 
 
 
@@ -273,7 +273,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.07.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.07.17.png)
+![iShot_2024-09-02_14.07.17](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.07.17.png)
 
 
 
@@ -294,7 +294,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.08.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.08.21.png)
+![iShot_2024-09-02_14.08.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.08.21.png)
 
 
 
@@ -319,7 +319,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.09.29](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.09.29.png)
+![iShot_2024-09-02_14.09.29](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.09.29.png)
 
 
 
@@ -346,7 +346,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.10.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.10.17.png)
+![iShot_2024-09-02_14.10.17](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.10.17.png)
 
 
 
@@ -371,7 +371,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.11.01](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.11.01.png)
+![iShot_2024-09-02_14.11.01](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.11.01.png)
 
 
 
@@ -398,7 +398,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.11.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.11.55.png)
+![iShot_2024-09-02_14.11.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.11.55.png)
 
 
 
@@ -507,7 +507,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.13.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.13.28.png)
+![iShot_2024-09-02_14.13.28](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.13.28.png)
 
 
 
@@ -549,7 +549,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.15.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.15.03.png)
+![iShot_2024-09-02_14.15.03](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.15.03.png)
 
 
 
@@ -571,7 +571,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.17.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.17.03.png)
+![iShot_2024-09-02_14.17.03](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.17.03.png)
 
 
 
@@ -600,7 +600,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.18.04](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.18.04.png)
+![iShot_2024-09-02_14.18.04](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.18.04.png)
 
 
 
@@ -621,7 +621,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.18.47](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.18.47.png)
+![iShot_2024-09-02_14.18.47](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.18.47.png)
 
 
 
@@ -644,7 +644,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.19.36](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.19.36.png)
+![iShot_2024-09-02_14.19.36](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.19.36.png)
 
 **span也可以指定文本颜色，一般写在css中**
 
@@ -663,7 +663,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.20.31](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.20.31.png)
+![iShot_2024-09-02_14.20.31](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.20.31.png)
 
 
 
@@ -690,7 +690,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.21.29](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.21.29.png)
+![iShot_2024-09-02_14.21.29](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.21.29.png)
 
 
 
@@ -715,7 +715,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.23.39](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.23.39.png)
+![iShot_2024-09-02_14.23.39](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.23.39.png)
 
 
 
@@ -743,7 +743,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.24.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.24.35.png)
+![iShot_2024-09-02_14.24.35](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.24.35.png)
 
 
 
@@ -823,7 +823,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.25.56](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.25.56.png)
+![iShot_2024-09-02_14.25.56](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.25.56.png)
 
 
 
@@ -871,7 +871,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.26.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.26.55.png)
+![iShot_2024-09-02_14.26.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.26.55.png)
 
 
 
@@ -918,7 +918,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.28.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.28.14.png)
+![iShot_2024-09-02_14.28.14](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.28.14.png)
 
 
 
@@ -965,7 +965,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.29.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.29.19.png)
+![iShot_2024-09-02_14.29.19](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.29.19.png)
 
 
 
@@ -1003,7 +1003,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.30.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.30.28.png)
+![iShot_2024-09-02_14.30.28](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.30.28.png)
 
 
 
@@ -1026,7 +1026,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.31.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.31.46.png)
+![iShot_2024-09-02_14.31.46](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.31.46.png)
 
 
 
@@ -1049,7 +1049,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.32.36](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.32.36.png)
+![iShot_2024-09-02_14.32.36](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.32.36.png)
 
 
 
@@ -1070,7 +1070,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.34.07](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.34.07.png)
+![iShot_2024-09-02_14.34.07](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.34.07.png)
 
 
 
@@ -1096,7 +1096,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 </html>
 ```
 
-![iShot_2024-09-02_14.36.52](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.36.52.png)
+![iShot_2024-09-02_14.36.52](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.36.52.png)
 
 
 
@@ -1128,7 +1128,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.37.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.37.55.png)
+![iShot_2024-09-02_14.37.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.37.55.png)
 
 
 
@@ -1149,7 +1149,7 @@ meta标签可以设置页面是否支持触屏缩放功能，其中各元素的�
 
 
 
-![iShot_2024-09-02_14.39.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.39.19.png)
+![iShot_2024-09-02_14.39.19](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.39.19.png)
 
 
 
@@ -1216,7 +1216,7 @@ form标签内置属性
 
 **运行上述代码效果如下**
 
-![iShot_2024-09-02_14.40.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.40.11.png)
+![iShot_2024-09-02_14.40.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.40.11.png)
 
 
 
@@ -1266,11 +1266,11 @@ tcp_server.close()
 
 **运行模拟登陆界面的html文件，随便输入一个用户名和密码，然后点击登陆**
 
-![iShot_2024-09-02_14.41.22](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.41.22.png)
+![iShot_2024-09-02_14.41.22](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.41.22.png)
 
 
 
 **因为模拟登陆界面的html代码中指定了访问本地8080端口，因此tcp服务端会返回指定的send.html文件中的内容**
 
-![iShot_2024-09-02_14.42.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_14.42.12.png)
+![iShot_2024-09-02_14.42.12](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_14.42.12.png)
 

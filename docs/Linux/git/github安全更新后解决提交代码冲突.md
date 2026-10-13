@@ -6,25 +6,25 @@
 
 ### 更新提示
 
-![iShot_2025-01-21_10.52.57](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-01-21_10.52.57.png)
+![iShot_2025-01-21_10.52.57](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-01-21_10.52.57.png)
 
 
 
 ### 创建安全更新
 
-![iShot_2025-01-21_10.56.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-01-21_10.56.06.png)
+![iShot_2025-01-21_10.56.06](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-01-21_10.56.06.png)
 
 
 
 ### 更新完成
 
-![iShot_2025-01-21_10.57.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-01-21_10.57.51.png)
+![iShot_2025-01-21_10.57.51](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-01-21_10.57.51.png)
 
 
 
 ### 合并mr
 
-![iShot_2025-01-21_10.59.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-01-21_10.59.35.png)
+![iShot_2025-01-21_10.59.35](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-01-21_10.59.35.png)
 
 
 

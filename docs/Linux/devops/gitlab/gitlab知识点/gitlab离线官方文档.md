@@ -14,7 +14,7 @@ gitlab提供了离线文档镜像，只需要启动相对应版本的容器即�
 docker run -it --rm -p 4000:4000 registry.gitlab.com/gitlab-org/gitlab-docs:15.7
 ```
 
-![iShot_2024-09-02_16.44.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.44.21.png)
+![iShot_2024-09-02_16.44.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.44.21.png)
 
 
 
@@ -22,4 +22,4 @@ docker run -it --rm -p 4000:4000 registry.gitlab.com/gitlab-org/gitlab-docs:15.7
 
 启动容器后访问 `IP:4000`
 
-![iShot_2024-09-02_16.44.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_16.44.58.png)
+![iShot_2024-09-02_16.44.58](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_16.44.58.png)

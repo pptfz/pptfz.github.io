@@ -435,7 +435,7 @@ password = test
 
 浏览器访问 `IP:9001` ，用户名和密码在 `inet_http_server` 下配置，这里为 `test`
 
-![iShot2020-06-3011.46.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2020-06-3011.46.06.png)
+![iShot2020-06-3011.46.06](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2020-06-3011.46.06.png)
 
 
 
@@ -627,7 +627,7 @@ Mar 12 15:36:23 pptfz systemd[1]: Started Supervisor daemon.
 
 **supervisorctl命令动作**
 
-![iShot_2024-09-06_15.11.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-06_15.11.24.png)
+![iShot_2024-09-06_15.11.24](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-06_15.11.24.png)
 
 
 

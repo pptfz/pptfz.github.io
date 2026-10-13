@@ -10,7 +10,7 @@
 
 flannel udp模式网络架构图
 
-![iShot_2025-03-14_15.59.04](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-03-14_15.59.04.png)
+![iShot_2025-03-14_15.59.04](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-03-14_15.59.04.png)
 
 **架构概述**
 
@@ -191,7 +191,7 @@ flannel默认使用 `portmap` 作为CNI网络插件，在部署flannel的时候�
 
 下载的 [CNI Network plugins](https://github.com/containernetworking/plugins) 解压后内容如下
 
-![iShot_2025-03-20_20.02.53](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-03-20_20.02.53.png)
+![iShot_2025-03-20_20.02.53](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-03-20_20.02.53.png)
 
 ```yaml
 $ cat ops-ingress.yaml 

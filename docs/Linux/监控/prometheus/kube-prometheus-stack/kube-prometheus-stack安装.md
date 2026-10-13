@@ -137,7 +137,7 @@ prometheus:
 
 
 
-![iShot_2025-12-03_10.06.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-12-03_10.06.12.png)
+![iShot_2025-12-03_10.06.12](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-12-03_10.06.12.png)
 
 
 
@@ -206,4 +206,4 @@ Events:
          #selector: {} # 注释这一行
 ```
 
-![iShot_2026-01-29_21.13.39](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-29_21.13.39.png)
+![iShot_2026-01-29_21.13.39](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-29_21.13.39.png)

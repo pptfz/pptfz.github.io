@@ -12,7 +12,7 @@
 
 yum安装的phpldapadmin汉化文件在  `/usr/share/phpldapadmin/locale/zh_CN/LC_MESSAGES` 目录下
 
-![iShot_2025-06-18_15.55.51](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-18_15.55.51.png)
+![iShot_2025-06-18_15.55.51](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-18_15.55.51.png)
 
 :::
 
@@ -159,7 +159,7 @@ systemctl restart httpd
 
 #### 访问首页面
 
-![iShot2021-07-01_14.55.33](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-07-01_14.55.33.png)
+![iShot2021-07-01_14.55.33](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-07-01_14.55.33.png)
 
 
 
@@ -173,7 +173,7 @@ systemctl restart httpd
 
 :::
 
-![iShot_2025-06-07_11.56.07](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-07_11.56.07.png)
+![iShot_2025-06-07_11.56.07](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-07_11.56.07.png)
 
 
 
@@ -185,7 +185,7 @@ systemctl restart httpd
 
 phpldapadmin登陆成功后会报错 `This base cannot be created with PLA`
 
-![iShot_2025-06-07_13.49.00](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-07_13.49.00.png)
+![iShot_2025-06-07_13.49.00](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-07_13.49.00.png)
 
 
 
@@ -216,7 +216,7 @@ adding new entry "dc=ops,dc=com"
 
 执行成功后重新登陆 phpldapadmin，可以看到之前的报错已经没有了
 
-![iShot_2025-06-07_13.54.07](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-07_13.54.07.png)
+![iShot_2025-06-07_13.54.07](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-07_13.54.07.png)
 
 
 
@@ -224,7 +224,7 @@ adding new entry "dc=ops,dc=com"
 
 ldap默认是允许匿名访问的
 
-![iShot2021-07-01_18.09.42](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-07-01_18.09.42.png)
+![iShot2021-07-01_18.09.42](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-07-01_18.09.42.png)
 
 
 
@@ -263,7 +263,7 @@ sed -i.bak "/\/\/ \$servers->setValue('login','anon_bind',true);/ {
 
 无需重启任何服务，配置完成后匿名登陆按钮就取消了
 
-![iShot2021-07-01_18.16.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-07-01_18.16.55.png)
+![iShot2021-07-01_18.16.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-07-01_18.16.55.png)
 
 
 
@@ -282,7 +282,7 @@ sed -i.bak "/\/\/ \$servers->setValue('login','anon_bind',true);/ {
 
 :::
 
-![iShot_2025-06-07_14.17.39](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-07_14.17.39.png)
+![iShot_2025-06-07_14.17.39](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-07_14.17.39.png)
 
 
 
@@ -300,7 +300,7 @@ mv mozillaOrgPerson.xml bak/
 
 移除相关文件警告就没有了
 
-![iShot_2025-06-07_14.46.02](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-07_14.46.02.png)
+![iShot_2025-06-07_14.46.02](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-07_14.46.02.png)
 
 
 
@@ -425,13 +425,13 @@ EOF
 
 `IP:端口`
 
-![iShot_2025-06-18_13.59.10](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-18_13.59.10.png)
+![iShot_2025-06-18_13.59.10](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-18_13.59.10.png)
 
 
 
 登录后
 
-![iShot_2025-06-18_13.56.53](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-18_13.56.53.png)
+![iShot_2025-06-18_13.56.53](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-18_13.56.53.png)
 
 
 
@@ -439,7 +439,7 @@ EOF
 
 如果使用 [bitnami](https://hub.docker.com/r/bitnami/openldap) 镜像安装openldap，则需要在启动容器的时候添加环境变量 `LDAP_ALLOW_ANON_BINDING=no` 关闭匿名登录，这样在连接phpldapadmin的时候，虽然登录页面还是有 `Anonymous` 的按钮，但是点击登录提示是失败的
 
-![iShot_2025-06-18_14.35.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-18_14.35.41.png)
+![iShot_2025-06-18_14.35.41](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-18_14.35.41.png)
 
 
 
@@ -663,7 +663,7 @@ docker buildx build --platform linux/amd64,linux/arm64 -t pptfz/phpldapadmin:1.2
 
 推送成功后就可以使用自己构建的镜像解决 `osixia/phpldapadmin` 默认语言为英文的问题了
 
-![iShot_2025-06-19_11.09.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-19_11.09.44.png)
+![iShot_2025-06-19_11.09.44](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-19_11.09.44.png)
 
 
 
@@ -955,17 +955,17 @@ result: 0 Success
 
 :::
 
-![iShot_2025-06-11_14.19.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-11_14.19.49.png)
+![iShot_2025-06-11_14.19.49](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-11_14.19.49.png)
 
 
 
 登录后首页面
 
-![iShot_2025-06-11_14.21.05](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-11_14.21.05.png)
+![iShot_2025-06-11_14.21.05](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-11_14.21.05.png)
 
 
 
 登录方式错误或用户名密码错误则会提示如下
 
-![iShot_2025-06-07_19.49.32](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-07_19.49.32.png)
+![iShot_2025-06-07_19.49.32](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-07_19.49.32.png)
 

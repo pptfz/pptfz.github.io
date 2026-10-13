@@ -4,7 +4,7 @@
 
 如果服务前边有cdn，则还需要在cdn中开启websocket
 
-![iShot_2025-07-08_16.52.37](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-07-08_16.52.37.png)
+![iShot_2025-07-08_16.52.37](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-07-08_16.52.37.png)
 
 :::
 

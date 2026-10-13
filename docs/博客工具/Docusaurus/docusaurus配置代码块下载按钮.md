@@ -158,4 +158,4 @@ export default function Root({ children }) {
 
 效果如下
 
-![iShot_2025-10-11_10.27.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-10-11_10.27.21.png)
+![iShot_2025-10-11_10.27.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-10-11_10.27.21.png)

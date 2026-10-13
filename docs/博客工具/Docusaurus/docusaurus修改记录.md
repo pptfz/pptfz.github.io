@@ -138,7 +138,7 @@ export default function Root({ children }) {
       {/* 右下角的 GIF 图片 */}
       <div className="gifImageBottom">
         <img 
-          src="https://raw.githubusercontent.com/pptfz/picgo-images/master/img/dance-2straps.gif" 
+          src="https://raw.githubusercontent.com/pptfz/piclist-images/master/img/dance-2straps.gif" 
           alt="Right Bottom Gif" 
           className="gifImage"
         />
@@ -146,7 +146,7 @@ export default function Root({ children }) {
       {/* 右上角 GIF 图片 */}
       <div className="gifImageTop"></div>
         <img 
-          src="https://raw.githubusercontent.com/pptfz/picgo-images/master/img/sing-dance-rap-basketball.gif" 
+          src="https://raw.githubusercontent.com/pptfz/piclist-images/master/img/sing-dance-rap-basketball.gif" 
           className="gifImageTop" 
           alt="Right Top GIF" 
         />

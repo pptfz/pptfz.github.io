@@ -2,7 +2,7 @@ prometheus告警配置
 
 prometheus告警流程示意图
 
-![iShot_2025-02-24_14.41.49](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-24_14.41.49.png)
+![iShot_2025-02-24_14.41.49](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-24_14.41.49.png)
 
 
 
@@ -60,7 +60,7 @@ spec
     name: config-volume
 ```
 
-![iShot_2025-02-24_19.45.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-24_19.45.35.png)
+![iShot_2025-02-24_19.45.35](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-24_19.45.35.png)
 
 
 
@@ -125,19 +125,19 @@ data:
 
 
 
-配置完告警后，此时prometheus ui中显示的状态是 `PENDING` ，意思为告警条件刚触发，尚未进入告警状态(这里为了测试，把PromQL中的阈值改为了大于20)![iShot_2025-02-25_11.15.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_11.15.46.png)
+配置完告警后，此时prometheus ui中显示的状态是 `PENDING` ，意思为告警条件刚触发，尚未进入告警状态(这里为了测试，把PromQL中的阈值改为了大于20)![iShot_2025-02-25_11.15.46](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_11.15.46.png)
 
 
 
 如果持续时间超过 `for` 字段定义的时间(这里为2分钟)，则状态会变为  `FIRING` ，意思为告警条件持续满足，prometheus已经开始触发告警
 
-![iShot_2025-02-25_11.17.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_11.17.25.png)
+![iShot_2025-02-25_11.17.25](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_11.17.25.png)
 
 
 
 当告警恢复时，状态就会变为 `INACTIVE`
 
-![iShot_2025-02-25_11.35.26](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_11.35.26.png)
+![iShot_2025-02-25_11.35.26](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_11.35.26.png)
 
 
 
@@ -153,7 +153,7 @@ prometheus告警状态码
 
 在alertmanager ui界面中可以查看到告警信息
 
-![iShot_2025-02-25_11.18.55](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_11.18.55.png)
+![iShot_2025-02-25_11.18.55](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_11.18.55.png)
 
 
 
@@ -192,25 +192,25 @@ templates:
 
 在 [slack官网](https://slack.com/intl/zh-cn/) 注册账号
 
-![iShot_2025-02-25_15.49.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_15.49.09.png)
+![iShot_2025-02-25_15.49.09](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_15.49.09.png)
 
 
 
 ##### 创建工作区
 
-![iShot_2025-02-25_15.57.54](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_15.57.54.png)
+![iShot_2025-02-25_15.57.54](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_15.57.54.png)
 
 定义工作区名称
 
-![iShot_2025-02-25_15.59.24](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_15.59.24.png)
+![iShot_2025-02-25_15.59.24](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_15.59.24.png)
 
 一共有多个步骤，按照提示填写即可，最后一步选择开始使用
 
-![iShot_2025-02-25_16.02.57](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_16.02.57.png)
+![iShot_2025-02-25_16.02.57](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_16.02.57.png)
 
 创建完成
 
-![iShot_2025-02-25_16.05.29](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_16.05.29.png)
+![iShot_2025-02-25_16.05.29](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_16.05.29.png)
 
 
 
@@ -224,35 +224,35 @@ templates:
 
 点击 `添加应用`
 
-![iShot_2025-02-25_16.09.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_16.09.46.png)
+![iShot_2025-02-25_16.09.46](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_16.09.46.png)
 
 搜索 `incomming webhooks` 
 
-![iShot_2025-02-25_16.30.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_16.30.03.png)
+![iShot_2025-02-25_16.30.03](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_16.30.03.png)
 
 
 
 添加到slack
 
-![iShot_2025-02-25_16.32.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_16.32.28.png)
+![iShot_2025-02-25_16.32.28](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_16.32.28.png)
 
 
 
 选择一个频道并点击 `add incoming webhook integration`
 
-![iShot_2025-02-25_16.34.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_16.34.30.png)
+![iShot_2025-02-25_16.34.30](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_16.34.30.png)
 
 
 
 添加完成，这里需要用到的就是 `webhook url` 
 
-![iShot_2025-02-25_16.46.04](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_16.46.04.png)
+![iShot_2025-02-25_16.46.04](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_16.46.04.png)
 
 
 
 自定义名称
 
-![iShot_2025-02-26_10.48.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-26_10.48.28.png)
+![iShot_2025-02-26_10.48.28](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-26_10.48.28.png)
 
 
 
@@ -262,7 +262,7 @@ templates:
 curl -d "payload={'text': 'Channel test.'}" https://hooks.slack.com/services/xxx
 ```
 
-![iShot_2025-02-26_10.54.41](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-26_10.54.41.png)
+![iShot_2025-02-26_10.54.41](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-26_10.54.41.png)
 
 
 
@@ -390,7 +390,7 @@ spec:
       name: prometheus-alertmanager
 ```
 
-![iShot_2025-02-25_14.43.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-25_14.43.09.png)
+![iShot_2025-02-25_14.43.09](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-25_14.43.09.png)
 
 :::
 
@@ -457,7 +457,7 @@ spec:
 
 告警发生
 
-![iShot_2025-03-07_11.33.27](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-03-07_11.33.27.png)
+![iShot_2025-03-07_11.33.27](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-03-07_11.33.27.png)
 
 
 
@@ -465,6 +465,6 @@ spec:
 
 告警恢复
 
-![iShot_2025-02-28_10.48.25](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-28_10.48.25.png)
+![iShot_2025-02-28_10.48.25](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-28_10.48.25.png)
 
 

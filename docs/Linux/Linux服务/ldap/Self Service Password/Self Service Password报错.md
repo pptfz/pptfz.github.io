@@ -8,7 +8,7 @@
 
 ### 报错信息
 
-![iShot2021-09-18_15.21.21](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot2021-09-18_15.21.21.png)
+![iShot2021-09-18_15.21.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-09-18_15.21.21.png)
 
 
 
@@ -58,7 +58,7 @@ $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
 
 ### 报错信息
 
-![iShot_2022-07-28_17.34.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-07-28_17.34.09.png)
+![iShot_2022-07-28_17.34.09](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2022-07-28_17.34.09.png)
 
 
 
@@ -74,7 +74,7 @@ $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
 172.20.20.2 - - [28/Jul/2022:09:19:07 +0000] "-" 408 0 "-" "-"
 ```
 
-![iShot_2022-07-28_17.42.50](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2022-07-28_17.42.50.png)
+![iShot_2022-07-28_17.42.50](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2022-07-28_17.42.50.png)
 
 
 
@@ -97,7 +97,7 @@ $ldap_filter = "(&(objectClass=*)($ldap_login_attribute={login}))";
 [Mon Sep 08 06:07:25.578613 2025] [php:notice] [pid 19:tid 19] [client 12.12.13.19:21786] LDAP - Modify password error 50 (Insufficient access), referer: https://ssp.xxx.com/index.php
 ```
 
-![iShot_2025-09-05_15.04.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-05_15.04.06.png)
+![iShot_2025-09-05_15.04.06](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-05_15.04.06.png)
 
 
 

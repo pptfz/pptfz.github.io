@@ -12,7 +12,7 @@
 
 ## 登陆报错
 
-![iShot_2026-01-28_19.25.45](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-28_19.25.45.png)
+![iShot_2026-01-28_19.25.45](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-28_19.25.45.png)
 
 ```shell
 Too many incorrect password attempts. Please try again later.

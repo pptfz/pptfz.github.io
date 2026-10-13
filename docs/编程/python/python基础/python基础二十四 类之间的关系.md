@@ -402,7 +402,7 @@ class Pig(Animal):
 
 
 
-![iShot_2024-08-29_14.54.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-08-29_14.54.09.png)
+![iShot_2024-08-29_14.54.09](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-08-29_14.54.09.png)
 
 
 

@@ -8,7 +8,7 @@ argocd更新admin密码提示如下
 
 `Unable to update your password.: New password does not match the following expression: ^.{8,32}$.`
 
-![iShot_2025-05-14_15.10.35](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-05-14_15.10.35.png)
+![iShot_2025-05-14_15.10.35](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-05-14_15.10.35.png)
 
 
 

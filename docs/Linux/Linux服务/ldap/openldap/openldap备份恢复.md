@@ -116,13 +116,13 @@ EOF
 
 :::
 
-![iShot_2025-09-15_17.40.11](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-15_17.40.11.png)
+![iShot_2025-09-15_17.40.11](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-15_17.40.11.png)
 
 
 
 解压缩后
 
-![iShot_2025-09-15_17.41.30](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-15_17.41.30.png)
+![iShot_2025-09-15_17.41.30](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-15_17.41.30.png)
 
 
 
@@ -130,7 +130,7 @@ EOF
 
 ldap中的组和用户如下，需要注意data文件内容备份是否正确
 
-![iShot_2025-09-15_17.44.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-15_17.44.48.png)
+![iShot_2025-09-15_17.44.48](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-15_17.44.48.png)
 
 
 
@@ -534,7 +534,7 @@ modifyTimestamp: 20250911062049Z
 
 ldap中新建了很多组，其中有用户的组是 `go` 和 `java` ，分别有3个user
 
-![iShot_2025-09-15_17.44.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-15_17.44.48.png)
+![iShot_2025-09-15_17.44.48](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-15_17.44.48.png)
 
 
 
@@ -542,7 +542,7 @@ ldap中新建了很多组，其中有用户的组是 `go` 和 `java` ，分别�
 
 手动删除一些数据，删除了 `php` 组，`go` 组和 `java` 组中的某些用户
 
-![iShot_2025-09-17_11.29.53](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_11.29.53.png)
+![iShot_2025-09-17_11.29.53](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-17_11.29.53.png)
 
 
 
@@ -726,7 +726,7 @@ docker start openldap
 
 启动容器后再次查看，可以看到数据已经恢复了
 
-![iShot_2025-09-17_16.50.06](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-17_16.50.06.png)
+![iShot_2025-09-17_16.50.06](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-17_16.50.06.png)
 
 
 
@@ -773,7 +773,7 @@ slapcat -n 0 -F /bitnami/openldap/slapd.d > config-backup.ldif
 
 手动删除所有内容
 
-![iShot_2025-09-25_10.40.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-25_10.40.48.png)
+![iShot_2025-09-25_10.40.48](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-25_10.40.48.png)
 
 
 
@@ -821,7 +821,7 @@ slapadd -F /bitnami/openldap/slapd.d -b "dc=ops,dc=com" -l backup.ldif
 
 恢复成功后所有内容就都还原了
 
-![iShot_2025-09-25_10.46.47](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-25_10.46.47.png)
+![iShot_2025-09-25_10.46.47](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-25_10.46.47.png)
 
 
 

@@ -215,5 +215,5 @@ EOF
 
 使用 `bitnami` 镜像启动的openldap，默认会有2个ou， `ou=groups` 和 `ou=users`
 
-![iShot_2025-06-12_13.26.02](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-12_13.26.02.png)
+![iShot_2025-06-12_13.26.02](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-12_13.26.02.png)
 

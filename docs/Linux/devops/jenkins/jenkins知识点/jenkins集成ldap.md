@@ -8,7 +8,7 @@
 
 在插件中心搜索 `LDAP Plugin`
 
-![iShot_2025-09-29_19.16.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-09-29_19.16.28.png)
+![iShot_2025-09-29_19.16.28](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-09-29_19.16.28.png)
 
 
 
@@ -18,7 +18,7 @@
 
 `系统管理` -> `安全` -> `全局安全配置` -> `安全域`
 
-![iShot_2025-10-13_16.40.20](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-10-13_16.40.20.png)
+![iShot_2025-10-13_16.40.20](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-10-13_16.40.20.png)
 
 
 

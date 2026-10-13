@@ -94,7 +94,7 @@
 
 - [uPic](https://upic.iluoxiao.com/) / [ImageOptim](https://upic.iluoxiao.com/) 是同一个作者开发的一款支持图片压缩、格式转换的图片压缩工具
 
-![upic](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/upic.gif)
+![upic](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/upic.gif)
 
 
 

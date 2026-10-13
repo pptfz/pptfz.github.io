@@ -179,11 +179,11 @@ gpg -c id_rsa
 
 输入加密密码
 
-![iShot_2025-06-30_11.44.14](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-30_11.44.14.png)
+![iShot_2025-06-30_11.44.14](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-30_11.44.14.png)
 
 确认加密密码
 
-![iShot_2025-06-30_11.47.28](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-30_11.47.28.png)
+![iShot_2025-06-30_11.47.28](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-30_11.47.28.png)
 
 
 
@@ -206,7 +206,7 @@ id_rsa.gpg: GPG symmetrically encrypted data (AES256 cipher)
 
 此时文件查看是乱码
 
-![iShot_2025-06-30_11.50.48](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-06-30_11.50.48.png)
+![iShot_2025-06-30_11.50.48](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-06-30_11.50.48.png)
 
 
 

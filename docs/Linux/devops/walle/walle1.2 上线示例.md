@@ -10,7 +10,7 @@
 
 **瓦力上线流程示意图**
 
-![iShot2020-07-2010.13.06](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2010.13.06.png)
+![iShot2020-07-2010.13.06](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2010.13.06.png)
 
 
 
@@ -41,13 +41,13 @@
 
 宿主机、目标机群、操作用户关系如下图所示，宿主机（walle所在的机器），是一个中间机器，是代码托管与远程目标机群的纽带。所以宿主机需要与代码托管(github/gitlab)和远程目标机群都建立ssh-key信任。
 
-![iShot2020-07-2013.10.45](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2013.10.45.png)
+![iShot2020-07-2013.10.45](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2013.10.45.png)
 
 
 
 **上线流程示意图**
 
-![iShot2020-07-2013.11.31](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2013.11.31.png)
+![iShot2020-07-2013.11.31](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2013.11.31.png)
 
 
 
@@ -57,7 +57,7 @@
 
 ### 2.1 项目配置说明
 
-![iShot2020-07-2011.44.44](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2012.48.29.png)
+![iShot2020-07-2011.44.44](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2012.48.29.png)
 
 
 
@@ -65,7 +65,7 @@
 
 #### 2.1.1 项目配置
 
-![iShot2020-07-2012.48.29](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2012.49.22.png)
+![iShot2020-07-2012.48.29](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2012.49.22.png)
 
 - **项目名称**		需要上线的项目名称，最好与项目类型名相同，例如项目是兼容测试类，则名称就命名为`兼容-测试-1.0`
 
@@ -79,7 +79,7 @@
 
 #### 2.1.2 宿主机配置(瓦力机器本身)
 
-![iShot2020-07-2012.48.58](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2012.48.58.png)
+![iShot2020-07-2012.48.58](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2012.48.58.png)
 
 - **代码检出仓库**        瓦力从gitlab拉取代码的存放路径，目录自定义设置，⚠️要保证程序运行用户对此目录有写权限
 - **排除文件**        可以填写要排除的文件，自定义
@@ -88,7 +88,7 @@
 
 #### 2.1.3 目标机器配置
 
-![iShot2020-07-2012.49.22](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2011.44.44.png)
+![iShot2020-07-2012.49.22](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2011.44.44.png)
 
 - **用户**        目标机器就是线上的web机器，这里填写程序的运行用户，例如tomcat的运行用户是www
 - **webroot**    代码的最终部署路径，⚠️注意不要创建此目录，瓦力会自动生成软连接到此，正确设置父级目录即可
@@ -100,7 +100,7 @@
 
 #### 2.1.3 高级任务(目标机器操作)
 
-![iShot2020-07-2012.50.08](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2012.50.08.png)
+![iShot2020-07-2012.50.08](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2012.50.08.png)
 
 
 
@@ -261,7 +261,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 <h4>如果是初次使用gitlab的话，还需要把gitlab机器的root用户的密钥添加到gitlab的ssh-key列表中</h4>
 
-![iShot2020-07-2017.51.58](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2017.18.45.png)
+![iShot2020-07-2017.51.58](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2017.18.45.png)
 
 
 
@@ -269,33 +269,33 @@ mkdir -p /data/release && chown www.www /data/release
 
 <h4>创建组</h4>
 
-![iShot2020-07-2017.18.45](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2017.22.20.png)
+![iShot2020-07-2017.18.45](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2017.22.20.png)
 
 
 
-![iShot2020-07-2017.22.20](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2017.51.58.png)
+![iShot2020-07-2017.22.20](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2017.51.58.png)
 
 
 
 <h4>创建用户</h4>
 
-![iShot2020-07-2017.23.20](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2017.28.23.png)
+![iShot2020-07-2017.23.20](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2017.28.23.png)
 
 
 
 <h4>配置个人选项信息</h4>
 
-![iShot2020-07-2017.28.23](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2017.29.54.png)
+![iShot2020-07-2017.28.23](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2017.29.54.png)
 
 
 
 <h4>设置用户密码</h4>
 
-![iShot2020-07-2017.29.54](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2017.23.20.png)
+![iShot2020-07-2017.29.54](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2017.23.20.png)
 
 
 
-![iShot2020-07-2017.31.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2017.34.46.png)
+![iShot2020-07-2017.31.13](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2017.34.46.png)
 
 
 
@@ -305,13 +305,13 @@ mkdir -p /data/release && chown www.www /data/release
 
 <h4>将用户添加到组中</h4>
 
-![iShot2020-07-2017.34.46](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2017.31.13.png)
+![iShot2020-07-2017.34.46](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2017.31.13.png)
 
 
 
 
 
-![iShot2020-07-2018.26.03](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2018.26.03.png)
+![iShot2020-07-2018.26.03](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2018.26.03.png)
 
 
 
@@ -329,7 +329,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 **⚠️新版的gitlab中的权限可能会不同**
 
-![iShot_2024-09-02_19.25.09](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-09-02_19.25.09.png)
+![iShot_2024-09-02_19.25.09](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-09-02_19.25.09.png)
 
 
 
@@ -339,17 +339,17 @@ mkdir -p /data/release && chown www.www /data/release
 
 **以刚才创建的新用户身份登录到gitlab，然后在用户组中创建新的项目**
 
-![iShot2020-07-2017.43.53](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2017.43.53.png)
+![iShot2020-07-2017.43.53](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2017.43.53.png)
 
 
 
-![iShot2020-07-2017.45.37](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2017.45.37.png)
+![iShot2020-07-2017.45.37](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2017.45.37.png)
 
 
 
 <h4>添加密钥，因为账号是给开发创建的，因此需要开发把本机的ssh密钥添加</h4>
 
-![iShot2020-07-2018.40.45](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.12.51.png)
+![iShot2020-07-2018.40.45](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.12.51.png)
 
 
 
@@ -359,7 +359,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 **⚠️要把瓦力机器`.ssh/id_rsa.pub`写入到`.ssh/authorized_keys`文件中，并且权限是600，否则瓦力检测会报错**
 
-![iShot2020-07-2019.12.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2018.40.45.png)
+![iShot2020-07-2019.12.51](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2018.40.45.png)
 
 
 
@@ -371,29 +371,29 @@ mkdir -p /data/release && chown www.www /data/release
 
 **配置项目**
 
-![iShot2020-07-2019.28.38](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.28.38.png)
+![iShot2020-07-2019.28.38](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.28.38.png)
 
 
 
 ##### 3.2.2.2 配置完成后检测
 
-![iShot2020-07-2019.29.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.29.40.png)
+![iShot2020-07-2019.29.40](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.29.40.png)
 
 
 
 ##### 3.2.2.3 创建上线单
 
-![iShot2020-07-2019.30.18](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.30.18.png)
+![iShot2020-07-2019.30.18](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.30.18.png)
 
 
 
-![iShot2020-07-2019.31.34](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.31.34.png)
+![iShot2020-07-2019.31.34](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.31.34.png)
 
 
 
 ##### 3.2.2.4 填写上线单信息
 
-![iShot2020-07-2019.34.40](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.35.02.png)
+![iShot2020-07-2019.34.40](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.35.02.png)
 
 
 
@@ -418,19 +418,19 @@ mkdir -p /data/release && chown www.www /data/release
 
 ##### 3.2.2.6 开始上线
 
-![iShot2020-07-2019.35.02](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.42.13.png)
+![iShot2020-07-2019.35.02](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.42.13.png)
 
 
 
 **点击部署开始上线，如果报错根据报错内容解决**
 
-![iShot2020-07-2019.35.38](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.35.38.png)
+![iShot2020-07-2019.35.38](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.35.38.png)
 
 
 
 ##### 3.2.2.7 浏览器访问  `目标web机器IP`  地址即可
 
-![iShot2020-07-2019.42.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.34.40.png)
+![iShot2020-07-2019.42.13](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.34.40.png)
 
 
 
@@ -442,7 +442,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 ⚠️这里有一个问题，如果在瓦力配置界面中对于目标机器的发布版本库只指定`/data/release`的话，会默认在这个目录下面生成一个名为1的目录，虽然不影响访问，但是不太好见名知意，因此最好设置为`/data/release/项目名`
 
-![iShot2020-07-2019.43.56](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.43.56.png)
+![iShot2020-07-2019.43.56](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.43.56.png)
 
 
 
@@ -450,11 +450,11 @@ mkdir -p /data/release && chown www.www /data/release
 
 **修改目标机器的发布版库为`/data/release/项目名`，这样的话就比较容易区分了**
 
-![iShot2020-07-2019.59.28](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.59.28.png)
+![iShot2020-07-2019.59.28](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.59.28.png)
 
 
 
-![iShot2020-07-2019.58.59](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2019.58.59.png)
+![iShot2020-07-2019.58.59](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2019.58.59.png)
 
 
 
@@ -493,11 +493,11 @@ mkdir -p /data/release && chown www.www /data/release
 
 **瓦力上线**
 
-![iShot2020-07-2020.15.25](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2020.15.25.png)
+![iShot2020-07-2020.15.25](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2020.15.25.png)
 
 
 
-![iShot2020-07-2020.15.51](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2020.15.51.png)
+![iShot2020-07-2020.15.51](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2020.15.51.png)
 
 
 
@@ -505,7 +505,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 **访问 `web机器IP` ，可以看到文件内容已更新**
 
-![iShot2020-07-2020.16.14](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2020.16.14.png)
+![iShot2020-07-2020.16.14](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2020.16.14.png)
 
 
 
@@ -513,7 +513,7 @@ mkdir -p /data/release && chown www.www /data/release
 
 链接的目录是`20200720-201541`，如果要回滚到上一个版本的话，链接应该会改为`20200720-195809`
 
-![iShot2020-07-2020.17.58](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2020.17.58.png)
+![iShot2020-07-2020.17.58](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2020.17.58.png)
 
 
 
@@ -523,19 +523,19 @@ mkdir -p /data/release && chown www.www /data/release
 
 **找到上一次升级的上线单，可以根据上线单标题和上线cimmit号(推荐)，点击回滚**
 
-![iShot2020-07-2020.20.13](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2020.20.13.png)
+![iShot2020-07-2020.20.13](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2020.20.13.png)
 
 
 
 **开始回滚**
 
-![iShot2020-07-2020.21.10](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2020.21.38.png)
+![iShot2020-07-2020.21.10](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2020.21.38.png)
 
 
 
 **浏览器访问 `web机器IP`，可以看到已经回滚到上一次提交的内容**
 
-![iShot2020-07-2020.21.38](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2020.21.10.png)
+![iShot2020-07-2020.21.38](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2020.21.10.png)
 
 
 
@@ -543,5 +543,5 @@ mkdir -p /data/release && chown www.www /data/release
 
 链接的目录是`20200720-201541`，如果要回滚到上一个版本的话，链接应该会改为`20200720-195809`
 
-![iShot2020-07-2020.24.30](https://gitee.com/pptfz/picgo-images/raw/master/img/iShot2020-07-2020.24.30.png)
+![iShot2020-07-2020.24.30](https://gitee.com/pptfz/piclist-images/raw/master/img/iShot2020-07-2020.24.30.png)
 

@@ -13,7 +13,7 @@
 - 占用内存较少
 - 适合只需要单向遍历的场景
 
-![iShot_2024-12-31_11.38.19](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-12-31_11.38.19.png)
+![iShot_2024-12-31_11.38.19](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-12-31_11.38.19.png)
 
 
 
@@ -31,7 +31,7 @@
 
 - 删除和插入操作更方便
 
-![iShot_2024-12-31_14.45.17](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2024-12-31_14.45.17.png)
+![iShot_2024-12-31_14.45.17](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2024-12-31_14.45.17.png)
 
 
 

@@ -125,7 +125,7 @@ cert-manager 提供多种证书存储方案，适应不同安全需求：
 
 ### 架构概览
 
-![iShot_2025-04-27_18.55.15](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-04-27_18.55.15.png)
+![iShot_2025-04-27_18.55.15](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-04-27_18.55.15.png)
 
 
 

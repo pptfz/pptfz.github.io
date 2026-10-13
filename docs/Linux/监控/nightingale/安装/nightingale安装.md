@@ -46,13 +46,13 @@ helm upgrade --install n9e -n monitor --create-namespace .
 
 默认用户名是 `root` ，密码是 `root.2020`
 
-![iShot_2025-04-16_16.04.12](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-04-16_16.04.12.png)
+![iShot_2025-04-16_16.04.12](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-04-16_16.04.12.png)
 
 
 
 登录后首页面
 
-![iShot_2025-04-16_16.05.03](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-04-16_16.05.03.png)
+![iShot_2025-04-16_16.05.03](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-04-16_16.05.03.png)
 
 
 

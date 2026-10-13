@@ -23,7 +23,7 @@
 
 默认显示如下，会把所有标签全部显示
 
-![iShot_2025-02-08_16.22.44](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-08_16.22.44.png)
+![iShot_2025-02-08_16.22.44](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-08_16.22.44.png)
 
 
 
@@ -35,7 +35,7 @@ avg by (node, instance) (100 * (1 - (node_memory_MemAvailable_bytes / node_memor
 
 这样就会显示 `node(节点名称)` 和 `instance(节点ip)`
 
-![iShot_2025-02-08_16.26.01](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-02-08_16.26.01.png)
+![iShot_2025-02-08_16.26.01](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-02-08_16.26.01.png)
 
 
 

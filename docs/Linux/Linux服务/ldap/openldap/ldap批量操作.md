@@ -641,7 +641,7 @@ AAA
 
 LDAP用户删除场景对比图
 
-![iShot_2026-01-16_19.03.58](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2026-01-16_19.03.58.png)
+![iShot_2026-01-16_19.03.58](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-01-16_19.03.58.png)
 
 
 

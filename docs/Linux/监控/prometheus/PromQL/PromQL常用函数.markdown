@@ -44,7 +44,7 @@ avg by (node, instance) (100 * (1 - (node_memory_MemAvailable_bytes / node_memor
 {instance="10.0.0.102:9100", node="k8s-node03"}	
 ```
 
-![iShot_2025-03-04_19.42.15](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-03-04_19.42.15.png)
+![iShot_2025-03-04_19.42.15](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-03-04_19.42.15.png)
 
 
 
@@ -86,4 +86,4 @@ label_replace(
 
 
 
-![iShot_2025-03-04_19.28.46](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-03-04_19.28.46.png)
+![iShot_2025-03-04_19.28.46](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-03-04_19.28.46.png)

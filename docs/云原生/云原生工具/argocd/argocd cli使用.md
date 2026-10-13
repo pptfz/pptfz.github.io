@@ -281,7 +281,7 @@ argocd proj create test \
 
 如果创建应用的时候，部署的目标命名空间没有在创建项目时允许的命名空间则会报错如下
 
-![iShot_2025-05-27_16.23.13](https://raw.githubusercontent.com/pptfz/picgo-images/master/img/iShot_2025-05-27_16.23.13.png)
+![iShot_2025-05-27_16.23.13](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2025-05-27_16.23.13.png)
 
 
 
