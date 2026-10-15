@@ -242,16 +242,29 @@ Docker Engine 没有实现 CRI，如果一定要用 Docker 需要额外安装 cr
 本节按 containerd 官方入门文档使用**二进制 tar 包**方式安装，命令与发行版无关，**Ubuntu 和 Red Hat 系完全相同**。Ubuntu 也可以 `apt-get install containerd`，但仓库版本通常较旧、默认配置需要自行调整，因此本文统一采用官方推荐方式。
 :::
 
+:::caution 先确认 CPU 架构
+所有下载地址都依赖 CPU 架构（x86_64 对应 `amd64`，ARM 对应 `arm64`），**下载错架构会报 `Exec format error`**。先在每台节点执行以下命令自动设置 `PKG_ARCH` 变量，后续 2.1～2.3 的命令都依赖它（每台节点都要执行；如果断开终端重连，`export` 的变量会丢失，需要重新执行）：
+
+```bash
+case $(uname -m) in
+  x86_64)  export PKG_ARCH="amd64" ;;
+  aarch64) export PKG_ARCH="arm64" ;;
+  *) echo "不支持的架构: $(uname -m)" && exit 1 ;;
+esac
+echo "当前架构: $(uname -m) -> PKG_ARCH=${PKG_ARCH}"
+```
+:::
+
 ### 2.1 安装 containerd
 
 [官方入门文档：Getting Started with containerd](https://github.com/containerd/containerd/blob/main/docs/getting-started.md)。
 
 ```bash
 # 下载（变量 CONTAINERD_VERSION=2.4.1）
-wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
+wget https://github.com/containerd/containerd/releases/download/v${CONTAINERD_VERSION}/containerd-${CONTAINERD_VERSION}-linux-${PKG_ARCH}.tar.gz
 
 # 解压到 /usr/local
-tar Cxzvf /usr/local containerd-${CONTAINERD_VERSION}-linux-amd64.tar.gz
+tar Cxzvf /usr/local containerd-${CONTAINERD_VERSION}-linux-${PKG_ARCH}.tar.gz
 
 # 使用 systemd 管理 containerd
 curl https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -o /usr/lib/systemd/system/containerd.service
@@ -264,10 +277,10 @@ systemctl daemon-reload
 
 ```bash
 # 下载（变量 RUNC_VERSION=1.5.2）
-wget https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.amd64
+wget https://github.com/opencontainers/runc/releases/download/v${RUNC_VERSION}/runc.${PKG_ARCH}
 
 # 安装
-install -m 755 runc.amd64 /usr/local/sbin/runc
+install -m 755 runc.${PKG_ARCH} /usr/local/sbin/runc
 
 # 验证
 runc -v
@@ -279,10 +292,10 @@ runc -v
 
 ```bash
 # 变量 CNI_PLUGINS_VERSION=v1.9.1（官方文档页面示例为 v1.3.0，按最新版填写即可）
-ARCH="amd64"
+# PKG_ARCH 已在 2.1 之前的架构判断中设置，无需重复定义
 DEST="/opt/cni/bin"
 mkdir -p "$DEST"
-curl -L "https://github.com/containernetworking/plugins/releases/download/${CNI_PLUGINS_VERSION}/cni-plugins-linux-${ARCH}-${CNI_PLUGINS_VERSION}.tgz" | tar -C "$DEST" -xz
+curl -L "https://github.com/containernetworking/plugins/releases/download/${CNI_PLUGINS_VERSION}/cni-plugins-linux-${PKG_ARCH}-${CNI_PLUGINS_VERSION}.tgz" | tar -C "$DEST" -xz
 ```
 
 ### 2.4 生成配置文件并配置 systemd cgroup 驱动
