@@ -600,6 +600,20 @@ apt-cache madison kubeadm
 3. **各节点 `dnf localinstall` 本地安装**：已装同版本自动跳过（幂等），失败自动重试，安装前先 `rpm --import` 导入仓库公钥通过 gpg 校验。
 
 两个附带说明：`kubernetes-cni` rpm 会接管 `/opt/cni/bin`（与 3.5 节手动解压的 CNI 是同一路径，以 rpm 版本为准，flannel 均兼容）；`download_dir/rpms/` 与控制机 `.k8s-pkgs/rpms/` 会保留安装包缓存，重跑时直接复用。
+
+:::caution dnf download 报 No package 的真正原因：仓库的 exclude
+官方推荐的 repo 配置里有 `exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni`（防止 yum upgrade 误升级三件套）。这一行会把这些包从**一切查询和下载中排除**，三种命令的豁免方式各不相同：
+
+| 命令 | 豁免 exclude 的方式 |
+| ---- | ------------------ |
+| `yum list` / `dnf list` | 命令行加 `--disableexcludes=kubernetes` |
+| ansible `yum/dnf` 模块 install | 模块参数 `disable_excludes: kubernetes` |
+| `dnf download` | **命令行加 `--disableexcludes=kubernetes`（没有其他参数可用）** |
+
+漏加就会出现 `No package kubelet-... available / Exiting due to strict setting`，和包名写法无关。另外 `dnf download` 的 spec 解析比 install 严格，传完整 `version-release`（如 `kubelet-1.37.1-150500.1.1`）最稳——下载任务里已用 `yum list` 输出自动解析，无需手写。
+
+还有第三个坑：`dnf download` **不加 `--arch` 时默认下载全部架构**（aarch64/ppc64le/s390x/x86_64 全拉下来），且 `--resolve` 在本机解析其他架构的依赖会直接报 `does not have a compatible architecture`。必须加 `--arch=$(uname -m),noarch` 只取本机架构和 noarch 包。
+:::
 :::
 
 ```bash
@@ -651,17 +665,33 @@ cat > plays/03-k8s-packages.yml <<'EOF'
       # kubelet ~110MB / kubectl ~100MB，node 各自从 pkgs.k8s.io 拉大包容易失败
       # （Cannot download, all mirrors were already tried），改为只在 master 下载一次
       # kubernetes-cni、cri-tools 是 kubeadm 的 rpm 依赖，一并下好，node 安装时完全离线
+      # 注意 1：仓库配置里 exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+      #   会把这些包从一切查询/下载中排除，dnf download 必须加 --disableexcludes=kubernetes，
+      #   否则报 No package ... / Exiting due to strict setting（dnf install 有模块级
+      #   disable_excludes 参数，dnf download 只能用命令行选项）
+      # 注意 2：dnf download 的 spec 解析比 install 严格，用完整 version-release 最稳
+      # 注意 3：dnf download 不加 --arch 时默认下载【全部架构】的 rpm
+      #   （aarch64/ppc64le/s390x/x86_64 全拉），--resolve 在本机解析其他架构依赖时
+      #   必报 does not have a compatible architecture；必须限定 本机架构 + noarch
       ansible.builtin.shell: |
+        set -o pipefail
         RPMS_DIR="{{ download_dir }}/rpms"
         mkdir -p "$RPMS_DIR"
         if ls "$RPMS_DIR"/kubelet-{{ k8s_version | replace('v', '') }}-*.rpm >/dev/null 2>&1; then
           echo "kubelet rpm 已存在，跳过下载"
           exit 0
         fi
-        dnf -y download --resolve --destdir "$RPMS_DIR" \
-          kubelet-{{ k8s_version | replace('v', '') }} \
-          kubeadm-{{ k8s_version | replace('v', '') }} \
-          kubectl-{{ k8s_version | replace('v', '') }} \
+        PKG_VER=$(yum --showduplicates list kubelet --disableexcludes=kubernetes \
+          | awk '/^kubelet\./ {print $2}' \
+          | grep -F "{{ k8s_version | replace('v', '') }}-" | head -1)
+        if [ -z "$PKG_VER" ]; then
+          echo "仓库中未找到 kubelet {{ k8s_version | replace('v', '') }} 对应的 rpm" >&2
+          exit 1
+        fi
+        echo "解析到完整版本: kubelet-${PKG_VER}（架构 $(uname -m)）"
+        dnf -y download --disableexcludes=kubernetes --resolve \
+          --arch=$(uname -m),noarch --destdir "$RPMS_DIR" \
+          "kubelet-${PKG_VER}" "kubeadm-${PKG_VER}" "kubectl-${PKG_VER}" \
           kubernetes-cni cri-tools
       register: rpm_download
       retries: 3
@@ -853,17 +883,34 @@ cat > plays/04-master-init.yml <<'EOF'
       register: k8s_initialized
 
     # ---------- 4.1 预拉取控制平面镜像 ----------
-    - name: 预拉取控制平面镜像（失败立即中止，国内网络请先在 group_vars 替换 image_registry）
+    - name: 获取控制平面镜像清单（按 image_registry 与 k8s_version 生成）
       ansible.builtin.command:
         argv:
           - kubeadm
           - config
           - images
-          - pull
+          - list
           - --image-repository={{ image_registry }}
           - --kubernetes-version={{ k8s_version }}
-      when: not k8s_initialized.stat.exists
+      register: cp_image_list
       changed_when: false
+      when: not k8s_initialized.stat.exists
+
+    - name: 逐个预拉取控制平面镜像（每个镜像独立进度与重试；国内网络请先在 group_vars 替换 image_registry）
+      # 不用 kubeadm config images pull 一条命令拉全部：ansible 不实时刷新输出，
+      # 执行时看起来像卡死；改为逐镜像 crictl pull——每个镜像独立任务行、
+      # crictl 自带 layer 下载进度条，失败只重拉当前这一个镜像，不从头来
+      ansible.builtin.shell: |
+        crictl --runtime-endpoint=unix:///run/containerd/containerd.sock pull {{ item }}
+      loop: "{{ cp_image_list.stdout_lines }}"
+      loop_control:
+        label: "{{ item | basename }}"
+      register: image_pull
+      retries: 3
+      delay: 5
+      until: image_pull is succeeded
+      changed_when: image_pull.stderr is not search('up to date')
+      when: not k8s_initialized.stat.exists
 
     # ---------- 4.2 初始化控制平面 ----------
     - name: 初始化控制平面（kubeadm init，advertise-address 取自 inventory）
@@ -893,6 +940,36 @@ cat > plays/04-master-init.yml <<'EOF'
         mode: "0600"
         force: false
 
+    # ---------- 4.3.1 kubectl 便捷配置（官方 Quick Reference 推荐写法）----------
+    - name: 安装 bash-completion（kubectl 补全依赖，官方说明需先安装该软件包）
+      # package 模块自动按系统选择 yum/apt，RedHat 与 Debian 通用
+      ansible.builtin.package:
+        name: bash-completion
+        state: present
+
+    - name: 配置 kubectl 补全与 k 别名（写入 /root/.bashrc，幂等：标记块存在则跳过）
+      # 官方 Quick Reference（kubectl 快速参考）写法：
+      #   source <(kubectl completion bash)  +  alias k=kubectl  +  complete 绑定
+      # blockinfile 用标记块包裹，重复执行不会重复写入
+      ansible.builtin.blockinfile:
+        path: /root/.bashrc
+        create: true
+        mode: "0644"
+        marker: "# {mark} ANSIBLE MANAGED: kubectl 补全与别名"
+        block: |
+          # kubectl 自动补全（Kubernetes 官方 Quick Reference）
+          source <(kubectl completion bash)
+          # k 别名 + 补全绑定（官方 Quick Reference）
+          alias k=kubectl
+          complete -o default -F __start_kubectl k
+          # 常用衍生别名（社区惯例，kube-system 命名空间快捷操作）
+          alias ksys='kubectl -n kube-system'
+          complete -o default -F __start_kubectl ksys
+
+    - name: kubectl 便捷配置完成提示（重新登录或 source /root/.bashrc 后生效）
+      ansible.builtin.debug:
+        msg: "已配置 kubectl 补全与 k/ksys 别名，重新登录 shell 或执行 source /root/.bashrc 生效"
+
     # ---------- 4.4 安装 Pod 网络插件 flannel ----------
     - name: 分发 kube-flannel.yml 到主节点（已在步骤 2 统一下载，见 3.5 节 2.1）
       ansible.builtin.copy:
@@ -913,8 +990,25 @@ cat > plays/04-master-init.yml <<'EOF'
       failed_when: flannel_apply.rc != 0
 
     # ---------- 4.5 验证控制平面 ----------
-    - name: 等待 CoreDNS 就绪（超时即失败；不装好 CNI 插件 CoreDNS 不会启动，官方说明）
-      ansible.builtin.command: kubectl wait --for=condition=Ready pod -l k8s-app=kube-dns -n kube-system --timeout={{ flannel_wait_timeout }}
+    - name: 等待 CoreDNS 就绪（轮询：init 完成后 addon Pod 创建有延迟，kubectl wait 对不存在的 Pod 会立即报错）
+      # 不用 kubectl wait：CoreDNS Pod 尚未创建时它直接报 no matching resources found（不等待）。
+      # 轮询 10 分钟：每 5 秒查一次 kube-dns Pod 状态，全部 Running 才通过；
+      # 超时则输出 kube-system 全部 Pod 状态和节点状态，方便定位（多为 flannel 未就绪或镜像未拉完）
+      ansible.builtin.shell: |
+        for i in $(seq 1 120); do
+          STATUS=$(kubectl get pods -l k8s-app=kube-dns -n kube-system --no-headers 2>/dev/null | awk '{print $3}' | sort -u)
+          if [ "$STATUS" = "Running" ]; then
+            echo "CoreDNS 已就绪（第 $i 次检查）"
+            exit 0
+          fi
+          sleep 5
+        done
+        echo "===== 等待超时，诊断信息如下 =====" >&2
+        echo "--- kube-system Pod 状态 ---" >&2
+        kubectl get pods -n kube-system -o wide >&2
+        echo "--- 节点状态 ---" >&2
+        kubectl get nodes -o wide >&2
+        exit 1
       changed_when: false
 
     - name: 显示控制平面 Pod 状态
