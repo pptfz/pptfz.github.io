@@ -406,11 +406,14 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 <TabItem value="rhel" label="Rocky / CentOS / RHEL" default>
 
 ```bash
-# 查看仓库中可安装的版本
-yum list kubeadm --showduplicates
+# 查看仓库中可安装的版本（必须加 --disableexcludes，否则上面 repo 里的
+# exclude=kubelet kubeadm kubectl 会把这些包从查询中排除，输出为空）
+yum list kubeadm --showduplicates --disableexcludes=kubernetes
 
 # 安装（变量 K8S_VERSION=v1.37.1，三件套版本必须一致）
-yum -y install kubelet-${K8S_VERSION} kubeadm-${K8S_VERSION} kubectl-${K8S_VERSION} --disableexcludes=kubernetes
+# 注意：yum/dnf 的包名不带 v 前缀！${K8S_VERSION#v} 会去掉 v（得 1.37.1），
+# 直接写 kubelet-${K8S_VERSION} 会拼出 kubelet-v1.37.1 而报 No package
+yum -y install kubelet-${K8S_VERSION#v} kubeadm-${K8S_VERSION#v} kubectl-${K8S_VERSION#v} --disableexcludes=kubernetes
 
 # 启用 kubelet 并设置开机自启
 systemctl enable --now kubelet
@@ -454,7 +457,11 @@ systemctl enable --now kubelet
 
 ```bash
 dnf -y install bash-completion
-echo "source <(kubectl completion bash)" >> ~/.bashrc && source ~/.bashrc
+# 以下三行为 Kubernetes 官方 Quick Reference 推荐写法（补全 + k 别名 + 补全绑定）
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+echo "alias k=kubectl" >> ~/.bashrc
+echo "complete -o default -F __start_kubectl k" >> ~/.bashrc
+source ~/.bashrc
 ```
 
 </TabItem>
@@ -462,7 +469,11 @@ echo "source <(kubectl completion bash)" >> ~/.bashrc && source ~/.bashrc
 
 ```bash
 apt-get -y install bash-completion
-echo "source <(kubectl completion bash)" >> ~/.bashrc && source ~/.bashrc
+# 以下三行为 Kubernetes 官方 Quick Reference 推荐写法（补全 + k 别名 + 补全绑定）
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+echo "alias k=kubectl" >> ~/.bashrc
+echo "complete -o default -F __start_kubectl k" >> ~/.bashrc
+source ~/.bashrc
 ```
 
 </TabItem>
@@ -563,6 +574,10 @@ kubectl apply -f kube-flannel.yml
 ```
 
 ### 4.5 验证控制平面
+
+:::caution init 刚完成时可能查不到 CoreDNS Pod
+`kubeadm init` 成功输出后，CoreDNS 等 addon 的 Pod 由控制器**异步创建**，中间有几秒到几十秒的延迟。此时执行 `kubectl get pods -A` 可能暂时看不到 coredns，或 `kubectl wait` 报 `no matching resources found`——**都不是故障**，等一会儿再查即可；未装 CNI（4.4）之前 CoreDNS 处于 Pending 也属正常。
+:::
 
 ```bash
 # CoreDNS 等 Pod 正常 Running 后，master 节点才会 Ready
