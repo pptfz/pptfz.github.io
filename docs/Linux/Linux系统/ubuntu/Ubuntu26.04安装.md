@@ -261,5 +261,22 @@ Snaps 推荐页，可以按需选择
 
 ![iShot_2026-10-21_19.21.19](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-10-21_19.21.19.png)
 
+## 安装报错：An error occurred during installation
+
+:::caution 注意
+
+安装过程中报错 `Sorry, there was a problem completing the installation.`，左侧进度停在 `configuring curtin co...` 阶段。
+
+原因：**之前有安装中断过，磁盘上残留了旧的分区/LVM 结构，curtin 再次安装时写不进去**。选择界面里的 `Restart the installer` 没用（残留还在），直接 `Reboot Now` 重新安装即可。
+
+:::
+
+如果重装还报错，可以从安装器 shell 里手动清掉残留分区结构再装：
+
+```bash
+lsblk              # 确认虚拟盘设备名，Parallels 一般是 sda 或 vda
+wipefs -a /dev/sda # 清除残留签名，设备名以上一条命令输出为准
+```
+
 
 
