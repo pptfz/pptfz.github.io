@@ -19,6 +19,16 @@ import TabItem from '@theme/TabItem';
 
 ubuntu 各版本均使用 [netplan](https://github.com/canonical/netplan) 管理网络，配置文件在 `/etc/netplan/` 目录下，但**不同版本的默认配置文件名和语法有差异**，注意区分：
 
+:::tip 22.04 / 24.04 / 26.04 静态 ip 写法通用
+
+**静态 ip 的 YAML 语法三版本完全一致**（`addresses` + `routes: - to: default via:` + `nameservers`），同一份配置稍改网卡名/网段即可通用，24.04 参照 22.04 选项卡即可。仅三个边缘差异：
+
+- `gateway4` 旧写法 22.04 起已废弃（26.04 彻底删除），一律用 `routes` 写法
+- 24.04 起配置文件全局可读会告警，建议 `chmod 600`
+- `/etc/netplan/50-cloud-init.yaml` 只在云镜像上存在，本地/虚机安装是安装器生成的 `00-installer-config.yaml`
+
+:::
+
 <Tabs groupId="ubuntu-version">
   <TabItem value="1804" label="18.04" default>
 
