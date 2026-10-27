@@ -348,7 +348,9 @@ location ~ /scripts {
 
 :::tip 说明
 
-这里需要拷贝2个配置文件，一个是 `Self Service Password` 的配置文件 `config.inc.php.orig` ，另一个是用于定义系统界面、错误提示、邮件内容等的**中文显示文本**的配置文件 `zh-CN.inc.php`
+这里需要拷贝2个配置文件，一个是 `Self Service Password` 的配置文件 `config.inc.php` ，文件中有 `if (file_exists (__DIR__ . '/conf/config.inc.local.php')) {` 配置，也就是说如果有 `config.inc.local.php` 主配置文件会自动加载
+
+另一个是用于定义系统界面、错误提示、邮件内容等的**中文显示文本**的配置文件 `zh-CN.inc.php`
 
 :::
 
