@@ -596,11 +596,15 @@ cat > plays/02-containerd.yml <<'EOF'
     # /usr/local/libexec/cni（与集群的 /opt/cni/bin 互不干扰）；runc 会多出一份
     # /usr/local/bin/runc（PATH 中 /usr/local/sbin 优先，原 1.5.2 生效）
     # Kubernetes 容器在 containerd 的 k8s.io 命名空间：nerdctl --namespace k8s.io ps -a
+    # 注意：buildkitd 默认不运行（集群节点通常无需构建镜像，playbook 不默认拉起）——
+    # 执行 nerdctl build 前需手动启用：systemctl daemon-reload && systemctl enable --now buildkit
+    # 幂等守卫用 buildkitd（仅 full 包提供）而非 nerdctl——minimal 版也有 nerdctl，
+    # 用 nerdctl 判断会导致从 minimal 升级到 full 时解压被误跳过
     - name: 解压 nerdctl-full 到 /usr/local（幂等：已安装则跳过）
       ansible.builtin.unarchive:
         src: "{{ download_dir }}/nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
         dest: /usr/local
-        creates: /usr/local/bin/nerdctl
+        creates: /usr/local/bin/buildkitd
       tags: [nerdctl]
 
     - name: 验证 nerdctl 可用（ansible 非登录 shell PATH 不含 /usr/local/bin，必须用绝对路径）
@@ -612,17 +616,17 @@ cat > plays/02-containerd.yml <<'EOF'
 EOF
 ```
 
-:::tip 关于下载进度显示与统一下载设计  
+:::tip 关于下载与统一下载设计  
 所有公网下载**只在主节点执行一次**（`delegate_to: master` + `run_once`），其余节点（含主节点自身）通过控制机中转的内网拷贝分发——节点再多也不会重复访问 GitHub，个别节点网络抖动不再影响整体安装。
 
-大文件下载用 `curl --progress-bar`，任务输出里会留下进度条和速度汇总。但要注意 ansible 的机制：**任务执行期间终端不会实时刷新**，进度条在任务结束时统一输出。想在执行期间实时观察，可以在控制机另开一个终端：
+下载写入 `.part` 临时文件并启用断点续传（`curl -C -`），任务级自动重试 5 次（间隔 10 秒），中断后重跑会从断点继续，不会重下整个文件。`--progress-bar` 进度条已移除——它的回车刷新会把 ansible 任务输出刷成乱码。想在执行期间实时观察，可以在控制机另开一个终端：
 
 ```bash
 # 目录换成 group_vars/all.yml 里的 download_dir
-watch -n 2 ls -lh /tmp/k8s-download/
+watch -n 2 ls -lh /tmp/k8s-install/
 ```
 
-全部安装包加起来约 60MB，下载失败的常见原因是国内访问 GitHub 不稳——`--retry 5` 会自动重试；仍失败的话，手动下载好这 5 个文件放到**控制机的 `k8s-ansible/.k8s-pkgs/` 目录**再跑 playbook，下载任务会因主节点缺文件而重试，但分发任务直接用现成文件，或者干脆手动把 5 个文件放到主节点的 `download_dir`（curl 的 `creates` 检测到存在会全部跳过）。  
+全部安装包加起来约 170MB（其中 nerdctl-full 约 110MB），下载失败的常见原因是国内访问 GitHub 不稳——自动重试仍失败的话，手动下载放到**主节点的 `download_dir`**（默认 `/tmp/k8s-install`），文件名必须与 playbook 中 `dest` 完全一致（正式名、不带 `.part`），重跑时 `creates` 检测到存在会跳过下载；或放到**控制机的 `k8s-ansible/.k8s-pkgs/` 目录**再跑 playbook，分发任务直接用现成文件。  
 :::
 
 ### 3.6 plays/03-k8s-packages.yml
@@ -1673,11 +1677,15 @@ cat > plays/02-containerd.yml <<'EOF'
     # /usr/local/libexec/cni（与集群的 /opt/cni/bin 互不干扰）；runc 会多出一份
     # /usr/local/bin/runc（PATH 中 /usr/local/sbin 优先，原 1.5.2 生效）
     # Kubernetes 容器在 containerd 的 k8s.io 命名空间：nerdctl --namespace k8s.io ps -a
+    # 注意：buildkitd 默认不运行（集群节点通常无需构建镜像，playbook 不默认拉起）——
+    # 执行 nerdctl build 前需手动启用：systemctl daemon-reload && systemctl enable --now buildkit
+    # 幂等守卫用 buildkitd（仅 full 包提供）而非 nerdctl——minimal 版也有 nerdctl，
+    # 用 nerdctl 判断会导致从 minimal 升级到 full 时解压被误跳过
     - name: 解压 nerdctl-full 到 /usr/local（幂等：已安装则跳过）
       ansible.builtin.unarchive:
         src: "{{ download_dir }}/nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
         dest: /usr/local
-        creates: /usr/local/bin/nerdctl
+        creates: /usr/local/bin/buildkitd
       tags: [nerdctl]
 
     - name: 验证 nerdctl 可用（ansible 非登录 shell PATH 不含 /usr/local/bin，必须用绝对路径）

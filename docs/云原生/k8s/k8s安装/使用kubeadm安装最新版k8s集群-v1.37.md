@@ -377,6 +377,42 @@ crictl pods
 `crictl pods`（列 sandbox）的 `-o` 只支持 `table`（默认）、`json`、`yaml`，加了会报 `unsupported output format "wide"`——这不是安装出了问题。`-o wide` 只有 `crictl ps`（列容器）支持，是 kubectl（`kubectl get pods -o wide`）带来的使用习惯差异。
 :::
 
+### 2.8 安装 nerdctl（可选）
+
+[nerdctl github地址](https://github.com/containerd/nerdctl)
+
+:::tip 说明
+`nerdctl` 是适用于 containerd 的 docker 兼容 CLI，命令用法与 docker 基本一致。Kubernetes 的容器在 containerd 的 `k8s.io` 命名空间中，查看集群容器需加 `--namespace k8s.io`，例如 `nerdctl --namespace k8s.io ps -a`。
+:::
+
+这里使用官方 **full 完整包**（一键包含 nerdctl 及全部依赖：CNI 插件、BuildKit、RootlessKit 等，无需再单独安装），下载 `nerdctl-full` 后直接解压到 `/usr/local`：
+
+```bash
+# v2.4.1 与本文安装的 containerd v2.4.1 同号发布，包内 containerd 版本一致，覆盖无影响
+# ARM 机器把 amd64 换成 arm64
+export NERDCTL_VERSION=2.4.1
+curl -fL -C - --connect-timeout 15 \
+  -o /tmp/nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz.part \
+  https://github.com/containerd/nerdctl/releases/download/v${NERDCTL_VERSION}/nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz \
+  && mv /tmp/nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz.part \
+        /tmp/nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz
+
+tar Cxzvvf /usr/local /tmp/nerdctl-full-${NERDCTL_VERSION}-linux-amd64.tar.gz
+
+# 验证（Client/Server 都能出版本号即正常）
+nerdctl version
+```
+
+:::tip 用 nerdctl build 构建镜像
+完整包自带 BuildKit（`buildkitd`/`buildctl`）和 service 文件，但**默认不运行**——执行 `nerdctl build` 前需先启用：
+
+```bash
+systemctl daemon-reload && systemctl enable --now buildkit
+```
+:::
+
+使用 Ansible 一键部署的集群，以上步骤已包含在 playbook 中（02 号 play 2.8，tag=`nerdctl` 可单独补装），无需手动执行。
+
 ## 3. 安装 kubeadm、kubelet、kubectl（所有节点）
 
 [官方文档：安装 kubeadm、kubelet 和 kubectl](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
