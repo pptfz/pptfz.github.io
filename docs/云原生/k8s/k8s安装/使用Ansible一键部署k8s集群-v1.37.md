@@ -98,7 +98,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i inventory.ini site.yml
 | Play 文件               | 手工笔记章节           | 内容                                                                |
 | --------------------- | ---------------- | ----------------------------------------------------------------- |
 | `01-prepare.yml`      | 第 1 节 前置准备       | 硬件检查（内存/CPU）、主机名、hosts、swap、SELinux/AppArmor、时间同步、内核模块、sysctl、防火墙 |
-| `02-containerd.yml`   | 第 2 节 容器运行时      | containerd/runc/CNI 下载解压、SystemdCgroup、pause 镜像、启动验证              |
+| `02-containerd.yml`   | 第 2 节 容器运行时      | containerd/runc/CNI 下载解压、SystemdCgroup、pause 镜像、启动验证、crictl 配置、nerdctl 安装（tag=nerdctl） |
 | `03-k8s-packages.yml` | 第 3 节 三件套安装      | pkgs.k8s.io 仓库（yum/apt 自动识别）、指定版本安装与锁版本、版本一致性校验                   |
 | `04-master-init.yml`  | 第 4 节 初始化 master | 预拉镜像、`kubeadm init`、kubectl 凭证、flannel（含网段校验）、等待 CoreDNS          |
 | `05-node-join.yml`    | 第 5 节 添加 node    | 逐台 join（token 现场生成）、等待所有节点 Ready、输出集群状态                           |
@@ -155,6 +155,8 @@ runc_version: "1.5.2"         # runc 版本
 cni_plugins_version: v1.9.1   # CNI 插件版本
 flannel_version: v0.28.9      # flannel 版本
 pause_version: "3.10"         # pause 沙箱镜像版本
+nerdctl_version: "2.4.1"      # nerdctl 版本（Docker 兼容 CLI，可选安装；使用 nerdctl-full 完整包，
+                              # 改版本时注意包内 containerd 版本要与集群一致，见 02 号 play 2.8 注释）
 
 # ---------- 集群网络（节点 IP 在 inventory.ini 里改）----------
 pod_cidr: 10.244.0.0/16       # Pod 网段（flannel 默认，须与 kube-flannel.yml 的 Network 一致）
@@ -413,13 +415,20 @@ cat > plays/02-containerd.yml <<'EOF'
         path: "{{ download_dir }}"
         state: directory
         mode: "0755"
+      tags: [nerdctl]
 
     # ---------- 2.1 统一下载与分发（公网只走 master 一次，其余全走内网拷贝）----------
-    - name: 统一在主节点下载所有安装包（带进度显示，失败自动重试后中止）
+    # 下载写 .part 临时文件并启用 -C - 断点续传：中途断网时重跑会从断点继续，不重下整个文件；
+    # 只有下载完整后才 mv 为正式文件名——creates 幂等检查只认正式名，半截 .part 不会造成误跳过
+    - name: 统一在主节点下载所有安装包（中断自动从断点续传，最多重试 5 次）- {{ item.dest }}
       ansible.builtin.shell: |
-        curl -fL --progress-bar --retry 5 --retry-delay 3 --connect-timeout 15 \
-          -o "{{ download_dir }}/{{ item.dest }}" "{{ item.url }}" \
-          -w '\n{{ item.dest }} 下载完成：%{size_download} 字节，平均 %{speed_download} B/s\n'
+        curl -fL -sS -C - --connect-timeout 15 \
+          -o "{{ download_dir }}/{{ item.dest }}.part" "{{ item.url }}" \
+          && mv "{{ download_dir }}/{{ item.dest }}.part" "{{ download_dir }}/{{ item.dest }}"
+      register: pkg_dl
+      until: pkg_dl.rc == 0
+      retries: 5
+      delay: 10
       loop:
         - dest: "containerd-{{ containerd_version }}-linux-{{ go_arch }}.tar.gz"
           url: "https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-{{ go_arch }}.tar.gz"
@@ -431,10 +440,13 @@ cat > plays/02-containerd.yml <<'EOF'
           url: "https://raw.githubusercontent.com/containerd/containerd/main/containerd.service"
         - dest: "kube-flannel.yml"
           url: "https://github.com/flannel-io/flannel/releases/download/{{ flannel_version }}/kube-flannel.yml"
+        - dest: "nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
+          url: "https://github.com/containerd/nerdctl/releases/download/v{{ nerdctl_version }}/nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
       delegate_to: "{{ groups['k8s_master'][0] }}"
       run_once: true
       args:
         creates: "{{ download_dir }}/{{ item.dest }}"
+      tags: [nerdctl]
 
     - name: 从主节点拉取下载产物到控制机（作为分发中转）
       ansible.builtin.fetch:
@@ -447,8 +459,10 @@ cat > plays/02-containerd.yml <<'EOF'
         - "cni-plugins-linux-{{ go_arch }}-{{ cni_plugins_version }}.tgz"
         - "containerd.service"
         - "kube-flannel.yml"
+        - "nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
       delegate_to: "{{ groups['k8s_master'][0] }}"
       run_once: true
+      tags: [nerdctl]
 
     - name: 将下载产物分发到所有节点（内网拷贝，含主节点自身）
       ansible.builtin.copy:
@@ -461,6 +475,8 @@ cat > plays/02-containerd.yml <<'EOF'
         - "cni-plugins-linux-{{ go_arch }}-{{ cni_plugins_version }}.tgz"
         - "containerd.service"
         - "kube-flannel.yml"
+        - "nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
+      tags: [nerdctl]
 
     - name: 解压 containerd 到 /usr/local（幂等：已安装则跳过）
       ansible.builtin.unarchive:
@@ -555,11 +571,44 @@ cat > plays/02-containerd.yml <<'EOF'
           ansible.builtin.fail:
             msg: "{{ diag_logs.stdout_lines }}"
 
-    - name: 验证 containerd 运行正常（异常直接失败退出）
-      ansible.builtin.command: ctr version
+    - name: 验证 containerd 运行正常（异常直接失败退出；ansible PATH 不含 /usr/local/bin，用绝对路径）
+      ansible.builtin.command: /usr/local/bin/ctr version
       register: ctr_ver
       changed_when: false
       failed_when: ctr_ver.rc != 0
+
+    # ---------- 2.7 配置 crictl（固定 endpoint，消除探测告警）----------
+    - name: 写入 /etc/crictl.yaml（不配置时每次执行 crictl 会 WARN 探测默认 endpoint）
+      ansible.builtin.copy:
+        content: |
+          runtime-endpoint: unix:///run/containerd/containerd.sock
+          image-endpoint: unix:///run/containerd/containerd.sock
+          timeout: 2
+          debug: false
+          pull-image-on-create: false
+        dest: /etc/crictl.yaml
+        mode: "0644"
+
+    # ---------- 2.8 安装 nerdctl（可选：Docker 兼容 CLI，tag=nerdctl 可单独执行）----------
+    # 使用 nerdctl-full 完整包（~110MB）：除 nerdctl 外还包含 containerd/runc/CNI 插件/
+    # BuildKit（nerdctl build 用）/RootlessKit，解压到 /usr/local
+    # 注意：包内 containerd 与集群版本一致（v2.4.1）时覆盖无影响；CNI 装到
+    # /usr/local/libexec/cni（与集群的 /opt/cni/bin 互不干扰）；runc 会多出一份
+    # /usr/local/bin/runc（PATH 中 /usr/local/sbin 优先，原 1.5.2 生效）
+    # Kubernetes 容器在 containerd 的 k8s.io 命名空间：nerdctl --namespace k8s.io ps -a
+    - name: 解压 nerdctl-full 到 /usr/local（幂等：已安装则跳过）
+      ansible.builtin.unarchive:
+        src: "{{ download_dir }}/nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
+        dest: /usr/local
+        creates: /usr/local/bin/nerdctl
+      tags: [nerdctl]
+
+    - name: 验证 nerdctl 可用（ansible 非登录 shell PATH 不含 /usr/local/bin，必须用绝对路径）
+      ansible.builtin.command: /usr/local/bin/nerdctl version
+      register: nerdctl_ver
+      changed_when: false
+      failed_when: nerdctl_ver.rc != 0
+      tags: [nerdctl]
 EOF
 ```
 
@@ -1131,6 +1180,16 @@ EOF
 - `kubeadm join`：检测 `/etc/kubernetes/kubelet.conf`，已加入则跳过；join 命令每次在 master 上用 `kubeadm token create --print-join-command` 现场生成，**不存在 token 过期问题**
 - node 加入采用 `serial: 1` 逐台执行，一台失败立即停止，不会批量出问题
 
+:::caution 集群已就绪后重跑 playbook 的唯一影响：containerd 会重启一次  
+02 号 play 的启动任务固定为 `state: restarted`，重跑 playbook 时 containerd 会重启，节点上运行中的 Pod 容器会跟着重启一次（kubelet 自动拉起，秒级闪断，无数据丢失）——其余步骤全部命中幂等跳过，`kubeadm init/join` 不会重复执行。
+
+如果集群已初始化完、只想补装 nerdctl（或重下安装包），利用 tag 单独执行 02 号 play 中带 `tags: [nerdctl]` 的任务（下载 → 中转 → 分发 → 解压 → 验证），不会触碰 containerd 服务：
+
+```bash
+ansible-playbook -i inventory.ini site.yml --tags nerdctl
+```
+:::
+
 **安装失败想重来**：先在失败节点执行 `kubeadm reset`（见手工笔记 6.7）并删除 `/etc/kubernetes` 后，直接重跑 playbook 即可。
 
 **操作系统自动识别**：playbook 通过 `ansible_facts['os_family']` 自动走 RedHat（yum）或 Debian（apt）分支，与手工笔记中的双系统选项卡一一对应，无需修改。
@@ -1190,6 +1249,8 @@ runc_version: "1.5.2"         # runc 版本
 cni_plugins_version: v1.9.1   # CNI 插件版本
 flannel_version: v0.28.9      # flannel 版本
 pause_version: "3.10"         # pause 沙箱镜像版本
+nerdctl_version: "2.4.1"      # nerdctl 版本（Docker 兼容 CLI，可选安装；使用 nerdctl-full 完整包，
+                              # 改版本时注意包内 containerd 版本要与集群一致，见 02 号 play 2.8 注释）
 
 # ---------- 集群网络（节点 IP 在 inventory.ini 里改）----------
 pod_cidr: 10.244.0.0/16       # Pod 网段（flannel 默认，须与 kube-flannel.yml 的 Network 一致）
@@ -1431,13 +1492,20 @@ cat > plays/02-containerd.yml <<'EOF'
         path: "{{ download_dir }}"
         state: directory
         mode: "0755"
+      tags: [nerdctl]
 
     # ---------- 2.1 统一下载与分发（公网只走 master 一次，其余全走内网拷贝）----------
-    - name: 统一在主节点下载所有安装包（带进度显示，失败自动重试后中止）
+    # 下载写 .part 临时文件并启用 -C - 断点续传：中途断网时重跑会从断点继续，不重下整个文件；
+    # 只有下载完整后才 mv 为正式文件名——creates 幂等检查只认正式名，半截 .part 不会造成误跳过
+    - name: 统一在主节点下载所有安装包（中断自动从断点续传，最多重试 5 次）- {{ item.dest }}
       ansible.builtin.shell: |
-        curl -fL --progress-bar --retry 5 --retry-delay 3 --connect-timeout 15 \
-          -o "{{ download_dir }}/{{ item.dest }}" "{{ item.url }}" \
-          -w '\n{{ item.dest }} 下载完成：%{size_download} 字节，平均 %{speed_download} B/s\n'
+        curl -fL -sS -C - --connect-timeout 15 \
+          -o "{{ download_dir }}/{{ item.dest }}.part" "{{ item.url }}" \
+          && mv "{{ download_dir }}/{{ item.dest }}.part" "{{ download_dir }}/{{ item.dest }}"
+      register: pkg_dl
+      until: pkg_dl.rc == 0
+      retries: 5
+      delay: 10
       loop:
         - dest: "containerd-{{ containerd_version }}-linux-{{ go_arch }}.tar.gz"
           url: "https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-{{ go_arch }}.tar.gz"
@@ -1449,10 +1517,13 @@ cat > plays/02-containerd.yml <<'EOF'
           url: "https://raw.githubusercontent.com/containerd/containerd/main/containerd.service"
         - dest: "kube-flannel.yml"
           url: "https://github.com/flannel-io/flannel/releases/download/{{ flannel_version }}/kube-flannel.yml"
+        - dest: "nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
+          url: "https://github.com/containerd/nerdctl/releases/download/v{{ nerdctl_version }}/nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
       delegate_to: "{{ groups['k8s_master'][0] }}"
       run_once: true
       args:
         creates: "{{ download_dir }}/{{ item.dest }}"
+      tags: [nerdctl]
 
     - name: 从主节点拉取下载产物到控制机（作为分发中转）
       ansible.builtin.fetch:
@@ -1465,8 +1536,10 @@ cat > plays/02-containerd.yml <<'EOF'
         - "cni-plugins-linux-{{ go_arch }}-{{ cni_plugins_version }}.tgz"
         - "containerd.service"
         - "kube-flannel.yml"
+        - "nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
       delegate_to: "{{ groups['k8s_master'][0] }}"
       run_once: true
+      tags: [nerdctl]
 
     - name: 将下载产物分发到所有节点（内网拷贝，含主节点自身）
       ansible.builtin.copy:
@@ -1479,6 +1552,8 @@ cat > plays/02-containerd.yml <<'EOF'
         - "cni-plugins-linux-{{ go_arch }}-{{ cni_plugins_version }}.tgz"
         - "containerd.service"
         - "kube-flannel.yml"
+        - "nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
+      tags: [nerdctl]
 
     - name: 解压 containerd 到 /usr/local（幂等：已安装则跳过）
       ansible.builtin.unarchive:
@@ -1573,11 +1648,44 @@ cat > plays/02-containerd.yml <<'EOF'
           ansible.builtin.fail:
             msg: "{{ diag_logs.stdout_lines }}"
 
-    - name: 验证 containerd 运行正常（异常直接失败退出）
-      ansible.builtin.command: ctr version
+    - name: 验证 containerd 运行正常（异常直接失败退出；ansible PATH 不含 /usr/local/bin，用绝对路径）
+      ansible.builtin.command: /usr/local/bin/ctr version
       register: ctr_ver
       changed_when: false
       failed_when: ctr_ver.rc != 0
+
+    # ---------- 2.7 配置 crictl（固定 endpoint，消除探测告警）----------
+    - name: 写入 /etc/crictl.yaml（不配置时每次执行 crictl 会 WARN 探测默认 endpoint）
+      ansible.builtin.copy:
+        content: |
+          runtime-endpoint: unix:///run/containerd/containerd.sock
+          image-endpoint: unix:///run/containerd/containerd.sock
+          timeout: 2
+          debug: false
+          pull-image-on-create: false
+        dest: /etc/crictl.yaml
+        mode: "0644"
+
+    # ---------- 2.8 安装 nerdctl（可选：Docker 兼容 CLI，tag=nerdctl 可单独执行）----------
+    # 使用 nerdctl-full 完整包（~110MB）：除 nerdctl 外还包含 containerd/runc/CNI 插件/
+    # BuildKit（nerdctl build 用）/RootlessKit，解压到 /usr/local
+    # 注意：包内 containerd 与集群版本一致（v2.4.1）时覆盖无影响；CNI 装到
+    # /usr/local/libexec/cni（与集群的 /opt/cni/bin 互不干扰）；runc 会多出一份
+    # /usr/local/bin/runc（PATH 中 /usr/local/sbin 优先，原 1.5.2 生效）
+    # Kubernetes 容器在 containerd 的 k8s.io 命名空间：nerdctl --namespace k8s.io ps -a
+    - name: 解压 nerdctl-full 到 /usr/local（幂等：已安装则跳过）
+      ansible.builtin.unarchive:
+        src: "{{ download_dir }}/nerdctl-full-{{ nerdctl_version }}-linux-{{ go_arch }}.tar.gz"
+        dest: /usr/local
+        creates: /usr/local/bin/nerdctl
+      tags: [nerdctl]
+
+    - name: 验证 nerdctl 可用（ansible 非登录 shell PATH 不含 /usr/local/bin，必须用绝对路径）
+      ansible.builtin.command: /usr/local/bin/nerdctl version
+      register: nerdctl_ver
+      changed_when: false
+      failed_when: nerdctl_ver.rc != 0
+      tags: [nerdctl]
 EOF
 
 cat > plays/03-k8s-packages.yml <<'EOF'

@@ -349,6 +349,34 @@ systemctl enable --now containerd
 systemctl status containerd
 ```
 
+### 2.7 配置 crictl（固定 endpoint，消除探测告警）
+
+不写 `/etc/crictl.yaml` 时，crictl 每次执行都会按默认顺序探测 runtime（containerd → cri-o → cri-dockerd），并输出两条告警：
+
+```text
+WARN[0000] Config "/etc/crictl.yaml" does not exist, trying next: "/usr/bin/crictl.yaml"
+WARN[0000] runtime connect using default endpoints: [unix:///run/containerd/containerd.sock unix:///run/crio/crio.sock unix:///var/run/cri-dockerd.sock]. As the default settings are now deprecated, you should set the endpoint instead.
+```
+
+功能不受影响（探测第一个就命中 containerd），但建议显式固定下来：
+
+```bash
+cat > /etc/crictl.yaml <<'EOF'
+runtime-endpoint: unix:///run/containerd/containerd.sock
+image-endpoint: unix:///run/containerd/containerd.sock
+timeout: 2
+debug: false
+pull-image-on-create: false
+EOF
+
+# 验证：不应再出现 WARN
+crictl pods
+```
+
+:::caution crictl pods 不支持 -o wide
+`crictl pods`（列 sandbox）的 `-o` 只支持 `table`（默认）、`json`、`yaml`，加了会报 `unsupported output format "wide"`——这不是安装出了问题。`-o wide` 只有 `crictl ps`（列容器）支持，是 kubectl（`kubectl get pods -o wide`）带来的使用习惯差异。
+:::
+
 ## 3. 安装 kubeadm、kubelet、kubectl（所有节点）
 
 [官方文档：安装 kubeadm、kubelet 和 kubectl](https://kubernetes.io/zh-cn/docs/setup/production-environment/tools/kubeadm/install-kubeadm/)
