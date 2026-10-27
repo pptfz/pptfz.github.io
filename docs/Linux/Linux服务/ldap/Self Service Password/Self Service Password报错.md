@@ -188,3 +188,50 @@ modifying entry "olcDatabase={2}mdb,cn=config"
 
 
 执行成功后用户就可以自行修改密码了
+
+
+
+## 报错5 `Invalid token`
+
+### 报错信息
+
+![iShot_2026-10-27_14.27.21](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-10-27_14.27.21.png)
+
+
+
+```shell
+[Tue Oct 27 06:20:35.301954 2026] [php:notice] [pid 22:tid 22] [client 1.1.1.1:52112] send_mail: SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting, referer: https://xxx.xxx.com/?action=sendtoken
+[Tue Oct 27 06:20:35.301981 2026] [php:notice] [pid 22:tid 22] [client 1.1.1.1:52112] Error while sending token to xxx@xxx.com (user xxx), referer: https://xxx.xxx.com/?action=sendtoken
+124.127.135.194 - - [27/Oct/2026:06:15:35 +0000] "POST /?action=sendtoken HTTP/1.1" 200 0 "https://xxx.xxx.com/?action=sendtoken" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+```
+
+
+
+
+
+### 解决方法
+
+:::tip 说明
+
+我这里使用了飞书邮箱smtp加密连接
+
+![iShot_2026-10-27_14.40.15](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-10-27_14.40.15.png)
+
+| 配置        | 结果             | 原因                                                         |
+| :---------- | :--------------- | :----------------------------------------------------------- |
+| 25 + `tls`  | ✅ 能用           | 25 端口明文连上，飞书允许 STARTTLS 升级                      |
+| 465 + `tls` | ❌ connect failed | 465 一连上就要求 TLS，如果先发明文 EHLO 等着 STARTTLS——飞书 465 根本不提供 STARTTLS，握手直接失败 |
+| 465 + `ssl` | ✅                | 协议对上端口了                                               |
+
+:::
+
+修改配置文件  `config.inc.local.php`
+
+```php
+# 修改
+$mail_smtp_secure = 'tls';
+
+# 修改为
+$mail_smtp_secure = 'ssl';
+```
+
