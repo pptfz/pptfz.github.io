@@ -3,6 +3,8 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+> 新方案（trzsz）见《[mac配置iterm2使用trzsz](./mac配置iterm2使用lrz%20lsz)》：不需要写脚本，自带进度条，支持传目录和断点续传。本篇 lrzsz 方案保留作参考，注意实测在部分环境（如 OrbStack 本地 VM）会死锁。
+
 ## 1.安装lrzsz
 
 ```shell
@@ -244,3 +246,12 @@ grep -n '^SZ=\|^RZ=' /usr/local/bin/iterm2-send-zmodem.sh /usr/local/bin/iterm2-
 ```
 
 **验证**：关掉当前 tab / 重连 ssh 后，`rz` 应弹出"选文件"窗口，`sz 文件名` 应弹出"选保存目录"窗口，能弹窗就说明接管成功。
+
+
+## 5.取消传输
+
+传输过程中 `Ctrl+C` 基本杀不掉（lrzsz 会吞掉 SIGINT），zmodem 的协议级取消是**连按 5 次 `Ctrl+X`**。还不行就开个新 tab 清场：
+
+```shell
+pkill sz; pkill rz
+```
