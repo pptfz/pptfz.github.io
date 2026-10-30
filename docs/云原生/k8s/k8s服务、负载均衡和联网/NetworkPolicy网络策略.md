@@ -14,7 +14,7 @@
 | 声明网络策略（任务：入门示例） | https://kubernetes.io/zh-cn/docs/tasks/administer-cluster/declare-network-policy/ |
 | Kubernetes 网络模型（CNI 插件列表） | https://kubernetes.io/zh-cn/docs/concepts/cluster-administration/networking/ |
 
-> 相关笔记：Service 与集群内访问模型见 [service简介](./service/service简介.md)；集群部署时如何选装 CNI（Calico/Flannel）见 [使用kubeadm安装最新版k8s集群-v1.37](../../k8s安装/使用kubeadm安装最新版k8s集群-v1.37.md)。
+> 相关笔记：Service 与集群内访问模型见 [service简介](./service/service简介.md)；集群部署时如何选装 CNI（Calico/Flannel）见 [使用kubeadm安装最新版k8s集群-v1.37](../k8s安装/使用kubeadm安装最新版k8s集群-v1.37.md)。
 
 ![NetworkPolicy 白名单流量模型](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/networkpolicy-whitelist.png)
 
