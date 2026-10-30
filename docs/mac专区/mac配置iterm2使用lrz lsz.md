@@ -40,6 +40,8 @@ sudo python3 -m pip install --upgrade trzsz-iterm2
 
 Go 版处理大文件比 Python 版快得多且更稳，服务器端推荐用这个：
 
+[trzsz-go](https://github.com/trzsz/trzsz-go)
+
 ```shell
 # ARM64（aarch64）机器
 wget https://github.com/trzsz/trzsz-go/releases/download/v1.2.0/trzsz_1.2.0_linux_aarch64.deb -O /tmp/trzsz.deb
