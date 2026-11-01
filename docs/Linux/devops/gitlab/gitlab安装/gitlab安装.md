@@ -394,6 +394,39 @@ a9ed8420da5d   gitlab/gitlab-ce:latest   "/assets/wrapper"   3 minutes ago   Up 
 
 **gitlab默认端口为80，第一次访问需要设置root密码，最少8位**
 
+:::tip 说明
+
+GitLab 16 及以上版本不再手动设置密码，安装时会自动生成随机初始 root 密码，存放在 `/etc/gitlab/initial_root_password`
+
+- 该密码仅 **24 小时内有效**，且第一次执行 `gitlab-ctl reconfigure` 后文件会被删除
+- 登录后应及时修改密码
+
+:::
+
+**查看初始root密码**
+
+```shell
+# 容器里看
+docker exec -it gitlab cat /etc/gitlab/initial_root_password
+
+# 宿主机直接看（docker安装挂载了config目录时）
+cat $GITLAB_HOME/config/initial_root_password
+```
+
+**密码过期或文件已删除时，重置root密码**
+
+```shell
+docker exec -it gitlab gitlab-rake "gitlab:password:reset[root]"
+```
+
+**安装时指定初始root密码（可选）**
+
+`GITLAB_OMNIBUS_CONFIG` 中添加如下配置
+
+```ruby
+gitlab_rails['initial_root_password'] = '你的密码'
+```
+
 ![iShot2021-06-20_01.22.44](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot2021-06-20_01.22.44.png)
 
 

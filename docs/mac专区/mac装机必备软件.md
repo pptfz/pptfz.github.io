@@ -64,9 +64,78 @@
 
 ## 效率小工具
 
-### Amazon Q
+### Kiro CLI（原 Amazon Q CLI / q）
 
-- [Amazon](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-installing.html) 是一款在终端中提示子命令、选项等具有提示功能的工具
+- **来源**：这款工具经历了三代：`q`（Amazon CodeWhisperer CLI）→ Amazon Q CLI → **Kiro CLI**（Amazon 收购 Fig 后于 2025-11 改名，配置从 ~/.aws/amazonq 迁移到 ~/.kiro）
+- **用途**：终端里的**内联 ghost 补全**（灰色建议，Tab 采纳）——靠桌面引擎 + macOS 辅助功能权限实现，也是 Kiro 收购 Fig 的技术。本人只用这一个功能，agent/chat 功能一概不用
+- 官方文档：https://kiro.dev/docs/cli/ ｜ 更新日志：https://kiro.dev/changelog
+
+#### 版本锁定 2.37.0（重要）
+
+- **CLI 3.0 起移除了内联 shell 补全**（同时移除 use_aws 工具、Classic 界面、/checkpoint），所以必须钉死 2.x 最后一版 2.37.0
+- 关闭更新：dashboard → Preferences → Startup → 关闭 **Automatic updates** 和 **Beta**
+- 物理锁死（防手滑升级）：`sudo chflags -R uchg "/Applications/Kiro CLI.app"`，解锁用 `nouchg`
+- 历史版本按版本号直接下载（官方保留所有旧版）：`https://prod.download.cli.kiro.dev/stable/<版本号>/Kiro%20CLI.dmg`，校验和见同目录 manifest.json
+- 安装时用 `ditto` 复制比 Finder 拖拽稳：`ditto "/Volumes/Kiro CLI/Kiro CLI.app" "/Applications/Kiro CLI.app"`
+
+#### 常用命令备忘（本次排查实际用过的）
+
+**禁止更新（重点，三层防线）**
+
+```bash
+# 第 1 层（UI 开关，必做）：dashboard → Preferences → Startup
+#   关闭 "Automatic updates" 和 "Beta"。
+#   原理：桌面引擎的自动升级由这个开关控制，关掉后不再静默拉新版本。
+
+# 第 2 层（行为约束，养成习惯）：以下两样永远不要碰
+#   ① 不执行 kiro-cli update（这是手动升级命令，不跑就不会升）
+#   ② 不重新执行 curl -fsSL https://cli.kiro.dev/install | bash（脚本永远拉最新版）
+#   弹窗引导切 V3 时选 "Don't ask again"
+
+# 第 3 层（物理锁，终极保险）：把 app 文件锁成不可写，任何更新程序都覆盖不了
+sudo chflags -R uchg "/Applications/Kiro CLI.app"
+# 解锁（升级/卸载/重装前必须先解锁）：
+sudo chflags -R nouchg "/Applications/Kiro CLI.app"
+```
+
+**安装 / 重装**
+
+```bash
+# 下载指定版本（官方保留所有历史版本，校验和看同目录 manifest.json）
+curl -L "https://prod.download.cli.kiro.dev/stable/2.37.0/Kiro%20CLI.dmg" -o ~/Desktop/KiroCLI-2.37.0.dmg
+
+# 校验：sha256 必须与 manifest.json 里对应包一致
+shasum -a 256 ~/Desktop/KiroCLI-2.37.0.dmg
+
+# 挂载 / 卸载 DMG（"资源忙"时先 hdiutil info 查残留挂载，找到 /dev/diskX 后 detach -force）
+hdiutil attach ~/Desktop/KiroCLI-2.37.0.dmg -nobrowse -readonly
+hdiutil detach "/Volumes/Kiro CLI"
+
+# 用 ditto 安装（比 Finder 拖拽稳，不会产生复制中断的 .BC.T_* 残片）
+ditto "/Volumes/Kiro CLI/Kiro CLI.app" "/Applications/Kiro CLI.app"
+```
+
+**日常排查**
+
+```bash
+kiro-cli version                     # 确认还是 2.37.0（只要版本没变，补全功能就在）
+pgrep -fl kiro_cli_desktop           # 补全引擎进程在不在（不在就没有一切提示）
+pkill -f kiro_cli_desktop && open -a "Kiro CLI"   # 重启补全引擎（授权/改设置后必须做）
+codesign --verify --deep "/Applications/Kiro CLI.app"   # 报"已损坏"时验签名是否真坏
+xattr -l 文件                        # 查看隔离/来源属性（quarantine 会触发 Gatekeeper 拦截）
+sqlite3 ~/Library/Application\ Support/kiro-cli/data.sqlite3 \
+  "SELECT key,value FROM state;"     # 看引擎状态：logged-in、补全触发计数等
+```
+
+
+#### 踩坑记录（2026-11-01 排查实录）
+
+1. **装完没提示，引擎没运行**：补全引擎是 app 里的 `kiro_cli_desktop` 进程，app 不在 /Applications 就一切免谈。一次是安装脚本卡半路（DMG 挂在 /private/var/folders 临时目录没弹出来，`hdiutil info` 能看到），一次是 Finder 拖拽复制被打断
+2. **"已损坏，无法打开"**：不是包有毒，是拖拽复制中断留下 .BC.T_* 残片导致签名缺失（`codesign --verify --deep` 报 sealed resource invalid）。重新完整复制即可，不用删 DMG
+3. **授权了辅助功能还是没提示**：权限要**进程重启**才生效，`pkill -f kiro_cli_desktop && open -a "Kiro CLI"`
+4. **最大的坑**：CLI 登录了 ≠ 桌面引擎登录了。状态库（`~/Library/Application Support/kiro-cli/data.sqlite3` 的 state 表）里 `desktop.auth-watcher.logged-in=false` 时，补全引擎不会调云端模型，永远没提示。要在 dashboard 里确认已登录
+5. **补全只在普通 shell 提示符出现**，vim 等全屏程序里没有；Linux 从未支持此功能，macOS 独享
+6. **完整卸载清单**（重装修复用）：`/Applications/Kiro CLI.app`、`~/.local/bin/`（kiro-cli、q、kiro-cli-chat、kiro-cli-term）、`~/Library/Application Support/kiro-cli`（800M+，含会话）、`~/Library/Application Support/fig`、`~/.kiro`（agent 配置，删前备份）
 
 
 
