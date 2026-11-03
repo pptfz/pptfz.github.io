@@ -6,6 +6,28 @@
 
 
 
+## 0.环境变量
+
+:::tip 说明
+
+本文所有命令统一引用下面这组环境变量，开始前先按需修改并执行一次（同一终端会话内有效，重开终端需重新 export 或写入 `/etc/profile.d/harbor.sh`）。注意版本、域名要与证书一致。
+
+:::
+
+```shell
+# ====== 环境变量（按需修改后统一执行一次） ======
+export HARBOR_VERSION="2.16.0-rc1"          # Harbor 版本（v2.16.0 正式版发布后可改为 2.16.0）
+export HARBOR_INSTALLER_ARCH="amd64"        # 安装包架构：uname -m 为 x86_64 填 amd64，aarch64 填 arm64
+export HARBOR_HOSTNAME="harbor.ops.com"     # 访问域名（需与证书 CN/SAN 一致）
+export HARBOR_ADMIN_PASSWORD="Harbor12345"  # admin 初始密码（仅首次启动生效）
+export HARBOR_DB_PASSWORD="root123"         # 内置 PostgreSQL root 密码
+export HARBOR_HTTP_PORT="8080"              # HTTP 访问端口
+export HARBOR_INSTALL_DIR="/data/docker-project/harbor"  # 安装根目录（程序与配置）
+export HARBOR_DATA_DIR="/data/docker-volume/harbor"      # 镜像数据存储目录（数据本体）
+```
+
+
+
 ## 1.安装先决条件
 
 ### 1.1 系统环境说明
@@ -49,17 +71,13 @@ yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/d
 yum -y install docker-ce
 
 systemctl start docker && systemctl enable docker  
-
-# 配置阿里云镜像加速地址
-cat > /etc/docker/daemon.json <<-'EOF'
-{
-  "registry-mirrors": ["https://gqk8w9va.mirror.aliyuncs.com"]
-}
-EOF
-
-# 配置完成后重启docker
-systemctl restart docker
 ```
+
+:::caution 镜像加速地址已失效
+
+早期笔记中的阿里云镜像加速地址（`https://gqk8w9va.mirror.aliyuncs.com`，写入 `/etc/docker/daemon.json` 的 `registry-mirrors`）**已停止服务，不要再配置**。如 daemon.json 中还残留该配置，删除后 `systemctl restart docker`。现在国内可自行寻找可用的加速地址，或直接使用 Docker 官方源。
+
+:::
 
 
 
@@ -67,7 +85,7 @@ systemctl restart docker
 
 ```shell
 export DOCKER_COMPOSE_VERSION=2.17.3
-curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSIO}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
 ```
 
 
@@ -91,10 +109,23 @@ harbor有2种安装方式
 
 
 
+:::caution v2.16.0-rc1 只有离线包，且包名带架构后缀
+
+v2.16.0 正式版尚未发布（当前最新 rc 为 v2.16.0-rc1，2026-10-27），从 v2.16.0-rc1 起官方**只提供离线安装包**，且包名**带架构后缀**：
+
+- x86_64 机器：`harbor-offline-installer-v2.16.0-rc1-amd64.tgz`（约 722MB）
+- aarch64 机器：`harbor-offline-installer-v2.16.0-rc1-arm64.tgz`（约 644MB）
+
+离线包内置全部组件镜像，`install.sh` 会自动 `docker load` 后启动，运行时不依赖 Docker Hub（国内环境反而更省心）。版本选择参考官方 [releases 页面](https://github.com/goharbor/harbor/releases)：`-dev` 是开发分支夜间构建（无安装包，不建议用）、`-rcN` 是候选版、无后缀是正式版。
+
+:::
+
+
+
 ### 2.1 创建目录
 
 ```shell
-[ -d /data ] || mkdir /data && cd /data
+mkdir -p "${HARBOR_INSTALL_DIR}" && cd "${HARBOR_INSTALL_DIR}"
 ```
 
 
@@ -102,18 +133,20 @@ harbor有2种安装方式
 ### 2.2 下载安装包
 
 ```shell
-# 下载安装包
-wget https://github.com/goharbor/harbor/releases/download/v2.8.0/harbor-online-installer-v2.8.0.tgz
+# 安装包名带架构后缀（变量见第 0 节）
+PKG="harbor-offline-installer-v${HARBOR_VERSION}-${HARBOR_INSTALLER_ARCH}.tgz"
+
+wget https://github.com/goharbor/harbor/releases/download/v${HARBOR_VERSION}/${PKG}
 ```
 
 
 
 ### 2.3 验证包(可选)
 
-可下载相应 `*.asc` 文件以验证包是否为正版
+可下载相应 `*.asc` 文件以验证包是否为正版（部分版本如 v2.16.0-rc1 提供 `*.sigstore.json` 签名替代）
 
 ```shell
-wget https://github.com/goharbor/harbor/releases/download/v2.8.0/harbor-offline-installer-v2.8.0.tgz.asc
+wget https://github.com/goharbor/harbor/releases/download/v${HARBOR_VERSION}/${PKG}.asc
 ```
 
 
@@ -122,8 +155,14 @@ wget https://github.com/goharbor/harbor/releases/download/v2.8.0/harbor-offline-
 
 ### 2.4 解压缩安装包
 
+:::tip 说明
+
+安装包内顶层是一个 `harbor/` 目录，`--strip-components=1` 用于去掉这一层，把 `install.sh` 等文件直接解压到 `${HARBOR_INSTALL_DIR}` 本身（避免出现 `harbor/harbor` 两层）。
+
+:::
+
 ```shell
-tar xf harbor-online-installer-v2.8.0.tgz && cd harbor
+tar xf ${PKG} --strip-components=1
 ```
 
 
@@ -423,21 +462,21 @@ harbor在线安装包解压后会有一个 `harbor.yml.tmpl` 示例配置文件
 #### 4.1.2 编辑配置文件
 
 ```yaml
-export HARBOR_VERSION=2.14.2
+# 以下命令依赖第 0 节的环境变量（heredoc 未加引号，${VAR} 会被 shell 展开）
 cat > harbor.yml << EOF
 # 指定harbor访问域名
-hostname: harbor.ops.com
+hostname: ${HARBOR_HOSTNAME}
 
 # 指定http端口
 http:
-  port: 8080
+  port: ${HARBOR_HTTP_PORT}
  
 # 指定admin密码 
-harbor_admin_password: Harbor12345 
+harbor_admin_password: ${HARBOR_ADMIN_PASSWORD} 
 
 # 指定数据库相关信息，默认使用本地PostgrsSQL，如果要使用外置数据库则需要修改 external_database 配置项并注释 database 配置项
 database:
-  password: root123
+  password: ${HARBOR_DB_PASSWORD}
   
   # 空闲连接池最大连接数，如果设置小于等于0则为不保留空闲连接
   max_idle_conns: 100
@@ -452,7 +491,7 @@ database:
   conn_max_idle_time: 0
 
 # 默认的数据存储路径，如果要使用外置存储，则需要修改 storage_service 配置项
-data_volume: /data/harbor-data
+data_volume: ${HARBOR_DATA_DIR}
 
 # 配置 Trivy 扫描仪，Trivy DB包含来自NVD, Red Hat和许多其他上游漏洞数据库的漏洞信息，它是由Trivy从GitHub发布页面https://github.com/aquasecurity/trivy-db/releases 下载并缓存到本地系统文件
 trivy:
@@ -740,3 +779,200 @@ storage_service:
 | `storageclass`   | 应用于每个注册表文件的 S3 存储类，默认值为 `STANDARD`        | 否       |
 | `accelerate`     | 注册表是否应使用 S3 Transfer Acceleration，在使用此选项之前，必须在存储桶上启用加速端点，默认为 `false` | 否       |
 
+
+## 6.一键快速安装脚本（可重复执行）
+
+:::tip 脚本特点
+
+- **幂等可重复执行**：每一步都先检测（Docker 已装则跳过、安装包已解压则跳过下载、`harbor.yml` 已存在则保留不覆盖、容器已在运行则跳过安装），中途失败修复后直接重跑即可，失败即停（`set -e`）
+- 与上文配置保持一致：HTTP 模式 8080 端口、v2.16.0-rc1 离线包、安装目录 `/data/docker-project/harbor`、数据目录 `/data/docker-volume/harbor`
+- 只需改脚本开头的变量区即可适配自己的环境
+
+:::
+
+:::caution 仅限测试/内网环境
+
+脚本默认 **HTTP 模式**，按官方文档说法 HTTP 只适合无外网连接的测试/开发环境，生产环境务必按第 3 节配置 HTTPS（或在 nginx/云 LB 上终止 TLS）。
+
+:::
+
+```shell
+cat > harbor_quick_install.sh <<'EOF'
+#!/bin/bash
+#=============================================================
+# Harbor 一键快速安装脚本（幂等，可重复执行，失败即停）
+# 适用: CentOS/RHEL 7+/Rocky 等 yum 系，HTTP 模式
+# 用法: bash harbor_quick_install.sh
+#=============================================================
+set -e
+
+# ---------------- 可按需修改的变量 ----------------
+HARBOR_VERSION="2.16.0-rc1"       # Harbor 版本
+HARBOR_HOSTNAME="harbor.ops.com"  # 访问域名（客户端需能解析到本机）
+ADMIN_PASSWORD="Harbor12345"      # admin 初始密码（仅首次生效）
+DB_PASSWORD="root123"             # 内置 PostgreSQL root 密码
+HTTP_PORT="8080"                  # HTTP 访问端口
+DATA_VOLUME="/data/docker-volume/harbor"   # 镜像数据存储目录
+INSTALL_DIR="/data/docker-project/harbor"  # 安装根目录（程序与配置）
+
+err(){ echo -e "\n[ERROR] $*" >&2; exit 1; }
+ok(){ echo "[ OK ] $*"; }
+
+[ "$(id -u)" -eq 0 ] || err "请用 root 执行本脚本"
+
+# 自动检测安装包架构（安装包名带架构后缀）
+case "$(uname -m)" in
+  x86_64)  INSTALLER_ARCH="amd64" ;;
+  aarch64) INSTALLER_ARCH="arm64" ;;
+  *) err "不支持的 CPU 架构: $(uname -m)，仅支持 x86_64/aarch64" ;;
+esac
+ok "CPU 架构: $(uname -m) -> 安装包架构: ${INSTALLER_ARCH}"
+
+# ---------- 1. Docker ----------
+if command -v docker >/dev/null 2>&1; then
+  ok "Docker 已安装: $(docker --version)"
+else
+  echo ">>> 安装 Docker ..."
+  yum install -y yum-utils || err "yum-utils 安装失败"
+  yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+  yum -y install docker-ce || err "docker-ce 安装失败"
+  systemctl enable --now docker
+  ok "Docker 安装完成"
+fi
+
+# 已有的 daemon.json 中若还配置了失效的阿里云镜像加速地址则提醒
+if [ -f /etc/docker/daemon.json ] && grep -q "mirror.aliyuncs.com" /etc/docker/daemon.json 2>/dev/null; then
+  cat <<EOF2
+[提示] /etc/docker/daemon.json 中配置的 mirror.aliyuncs.com 镜像加速地址已失效，
+       建议手动删除该配置项后执行 systemctl restart docker。
+EOF2
+fi
+
+# ---------- 2. Docker Compose ----------
+if docker compose version >/dev/null 2>&1; then
+  ok "Docker Compose 插件已安装: $(docker compose version)"
+elif command -v docker-compose >/dev/null 2>&1; then
+  ok "docker-compose 已安装: $(docker-compose --version)"
+else
+  echo ">>> 安装 docker-compose-plugin ..."
+  yum -y install docker-compose-plugin || err "docker-compose-plugin 安装失败"
+  ok "Docker Compose 安装完成"
+fi
+
+# ---------- 3. 下载并解压安装包（已存在则跳过） ----------
+mkdir -p "${INSTALL_DIR}"
+cd "${INSTALL_DIR}"
+PKG="harbor-offline-installer-v${HARBOR_VERSION}-${INSTALLER_ARCH}.tgz"
+if [ -f "${INSTALL_DIR}/install.sh" ]; then
+  ok "安装包已解压（${INSTALL_DIR}），跳过下载"
+else
+  echo ">>> 下载 ${PKG}（GitHub 直连，较慢请耐心）..."
+  wget -q --show-progress -O "${INSTALL_DIR}/${PKG}" \
+    "https://github.com/goharbor/harbor/releases/download/v${HARBOR_VERSION}/${PKG}" \
+    || err "下载失败。可手动下载 ${PKG} 放到 ${INSTALL_DIR} 后重跑本脚本"
+  # --strip-components=1: 去掉包内顶层 harbor/ 目录，直接解压到 ${INSTALL_DIR}
+  tar xf "${PKG}" --strip-components=1
+fi
+
+cd "${INSTALL_DIR}"
+
+# ---------- 4. 生成 harbor.yml（已存在则保留原配置，不覆盖） ----------
+if [ -f harbor.yml ]; then
+  ok "harbor.yml 已存在，保留现有配置不覆盖"
+else
+  cat > harbor.yml <<EOF2
+hostname: ${HARBOR_HOSTNAME}
+
+http:
+  port: ${HTTP_PORT}
+
+harbor_admin_password: ${ADMIN_PASSWORD}
+
+database:
+  password: ${DB_PASSWORD}
+  max_idle_conns: 100
+  max_open_conns: 900
+  conn_max_lifetime: 5m
+  conn_max_idle_time: 0
+
+data_volume: ${DATA_VOLUME}
+
+trivy:
+  ignore_unfixed: false
+  skip_update: false
+  offline_scan: false
+  security_check: vuln
+  insecure: false
+
+jobservice:
+  max_job_workers: 10
+  max_job_duration_hours: 24
+  job_loggers:
+    - STD_OUTPUT
+    - FILE
+  logger_sweeper_duration: 1
+
+notification:
+  webhook_job_max_retry: 3
+  webhook_job_http_client_timeout: 3
+
+log:
+  level: info
+  local:
+    rotate_count: 50
+    rotate_size: 200M
+    location: /var/log/harbor
+
+_version: ${HARBOR_VERSION}
+
+proxy:
+  http_proxy:
+  https_proxy:
+  no_proxy:
+  components:
+    - core
+    - jobservice
+    - trivy
+
+upload_purging:
+  enabled: true
+  age: 168h
+  interval: 24h
+  dryrun: false
+
+cache:
+  enabled: true
+  expire_hours: 24
+EOF2
+  ok "已生成 harbor.yml"
+fi
+
+# ---------- 5. HTTP 模式提示 ----------
+if ! grep -q "${HARBOR_HOSTNAME}" /etc/docker/daemon.json 2>/dev/null; then
+  cat <<EOF2
+
+[提示] 当前为 HTTP 模式，本机及其他客户端节点如需 docker login/push/pull，
+       请把 insecure-registries 加入 /etc/docker/daemon.json 后重启 docker：
+         "insecure-registries": ["${HARBOR_HOSTNAME}", "本机IP:${HTTP_PORT}"]
+EOF2
+fi
+
+# ---------- 6. 执行安装（已在运行则跳过） ----------
+if docker compose ps --status running --services 2>/dev/null | grep -qx core; then
+  ok "Harbor 已在运行，跳过安装。重装请执行: docker compose down && rm -f harbor.yml 后重跑本脚本"
+else
+  echo ">>> 开始安装 Harbor v${HARBOR_VERSION} ..."
+  ./install.sh || err "install.sh 执行失败，修复后重跑本脚本即可"
+fi
+
+echo ""
+echo "=============================================================="
+echo " Harbor v${HARBOR_VERSION} 安装完成"
+echo " 访问地址:  http://<本机IP>:${HTTP_PORT}  (需配置 hosts 解析 ${HARBOR_HOSTNAME})"
+echo " 登录账号:  admin / ${ADMIN_PASSWORD} (仅首次生效)"
+echo " 数据目录:  ${DATA_VOLUME}"
+echo "=============================================================="
+EOF
+
+bash harbor_quick_install.sh
+```
