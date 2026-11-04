@@ -88,6 +88,54 @@
 
 
 
+## 功能
+
+### [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+
+在扩展商店中搜索 `Remote - SSH` 并安装
+
+![iShot_2026-11-03_14.42.49](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-11-03_14.42.49.png)
+
+
+
+
+
+按 `Cmd+Shift+P`，然后搜索 `Add New SSH Host`
+
+![iShot_2026-11-03_14.49.58](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-11-03_14.49.58.png)
+
+
+
+输入ssh连接命令
+
+![iShot_2026-11-03_14.51.37](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-11-03_14.51.37.png)
+
+
+
+选择mac本地的ssh config
+
+![iShot_2026-11-03_14.52.52](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-11-03_14.52.52.png)
+
+
+
+选择完成后就会提示已添加主机
+
+![iShot_2026-11-03_14.53.05](https://raw.githubusercontent.com/pptfz/piclist-images/master/img/iShot_2026-11-03_14.53.05.png)
+
+
+
+
+
+搜索 `Remote-SSH: Connect to Host`
+
+
+
+
+
+
+
+
+
 
 
 
