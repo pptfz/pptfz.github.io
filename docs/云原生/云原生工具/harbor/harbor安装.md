@@ -30,7 +30,11 @@ export HARBOR_DATA_DIR="/data/docker-volume/harbor"      # 镜像数据存储目
 
 ## 1.安装先决条件
 
-### 1.1 系统环境说明
+:::caution 前置要求
+
+Harbor 以 Docker Compose 方式运行，**开始前服务器上必须已安装并启动 Docker（含 Docker Compose 插件）**，本笔记不再包含 Docker/Compose 的安装步骤。openssl、wget 为系统自带或常规软件。
+
+:::
 
 **硬件**
 
@@ -59,36 +63,6 @@ export HARBOR_DATA_DIR="/data/docker-volume/harbor"      # 镜像数据存储目
 | 443  | HTTPS | Harbor 门户和核心 API 在此端口上接受 HTTPS 请求。您可以在配置文件中更改此端口。 |
 | 4443 | HTTPS | 连接到 Harbor 的 Docker Content Trust 服务。只有在启用 Notary 时才需要。您可以在配置文件中更改此端口。 |
 | 80   | HTTP  | Harbor 门户和核心 API 在此端口上接受 HTTP 请求。您可以在配置文件中更改此端口。 |
-
-
-
-### 1.2 安装docker
-
-```shell
-# 阿里云yum源
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-
-yum -y install docker-ce
-
-systemctl start docker && systemctl enable docker  
-```
-
-:::caution 镜像加速地址已失效
-
-早期笔记中的阿里云镜像加速地址（`https://gqk8w9va.mirror.aliyuncs.com`，写入 `/etc/docker/daemon.json` 的 `registry-mirrors`）**已停止服务，不要再配置**。如 daemon.json 中还残留该配置，删除后 `systemctl restart docker`。现在国内可自行寻找可用的加速地址，或直接使用 Docker 官方源。
-
-:::
-
-
-
-### 1.3 安装docker-compose
-
-```shell
-export DOCKER_COMPOSE_VERSION=2.17.3
-curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
-```
-
-
 
 
 
@@ -784,7 +758,8 @@ storage_service:
 
 :::tip 脚本特点
 
-- **幂等可重复执行**：每一步都先检测（Docker 已装则跳过、安装包已解压则跳过下载、`harbor.yml` 已存在则保留不覆盖、容器已在运行则跳过安装），中途失败修复后直接重跑即可，失败即停（`set -e`）
+- **不包含 Docker/Compose 安装**：要求服务器上已装好 Docker（含 Compose 插件），脚本启动时会校验，缺失即报错退出
+- **幂等可重复执行**：每一步都先检测（安装包已解压则跳过下载、`harbor.yml` 已存在则保留不覆盖、容器已在运行则跳过安装），中途失败修复后直接重跑即可，失败即停（`set -e`）
 - 与上文配置保持一致：HTTP 模式 8080 端口、v2.16.0-rc1 离线包、安装目录 `/data/docker-project/harbor`、数据目录 `/data/docker-volume/harbor`
 - 只需改脚本开头的变量区即可适配自己的环境
 
@@ -801,7 +776,8 @@ cat > harbor_quick_install.sh <<'EOF'
 #!/bin/bash
 #=============================================================
 # Harbor 一键快速安装脚本（幂等，可重复执行，失败即停）
-# 适用: CentOS/RHEL 7+/Rocky 等 yum 系，HTTP 模式
+# 适用: 任意已安装 Docker(含 Compose 插件) 的 Linux（CentOS/Rocky/Ubuntu/Debian 等）
+#       Docker 与 Compose 请提前自行安装，脚本只负责 Harbor 本体
 # 用法: bash harbor_quick_install.sh
 #=============================================================
 set -e
@@ -820,6 +796,20 @@ ok(){ echo "[ OK ] $*"; }
 
 [ "$(id -u)" -eq 0 ] || err "请用 root 执行本脚本"
 
+# ---------- 0. 校验 Docker 与 Compose 已就绪 ----------
+if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
+  ok "Docker 已就绪: $(docker --version)"
+else
+  err "Docker 未安装或未启动，请先安装并 systemctl enable --now docker"
+fi
+
+if docker compose version >/dev/null 2>&1; then
+  ok "Docker Compose 插件已就绪: $(docker compose version)"
+else
+  err "Docker Compose 插件未安装，请先安装 docker-compose-plugin"
+fi
+
+# ---------- 1. 下载并解压安装包（已存在则跳过） ----------
 # 自动检测安装包架构（安装包名带架构后缀）
 case "$(uname -m)" in
   x86_64)  INSTALLER_ARCH="amd64" ;;
@@ -828,38 +818,6 @@ case "$(uname -m)" in
 esac
 ok "CPU 架构: $(uname -m) -> 安装包架构: ${INSTALLER_ARCH}"
 
-# ---------- 1. Docker ----------
-if command -v docker >/dev/null 2>&1; then
-  ok "Docker 已安装: $(docker --version)"
-else
-  echo ">>> 安装 Docker ..."
-  yum install -y yum-utils || err "yum-utils 安装失败"
-  yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-  yum -y install docker-ce || err "docker-ce 安装失败"
-  systemctl enable --now docker
-  ok "Docker 安装完成"
-fi
-
-# 已有的 daemon.json 中若还配置了失效的阿里云镜像加速地址则提醒
-if [ -f /etc/docker/daemon.json ] && grep -q "mirror.aliyuncs.com" /etc/docker/daemon.json 2>/dev/null; then
-  cat <<EOF2
-[提示] /etc/docker/daemon.json 中配置的 mirror.aliyuncs.com 镜像加速地址已失效，
-       建议手动删除该配置项后执行 systemctl restart docker。
-EOF2
-fi
-
-# ---------- 2. Docker Compose ----------
-if docker compose version >/dev/null 2>&1; then
-  ok "Docker Compose 插件已安装: $(docker compose version)"
-elif command -v docker-compose >/dev/null 2>&1; then
-  ok "docker-compose 已安装: $(docker-compose --version)"
-else
-  echo ">>> 安装 docker-compose-plugin ..."
-  yum -y install docker-compose-plugin || err "docker-compose-plugin 安装失败"
-  ok "Docker Compose 安装完成"
-fi
-
-# ---------- 3. 下载并解压安装包（已存在则跳过） ----------
 mkdir -p "${INSTALL_DIR}"
 cd "${INSTALL_DIR}"
 PKG="harbor-offline-installer-v${HARBOR_VERSION}-${INSTALLER_ARCH}.tgz"
@@ -876,7 +834,7 @@ fi
 
 cd "${INSTALL_DIR}"
 
-# ---------- 4. 生成 harbor.yml（已存在则保留原配置，不覆盖） ----------
+# ---------- 2. 生成 harbor.yml（已存在则保留原配置，不覆盖） ----------
 if [ -f harbor.yml ]; then
   ok "harbor.yml 已存在，保留现有配置不覆盖"
 else
@@ -947,7 +905,7 @@ EOF2
   ok "已生成 harbor.yml"
 fi
 
-# ---------- 5. HTTP 模式提示 ----------
+# ---------- 3. HTTP 模式提示 ----------
 if ! grep -q "${HARBOR_HOSTNAME}" /etc/docker/daemon.json 2>/dev/null; then
   cat <<EOF2
 
@@ -957,7 +915,7 @@ if ! grep -q "${HARBOR_HOSTNAME}" /etc/docker/daemon.json 2>/dev/null; then
 EOF2
 fi
 
-# ---------- 6. 执行安装（已在运行则跳过） ----------
+# ---------- 4. 执行安装（已在运行则跳过） ----------
 if docker compose ps --status running --services 2>/dev/null | grep -qx core; then
   ok "Harbor 已在运行，跳过安装。重装请执行: docker compose down && rm -f harbor.yml 后重跑本脚本"
 else
