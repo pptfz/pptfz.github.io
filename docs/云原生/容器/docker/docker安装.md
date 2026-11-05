@@ -1,18 +1,26 @@
 [toc]
 
-快速安装
+## 快速安装（官方脚本，自动判断系统）
+
+官方提供一键安装脚本，会**自动判断当前发行版**（Ubuntu/Debian/CentOS/RHEL/Fedora/SLES 等），再选择对应包管理器完成安装，各系统通用：
 
 ```shell
-# 阿里云yum源
-yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+# 下载官方一键安装脚本并执行
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
 
-yum -y install docker-ce
+# 国内网络下载慢，可指定阿里云镜像源
+# sh get-docker.sh --mirror Aliyun
 
-systemctl start docker && systemctl enable docker  
-
-# 配置完成后重启docker
-systemctl restart docker
+# 启动并设置开机自启
+systemctl enable --now docker
 ```
+
+:::tip 手动安装
+
+一键脚本适合新机器一把梭；需要控制版本、换软件源（阿里云等）或了解各发行版差异的，看下面的 [包管理器安装](#包管理器安装)。
+
+:::
 
 
 
@@ -38,11 +46,35 @@ systemctl restart docker
 
 # docker安装
 
-[docker官方安装文档](https://docs.docker.com/engine/install/centos/)
+[docker官方安装文档（总览）](https://docs.docker.com/engine/install/)
+
+官方支持包管理器安装的发行版（各发行版官方文档入口）：
+
+| 发行版 | 包管理器 | 官方文档 |
+| ------ | -------- | -------- |
+| CentOS | yum/dnf | [install/centos](https://docs.docker.com/engine/install/centos/) |
+| RHEL   | yum/dnf | [install/rhel](https://docs.docker.com/engine/install/rhel/) |
+| Fedora | dnf     | [install/fedora](https://docs.docker.com/engine/install/fedora/) |
+| Ubuntu | apt     | [install/ubuntu](https://docs.docker.com/engine/install/ubuntu/) |
+| Debian | apt     | [install/debian](https://docs.docker.com/engine/install/debian/) |
+| SLES   | zypper  | [install/sles](https://docs.docker.com/engine/install/sles/) |
+
+:::tip 先判断系统再安装
+
+不确定当前是什么系统时，先看 `/etc/os-release`：
+
+```shell
+cat /etc/os-release | grep -E "^(ID|VERSION_ID)="
+# ID=ubuntu / centos / rhel / debian / fedora / sles ...
+```
+
+按 ID 选择下面对应的小节；懒得区分就用文首的官方一键脚本。
+
+:::
 
 ## 包管理器安装
 
-### yum
+### CentOS / RHEL（yum）
 
 #### 下载yum源
 
@@ -159,6 +191,100 @@ Server: Docker Engine - Community
   Version:          0.19.0
   GitCommit:        de40ad0
 ```
+
+
+
+### Ubuntu（apt）
+
+官方文档：[docs.docker.com/engine/install/ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+
+#### 添加仓库并安装
+
+```shell
+# 1. 添加官方 GPG 密钥
+apt-get update
+apt-get install -y ca-certificates curl
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+
+# 2. 添加 apt 仓库
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 3. 安装（最新版）
+apt-get update
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 4. 启动并设置开机自启
+systemctl enable --now docker
+```
+
+:::tip 换阿里云源
+
+国内网络把上面第 2 步里的 `https://download.docker.com/linux/ubuntu` 替换为 `https://mirrors.aliyun.com/docker-ce/linux/ubuntu` 即可，其余不变。
+
+:::
+
+#### 安装指定版本（apt）
+
+```shell
+# 查看可用版本
+apt-cache madison docker-ce | awk '{ print $3 }'
+
+# 安装指定版本
+export DOCKER_VERSION=29.1.2
+apt-get install -y docker-ce=${DOCKER_VERSION} docker-ce-cli=${DOCKER_VERSION} containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+### Debian（apt）
+
+官方文档：[docs.docker.com/engine/install/debian](https://docs.docker.com/engine/install/debian/)
+
+流程与 Ubuntu 完全一致，只有两处不同：GPG 地址和仓库地址把 `ubuntu` 换成 `debian`，版本变量用 `$VERSION_CODENAME`：
+
+```shell
+# GPG 密钥
+curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+
+# apt 仓库
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 安装与启动（同 Ubuntu）
+apt-get update
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+systemctl enable --now docker
+```
+
+### Fedora（dnf）
+
+官方文档：[docs.docker.com/engine/install/fedora](https://docs.docker.com/engine/install/fedora/)
+
+```shell
+# 1. 安装 dnf 插件
+dnf -y install dnf-plugins-core
+
+# 2. 添加仓库
+dnf config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+# Fedora 40 及更早版本（dnf4）没有 addrepo 子命令，用：
+# dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+# 3. 安装并启动
+dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+systemctl enable --now docker
+```
+
+:::tip RHEL 用户
+
+RHEL 与 CentOS 用同一套 yum/dnf 流程，把仓库地址里的 `centos` 换成 `rhel` 即可（见上方表格的官方文档链接）。CentOS 8/9 的 `yum` 命令实际是 `dnf` 的别名，上文本体命令通用。
+
+:::
 
 
 
