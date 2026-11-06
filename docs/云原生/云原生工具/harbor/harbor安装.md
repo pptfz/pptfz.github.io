@@ -758,16 +758,19 @@ storage_service:
 
 :::tip 脚本特点
 
-- **不包含 Docker/Compose 安装**：要求服务器上已装好 Docker（含 Compose 插件），脚本启动时会校验，缺失即报错退出
-- **幂等可重复执行**：每一步都先检测（安装包已解压则跳过下载、`harbor.yml` 已存在则保留不覆盖、容器已在运行则跳过安装），中途失败修复后直接重跑即可，失败即停（`set -e`）
-- 与上文配置保持一致：HTTP 模式 8080 端口、v2.16.0-rc1 离线包、安装目录 `/data/docker-project/harbor`、数据目录 `/data/docker-volume/harbor`
+- **幂等可重复执行**：每一步都先检测（Docker 已装则跳过、安装包已解压则跳过下载、`harbor.yml` 已存在则保留不覆盖、证书已存在则跳过生成、容器已在运行则跳过安装），中途失败修复后直接重跑即可，失败即停（`set -e`）
+- **三种访问模式一键切换**（`DEPLOY_MODE` 变量）：`http` 纯 HTTP / `https-lb` 生产 LB 终止 TLS / `https` 自签证书模拟 HTTPS
+- 自动检测 CPU 架构（x86_64 → amd64 包，aarch64 → arm64 包）
 - 只需改脚本开头的变量区即可适配自己的环境
 
 :::
 
-:::caution 仅限测试/内网环境
+:::caution 三种模式说明与切换方法
 
-脚本默认 **HTTP 模式**，按官方文档说法 HTTP 只适合无外网连接的测试/开发环境，生产环境务必按第 3 节配置 HTTPS（或在 nginx/云 LB 上终止 TLS）。
+- **`http`**：最简单，但客户端必须配 `insecure-registries`（否则报错 `http: server gave HTTP response to HTTPS client`），官方仅建议无外网的测试/内网环境
+- **`https-lb`**（生产推荐）：证书配在入口 LB 上，Harbor 本机保持 HTTP；harbor.yml 写 `external_url` 告知外部地址。LB 转发时要保留 Host 头并加 `X-Forwarded-Proto: https`
+- **`https`**：脚本自动生成自签 CA 和服务端证书（SAN 同时含域名和本机 IP，两种方式访问都行），harbor.yml 监听 443；客户端节点需信任 `ca.crt`，脚本最后会打印 docker / containerd 的具体信任命令
+- **切换模式**：`docker compose down && rm -f harbor.yml` 后重跑脚本（已生成的证书会保留复用，不会重复生成）
 
 :::
 
@@ -776,40 +779,37 @@ cat > harbor_quick_install.sh <<'EOF'
 #!/bin/bash
 #=============================================================
 # Harbor 一键快速安装脚本（幂等，可重复执行，失败即停）
-# 适用: 任意已安装 Docker(含 Compose 插件) 的 Linux（CentOS/Rocky/Ubuntu/Debian 等）
-#       Docker 与 Compose 请提前自行安装，脚本只负责 Harbor 本体
+# 适用: CentOS/RHEL 7+/Rocky 等 yum 系
 # 用法: bash harbor_quick_install.sh
 #=============================================================
 set -e
 
 # ---------------- 可按需修改的变量 ----------------
 HARBOR_VERSION="2.16.0-rc1"       # Harbor 版本
-HARBOR_HOSTNAME="harbor.ops.com"  # 访问域名（客户端需能解析到本机）
+HARBOR_HOSTNAME="harbor.ops.com"  # 访问域名（客户端需能解析到本机或经 LB）
+HARBOR_SERVER_IP="10.0.0.100"     # 本机 IP（留空则自动获取；https 模式会写入证书 SAN）
 ADMIN_PASSWORD="Harbor12345"      # admin 初始密码（仅首次生效）
 DB_PASSWORD="root123"             # 内置 PostgreSQL root 密码
-HTTP_PORT="8080"                  # HTTP 访问端口
+HTTP_PORT="8080"                  # HTTP 访问端口（http / https-lb 模式使用）
 DATA_VOLUME="/data/docker-volume/harbor"   # 镜像数据存储目录
 INSTALL_DIR="/data/docker-project/harbor"  # 安装根目录（程序与配置）
+
+# 访问模式（三选一）:
+#   http      纯 HTTP，最简单；客户端必须配 insecure-registries，仅内网/测试
+#   https-lb  生产环境推荐：入口 LB 上配置证书终止 TLS，Harbor 本机保持 HTTP
+#   https     测试环境模拟 HTTPS：本机自签证书监听 443，客户端需信任 ca.crt
+DEPLOY_MODE="https"
 
 err(){ echo -e "\n[ERROR] $*" >&2; exit 1; }
 ok(){ echo "[ OK ] $*"; }
 
 [ "$(id -u)" -eq 0 ] || err "请用 root 执行本脚本"
 
-# ---------- 0. 校验 Docker 与 Compose 已就绪 ----------
-if command -v docker >/dev/null 2>&1 && docker info >/dev/null 2>&1; then
-  ok "Docker 已就绪: $(docker --version)"
-else
-  err "Docker 未安装或未启动，请先安装并 systemctl enable --now docker"
-fi
+case "${DEPLOY_MODE}" in
+  http|https-lb|https) ok "访问模式: ${DEPLOY_MODE}" ;;
+  *) err "DEPLOY_MODE 只能是 http / https-lb / https，当前: ${DEPLOY_MODE}" ;;
+esac
 
-if docker compose version >/dev/null 2>&1; then
-  ok "Docker Compose 插件已就绪: $(docker compose version)"
-else
-  err "Docker Compose 插件未安装，请先安装 docker-compose-plugin"
-fi
-
-# ---------- 1. 下载并解压安装包（已存在则跳过） ----------
 # 自动检测安装包架构（安装包名带架构后缀）
 case "$(uname -m)" in
   x86_64)  INSTALLER_ARCH="amd64" ;;
@@ -818,13 +818,45 @@ case "$(uname -m)" in
 esac
 ok "CPU 架构: $(uname -m) -> 安装包架构: ${INSTALLER_ARCH}"
 
+# ---------- 1. Docker ----------
+if command -v docker >/dev/null 2>&1; then
+  ok "Docker 已安装: $(docker --version)"
+else
+  echo ">>> 安装 Docker ..."
+  yum install -y yum-utils || err "yum-utils 安装失败"
+  yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+  yum -y install docker-ce || err "docker-ce 安装失败"
+  systemctl enable --now docker
+  ok "Docker 安装完成"
+fi
+
+# 已有的 daemon.json 中若还配置了失效的阿里云镜像加速地址则提醒
+if [ -f /etc/docker/daemon.json ] && grep -q "mirror.aliyuncs.com" /etc/docker/daemon.json 2>/dev/null; then
+  cat <<EOF2
+[提示] /etc/docker/daemon.json 中配置的 mirror.aliyuncs.com 镜像加速地址已失效，
+       建议手动删除该配置项后执行 systemctl restart docker。
+EOF2
+fi
+
+# ---------- 2. Docker Compose ----------
+if docker compose version >/dev/null 2>&1; then
+  ok "Docker Compose 插件已安装: $(docker compose version)"
+elif command -v docker-compose >/dev/null 2>&1; then
+  ok "docker-compose 已安装: $(docker-compose --version)"
+else
+  echo ">>> 安装 docker-compose-plugin ..."
+  yum -y install docker-compose-plugin || err "docker-compose-plugin 安装失败"
+  ok "Docker Compose 安装完成"
+fi
+
+# ---------- 3. 下载并解压安装包（已存在则跳过） ----------
 mkdir -p "${INSTALL_DIR}"
 cd "${INSTALL_DIR}"
 PKG="harbor-offline-installer-v${HARBOR_VERSION}-${INSTALLER_ARCH}.tgz"
 if [ -f "${INSTALL_DIR}/install.sh" ]; then
   ok "安装包已解压（${INSTALL_DIR}），跳过下载"
 else
-  echo ">>> 下载 ${PKG}（GitHub 直连，较慢请耐心）..."
+  echo ">>> 下载 ${PKG}（约 700MB，GitHub 直连较慢请耐心）..."
   wget -q --show-progress -O "${INSTALL_DIR}/${PKG}" \
     "https://github.com/goharbor/harbor/releases/download/v${HARBOR_VERSION}/${PKG}" \
     || err "下载失败。可手动下载 ${PKG} 放到 ${INSTALL_DIR} 后重跑本脚本"
@@ -834,15 +866,70 @@ fi
 
 cd "${INSTALL_DIR}"
 
-# ---------- 2. 生成 harbor.yml（已存在则保留原配置，不覆盖） ----------
+# ---------- 4. https 模式：生成自签 CA 与服务端证书（已存在则跳过） ----------
+CERT_DIR="/data/cert"
+if [ "${DEPLOY_MODE}" = "https" ]; then
+  if [ -z "${HARBOR_SERVER_IP}" ]; then
+    HARBOR_SERVER_IP=$(hostname -I 2>/dev/null | awk '{print $1}')
+  fi
+  [ -n "${HARBOR_SERVER_IP}" ] || err "无法自动获取本机 IP，请手动设置 HARBOR_SERVER_IP"
+  if [ -f "${CERT_DIR}/${HARBOR_HOSTNAME}.crt" ] && [ -f "${CERT_DIR}/ca.crt" ]; then
+    ok "自签证书已存在（${CERT_DIR}），跳过生成"
+  else
+    echo ">>> 生成自签证书（SAN: DNS=${HARBOR_HOSTNAME}, IP=${HARBOR_SERVER_IP}）..."
+    mkdir -p "${CERT_DIR}" && cd "${CERT_DIR}"
+    [ -f ca.key ] || openssl genrsa -out ca.key 4096
+    [ -f ca.crt ] || openssl req -x509 -new -nodes -sha512 -days 3650 \
+      -subj "/C=CN/ST=Beijing/L=Beijing/O=ops/OU=ops/CN=harbor-ca" \
+      -key ca.key -out ca.crt
+    [ -f "${HARBOR_HOSTNAME}.key" ] || openssl genrsa -out "${HARBOR_HOSTNAME}.key" 4096
+    [ -f "${HARBOR_HOSTNAME}.csr" ] || openssl req -sha512 -new \
+      -subj "/C=CN/ST=Beijing/L=Beijing/O=ops/OU=ops/CN=${HARBOR_HOSTNAME}" \
+      -key "${HARBOR_HOSTNAME}.key" -out "${HARBOR_HOSTNAME}.csr"
+    cat > v3.ext <<EOF2
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1=${HARBOR_HOSTNAME}
+IP.1=${HARBOR_SERVER_IP}
+EOF2
+    openssl x509 -req -sha512 -days 3650 -extfile v3.ext \
+      -CA ca.crt -CAkey ca.key -CAcreateserial \
+      -in "${HARBOR_HOSTNAME}.csr" -out "${HARBOR_HOSTNAME}.crt"
+    # Docker 守护进程把 .crt 当 CA 证书、.cert 当客户端证书，需转换一份
+    openssl x509 -inform PEM -in "${HARBOR_HOSTNAME}.crt" -out "${HARBOR_HOSTNAME}.cert"
+    cd "${INSTALL_DIR}"
+    ok "自签证书已生成: ${CERT_DIR}"
+  fi
+fi
+
+# ---------- 5. 生成 harbor.yml（已存在则保留原配置，不覆盖） ----------
 if [ -f harbor.yml ]; then
-  ok "harbor.yml 已存在，保留现有配置不覆盖"
+  ok "harbor.yml 已存在，保留现有配置不覆盖（切换 DEPLOY_MODE 需先 rm -f harbor.yml 再重跑）"
 else
+  # 按模式生成访问配置段
+  if [ "${DEPLOY_MODE}" = "https" ]; then
+    ACCESS_BLOCK="https:
+  port: 443
+  certificate: /data/cert/${HARBOR_HOSTNAME}.crt
+  private_key: /data/cert/${HARBOR_HOSTNAME}.key"
+  elif [ "${DEPLOY_MODE}" = "https-lb" ]; then
+    ACCESS_BLOCK="external_url: https://${HARBOR_HOSTNAME}
+http:
+  port: ${HTTP_PORT}"
+  else
+    ACCESS_BLOCK="http:
+  port: ${HTTP_PORT}"
+  fi
   cat > harbor.yml <<EOF2
 hostname: ${HARBOR_HOSTNAME}
 
-http:
-  port: ${HTTP_PORT}
+# 访问配置（模式: ${DEPLOY_MODE}）
+${ACCESS_BLOCK}
 
 harbor_admin_password: ${ADMIN_PASSWORD}
 
@@ -905,17 +992,49 @@ EOF2
   ok "已生成 harbor.yml"
 fi
 
-# ---------- 3. HTTP 模式提示 ----------
-if ! grep -q "${HARBOR_HOSTNAME}" /etc/docker/daemon.json 2>/dev/null; then
+# ---------- 6. 打印客户端接入方法（按模式不同） ----------
+if [ "${DEPLOY_MODE}" = "http" ]; then
   cat <<EOF2
 
-[提示] 当前为 HTTP 模式，本机及其他客户端节点如需 docker login/push/pull，
+[提示] 当前为 HTTP 模式，客户端节点如需 docker login/push/pull，
        请把 insecure-registries 加入 /etc/docker/daemon.json 后重启 docker：
-         "insecure-registries": ["${HARBOR_HOSTNAME}", "本机IP:${HTTP_PORT}"]
+         "insecure-registries": ["${HARBOR_HOSTNAME}", "${HARBOR_SERVER_IP}:${HTTP_PORT}"]
+EOF2
+elif [ "${DEPLOY_MODE}" = "https-lb" ]; then
+  cat <<EOF2
+
+[提示] 当前为 LB 终止 TLS 模式：Harbor 本机仅监听 HTTP:${HTTP_PORT}，由入口 LB 对外提供 HTTPS。
+  LB 配置要点：
+    1. 证书绑定在 LB 上的 ${HARBOR_HOSTNAME}
+    2. 转发到 ${HARBOR_SERVER_IP}:${HTTP_PORT}，保留 Host 头
+    3. 添加请求头 X-Forwarded-Proto: https（否则 Harbor 生成的链接/跳转异常）
+EOF2
+else
+  cat <<EOF2
+
+[提示] 当前为自签 HTTPS 模式，CA 证书: ${CERT_DIR}/ca.crt。
+  客户端需能解析 ${HARBOR_HOSTNAME}（/etc/hosts 加 "${HARBOR_SERVER_IP} ${HARBOR_HOSTNAME}" 或走 DNS）。
+  --- Docker 客户端节点（含本机） ---
+    mkdir -p /etc/docker/certs.d/${HARBOR_HOSTNAME}
+    cp ${CERT_DIR}/ca.crt ${CERT_DIR}/${HARBOR_HOSTNAME}.cert ${CERT_DIR}/${HARBOR_HOSTNAME}.key /etc/docker/certs.d/${HARBOR_HOSTNAME}/
+    systemctl restart docker
+    docker login ${HARBOR_HOSTNAME}
+    （若用 IP 访问，把上面目录名 ${HARBOR_HOSTNAME} 换成 ${HARBOR_SERVER_IP} 即可）
+  --- K8S 节点（containerd，kubeadm 默认） ---
+    mkdir -p /etc/containerd/certs.d/${HARBOR_HOSTNAME}
+    cp ${CERT_DIR}/ca.crt /etc/containerd/certs.d/${HARBOR_HOSTNAME}/
+    cat > /etc/containerd/certs.d/${HARBOR_HOSTNAME}/hosts.toml <<'TOML'
+server = "https://${HARBOR_HOSTNAME}"
+
+[host."https://${HARBOR_HOSTNAME}"]
+  capabilities = ["pull", "resolve"]
+  ca = "/etc/containerd/certs.d/${HARBOR_HOSTNAME}/ca.crt"
+TOML
+    systemctl restart containerd
 EOF2
 fi
 
-# ---------- 4. 执行安装（已在运行则跳过） ----------
+# ---------- 7. 执行安装（已在运行则跳过） ----------
 if docker compose ps --status running --services 2>/dev/null | grep -qx core; then
   ok "Harbor 已在运行，跳过安装。重装请执行: docker compose down && rm -f harbor.yml 后重跑本脚本"
 else
@@ -923,11 +1042,18 @@ else
   ./install.sh || err "install.sh 执行失败，修复后重跑本脚本即可"
 fi
 
+case "${DEPLOY_MODE}" in
+  http)     ACCESS_URL="http://<本机IP>:${HTTP_PORT}" ;;
+  https-lb) ACCESS_URL="https://${HARBOR_HOSTNAME} (经 LB 转发)" ;;
+  https)    ACCESS_URL="https://${HARBOR_HOSTNAME} (或 https://${HARBOR_SERVER_IP})" ;;
+esac
+
 echo ""
 echo "=============================================================="
-echo " Harbor v${HARBOR_VERSION} 安装完成"
-echo " 访问地址:  http://<本机IP>:${HTTP_PORT}  (需配置 hosts 解析 ${HARBOR_HOSTNAME})"
+echo " Harbor v${HARBOR_VERSION} 安装完成（模式: ${DEPLOY_MODE}）"
+echo " 访问地址:  ${ACCESS_URL}"
 echo " 登录账号:  admin / ${ADMIN_PASSWORD} (仅首次生效)"
+echo " 程序目录:  ${INSTALL_DIR}"
 echo " 数据目录:  ${DATA_VOLUME}"
 echo "=============================================================="
 EOF
